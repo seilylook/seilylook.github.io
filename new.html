@@ -1,0 +1,17 @@
+<form action="{% url 'create' %}">
+    <h3>:매장 : </h3>
+    <input type="text" name="storename">
+    <br><br>
+    <h3>대표 메뉴: </h3>
+    <input type="text" name="mainmenuname">
+     <br><br>
+    <h3>가격: </h3>
+    <input type="text" name="price">
+     <br><br>
+    <h3>사진: </h3>
+    <input type="file" name="foodimage">
+    <h3>설명: </h3>
+    <textarea cols="20" rows="3" name="content"></textarea>
+    <br><br>
+    <input type="submit" value="제출하기">
+</form>

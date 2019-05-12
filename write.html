@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Kirang+Haerang" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu|Jua" rel="stylesheet">
+    
+    <title>모집글 작성</title>
+    <style>
+        h1{
+            text-align:center;
+            font-family: 'Kirang Haerang', cursive;
+            font-size: 5em;
+        }
+        .t{
+            margin:auto;
+            height: 3em;
+            width: 40em;
+            border: 3px solid #1b5ac2;
+            background: #ffffff;
+        }
+        input{
+            font-size: 16px;
+            width: 325px;
+            padding: 10px;
+            border: 0px;
+            outline: none;
+            float: left;
+        }
+        #c{
+            margin:auto;
+            height: 10em;
+            width: 40em;
+            border: 3px solid #1b5ac2;
+            background: #ffffff;
+
+        }
+        #write{
+            color:white;
+            font-family: 'Jua', sans-serif;
+            margin:auto; 
+    
+        }
+        #b{
+            width: 50px;
+            height: 20%;
+            border: 0px;
+            background: #1b5ac2;
+            outline: none;
+            position:relative;
+            top:100px;
+        }
+        #tit{
+            background-color:#ffdfdf;
+            padding:3em;
+        }
+        .header{
+            position:relative;
+            left:11em;
+            border: 1px solid #1b5ac2;
+            background-color:#1b5ac2;
+            color:white;
+            padding: 1em;
+           
+        }
+        .input{
+            position:relative;
+            left:13em;
+            border: 2px solid #1b5ac2;
+            padding:2em;
+            text-align:center;
+            height:1em;
+            width:20em;
+        }
+        #input{
+            position:relative;
+            left:13em;
+            border: 2px solid #1b5ac2;
+            padding:2em;
+            text-align:center;
+            height:3em;
+            width:40em;
+        }
+         div button{
+            position:relative;
+            left:40em;
+            background-color:#1b5ac2;
+            padding:1em;
+       }
+    </style>
+</head>
+<body>
+    <div id='tit'><h1>모집글 작성</h1></div>
+    <br><br>
+    <span class='header'>제목</span><div class='input'><input type='text' placeholder="제목 입력"></div>
+    <br><br><br>    
+    
+        <span class='header'>작성자</span><div class='input'><input type='text' placeholder="작성자"></div>
+    <br><br><br>
+    
+        <span class='header'>위치</span><div class='input'><input type='text' placeholder="위치 입력"></div>
+    <br><br><br>
+    
+        <span class='header'>내용</span><div id='input'><input type='text' placeholder="내용 입력"></div>
+    
+        <div><button id='b'><a href='{% url "honbob"%}' id='write'>입력</a></button></div>
+    
+
+</body>
+</html>

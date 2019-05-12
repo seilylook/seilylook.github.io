@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js">     </script>
+    <link href="https://fonts.googleapis.com/css?family=Kirang+Haerang" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu|Jua" rel="stylesheet">
+    <style>
+        #title{
+            background-color:#ffdfdf;
+            padding:3em;
+        }
+        h1{
+            text-align: center;
+            font-family: 'Kirang Haerang', cursive;
+            font-size: 5em;
+        }
+        #list{
+            font-family: 'Jua', sans-serif;
+        }
+    </style>
+    <title>customer</title>
+    
+</head>
+<body>
+    {% load static %}
+    <div id='title'>
+        
+        <h1>손님</h1></div>
+    <ul class="nav nav-pills" id='list'>
+        <li role="presentation"><a href="{%url 'challenge'%}">맛집 도전자</a></li>
+        <li role="presentation"><a href="{%url 'recommend'%}">맛집 추천</a>
+            <h2>{{ post.title }}</h2>
+{% if post.photo %}
+path :{{ post.photo.path }} # /Users/nickname/documents/practice/media/jeju_pic.png
+url : {{ post.photo.url }} # /media/jeju_pic.png
+<!-- <img src="{% static 'images/1.jpeg' %}" alt=""> -->
+{% endif %}
+        </li>
+        <li role="presentation"><a href="{%url 'honbob'%}">파티 모집</a></li>
+    </ul>
+    
+</body>
+</html>
+
+    
+    
+    
+    
+    
+    
+    
+    

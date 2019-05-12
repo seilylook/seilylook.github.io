@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js">     </script>
+    <link href="https://fonts.googleapis.com/css?family=Kirang+Haerang" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu|Jua" rel="stylesheet">
+    <style>
+        #title{
+            background-color:#ffdfdf;
+            padding:3em;
+        }
+        h1{
+            text-align: center;
+            font-family: 'Kirang Haerang', cursive;
+            font-size: 5em;
+        }
+        #gumsak{
+            margin:auto;
+            height: 3.5em;
+            width: 40em;
+            border: 1px solid #1b5ac2;
+            background: #ffffff;
+        }
+        input{
+            font-size: 16px;
+            width: 325px;
+            padding: 10px;
+            border: 0px;
+            outline: none;
+            float: left;
+        }
+        #b1{
+            width: 50px;
+            height: 100%;
+            border: 0px;
+            background: #1b5ac2;
+            outline: none;
+            float: right;
+        }
+        #gum{
+            color:#ffffff;
+            font-family: 'Jua', sans-serif;
+        }
+        #b2{
+            width: 100px;
+            height: 150%;
+            border: 0px;
+            background: #1b5ac2;
+            outline: none;
+            position: relative;
+            right:-80em;
+        }
+        #write{
+            color:#ffffff;
+            font-family: 'Jua', sans-serif;
+        }
+        thead,#list{
+            font-family: 'Jua', sans-serif;
+        }
+        tbody{
+            font-family: 'Gaegu', cursive;
+        }
+    
+    </style>
+    <title>customer</title>
+    
+</head>
+<body>
+    <div id='title'>
+        <h1> 파티 모집 </h1>
+    </div>
+    <ul class="nav nav-pills" id='list'>
+        <li role="presentation">
+            <a href="{% url 'challenge' %}">맛집 도전자</a>
+        </li>
+        <li role="presentation"><a href="{%url 'recommend'%}">맛집 추천</a></li>
+        <li role="presentation" class='active'><a href="">파티 모집</a></li>
+    </ul>
+    <br><br>
+    <div id="gumsak">
+        <input type='text' placeholder='검색어 입력'>
+        <button id='b1'><a href='' id='gum'>검색</a></button>
+    </div>
+    <br>
+    <button id='b2'><a href='{%url "write"%}' id='write'>모집글 작성</a></button>
+    <br><br><br>
+    <table class='table table-hover'>
+        <thead>
+        <tr>
+            <th>순서</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+            <th>위치</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><a href=''>수원 성대 율전 맛집 탐방하`실 분!</a></td>
+            <td>뉴비</td>
+            <td>2019.05.04</td>
+            <td>수원시 율천동</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><a href=''>명륜 맛집 깔리 가실 분!</a></td>
+            <td>인싸</td>
+            <td>2019.05.04</td>
+            <td>서울특별시 종로구 명륜동</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <div class='text-center'>
+        <ul class='pagination'>
+            <li><a href=''>1</a></li>
+            <li><a href=''>2</a></li>
+            <li><a href=''>3</a></li>
+    </div>
+</body>
+</html>

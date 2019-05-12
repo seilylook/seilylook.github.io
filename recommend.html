@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>recommend</title>
+      <link href="https://fonts.googleapis.com/css?family=Kirang+Haerang" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu|Jua" rel="stylesheet">
+      <link rel="stylesheet"         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js">     </script>
+      <style>
+
+          .title{
+            background-color:#ffdfdf;
+            padding:3em;
+          }
+          h1{
+            text-align: center;
+            font-family: 'Kirang Haerang', cursive;
+            font-size: 5em;
+          }
+          #list{
+              font-family: 'Jua', sans-serif;
+          }
+              
+      body {
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+      .main {
+        padding: 40px;
+        text-align: center;
+      }
+      .main-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 30px;
+      }
+      .main-container img {
+        width: 100%;
+      }
+      .heading {
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        margin: 10px;
+        margin-bottom: 40px;
+      }
+      .best-container {
+        width: 75%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 20px;
+      }
+      .best-container img {
+        width: 100%;
+      }
+      .best-item {
+        font-size: 11px;
+      }
+      .best-item img {
+        width 50%;
+      }
+      .article {
+        margin-top: 100px;
+      }
+      .article-container {
+        width: 98%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 10px;
+      }
+      .article-item img {
+        width: 100%;
+      }
+      .article-item {
+        padding: auto 10px;
+      }
+      .article-item-head {
+        font-size: 8.5px;
+        font-weight: bolder;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .article-item-date {
+        font-size: 8px;
+      }
+      .article-item-content {
+        font-size: 8px;
+        color: rgb(156, 156, 156);
+      }
+      .article-bottom-box {
+        margin-top: 12px;
+      }
+      .continue-button {
+        border: 1px solid rgb(95, 95, 95);
+        color: black;
+        text-align: center;
+        font-size: 8px;
+        width: 100px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+
+      .review {
+        margin-top: 100px;
+      }
+      .review-container {
+        width: 66%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-column-gap: 5px;
+        grid-row-gap: 5px;
+      }
+      .review-container img {
+        width: 100%;
+      }
+    </style>
+      
+  </head>
+  <body>
+    <div class="title">
+        <h1>
+        맛집을 추천해 드립니다~!    
+        </h1>
+    </div>
+      <ul class="nav nav-pills" id='list'>
+        <li role="presentation">
+            <a href="{% url 'challenge' %}">맛집 도전자</a>
+        </li>
+        <li role="presentation" class='active'><a href="{%url 'recommend'%}" class='active'>맛집 추천</a></li>
+        <li role="presentation"><a href="{%url 'honbob'%}">파티 모집</a>            </li>
+        </ul>
+       <div class="main">
+      <div class="main-container">
+        <img src="./img/1.jpg" alt="" />
+        <img src="./img/2.jpg" alt="" />
+        <img src="./img/3.jpg" alt="" />
+      </div>
+         <h2>
+            Recommendations 
+          </h2>
+    </div>
+    <div class="best">
+      <div class="heading"></div>
+      <div class="best-container">
+        <div class="best-item">
+          <img src="static/images/1.jpg" alt="" />
+          <div class="name">1</div>
+          <div class="pirce">KRW 69,000</div>
+        </div>
+        <div class="best-item">
+          <img src="img/2.jpg" alt="" />
+          <div class="name">2</div>
+          <div class="pirce">KRW 69,000</div>
+        </div>
+        <div class="best-item">
+          <img src="img/3.jpg" alt="" />
+          <div class="name">3</div>
+          <div class="pirce">KRW 69,000</div>
+        </div>
+        <div class="best-item">
+          <img src="./img/7.jpg" alt="" />
+          <div class="name">4</div>
+          <div class="pirce">KRW 44,000</div>
+        </div>
+        <div class="best-item">
+          <img src="./img/8.jpg" alt="" />
+          <div class="name">5</div>
+          <div class="pirce">KRW 57,000</div>
+        </div>
+        <div class="best-item">
+          <img src="./img/9.jpg" alt="" />
+          <div class="name">6</div>
+          <div class="pirce">KRW 62,000</div>
+        </div>
+        <div class="best-item">
+          <img src="./img/index/11.jpg" alt="" />
+          <div class="name">7</div>
+          <div class="pirce">KRW 69,000</div>
+        </div>
+        <div class="best-item">
+          <img src="./img/index/12.jpg" alt="" />
+          <div class="name">8</div>
+          <div class="pirce">KRW 69,000</div>
+        </div>
+        <div class="best-item">
+          <img src="./img/index/13.jpg" alt="" />
+          <div class="name">9</div>
+          <div class="pirce">KRW 69,000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article">
+      <div class="heading"></div>
+      <div class="article-container">
+        <div class="article-item">
+          <img src="./img/index/14.jpg" alt="" />
+
+          <div class="article-item-head">
+            <div class="article-item-name">
+             
+            </div>
+            <div class="article-item-date">
+             
+            </div>
+          </div>
+          <div class="article-item-content">
+
+          </div>
+          <div class="article-bottom-box">
+            <div class="continue-button">
+          
+            </div>
+          </div>
+        </div>
+        <div class="article-item">
+          <img src="./img/index/15.jpg" alt="" />
+
+          <div class="article-item-head">
+            <div class="article-item-name">
+             
+            </div>
+            <div class="article-item-date">
+             
+            </div>
+          </div>
+          <div class="article-item-content">
+
+          </div>
+          <div class="article-bottom-box">
+            <div class="continue-button">
+              
+            </div>
+          </div>
+        </div>
+        <div class="article-item">
+          <img src="./img/index/16.jpg" alt="" />
+
+          <div class="article-item-head">
+            <div class="article-item-name">
+              
+            </div>
+            <div class="article-item-date">
+              
+            </div>
+          </div>
+          <div class="article-item-content">
+
+          </div>
+          <div class="article-bottom-box">
+            <div class="continue-button">
+              
+            </div>
+          </div>
+        </div>
+        <div class="article-item">
+          <img src="./img/index/17.jpg" alt="" />
+
+          <div class="article-item-head">
+            <div class="article-item-name">
+              
+            </div>
+            <div class="article-item-date">
+              
+            </div>
+          </div>
+
+          <div class="article-bottom-box">
+            <div class="continue-button">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+  </body>
+</html>

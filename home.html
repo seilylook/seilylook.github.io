@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+<link rel="stylesheet" href="//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css">
+    <style>
+        .btn{
+            font-family: 'Jua'
+        }
+        p { font-size: 1.6em; }
+.nanum-square { font-family: 'Nanum Square'; }
+.bold { font-weight: bold; }
+}
+    </style>
+      {% load staticfiles %}
+      <link rel="stylesheet" type="text/css" href="{% static '/firstapp/style.css' %}" />
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="btn-wrap">
+        <a class='btn' href="{% url 'president' %}">사장님</a>
+        <a class='btn' href="{% url 'recom_food' %}">손님</a>
+      </div>
+    </div>
+      
+    <!-- <div class="b">
+    </div> -->
+      
+  </body>
+
+</html>
