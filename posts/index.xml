@@ -1,14 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - My New Hugo Site</title>
-        <link>http://example.org/posts/</link>
-        <description>All Posts | My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 22 Aug 2023 15:39:01 &#43;0900</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <title>All Posts - Devlog</title>
+        <link>https://seilylook.github.io/posts/</link>
+        <description>All Posts | Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 22 Aug 2023 15:39:01 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>First Post</title>
-    <link>http://example.org/posts/first-post/</link>
+    <link>https://seilylook.github.io/posts/first-post/</link>
     <pubDate>Tue, 22 Aug 2023 15:39:01 &#43;0900</pubDate>
-    <author>xxxx</author>
-    <guid>http://example.org/posts/first-post/</guid>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/first-post/</guid>
     <description><![CDATA[Hello world ]]></description>
 </item>
 </channel>
