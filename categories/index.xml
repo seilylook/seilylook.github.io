@@ -4,7 +4,15 @@
         <link>https://seilylook.github.io/categories/</link>
         <description>Categories - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 22 Aug 2023 17:04:46 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 23 Aug 2023 16:40:10 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>about</title>
+    <link>https://seilylook.github.io/categories/about/</link>
+    <pubDate>Wed, 23 Aug 2023 16:40:10 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/categories/about/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Development</title>
     <link>https://seilylook.github.io/categories/development/</link>
     <pubDate>Tue, 22 Aug 2023 17:04:46 &#43;0900</pubDate>
