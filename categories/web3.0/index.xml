@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Web3.0 - Category - Devlog</title>
+        <link>https://seilylook.github.io/categories/web3.0/</link>
+        <description>Web3.0 - Category - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 24 Aug 2023 14:14:21 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/web3.0/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust</title>
+    <link>https://seilylook.github.io/posts/rust/</link>
+    <pubDate>Thu, 24 Aug 2023 14:14:21 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/rust/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/Rust-Logo.png" referrerpolicy="no-referrer">
+            </div>Rust: Rust는 시스템 프로그래밍 언어로서, 안전성, 속도, 병행성(Concurrency)을 중요한 목표로 개발된 언어입니다. Mozilla에서 개발한 Rust는 C와 C++과 같은 언어의 잠재적인 문제를 극복하고자 설계되었습니다. Rust는 메모리 안전성을 강조하며, 코드의 버그와 런타임 에러를 최소화하고 안전한 병행성을 제공하기 위한 다양한 기능을 제공합니다.
+Rust https://www.rust-lang.org/
+1. 시작 1.1 설치하기 Rust는 rustup이라고 하는 러스트 버전 및 관련 도구들을 관리하기 위한 커맨드 라인 도구를 통해 러스트를 다운받을 수 있다.
+Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh.]]></description>
+</item>
+</channel>
+</rss>
