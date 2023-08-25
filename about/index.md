@@ -17,7 +17,7 @@
 ## Education 🎓
 
 <center>
-    <lottie-player src="https://lottie.host/720cade1-3df3-4420-a9aa-7de8425f61b0/lVkVUeXD3B.json" background="transparent"  speed="1"  style="width:450px;height:450px" autoplay ></lottie-player>
+    <lottie-player src="https://lottie.host/720cade1-3df3-4420-a9aa-7de8425f61b0/lVkVUeXD3B.json" background="transparent"  speed="1"  style="width:300px;height:300px" autoplay ></lottie-player>
 </center>
 
 **Ajou University**
@@ -37,7 +37,7 @@
 ## Skills 🛠
 
 <center>
-        <lottie-player src="https://lottie.host/ad4c866a-535c-4dab-980a-56f43f1f1f28/ZnvWk1OlwU.json" background="transparent"  speed="1"  style="width:450px;height:450px" autoplay ></lottie-player>
+        <lottie-player src="https://lottie.host/ad4c866a-535c-4dab-980a-56f43f1f1f28/ZnvWk1OlwU.json" background="transparent"  speed="1"  style="width:300px;height:300px" autoplay ></lottie-player>
 </center>
 
 - `Language`: Javscript, Typescript, Python, Dart, Rust
@@ -55,7 +55,7 @@
 ## Projects
 
 <center>
-        <lottie-player src="https://lottie.host/d2ae2b2c-70e1-4b43-8f8b-2fc0a6da9f85/k9p93ZYFuL.json" background="transparent"  speed="1"  style="width:450px;height:450px" autoplay ></lottie-player>
+        <lottie-player src="https://lottie.host/d2ae2b2c-70e1-4b43-8f8b-2fc0a6da9f85/k9p93ZYFuL.json" background="transparent"  speed="1"  style="width:300px;height:300px" autoplay ></lottie-player>
 </center>
 
 #### 1. Converto

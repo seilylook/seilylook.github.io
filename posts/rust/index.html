@@ -12,7 +12,7 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/rust/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-08-24T14:14:21+09:00" />
-<meta property="article:modified_time" content="2023-08-24T22:15:33+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-08-25T12:41:18+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -33,8 +33,8 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/rust\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Language, Web3.0","wordcount":  3104 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/rust\/","datePublished": "2023-08-24T14:14:21+09:00","dateModified": "2023-08-24T22:15:33+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Language, Web3.0","wordcount":  3323 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/rust\/","datePublished": "2023-08-24T14:14:21+09:00","dateModified": "2023-08-25T12:41:18+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -81,8 +81,8 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3104 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3323 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -151,8 +151,16 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
             <li><a href="#반환값을-가지는-함수">반환값을 가지는 함수</a></li>
           </ul>
         </li>
+        <li><a href="#24-반복문">2.4 반복문</a>
+          <ul>
+            <li><a href="#loop와-함께-코드의-반복-수행">loop와 함께 코드의 반복 수행</a></li>
+            <li><a href="#while와-함께하는-조건부-반복">while와 함께하는 조건부 반복</a></li>
+            <li><a href="#for와-함께하는-콜렉션-반복">for와 함께하는 콜렉션 반복</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
+    <li><a href="#소유권">소유권</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p><code>Rust</code>: Rust는 시스템 프로그래밍 언어로서, 안전성, 속도, 병행성(Concurrency)을 중요한 목표로 개발된 언어입니다. Mozilla에서 개발한 Rust는 C와 C++과 같은 언어의 잠재적인 문제를 극복하고자 설계되었습니다. Rust는 메모리 안전성을 강조하며, 코드의 버그와 런타임 에러를 최소화하고 안전한 병행성을 제공하기 위한 다양한 기능을 제공합니다.</p>
@@ -991,12 +999,126 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
 </div><p>에러 메시지의 중요 포인트는 “mismatched types,”으로 이 코드의 주요 문제를 보여줍니다.</p>
 <p><code>plus_one</code> 함수의 정의는 i32 값을 반환하겠다고 하였으나, 구문은 값을 산출하지 않기에 <code>()처럼 비어있는 튜플</code>로 표현됩니다.</p>
 <p>이런 이유로, 반환할 것이 없어서 함수가 정의된 내용과 상충하게 되고 이는 에러를 발생시킵니다. 이번 결과에서는, Rust가 문제를 해결할 수 있도록 도와주는 메시지를 제공합니다: 세미콜론을 제거하면 에러가 교정될 수도 있다고 제안하네요.</p>
+<h3 id="24-반복문">2.4 반복문</h3>
+<p>Rust가 제공하는 반복문은 <code>loop</code>, <code>while</code>, <code>for</code>가 있다.</p>
+<h4 id="loop와-함께-코드의-반복-수행">loop와 함께 코드의 반복 수행</h4>
+<p><code>loop</code> keyword는 Rust에게 그만두라고 명시하여 알려주기 전까지 코드 블럭을 반복 수행합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    loop {
+</span></span><span class="line"><span class="cl">        println!(&#34;again!&#34;);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 프로그램을 실행시키면, 우리는 프로그램을 강제 정지하기 전까지 again!이 반복 출력되는 것을 보게 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ cargo run
+</span></span><span class="line"><span class="cl">   Compiling loops v0.1.0 <span class="o">(</span>file:///projects/loops<span class="o">)</span>
+</span></span><span class="line"><span class="cl">     Running <span class="sb">`</span>target/debug/loops<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">again!
+</span></span><span class="line"><span class="cl">again!
+</span></span><span class="line"><span class="cl">again!
+</span></span><span class="line"><span class="cl">again!
+</span></span><span class="line"><span class="cl">^Cagain!
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="while와-함께하는-조건부-반복">while와 함께하는 조건부 반복</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let mut number = 3;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    while number != 0 {
+</span></span><span class="line"><span class="cl">        println!(&#34;{}!&#34;, number);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        number = number - 1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    println!(&#34;LIFTOFF!!!&#34;);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="for와-함께하는-콜렉션-반복">for와 함께하는 콜렉션 반복</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let a = [10, 20, 30, 40, 50];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    for element in a.iter() {
+</span></span><span class="line"><span class="cl">        println!(&#34;the value is: {}&#34;, element);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>여기 <code>for</code> 반복문과 아직 설명하지 않은 range를 역순하는 <code>rev</code>메소드를 사용하는 카운트다운 프로그램이 있습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    for number in (1..4).rev() {
+</span></span><span class="line"><span class="cl">        println!(&#34;{}!&#34;, number);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    println!(&#34;LIFTOFF!!!&#34;);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="소유권">소유권</h2>
+<p>소유권(Ownership)은 러스트의 가장 유니크한 특성이며, 러스트가 가비지 콜렉터 없이 메모리 안정성 보장을 하게 해줍니다. 그러므로, 소유권이 러스트 내에서 어떻게 동작하는지 이해하는 것은 중요합니다. 이 장에서는 소유권 뿐만 아니라 이와 관련된 특성들: 빌림, 슬라이스, 그리고 러스트가 메모리에 데이터를 저장하는지 등을 알아보겠습니다.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-08-24&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/a59ef6145e9291d7688e2bfb9286d393dc71f752" target="_blank" title="commit by seilylook(seilylook@naver.com) a59ef6145e9291d7688e2bfb9286d393dc71f752: docs: various data types">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a59ef61</a></span>
+                <span>Updated on 2023-08-25&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/74ed8c5e843b6858eb2b8febb983b8f80e6c9464" target="_blank" title="commit by seilylook(seilylook@naver.com) 74ed8c5e843b6858eb2b8febb983b8f80e6c9464: docs: function &amp;&amp; statement, expression">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>74ed8c5</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

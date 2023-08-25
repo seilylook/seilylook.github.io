@@ -615,3 +615,76 @@ error[E0308]: mismatched types
 
 이런 이유로, 반환할 것이 없어서 함수가 정의된 내용과 상충하게 되고 이는 에러를 발생시킵니다. 이번 결과에서는, Rust가 문제를 해결할 수 있도록 도와주는 메시지를 제공합니다: 세미콜론을 제거하면 에러가 교정될 수도 있다고 제안하네요.
 
+### 2.4 반복문
+
+Rust가 제공하는 반복문은 `loop`, `while`, `for`가 있다.
+
+#### loop와 함께 코드의 반복 수행
+
+`loop` keyword는 Rust에게 그만두라고 명시하여 알려주기 전까지 코드 블럭을 반복 수행합니다.
+
+```
+fn main() {
+    loop {
+        println!("again!");
+    }
+}
+```
+
+이 프로그램을 실행시키면, 우리는 프로그램을 강제 정지하기 전까지 again!이 반복 출력되는 것을 보게 됩니다.
+
+```shell
+$ cargo run
+   Compiling loops v0.1.0 (file:///projects/loops)
+     Running `target/debug/loops`
+again!
+again!
+again!
+again!
+^Cagain!
+
+```
+
+#### while와 함께하는 조건부 반복
+
+```
+fn main() {
+    let mut number = 3;
+
+    while number != 0 {
+        println!("{}!", number);
+
+        number = number - 1;
+    }
+
+    println!("LIFTOFF!!!");
+}
+```
+
+#### for와 함께하는 콜렉션 반복
+
+```
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a.iter() {
+        println!("the value is: {}", element);
+    }
+}
+```
+
+여기 `for` 반복문과 아직 설명하지 않은 range를 역순하는 `rev`메소드를 사용하는 카운트다운 프로그램이 있습니다:
+
+```
+fn main() {
+    for number in (1..4).rev() {
+        println!("{}!", number);
+    }
+    println!("LIFTOFF!!!");
+}
+```
+
+## 소유권
+
+소유권(Ownership)은 러스트의 가장 유니크한 특성이며, 러스트가 가비지 콜렉터 없이 메모리 안정성 보장을 하게 해줍니다. 그러므로, 소유권이 러스트 내에서 어떻게 동작하는지 이해하는 것은 중요합니다. 이 장에서는 소유권 뿐만 아니라 이와 관련된 특성들: 빌림, 슬라이스, 그리고 러스트가 메모리에 데이터를 저장하는지 등을 알아보겠습니다.
+
