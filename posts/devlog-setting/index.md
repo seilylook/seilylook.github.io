@@ -876,7 +876,7 @@ git push origin main
 다음부터는 명령어를 통해 배포할 수 있다.
 
 ```shell
-$ sh git-push.sh <COMMIT_MSG>
+$ sh deploy.sh <COMMIT_MSG>
 
 ```
 

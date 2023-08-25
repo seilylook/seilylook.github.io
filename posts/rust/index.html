@@ -12,7 +12,7 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/rust/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-08-24T14:14:21+09:00" />
-<meta property="article:modified_time" content="2023-08-24T16:03:46+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-08-24T22:15:33+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -33,8 +33,8 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/rust\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Language, Web3.0","wordcount":  884 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/rust\/","datePublished": "2023-08-24T14:14:21+09:00","dateModified": "2023-08-24T16:03:46+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Language, Web3.0","wordcount":  2262 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/rust\/","datePublished": "2023-08-24T14:14:21+09:00","dateModified": "2023-08-24T22:15:33+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -81,16 +81,16 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;884 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2262 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/Rust-Logo.png"
-        data-srcset="/images/Rust-Logo.png, /images/Rust-Logo.png 1.5x, /images/Rust-Logo.png 2x"
+        data-src="/images/rust-logo.svg"
+        data-srcset="/images/rust-logo.svg, /images/rust-logo.svg 1.5x, /images/rust-logo.svg 2x"
         data-sizes="auto"
-        alt="/images/Rust-Logo.png"
-        title="/images/Rust-Logo.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/rust-logo.svg"
+        title="/images/rust-logo.svg" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -122,6 +122,27 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
             <li><a href="#cargo를-사용해-프로젝트-생성">Cargo를 사용해 프로젝트 생성</a></li>
             <li><a href="#cargo-프로젝트를-빌드하고-실행">Cargo 프로젝트를 빌드하고 실행</a></li>
             <li><a href="#배포">배포</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#2-개념">2. 개념</a>
+      <ul>
+        <li><a href="#21-변수와-가변성">2.1 변수와 가변성</a>
+          <ul>
+            <li><a href="#변수와-상수-간의-차이점들">변수와 상수 간의 차이점들</a></li>
+            <li><a href="#shadowing">shadowing</a></li>
+          </ul>
+        </li>
+        <li><a href="#22-데이터-타입들">2.2 데이터 타입들</a>
+          <ul>
+            <li><a href="#스칼라-타입들">스칼라 타입들</a></li>
+            <li><a href="#복합-타입들">복합 타입들</a>
+              <ul>
+                <li><a href="#값들을-집합시켜서-튜플화하기">값들을 집합시켜서 튜플화하기</a></li>
+                <li><a href="#배열">배열</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -410,19 +431,340 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
 <p>프로젝트가 마침내 배포를 위한 준비가 됐다면, <code>cargo build --release</code> 를 사용해 최적화와 함께 이를 커파일 할 수 있다. 이 커맨드는 taget/debug 대신 target/release에 실행파일을 생성한다.</p>
 <p>최적화는 러스트 코드를 더 빠르게 만들어주지만, 최적화를 켜는 것은 프로그램을 컴파일하는덷 드는 시간을 길게 할 수 있다.</p>
 <p>이것이 바로 두 개의 서로 다른 프로파일이 있는 이유이다. 하나는 빠르게 그리고 자주 다시 빌드하기를 원하는 개발용, 다른 하나는 반복적으로 다시 빌드를 할 필요 없고 가능한 빠르게 실행되어 사용자들에게 제공할 최종 프포그램을 빌드하기 위한 용도이다.</p>
-</div><div class="post-footer" id="post-footer">
+<h2 id="2-개념">2. 개념</h2>
+<h3 id="21-변수와-가변성">2.1 변수와 가변성</h3>
+<p>기본 변수는 불변성이다. 이것은 Rust가 제공하는 안전성과 손쉬운 동시성이라는 장점을 취할 수 있도록 코드를 작성하게끔 강제하는 요소 중 하나이다.</p>
+<p>변수가 불변성일 경우, 일단 값이 이름에 bound 되면 해당 값을 변경할 수 없다. 시험 삼아 <code>cargo new --bin variables</code>를 실행해서 새 프로젝트를 생성해본다. 그런 다음 VScode를 열어 다음과 같이 수정해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x = 5;
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">    x = 6;
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>저장하고 <code>cargo run</code>명령을 통해 실행시켜 보면, 다음과 같은 에러가 발생할 것이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">error<span class="o">[</span>E0384<span class="o">]</span>: re-assignment of immutable variable <span class="sb">`</span>x<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"> --&gt; src/main.rs:4:5
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="m">2</span> <span class="p">|</span>     <span class="nb">let</span> <span class="nv">x</span> <span class="o">=</span> 5<span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>         - first assignment to <span class="sb">`</span>x<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="m">3</span> <span class="p">|</span>     println!<span class="o">(</span><span class="s2">&#34;The value of x is: {}&#34;</span>, x<span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="m">4</span> <span class="p">|</span>     <span class="nv">x</span> <span class="o">=</span> 6<span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>     ^^^^^ re-assignment of immutable variable
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 에러가 발생하는 이유는 <code>불변성 변수에 재할당</code>이고, 원인은 변수 <code>x</code>에 값을 새로 정의했기 때문이다.</p>
+<p>이전에 불변성으로 선언한 것의 값을 변경하고자 하는 시도를 하면 컴파일 타임의 에러를 얻게 되고 이로 인해 버그가 발생할 수 있기 때문에 중요하다. 만약 우리 코드의 일부는 값이 변경되지 않는다는 것을 가정하는데 다른 코드는 이와 다르게 값을 변경한다면, 전자에 해당하는 코드는 우리가 의도한 대로 수행되지 않을 수 있다.</p>
+<p>Rust에서는 컴파일러가 변경되지 않은 값에 대한 보증을 해주고, 실제로 이는 바뀌지 않는다. 이것이 의미하는 바는 코드를 작성하거나 분석할 시에 변수의 값이 어떻게 변경되는지 추적할 필요가 없이 때문에 코드의 안정성을 높여준다.</p>
+<p>하지만 때로는 변해야 되는 변수를 사용해야 될 때도 있기 때문에 <code>mut</code>을 추가하는 것을 통해 가변성 변수를 선언할 수 있다. 다음과 같이 사용할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let mut x = 5;
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">    x = 6;
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>위의 코드로 바꾸면 다음의 결과를 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ cargo run
+</span></span><span class="line"><span class="cl">   Compiling variables v0.1.0 <span class="o">(</span>file:///projects/variables<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Finished dev <span class="o">[</span>unoptimized + debuginfo<span class="o">]</span> target<span class="o">(</span>s<span class="o">)</span> in 0.30 secs
+</span></span><span class="line"><span class="cl">     Running <span class="sb">`</span>target/debug/variables<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">The value of x is: <span class="m">5</span>
+</span></span><span class="line"><span class="cl">The value of x is: <span class="m">6</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>가변성 변수를 사용할 좋은 경우는 다음과 같다. 예를 들어, 대규모 데이터 구조체를 다루는 경우 가변한 인스턴스를 사용하는 것이 새로 인스턴스를 할당하고 반한하는 것보다 빠를 수 있다.</p>
+<p>이는 반대로 데이터 규모가 작다면 새 인스턴스를 생성하고 함수적 프로그래밍 스타일로 작성하는 것이 더 합리적이라 할 수 있다.</p>
+<h4 id="변수와-상수-간의-차이점들">변수와 상수 간의 차이점들</h4>
+<p>변수의 값을 변경할 수 없는 사항이 다른 언어가 가진 프로그래밍 개념을 떠오르게 한다. <code>상수</code> 불변성 변수와 마찬가지로 상수 또한 이름으로 bound 된 후에는 값의 변경이 허용되지 않지만, 상수와 변수는 조금 다르다.</p>
+<p>첫째, 상수에 대해서는 <code>mut</code>을 사용하는 것이 허용되지 않는다. 상수는 기본 설정이 불변성이 아니라 불변성 그 자체이다.</p>
+<p>우리가 상수를 사용하고자 한다면 let 키워드 대신 const 키워드를 사용해야 하고, 값의 유형을 선언해야 한다.</p>
+<p>상수는 전체 영역을 포함해 어떤 영역에서도 선언될 수 있다. 이는 코드의 많은 부분에서 사용될 필요가 있는 값을 다루는데 유용하다. <code>ex) PUBLIC_BASE_URL=https://example.com</code></p>
+<h4 id="shadowing">shadowing</h4>
+<p>이전에 선언한 변수와 같은 이름의 새 변수를 선언할 수 있고, 새 변수는 이전 변수를 <code>shadows</code>하게 된다. 해당 변수명은 두 번째 변수의 값을 갖게 된다는 뜻이다. let 키워드를 사용해 다음처럼 반복해 같은 변수명으로 shadow 할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x = 5;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let x = x + 1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let x = x * 2;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 프로그램은 처음 <code>x</code>에 값 5를 bind 한다. 이후 반복된 <code>let x = </code>구문으로 <code>x</code>를 shadow하고 원본 값에 <code>1</code>을 더해 <code>x</code>의 값은 <code>6</code>이 된다. 세번째 <code>let</code>문으로 또 <code>x</code>를 shadow하고, 이전 값에 <code>2</code>를 곱해 <code>x</code>의 최종값은 <code>12</code>가 된다. 프로그램을 실행하면 결과값이 다음과 같다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cargo run
+</span></span><span class="line"><span class="cl">   Compiling variables v0.1.0 (file:///projects/variables)
+</span></span><span class="line"><span class="cl">    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
+</span></span><span class="line"><span class="cl">     Running `target/debug/variables`
+</span></span><span class="line"><span class="cl">The value of x is: 12
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이와 같은 사용은 변수를 <code>mut</code>으로 선언하는 것과는 차이가 있다. 왜냐면 <code>let</code> 키워드를 사용하지 않고 변수에 새로 값을 대입하려고 하면 컴파일-시에 에러를 얻게 되기 때문이다. 우리가 몇 번 값을 변경할 수 있지만 그 이후에 변수는 불변성을 갖게 된다.</p>
+<p>또 다른 <code>mut</code>과 <code>shadowing</code>의 차이는 <code>let</code> 키워드를 다시 사용해 효과적으로 새 변수를 선언하고, 값의 유형을 변경할 수 있으면서도 동일 이름을 사용할 수 있다는 점 이다. 예를 들어, 공백 문자들을 입력받아 공백 문자의 길이를 보여주고자 할 때, 실제로 저장하고자 하는 것은 공백의 개수이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">let spaces = &#34;   &#34;;
+</span></span><span class="line"><span class="cl">let spaces = spaces.len();
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이런 구조가 허용되는 이유는 첫 <code>spaces</code> 변수가 문자열 유형이고 두번째 <code>spaces</code> 변수는 첫 번째 것과 동일한 이름을 가진 새롭게 정의된 숫자 유형의 변수이기 때문이다.</p>
+<p><code>Shadowing</code>은 <code>space_str</code>이나 <code>space_num</code>과 같이 대체된 이름을 사용하는 대신 간단히 <code>spaces</code> 이름을 사용할 수 있게 해준다.</p>
+<p>그러나 <code>mut</code>를 사용하려고 한다면</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">let mut spaces = &#34;   &#34;;
+</span></span><span class="line"><span class="cl">spaces = spaces.len();
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음과 같은 에러가 발생한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">error<span class="o">[</span>E0308<span class="o">]</span>: mismatched types
+</span></span><span class="line"><span class="cl"> --&gt; src/main.rs:3:14
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="m">3</span> <span class="p">|</span>     <span class="nv">spaces</span> <span class="o">=</span> spaces.len<span class="o">()</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>              ^^^^^^^^^^^^ expected <span class="p">&amp;</span>str, found usize
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl">  <span class="o">=</span> note: expected <span class="nb">type</span> <span class="sb">`</span><span class="p">&amp;</span>str<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">             found <span class="nb">type</span> <span class="sb">`</span>usize<span class="sb">`</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22-데이터-타입들">2.2 데이터 타입들</h3>
+<p>Rust에서 사용되는 모든 값들은 어떤 타입을 갖습니다. 그러니 어떤 형태의 데이터인지 명시하여 Rust에게 알려줘서 이를 통해 데이터를 어떻게 다룰지 알 수 있도록 해야 합니다.</p>
+<p>이번 장의 전체에 걸쳐 주지해야 할 점은 Rust는 타입이 고정된 언어라는 점 입니다. 이게 의미하는 바는 모든 변수의 타입이 컴파일 시에 반드시 정해져 있어야 한다는 겁니다. 보통 컴파일러는 우리가 값을 사용하는 지에 따라 타입을 추측할 수 있습니다. 2장에서 <code>String</code>을 <code>parse</code>를 사용하여 숫자로 변환했던 경우처럼 타입의 선택 폭이 넓은 경우는 반드시 타입의 명시를 첨가해야 합니다. 다음처럼:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">let guess: u32 = &#34;42&#34;.parse().expect(&#34;Not a number!&#34;);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>여기에 타입 명시를 첨가하지 않은 경우, Rust는 다음과 같은 에러를 발생시킵니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">error</span><span class="p">[</span><span class="n">E0282</span><span class="p">]:</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">annotations</span><span class="w"> </span><span class="n">needed</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">rs</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="n">let</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&#34;42&#34;</span><span class="p">.</span><span class="nf">parse</span><span class="p">().</span><span class="nf">expect</span><span class="p">(</span><span class="s2">&#34;Not a number!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="o">^^^^^</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="n">cannot</span><span class="w"> </span><span class="n">infer</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">`</span><span class="n">_</span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="n">consider</span><span class="w"> </span><span class="n">giving</span><span class="w"> </span><span class="o">`</span><span class="n">guess</span><span class="o">`</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">type</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="스칼라-타입들">스칼라 타입들</h4>
+<p>스칼라는 하나의 값으로 표현되는 타입입니다. Rust는 정수형, 부동소수점 숫자, boolean, 그리고 문자, 네 가지 스칼라 타입을 보유하고 있습니다.</p>
+<h4 id="복합-타입들">복합 타입들</h4>
+<p>복합 타입들은 다른 타입의 다양한 값들을 하나의 타입으로 묶을 수 있습니다. Rust는 두 개의 기본 타입들을 갖고 있습니다: 튜플과 배열.</p>
+<h5 id="값들을-집합시켜서-튜플화하기">값들을 집합시켜서 튜플화하기</h5>
+<p>튜플은 다양한 타입의 몇 개의 숫자를 집합시켜 하나의 복합 타입으로 만드는 일반적인 방법입니다.</p>
+<p>우리는 괄호 안에 콤마로 구분되는 값들의 목록을 작성하여 튜플을 만듭니다. 튜플에 포함되는 각 값의 타입이 동일할 필요없이 서로 달라도 됩니다. 다음의 예제에 우리는 선택 사항인 타입 명시를 추가했습니다.</p>
+<p>Filename: src/main.rs</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let tup: (i32, f64, u8) = (500, 6.4, 1);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>튜플은 단일 요소를 위한 복합계로 고려되었기에 변수 <code>tup</code>에는 튜플 전체가 bind 됩니다. 개별 값을 튜플의 밖으로 빼내오기 위해서는, 패턴 매칭을 사용하여 튜플의 값을 구조해체 시키면 됩니다. 다음을 봅시다:</p>
+<p>Filename: src/main.rs</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let tup = (500, 6.4, 1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let (x, y, z) = tup;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of y is: {}&#34;, y);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>해당 프로그램은 처음에 튜플을 만들고 변수 <code>tup</code>에 bind 시킵니다. 이후 패턴과 <code>let</code>을 통해 <code>tup</code>을 세개의 분리된 변수 <code>x</code>, <code>y</code>, 그리고 <code>z</code>에 이동시킵니다. 이것을 <code>구조해체</code>라고 부르는 이유는 하나의 튜플을 세 부분으로 나누기 때문입니다. 최종적으로 프로그램은 <code>y</code>의 값을 출력할 것이고 이는 6.4입니다.</p>
+<p>패턴 매칭을 통한 <code>구조해체</code>에 추가로, 우리는 마침표(.) 뒤에 우리가 접근하길 원하는 값의 색인을 넣는 것을 통해 튜플의 요소에 직접적으로 접근할 수 있습니다. 예제를 봅시다:</p>
+<p>Filename: src/main.rs</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x: (i32, f64, u8) = (500, 6.4, 1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let five_hundred = x.0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let six_point_four = x.1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let one = x.2;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="배열">배열</h5>
+<p>여러 값들의 집합체를 만드는 다른 방법은 배열입니다. 튜플과는 다르게, 배열의 모든 요소는 모두 같은 타입이여야 합니다. Rust의 배열이 몇 다른 언어들의 배열과 다른 점은 Rust에서는 배열은 고정된 길이를 갖는다는 점입니다: 한번 선언되면, 이들은 크기는 커지거나 작아지지 않습니다.</p>
+<p>Rust에서는 대괄호 안에 값들을 콤마로 구분하여 나열해서 배열을 만듭니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let a = [1, 2, 3, 4, 5];
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>배열이 유용할 때는 당신의 데이터를 heap보다 stack에 할당하는 것을 원하거나(stack 과 heap에 대해서는 4장에서 다루게 될 것입니다), 당신이 항상 고정된 숫자의 요소를 갖는다고 확신하고 싶을 때입니다. 이들은 벡터 타입처럼 가변적이지 않습니다. 벡터 타입은 유사 집합체로 표준 라이브러리에서 제공되며 확장 혹은 축소가 가능합니다. 배열이나 벡터 중에 뭘 선택해야 할지 확실하지 않은 상황이라면 벡터를 사용하도록 하세요. 8장에서 벡터에 대해 더 자세히 다룹니다.</p>
+<p>벡터가 아닌 배열을 선택하게 되는 경우의 예로, 프로그램이 올해의 달 이름을 알고자 할 경우입니다. 프로그램이 달을 추가하거나 삭제하는 경우는 거의 없을 것이므로, 고정적으로 12개의 아이템을 가질테니 배열을 사용하면 됩니다.</p>
+<p>배열의 접근은 다른 언어들과 마찬가지로 접근하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let a = [1, 2, 3, 4, 5];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let first = a[0];
+</span></span><span class="line"><span class="cl">    let second = a[1];
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-08-24&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/6c3fd43302f7636b7776e08f2a8d48cf421ee9e0" target="_blank" title="commit by seilylook(seilylook@naver.com) 6c3fd43302f7636b7776e08f2a8d48cf421ee9e0: feat: start Rust">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6c3fd43</a></span>
+                <span>Updated on 2023-08-24&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/a59ef6145e9291d7688e2bfb9286d393dc71f752" target="_blank" title="commit by seilylook(seilylook@naver.com) a59ef6145e9291d7688e2bfb9286d393dc71f752: docs: various data types">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a59ef61</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/posts/rust/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-hashtags="Development,Language,Web3.0"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/rust/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-image="/images/Rust-Logo.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-hashtags="Development,Language,Web3.0"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/rust/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-image="/images/rust-logo.svg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

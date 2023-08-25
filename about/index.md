@@ -40,8 +40,8 @@
         <lottie-player src="https://lottie.host/ad4c866a-535c-4dab-980a-56f43f1f1f28/ZnvWk1OlwU.json" background="transparent"  speed="1"  style="width:450px;height:450px" autoplay ></lottie-player>
 </center>
 
-- `Language`: Javscript, Typescript, Python, Flutter
-- `Frontend`: React, Next.js, Svelte, Tailwindcss, Redux, Recoil
+- `Language`: Javscript, Typescript, Python, Dart, Rust
+- `Frontend`: React, Next.js, Svelte, Redux, Recoil, Saga, Flutter, Tailwindcss, styled-component
 - `Backend`: NestJS, Express
 - `DB`: MySQL, MongoDB
 - `Infra`: Cloudflare, Vercel, Heroku
