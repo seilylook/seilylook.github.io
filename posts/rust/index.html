@@ -33,7 +33,7 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/rust\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Language, Web3.0","wordcount":  2262 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Language, Web3.0","wordcount":  3104 ,
         "url": "https:\/\/seilylook.github.io\/posts\/rust\/","datePublished": "2023-08-24T14:14:21+09:00","dateModified": "2023-08-24T22:15:33+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -81,8 +81,8 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2262 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3104 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -143,6 +143,12 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
                 <li><a href="#배열">배열</a></li>
               </ul>
             </li>
+          </ul>
+        </li>
+        <li><a href="#23-함수-동작-원리">2.3 함수 동작 원리</a>
+          <ul>
+            <li><a href="#구문과-표현식">구문과 표현식</a></li>
+            <li><a href="#반환값을-가지는-함수">반환값을 가지는 함수</a></li>
           </ul>
         </li>
       </ul>
@@ -752,7 +758,240 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h3 id="23-함수-동작-원리">2.3 함수 동작 원리</h3>
+<p>함수는 Rust에 녹아들어 있습니다. 여러분은 이미 언어에서 가장 중요하게 생각하는 main함수를 보셨습니다. 이는 다수의 프로그램에서 실행 지점입니다. 여러분은 또한 <code>fn</code> 키워드도 보셨을텐데, 이는 새로운 함수의 선언을 가능하게 합니다.</p>
+<p>Rust에서의 함수 선언은 <code>fn</code>으로 시작하며 함수 이름 뒤에 괄호의 형식으로 되어 있습니다. 중괄호는 컴파일러에게 함수의 시작과 종료 지점을 알려주게 됩니다.</p>
+<p>우리는 함수의 이름과 괄호 형식을 기입하는 것을 통해 우리가 선언했던 어떤 함수든 호출할 수 있습니다. <code>another_function</code>이 프로그램 내에 정의되어 있으므로, <code>main</code> 함수에서 해당 함수를 호출할 수 있습니다. 주의할 점은, 소스 코드 내에서 <code>another_function</code>이 <code>main</code> 함수 뒤에 정의했다는 점 입니다. 우리는 이를 <code>main</code> 함수 앞에도 정의할 수 있습니다. Rust는 당신의 함수의 위치를 신경쓰지 않습니다, 어디든 정의만 되어 있으면 됩니다.</p>
+<h4 id="구문과-표현식">구문과 표현식</h4>
+<p>사실 우리는 이미 구문과 표현식을 사용했습니다.</p>
+<ul>
+<li><code>구문</code>: 어떤 명령들의 나열로 값을 반환하지 않는 어떤 동작을 수행.</li>
+<li><code>표현식</code>: 결과 값을 산출해 낸다.</li>
+</ul>
+<p>구문 예시</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let y = 6;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>함수 정의는 또 하나의 구문입니다; 상기 예제는 자신 그 자체가 구문입니다. 구문은 값을 반환하지 않습니다. 그러니, 여러분은 다음처럼 <code>let</code> 구문을 사용해서는 다른 변수에 값을 대입할 수 없습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x = (let y = 6);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>여러분이 이 프로그램을 수행하면, 다음과 같은 에러를 보게 될 겁니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ cargo run
+</span></span><span class="line"><span class="cl">   Compiling functions v0.1.0 <span class="o">(</span>file:///projects/functions<span class="o">)</span>
+</span></span><span class="line"><span class="cl">error: expected expression, found statement <span class="o">(</span><span class="sb">`</span><span class="nb">let</span><span class="sb">`</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"> --&gt; src/main.rs:2:14
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="m">2</span> <span class="p">|</span>     <span class="nb">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="o">(</span><span class="nb">let</span> <span class="nv">y</span> <span class="o">=</span> 6<span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>              ^^^
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl">  <span class="o">=</span> note: variable declaration using <span class="sb">`</span><span class="nb">let</span><span class="sb">`</span> is a statement
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>let y = 6</code> 구문은 반환 값이 없으므로, x에 bind 시킬 것이 없습니다. 이것이 다른 언어인 C나 Ruby와의 차이점 입니다. 이들 언어들은 x = y = 6와 같은 코드가 x와 y에 모두 6의 값을 대입할 수 있습니다; Rust에서는 허용되지 않습니다. 여러분이 작성하는 Rust 코드의 대부분은 표현식이며 이는 어떤 값을 산출합니다. 5 + 6과 같은 간단한 수학 연산을 살펴보면, 이는 11이란 값을 산출하는 표현식입니다.</p>
+<p>표현식은 구문의 부분일 수 있습니다: 항목 3-3은 let y = 6;이란 구문을 갖는데, 6은 6이란 값을 산출하는 표현식입니다. 함수를 호출하는 것은 표현식입니다. 매크로를 호출하는 것은 표현식입니다. 예제처럼 새로운 범위를 생성하는데 사용하는 <code>block {}</code>은 표현식입니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x = 5;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    let y = {
+</span></span><span class="line"><span class="cl">        let x = 3;
+</span></span><span class="line"><span class="cl">        x + 1
+</span></span><span class="line"><span class="cl">    };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of y is: {}&#34;, y);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>표현식 부분</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    let x = 3;
+</span></span><span class="line"><span class="cl">    x + 1
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이번 경우에 해당 block은 4를 산출합니다. 이 값은 <code>let</code> 구문의 일부로 y에 bound됩니다. <code>여러분이 앞서 봐온 것과 다르게 x + 1 줄의 마지막이 세미콜론으로 끝나지 않은 점을 주목하세요.</code> <code>표현식은 종결을 나타내는 세미콜론을 사용하지 않습니다.</code> 만약 세미콜론을 표현식 마지막에 추가하면, 이는 구문으로 변경되고 반환 값이 아니게 됩니다. 이후부터 함수의 반환 값과 표현식을 살펴보실 때 이 점을 유의하세요.</p>
+<h4 id="반환값을-가지는-함수">반환값을 가지는 함수</h4>
+<p>함수는 그들을 호출한 코드에 값을 반환할 수 있다. 우리는 반환되는 값을 명명해야 할 필요는 없지만, 그들의 타입은 <code>화살표 -&gt;</code>뒤에 선언해야 한다. Rust에서 반환 값은 함수 본문의 마지막 표현식의 값과 동일합니다. <code>return</code> 키워드와 값을 써서 함수로부터 일찍 반환할 수 있지만, 대부분의 함수들은 암묵적으로 마지막 표현식을 반환합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn five() -&gt; i32 {
+</span></span><span class="line"><span class="cl">    5
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x = five();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>five</code> 함수에는 함수 호출, 매크로, 심지어 <code>let</code> 구문도 없이 그저 5란 숫자 하나가 있습니다. 이는 Rust에서 완벽하게 함수로 허용됩니다. 함수 반환 값의 타입이 <code>-&gt; i32</code>로 명시되어 있다는 점 또한 주목하세요. 해당 코드를 수행하면 다음과 같은 결과를 얻게 될 겁니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ cargo run
+</span></span><span class="line"><span class="cl">   Compiling functions v0.1.0 <span class="o">(</span>file:///projects/functions<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Finished dev <span class="o">[</span>unoptimized + debuginfo<span class="o">]</span> target<span class="o">(</span>s<span class="o">)</span> in 0.30 secs
+</span></span><span class="line"><span class="cl">     Running <span class="sb">`</span>target/debug/functions<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">The value of x is: <span class="m">5</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>five</code> 함수는 매개변수 없이 반환 값에 대한 타입만 정의되어 있지만, 본문에는 5만이 세미콜론 없이 외로이 있는 이유는 이것이 우리가 값을 반환하고자 할 때 사용하는 표현식이기 때문입니다. 다른 예제를 통해 살펴보겠습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x = plus_one(5);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">fn plus_one(x: i32) -&gt; i32 {
+</span></span><span class="line"><span class="cl">    x + 1
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 코드를 수행하면 The value of x is: 6를 출력하게 됩니다.</p>
+<p>우리가 x + 1 끝에 세미콜론을 추가하여 표현식을 구문으로 변경하면 어떤 일이 일어날까요?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">fn main() {
+</span></span><span class="line"><span class="cl">    let x = plus_one(5);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    println!(&#34;The value of x is: {}&#34;, x);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">fn plus_one(x: i32) -&gt; i32 {
+</span></span><span class="line"><span class="cl">    x + 1;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 코드를 실행하면 다음과 같은 에러를 얻게 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">error<span class="o">[</span>E0308<span class="o">]</span>: mismatched types
+</span></span><span class="line"><span class="cl"> --&gt; src/main.rs:7:28
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="m">7</span> <span class="p">|</span>   fn plus_one<span class="o">(</span>x: i32<span class="o">)</span> -&gt; i32 <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>  ____________________________^
+</span></span><span class="line"><span class="cl"><span class="m">8</span> <span class="p">|</span> <span class="p">|</span>     x + 1<span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="p">|</span>          - help: consider removing this semicolon
+</span></span><span class="line"><span class="cl"><span class="m">9</span> <span class="p">|</span> <span class="p">|</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="p">|</span>_^ expected i32, found <span class="o">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl">  <span class="o">=</span> note: expected <span class="nb">type</span> <span class="sb">`</span>i32<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">             found <span class="nb">type</span> <span class="sb">`</span><span class="o">()</span><span class="sb">`</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>에러 메시지의 중요 포인트는 “mismatched types,”으로 이 코드의 주요 문제를 보여줍니다.</p>
+<p><code>plus_one</code> 함수의 정의는 i32 값을 반환하겠다고 하였으나, 구문은 값을 산출하지 않기에 <code>()처럼 비어있는 튜플</code>로 표현됩니다.</p>
+<p>이런 이유로, 반환할 것이 없어서 함수가 정의된 내용과 상충하게 되고 이는 에러를 발생시킵니다. 이번 결과에서는, Rust가 문제를 해결할 수 있도록 도와주는 메시지를 제공합니다: 세미콜론을 제거하면 에러가 교정될 수도 있다고 제안하네요.</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
