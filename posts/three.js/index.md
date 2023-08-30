@@ -25,7 +25,7 @@ npm install three
 
 패키지가 다운로드 및 설치 될 것이며, 다음과 같이 코드에서 불러올 수 있을 것이다.
 
-```
+```Javascript
 // Option 1: Import the entire three.js core library.
 import * as THREE from 'three';
 
