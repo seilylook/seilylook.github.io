@@ -4,13 +4,40 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 25 Aug 2023 14:01:59 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Authentication Svelte Rust</title>
+    <link>https://seilylook.github.io/posts/authentication-svelte-rust/</link>
+    <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/authentication-svelte-rust/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/user-auth.jpg" referrerpolicy="no-referrer">
+            </div>Introduction Svelte와 Rust를 사용해서 사용자 인증 시스템을 구현한 프로젝트.
+Tech stack Front-end
+Sveltekit
+Typescript
+tailwindcss
+vite
+pnpm
+Back-end
+Actix-web: Rust 전용 웹 프레임워크
+tokio: Rust 전용 비동기 프레임워크
+serde: Rust 데이터 구조에 대한 직렬화, 역직렬화를 제공하는 라이브러리
+minijinja: 템플릿 엔진
+SQLx: SQL 비동기 도구
+PostgreSQL: 데이터베이스
+Redis: 토큰 만료 등을 도와주는 라이브러리
+1. 시작 1.1 프로젝트 생성 1 2 3 4 5 6 7 cd Rust mkdir auth-svelte-rust cd auth-svelte-rust cargo new backend cd backend를 통해 들어가서 Cargo.]]></description>
+</item>
+<item>
     <title>Flutter</title>
     <link>https://seilylook.github.io/posts/flutter/</link>
     <pubDate>Fri, 25 Aug 2023 14:01:59 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/flutter/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/flutter-logo.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item>
 <item>
     <title>Three.js</title>

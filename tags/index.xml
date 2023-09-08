@@ -4,7 +4,55 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 24 Aug 2023 16:13:40 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Back-end</title>
+    <link>https://seilylook.github.io/tags/back-end/</link>
+    <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/back-end/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Development</title>
+    <link>https://seilylook.github.io/tags/development/</link>
+    <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/development/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Front-end</title>
+    <link>https://seilylook.github.io/tags/front-end/</link>
+    <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/front-end/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Project</title>
+    <link>https://seilylook.github.io/tags/project/</link>
+    <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/project/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Language</title>
+    <link>https://seilylook.github.io/tags/language/</link>
+    <pubDate>Fri, 25 Aug 2023 14:01:59 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/language/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Mobile</title>
+    <link>https://seilylook.github.io/tags/mobile/</link>
+    <pubDate>Fri, 25 Aug 2023 14:01:59 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/mobile/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>3D</title>
     <link>https://seilylook.github.io/tags/3d/</link>
     <pubDate>Thu, 24 Aug 2023 16:13:40 &#43;0900</pubDate>
@@ -13,27 +61,11 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Development</title>
-    <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Thu, 24 Aug 2023 16:13:40 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/development/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
     <title>Library</title>
     <link>https://seilylook.github.io/tags/library/</link>
     <pubDate>Thu, 24 Aug 2023 16:13:40 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/library/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Language</title>
-    <link>https://seilylook.github.io/tags/language/</link>
-    <pubDate>Thu, 24 Aug 2023 14:14:21 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/language/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
