@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/tags/back-end/</link>
         <description>Back-end - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/back-end/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/back-end/" rel="self" type="application/rss+xml" /><item>
+    <title>Blockchain</title>
+    <link>https://seilylook.github.io/posts/blockchain/</link>
+    <pubDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/blockchain/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/blockchain.jpg" referrerpolicy="no-referrer">
+            </div>Introduction Rust를 활용한 Blockchain 학습 로드맵
+Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산 애플리케이션을 말한다.
+탈중앙화 분산 애플리케이션이라는 것은 비트코인과 이더리움과 같은 암호화폐의 기반이 되는 기술인 블록체인 기술 위에서 돌아가는 애플리케이션이라는 뜻이다.
+기존에 비트코인은 비트코인 거래에서 발생하는 거래 및 장부 이외에 다른 일은 취급하지 못한다. 하지만 이더리움이 등장하고나서 새로운 개념의 블록체인 확장 기술 중 핵심이 되는 스마트 컨트랙트라는 기술을 세상에 선보이면서 암호화폐 거래에 국한되었던 기술을 다양한 산업에 적용할 수 있게 되었다.]]></description>
+</item>
+<item>
     <title>Authentication Svelte Rust</title>
     <link>https://seilylook.github.io/posts/authentication-svelte-rust/</link>
     <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
@@ -28,6 +41,19 @@ SQLx: SQL 비동기 도구
 PostgreSQL: 데이터베이스
 Redis: 토큰 만료 등을 도와주는 라이브러리
 1. 시작 1.1 프로젝트 생성 1 2 3 4 5 6 7 cd Rust mkdir auth-svelte-rust cd auth-svelte-rust cargo new backend cd backend를 통해 들어가서 Cargo.]]></description>
+</item>
+<item>
+    <title>Rust</title>
+    <link>https://seilylook.github.io/posts/rust/</link>
+    <pubDate>Thu, 24 Aug 2023 14:14:21 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/rust/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/rust-logo.svg" referrerpolicy="no-referrer">
+            </div>Rust: Rust는 시스템 프로그래밍 언어로서, 안전성, 속도, 병행성(Concurrency)을 중요한 목표로 개발된 언어입니다. Mozilla에서 개발한 Rust는 C와 C++과 같은 언어의 잠재적인 문제를 극복하고자 설계되었습니다. Rust는 메모리 안전성을 강조하며, 코드의 버그와 런타임 에러를 최소화하고 안전한 병행성을 제공하기 위한 다양한 기능을 제공합니다.
+Rust https://www.rust-lang.org/
+1. 시작 1.1 설치하기 Rust는 rustup이라고 하는 러스트 버전 및 관련 도구들을 관리하기 위한 커맨드 라인 도구를 통해 러스트를 다운받을 수 있다.
+Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh.]]></description>
 </item>
 </channel>
 </rss>

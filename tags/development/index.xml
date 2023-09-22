@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/tags/development/</link>
         <description>Development - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Blockchain</title>
+    <link>https://seilylook.github.io/posts/blockchain/</link>
+    <pubDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/blockchain/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/blockchain.jpg" referrerpolicy="no-referrer">
+            </div>Introduction Rust를 활용한 Blockchain 학습 로드맵
+Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산 애플리케이션을 말한다.
+탈중앙화 분산 애플리케이션이라는 것은 비트코인과 이더리움과 같은 암호화폐의 기반이 되는 기술인 블록체인 기술 위에서 돌아가는 애플리케이션이라는 뜻이다.
+기존에 비트코인은 비트코인 거래에서 발생하는 거래 및 장부 이외에 다른 일은 취급하지 못한다. 하지만 이더리움이 등장하고나서 새로운 개념의 블록체인 확장 기술 중 핵심이 되는 스마트 컨트랙트라는 기술을 세상에 선보이면서 암호화폐 거래에 국한되었던 기술을 다양한 산업에 적용할 수 있게 되었다.]]></description>
+</item>
+<item>
     <title>Authentication Svelte Rust</title>
     <link>https://seilylook.github.io/posts/authentication-svelte-rust/</link>
     <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
