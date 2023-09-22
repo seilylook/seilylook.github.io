@@ -12,7 +12,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/blockchain/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-09-22T18:40:05+09:00" />
-<meta property="article:modified_time" content="2023-09-22T19:30:35+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-09-22T19:52:02+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -33,8 +33,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/blockchain\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Technology, DApp, Core, Service, Front-end, Back-end","wordcount":  1131 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/blockchain\/","datePublished": "2023-09-22T18:40:05+09:00","dateModified": "2023-09-22T19:30:35+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Technology, DApp, Core, Service, Front-end, Back-end","wordcount":  1291 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/blockchain\/","datePublished": "2023-09-22T18:40:05+09:00","dateModified": "2023-09-22T19:52:02+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -81,8 +81,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Blockchain</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/technology/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Technology</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-22">2023-09-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1131 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-22">2023-09-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1291 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -120,7 +120,11 @@
     </li>
     <li><a href="#2-개발-언어">2. 개발 언어</a>
       <ul>
-        <li><a href="#21-solidityhttpssoliditylangorg">2.1 <a href="https://soliditylang.org/">Solidity</a></a></li>
+        <li><a href="#21-solidityhttpssoliditylangorg">2.1 <a href="https://soliditylang.org/">Solidity</a></a>
+          <ul>
+            <li><a href="#solidity의-주요-특징와-개념">Solidity의 주요 특징와 개념</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -238,12 +242,36 @@
 <h2 id="2-개발-언어">2. 개발 언어</h2>
 <h3 id="21-solidityhttpssoliditylangorg">2.1 <a href="https://soliditylang.org/" target="_blank" rel="noopener noreffer ">Solidity</a></h3>
 <p>Solidity는 이더리움 블록체인에서 스마트 계약을 개발하기 위한 고급 프로그래밍 언어입니다. 이 언어는 이더리움 가상 머신(EVM)에서 실행되며, 스마트 계약의 조건과 로직을 정의하는 데 사용됩니다. Solidity는 이더리움 생태계에서 가장 널리 사용되는 스마트 계약 개발 언어 중 하나이며, 개발자들이 자신의 계약을 작성하고 배포하는 데 주로 사용됩니다.</p>
+<h4 id="solidity의-주요-특징와-개념">Solidity의 주요 특징와 개념</h4>
+<ul>
+<li>
+<p><code>스마트 계약 지원</code>: Solidity는 스마트 계약을 작성하기 위한 특수한 기능을 제공합니다. 이를 통해 계약의 조건, 함수, 변수 및 이벤트를 정의할 수 있습니다.</p>
+</li>
+<li>
+<p><code>정적 타입 언어</code>: Solidity는 정적 타입 언어로서, 변수의 데이터 유형을 명시적으로 선언해야 합니다. 이로써 코드의 안전성이 향상되며 오류를 미리 발견할 수 있습니다.</p>
+</li>
+<li>
+<p><code>상속 및 계층 구조</code>: Solidity에서는 계약 간 상속을 지원합니다. 즉, 이미 작성된 계약을 확장하고 재사용할 수 있습니다. 이는 코드의 재사용성과 모듈성을 증가시킵니다.</p>
+</li>
+<li>
+<p><code>이벤트</code>: Solidity에서는 이벤트를 사용하여 외부 애플리케이션에 중요한 정보를 브로드캐스트할 수 있습니다. 이벤트는 트랜잭션 실행과 관련된 상황을 모니터링하고 사용자에게 알릴 때 유용합니다.</p>
+</li>
+<li>
+<p><code>가스 비용</code>: Solidity 코드를 실행하는 데에는 가스가 필요합니다. 가스는 트랜잭션 수행 시에 지불되며, 계약의 복잡성과 실행 시간에 따라 달라집니다.</p>
+</li>
+<li>
+<p><code>보안 고려 사항</code>: 스마트 계약은 불변적이며 수정할 수 없으므로, 코드의 보안성은 매우 중요합니다. Solidity 개발자는 보안 취약점을 방지하고 해결하기 위해 최선을 다해야 합니다.</p>
+</li>
+<li>
+<p><code>개발 환경</code>: Solidity 코드를 작성하고 테스트하기 위해 Remix, Truffle, Hardhat 등의 개발 도구를 사용할 수 있습니다. 이 도구들은 스마트 계약 개발을 단순화하고 효율적으로 관리할 수 있도록 도와줍니다.</p>
+</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-09-22&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/bd9c82676b0b780c94453833a5f4ea31a88a8d05" target="_blank" title="commit by seilylook(seilylook@naver.com) bd9c82676b0b780c94453833a5f4ea31a88a8d05: docs: blockchain init">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bd9c826</a></span>
+                <span>Updated on 2023-09-22&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/3c42cce81092ad0f19a58a5316a9cef1ee3c4f2b" target="_blank" title="commit by seilylook(seilylook@naver.com) 3c42cce81092ad0f19a58a5316a9cef1ee3c4f2b: docs: blockchain job add">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3c42cce</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
