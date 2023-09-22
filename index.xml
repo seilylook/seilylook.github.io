@@ -14,10 +14,10 @@
     <guid>https://seilylook.github.io/posts/blockchain/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/blockchain.jpg" referrerpolicy="no-referrer">
-            </div>Introduction Rust를 활용한 Blockchain 학습 로드맵
-Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산 애플리케이션을 말한다.
-탈중앙화 분산 애플리케이션이라는 것은 비트코인과 이더리움과 같은 암호화폐의 기반이 되는 기술인 블록체인 기술 위에서 돌아가는 애플리케이션이라는 뜻이다.
-기존에 비트코인은 비트코인 거래에서 발생하는 거래 및 장부 이외에 다른 일은 취급하지 못한다. 하지만 이더리움이 등장하고나서 새로운 개념의 블록체인 확장 기술 중 핵심이 되는 스마트 컨트랙트라는 기술을 세상에 선보이면서 암호화폐 거래에 국한되었던 기술을 다양한 산업에 적용할 수 있게 되었다.]]></description>
+            </div>Introduction Blockchain 개발의 영역은 크게 3가지 나뉜다.
+서비스 개발자
+1.1 프론트엔드 개발자: 프론트엔드 개발자는 React와 같은 웹 기반 개발 스택을 기본적으로 잘 다룰 줄 알아야하며, 사용하고자 하는 체인에 맞는 라이브러리를 숙달해야 한다. 이를 통해 MetaMask, Kaikas 등과 같은 지갑 시스템과 연동하거나, 서버 또는 스마트 컨트랙트에서 처리되는 트랜잭션 데이터를 화면에 표현해준다.
+1.2 백엔드 개발자: 백엔드 개발자는 스마트 컨트랙트와 프런트엔드 영역 그리고 데이터베이스 사이의 통신 시스템을 구성합니다. 스마트 컨트랙트 개발자는 블록체인 가상 머신(Virtual Machine, 이하 VM) 위에서 시스템을 작동할 수 있도록 코드를 구현하고 유지, 보수합니다.]]></description>
 </item>
 <item>
     <title>Authentication Svelte Rust</title>

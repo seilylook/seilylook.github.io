@@ -5,22 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Blockchain - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Blockchain" />
-<meta property="og:description" content="Introduction Rust를 활용한 Blockchain 학습 로드맵
-Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산 애플리케이션을 말한다.
-탈중앙화 분산 애플리케이션이라는 것은 비트코인과 이더리움과 같은 암호화폐의 기반이 되는 기술인 블록체인 기술 위에서 돌아가는 애플리케이션이라는 뜻이다.
-기존에 비트코인은 비트코인 거래에서 발생하는 거래 및 장부 이외에 다른 일은 취급하지 못한다. 하지만 이더리움이 등장하고나서 새로운 개념의 블록체인 확장 기술 중 핵심이 되는 스마트 컨트랙트라는 기술을 세상에 선보이면서 암호화폐 거래에 국한되었던 기술을 다양한 산업에 적용할 수 있게 되었다." />
+<meta property="og:description" content="Introduction Blockchain 개발의 영역은 크게 3가지 나뉜다.
+서비스 개발자
+1.1 프론트엔드 개발자: 프론트엔드 개발자는 React와 같은 웹 기반 개발 스택을 기본적으로 잘 다룰 줄 알아야하며, 사용하고자 하는 체인에 맞는 라이브러리를 숙달해야 한다. 이를 통해 MetaMask, Kaikas 등과 같은 지갑 시스템과 연동하거나, 서버 또는 스마트 컨트랙트에서 처리되는 트랜잭션 데이터를 화면에 표현해준다.
+1.2 백엔드 개발자: 백엔드 개발자는 스마트 컨트랙트와 프런트엔드 영역 그리고 데이터베이스 사이의 통신 시스템을 구성합니다. 스마트 컨트랙트 개발자는 블록체인 가상 머신(Virtual Machine, 이하 VM) 위에서 시스템을 작동할 수 있도록 코드를 구현하고 유지, 보수합니다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/blockchain/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-09-22T18:40:05+09:00" />
-<meta property="article:modified_time" content="2023-09-22T18:40:05+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-09-22T19:30:35+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
 <meta name="twitter:title" content="Blockchain"/>
-<meta name="twitter:description" content="Introduction Rust를 활용한 Blockchain 학습 로드맵
-Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산 애플리케이션을 말한다.
-탈중앙화 분산 애플리케이션이라는 것은 비트코인과 이더리움과 같은 암호화폐의 기반이 되는 기술인 블록체인 기술 위에서 돌아가는 애플리케이션이라는 뜻이다.
-기존에 비트코인은 비트코인 거래에서 발생하는 거래 및 장부 이외에 다른 일은 취급하지 못한다. 하지만 이더리움이 등장하고나서 새로운 개념의 블록체인 확장 기술 중 핵심이 되는 스마트 컨트랙트라는 기술을 세상에 선보이면서 암호화폐 거래에 국한되었던 기술을 다양한 산업에 적용할 수 있게 되었다."/>
+<meta name="twitter:description" content="Introduction Blockchain 개발의 영역은 크게 3가지 나뉜다.
+서비스 개발자
+1.1 프론트엔드 개발자: 프론트엔드 개발자는 React와 같은 웹 기반 개발 스택을 기본적으로 잘 다룰 줄 알아야하며, 사용하고자 하는 체인에 맞는 라이브러리를 숙달해야 한다. 이를 통해 MetaMask, Kaikas 등과 같은 지갑 시스템과 연동하거나, 서버 또는 스마트 컨트랙트에서 처리되는 트랜잭션 데이터를 화면에 표현해준다.
+1.2 백엔드 개발자: 백엔드 개발자는 스마트 컨트랙트와 프런트엔드 영역 그리고 데이터베이스 사이의 통신 시스템을 구성합니다. 스마트 컨트랙트 개발자는 블록체인 가상 머신(Virtual Machine, 이하 VM) 위에서 시스템을 작동할 수 있도록 코드를 구현하고 유지, 보수합니다."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/blockchain/" /><link rel="prev" href="https://seilylook.github.io/posts/authentication-svelte-rust/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -33,8 +33,8 @@ Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/blockchain\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Technology, DApp, Core, Service, Front-end, Back-end","wordcount":  738 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/blockchain\/","datePublished": "2023-09-22T18:40:05+09:00","dateModified": "2023-09-22T18:40:05+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Technology, DApp, Core, Service, Front-end, Back-end","wordcount":  1131 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/blockchain\/","datePublished": "2023-09-22T18:40:05+09:00","dateModified": "2023-09-22T19:30:35+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -81,8 +81,8 @@ Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Blockchain</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/technology/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Technology</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-22">2023-09-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;738 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-22">2023-09-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1131 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -118,10 +118,36 @@ Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산
         </li>
       </ul>
     </li>
+    <li><a href="#2-개발-언어">2. 개발 언어</a>
+      <ul>
+        <li><a href="#21-solidityhttpssoliditylangorg">2.1 <a href="https://soliditylang.org/">Solidity</a></a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
-<p><code>Rust</code>를 활용한 <code>Blockchain</code> 학습 로드맵</p>
+<p><code>Blockchain</code> 개발의 영역은 크게 3가지 나뉜다.</p>
+<ol>
+<li>
+<p><code>서비스 개발자</code></p>
+<p>1.1 프론트엔드 개발자: 프론트엔드 개발자는 React와 같은 웹 기반 개발 스택을 기본적으로 잘 다룰 줄 알아야하며, 사용하고자 하는 체인에 맞는 라이브러리를 숙달해야 한다. 이를 통해 <code>MetaMask</code>, <code>Kaikas</code> 등과 같은 지갑 시스템과 연동하거나, 서버 또는 스마트 컨트랙트에서 처리되는 트랜잭션 데이터를 화면에 표현해준다.</p>
+<p>1.2 백엔드 개발자: 백엔드 개발자는 스마트 컨트랙트와 프런트엔드 영역 그리고 데이터베이스 사이의 통신 시스템을 구성합니다. <code>스마트 컨트랙트</code> 개발자는 블록체인 가상 머신(Virtual Machine, 이하 VM) 위에서 시스템을 작동할 수 있도록 코드를 구현하고 유지, 보수합니다. 이렇게 개발자들이 함께 만든 서비스를 탈중앙화 어플리케이션(Decentralized Application, 이하 dApp)이라고 하며, 이 서비스에 관련된 개발자를 dApp 개발자라고도 합니다.</p>
+<p>1.3 dApp 개발자: dApp 개발자는 스마트 컨트랙트를 바탕으로 탈중앙화 된 App을 만드는 과정입니다. 스마트 컨트랙트를 포함하는 블록체인인 이더리움, 솔라나, 하이퍼렛져 등등 다양한 플랫폼들은 각자 사용하는 컨트랙트 언어가 다릅니다. 국내에서는 대표적으로 그라운드엑스, 노드게임즈 등이 있습니다.</p>
+</li>
+<li>
+<p><code>코어 개발자</code></p>
+<p>스마트 컨트랙트가 동작하기 위해서는 비트코인과 이더리움 등으로 대표되는 해당 환경을 제공하는 플랫폼이 있어야 합니다. 이러한 플랫폼을 만드는 개발자가 바로 코어 개발자입니다.</p>
+<p>코어 개발자는 주어진 환경에서 버그 없이 동작하는 프로그램을 개발해야 합니다. 따라서 블록체인 관련 전문 지식과 컴퓨터 공학(Computer Science, 이하 CS) 지식을 깊이 이해하고 있어야 합니다. 국내에서는 주로 오픈소스로 공개된 플랫폼을 연구하여 새로운 형태로 개발하는 코어 개발을 많이 진행합니다. 이를 위해 코드를 분석하는 능력과 원하는 기능을 추가하거나 제거하는 능력 그리고 연동되는 시스템에 대한 이해가 필요하죠. 그런 만큼 서비스 개발자와 비교해 진입장벽이 상당히 높습니다.</p>
+<p>이뿐만이 아닙니다. 코어 개발자는 블록체인 코어에 대한 깊은 이해를 바탕으로 블록체인 코어 개발과 연동되는 암호학, 합의 알고리즘 그리고 지갑과 같은 다양한 개발을 진행하기도 합니다.</p>
+</li>
+<li>
+<p><code>Devops 개발자</code></p>
+<p>블록체인 개발자를 이야기하는데 왜 갑자기 엔지니어가 나올까요?</p>
+<p>데브옵스 엔지니어링이 블록체인 개발에 빼놓을 수 없는 중요한 요소이기 때문입니다. 블록체인에는 노드라는 시스템이 존재합니다. 이는 고가용성이 필요한 컴퓨팅 시스템으로써 노드는 언제나 모든 사람에게 투명하게 공개되어야 하며, 블록 생성의 역할도 가지고 있고, 한편 보안 측면에서 악의적인 공격에 대한 대응도 준비되어 있어야 합니다.</p>
+<p>데브옵스 엔지니어는 단순하게 엔지니어링만 다루거나 이를 유지, 보수하는 업무만 하지 않습니다. 노드를 이용해 블록체인 데이터를 추출하여 각 플랫폼마다 존재하는 코인 데몬, 지갑 데몬과 같은 함수를 호출하는 것으로 같은 형태의 데이터베이스를 유지하고, 해당 데이터베이스를 블록체인 네트워크와 동일하게 유지해야 합니다.</p>
+<p>데브옵스 엔지니어는 거래소, 노드 밸리데이터, 그리고 DeFi를 운영하는 회사 등에서 많이 채용되며, 국내에는 대표적인 기업으로 빗썸과 DSRV 등이 있습니다.</p>
+</li>
+</ol>
 <h2 id="dapp-이란">Dapp 이란?</h2>
 <p>디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산 애플리케이션을 말한다.</p>
 <p>탈중앙화 분산 애플리케이션이라는 것은 비트코인과 이더리움과 같은 암호화폐의 기반이 되는 기술인 블록체인 기술 위에서 돌아가는 애플리케이션이라는 뜻이다.</p>
@@ -209,11 +235,15 @@ Dapp 이란? 디앱(Dapp)은 Decentralized Application으로 탈중앙화 분산
 <p><code>다양한 응용 분야</code>: 스마트 계약은 다양한 응용 분야에 적용됩니다. 가장 유명한 예로는 암호화폐 거래, 디지털 자산 관리, 분산 금융 서비스(DeFi), 투표 시스템, 공급망 관리, 부동산 거래, 의료 기록 관리 등이 있습니다.</p>
 </li>
 </ul>
+<h2 id="2-개발-언어">2. 개발 언어</h2>
+<h3 id="21-solidityhttpssoliditylangorg">2.1 <a href="https://soliditylang.org/" target="_blank" rel="noopener noreffer ">Solidity</a></h3>
+<p>Solidity는 이더리움 블록체인에서 스마트 계약을 개발하기 위한 고급 프로그래밍 언어입니다. 이 언어는 이더리움 가상 머신(EVM)에서 실행되며, 스마트 계약의 조건과 로직을 정의하는 데 사용됩니다. Solidity는 이더리움 생태계에서 가장 널리 사용되는 스마트 계약 개발 언어 중 하나이며, 개발자들이 자신의 계약을 작성하고 배포하는 데 주로 사용됩니다.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-09-22</span>
+                <span>Updated on 2023-09-22&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/bd9c82676b0b780c94453833a5f4ea31a88a8d05" target="_blank" title="commit by seilylook(seilylook@naver.com) bd9c82676b0b780c94453833a5f4ea31a88a8d05: docs: blockchain init">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bd9c826</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
