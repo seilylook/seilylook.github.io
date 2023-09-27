@@ -850,6 +850,8 @@ id | user_id | phone_number | birth_date | gibhub_link
 
 먼저 비밀번호부터 시작한다.
 
+#### src/utils/auth/password.rs
+
 ```Rust
 // src/utils/auth/password.rs
 
@@ -880,6 +882,8 @@ pub async fn verify_password(
 해시를 생성하고 확인하기 위해 `argon2`의 기본 설정을 사용하고 있다.
 
 다음으로 토큰 생성 및 확인을 위한 로직을 작성한다.
+
+#### src/utils/auth/token.rs
 
 ```Rust
 // src/utils/auth/token.rs
@@ -1156,6 +1160,8 @@ pub struct EmailSettings {
 
 `types` 모둘을 만들어주고 토큰 생성을 위한 로직을 추가해준다.
 
+#### src/types/tokens.rs
+
 ```Rust
 // src/types/tokens.rs
 
@@ -1166,4 +1172,551 @@ pub struct ConfirmationToken {
 ```
 
 ### 3.4 템플릿을 로드하고 이메일 로직을 작성한다.
+
+이제 이름이나 간략한 경로만 제공하면 HTML 기반 이메일이 로드되도록 만들어준다. `minijinja`와 `Once  cell`을 사용해준다.
+
+#### src/lib.rs
+
+```Rust
+
+pub static ENV: once_cell::sync::Lazy<minijinja::Environment<'static>> =
+    once_cell::sync::Lazy::new(|| {
+        let mut env = minijinja::Environment::new();
+        env.set_source(minijinja::Source::from_path("templates"));
+        env
+    });
+```
+
+이 코드를 통해서 `templates` 폴더 안에 있는 파일들을 느리게 사용할 수 있도록 만들어준다.
+
+실질적으로 이메일을 보내는 로직을 만들어준다. 기존에 만들었던 `utils` 모듈을 사용한다.
+
+#### src/utils/emails.rs
+
+```Rust
+use lettre::AsyncTransport;
+
+#[tracing::instrument(
+    name = "Generic e-mail sending function.",
+    skip(
+        recipient_email,
+        recipient_first_name,
+        recipient_last_name,
+        subject,
+        html_content,
+        text_content
+    ),
+    fields(
+        recipient_email = %recipient_email,
+        recipient_first_name = %recipient_first_name,
+        recipient_last_name = %recipient_last_name
+    )
+)]
+pub async fn send_email(
+    sender_email: Option<String>,
+    recipient_email: String,
+    recipient_first_name: String,
+    recipient_last_name: String,
+    subject: impl Into<String>,
+    html_content: impl Into<String>,
+    text_content: impl Into<String>,
+) -> Result<(), String> {
+    let settings = crate::settings::get_settings().expect("Failed to read settings.");
+
+    let email = lettre::Message::builder()
+        .from(
+            format!(
+                "{} <{}>",
+                "JohnWrites",
+                if sender_email.is_some() {
+                    sender_email.unwrap()
+                } else {
+                    settings.email.host_user.clone()
+                }
+            )
+            .parse()
+            .unwrap(),
+        )
+        .to(format!(
+            "{} <{}>",
+            [recipient_first_name, recipient_last_name].join(" "),
+            recipient_email
+        )
+        .parse()
+        .unwrap())
+        .subject(subject)
+        .multipart(
+            lettre::message::MultiPart::alternative()
+                .singlepart(
+                    lettre::message::SinglePart::builder()
+                        .header(lettre::message::header::ContentType::TEXT_PLAIN)
+                        .body(text_content.into()),
+                )
+                .singlepart(
+                    lettre::message::SinglePart::builder()
+                        .header(lettre::message::header::ContentType::TEXT_HTML)
+                        .body(html_content.into()),
+                ),
+        )
+        .unwrap();
+
+    let creds = lettre::transport::smtp::authentication::Credentials::new(
+        settings.email.host_user,
+        settings.email.host_user_password,
+    );
+
+    // Open a remote connection to gmail
+    let mailer: lettre::AsyncSmtpTransport<lettre::Tokio1Executor> =
+        lettre::AsyncSmtpTransport::<lettre::Tokio1Executor>::relay(&settings.email.host)
+            .unwrap()
+            .credentials(creds)
+            .build();
+
+    // Send the email
+    match mailer.send(email).await {
+        Ok(_) => {
+            tracing::event!(target: "backend", tracing::Level::INFO, "Email successfully sent!");
+            Ok(())
+        }
+        Err(e) => {
+            tracing::event!(target: "backend", tracing::Level::ERROR, "Could not send email: {:#?}", e);
+            Err(format!("Could not send email: {:#?}", e))
+        }
+    }
+}
+
+#[tracing::instrument(
+    name = "Generic multipart e-mail sending function.",
+    skip(redis_connection),
+    fields(
+        recipient_user_id = %user_id,
+        recipient_email = %recipient_email,
+        recipient_first_name = %recipient_first_name,
+        recipient_last_name = %recipient_last_name
+    )
+)]
+pub async fn send_multipart_email(
+    subject: String,
+    user_id: uuid::Uuid,
+    recipient_email: String,
+    recipient_first_name: String,
+    recipient_last_name: String,
+    template_name: &str,
+    redis_connection: &mut deadpool_redis::redis::aio::Connection,
+) -> Result<(), String> {
+    let settings = crate::settings::get_settings().expect("Unable to load settings.");
+    let title = subject.clone();
+
+    let issued_token = match crate::utils::issue_confirmation_token_pasetors(
+        user_id,
+        redis_connection,
+        None,
+    )
+    .await
+    {
+        Ok(t) => t,
+        Err(e) => {
+            tracing::event!(target: "backend", tracing::Level::ERROR, "{}", e);
+            return Err(format!("{}", e));
+        }
+    };
+    let web_address = {
+        if settings.debug {
+            format!(
+                "{}:{}",
+                settings.application.base_url, settings.application.port,
+            )
+        } else {
+            settings.application.base_url
+        }
+    };
+    let confirmation_link = {
+        if template_name == "password_reset_email.html" {
+            format!(
+                "{}/users/password/confirm/change_password?token={}",
+                web_address, issued_token,
+            )
+        } else {
+            format!(
+                "{}/users/register/confirm/?token={}",
+                web_address, issued_token,
+            )
+        }
+    };
+    let current_date_time = chrono::Local::now();
+    let dt = current_date_time + chrono::Duration::minutes(settings.secret.token_expiration);
+
+    let template = crate::ENV.get_template(template_name).unwrap();
+    let ctx = minijinja::context! {
+        title => &title,
+        confirmation_link => &confirmation_link,
+        domain => &settings.frontend_url,
+        expiration_time => &settings.secret.token_expiration,
+        exact_time => &dt.format("%A %B %d, %Y at %r").to_string()
+    };
+    let html_text = template.render(ctx).unwrap();
+
+    let text = format!(
+        r#"
+        Tap the link below to confirm your email address.
+        {}
+        "#,
+        confirmation_link
+    );
+    tokio::spawn(send_email(
+        None,
+        recipient_email,
+        recipient_first_name,
+        recipient_last_name,
+        subject,
+        html_text,
+        text,
+    ));
+    Ok(())
+}
+```
+
+`send_email` 함수에서는 다중 파트 이메일을 구성하고 텍스트만 있는 대체 옵션을 제공하며, 성공적이고 안전한 이메일 전송을 보장하기 위해 필요한 자격 증명을 제공한다.
+
+`send_multipart_email` 함수는 사용자에게 토큰을 발급하고 해당 사용자에게 보내는 확인 링크를 구축하며, 컨텍스트 값으로 템플릿을 렌더링 한 다음 이메일을 tokio에게 전송해준ㄷ다. 이는 이메일을 대기열에 넣고 다른 스레드에서 보내는 것과 같다.
+
+이제 이메일 증명을 위해 HTML 코드를 작성해준다.
+
+#### templates/verification_email.html
+
+```HTML
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+  </head>
+
+  <body>
+    <table
+      style="
+        max-width: 555px;
+        width: 100%;
+        font-family: 'Open Sans', Segoe, 'Segoe UI', 'DejaVu Sans',
+          'Trebuchet MS', Verdana, sans-serif;
+        background: #fff;
+        font-size: 13px;
+        color: #323232;
+      "
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      bgcolor="#ffffff"
+      align="center"
+    >
+      <tbody>
+        <tr>
+          <td align="left">
+            <h1 style="text-align: center">
+              <span style="font-size: 15px">
+                <strong>{{ title }}</strong>
+              </span>
+            </h1>
+
+            <p>Tap the button below to verify your email address.</p>
+
+            <table
+              style="
+                max-width: 555px;
+                width: 100%;
+                font-family: 'Open Sans', arial, sans-serif;
+                font-size: 13px;
+                color: #323232;
+              "
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              bgcolor="#ffffff"
+              align="center"
+            >
+              <tbody>
+                <tr>
+                  <td height="10">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">
+                    <a
+                      href="{{ confirmation_link }}"
+                      style="
+                        color: #fff;
+                        background-color: hsla(199, 69%, 84%, 1);
+                        width: 320px;
+                        font-size: 16px;
+                        border-radius: 3px;
+                        line-height: 44px;
+                        height: 44px;
+                        font-family: 'Open Sans', Arial, helvetica, sans-serif;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                      "
+                      target="_blank"
+                      data-saferedirecturl="https://www.google.com/url?q={{ confirmation_link }}"
+                    >
+                      <span style="color: #000000">
+                        <strong>Verify email address</strong>
+                      </span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table
+              style="
+                max-width: 555px;
+                width: 100%;
+                font-family: 'Open Sans', arial, sans-serif;
+                font-size: 13px;
+                color: #323232;
+              "
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              bgcolor="#ffffff"
+              align="center"
+            >
+              <tbody>
+                <tr>
+                  <td height="10">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="left">
+                    <p align="center">&nbsp;</p>
+                    If the above button doesn't work, try copying and pasting
+                    the link below into your browser. If you continue to
+                    experience problems, please contact us.
+                    <br />
+                    {{ confirmation_link }}
+                    <br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p align="center">&nbsp;</p>
+                    <br />
+                    <p style="padding-bottom: 15px; margin: 0">
+                      Kindly note that this link will expire in
+                      <strong>{{expiration_time}} minutes</strong>. The exact
+                      expiration date and time is:
+                      <strong>{{ exact_time }}</strong>.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+```
+
+### 3.5 등록 라우트 로직을 만들어준다.
+
+#### src/routes/users/register.rs
+
+```Rust
+use sqlx::Row;
+
+#[derive(serde::Deserialize, Debug, serde::Serialize)]
+pub struct NewUser {
+    email: String,
+    password: String,
+    first_name: String,
+    last_name: String,
+}
+
+#[derive(serde::Deserialize, serde::Serialize)]
+pub struct CreateNewUser {
+    email: String,
+    password: String,
+    first_name: String,
+    last_name: String,
+}
+
+#[tracing::instrument(name = "Adding a new user",
+skip( pool, new_user, redis_pool),
+fields(
+    new_user_email = %new_user.email,
+    new_user_first_name = %new_user.first_name,
+    new_user_last_name = %new_user.last_name
+))]
+#[actix_web::post("/register/")]
+pub aync fn register_userr(
+    pool: actix_web::web::Data<sqlx::postgres::PgPool>,
+    new_user: actix_web::web::Json<NewUser>,
+    redis_pool: actix_web::web::Data<deadpool_redis::Pool>,
+) -> actix_web::HttpResponse {
+    let mut transaction = match pool.begin().await {
+        Ok(transaction) => transaction,
+        Err(e) => {
+            tracing::event!(target: "backend", tracing::Level::ERROR, "Unable to begin DB transaction: {:#?}", e);
+            return actix_web::HttpResponse::InternalServerError().json(
+                crate::types::ErrorResponse {
+                    error: "Something unexpected happend. Kindly try again.".to_string(),
+                },
+            );
+        }
+    };
+    let hashed_password = crate::utils::hash(new_user.0.password.as_bytes()).await;
+
+    let create_new_user = CreateNewUser {
+        password: hashed_password,
+        email: new_user.0.email,
+        first_name: new_user.0.first_name,
+        last_name: new_user.0.last_name,
+    };
+
+    let user_id = match insert_created_user_into_db(&mut transaction, &create_new_user).await {
+        Ok(id) => id,
+        Err(e) => {
+            tracing::event!(target: "sqlx",tracing::Level::ERROR, "Failed to insert user into DB: {:#?}", e);
+            let error_message = if e
+                .as_database_error()
+                .unwrap()
+                .code()
+                .unwrap()
+                .parse::<i32>()
+                .unwrap()
+                == 23505
+            {
+                crate::types::ErrorResponse {
+                    error: "A user with that email address already exists".to_string(),
+                }
+            } else {
+                crate::types::ErrorResponse {
+                    error: "Error inserting user into the database".to_string(),
+                }
+            };
+            return actix_web::HttpResponse::InternalServerError().json(error_message);
+        }
+    };
+
+    let mut redis_con = redis_pool
+        .get()
+        .await
+        .map_err(|e| {
+            tracing::event!(target: "backend", tracing::Level::ERROR, "{}", e);
+            actix_web::HttpResponse::InternalServerError().json(crate::types::ErrorResponse {
+                error: "We cannot activate your account at the moment".to_string(),
+            })
+        })
+        .expect("Redis connection cannot be gotten.");
+
+    crate::utils::send_multipart_email(
+        "RustAuth - Let's get you verified".to_string(),
+        user_id,
+        create_new_user.email,
+        create_new_user.first_name,
+        create_new_user.last_name,
+        "verification_email.html",
+        &mut redis_con,
+    )
+    .await
+    .unwrap();
+
+    if transaction.commit().await.is_err() {
+        return actix_web::HttpResponse::InternalServerError().finish();
+    }
+
+    tracing::event!(target: "backend", tracing::Level::INFO, "User created successfully.");
+    actix_web::HttpResponse::Ok().json(crate::types::SuccessResponse {
+        message: "Your account was created successfully. Check your email address to activate your account as we just sent you an activation link. Ensure you activate your account before the link expires".to_string(),
+    })
+}
+
+
+#[tracing::instrument(name = "Inserting new user into DB.", skip(transaction, new_user),fields(
+    new_user_email = %new_user.email,
+    new_user_first_name = %new_user.first_name,
+    new_user_last_name = %new_user.last_name
+))]
+async fn insert_created_user_into_db(
+    transaction: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    new_user: &CreateNewUser,
+) -> Result<uuid::Uuid, sqlx::Error> {
+    let user_id = match sqlx::query(
+        "INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING id",
+    )
+    .bind(&new_user.email)
+    .bind(&new_user.password)
+    .bind(&new_user.first_name)
+    .bind(&new_user.last_name)
+    .map(|row: sqlx::postgres::PgRow| -> uuid::Uuid{
+        row.get("id")
+   })
+    .fetch_one(&mut *transaction)
+    .await
+    {
+        Ok(id) => id,
+        Err(e) => {
+            tracing::event!(target: "sqlx",tracing::Level::ERROR, "Failed to insert user into DB: {:#?}", e);
+            return Err(e);
+        }
+    };
+
+    match sqlx::query(
+        "INSERT INTO user_profile (user_id)
+                VALUES ($1)
+            ON CONFLICT (user_id)
+            DO NOTHING
+            RETURNING user_id",
+    )
+    .bind(user_id)
+    .map(|row: sqlx::postgres::PgRow| -> uuid::Uuid { row.get("user_id") })
+    .fetch_one(&mut *transaction)
+    .await
+    {
+        Ok(id) => {
+            tracing::event!(target: "sqlx",tracing::Level::INFO, "User profile created successfully {}.", id);
+            Ok(id)
+        }
+        Err(e) => {
+            tracing::event!(target: "sqlx",tracing::Level::ERROR, "Failed to insert user's profile into DB: {:#?}", e);
+            Err(e)
+        }
+    }
+}
+```
+
+사용자가 `email`, `first_name`, `last_name`, `password`를 JSON 형태로 전달하도록 구성한다. 들어온 JSON 데이털르 사용하기 위해 actix_web의 JSON extractor를 사용해준다. 사용자와 프로필을 생성하는 두 가지 작업을 동시에 수행할 것이므로 하나가 실패하면 이전 작업을 되돌리거나 롤백해야 한다. 이를 위해서 `transaction`을 사용한다.
+
+그 후, 사용자가 제공한 비밀번호를 해시화하고 `insert_created_user_into_db` 함수를 호출해준다. 해당 함수에서 사용자 데이터를 DB에 삽입해준다. 성공하면 사용자 ID가 반환되어 사용자 프로필을 생성하는 다음 쿼리에 제공횐다. 모든 것이 정상이라면 사용자 ID를 반환한다.
+
+반환된 ID는 이전에 만든 함수 `send_multipart_email`으로 전달된다.
+
+### 3.6 등록한 경로를 애플리케이션에 연결하기
+
+작업의 마지막 부분은 애플리케이션이 새로 생성된 경로를 인식하도록 하는 것이다. 경로를 모듈로 분할하기 위해 다음과 같이 작업해준다.
+
+#### src/routes/users/mod.rs
+
+```Rust
+pub fn auth_routes_config(cfg: &mut actix_web::web::ServiceConfig) {
+    cfg.service(actix_web::web::scope("/users").service(register::register_user));
+}
+```
+
+#### src/routes/mod.rs
+
+```Rust
+pub use users::auth_routes_config;
+```
+
+#### src/startup.rs
+
+```Rust
+    .service(crate::routes::health_check)
+    // Authentication routes
+    .configure(crate::routes::auth_routes_config)
+```
 

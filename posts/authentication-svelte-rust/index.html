@@ -57,7 +57,7 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/authentication-svelte-rust\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Project, Front-end, Back-end","wordcount":  4433 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Project, Front-end, Back-end","wordcount":  6229 ,
         "url": "https:\/\/seilylook.github.io\/posts\/authentication-svelte-rust\/","datePublished": "2023-09-08T14:26:14+09:00","dateModified": "2023-09-22T14:55:08+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -105,8 +105,8 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Authentication Svelte Rust</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-08">2023-09-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4433 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;21 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-08">2023-09-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6229 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;30 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -152,9 +152,36 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
     <li><a href="#3-만들어둔-데이터베이스에-사용자-등록-코드-작성">3. 만들어둔 데이터베이스에 사용자 등록 코드 작성</a>
       <ul>
         <li><a href="#31-dependency-설치">3.1 dependency 설치</a></li>
-        <li><a href="#32-토큰과-해시를-위한-로직-작성">3.2 토큰과 해시를 위한 로직 작성</a></li>
-        <li><a href="#33-type-생성-및-설정-업데이트">3.3 Type 생성 및 설정 업데이트</a></li>
-        <li><a href="#34-템플릿을-로드하고-이메일-로직을-작성한다">3.4 템플릿을 로드하고 이메일 로직을 작성한다.</a></li>
+        <li><a href="#32-토큰과-해시를-위한-로직-작성">3.2 토큰과 해시를 위한 로직 작성</a>
+          <ul>
+            <li><a href="#srcutilsauthpasswordrs">src/utils/auth/password.rs</a></li>
+            <li><a href="#srcutilsauthtokenrs">src/utils/auth/token.rs</a></li>
+          </ul>
+        </li>
+        <li><a href="#33-type-생성-및-설정-업데이트">3.3 Type 생성 및 설정 업데이트</a>
+          <ul>
+            <li><a href="#srctypestokensrs">src/types/tokens.rs</a></li>
+          </ul>
+        </li>
+        <li><a href="#34-템플릿을-로드하고-이메일-로직을-작성한다">3.4 템플릿을 로드하고 이메일 로직을 작성한다.</a>
+          <ul>
+            <li><a href="#srclibrs-1">src/lib.rs</a></li>
+            <li><a href="#srcutilsemailsrs">src/utils/emails.rs</a></li>
+            <li><a href="#templatesverification_emailhtml">templates/verification_email.html</a></li>
+          </ul>
+        </li>
+        <li><a href="#35-등록-라우트-로직을-만들어준다">3.5 등록 라우트 로직을 만들어준다.</a>
+          <ul>
+            <li><a href="#srcroutesusersregisterrs">src/routes/users/register.rs</a></li>
+          </ul>
+        </li>
+        <li><a href="#36-등록한-경로를-애플리케이션에-연결하기">3.6 등록한 경로를 애플리케이션에 연결하기</a>
+          <ul>
+            <li><a href="#srcroutesusersmodrs">src/routes/users/mod.rs</a></li>
+            <li><a href="#srcroutesmodrs">src/routes/mod.rs</a></li>
+            <li><a href="#srcstartuprs-1">src/startup.rs</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -1661,6 +1688,7 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
 <p>이제 토근을 안전하게 생성 및 증명하고 비밀번호를 해쉬화하고 증명하기 위한 로직을 만들어준다. 이를 위해서는 새로운 <code>utils</code>라는 모듈이 필요하다.</p>
 <p>폴더를 만들어주고 이를 모듈화해준다. 보다 체계적으로 구성하기 위해 토큰 및 비밀번호 로직이 존재하는 하위 모듈 <code>auth</code>를 만들어준다.</p>
 <p>먼저 비밀번호부터 시작한다.</p>
+<h4 id="srcutilsauthpasswordrs">src/utils/auth/password.rs</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1717,6 +1745,7 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
 </div>
 </div><p>해시를 생성하고 확인하기 위해 <code>argon2</code>의 기본 설정을 사용하고 있다.</p>
 <p>다음으로 토큰 생성 및 확인을 위한 로직을 작성한다.</p>
+<h4 id="srcutilsauthtokenrs">src/utils/auth/token.rs</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -2214,6 +2243,7 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>types</code> 모둘을 만들어주고 토큰 생성을 위한 로직을 추가해준다.</p>
+<h4 id="srctypestokensrs">src/types/tokens.rs</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2233,7 +2263,1044 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="34-템플릿을-로드하고-이메일-로직을-작성한다">3.4 템플릿을 로드하고 이메일 로직을 작성한다.</h3>
-</div><div class="post-footer" id="post-footer">
+<p>이제 이름이나 간략한 경로만 제공하면 HTML 기반 이메일이 로드되도록 만들어준다. <code>minijinja</code>와 <code>Once  cell</code>을 사용해준다.</p>
+<h4 id="srclibrs-1">src/lib.rs</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Rust" data-lang="Rust"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="no">ENV</span>: <span class="nc">once_cell</span>::<span class="n">sync</span>::<span class="n">Lazy</span><span class="o">&lt;</span><span class="n">minijinja</span>::<span class="n">Environment</span><span class="o">&lt;</span><span class="nb">&#39;static</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">once_cell</span>::<span class="n">sync</span>::<span class="n">Lazy</span>::<span class="n">new</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minijinja</span>::<span class="n">Environment</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">env</span><span class="p">.</span><span class="n">set_source</span><span class="p">(</span><span class="n">minijinja</span>::<span class="n">Source</span>::<span class="n">from_path</span><span class="p">(</span><span class="s">&#34;templates&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">env</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 코드를 통해서 <code>templates</code> 폴더 안에 있는 파일들을 느리게 사용할 수 있도록 만들어준다.</p>
+<p>실질적으로 이메일을 보내는 로직을 만들어준다. 기존에 만들었던 <code>utils</code> 모듈을 사용한다.</p>
+<h4 id="srcutilsemailsrs">src/utils/emails.rs</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Rust" data-lang="Rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">lettre</span>::<span class="n">AsyncTransport</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[tracing::instrument(
+</span></span></span><span class="line"><span class="cl"><span class="cp">    name = </span><span class="s">&#34;Generic e-mail sending function.&#34;</span><span class="cp">,
+</span></span></span><span class="line"><span class="cl"><span class="cp">    skip(
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_email,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_first_name,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_last_name,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        subject,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        html_content,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        text_content
+</span></span></span><span class="line"><span class="cl"><span class="cp">    ),
+</span></span></span><span class="line"><span class="cl"><span class="cp">    fields(
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_email = %recipient_email,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_first_name = %recipient_first_name,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_last_name = %recipient_last_name
+</span></span></span><span class="line"><span class="cl"><span class="cp">    )
+</span></span></span><span class="line"><span class="cl"><span class="cp">)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">send_email</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sender_email</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">recipient_email</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">recipient_first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">recipient_last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">subject</span>: <span class="nc">impl</span><span class="w"> </span><span class="nb">Into</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">html_content</span>: <span class="nc">impl</span><span class="w"> </span><span class="nb">Into</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">text_content</span>: <span class="nc">impl</span><span class="w"> </span><span class="nb">Into</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">crate</span>::<span class="n">settings</span>::<span class="n">get_settings</span><span class="p">().</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Failed to read settings.&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lettre</span>::<span class="n">Message</span>::<span class="n">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">format!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;</span><span class="si">{}</span><span class="s"> &lt;</span><span class="si">{}</span><span class="s">&gt;&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;JohnWrites&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">sender_email</span><span class="p">.</span><span class="n">is_some</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">sender_email</span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">settings</span><span class="p">.</span><span class="n">email</span><span class="p">.</span><span class="n">host_user</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">parse</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">to</span><span class="p">(</span><span class="fm">format!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="s">&#34;</span><span class="si">{}</span><span class="s"> &lt;</span><span class="si">{}</span><span class="s">&gt;&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">[</span><span class="n">recipient_first_name</span><span class="p">,</span><span class="w"> </span><span class="n">recipient_last_name</span><span class="p">].</span><span class="n">join</span><span class="p">(</span><span class="s">&#34; &#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">recipient_email</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">parse</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">subject</span><span class="p">(</span><span class="n">subject</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">multipart</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">lettre</span>::<span class="n">message</span>::<span class="n">MultiPart</span>::<span class="n">alternative</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">singlepart</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">lettre</span>::<span class="n">message</span>::<span class="n">SinglePart</span>::<span class="n">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="n">header</span><span class="p">(</span><span class="n">lettre</span>::<span class="n">message</span>::<span class="n">header</span>::<span class="n">ContentType</span>::<span class="no">TEXT_PLAIN</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="n">body</span><span class="p">(</span><span class="n">text_content</span><span class="p">.</span><span class="n">into</span><span class="p">()),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">singlepart</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">lettre</span>::<span class="n">message</span>::<span class="n">SinglePart</span>::<span class="n">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="n">header</span><span class="p">(</span><span class="n">lettre</span>::<span class="n">message</span>::<span class="n">header</span>::<span class="n">ContentType</span>::<span class="no">TEXT_HTML</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="n">body</span><span class="p">(</span><span class="n">html_content</span><span class="p">.</span><span class="n">into</span><span class="p">()),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">creds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lettre</span>::<span class="n">transport</span>::<span class="n">smtp</span>::<span class="n">authentication</span>::<span class="n">Credentials</span>::<span class="n">new</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">settings</span><span class="p">.</span><span class="n">email</span><span class="p">.</span><span class="n">host_user</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">settings</span><span class="p">.</span><span class="n">email</span><span class="p">.</span><span class="n">host_user_password</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Open a remote connection to gmail
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">mailer</span>: <span class="nc">lettre</span>::<span class="n">AsyncSmtpTransport</span><span class="o">&lt;</span><span class="n">lettre</span>::<span class="n">Tokio1Executor</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">lettre</span>::<span class="n">AsyncSmtpTransport</span>::<span class="o">&lt;</span><span class="n">lettre</span>::<span class="n">Tokio1Executor</span><span class="o">&gt;</span>::<span class="n">relay</span><span class="p">(</span><span class="o">&amp;</span><span class="n">settings</span><span class="p">.</span><span class="n">email</span><span class="p">.</span><span class="n">host</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">credentials</span><span class="p">(</span><span class="n">creds</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="n">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Send the email
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">mailer</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">email</span><span class="p">).</span><span class="k">await</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;backend&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">INFO</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Email successfully sent!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Ok</span><span class="p">(())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;backend&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">ERROR</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Could not send email: {:#?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;Could not send email: </span><span class="si">{:#?}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[tracing::instrument(
+</span></span></span><span class="line"><span class="cl"><span class="cp">    name = </span><span class="s">&#34;Generic multipart e-mail sending function.&#34;</span><span class="cp">,
+</span></span></span><span class="line"><span class="cl"><span class="cp">    skip(redis_connection),
+</span></span></span><span class="line"><span class="cl"><span class="cp">    fields(
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_user_id = %user_id,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_email = %recipient_email,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_first_name = %recipient_first_name,
+</span></span></span><span class="line"><span class="cl"><span class="cp">        recipient_last_name = %recipient_last_name
+</span></span></span><span class="line"><span class="cl"><span class="cp">    )
+</span></span></span><span class="line"><span class="cl"><span class="cp">)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">send_multipart_email</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">subject</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">user_id</span>: <span class="nc">uuid</span>::<span class="n">Uuid</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">recipient_email</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">recipient_first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">recipient_last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">template_name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">redis_connection</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">deadpool_redis</span>::<span class="n">redis</span>::<span class="n">aio</span>::<span class="n">Connection</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">crate</span>::<span class="n">settings</span>::<span class="n">get_settings</span><span class="p">().</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Unable to load settings.&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subject</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">issued_token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="k">crate</span>::<span class="n">utils</span>::<span class="n">issue_confirmation_token_pasetors</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">user_id</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">redis_connection</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">None</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">await</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;backend&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">ERROR</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">web_address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span><span class="n">debug</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">format!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;</span><span class="si">{}</span><span class="s">:</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">settings</span><span class="p">.</span><span class="n">application</span><span class="p">.</span><span class="n">base_url</span><span class="p">,</span><span class="w"> </span><span class="n">settings</span><span class="p">.</span><span class="n">application</span><span class="p">.</span><span class="n">port</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">settings</span><span class="p">.</span><span class="n">application</span><span class="p">.</span><span class="n">base_url</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">confirmation_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">template_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;password_reset_email.html&#34;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">format!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;</span><span class="si">{}</span><span class="s">/users/password/confirm/change_password?token=</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">web_address</span><span class="p">,</span><span class="w"> </span><span class="n">issued_token</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">format!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="s">&#34;</span><span class="si">{}</span><span class="s">/users/register/confirm/?token=</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">web_address</span><span class="p">,</span><span class="w"> </span><span class="n">issued_token</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">current_date_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span>::<span class="n">Local</span>::<span class="n">now</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_date_time</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chrono</span>::<span class="n">Duration</span>::<span class="n">minutes</span><span class="p">(</span><span class="n">settings</span><span class="p">.</span><span class="n">secret</span><span class="p">.</span><span class="n">token_expiration</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">crate</span>::<span class="no">ENV</span><span class="p">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minijinja</span>::<span class="fm">context!</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">title</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">confirmation_link</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">confirmation_link</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">domain</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">settings</span><span class="p">.</span><span class="n">frontend_url</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">expiration_time</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">settings</span><span class="p">.</span><span class="n">secret</span><span class="p">.</span><span class="n">token_expiration</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">exact_time</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dt</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#34;%A %B %d, %Y at %r&#34;</span><span class="p">).</span><span class="n">to_string</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">html_text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">template</span><span class="p">.</span><span class="n">render</span><span class="p">(</span><span class="n">ctx</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">format!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="sa">r</span><span class="s">#&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        Tap the link below to confirm your email address.
+</span></span></span><span class="line"><span class="cl"><span class="s">        {}
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;#</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">confirmation_link</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">tokio</span>::<span class="n">spawn</span><span class="p">(</span><span class="n">send_email</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">None</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">recipient_email</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">recipient_first_name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">recipient_last_name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">subject</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">html_text</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">text</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>send_email</code> 함수에서는 다중 파트 이메일을 구성하고 텍스트만 있는 대체 옵션을 제공하며, 성공적이고 안전한 이메일 전송을 보장하기 위해 필요한 자격 증명을 제공한다.</p>
+<p><code>send_multipart_email</code> 함수는 사용자에게 토큰을 발급하고 해당 사용자에게 보내는 확인 링크를 구축하며, 컨텍스트 값으로 템플릿을 렌더링 한 다음 이메일을 tokio에게 전송해준ㄷ다. 이는 이메일을 대기열에 넣고 다른 스레드에서 보내는 것과 같다.</p>
+<p>이제 이메일 증명을 위해 HTML 코드를 작성해준다.</p>
+<h4 id="templatesverification_emailhtml">templates/verification_email.html</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">table</span>
+</span></span><span class="line"><span class="cl">      <span class="na">style</span><span class="o">=</span><span class="s">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        max-width: 555px;
+</span></span></span><span class="line"><span class="cl"><span class="s">        width: 100%;
+</span></span></span><span class="line"><span class="cl"><span class="s">        font-family: &#39;Open Sans&#39;, Segoe, &#39;Segoe UI&#39;, &#39;DejaVu Sans&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s">          &#39;Trebuchet MS&#39;, Verdana, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="s">        background: #fff;
+</span></span></span><span class="line"><span class="cl"><span class="s">        font-size: 13px;
+</span></span></span><span class="line"><span class="cl"><span class="s">        color: #323232;
+</span></span></span><span class="line"><span class="cl"><span class="s">      &#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">cellspacing</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">cellpadding</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">border</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">bgcolor</span><span class="o">=</span><span class="s">&#34;#ffffff&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">align</span><span class="o">=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">align</span><span class="o">=</span><span class="s">&#34;left&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;text-align: center&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;font-size: 15px&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ title }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tap the button below to verify your email address.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">table</span>
+</span></span><span class="line"><span class="cl">              <span class="na">style</span><span class="o">=</span><span class="s">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                max-width: 555px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                width: 100%;
+</span></span></span><span class="line"><span class="cl"><span class="s">                font-family: &#39;Open Sans&#39;, arial, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="s">                font-size: 13px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                color: #323232;
+</span></span></span><span class="line"><span class="cl"><span class="s">              &#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">cellspacing</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">cellpadding</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">border</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">bgcolor</span><span class="o">=</span><span class="s">&#34;#ffffff&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">align</span><span class="o">=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">height</span><span class="o">=</span><span class="s">&#34;10&#34;</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span><span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;text-align: center&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">a</span>
+</span></span><span class="line"><span class="cl">                      <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ confirmation_link }}&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="na">style</span><span class="o">=</span><span class="s">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        color: #fff;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        background-color: hsla(199, 69%, 84%, 1);
+</span></span></span><span class="line"><span class="cl"><span class="s">                        width: 320px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        font-size: 16px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        border-radius: 3px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        line-height: 44px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        height: 44px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        font-family: &#39;Open Sans&#39;, Arial, helvetica, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        text-align: center;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        text-decoration: none;
+</span></span></span><span class="line"><span class="cl"><span class="s">                        display: inline-block;
+</span></span></span><span class="line"><span class="cl"><span class="s">                      &#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="na">target</span><span class="o">=</span><span class="s">&#34;_blank&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="na">data-saferedirecturl</span><span class="o">=</span><span class="s">&#34;https://www.google.com/url?q={{ confirmation_link }}&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;color: #000000&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>Verify email address<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">table</span>
+</span></span><span class="line"><span class="cl">              <span class="na">style</span><span class="o">=</span><span class="s">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                max-width: 555px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                width: 100%;
+</span></span></span><span class="line"><span class="cl"><span class="s">                font-family: &#39;Open Sans&#39;, arial, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="s">                font-size: 13px;
+</span></span></span><span class="line"><span class="cl"><span class="s">                color: #323232;
+</span></span></span><span class="line"><span class="cl"><span class="s">              &#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">cellspacing</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">cellpadding</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">border</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">bgcolor</span><span class="o">=</span><span class="s">&#34;#ffffff&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="na">align</span><span class="o">=</span><span class="s">&#34;center&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">height</span><span class="o">=</span><span class="s">&#34;10&#34;</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span><span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">align</span><span class="o">=</span><span class="s">&#34;left&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">align</span><span class="o">=</span><span class="s">&#34;center&#34;</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    If the above button doesn&#39;t work, try copying and pasting
+</span></span><span class="line"><span class="cl">                    the link below into your browser. If you continue to
+</span></span><span class="line"><span class="cl">                    experience problems, please contact us.
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">                    {{ confirmation_link }}
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">align</span><span class="o">=</span><span class="s">&#34;center&#34;</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;padding-bottom: 15px; margin: 0&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                      Kindly note that this link will expire in
+</span></span><span class="line"><span class="cl">                      <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{expiration_time}} minutes<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>. The exact
+</span></span><span class="line"><span class="cl">                      expiration date and time is:
+</span></span><span class="line"><span class="cl">                      <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ exact_time }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>.
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="35-등록-라우트-로직을-만들어준다">3.5 등록 라우트 로직을 만들어준다.</h3>
+<h4 id="srcroutesusersregisterrs">src/routes/users/register.rs</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Rust" data-lang="Rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">sqlx</span>::<span class="n">Row</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[derive(serde::Deserialize, Debug, serde::Serialize)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">NewUser</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">email</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">password</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[derive(serde::Deserialize, serde::Serialize)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">CreateNewUser</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">email</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">password</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[tracing::instrument(name = </span><span class="s">&#34;Adding a new user&#34;</span><span class="cp">,
+</span></span></span><span class="line"><span class="cl"><span class="cp">skip( pool, new_user, redis_pool),
+</span></span></span><span class="line"><span class="cl"><span class="cp">fields(
+</span></span></span><span class="line"><span class="cl"><span class="cp">    new_user_email = %new_user.email,
+</span></span></span><span class="line"><span class="cl"><span class="cp">    new_user_first_name = %new_user.first_name,
+</span></span></span><span class="line"><span class="cl"><span class="cp">    new_user_last_name = %new_user.last_name
+</span></span></span><span class="line"><span class="cl"><span class="cp">))]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[actix_web::post(</span><span class="s">&#34;/register/&#34;</span><span class="cp">)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="n">aync</span><span class="w"> </span><span class="k">fn</span> <span class="nf">register_userr</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">pool</span>: <span class="nc">actix_web</span>::<span class="n">web</span>::<span class="n">Data</span><span class="o">&lt;</span><span class="n">sqlx</span>::<span class="n">postgres</span>::<span class="n">PgPool</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">new_user</span>: <span class="nc">actix_web</span>::<span class="n">web</span>::<span class="n">Json</span><span class="o">&lt;</span><span class="n">NewUser</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">redis_pool</span>: <span class="nc">actix_web</span>::<span class="n">web</span>::<span class="n">Data</span><span class="o">&lt;</span><span class="n">deadpool_redis</span>::<span class="n">Pool</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">actix_web</span>::<span class="n">HttpResponse</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">transaction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">pool</span><span class="p">.</span><span class="n">begin</span><span class="p">().</span><span class="k">await</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">transaction</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">transaction</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;backend&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">ERROR</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Unable to begin DB transaction: {:#?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">actix_web</span>::<span class="n">HttpResponse</span>::<span class="n">InternalServerError</span><span class="p">().</span><span class="n">json</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">crate</span>::<span class="n">types</span>::<span class="n">ErrorResponse</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">error</span>: <span class="s">&#34;Something unexpected happend. Kindly try again.&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">hashed_password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">crate</span>::<span class="n">utils</span>::<span class="n">hash</span><span class="p">(</span><span class="n">new_user</span><span class="p">.</span><span class="mf">0.</span><span class="n">password</span><span class="p">.</span><span class="n">as_bytes</span><span class="p">()).</span><span class="k">await</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">create_new_user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateNewUser</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">password</span>: <span class="nc">hashed_password</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">email</span>: <span class="nc">new_user</span><span class="p">.</span><span class="mf">0.</span><span class="n">email</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">first_name</span>: <span class="nc">new_user</span><span class="p">.</span><span class="mf">0.</span><span class="n">first_name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">last_name</span>: <span class="nc">new_user</span><span class="p">.</span><span class="mf">0.</span><span class="n">last_name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">insert_created_user_into_db</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">transaction</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">create_new_user</span><span class="p">).</span><span class="k">await</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;sqlx&#34;</span><span class="p">,</span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">ERROR</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Failed to insert user into DB: {:#?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">error_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">e</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">as_database_error</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">code</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">parse</span>::<span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="o">==</span><span class="w"> </span><span class="mi">23505</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">crate</span>::<span class="n">types</span>::<span class="n">ErrorResponse</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">error</span>: <span class="s">&#34;A user with that email address already exists&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">crate</span>::<span class="n">types</span>::<span class="n">ErrorResponse</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">error</span>: <span class="s">&#34;Error inserting user into the database&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">actix_web</span>::<span class="n">HttpResponse</span>::<span class="n">InternalServerError</span><span class="p">().</span><span class="n">json</span><span class="p">(</span><span class="n">error_message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">redis_con</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redis_pool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="k">await</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">map_err</span><span class="p">(</span><span class="o">|</span><span class="n">e</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;backend&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">ERROR</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">actix_web</span>::<span class="n">HttpResponse</span>::<span class="n">InternalServerError</span><span class="p">().</span><span class="n">json</span><span class="p">(</span><span class="k">crate</span>::<span class="n">types</span>::<span class="n">ErrorResponse</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">error</span>: <span class="s">&#34;We cannot activate your account at the moment&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Redis connection cannot be gotten.&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">crate</span>::<span class="n">utils</span>::<span class="n">send_multipart_email</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;RustAuth - Let&#39;s get you verified&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">user_id</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">create_new_user</span><span class="p">.</span><span class="n">email</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">create_new_user</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">create_new_user</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;verification_email.html&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">redis_con</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">await</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">transaction</span><span class="p">.</span><span class="n">commit</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">is_err</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">actix_web</span>::<span class="n">HttpResponse</span>::<span class="n">InternalServerError</span><span class="p">().</span><span class="n">finish</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;backend&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">INFO</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;User created successfully.&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">actix_web</span>::<span class="n">HttpResponse</span>::<span class="nb">Ok</span><span class="p">().</span><span class="n">json</span><span class="p">(</span><span class="k">crate</span>::<span class="n">types</span>::<span class="n">SuccessResponse</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">message</span>: <span class="s">&#34;Your account was created successfully. Check your email address to activate your account as we just sent you an activation link. Ensure you activate your account before the link expires&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[tracing::instrument(name = </span><span class="s">&#34;Inserting new user into DB.&#34;</span><span class="cp">, skip(transaction, new_user),fields(
+</span></span></span><span class="line"><span class="cl"><span class="cp">    new_user_email = %new_user.email,
+</span></span></span><span class="line"><span class="cl"><span class="cp">    new_user_first_name = %new_user.first_name,
+</span></span></span><span class="line"><span class="cl"><span class="cp">    new_user_last_name = %new_user.last_name
+</span></span></span><span class="line"><span class="cl"><span class="cp">))]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">insert_created_user_into_db</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">transaction</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">sqlx</span>::<span class="n">Transaction</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="p">,</span><span class="w"> </span><span class="n">sqlx</span>::<span class="n">Postgres</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">new_user</span>: <span class="kp">&amp;</span><span class="nc">CreateNewUser</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">uuid</span>::<span class="n">Uuid</span><span class="p">,</span><span class="w"> </span><span class="n">sqlx</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">sqlx</span>::<span class="n">query</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING id&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_user</span><span class="p">.</span><span class="n">email</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_user</span><span class="p">.</span><span class="n">password</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_user</span><span class="p">.</span><span class="n">first_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_user</span><span class="p">.</span><span class="n">last_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">row</span>: <span class="nc">sqlx</span>::<span class="n">postgres</span>::<span class="n">PgRow</span><span class="o">|</span><span class="w"> </span>-&gt; <span class="nc">uuid</span>::<span class="n">Uuid</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">fetch_one</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="o">*</span><span class="n">transaction</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">await</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;sqlx&#34;</span><span class="p">,</span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">ERROR</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Failed to insert user into DB: {:#?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">sqlx</span>::<span class="n">query</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;INSERT INTO user_profile (user_id)
+</span></span></span><span class="line"><span class="cl"><span class="s">                VALUES ($1)
+</span></span></span><span class="line"><span class="cl"><span class="s">            ON CONFLICT (user_id)
+</span></span></span><span class="line"><span class="cl"><span class="s">            DO NOTHING
+</span></span></span><span class="line"><span class="cl"><span class="s">            RETURNING user_id&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">row</span>: <span class="nc">sqlx</span>::<span class="n">postgres</span>::<span class="n">PgRow</span><span class="o">|</span><span class="w"> </span>-&gt; <span class="nc">uuid</span>::<span class="n">Uuid</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#34;user_id&#34;</span><span class="p">)</span><span class="w"> </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">fetch_one</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="o">*</span><span class="n">transaction</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">await</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;sqlx&#34;</span><span class="p">,</span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">INFO</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;User profile created successfully {}.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">tracing</span>::<span class="fm">event!</span><span class="p">(</span><span class="n">target</span>: <span class="s">&#34;sqlx&#34;</span><span class="p">,</span><span class="n">tracing</span>::<span class="n">Level</span>::<span class="no">ERROR</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Failed to insert user&#39;s profile into DB: {:#?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>사용자가 <code>email</code>, <code>first_name</code>, <code>last_name</code>, <code>password</code>를 JSON 형태로 전달하도록 구성한다. 들어온 JSON 데이털르 사용하기 위해 actix_web의 JSON extractor를 사용해준다. 사용자와 프로필을 생성하는 두 가지 작업을 동시에 수행할 것이므로 하나가 실패하면 이전 작업을 되돌리거나 롤백해야 한다. 이를 위해서 <code>transaction</code>을 사용한다.</p>
+<p>그 후, 사용자가 제공한 비밀번호를 해시화하고 <code>insert_created_user_into_db</code> 함수를 호출해준다. 해당 함수에서 사용자 데이터를 DB에 삽입해준다. 성공하면 사용자 ID가 반환되어 사용자 프로필을 생성하는 다음 쿼리에 제공횐다. 모든 것이 정상이라면 사용자 ID를 반환한다.</p>
+<p>반환된 ID는 이전에 만든 함수 <code>send_multipart_email</code>으로 전달된다.</p>
+<h3 id="36-등록한-경로를-애플리케이션에-연결하기">3.6 등록한 경로를 애플리케이션에 연결하기</h3>
+<p>작업의 마지막 부분은 애플리케이션이 새로 생성된 경로를 인식하도록 하는 것이다. 경로를 모듈로 분할하기 위해 다음과 같이 작업해준다.</p>
+<h4 id="srcroutesusersmodrs">src/routes/users/mod.rs</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Rust" data-lang="Rust"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">auth_routes_config</span><span class="p">(</span><span class="n">cfg</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">actix_web</span>::<span class="n">web</span>::<span class="n">ServiceConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">cfg</span><span class="p">.</span><span class="n">service</span><span class="p">(</span><span class="n">actix_web</span>::<span class="n">web</span>::<span class="n">scope</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">).</span><span class="n">service</span><span class="p">(</span><span class="n">register</span>::<span class="n">register_user</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="srcroutesmodrs">src/routes/mod.rs</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Rust" data-lang="Rust"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">users</span>::<span class="n">auth_routes_config</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="srcstartuprs-1">src/startup.rs</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Rust" data-lang="Rust"><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">service</span><span class="p">(</span><span class="k">crate</span>::<span class="n">routes</span>::<span class="n">health_check</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Authentication routes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="k">crate</span>::<span class="n">routes</span>::<span class="n">auth_routes_config</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
