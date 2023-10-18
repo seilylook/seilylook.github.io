@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/tags/front-end/</link>
         <description>Front-end - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/front-end/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/front-end/" rel="self" type="application/rss+xml" /><item>
+    <title>Krypto</title>
+    <link>https://seilylook.github.io/posts/krypto/</link>
+    <pubDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/krypto/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ethereum-image.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction React와 Solidity를 사용해 Ethereum 거래 서비스 구현.
+Tech stack Front-end
+React Tailwindcss ethers (version 5) vite Smart Contract
+hardhat chai ethers (version 5) ethereum-waffle(version 4) Directory structure 1 2 3 4 5 6 7 8 9 10 11 12 client/ ├── images ├── public/ ├── src/ │ ├── assets/ | |── components/ | |── context/ | |── utils/ | |── App.jsx ├── package.json/ ├── tailwind.config.js/ ├── vite.config.js/ 1 2 3 4 5 6 7 8 smart_contract/ ├── artifacts/ ├── cache/ ├── contract/ │ ├── Transactions.]]></description>
+</item>
+<item>
     <title>Blockchain</title>
     <link>https://seilylook.github.io/posts/blockchain/</link>
     <pubDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</pubDate>
