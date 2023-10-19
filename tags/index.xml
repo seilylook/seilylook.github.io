@@ -4,10 +4,10 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
     <title>Blockchain</title>
     <link>https://seilylook.github.io/tags/blockchain/</link>
-    <pubDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</pubDate>
+    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/blockchain/</guid>
     <description><![CDATA[]]></description>
@@ -15,9 +15,33 @@
 <item>
     <title>Development</title>
     <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</pubDate>
+    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/development/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Language</title>
+    <link>https://seilylook.github.io/tags/language/</link>
+    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/language/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Smart Contract</title>
+    <link>https://seilylook.github.io/tags/smart-contract/</link>
+    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/smart-contract/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Technology</title>
+    <link>https://seilylook.github.io/tags/technology/</link>
+    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/technology/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -37,27 +61,11 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Smart Contract</title>
-    <link>https://seilylook.github.io/tags/smart-contract/</link>
-    <pubDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/smart-contract/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
     <title>Decentralize</title>
     <link>https://seilylook.github.io/tags/decentralize/</link>
     <pubDate>Wed, 11 Oct 2023 17:37:16 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/decentralize/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Technology</title>
-    <link>https://seilylook.github.io/tags/technology/</link>
-    <pubDate>Wed, 11 Oct 2023 17:37:16 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/technology/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -74,14 +82,6 @@
     <pubDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/back-end/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Core</title>
-    <link>https://seilylook.github.io/tags/core/</link>
-    <pubDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/core/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

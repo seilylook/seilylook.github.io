@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Solidity - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Solidity" />
+<meta property="og:description" content="Introduction Solidity 언어 학습 기록.
+Chapter 1 1.1 Contract Solidity 언어는 Contract 안에 쌓여 있다. Contract는 Ethereum 애플리케이션의 기본적인 구성 요소로, 모든 변수와 함수는 어느 한 Contract 에 속하게 되어 있다.
+즉 모든 프로젝트의 시작점이다.
+Version Pragma 모든 Solidity 소스 코드는 version pragma로 시작해야 한다. 이는 해당 코드가 사용해야 하는 Solidity 버전을 선언하는 것이다. 이를 통해 이후에 새로운 컴파일러 버전이 나와도 기존 코드가 깨지지 않도록 예방하는 것이다.
+Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문에 에러 처리한 경험이 많은데, 위의 기능은 편리하다고 생각된다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/solidity/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-19T20:34:45+09:00" />
+<meta property="article:modified_time" content="2023-10-19T21:27:26+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
+
+<meta name="twitter:title" content="Solidity"/>
+<meta name="twitter:description" content="Introduction Solidity 언어 학습 기록.
+Chapter 1 1.1 Contract Solidity 언어는 Contract 안에 쌓여 있다. Contract는 Ethereum 애플리케이션의 기본적인 구성 요소로, 모든 변수와 함수는 어느 한 Contract 에 속하게 되어 있다.
+즉 모든 프로젝트의 시작점이다.
+Version Pragma 모든 Solidity 소스 코드는 version pragma로 시작해야 한다. 이는 해당 코드가 사용해야 하는 Solidity 버전을 선언하는 것이다. 이를 통해 이후에 새로운 컴파일러 버전이 나와도 기존 코드가 깨지지 않도록 예방하는 것이다.
+Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문에 에러 처리한 경험이 많은데, 위의 기능은 편리하다고 생각된다."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/solidity/" /><link rel="prev" href="https://seilylook.github.io/posts/krypto/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Solidity",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/solidity\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Technology, Language, Smart Contract, Blockchain","wordcount":  752 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/solidity\/","datePublished": "2023-10-19T20:34:45+09:00","dateModified": "2023-10-19T21:27:26+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/solidity/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/solidity/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Solidity</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/language/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Language</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-19">2023-10-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;752 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/solidity-image.png"
+        data-srcset="/images/solidity-image.png, /images/solidity-image.png 1.5x, /images/solidity-image.png 2x"
+        data-sizes="auto"
+        alt="/images/solidity-image.png"
+        title="/images/solidity-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#chapter-1">Chapter 1</a>
+      <ul>
+        <li><a href="#11-contract">1.1 Contract</a>
+          <ul>
+            <li><a href="#version-pragma">Version Pragma</a></li>
+          </ul>
+        </li>
+        <li><a href="#12-variables">1.2 Variables</a>
+          <ul>
+            <li><a href="#uint-부호-없는-정수">uint: 부호 없는 정수</a></li>
+          </ul>
+        </li>
+        <li><a href="#13-구조체">1.3 구조체</a></li>
+        <li><a href="#14-배열">1.4 배열</a></li>
+        <li><a href="#15-함수">1.5 함수</a></li>
+        <li><a href="#16-구조체-배열-활용">1.6 구조체 배열 활용</a></li>
+        <li><a href="#17-private--public-함수">1.7 Private / Public 함수</a></li>
+        <li><a href="#18-함수-제어자">1.8 함수 제어자</a></li>
+        <li><a href="#19-keccak256">1.9 Keccak256</a></li>
+        <li><a href="#110-event">1.10 Event</a></li>
+        <li><a href="#정리">정리</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p><code>Solidity</code> 언어 학습 기록.</p>
+<h2 id="chapter-1">Chapter 1</h2>
+<h3 id="11-contract">1.1 Contract</h3>
+<p>Solidity 언어는 Contract 안에 쌓여 있다. Contract는 Ethereum 애플리케이션의 기본적인 구성 요소로, 모든 변수와 함수는 어느 한 Contract 에 속하게 되어 있다.</p>
+<p>즉 모든 프로젝트의 시작점이다.</p>
+<h4 id="version-pragma">Version Pragma</h4>
+<p>모든 Solidity 소스 코드는 <code>version pragma</code>로 시작해야 한다. 이는 해당 코드가 사용해야 하는 Solidity 버전을 선언하는 것이다. 이를 통해 이후에 새로운 컴파일러 버전이 나와도 기존 코드가 깨지지 않도록 예방하는 것이다.</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문에 에러 처리한 경험이 많은데, 위의 기능은 편리하다고 생각된다.</div>
+        </div>
+    </div>
+<p>선언은 다음과 같이한다: <code>pragma solidity ^0.4.19;</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Sol" data-lang="Sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">HelloWorld</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-variables">1.2 Variables</h3>
+<p>상태 변수는 Contract 저장소에 영구적으로 저장된다. 즉, Ethereum 블록체인에 기록되는 것이다. 데이터베이스에 데이터를 저장하는 것과 동일하다.</p>
+<h4 id="uint-부호-없는-정수">uint: 부호 없는 정수</h4>
+<p>uint 자료형은 부호 없는 정수로, 값이 음수가 아니어야 한다.</p>
+<p>부호 있는 정수를 위해서는 int를 사용해야 한다.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">솔리디티에서 uint는 실제로 uint256, 즉 256비트 부호 없는 정수의 다른 표현이지. uint8, uint16, uint32 등과 같이 uint를 더 적은 비트로 선언할 수도 있네.</div>
+        </div>
+    </div>
+<h3 id="13-구조체">1.3 구조체</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Sol" data-lang="Sol"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="14-배열">1.4 배열</h3>
+<p>대부분의 언어와 마찬가지로 Solidity에는 정적 배열, 동적 배열 두가지가 존재한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// 2개의 원소를 담을 수 있는 고정 길이의 배열:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">fixedArray</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 또다른 고정 배열으로 5개의 스트링을 담을 수 있다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">string</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">stringArray</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 동적 배열은 고정된 크기가 없으며 계속 크기가 커질 수 있다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint</span><span class="p">[]</span> <span class="n">dynamicArray</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>앞서 배운 구조체 배열도 생성할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="n">Person</span><span class="p">[]</span> <span class="n">people</span><span class="p">;</span> <span class="c1">// 이는 동적 배열로, 원소를 계속 추가할 수 있다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="15-함수">1.5 함수</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">eatHamburgers</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_amount</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="16-구조체-배열-활용">1.6 구조체 배열 활용</h3>
+<p>앞서 말한 <code>Person</code> 형식을 가진 people 구조체 배열을 만들어 데이터를 넣는다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Person</span><span class="p">[]</span> <span class="k">public</span> <span class="n">people</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 새로운 사람을 생성한다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Person</span> <span class="n">satoshi</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="mi">172</span><span class="p">,</span> <span class="s">&#34;Satoshi&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 이 사람을 배열에 추가한다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">people</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">satoshi</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 데이터를 직접 넣어줄 수 있다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">people</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s">&#34;Vitalik&#34;</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="17-private--public-함수">1.7 Private / Public 함수</h3>
+<p>Solidity에서 함수는 기본적으로 <code>public</code>으로 선언된다. 즉, 누구나 Contract의 함수를 호출하고 코드를 실행할 수 있다.</p>
+<p>이는 바람직한 건 아닐 뿐더러, 자네 Contract를 공격에 취약하게 만들 수 있다. 그러니 Java와 마찬가지로 기본적으로 <code>private</code>으로 선언하는 것이 옳다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kt">uint</span><span class="p">[]</span> <span class="n">numbers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">_addToArray</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_number</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">numbers</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">_number</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>private</code>는 Contract 내의 다른 함수들만이 이 함수를 호출해 numbers 배열로 무언가를 추가할 수 있다.</p>
+<p>위의 예시에서 볼 수 있듯이 <code>private</code> 키워드는 함수명 다음에 적는다. 함수 인자명과 마찬가지로 <code>private</code> 함수명도 언더바(<code>_</code>)로 시작하는 것이 관례이다.</p>
+<h3 id="18-함수-제어자">1.8 함수 제어자</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">greeting</span> <span class="o">=</span> <span class="s">&#34;What&#39;s up dog&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">sayHello</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">greeting</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>위의 함수 <code>sayHello()</code>는 상태를 변화시키지 않는다.</p>
+<p>이 경우에는 함수를 <code>view</code> 함수로 선언한다. 이는 함수가 데이터를 보기만 하고 변경하지 않는다는 뜻이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">sayHello</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Solidity는 <code>pure</code> 함수도 가지고 있는데, 이는 함수가 앱에서 어떤 데이터도 접근하지 않는 것을 의미한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">_multiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">b</span><span class="p">)</span> <span class="k">private</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">참고: 함수를 pure나 view로 언제 표시할지 기억하기 어려울 수 있지. 운 좋게도 솔리디티 컴파일러는 어떤 제어자를 써야 하는지 경고 메시지를 통해 잘 알려주네.</div>
+        </div>
+    </div>
+<h3 id="19-keccak256">1.9 Keccak256</h3>
+<p>Ethereum은 SHA3의 한 버전인 <code>keccak256</code>를 내장 해시 함수로 가지고 있다. 해시 함수는 기본적으로 입력 스트링을 랜덤 256비트 16진수로 매핑한다. 스트링에 약간의 변화라도 있으면 해시 값은 크게 달란진다.</p>
+<p>해시 함수는 Ethereum에서 여러 용도로 활용된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaab&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaac&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="110-event">1.10 Event</h3>
+<p><code>event</code>는 Contract가 블록체인 상에서 앱의 사용자 단에서 무언가 액션이 발생했을 때 의사소통하는 방법이다. Contract는 특정 이벤트가 일어나는 지 듣고 그 이벤트가 발생하면 행동을 취한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// 이벤트를 선언한다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">event</span> <span class="nc">IntegersAdded</span><span class="p">(</span><span class="kt">uint</span> <span class="n">x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">y</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">add</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_y</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">result</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">+</span> <span class="n">_y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이벤트를 실행하여 앱에게 add 함수가 실행되었음을 알린다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">IntegersAdded</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="정리">정리</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">event</span> <span class="nc">NewZombie</span><span class="p">(</span><span class="kt">uint</span> <span class="n">zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="nb">name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">dna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">struct</span> <span class="nc">Zombie</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">dna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span><span class="p">[]</span> <span class="k">public</span> <span class="n">zombies</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">id</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Zombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NewZombie</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">_generateRandomDna</span><span class="p">(</span><span class="kt">string</span> <span class="n">_str</span><span class="p">)</span> <span class="k">private</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">rand</span> <span class="o">=</span> <span class="kt">uint</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_str</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">rand</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">randDna</span> <span class="o">=</span> <span class="n">_generateRandomDna</span><span class="p">(</span><span class="n">_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_createZombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">randDna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/329602a4723cb49cd025791f741fdc8cbbc000be" target="_blank" title="commit by seilylook(seilylook@naver.com) 329602a4723cb49cd025791f741fdc8cbbc000be: add: solidity &amp;&amp; design: about page">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>329602a</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/solidity/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/solidity/" data-title="Solidity" data-hashtags="Development,Technology,Language,Smart Contract,Blockchain"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/solidity/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/solidity/" data-title="Solidity"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/solidity/" data-title="Solidity"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/solidity/" data-title="Solidity" data-image="/images/solidity-image.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/technology/">Technology</a>,&nbsp;<a href="/tags/language/">Language</a>,&nbsp;<a href="/tags/smart-contract/">Smart Contract</a>,&nbsp;<a href="/tags/blockchain/">Blockchain</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/krypto/" class="prev" rel="prev" title="Krypto"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Krypto</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.117.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
