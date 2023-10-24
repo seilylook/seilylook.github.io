@@ -988,3 +988,335 @@ contract ZombieHelper is ZombieFeeding {
 }
 ```
 
+{{<admonition info>}}
+
+1. 함수 제어자
+
+- `private`: Contract 내부의 다른 함수들에서만 호출될 수 있다.
+
+- `internal`: 해당 Contract를 상속하는 Contract에서도 호출될 수 있다.
+
+- `external`: 오직 Contract 외부에서만 호출될 수 있다.
+
+- `public`: 내외부 모두에서, 어디서든 호출될 수 있다.
+
+2. 상태 제어자
+
+- `view`: 해당 함수를 실행해도 어떤 데이터도 저장/변경되지 않음을 알려준다.
+
+- `pure`: 해당 함수가 어떤 데이터도 블록체인에 저장하지 않을 뿐만 아니라, 블록체인으로부터 어떤 데이터도 읽지 않음을 알려준다.
+
+  이들 모두 Contract 외부에서 불렸을 때 가스를 전혀 소모하지 않는다.(하지만 다른 함수에 의해 내부적으로 호출됐을 경우에는 가스를 소모한다.)
+
+3. 사용자 정의 제어자
+
+예를 들어 `onlyOwner`, `aboveLevel` 같은 것이다. 이런 제어자를 사용해 함수에 이 제어자들이 어떻게 영향을 줄지를 결정하는 논리를 구성할 수 있다.
+
+```sol
+function test() external view onlyOwner anotherModifier { /* ... */ }
+```
+
+{{</admonition>}}
+
+## Chapter 4
+
+### 4.1 Payable 제어자
+
+`payable` 함수는 Solidity와 Ethereum을 아주 멋지게 만드는 것 중 하나다. 이는 이더를 받을 수 있는 특별한 함수 유형이다.
+
+일반적인 웹 서버에서 API 함수를 실행할 때에는, 함수 호출을 통해서 US 달러를 보낼 수 없다 - 비트코인도 마찬가지로 보낼 수 없다.
+
+하지만 Ethereum에서는 돈(이더), 데이터(transaction payload), 그리고 Contract 코드 자체 모두 Ethereum 위에 존재하기 때문에, 함수를 실행하는 동시에 Contract에 돈을 지불하는 것이 가능하다.
+
+이를 통해 흥미로운 구성을 만들 수 있다. 함수를 실행하기 위해 Contract에 일정 금액을 지불하게 하는 것과 같이 말이다.
+
+예시를 보면 다음과 같다.
+
+```sol
+contract OnlineStore {
+  function buySomething() external payable {
+    // 함수 실행에 0.001이더가 보내졌는지 확실히 하기 위해 확인:
+    require(msg.value == 0.001 ether);
+    // 보내졌다면, 함수를 호출한 자에게 디지털 아이템을 전달하기 위한 내용 구성:
+    transferThing(msg.sender);
+  }
+}
+```
+
+여기서, `msg.sender`는 Contract로 이더가 얼마나 보내졌는지 확인하는 방법이고, `ether`는 기본적으로 포함된 단위이다.
+
+여기서 일어나는 일은 누군가 web3.js(DApp의 자바스크립트 프론트엔드)에서 다음과 같이 함수를 실행할 때 발생한다.
+
+```JS
+// `OnlineStore`는 자네의 이더리움 상의 컨트랙트를 가리킨다고 가정하네:
+OnlineStore.buySomething({
+  from: web3.eth.defaultAccount,
+  value: web3.utils.toWei(0.001),
+});
+```
+
+`value` 필드를 자세히 보면, 자바스크립트 함수 호출에서 이 필드를 통해 `ether`를 얼마나 보낼지 결정한다(여기서는 0.001). Transaction을 봉투로 생각하고, 함수 호출에 전달하는 매개 변수를 편지 내용이라 생각한다면, `value`는 봉투 안에 현금을 넣는 것과 같다.
+
+{{<admonition warning>}}
+참고: 만약 함수가 payable로 표시되지 않았는데 자네가 위에서 본 것처럼 이더를 보내려 한다면, 함수에서 자네의 트랜잭션을 거부할 것이네.
+{{</admonition>}}
+
+### 4.2 출금
+
+Contract로 이더를 보내면, 해당 Contract의 Ethereum 계좌에 이더가 저장되고 거기에 갇히게 된다.
+
+다음과 같이 Contract에서 이더를 인출하는 함수를 작성할 수 있다.
+
+```sol
+contract GetPaid is Ownable {
+  function withdraw() external onlyOwner {
+    owner.transfer(this.balance);
+  }
+}
+```
+
+`Ownable` Contract를 import 했다고 가정하고 `owner`와 `onlyOwner`를 사용하고 있다.
+
+`transfer` 함수를 사용해서 특정한 Ethereum 주소에 돈을 보낼 수 있다. 예를 들어, 만약 누군가 한 아이템에 대해 초과 지불을 했다면, 이더를 `msg.sender`로 되돌려주는 함수를 만들 수도 있다.
+
+```sol
+uint itemFee = 0.001 ether;
+msg.sender.transfer(msg.value - itemFee);
+```
+
+혹은 구매자와 판매자가 존재하는 Contract에서, 판매자의 주소를 storage에 저장하고, 누군가 판매자의 아이템을 구매하면 구매자로부터 받은 요금을 그에게 전달할 수도 있다: `seller.transfer(msg.sender)`
+
+### 4.3 난수
+
+모든 좋은 게임들은 일정 수준의 무작위성을 필요로한다.
+
+#### keccak256을 통한 난수 생성
+
+Solidity에서 난수를 만들기에 가장 좋은 방법은 `keccak256` 해시 함수를 쓰는 것이다.
+
+다음과 같이 사용할 수 있닫.
+
+```sol
+// Generate a random number between 1 and 100:
+uint randNonce = 0;
+uint random = uint(keccak256(now, msg.sender, randNonce)) % 100;
+randNonce++;
+uint random2 = uint(keccak256(now, msg.sender, randNonce)) % 100;
+```
+
+위의 예시에서는 `now`의 타임스탬프 값, `msg.sender`, 증가하는 `noncee`(딱 한 번만 사용되는 숫자, 즉 똑같은 입력으로 두 번 이상 동일한 해시 함수를 실행할 수 없게 함)를 받고 있다.
+
+그리고서 `keccak`을 사용해서 이 입력들을 임의의 해시 값으로 변환하고, 변환환 해시 값을 `uint`로 바꾼 후, `% 100`을 써서 마지막 2자리 숫자만 받도록 한ㄷ다. 이를 통해 0과 99 사이의 완전한 난수를 얻을 수 있다.
+
+#### 이 메소드는 정직하지 않은 노드의 공격에 취약하다.
+
+Ethereum에서는 Contract의 함수를 실행하면 Transaction으로서 네트워크의 노드 하나 혹은 여러 노드에 실행을 알리게 된다. 그 후 네트워크의 노드들은 여러 개의 transaction을 모으고, "직업 증명"으로 알려진 계산이 매우 복잡한 수학적 문제를 먼저 풀기 위한 시도를 한다. 그리고서 해당 transaction 그룹을 그들의 직업증명(PoW)와 함께 블록으로 네트워크에 배포한다.
+
+한 노드가 어떤 PoW를 풀면, 다른 노드들은 그 PoW를 풀려는 시도를 멈추고 해당 노드가 보낸 transaction 목록이 유효한 것인지 검증한다. 유효하다면 해당 블록을 받아들이고 다음 블록을 풀기 시작한다.
+
+이것이 난수 함수를 취약하게 만든다.
+
+우리가 동전 던지기 Contract를 사용한다고 가정해보자 - 앞면이 나오면 돈이 두 배가 되고, 뒷면이 나오면 모두 잃는 것이다. 앞뒤면을 결정할 때 위에서 본 난수 함수를 사용한다고 가정해보자.(`random >= 50`은 앞면, `random < 50`은 뒷면이다)
+
+내가 만약 노드를 실행하고 있다면, 나는 오직 나의 노드에만 transaction을 알리고 이것을 공유하지 않을 수 있다. 그 후 내가 이기는지 확인하기 위해 동전 던지기 함수를 실행할 수 있다 - 그리고 만약 내가 진다면, 내가 풀고 있는 다음 블록에 해당 transaction을 포함하지 않는 것을 선택한다. 난 이것을 내가 결국 동전 던지기에서 이기고 다음 블록을 풀 때까지 무한대로 반복할 수 있고, 이득을 볼 수 있다.
+
+#### 그럼 Ethereum에서는 어떻게 난수를 안전하게 만들어 낼 수 있을까?
+
+블록체인의 전체 내용은 모든 참여자에게 공개되므로, 이건 풀기 어려운 문제이다. 하나의 방법은 Ethereum 블록체인 외북의 난수 함수에 접근할 수 있도록 `Oracle`을 사용하는 것이다.
+
+### 정리
+
+```sol
+// zombieAttack.sol
+
+import "./zombiehelper.sol";
+
+contract ZombieBattle is ZombieHelper {
+  uint randNonce = 0;
+  uint attackVictoryProbability = 70;
+
+  function randMod(uint _modulus) internal returns(uint) {
+    randNonce++;
+    return uint(keccak256(now, msg.sender, randNonce)) % _modulus;
+  }
+
+  function attack(uint _zombieId, uint _targetId) external ownerOf(_zombieId) {
+    Zombie storage myZombie = zombies[_zombieId];
+    Zombie storage enemyZombie = zombies[_targetId];
+    uint rand = randMod(100);
+    if (rand <= attackVictoryProbability) {
+      myZombie.winCount++;
+      myZombie.level++;
+      enemyZombie.lossCount++;
+      feedAndMultiply(_zombieId, enemyZombie.dna, "zombie");
+    } else {
+      myZombie.lossCount++;
+      enemyZombie.winCount++;
+    }
+    _triggerCooldown(myZombie);
+  }
+}
+```
+
+```sol
+// zombie.helper.sol
+
+pragma solidity ^0.4.19;
+
+import "./zombiefeeding.sol";
+
+contract ZombieHelper is ZombieFeeding {
+
+  uint levelUpFee = 0.001 ether;
+
+  modifier aboveLevel(uint _level, uint _zombieId) {
+    require(zombies[_zombieId].level >= _level);
+    _;
+  }
+
+  function withdraw() external onlyOwner {
+    owner.transfer(this.balance);
+  }
+
+  function setLevelUpFee(uint _fee) external onlyOwner {
+    levelUpFee = _fee;
+  }
+
+  function changeName(uint _zombieId, string _newName) external aboveLevel(2, _zombieId) ownerOf(_zombieId) {
+    zombies[_zombieId].name = _newName;
+  }
+
+  function changeDna(uint _zombieId, uint _newDna) external aboveLevel(20, _zombieId) ownerOf(_zombieId) {
+    zombies[_zombieId].dna = _newDna;
+  }
+
+  function getZombiesByOwner(address _owner) external view returns(uint[]) {
+    uint[] memory result = new uint[](ownerZombieCount[_owner]);
+    uint counter = 0;
+    for (uint i = 0; i < zombies.length; i++) {
+      if (zombieToOwner[i] == _owner) {
+        result[counter] = i;
+        counter++;
+      }
+    }
+    return result;
+  }
+
+}
+
+```
+
+```sol
+// zombiefeeding.sol
+
+pragma solidity ^0.4.19;
+
+import "./zombiefactory.sol";
+
+contract KittyInterface {
+  function getKitty(uint256 _id) external view returns (
+    bool isGestating,
+    bool isReady,
+    uint256 cooldownIndex,
+    uint256 nextActionAt,
+    uint256 siringWithId,
+    uint256 birthTime,
+    uint256 matronId,
+    uint256 sireId,
+    uint256 generation,
+    uint256 genes
+  );
+}
+
+contract ZombieFeeding is ZombieFactory {
+
+  KittyInterface kittyContract;
+
+  modifier ownerOf(uint _zombieId) {
+    require(msg.sender == zombieToOwner[_zombieId]);
+    _;
+  }
+
+  function setKittyContractAddress(address _address) external onlyOwner {
+    kittyContract = KittyInterface(_address);
+  }
+
+  function _triggerCooldown(Zombie storage _zombie) internal {
+    _zombie.readyTime = uint32(now + cooldownTime);
+  }
+
+  function _isReady(Zombie storage _zombie) internal view returns (bool) {
+      return (_zombie.readyTime <= now);
+  }
+
+  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal ownerOf(_zombieId) {
+    Zombie storage myZombie = zombies[_zombieId];
+    require(_isReady(myZombie));
+    _targetDna = _targetDna % dnaModulus;
+    uint newDna = (myZombie.dna + _targetDna) / 2;
+    if (keccak256(_species) == keccak256("kitty")) {
+      newDna = newDna - newDna % 100 + 99;
+    }
+    _createZombie("NoName", newDna);
+    _triggerCooldown(myZombie);
+  }
+
+  function feedOnKitty(uint _zombieId, uint _kittyId) public {
+    uint kittyDna;
+    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+    feedAndMultiply(_zombieId, kittyDna, "kitty");
+  }
+}
+```
+
+```sol
+// zombiefactory.sol
+
+pragma solidity ^0.4.19;
+
+import "./ownable.sol";
+
+contract ZombieFactory is Ownable {
+
+    event NewZombie(uint zombieId, string name, uint dna);
+
+    uint dnaDigits = 16;
+    uint dnaModulus = 10 ** dnaDigits;
+    uint cooldownTime = 1 days;
+
+    struct Zombie {
+      string name;
+      uint dna;
+      uint32 level;
+      uint32 readyTime;
+      uint16 winCount;
+      uint16 lossCount;
+    }
+
+    Zombie[] public zombies;
+
+    mapping (uint => address) public zombieToOwner;
+    mapping (address => uint) ownerZombieCount;
+
+    function _createZombie(string _name, uint _dna) internal {
+        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
+        zombieToOwner[id] = msg.sender;
+        ownerZombieCount[msg.sender]++;
+        NewZombie(id, _name, _dna);
+    }
+
+    function _generateRandomDna(string _str) private view returns (uint) {
+        uint rand = uint(keccak256(_str));
+        return rand % dnaModulus;
+    }
+
+    function createRandomZombie(string _name) public {
+        require(ownerZombieCount[msg.sender] == 0);
+        uint randDna = _generateRandomDna(_name);
+        randDna = randDna - randDna % 100;
+        _createZombie(_name, randDna);
+    }
+
+}
+```
+
