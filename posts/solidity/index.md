@@ -1320,3 +1320,27 @@ contract ZombieFactory is Ownable {
 }
 ```
 
+## Chapter 6
+
+### 6.1 Token
+
+Ethereum에서 `Token`은 기본적으로 그저 몇몇 공통 규약을 따르는 Smart Contract이다. 즉 다른 모든 Token Contract가 사용하는 표준 함수 집합을 구현하는 것이다. 예를 들어 `transfer(address _to, uint256 _value)`나 `balanceOf(address _owner)`같은 함수들이 있다.
+
+내부적으로 Smart Contract는 보통 `mapping(address => uint256) balances`와 같은 mapping을 가지고 있다. 각각의 주소에 잔액이 얼마나 있는지 기록하는 것이다.
+
+즉 기본적으로 Token은 그저 하나의 Contract이다. 그 안에서 누가 얼마나 많은 Token을 가지고 있는지 기록하고, 몇몇 함수를 가지고 사용자들이 그들의 Token을 다른 주소로 전송할 수 있게 해주는 것이다.
+
+#### 이렇게 하는 이유?
+
+모든 ERC20 토큰들이 똑같은 이름의 동일한 함수 집합을 공유하기 때문에, 이 Tokeen들에 똑같은 방식으로 상호작용이 가능하다.
+
+즉 하나의 ERC20 Token과 상호작용할 수 있는 애플리케이션 하나를 만들면, 이 앱이 다른 어떤 ERC20 Token과도 상호작용이 가능하다. 이런 방식으로 앱에 더 많은 Token을 추가할 수 있다. 커스텀 코드를 추가하지 않고도 말이다. 우리는 그저 새로운 Token의 Contract 주소만 끼워넣으면 된다. 그러고 나면, 앱에서 사용할 수 있는 또 다른 Token이 생긴다.
+
+이런 방식의 예시로는 거래소가 있다. 한 거래소에서 새로운 ERC20 Token을 상장할 때, 실제로는 이 거래소에서 통신이 가능한 또 하나의 Smart Contract를 추가하는 것이다. 사용자들은 이 Contract에 거래소의 지갑 주소에 Token을 보내라고 할 수 있고, 거래소에서는 이 Contract에 사용자들이 출금을 신청하면 Token을 다시 돌려보내라고 할 수 있게 만드는 것이다.
+
+거래소에서는 이 진송 로직을 한 번만 구현하면 된다. 그리고서 새로운 ERC20 Token을 추가하고 싶으면, 데이터베이스에 단순히 새 Contract 주소를 추가하기만 하면 된다.
+
+#### 다른 Token 표준
+
+ERC721 Token은 교체가 불가하다. 각각의 Token이 유일하고 분할이 불가하기 때문이다. 이 Token을 하나의 전체 단위로만 거래할 수 있고, 각각의 Token은 유일한 ID를 가지고 있다.
+
