@@ -13,7 +13,7 @@ Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/solidity/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-10-19T20:34:45+09:00" />
-<meta property="article:modified_time" content="2023-10-24T18:52:21+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-10-24T19:16:39+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -35,8 +35,8 @@ Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문�
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/solidity\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Technology, Language, Smart Contract, Blockchain","wordcount":  6321 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/solidity\/","datePublished": "2023-10-19T20:34:45+09:00","dateModified": "2023-10-24T18:52:21+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Technology, Language, Smart Contract, Blockchain","wordcount":  8948 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/solidity\/","datePublished": "2023-10-19T20:34:45+09:00","dateModified": "2023-10-24T19:16:39+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -83,8 +83,8 @@ Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문�
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Solidity</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/language/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Language</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-19">2023-10-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6321 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;30 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-19">2023-10-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8948 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;43 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -193,12 +193,49 @@ Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문�
         <li><a href="#정리-3">정리</a></li>
       </ul>
     </li>
-    <li><a href="#chapter-6">Chapter 6</a>
+    <li><a href="#chapter-5">Chapter 5</a>
       <ul>
-        <li><a href="#61-token">6.1 Token</a>
+        <li><a href="#51-token">5.1 Token</a>
           <ul>
             <li><a href="#이렇게-하는-이유">이렇게 하는 이유?</a></li>
             <li><a href="#다른-token-표준">다른 Token 표준</a></li>
+          </ul>
+        </li>
+        <li><a href="#52-erc721-표준">5.2 ERC721 표준</a>
+          <ul>
+            <li><a href="#balanceof">balanceOf</a></li>
+            <li><a href="#ownerof">ownerOf</a></li>
+          </ul>
+        </li>
+        <li><a href="#53-overflow-막기">5.3 Overflow 막기</a>
+          <ul>
+            <li><a href="#contract-보안-강화-overflow와-underflow">Contract 보안 강화: Overflow와 Underflow</a></li>
+            <li><a href="#safemath-사용하기">SafeMath 사용하기</a></li>
+          </ul>
+        </li>
+        <li><a href="#정리-4">정리</a></li>
+      </ul>
+    </li>
+    <li><a href="#chapter-6">Chapter 6</a>
+      <ul>
+        <li><a href="#61-web3js-소개">6.1 Web3.js 소개</a>
+          <ul>
+            <li><a href="#web3js란-무엇인가">Web3.js란 무엇인가?</a></li>
+            <li><a href="#시작하기">시작하기</a></li>
+          </ul>
+        </li>
+        <li><a href="#62-web3-provider">6.2 Web3 Provider</a>
+          <ul>
+            <li><a href="#infura">Infura</a></li>
+            <li><a href="#metamask">Metamask</a></li>
+            <li><a href="#metamask의-web3-provider-사용하기">Metamask의 Web3 Provider 사용하기</a></li>
+          </ul>
+        </li>
+        <li><a href="#63-contract와-대화하기">6.3 Contract와 대화하기</a>
+          <ul>
+            <li><a href="#contract-address">Contract address</a></li>
+            <li><a href="#contract-abi">Contract ABI</a></li>
+            <li><a href="#web3js-contract-인스턴스화하기">Web3.js Contract 인스턴스화하기</a></li>
           </ul>
         </li>
       </ul>
@@ -2292,8 +2329,8 @@ Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문�
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="chapter-6">Chapter 6</h2>
-<h3 id="61-token">6.1 Token</h3>
+</div><h2 id="chapter-5">Chapter 5</h2>
+<h3 id="51-token">5.1 Token</h3>
 <p>Ethereum에서 <code>Token</code>은 기본적으로 그저 몇몇 공통 규약을 따르는 Smart Contract이다. 즉 다른 모든 Token Contract가 사용하는 표준 함수 집합을 구현하는 것이다. 예를 들어 <code>transfer(address _to, uint256 _value)</code>나 <code>balanceOf(address _owner)</code>같은 함수들이 있다.</p>
 <p>내부적으로 Smart Contract는 보통 <code>mapping(address =&gt; uint256) balances</code>와 같은 mapping을 가지고 있다. 각각의 주소에 잔액이 얼마나 있는지 기록하는 것이다.</p>
 <p>즉 기본적으로 Token은 그저 하나의 Contract이다. 그 안에서 누가 얼마나 많은 Token을 가지고 있는지 기록하고, 몇몇 함수를 가지고 사용자들이 그들의 Token을 다른 주소로 전송할 수 있게 해주는 것이다.</p>
@@ -2304,12 +2341,1026 @@ Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문�
 <p>거래소에서는 이 진송 로직을 한 번만 구현하면 된다. 그리고서 새로운 ERC20 Token을 추가하고 싶으면, 데이터베이스에 단순히 새 Contract 주소를 추가하기만 하면 된다.</p>
 <h4 id="다른-token-표준">다른 Token 표준</h4>
 <p>ERC721 Token은 교체가 불가하다. 각각의 Token이 유일하고 분할이 불가하기 때문이다. 이 Token을 하나의 전체 단위로만 거래할 수 있고, 각각의 Token은 유일한 ID를 가지고 있다.</p>
-</div><div class="post-footer" id="post-footer">
+<h3 id="52-erc721-표준">5.2 ERC721 표준</h3>
+<p>먼저 ERC721 표준은 다음과 같다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ERC721</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">event</span> <span class="nc">Transfer</span><span class="p">(</span><span class="kt">address</span> <span class="k">indexed</span> <span class="n">_from</span><span class="p">,</span> <span class="kt">address</span> <span class="k">indexed</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">event</span> <span class="nc">Approval</span><span class="p">(</span><span class="kt">address</span> <span class="k">indexed</span> <span class="n">_owner</span><span class="p">,</span> <span class="kt">address</span> <span class="k">indexed</span> <span class="n">_approved</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">_balance</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">ownerOf</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">takeOwnership</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="balanceof">balanceOf</h4>
+<p>이 함수는 단순히 <code>address</code>를 받아, 해당 <code>address</code>가 Token을 얼마나 가지고 있는지 반환한다.</p>
+<h4 id="ownerof">ownerOf</h4>
+<p>이 함수에서는 Token ID를 받아, 이를 소유하고 있는 사람의 <code>address</code>를 반환한다.</p>
+<h3 id="53-overflow-막기">5.3 Overflow 막기</h3>
+<h4 id="contract-보안-강화-overflow와-underflow">Contract 보안 강화: Overflow와 Underflow</h4>
+<p>Overflow란 무엇인가?</p>
+<p>우리가 8비트 데이터를 저장할 수 있는 <code>uint8</code> 하나를 가지고 있다고 해보자. 이 말인즉 우리가 저장할 수 있는 가장 큰 수는 이진수로 <code>11111111</code>(또는 십진수로 2^8-1 = 255)가 된다.</p>
+<p>다음 예시를 보면, 마지막 <code>number</code>의 값은 무엇이 될까?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kt">uint8</span> <span class="nb">number</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">number</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>위의 예시에서, 우리는 이 변수에 Overflow를 만들었다 - 즉 <code>number</code>가 직관과는 다르게 0이 된다. 우리가 증가를 시켰음에도 말이다. 우리가 이진수 <code>11111111</code>에 1을 더하면, 이 수는 <code>00000000</code>로 돌아간다.</p>
+<p>Underflow는 이와 유사하게 우리가 <code>0</code> 값을 가진 <code>uint8</code>에서 <code>1</code>을 빼면, <code>255</code>와 같아지는 것을 말한다(<code>uint</code>에 부호가 없어, 음수가 될 수 없기 때문이다).</p>
+<p>우리가 여기서 <code>uint8</code>을 쓰지는 않고, <code>1</code>씩 증가시킨다고 <code>uint256</code>에 Overflow가 발생하지는 않을 것 같지만, 미래에 우리의 DApp에 예상치 못한 문제가 발생하지 않도록 여전히 Contract에 보호 장치를 두는 것이 좋다.</p>
+<h4 id="safemath-사용하기">SafeMath 사용하기</h4>
+<p>Library는 Solidity에서 특별한 종류의 Contract이다. 이게 유용하게 사용되는 경우 중 하나는 기본(native) 데이터 타입에 함수를 붙일 때이다.</p>
+<p>예를 들어, SafeMath 라이브러리를 쓸 때는 <code>using SafeMath for uint256</code>이라는 구문을 사용한다. SafeMath 라이브러리는 4개의 함수를 가지고 있다 - <code>add</code>, <code>sub</code>, <code>mul</code>, <code>div</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kn">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint256</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">uint256</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint256</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 5 + 3 = 8
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 5 * 2 = 10
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>SafeMath 내부의 코드는 다음과 같다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">library</span> <span class="n">SafeMath</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">mul</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">div</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// assert(b &gt; 0); // Solidity automatically throws when dividing by 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// assert(a == b * c + a % b); // There is no case in which this doesn&#39;t hold
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">sub</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">add</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>먼저 <code>library</code> 키워드를 살펴본다 - Library는 Contract와 비슷하지만 조금 다른 점이 있다. Library는 우리가 <code>using</code> 키워드를 사용할 수 있게 해준다. 이를 통해 Library의 메소드들을 다른 데이터 타입에 적용할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kn">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 우리는 이제 이 메소드들을 아무 uint에서나 쓸 수 있네.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint</span> <span class="n">test</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// test는 이제 6이 되네
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// test는 이제 11이 되네
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>mul</code>과 <code>add</code> 함수는 각각 2개의 인수를 필요로 한다. 하지만 우리가 <code>using SafeMath for uint</code>를 선언할 때, 우리가 함수를 적용하는 <code>uint(test)</code>는 첫 번째 인수로 자동으로 전달된다.</p>
+<p>SafeMath가 어떤 것을 하는 지 보기 위해 <code>add</code> 함수를 살펴본다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">add</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">assert</span><span class="p">(</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>기본적으로 <code>add</code>는 그저 2개의 <code>uint</code>를 <code>+</code>처럼 더한다. 하지만 그 안에 <code>assert</code> 구문을 써서 그 합이 <code>a</code>보다 크도록 보장한다. 이것이 <code>Overflow</code>를 막아준다.</p>
+<p><code>assert</code>는 조건을 만족하지 않으면 에러를 발생시킨다는 점에서 <code>require</code>와 비슷하다. <code>assert</code>와 <code>require</code>의 차이점은, <code>require</code>는 함수 실행이 실패하면 남은 가스를 사용자에게 되돌려 주지만, <code>assert</code>는 그렇지 않다. 즉 대부분 코드에 <code>require</code>를 쓰고싶다. <code>assert</code>는 일반적으로 코드가 심각하게 잘못 실행될 때 사용한다.</p>
+<p>정리하자면, SafeMath의 add, sub, mul, div는 4개의 수학 연산을 수행하는 함수이지만, Overflow나 Underflow가 발생하면 에러를 발생시키는 것이다.</p>
+<h3 id="정리-4">정리</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// zombieownership.sol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombieattack.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./erc721.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./safemath.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">/// TODO: natspec에 맞도록 이 부분을 바꾸게.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">contract</span> <span class="nc">ZombieOwnership</span> <span class="k">is</span> <span class="n">ZombieAttack</span><span class="p">,</span> <span class="n">ERC721</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kn">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint256</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">mapping</span> <span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="kt">address</span><span class="p">)</span> <span class="n">zombieApprovals</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">_balance</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ownerZombieCount</span><span class="p">[</span><span class="n">_owner</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">ownerOf</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_tokenId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">_transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_from</span><span class="p">,</span> <span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ownerZombieCount</span><span class="p">[</span><span class="n">_to</span><span class="p">]</span> <span class="o">=</span> <span class="n">ownerZombieCount</span><span class="p">[</span><span class="n">_to</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ownerZombieCount</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">ownerZombieCount</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">].</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_tokenId</span><span class="p">]</span> <span class="o">=</span> <span class="n">_to</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transfer</span><span class="p">(</span><span class="n">_from</span><span class="p">,</span> <span class="n">_to</span><span class="p">,</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwnerOf</span><span class="p">(</span><span class="n">_tokenId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_transfer</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">,</span> <span class="n">_to</span><span class="p">,</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwnerOf</span><span class="p">(</span><span class="n">_tokenId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombieApprovals</span><span class="p">[</span><span class="n">_tokenId</span><span class="p">]</span> <span class="o">=</span> <span class="n">_to</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Approval</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">,</span> <span class="n">_to</span><span class="p">,</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">takeOwnership</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="n">zombieApprovals</span><span class="p">[</span><span class="n">_tokenId</span><span class="p">]</span> <span class="o">==</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">address</span> <span class="n">owner</span> <span class="o">=</span> <span class="n">ownerOf</span><span class="p">(</span><span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_transfer</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">,</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// zombieattack.sol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiehelper.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieAttack</span> <span class="k">is</span> <span class="n">ZombieHelper</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">randNonce</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">attackVictoryProbability</span> <span class="o">=</span> <span class="mi">70</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">randMod</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_modulus</span><span class="p">)</span> <span class="k">internal</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">randNonce</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kt">uint</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="nb">now</span><span class="p">,</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">,</span> <span class="n">randNonce</span><span class="p">))</span> <span class="o">%</span> <span class="n">_modulus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">attack</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetId</span><span class="p">)</span> <span class="k">external</span> <span class="n">onlyOwnerOf</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">enemyZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_targetId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">rand</span> <span class="o">=</span> <span class="n">randMod</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">rand</span> <span class="o">&lt;=</span> <span class="n">attackVictoryProbability</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">myZombie</span><span class="p">.</span><span class="n">winCount</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">myZombie</span><span class="p">.</span><span class="n">level</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">enemyZombie</span><span class="p">.</span><span class="n">lossCount</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">feedAndMultiply</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">,</span> <span class="n">enemyZombie</span><span class="p">.</span><span class="n">dna</span><span class="p">,</span> <span class="s">&#34;zombie&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">myZombie</span><span class="p">.</span><span class="n">lossCount</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">enemyZombie</span><span class="p">.</span><span class="n">winCount</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">_triggerCooldown</span><span class="p">(</span><span class="n">myZombie</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// zombiehelper.sol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiefeeding.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieHelper</span> <span class="k">is</span> <span class="n">ZombieFeeding</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">levelUpFee</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">001</span> <span class="kc">ether</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">modifier</span> <span class="nf">aboveLevel</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_level</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="n">_level</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">withdraw</span><span class="p">()</span> <span class="k">external</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">owner</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="nb">balance</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">setLevelUpFee</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_fee</span><span class="p">)</span> <span class="k">external</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">levelUpFee</span> <span class="o">=</span> <span class="n">_fee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">levelUp</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">value</span> <span class="o">==</span> <span class="n">levelUpFee</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="n">level</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">changeName</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_newName</span><span class="p">)</span> <span class="k">external</span> <span class="n">aboveLevel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="n">onlyOwnerOf</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="nb">name</span> <span class="o">=</span> <span class="n">_newName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">changeDna</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_newDna</span><span class="p">)</span> <span class="k">external</span> <span class="n">aboveLevel</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="n">onlyOwnerOf</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="n">dna</span> <span class="o">=</span> <span class="n">_newDna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">getZombiesByOwner</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">uint</span><span class="p">[](</span><span class="n">ownerZombieCount</span><span class="p">[</span><span class="n">_owner</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">uint</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">zombies</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">zombieToOwner</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">_owner</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">counter</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// zombiefeeding.sol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">KittyInterface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">getKitty</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_id</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isGestating</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isReady</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">cooldownIndex</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">nextActionAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">siringWithId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">birthTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">matronId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">sireId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">generation</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">genes</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">KittyInterface</span> <span class="n">kittyContract</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">modifier</span> <span class="nf">onlyOwnerOf</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">setKittyContractAddress</span><span class="p">(</span><span class="kt">address</span> <span class="n">_address</span><span class="p">)</span> <span class="k">external</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kittyContract</span> <span class="o">=</span> <span class="n">KittyInterface</span><span class="p">(</span><span class="n">_address</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">_triggerCooldown</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_zombie</span><span class="p">.</span><span class="n">readyTime</span> <span class="o">=</span> <span class="kt">uint32</span><span class="p">(</span><span class="nb">now</span> <span class="o">+</span> <span class="n">cooldownTime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">_isReady</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">(</span><span class="n">_zombie</span><span class="p">.</span><span class="n">readyTime</span> <span class="o">&lt;=</span> <span class="nb">now</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_species</span><span class="p">)</span> <span class="k">internal</span> <span class="n">onlyOwnerOf</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="n">_isReady</span><span class="p">(</span><span class="n">myZombie</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_targetDna</span> <span class="o">=</span> <span class="n">_targetDna</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">newDna</span> <span class="o">=</span> <span class="p">(</span><span class="n">myZombie</span><span class="p">.</span><span class="n">dna</span> <span class="o">+</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_species</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;kitty&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">newDna</span> <span class="o">=</span> <span class="n">newDna</span> <span class="o">-</span> <span class="n">newDna</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">99</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_createZombie</span><span class="p">(</span><span class="s">&#34;NoName&#34;</span><span class="p">,</span> <span class="n">newDna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_triggerCooldown</span><span class="p">(</span><span class="n">myZombie</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">feedOnKitty</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_kittyId</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">kittyDna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(,,,,,,,,,</span><span class="n">kittyDna</span><span class="p">)</span> <span class="o">=</span> <span class="n">kittyContract</span><span class="p">.</span><span class="n">getKitty</span><span class="p">(</span><span class="n">_kittyId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">feedAndMultiply</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">,</span> <span class="n">kittyDna</span><span class="p">,</span> <span class="s">&#34;kitty&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// zombiefactory.sol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./ownable.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./safemath.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="k">is</span> <span class="n">Ownable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kn">using</span> <span class="n">SafeMath</span> <span class="k">for</span> <span class="kt">uint256</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">event</span> <span class="nc">NewZombie</span><span class="p">(</span><span class="kt">uint</span> <span class="n">zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="nb">name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">dna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">cooldownTime</span> <span class="o">=</span> <span class="mi">1</span> <span class="kc">days</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">struct</span> <span class="nc">Zombie</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32</span> <span class="n">level</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32</span> <span class="n">readyTime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint16</span> <span class="n">winCount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint16</span> <span class="n">lossCount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Zombie</span><span class="p">[]</span> <span class="k">public</span> <span class="n">zombies</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">mapping</span> <span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="kt">address</span><span class="p">)</span> <span class="k">public</span> <span class="n">zombieToOwner</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">ownerZombieCount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">id</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Zombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kt">uint32</span><span class="p">(</span><span class="nb">now</span> <span class="o">+</span> <span class="n">cooldownTime</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ownerZombieCount</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">NewZombie</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">_generateRandomDna</span><span class="p">(</span><span class="kt">string</span> <span class="n">_str</span><span class="p">)</span> <span class="k">private</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">rand</span> <span class="o">=</span> <span class="kt">uint</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_str</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">rand</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="n">ownerZombieCount</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">randDna</span> <span class="o">=</span> <span class="n">_generateRandomDna</span><span class="p">(</span><span class="n">_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">randDna</span> <span class="o">=</span> <span class="n">randDna</span> <span class="o">-</span> <span class="n">randDna</span> <span class="o">%</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_createZombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">randDna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// safemath.sol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">18</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @title SafeMath
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @dev Math operations with safety checks that throw on error
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">library</span> <span class="n">SafeMath</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @dev Multiplies two numbers, throws on overflow.
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">mul</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @dev Integer division of two numbers, truncating the quotient.
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">div</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// assert(b &gt; 0); // Solidity automatically throws when dividing by 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// assert(a == b * c + a % b); // There is no case in which this doesn&#39;t hold
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">sub</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * @dev Adds two numbers, throws on overflow.
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">add</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">b</span><span class="p">)</span> <span class="k">internal</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// erc721.sol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ERC721</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">event</span> <span class="nc">Transfer</span><span class="p">(</span><span class="kt">address</span> <span class="k">indexed</span> <span class="n">_from</span><span class="p">,</span> <span class="kt">address</span> <span class="k">indexed</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">event</span> <span class="nc">Approval</span><span class="p">(</span><span class="kt">address</span> <span class="k">indexed</span> <span class="n">_owner</span><span class="p">,</span> <span class="kt">address</span> <span class="k">indexed</span> <span class="n">_approved</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">_balance</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">ownerOf</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">takeOwnership</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_tokenId</span><span class="p">)</span> <span class="k">public</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-6">Chapter 6</h2>
+<h3 id="61-web3js-소개">6.1 Web3.js 소개</h3>
+<h4 id="web3js란-무엇인가">Web3.js란 무엇인가?</h4>
+<p>Ethereum 네트워크는 노드로 구성되어 있고, 각 노드는 블록체인의 복사본을 가지고 있다. Smart Contract의 함수를 실행하고자 한다면, 이 노드들 중 하나에 질의를 보내 아래 내용을 전달해야 한다.</p>
+<ol>
+<li>
+<p>Smart Contract의 주소</p>
+</li>
+<li>
+<p>실행하고자 하는 함수</p>
+</li>
+<li>
+<p>그 함수에 전달하고자 하는 변수들</p>
+</li>
+</ol>
+<p>Ethereum 노드들은 JSON_RPC라고 불리는 언어로만 소통할 수 있고, 이는 사람이 읽기는 불편하다. Contract의 함수를 실행하고 싶다고 질의 보내는 것은 다음과 같이 생겼다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// 그래... 이런 방법으로 모든 함수 호출을 잘 작성할 수 있길 빌겠네!
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 오른쪽으로 스크롤하게 ==&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="s">&#34;jsonrpc&#34;</span><span class="o">:</span><span class="s">&#34;2.0&#34;</span><span class="p">,</span><span class="s">&#34;method&#34;</span><span class="o">:</span><span class="s">&#34;eth_sendTransaction&#34;</span><span class="p">,</span><span class="s">&#34;params&#34;</span><span class="o">:</span><span class="p">[{</span><span class="s">&#34;from&#34;</span><span class="o">:</span><span class="s">&#34;0xb60e8dd61c5d32be8058bb8eb970870f07233155&#34;</span><span class="p">,</span><span class="s">&#34;to&#34;</span><span class="o">:</span><span class="s">&#34;0xd46e8dd67c5d32be8058bb8eb970870f07244567&#34;</span><span class="p">,</span><span class="s">&#34;gas&#34;</span><span class="o">:</span><span class="s">&#34;0x76c0&#34;</span><span class="p">,</span><span class="s">&#34;gasPrice&#34;</span><span class="o">:</span><span class="s">&#34;0x9184e72a000&#34;</span><span class="p">,</span><span class="s">&#34;value&#34;</span><span class="o">:</span><span class="s">&#34;0x9184e72a&#34;</span><span class="p">,</span><span class="s">&#34;data&#34;</span><span class="o">:</span><span class="s">&#34;0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675&#34;</span><span class="p">}],</span><span class="s">&#34;id&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 복잡하게 실행하지 않고 <code>Web3.js</code>는 쉽게 사용하도록 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="n">CryptoZombies</span><span class="p">.</span><span class="n">methods</span><span class="p">.</span><span class="n">createRandomZombie</span><span class="p">(</span><span class="s">&#34;Vitalik Nakamoto 🤔&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nb">send</span><span class="p">({</span> <span class="k">from</span><span class="o">:</span> <span class="s">&#34;0xb60e8dd61c5d32be8058bb8eb970870f07233155&#34;</span><span class="p">,</span> <span class="nb">gas</span><span class="o">:</span> <span class="s">&#34;3000000&#34;</span> <span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="시작하기">시작하기</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm i web3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>또는 github에서 간략화 된 <code>.js</code> 파일을 가져와 적용할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">language</span><span class="o">=</span><span class="s">&#34;javascript&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;web3.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>CryptoZombies front-end<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span>
+</span></span><span class="line"><span class="cl">      <span class="na">language</span><span class="o">=</span><span class="s">&#34;javascript&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 여기에 web3.js를 포함하게. --&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="62-web3-provider">6.2 Web3 Provider</h3>
+<p>처음 필요로 하는 것은 <code>Web3 Provider</code>이다.</p>
+<p>Ethereum은 똑같은 데이터의 복사본을 공유하는 노드들로 구성되어 있다. Web3.js에서 Web3 Provider를 설정하는 것은 우리 코드에 읽기와 쓰기를 처리하려면 어떤 노드와 통신을 해야 하는지 설정하는 것이다. 이는 전통적인 웹 앱에서 <code>API</code> 호출을 위해 원격 웹 서버의 <code>URL</code>을 설정하는 것과 똑같다.</p>
+<p>우리만의 Ethereum 노드를 Provider로 운영할 수 있다. 하지만 편리하게 쓸 수 있는 제 3자 서비스가 있다. DApp의 사용자들을 위해 Ethereum 노드를 운영할 필요가 없도록 하기 위해 사용할 수 있는 서비스이다 - <code>Infura</code>이다.</p>
+<h4 id="infura">Infura</h4>
+<p>Infura는 빠른 읽기를 위한 캐시 계층을 포함하는 다수의 Ethereum 노드를 운영하는 서비스이다. 접근을 위한 API를 무료로 사용할 수 있다. Infura를 프로바이더로 사용하면, 우리만의 Ethereum을 설치하고 계속 유지할 필요 없이 Ethereum 블록체인과 메세지를 주고받을 수 있다.</p>
+<p>다음과 같이 Web3에 Web3 Provider로 Infura를 쓰도록 설정할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JS" data-lang="JS"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="k">new</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">WebsocketProvider</span><span class="p">(</span><span class="s2">&#34;wss://mainnet.infura.io/ws&#34;</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>많은 사용자들이 우리의 DApp을 사용할 것이기에 - 그리고 이 사용자들은 단순히 읽기만 하는 게 아니라 블록체인에 뭔가 쓰기도 할 것 이기에 - 우리는 이 사용자들이 그들의 개인 키로 Trasaction에 서명을 할 수 있도록 해야 한다.</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">참고: 이더리움(그리고 일반적으로 블록체인)은 트랜잭션에 전자 서명을 하기 위해 공개/개인 키 쌍을 사용하네. 말하자면 전자 서명을 위해 엄청나게 안전한 비밀번호 같은 것이지. 이런 방식으로 내가 만약 블록체인에서 어떤 데이터를 변경하면, 나의 공개 키를 통해 내가 거기 서명을 한 사람이라고 증명할 수 있네 - 하지만 아무도 내 개인 키를 모르기 때문에, 내 트랜잭션을 누구도 위조할 수 없지.</div>
+        </div>
+    </div>
+<p>이런 암호학을 실제로 구현한다는 것은 미련한 생각이다. 이런 공동/개인 키 관리를 대신 처리해주는 서비스가 바로 <code>Metamask</code>이다.</p>
+<h4 id="metamask">Metamask</h4>
+<p>Metamask는 사용자들이 Ethereum 계정과 개인 키를 안전하게 관리할 수 있게 해주는 크롬롸 파이어폭스의 브라우저 확장 프로그램이다. 그리고 해당 계정들을 써서 Web3.js를 사용하는 웹사이트들과 상호작용을 할 수 있도록 해준다.</p>
+<p>그리고 개발자로서, 사용자들이 웹 브라우저를 써서 웹 사이트를 통해 우리의 DApp과 상호작용을 하길 원한다면, 기존에 만든 DApp을 Metamask와 호환할 수 있도록 해야 한다.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">참고: 메타마스크는 내부적으로 Infura의 서버를 Web3 프로바이더로 사용하네. 위에서 우리가 했던 것처럼 말이야 - 하지만 사용자들에게 그들만의 Web3 프로바이더를 선택할 수 있는 옵션을 주기도 하지. 즉 메타마스크의 Web3 프로바이더를 사용하면, 사용자에게 선택권을 주는 것이기도 하면서 자네 앱에서 걱정할 거리를 하나 줄일 수 있지.</div>
+        </div>
+    </div>
+<h4 id="metamask의-web3-provider-사용하기">Metamask의 Web3 Provider 사용하기</h4>
+<p>Metamask는 <code>web3</code>라는 전역 자바스크립트 객체를 통해 브라우저에 Web3 Provider를 주입한다. 그러니 우리 앱에서는 web3가 존재하는지 확인하고, 만약 존재한다면 <code>web3.currentProvider</code>를 <code>Provider</code>로 사용하면 된다.</p>
+<p>아래는 Metamask에서 제공하는 템플릿 코드이다. 사용자가 Metamask를 설치했는지 확인하고 설치가 안 된 경우 우리 앱을 사용하려면 설치해야 한다고 알려준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="n">window</span><span class="p">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="s">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Web3가 브라우저에 주입되었는지 확인(Mist/MetaMask)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="kr">typeof</span> <span class="n">web3</span> <span class="o">!==</span> <span class="s">&#39;undefined&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Mist/MetaMask의 프로바이더 사용
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">web3js</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Web3</span><span class="p">(</span><span class="n">web3</span><span class="p">.</span><span class="n">currentProvider</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이제 자네 앱을 시작하고 web3에 자유롭게 접근할 수 있네:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">startApp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">참고: 메타마스크 말고도 사용자들이 쓸 수 있는 다른 개인 키 관리 프로그램도 있네. 미스트(Mist) 웹 브라우저 같은 것들이지. 하지만, 그것들도 모두 web3 변수를 주입하는 동일한 형태를 사용하네. 그러니 사용자들이 다른 프로그램을 쓰더라도 여기서 우리가 설명하는 방식으로 사용자의 Web3 프로바이더를 인식할 수 있을 것이네.</div>
+        </div>
+    </div>
+<h3 id="63-contract와-대화하기">6.3 Contract와 대화하기</h3>
+<p>이제 Metamask의 Web3 Provider로 Web3.js를 초기화했으니, 우리의 Smart Contract와 통신을 할 수 있도록 설정해준다.</p>
+<p>Web3.js는 우리의 Smart Contract와 통신하기 위해 2가지를 필요로 한다.</p>
+<ol>
+<li>
+<p>Contract Address</p>
+</li>
+<li>
+<p>ABI</p>
+</li>
+</ol>
+<h4 id="contract-address">Contract address</h4>
+<p>Smart Contract를 모두 작성한 후, 우리는 그걸 컴파일한 후 Ethereum에 배포할 것이다.</p>
+<p>Contract를 배포한 후, 해당 Contract는 영원히 존재하는, Ethereum 상에서 고정된 주소를 얻는다. 예를 들어 <code>0x06012c8cf97BEaD5deAe237070F9587f8E7A266d</code>이다.</p>
+<h4 id="contract-abi">Contract ABI</h4>
+<p><code>ABI</code>는 Application Binary Interface의 줄임말이다. 기본적으로 JSON 형태로 Contract의 메소드를 표현하는 것이다. 우리 Contract가 이해할 수 있도록 하려면 Web3.js가 어떤 형태로 함수 호출을 해야 하는지 알려준다.</p>
+<p>Ethereum에 배포하기 위해 Contract를 컴파일할 때, Solidity 컴파일러가 우리에게 ABI를 줄 것이다. 그러니 Contract address 와 Contract ABI를 저장하고 사용해야 한다.</p>
+<h4 id="web3js-contract-인스턴스화하기">Web3.js Contract 인스턴스화하기</h4>
+<p>Contract의 Address와 ABI를 얻고나면, 우리는 다음과 같이 Web3에서 인스턴스화(객체화)할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// myContract 인스턴스화
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="n">myContract</span> <span class="o">=</span> <span class="k">new</span> <span class="n">web3js</span><span class="p">.</span><span class="n">eth</span><span class="p">.</span><span class="n">Contract</span><span class="p">(</span><span class="n">myABI</span><span class="p">,</span> <span class="n">myContractAddress</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-10-24&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/8ccfcb37d5a8a3763d1bec7ef12f846e9ff5e0db" target="_blank" title="commit by seilylook(seilylook@naver.com) 8ccfcb37d5a8a3763d1bec7ef12f846e9ff5e0db: add: solidity chapter 4">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8ccfcb3</a></span>
+                <span>Updated on 2023-10-24&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/ecafb9b453be9e7264b7ba74159563159b6e304a" target="_blank" title="commit by seilylook(seilylook@naver.com) ecafb9b453be9e7264b7ba74159563159b6e304a: add: solidity chapter 6.1">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ecafb9b</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
