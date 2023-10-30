@@ -2062,5 +2062,251 @@ function createRandomZombie(name) {
 
 - `receipt`는 Transaction이 Ethereum의 블록에 포함될 때, 즉 좀비가 생성되고 우리의 Contract에 저장되었을 때 발생한다.
 
-- `error`는 Transaction이 블록에 포함되지 몼했을 때, 예를 들어
+- `error`는 Transaction이 블록에 포함되지 몼했을 때, 예를 들어 사용자가 충분한 가스를 전송하지 않았을 때 발생하게 된다. 우리는 UI를 통해 사용자에게 Transaction이 전송되지 않았음을 알리고, 다시 시도할 수 있도록 한다.
+
+### 6.7 Payable 함수 호출하기
+
+`attack`, `changeName` 그리고 `changeDna`의 로직은 매우 비슷할 것이고, 이를 구현하는 것은 단순하니 그것들을 일일이 코딩하지는 않을 것이다.
+
+{{<admonition tip>}}
+사실, 이 함수 호출에는 이미 많은 반복 로직이 있기 때문에, 리팩토링을 해서 공통 코드를 자체 함수로 만드는 것이 합리적일 것이네 (그리고 txStatus에 표시될 메세지에 템플릿 시스템을 이용하게 - 우린 이미 Vue.js 같은 프레임워크를 사용하면 얼마나 더 깔끔해질 수 있는지 보고 있네!)
+{{</admonition>}}
+
+이제 Web3.js에서 특별한 처리가 필요한 다른 종류의 함수를 살펴본다 - `payable` 함수이다.
+
+#### Level Up
+
+`zombieHelper`를 다시 생각해보면, 우린 사용자가 레벨업할 수 있는 곳에 `payable` 함수를 추가했다.
+
+```sol
+function levelUp(uint _zombieId) external payable {
+  require(msg.value == levelUpFee);
+  zombies[_zombieId].level++;
+}
+```
+
+함수를 이용해 이더를 보내는 방법은 간단하지만, 이더가 아니라 wei로 얼마를 보낼지 정해야 하는 제한이 있다.
+
+#### Wei란?
+
+`wei`는 이더의 가장 작은 하위 단위이다 - 하나의 이더는 10^18개의 `wei`이다.
+
+이거를 직접세기는 어렵다 - Web3.js에는 이러한 작업을 해주는 변환 유틸리티가 있다.
+
+```JS
+// 이렇게 하면 1 ETH를 Wei로 바꿀 것이네
+web3js.utils.toWei("1");
+```
+
+우리 DApp에서, 우리는 `levelUpFee = 0.001 ether`로 설정한다. 그러니 `levelUp` 함수를 호출할 때, 아래의 코드를 써서 사용자가 `0.001` 이더를 보내게 할 수 있다.
+
+```JS
+CryptoZombies.methods.levelUp(zombieId)
+.send({ from: userAccount, value: web3js.utils.toWei("0.001") })
+```
+
+### 6.8 Event 구독하기
+
+Web3.js를 통해 Contract와 상호작용 하는 것은 꽤 간단하다 - 한번 환경을 구축하고 나면, 함수를 호출하고 Transaction을 전송하는 것은 일반적인 웹 API와 크게 다르지 않다.
+
+여기 우리가 다루고자 하는 것이 하나 더 있다 - Contract에서 이벤트를 구독하는 것이다.
+
+#### 새로운 좀비 수신하기
+
+`zombieFactory.sol`을 다시 생각해보면, 새로운 좀비가 생성될 때마다 매번 호출되던 `Newzombie`라는 이벤트가 있다
+
+```sol
+event NewZombie(uint zombieId, string name, uint dna);
+```
+
+Web3.js에서 우리는 `event`를 구독해 해당 `event`가 발생할 때마다 Web3 Provider가 우리의 코드 내의 어떠한 로직을 실행시키도록 할 수 있다.
+
+```JS
+cryptoZombies.events.NewZombie()
+.on("data", function(event) {
+  let zombie = event.returnValues;
+  // `event.returnValue` 객체에서 이 이벤트의 세 가지 반환 값에 접근할 수 있네:
+  console.log("새로운 좀비가 태어났습니다!", zombie.zombieId, zombie.name, zombie.dna);
+}).on("error", console.error);
+```
+
+이건 DApp에서 어떤 좀비가 생성되든지 항상 알림을 보낼 거라는 걸 명심해야 한다 - 현재 사용자의 좀비만이 아니라는 것이다. 현재 사용자가 만든 것에 대해서만 알림을 보내고 싶다면 어떻게 해야 하는가?
+
+#### indexed 사용하기
+
+`event`를 필터링하고 현재 사용자가와 연관된 변경만을 수신하기 위해, 우리의 ERC721을 구현할 때 `Transfer` 이벤트에서 했던 것처럼 우리의 Solidity Contract에 `indexed` 키워드를 사용해야 한닫.
+
+```sol
+event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
+```
+
+이 경우, `_from`과 `_to`기 `indexed`되어 있기 때문에, 우리 프론트엔드의 이벤트 리스너에서 이들을 필터링할 수 있다
+
+```JS
+// `filter`를 사용해 `_to`가 `userAccount`와 같을 때만 코드를 실행
+cryptoZombies.events.Transfer({ filter: { _to: userAccount } })
+.on("data", function(event) {
+  let data = event.returnValues;
+  // 현재 사용자가 방금 좀비를 받았네!
+  // 해당 좀비를 보여줄 수 있도록 UI를 업데이트할 수 있도록 여기에 추가
+}).on("error", console.error);
+```
+
+`event`와 `indexed` 영역을 사용하는 것은 우리 Contract에서 변화를 감지하고 프론트엔드에 반영할 수 있게 하는 유용한 방법이다.
+
+#### 지난 Event에 대해 질문하기
+
+`getPastEvents`를 이용해 지난 이벤트들에 대해 질문을 하고, `fromBlock`과 `toBlock` 필터들을 이용해 이벤트 로그에 대한 시간 범위를 Solidity에 전달할 수 있다(여기서 "block"은 Ethereum 블록 번호를 나타낸다)
+
+```JS
+cryptoZombies.getPastEvents("NewZombie", { fromBlock: 0, toBlock: "latest" })
+.then(function(events) {
+  // `events`는 우리가 위에서 했던 것처럼 반복 접근할 `event` 객체들의 배열이네.
+  // 이 코드는 생성된 모든 좀비의 목록을 우리가 받을 수 있게 할 것이네.
+});
+```
+
+위 메소드를 사용해 시작 시간부터의 이벤트 로그들에 대해 질문을 할 수 있기 때문에, 이를 통해 흥미로운 사용 예시를 만들 수 있다. 이벤트를 저렴한 형태의 storage로 사용하는 것이다.
+
+다시 생각해보면, 데이터를 블록체인에 기록하는 것은 Solidity에서 가장 비싼 비용을 지불하는 작업 중 하나였다. 하지만 Event를 이용하는 것은 가스 측면에서 훨씬 더 저렴하다.
+
+여기서 단점이 되는 부분은 Smart Contract 자체 안에서도 Event를 읽을 수 없다는 것이다. 하지만 히스토리로 블록체인에 기록해 앱의 프론트엔드에서 읽기를 워하는 데이터가 있다면, 이는 새겨 놓아야 할 중요한 사용 예시이다.
+
+### 정리
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>CryptoZombies front-end</title>
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="web3.min.js"></script>
+    <script language="javascript" type="text/javascript" src="cryptozombies_abi.js"></script>
+  </head>
+  <body>
+    <div id="txStatus"></div>
+    <div id="zombies"></div>
+
+    <script>
+      var cryptoZombies;
+      var userAccount;
+
+      function startApp() {
+        var cryptoZombiesAddress = "YOUR_CONTRACT_ADDRESS";
+        cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress);
+
+        var accountInterval = setInterval(function() {
+
+          if (web3.eth.accounts[0] !== userAccount) {
+            userAccount = web3.eth.accounts[0];
+
+            getZombiesByOwner(userAccount)
+            .then(displayZombies);
+          }
+        }, 100);
+
+        cryptoZombies.events.Transfer({ filter: { _to: userAccount } })
+        .on("data", function(event) {
+          let data = event.returnValues;
+          getZombiesByOwner(userAccount).then(displayZombies);
+        }).on("error", console.error);
+      }
+
+      function displayZombies(ids) {
+        $("#zombies").empty();
+        for (id of ids) {
+
+          getZombieDetails(id)
+          .then(function(zombie) {
+
+
+            $("#zombies").append(`<div class="zombie">
+              <ul>
+                <li>Name: ${zombie.name}</li>
+                <li>DNA: ${zombie.dna}</li>
+                <li>Level: ${zombie.level}</li>
+                <li>Wins: ${zombie.winCount}</li>
+                <li>Losses: ${zombie.lossCount}</li>
+                <li>Ready Time: ${zombie.readyTime}</li>
+              </ul>
+            </div>`);
+          });
+        }
+      }
+
+      function createRandomZombie(name) {
+
+
+        $("#txStatus").text("Creating new zombie on the blockchain. This may take a while...");
+
+        return CryptoZombies.methods.createRandomZombie(name)
+        .send({ from: userAccount })
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Successfully created " + name + "!");
+
+          getZombiesByOwner(userAccount).then(displayZombies);
+        })
+        .on("error", function(error) {
+
+          $("#txStatus").text(error);
+        });
+      }
+
+      function feedOnKitty(zombieId, kittyId) {
+        $("#txStatus").text("Eating a kitty. This may take a while...");
+        return CryptoZombies.methods.feedOnKitty(zombieId, kittyId)
+        .send({ from: userAccount })
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Ate a kitty and spawned a new Zombie!");
+          getZombiesByOwner(userAccount).then(displayZombies);
+        })
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        });
+      }
+
+      function levelUp(zombieId) {
+        $("#txStatus").text("좀비를 레벨업하는 중...");
+        return CryptoZombies.methods.levelUp(zombieId)
+        .send({ from: userAccount, value: web3.utils.toWei("0.001") })
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("압도적인 힘! 좀비가 성공적으로 레벨업했습니다.");
+        })
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        });
+      }
+
+      function getZombieDetails(id) {
+        return cryptoZombies.methods.zombies(id).call()
+      }
+
+      function zombieToOwner(id) {
+        return cryptoZombies.methods.zombieToOwner(id).call()
+      }
+
+      function getZombiesByOwner(owner) {
+        return cryptoZombies.methods.getZombiesByOwner(owner).call()
+      }
+
+      window.addEventListener('load', function() {
+
+
+        if (typeof web3 !== 'undefined') {
+
+          web3js = new Web3(web3.currentProvider);
+        } else {
+
+
+        }
+
+
+        startApp()
+
+      })
+    </script>
+  </body>
+</html>
+```
 
