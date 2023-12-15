@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Flutter - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/flutter/</link>
+        <description>Flutter - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/flutter/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter Image Picker</title>
+    <link>https://seilylook.github.io/posts/flutter-image-picker/</link>
+    <pubDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-image-picker/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/flutter-image-picker.png" referrerpolicy="no-referrer">
+            </div>Introduction Flutter 기능 구현 - Image Pick &amp; Update &amp; Save
+Chapter 1 ]]></description>
+</item>
+</channel>
+</rss>

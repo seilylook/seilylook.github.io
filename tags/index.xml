@@ -4,28 +4,36 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 11 Nov 2023 19:17:13 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Cross Platform</title>
+    <link>https://seilylook.github.io/tags/cross-platform/</link>
+    <pubDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/cross-platform/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Dart</title>
+    <link>https://seilylook.github.io/tags/dart/</link>
+    <pubDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/dart/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Development</title>
     <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Sat, 11 Nov 2023 19:17:13 &#43;0900</pubDate>
+    <pubDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/development/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Mobile</title>
-    <link>https://seilylook.github.io/tags/mobile/</link>
-    <pubDate>Sat, 11 Nov 2023 19:17:13 &#43;0900</pubDate>
+    <title>Flutter</title>
+    <link>https://seilylook.github.io/tags/flutter/</link>
+    <pubDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/mobile/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Project</title>
-    <link>https://seilylook.github.io/tags/project/</link>
-    <pubDate>Sat, 11 Nov 2023 19:17:13 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/project/</guid>
+    <guid>https://seilylook.github.io/tags/flutter/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -69,19 +77,11 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Decentralize</title>
-    <link>https://seilylook.github.io/tags/decentralize/</link>
-    <pubDate>Wed, 11 Oct 2023 17:37:16 &#43;0900</pubDate>
+    <title>Project</title>
+    <link>https://seilylook.github.io/tags/project/</link>
+    <pubDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/decentralize/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Web 3.0</title>
-    <link>https://seilylook.github.io/tags/web-3.0/</link>
-    <pubDate>Wed, 11 Oct 2023 17:37:16 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/web-3.0/</guid>
+    <guid>https://seilylook.github.io/tags/project/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
