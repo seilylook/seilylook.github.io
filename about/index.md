@@ -152,3 +152,21 @@
 
 {{</admonition>}}
 
+### 6. YouTube Videos Streaming
+
+<center>
+  <a href="https://github.com/seilylook/flutter-seTube.git">
+      <img src="https://github-readme-stats.vercel.app/api/pin/?username=seilylook&repo=flutter-seTube" alt="Readme Card" style="width:450px;">
+  </a>
+</center>
+
+{{<admonition success Demo>}}
+
+<table>
+  <tr>
+    <td><img src="/images/seTube-result.png" /></td>
+  </tr>
+</table>
+
+{{</admonition>}}
+

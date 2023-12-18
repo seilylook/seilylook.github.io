@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/categories/project/</link>
         <description>Project - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/project/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 18 Dec 2023 18:32:43 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/project/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter Youtube Streaming</title>
+    <link>https://seilylook.github.io/posts/flutter-youtube-streaming/</link>
+    <pubDate>Mon, 18 Dec 2023 18:32:43 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-youtube-streaming/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/youtube-logo.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction Flutter 기능 구현 - YouTube 동영상 데이터 가져오기.
+HTTP 요청의 응답을 담을 모델 클래스를 구현하고, UI를 작성한 다음, Dio를 사용해서 직접 API 요청을 진행한다. 마지막으로 요청을 다시 실행하고 리스트를 갱신할 수 있는 새로고침 기능을 추가해준다.
+Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 구현 VideoModel 유튜브 API를 사용하면 굉장히 많은 정보를 가져올 수 있다. 그 중에서 동영상 ID와 제목만 활용해본다. 이 정보를 담을 VideoModel 클래스를 구현해서 데이터를 관리한다.]]></description>
+</item>
+<item>
     <title>Flutter Image Picker</title>
     <link>https://seilylook.github.io/posts/flutter-image-picker/</link>
     <pubDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</pubDate>
