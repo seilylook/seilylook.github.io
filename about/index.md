@@ -133,17 +133,22 @@
 
 {{</admonition>}}
 
-### 5. Twitter Clone
+### 5. Image Picker
 
 <center>
-  <a href="https://github.com/seilylook/twitter-clone-flutter.git">
-      <img src="https://github-readme-stats.vercel.app/api/pin/?username=seilylook&repo=twitter-clone-flutter" alt="Readme Card" style="width:450px;">
+  <a href="https://github.com/seilylook/flutter-image-picker.git">
+      <img src="https://github-readme-stats.vercel.app/api/pin/?username=seilylook&repo=flutter-image-picker" alt="Readme Card" style="width:450px;">
   </a>
 </center>
 
 {{<admonition success Demo>}}
 
-<img src="/images/twitter-clone-main.png" />
+<table>
+  <tr>
+    <td><img src="/images/image-picker-result1.png" /></td>
+    <td><img src="/images/image-picker-result2.png" /></td>
+  </tr>
+</table>
 
 {{</admonition>}}
 

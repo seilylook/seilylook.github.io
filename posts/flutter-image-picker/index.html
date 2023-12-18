@@ -11,7 +11,7 @@ pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-image-picker/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-15T14:43:56+09:00" />
-<meta property="article:modified_time" content="2023-12-15T14:53:17+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-12-15T15:50:39+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -31,8 +31,8 @@ pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-image-picker\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  283 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/flutter-image-picker\/","datePublished": "2023-12-15T14:43:56+09:00","dateModified": "2023-12-15T14:53:17+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  1314 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-image-picker\/","datePublished": "2023-12-15T14:43:56+09:00","dateModified": "2023-12-15T15:50:39+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -79,8 +79,8 @@ pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Image Picker</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;283 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1314 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -105,6 +105,16 @@ pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 
             <li><a href="#androidappsrcmainandroidmanifestxml">android/app/src/main/AndroidManifest.xml</a></li>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li><a href="#chpater-2">Chpater 2</a>
+      <ul>
+        <li><a href="#appbar">Appbar</a></li>
+        <li><a href="#image-삽입-삭제-저장">Image 삽입, 삭제, 저장</a></li>
+        <li><a href="#footer">Footer</a></li>
+        <li><a href="#이모티콘-sticker-widget">이모티콘 sticker widget</a></li>
+        <li><a href="#스티커-붙이기">스티커 붙이기</a></li>
+        <li><a href="#스티커-삭제하기">스티커 삭제하기</a></li>
       </ul>
     </li>
   </ul>
@@ -248,12 +258,528 @@ pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 
 </span></span><span class="line"><span class="cl">    <span class="na">android:requestLegacyExternalStorage=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="chpater-2">Chpater 2</h2>
+<p>가장 먼저 메인 화면을 위한 준비를 해준다. 이미지를 선택하는 화면을 제외한 나머지 화면은 HomeScreen에서 작업한다. HomeScreen UI 작업이 끝나면 스티커 붙이기 기능을 구현하고 마지막으로 이미지 선택, 이미지 저장에 해당되는 기능을 구현해준다.</p>
+<h3 id="appbar">Appbar</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MainAppBar</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">VoidCallback</span> <span class="n">onPickImage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">VoidCallback</span> <span class="n">onSaveImage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">VoidCallback</span> <span class="n">onDeleteItem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">MainAppBar</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">onPickImage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">onSaveImage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">onDeleteItem</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Container</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">height:</span> <span class="m">100</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">decoration:</span> <span class="n">BoxDecoration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">white</span><span class="p">.</span><span class="n">withOpacity</span><span class="p">(</span><span class="m">0.9</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">child:</span> <span class="n">Row</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">mainAxisAlignment:</span> <span class="n">MainAxisAlignment</span><span class="p">.</span><span class="n">spaceAround</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">crossAxisAlignment:</span> <span class="n">CrossAxisAlignment</span><span class="p">.</span><span class="n">end</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="n">IconButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onPressed:</span> <span class="n">onPickImage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">icon:</span> <span class="n">Icon</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="n">Icons</span><span class="p">.</span><span class="n">image_search_outlined</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">grey</span><span class="p">[</span><span class="m">700</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">IconButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onPressed:</span> <span class="n">onDeleteItem</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">icon:</span> <span class="n">Icon</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="n">Icons</span><span class="p">.</span><span class="n">delete_forever_outlined</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">grey</span><span class="p">[</span><span class="m">700</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">IconButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onPressed:</span> <span class="n">onSaveImage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">icon:</span> <span class="n">Icon</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="n">Icons</span><span class="p">.</span><span class="n">save</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">grey</span><span class="p">[</span><span class="m">700</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="image-삽입-삭제-저장">Image 삽입, 삭제, 저장</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onPickImage</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">image</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">ImagePicker</span><span class="p">().</span><span class="n">pickImage</span><span class="p">(</span><span class="k">source</span><span class="o">:</span> <span class="n">ImageSource</span><span class="p">.</span><span class="n">gallery</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onDeleteItem</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">stickers</span> <span class="o">=</span> <span class="n">stickers</span><span class="p">.</span><span class="n">where</span><span class="p">((</span><span class="n">sticker</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">sticker</span><span class="p">.</span><span class="n">id</span> <span class="o">!=</span> <span class="n">selectedId</span><span class="p">).</span><span class="n">toSet</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onSaveImage</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">RenderRepaintBoundary</span> <span class="n">boundary</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">imgKey</span><span class="p">.</span><span class="n">currentContext</span><span class="o">!</span><span class="p">.</span><span class="n">findRenderObject</span><span class="p">()</span> <span class="o">as</span> <span class="n">RenderRepaintBoundary</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ui</span><span class="p">.</span><span class="n">Image</span> <span class="n">image</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">boundary</span><span class="p">.</span><span class="n">toImage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ByteData</span><span class="o">?</span> <span class="n">byteData</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">image</span><span class="p">.</span><span class="n">toByteData</span><span class="p">(</span><span class="nl">format:</span> <span class="n">ui</span><span class="p">.</span><span class="n">ImageByteFormat</span><span class="p">.</span><span class="n">png</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Uint8List</span> <span class="n">pngBytes</span> <span class="o">=</span> <span class="n">byteData</span><span class="o">!</span><span class="p">.</span><span class="n">buffer</span><span class="p">.</span><span class="n">asUint8List</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">await</span> <span class="n">ImageGallerySaver</span><span class="p">.</span><span class="n">saveImage</span><span class="p">(</span><span class="n">pngBytes</span><span class="p">,</span> <span class="nl">quality:</span> <span class="m">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// ignore: use_build_context_synchronously
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ScaffoldMessenger</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">showSnackBar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">const</span> <span class="n">SnackBar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">content:</span> <span class="n">Text</span><span class="p">(</span><span class="s1">&#39;이미지가 저장되었습니다.&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>
+<p><code>toImage()</code> 함수를 실행해서 <code>RepaintBoundary</code>가 감싸고 있는 영역을 이미지로 변환할 수 있다. 이미지 갤러리에 저장할 때 사용할 플러그인인 <code>ImageGallerySaver</code>는 이미지를 저장하기에 앞서 이미지를 바이트 데이터로 변환해야 한다.</p>
+</li>
+<li>
+<p>이미지는 Byte 데이터로 변환한다. 변환된느 확장자는 png로 지정했다.</p>
+</li>
+<li>
+<p>Byte 데이터를 8비트 정수형으로 변환한다. <code>ImageGallerySaver</code> 플러그인은 Byte 데이터가 8비트 정수형으로 변환되어 있는 걸 요구하기 때문이다. 이는 웹에서 이미지를 저장할 떄도 비슷한 변환 과정을 거친다.</p>
+</li>
+<li>
+<p>변환된 이미지 데이터를 <code>ImageGallerySaver.saveImage()</code> 함수에 입력해주고 갤러리에 이미지를 저장한ㄷ다. 추가적으로 ScaffoldMessenger의 <code>showSnackBar()</code>를 통해 이미지가 저장됐음을 알려준다.</p>
+</li>
+</ol>
+<h3 id="footer">Footer</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">typedef</span> <span class="n">OnEmotionTap</span> <span class="o">=</span> <span class="kt">void</span> <span class="n">Function</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Footer</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">OnEmotionTap</span> <span class="n">onEmotionTap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">Footer</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">onEmotionTap</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Container</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">white</span><span class="p">.</span><span class="n">withOpacity</span><span class="p">(</span><span class="m">0.9</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">height:</span> <span class="m">150</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">child:</span> <span class="n">SingleChildScrollView</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">scrollDirection:</span> <span class="n">Axis</span><span class="p">.</span><span class="n">horizontal</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="n">Row</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">children:</span> <span class="n">List</span><span class="p">.</span><span class="n">generate</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="m">7</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">Padding</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">padding:</span> <span class="kd">const</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">symmetric</span><span class="p">(</span><span class="nl">horizontal:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">child:</span> <span class="n">GestureDetector</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">onTap:</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">onEmotionTap</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">child:</span> <span class="n">Image</span><span class="p">.</span><span class="n">asset</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="s1">&#39;assets/img/emoticon_</span><span class="si">${</span><span class="n">index</span> <span class="o">+</span> <span class="m">1</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">height:</span> <span class="m">100</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="이모티콘-sticker-widget">이모티콘 sticker widget</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">EmoticonPicker</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">VoidCallback</span> <span class="n">onTransform</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">imgPath</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">bool</span> <span class="n">isSelected</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">EmoticonPicker</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">imgPath</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">onTransform</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">isSelected</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">EmoticonPicker</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_EmoticonPickerState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_EmoticonPickerState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">EmoticonPicker</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">scale</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">hTransform</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">vTransform</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">actualScale</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">transform:</span> <span class="n">Matrix4</span><span class="p">.</span><span class="n">identity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">..</span><span class="n">translate</span><span class="p">(</span><span class="n">hTransform</span><span class="p">,</span> <span class="n">vTransform</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">..</span><span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">child:</span> <span class="n">Container</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">decoration:</span> <span class="n">widget</span><span class="p">.</span><span class="n">isSelected</span>
+</span></span><span class="line"><span class="cl">              <span class="o">?</span> <span class="n">BoxDecoration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">borderRadius:</span> <span class="n">BorderRadius</span><span class="p">.</span><span class="n">circular</span><span class="p">(</span><span class="m">4.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">border:</span> <span class="n">Border</span><span class="p">.</span><span class="n">all</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">blue</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">width:</span> <span class="m">1.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="o">:</span> <span class="n">BoxDecoration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">border:</span> <span class="n">Border</span><span class="p">.</span><span class="n">all</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">transparent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">width:</span> <span class="m">1.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">child:</span> <span class="n">GestureDetector</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onTap:</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">widget</span><span class="p">.</span><span class="n">onTransform</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onScaleUpdate:</span> <span class="p">(</span><span class="n">ScaleUpdateDetails</span> <span class="n">details</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">scale</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">scale</span> <span class="o">*</span> <span class="n">actualScale</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">vTransform</span> <span class="o">+=</span> <span class="n">details</span><span class="p">.</span><span class="n">focalPointDelta</span><span class="p">.</span><span class="n">dy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">hTransform</span> <span class="o">+=</span> <span class="n">details</span><span class="p">.</span><span class="n">focalPointDelta</span><span class="p">.</span><span class="n">dx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">              <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onScaleEnd:</span> <span class="p">(</span><span class="n">ScaleEndDetails</span> <span class="n">details</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">actualScale</span> <span class="o">=</span> <span class="n">scale</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">child:</span> <span class="n">Image</span><span class="p">.</span><span class="n">asset</span><span class="p">(</span><span class="n">widget</span><span class="p">.</span><span class="n">imgPath</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">)),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>해당 class를 자세히 살펴본다. 먼저, <code>onScaleUpdate</code> 이 제스처는 <code>ScaleUpdateDetail</code>값을 첫 번째 매개 변수로 입력받는다. <code>ScaleUpdateDetail</code>는 굉장히 많은 정보를 제공한다. 여기서 사용할 정보는 두가지이다.</p>
+<p>첫번쨰는 확대 비율에 해당되는 <code>detail.scale</code>이다. 이 값을 double로 제공되며 확대/축소 제스처가 시작된 순간을 기준으로 몇 배율의 변화가 있는지 알려준다. 배율은 위젯의 초기 크기 기준이 아니기 때문에 확대/축소 제스처가 끝나는 순간을 알려주는 <code>onScaleEnd</code>매개변수가 실행될 때 현재 배율을 꼭 기억해두어야 한다. 그래야 최근 배율 * details.scale를 계산해서 위젯의 초기 크기 기준으로 배율을 계산할 수 있다.</p>
+<p>두번째로 사용할 값은 <code>details.focalPointDelta</code>이다. 이 값은 dy, dx 값을 갖고 있으며 각각 세로축, 가로축으로 이동한 수치를 반환받을 수 있다. 가로와 세로로 이동한 수치와 확대 및 축소가 된 수치를 변수로 저장해두고 확대/축소 제스처에 대한 콜백이 실행될 때마다 변수들을 업데이트해주면 사용자가 의도한 위젯의 변화를 상태 관리할 수 있다.</p>
+<h3 id="스티커-붙이기">스티커 붙이기</h3>
+<p>이제 스티커 붙이기 기능을 구현한다. 여러 개의 스티커를 한번에 관리하기 편하도록 lib/model/sticker_model.dart 파일에 StickerModel 클래스를 구현해서 각각 스티커에 필요한 정보를 저장한다. 현재 필요한 각각 스티커의 정보는 ID 값과 스티커 이미지 경로 값이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">StickerModel</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">imgPath</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">StickerModel</span><span class="p">({</span><span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">imgPath</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="kd">operator</span> <span class="o">==</span><span class="p">(</span><span class="kt">Object</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">other</span> <span class="o">as</span> <span class="n">StickerModel</span><span class="p">).</span><span class="n">id</span> <span class="o">==</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="kd">get</span> <span class="n">hashCode</span> <span class="o">=&gt;</span> <span class="n">id</span><span class="p">.</span><span class="n">hashCode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>
+<p>하나의 인스턴스가 다른 인스턴스와 같은 지 비교할 때 사용한다. StickerModel은 id에 유일한 값을 입력하고 만약에 겹치면 중복 데이터를 제거한다.</p>
+</li>
+<li>
+<p>Set 등 해시값을 사용하는 데이터 구조에서 사용하는 Getter이다. 마찬가지로 id값만 유일하면 되니 id의 hashCode값만 반환해준다.</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onEmotionTap</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">stickers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="n">stickers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StickerModel</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nl">id:</span> <span class="kd">const</span> <span class="n">Uuid</span><span class="p">().</span><span class="n">v4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">imgPath:</span> <span class="s1">&#39;assets/img/emoticon_</span><span class="si">$</span><span class="n">index</span><span class="s1">.png&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li><code>UUID</code> 패키지의 <code>Uuid().v4()</code> 함수를 사용하면 절대로 겹치지 않는 String 값을 생성할 수 있다. 화면에 스티커를 생성할 때마다 유일한 id 값을 소유하는 StickerModel을 만들어야 하니 id 값에 매전 새로운 UUID 값을 생성해서 저장한다.</li>
+</ol>
+<h3 id="스티커-삭제하기">스티커 삭제하기</h3>
+<p>스티커 삭제는 Set 형태인 stickers 변수에 모든 스티커 정보를 다 저장해놨으니 스티커 삭제 버튼이 눌릴 때마다 stickers 변수에서 각 StickerModel을 순회하며 id를 비교해서 <code>selectedId</code> 변수와 다른 것만 남겨주면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onDeleteItem</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">stickers</span> <span class="o">=</span> <span class="n">stickers</span><span class="p">.</span><span class="n">where</span><span class="p">((</span><span class="n">sticker</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">sticker</span><span class="p">.</span><span class="n">id</span> <span class="o">!=</span> <span class="n">selectedId</span><span class="p">).</span><span class="n">toSet</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-15&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/56261505384e2fcea4d9b6c62253cf8ef95b4f35" target="_blank" title="commit by seilylook(seilylook@naver.com) 56261505384e2fcea4d9b6c62253cf8ef95b4f35: add: flutter image picker">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5626150</a></span>
+                <span>Updated on 2023-12-15&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/5e113fd1b4f8f7ce5caf34002645e8b2cb8ae78a" target="_blank" title="commit by seilylook(seilylook@naver.com) 5e113fd1b4f8f7ce5caf34002645e8b2cb8ae78a: docs: image picker dependency setting">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5e113fd</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
