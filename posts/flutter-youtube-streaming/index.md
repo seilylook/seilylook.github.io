@@ -138,3 +138,55 @@ void dispose() {
 
 - `dispose`: CustomYouTubePlayerState 클래슥가 삭젣되면 컬트롤러 또한 삭제해서 메모리 누수를 막아준다.
 
+### YouTube API 연결하기
+
+`Dio` 패키지를 이용한 HTTP 요청을 구현해준다. 우선 API end point를 위한 `Constants`를 만들어준다.
+
+#### lib/constants/constant_url.dart
+
+```env
+API_KEY=Google Cloud Console에서 발급받은 API key를 입력!!!
+YOUTUBE_BASE_URL=https://youtube.googleapis.com/youtube/v3/search
+CF_CHANNEL_ID=UCxZ2AlaT0hOmxzZVbF_j_Sw
+```
+
+```dart
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+String API_KEY = dotenv.get('API_KEY');
+String YOUTUBE_BASE_URL = dotenv.get('YOUTUBE_BASE_URL');
+String CF_CHANNEL_ID = dotenv.get('CF_CHANNEL_ID');
+```
+
+채널 ID는 유튜브에서 채널을 생성하면 부엳되는 채널당 고유 ID이다. 채널 페이지에 들어갔을 때 URL의 마지막 부분에서 가져올 수 있다.
+
+Youtube Data API V3는 상당히 많은 기능을 제공한다. 수많은 기능 중 `Search:list API`를 사용해서 특정 채널에서 다수의 동영상을 최신 순서대로 가져온다. API end point로 HTTP GET 요청을 보내면 에러가 없을 경우 다음과 같은 JSON 데이터를 응답받는다.
+
+```json
+{
+  "kind": "youtube#searchResult",
+  "etag": etag,
+  "id": {
+    "kind": string,
+    "videoId": string,
+    "channelId": string,
+    "playlistId": string
+  },
+  "snippet": {
+    "publishedAt": datetime,
+    "channelId": string,
+    "title": string,
+    "description": string,
+    "thumbnails": {
+      (key): {
+        "url": string,
+        "width": unsigned integer,
+        "height": unsigned integer
+      }
+    },
+    "channelTitle": string,
+    "liveBroadcastContent": string
+  }
+}
+```
+

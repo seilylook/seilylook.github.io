@@ -11,7 +11,7 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-youtube-streaming/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-18T18:32:43+09:00" />
-<meta property="article:modified_time" content="2023-12-18T18:32:43+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-12-18T18:57:29+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -31,8 +31,8 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-youtube-streaming\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  566 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/flutter-youtube-streaming\/","datePublished": "2023-12-18T18:32:43+09:00","dateModified": "2023-12-18T18:32:43+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  740 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-youtube-streaming\/","datePublished": "2023-12-18T18:32:43+09:00","dateModified": "2023-12-18T18:57:29+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -79,8 +79,8 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Youtube Streaming</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-18">2023-12-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;566 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-18">2023-12-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;740 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -104,6 +104,11 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
           </ul>
         </li>
         <li><a href="#customyoutubeplater-widget">CustomYoutubePlater widget</a></li>
+        <li><a href="#youtube-api-연결하기">YouTube API 연결하기</a>
+          <ul>
+            <li><a href="#libconstantsconstant_urldart">lib/constants/constant_url.dart</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -326,11 +331,101 @@ Controller는 종종 외부 리소스를 관리하며, 이 리소스들은 사�
 <p><code>dispose</code>: CustomYouTubePlayerState 클래슥가 삭젣되면 컬트롤러 또한 삭제해서 메모리 누수를 막아준다.</p>
 </li>
 </ul>
-</div><div class="post-footer" id="post-footer">
+<h3 id="youtube-api-연결하기">YouTube API 연결하기</h3>
+<p><code>Dio</code> 패키지를 이용한 HTTP 요청을 구현해준다. 우선 API end point를 위한 <code>Constants</code>를 만들어준다.</p>
+<h4 id="libconstantsconstant_urldart">lib/constants/constant_url.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-env" data-lang="env"><span class="line"><span class="cl"><span class="nv">API_KEY</span><span class="o">=</span>Google Cloud Console에서 발급받은 API key를 입력!!!
+</span></span><span class="line"><span class="cl"><span class="nv">YOUTUBE_BASE_URL</span><span class="o">=</span>https://youtube.googleapis.com/youtube/v3/search
+</span></span><span class="line"><span class="cl"><span class="nv">CF_CHANNEL_ID</span><span class="o">=</span>UCxZ2AlaT0hOmxzZVbF_j_Sw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter_dotenv/flutter_dotenv.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="n">dotenv</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">&#39;API_KEY&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">String</span> <span class="n">YOUTUBE_BASE_URL</span> <span class="o">=</span> <span class="n">dotenv</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">&#39;YOUTUBE_BASE_URL&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">String</span> <span class="n">CF_CHANNEL_ID</span> <span class="o">=</span> <span class="n">dotenv</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">&#39;CF_CHANNEL_ID&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>채널 ID는 유튜브에서 채널을 생성하면 부엳되는 채널당 고유 ID이다. 채널 페이지에 들어갔을 때 URL의 마지막 부분에서 가져올 수 있다.</p>
+<p>Youtube Data API V3는 상당히 많은 기능을 제공한다. 수많은 기능 중 <code>Search:list API</code>를 사용해서 특정 채널에서 다수의 동영상을 최신 순서대로 가져온다. API end point로 HTTP GET 요청을 보내면 에러가 없을 경우 다음과 같은 JSON 데이터를 응답받는다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;kind&#34;</span><span class="p">:</span> <span class="s2">&#34;youtube#searchResult&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;etag&#34;</span><span class="p">:</span> <span class="err">etag</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;kind&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;videoId&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;channelId&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;playlistId&#34;</span><span class="p">:</span> <span class="err">string</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;snippet&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;publishedAt&#34;</span><span class="p">:</span> <span class="err">datetime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;channelId&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;thumbnails&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="err">(key):</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;url&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;width&#34;</span><span class="p">:</span> <span class="err">unsigned</span> <span class="err">integer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;height&#34;</span><span class="p">:</span> <span class="err">unsigned</span> <span class="err">integer</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;channelTitle&#34;</span><span class="p">:</span> <span class="err">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;liveBroadcastContent&#34;</span><span class="p">:</span> <span class="err">string</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-18</span>
+                <span>Updated on 2023-12-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/a832969002aaf51cf0445f5d220641613475ddb7" target="_blank" title="commit by seilylook(seilylook@naver.com) a832969002aaf51cf0445f5d220641613475ddb7: docs: youtube streaming">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a832969</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
