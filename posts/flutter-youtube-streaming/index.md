@@ -190,3 +190,126 @@ Youtube Data API V3는 상당히 많은 기능을 제공한다. 수많은 기능
 }
 ```
 
+`items` 키에 입력된 값들을 잘 살펴보면 `VideoModel` 인스턴스를 생성할 때 필요한 정보를 찾을 수 있다. ViewModel의 id에 해당되는 `videoId` 키와 title에 해당되는 `title` 키이다. 결과적으로 각각 item의 videoId를 가져오려면 `item['id']['videoId']`를 실행하면 되고 title을 가져오려면 `item['snippet']['title']`을 실행하면 된다. 이 정보를 기반으로 HTTP 요청을 보내서 결과값을 VideoModel로 매핑해준다.
+
+`Dio` 패키지에서 제공하는 Dio 클래스는 `get()`, `post()`, `put()`, `delete()` 등의 함수를 제공하는 데, 각각 같은 이름의 HTTP 요청 기능을 수행한다. 모든 HTTP 요청은 네트워크를 통해 전송되며 언제 응답이 도착할 지 알 수 없기 때문에 비동기 프로그래밍을 사용한다.
+
+결과값을 받으면 복잡한 JSON 구조를 필요한 형태인 `List<VideoModel>`로 전환해줘야 한다. 혹시나 items의 리스트 값 중에 videoId나 title 값이 존재하지 않는 경우를 제외시키고 나머지를 List<VideoModel>로 전환해준다.
+
+#### lib/apis/youtube_api.dart
+
+```dart
+import 'package:se_tube/constants/constant_url.dart';
+import 'package:dio/dio.dart';
+import 'package:se_tube/model/video_model.dart';
+
+class YouTubeAPI {
+  static Future<List<VideoModel>> getVideos() async {
+    final response = await Dio().get(
+      YOUTUBE_BASE_URL,
+      queryParameters: {
+        'channelId': CF_CHANNEL_ID,
+        'maxResults': 50,
+        'key': API_KEY,
+        'part': 'snippet',
+        'order': 'date',
+      },
+    );
+
+    final listWithData = response.data['items'].where(
+      (item) =>
+          item?['id']?['videoId'] != null && item?['snippet']?['title'] != null,
+    );
+
+    return listWithData
+        .map<VideoModel>(
+          (item) => VideoModel(
+            id: item['id']['videoId'],
+            title: item['snippet']['title'],
+          ),
+        )
+        .toList();
+  }
+}
+```
+
+`get()` 함수의 첫 번째 매개변수에는 필수로 요청을 보낼 URL을 입력해줘야 하며, `queryparameter` 매개 변수에는 전송해줄 쿼리 매개 변수값들을 Map 형태로 보낼 수 있다.
+
+### ListView 구현
+
+네트워크 요청으로 받을 데이터가 준비되었고 동영상을 보여줄 widget도 준비되었다. 이제 데이터를 기반으로 동영상을 리스트 형태로 구현해준다. 플러터에서 여러 widget을 리스트로 구현하는 widget은 다양하다. 그중 `ListView` widget을 사용한다. children 매개변수에 리스트로 보여주고 싶은 widget들을 입력해주면 자동으로 리스트 형태로 widget이 구현되어 사용이 편리하다. `getVideos()` 함수를 사용해서 비동기로 데이터를 가져와야 하니 `FutureBuilder`를 사용한다.
+
+### 아래로 toggle 시 새로고침 기능 구현
+
+`build()` 함수에 `FutureBuilder`를 사용하면 FutureBuilder가 화면에 렌더링 될 때마다 future 매개변수에 입력된 함수가 실행된다. 현재 이 앱은 앱을 처음 시작했을 때만 동영상 데이터를 가져오고 있다. 하지만 실전 앱이라면 새로운 사용자가 원할 때 새로운 데이터를 가져올 수 있는 기능을 추가해야 한다. 앱에서는 보통 리스트 UI를 만들 때 새로고침 기능은 첫 화면에서 리스트를 아래로 당기는 동작에 추가한다. 홈 스크린에서 아래로 당기면 새로고침되는 기능을 추가하고 마무리 해준다.
+
+#### lib/screens/home_screen.dart
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:se_tube/apis/youtube_api.dart';
+import 'package:se_tube/model/video_model.dart';
+import 'package:se_tube/widgets/custom_youtube_player.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'SE Tube',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+          ),
+        ),
+        backgroundColor: Colors.black,
+      ),
+      body: FutureBuilder<List<VideoModel>>(
+        future: YouTubeAPI.getVideos(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            );
+          }
+
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return RefreshIndicator(
+            onRefresh: () async {
+              setState(() {});
+            },
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: snapshot.data!
+                  .map((e) => CustomYouTubePlayer(videoModel: e))
+                  .toList(),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+```
+

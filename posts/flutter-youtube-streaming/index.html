@@ -11,7 +11,7 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-youtube-streaming/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-18T18:32:43+09:00" />
-<meta property="article:modified_time" content="2023-12-18T18:57:29+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-12-18T19:17:49+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -31,8 +31,8 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-youtube-streaming\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  740 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/flutter-youtube-streaming\/","datePublished": "2023-12-18T18:32:43+09:00","dateModified": "2023-12-18T18:57:29+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  1275 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-youtube-streaming\/","datePublished": "2023-12-18T18:32:43+09:00","dateModified": "2023-12-18T19:17:49+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -79,8 +79,8 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Youtube Streaming</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-18">2023-12-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;740 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-18">2023-12-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1275 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -107,6 +107,13 @@ Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 �
         <li><a href="#youtube-api-연결하기">YouTube API 연결하기</a>
           <ul>
             <li><a href="#libconstantsconstant_urldart">lib/constants/constant_url.dart</a></li>
+            <li><a href="#libapisyoutube_apidart">lib/apis/youtube_api.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#listview-구현">ListView 구현</a></li>
+        <li><a href="#아래로-toggle-시-새로고침-기능-구현">아래로 toggle 시 새로고침 기능 구현</a>
+          <ul>
+            <li><a href="#libscreenshome_screendart">lib/screens/home_screen.dart</a></li>
           </ul>
         </li>
       </ul>
@@ -420,12 +427,228 @@ Controller는 종종 외부 리소스를 관리하며, 이 리소스들은 사�
 </span></span><span class="line"><span class="cl"><span class="err">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p><code>items</code> 키에 입력된 값들을 잘 살펴보면 <code>VideoModel</code> 인스턴스를 생성할 때 필요한 정보를 찾을 수 있다. ViewModel의 id에 해당되는 <code>videoId</code> 키와 title에 해당되는 <code>title</code> 키이다. 결과적으로 각각 item의 videoId를 가져오려면 <code>item['id']['videoId']</code>를 실행하면 되고 title을 가져오려면 <code>item['snippet']['title']</code>을 실행하면 된다. 이 정보를 기반으로 HTTP 요청을 보내서 결과값을 VideoModel로 매핑해준다.</p>
+<p><code>Dio</code> 패키지에서 제공하는 Dio 클래스는 <code>get()</code>, <code>post()</code>, <code>put()</code>, <code>delete()</code> 등의 함수를 제공하는 데, 각각 같은 이름의 HTTP 요청 기능을 수행한다. 모든 HTTP 요청은 네트워크를 통해 전송되며 언제 응답이 도착할 지 알 수 없기 때문에 비동기 프로그래밍을 사용한다.</p>
+<p>결과값을 받으면 복잡한 JSON 구조를 필요한 형태인 <code>List&lt;VideoModel&gt;</code>로 전환해줘야 한다. 혹시나 items의 리스트 값 중에 videoId나 title 값이 존재하지 않는 경우를 제외시키고 나머지를 List<VideoModel>로 전환해준다.</p>
+<h4 id="libapisyoutube_apidart">lib/apis/youtube_api.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:se_tube/constants/constant_url.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:dio/dio.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:se_tube/model/video_model.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">YouTubeAPI</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">static</span> <span class="n">Future</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">VideoModel</span><span class="o">&gt;&gt;</span> <span class="n">getVideos</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">response</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">Dio</span><span class="p">().</span><span class="kd">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">YOUTUBE_BASE_URL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">queryParameters:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;channelId&#39;</span><span class="o">:</span> <span class="n">CF_CHANNEL_ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;maxResults&#39;</span><span class="o">:</span> <span class="m">50</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="n">API_KEY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;part&#39;</span><span class="o">:</span> <span class="s1">&#39;snippet&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;order&#39;</span><span class="o">:</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">listWithData</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">].</span><span class="n">where</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">item</span><span class="o">?</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">?</span><span class="p">[</span><span class="s1">&#39;videoId&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">item</span><span class="o">?</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">]</span><span class="o">?</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">listWithData</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">map</span><span class="o">&lt;</span><span class="n">VideoModel</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">VideoModel</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">id:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">][</span><span class="s1">&#39;videoId&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">title:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">toList</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>get()</code> 함수의 첫 번째 매개변수에는 필수로 요청을 보낼 URL을 입력해줘야 하며, <code>queryparameter</code> 매개 변수에는 전송해줄 쿼리 매개 변수값들을 Map 형태로 보낼 수 있다.</p>
+<h3 id="listview-구현">ListView 구현</h3>
+<p>네트워크 요청으로 받을 데이터가 준비되었고 동영상을 보여줄 widget도 준비되었다. 이제 데이터를 기반으로 동영상을 리스트 형태로 구현해준다. 플러터에서 여러 widget을 리스트로 구현하는 widget은 다양하다. 그중 <code>ListView</code> widget을 사용한다. children 매개변수에 리스트로 보여주고 싶은 widget들을 입력해주면 자동으로 리스트 형태로 widget이 구현되어 사용이 편리하다. <code>getVideos()</code> 함수를 사용해서 비동기로 데이터를 가져와야 하니 <code>FutureBuilder</code>를 사용한다.</p>
+<h3 id="아래로-toggle-시-새로고침-기능-구현">아래로 toggle 시 새로고침 기능 구현</h3>
+<p><code>build()</code> 함수에 <code>FutureBuilder</code>를 사용하면 FutureBuilder가 화면에 렌더링 될 때마다 future 매개변수에 입력된 함수가 실행된다. 현재 이 앱은 앱을 처음 시작했을 때만 동영상 데이터를 가져오고 있다. 하지만 실전 앱이라면 새로운 사용자가 원할 때 새로운 데이터를 가져올 수 있는 기능을 추가해야 한다. 앱에서는 보통 리스트 UI를 만들 때 새로고침 기능은 첫 화면에서 리스트를 아래로 당기는 동작에 추가한다. 홈 스크린에서 아래로 당기면 새로고침되는 기능을 추가하고 마무리 해준다.</p>
+<h4 id="libscreenshome_screendart">lib/screens/home_screen.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:se_tube/apis/youtube_api.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:se_tube/model/video_model.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:se_tube/widgets/custom_youtube_player.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">HomeScreen</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">HomeScreen</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_HomeScreenState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_HomeScreenState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Scaffold</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">backgroundColor:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">black</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">appBar:</span> <span class="n">AppBar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">centerTitle:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">title:</span> <span class="kd">const</span> <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">&#39;SE Tube&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">style:</span> <span class="n">TextStyle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">white</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">bold</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">fontSize:</span> <span class="m">25</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">backgroundColor:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">black</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">body:</span> <span class="n">FutureBuilder</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">VideoModel</span><span class="o">&gt;&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">future:</span> <span class="n">YouTubeAPI</span><span class="p">.</span><span class="n">getVideos</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">builder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">snapshot</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="n">snapshot</span><span class="p">.</span><span class="n">hasError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">Center</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">snapshot</span><span class="p">.</span><span class="n">error</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">style:</span> <span class="kd">const</span> <span class="n">TextStyle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">white</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">snapshot</span><span class="p">.</span><span class="n">hasData</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kd">const</span> <span class="n">Center</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">child:</span> <span class="n">CircularProgressIndicator</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="n">RefreshIndicator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onRefresh:</span> <span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">setState</span><span class="p">(()</span> <span class="p">{});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">child:</span> <span class="n">ListView</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">physics:</span> <span class="kd">const</span> <span class="n">BouncingScrollPhysics</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">children:</span> <span class="n">snapshot</span><span class="p">.</span><span class="n">data</span><span class="o">!</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">map</span><span class="p">((</span><span class="n">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">CustomYouTubePlayer</span><span class="p">(</span><span class="nl">videoModel:</span> <span class="n">e</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">toList</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/a832969002aaf51cf0445f5d220641613475ddb7" target="_blank" title="commit by seilylook(seilylook@naver.com) a832969002aaf51cf0445f5d220641613475ddb7: docs: youtube streaming">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a832969</a></span>
+                <span>Updated on 2023-12-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/beca0ecc4bf63a418a25dcdcd1409ab753d0106e" target="_blank" title="commit by seilylook(seilylook@naver.com) beca0ecc4bf63a418a25dcdcd1409ab753d0106e: docs: youtube streaming API end point setup">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>beca0ec</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
