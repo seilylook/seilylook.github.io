@@ -14,7 +14,7 @@
     <guid>https://seilylook.github.io/posts/flutter-calendar-scheduler/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/scheduler.png" referrerpolicy="no-referrer">
-            </div>Introduction 달력 형태의 Widget인 TableCalendar를 사용해서 일정 관리 앱 구현.
+            </div>Introduction 달력 형태의 위젯인 TableCalendar를 사용해서 일정 관리 앱 구현.
 Dependency table_calendar
 intl
 drift

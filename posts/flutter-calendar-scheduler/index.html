@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Flutter Calendar Scheduler - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Flutter Calendar Scheduler" />
-<meta property="og:description" content="Introduction 달력 형태의 Widget인 TableCalendar를 사용해서 일정 관리 앱 구현.
+<meta property="og:description" content="Introduction 달력 형태의 위젯인 TableCalendar를 사용해서 일정 관리 앱 구현.
 Dependency table_calendar
 intl
 drift
@@ -26,7 +26,7 @@ uuid
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
 <meta name="twitter:title" content="Flutter Calendar Scheduler"/>
-<meta name="twitter:description" content="Introduction 달력 형태의 Widget인 TableCalendar를 사용해서 일정 관리 앱 구현.
+<meta name="twitter:description" content="Introduction 달력 형태의 위젯인 TableCalendar를 사용해서 일정 관리 앱 구현.
 Dependency table_calendar
 intl
 drift
@@ -51,7 +51,7 @@ uuid
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  832 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  1896 ,
         "url": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/","datePublished": "2023-12-19T11:52:16+09:00","dateModified": "2023-12-19T12:23:09+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -99,8 +99,8 @@ uuid
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Calendar Scheduler</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;832 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1896 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -125,25 +125,37 @@ uuid
         </li>
         <li><a href="#달력-구현">달력 구현</a>
           <ul>
-            <li><a href="#libwidgetsmain_calendardart">lib/widgets/main_calendar.dart</a></li>
+            <li><a href="#lib위젯smain_calendardart">lib/위젯s/main_calendar.dart</a></li>
           </ul>
         </li>
-        <li><a href="#선택된-날의-일정-보여주기-schedulecard-widget">선택된 날의 일정 보여주기: ScheduleCard widget</a>
+        <li><a href="#선택된-날의-일정-보여주기-schedulecard-위젯">선택된 날의 일정 보여주기: ScheduleCard 위젯</a>
           <ul>
-            <li><a href="#libwidgetsschedule_carddart">lib/widgets/schedule_card.dart</a></li>
+            <li><a href="#lib위젯sschedule_carddart">lib/위젯s/schedule_card.dart</a></li>
           </ul>
         </li>
-        <li><a href="#오늘-날짜를-보여주기-todaybanner-widget">오늘 날짜를 보여주기: TodayBanner widget</a>
+        <li><a href="#오늘-날짜를-보여주기-todaybanner-위젯">오늘 날짜를 보여주기: TodayBanner 위젯</a>
           <ul>
-            <li><a href="#libwidgetstoday_banneerdart">lib/widgets/today_banneer.dart</a></li>
+            <li><a href="#lib위젯stoday_banneerdart">lib/위젯s/today_banneer.dart</a></li>
           </ul>
         </li>
+        <li><a href="#일정-작성하기">일정 작성하기</a>
+          <ul>
+            <li><a href="#lib위젯sschedule_bottom_sheetdart">lib/위젯s/schedule_bottom_sheet.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#일정-내용-필드-구현">일정 내용 필드 구현</a>
+          <ul>
+            <li><a href="#lib위젯scustom_text_fielddart">lib/위젯s/custom_text_field.dart</a></li>
+            <li><a href="#libscreenshome_screendart">lib/screens/home_screen.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#i18n-적용하기">i18n 적용하기</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
-<p>달력 형태의 Widget인 <code>TableCalendar</code>를 사용해서 일정 관리 앱 구현.</p>
+<p>달력 형태의 위젯인 <code>TableCalendar</code>를 사용해서 일정 관리 앱 구현.</p>
 <h2 id="dependency">Dependency</h2>
 <ul>
 <li>
@@ -201,7 +213,7 @@ uuid
 </div>
 </div><h3 id="달력-구현">달력 구현</h3>
 <p>HomeScreen의 화면 윗부분의 달력을 <code>MainCalendar</code> 클래스로 만들어준다.</p>
-<h4 id="libwidgetsmain_calendardart">lib/widgets/main_calendar.dart</h4>
+<h4 id="lib위젯smain_calendardart">lib/위젯s/main_calendar.dart</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -276,7 +288,7 @@ uuid
 </span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:table_calendar/table_calendar.dart&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MainCalendar</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MainCalendar</span> <span class="kd">extends</span> <span class="n">Stateless위젯</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">OnDaySelected</span> <span class="n">onDaySelected</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span> <span class="n">selectedDate</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -287,7 +299,7 @@ uuid
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">위젯</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">TableCalendar</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">onDaySelected:</span> <span class="n">onDaySelected</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">selectedDayPredicate:</span> <span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">=&gt;</span>
@@ -354,9 +366,9 @@ uuid
 <p><code>selectedDayPredicatee</code>는 어떤 날짜를 선택된 날짜로 지정할지 결정하는 함수이다. 현재 달력에 보이는 모든 날짜를 순회하며 실행하는 함수로 true가 반횐되면 선택된 날짜로 표시학고 false가 반환되면 선택되지 않은 날짜로 지정한다.</p>
 </li>
 </ul>
-<h3 id="선택된-날의-일정-보여주기-schedulecard-widget">선택된 날의 일정 보여주기: ScheduleCard widget</h3>
-<p>선택된 날짜에 해당되는 일정을 보여주는 widget을 만들어준다. 각 일정은 시간(시작 시간부터 종료 시간)과 내용으로 이루어져 있다.</p>
-<h4 id="libwidgetsschedule_carddart">lib/widgets/schedule_card.dart</h4>
+<h3 id="선택된-날의-일정-보여주기-schedulecard-위젯">선택된 날의 일정 보여주기: ScheduleCard 위젯</h3>
+<p>선택된 날짜에 해당되는 일정을 보여주는 위젯을 만들어준다. 각 일정은 시간(시작 시간부터 종료 시간)과 내용으로 이루어져 있다.</p>
+<h4 id="lib위젯sschedule_carddart">lib/위젯s/schedule_card.dart</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -459,7 +471,7 @@ uuid
 <pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">ScheduleCard</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">ScheduleCard</span> <span class="kd">extends</span> <span class="n">Stateless위젯</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">int</span> <span class="n">startTime</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">int</span> <span class="n">endTime</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">content</span><span class="p">;</span>
@@ -471,7 +483,7 @@ uuid
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">위젯</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Container</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">decoration:</span> <span class="n">BoxDecoration</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="nl">border:</span> <span class="n">Border</span><span class="p">.</span><span class="n">all</span><span class="p">(</span>
@@ -501,7 +513,7 @@ uuid
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_Time</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_Time</span> <span class="kd">extends</span> <span class="n">Stateless위젯</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">int</span> <span class="n">startTime</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">int</span> <span class="n">endTime</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -511,7 +523,7 @@ uuid
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">위젯</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">const</span> <span class="n">textStyle</span> <span class="o">=</span> <span class="n">TextStyle</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">w600</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">color:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
@@ -536,14 +548,14 @@ uuid
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_Content</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_Content</span> <span class="kd">extends</span> <span class="n">Stateless위젯</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">content</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">_Content</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">content</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">위젯</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Expanded</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="n">content</span><span class="p">,</span>
@@ -553,12 +565,12 @@ uuid
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>_Time</code>: 시간을 표현해주는 widget이다.</p>
-<p><code>_Content</code>: 일정을 알려주는 widget이다.</p>
-<p><code>IntrinsicHeight</code>: 내부 위젯들의 높이를 최대 높이로 맞춰준다. _Time widget은 Column widget을 사용 중익기 때문에 ScheduleCard widget의 최대 크기만큼 높이를 차지한다. _Content widget은 Column widget을 사용하지 않기 때문에 최소 크기만 차지하며 세로로 가운데 정렬이 이루어진다.</p>
-<h3 id="오늘-날짜를-보여주기-todaybanner-widget">오늘 날짜를 보여주기: TodayBanner widget</h3>
-<p><code>TodayBanner</code> widget은 MainCalendar widget과 ScheduleCard widget 사이에 오늘 날짜를 보여준다.</p>
-<h4 id="libwidgetstoday_banneerdart">lib/widgets/today_banneer.dart</h4>
+</div><p><code>_Time</code>: 시간을 표현해주는 위젯이다.</p>
+<p><code>_Content</code>: 일정을 알려주는 위젯이다.</p>
+<p><code>IntrinsicHeight</code>: 내부 위젯들의 높이를 최대 높이로 맞춰준다. _Time 위젯은 Column 위젯을 사용 중익기 때문에 ScheduleCard 위젯의 최대 크기만큼 높이를 차지한다. _Content 위젯은 Column 위젯을 사용하지 않기 때문에 최소 크기만 차지하며 세로로 가운데 정렬이 이루어진다.</p>
+<h3 id="오늘-날짜를-보여주기-todaybanner-위젯">오늘 날짜를 보여주기: TodayBanner 위젯</h3>
+<p><code>TodayBanner</code> 위젯은 MainCalendar 위젯과 ScheduleCard 위젯 사이에 오늘 날짜를 보여준다.</p>
+<h4 id="lib위젯stoday_banneerdart">lib/위젯s/today_banneer.dart</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -606,7 +618,7 @@ uuid
 <pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">TodayBanner</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">TodayBanner</span> <span class="kd">extends</span> <span class="n">Stateless위젯</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span> <span class="n">selectedDate</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">TodayBanner</span><span class="p">({</span>
@@ -616,7 +628,7 @@ uuid
 </span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">위젯</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">const</span> <span class="n">textStyle</span> <span class="o">=</span> <span class="n">TextStyle</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">w600</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">      <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">white</span><span class="p">,</span>
@@ -646,7 +658,476 @@ uuid
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>HomeScreen</code>의 <code>MainCalendar</code>와 <code>ScheduleCard</code> 사이에 넣어준다.</p>
-</div><div class="post-footer" id="post-footer">
+<h3 id="일정-작성하기">일정 작성하기</h3>
+<p><code>ScheduleBottomSheet</code>는 사용자가 새로 추가할 일정을 입력할 수 있는 위젯이다. 텍스트 필드 3개와 버튼 하나로 이루어져 있다. 시작 시간, 종료 시간, 일정 내용을 입력한 후 저장 버튼을 누르면 선택된 날짜를 기준으로 일정을 생성한다.</p>
+<h4 id="lib위젯sschedule_bottom_sheetdart">lib/위젯s/schedule_bottom_sheet.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/위젯s/custom_text_field.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">ScheduleBottomSheet</span> <span class="kd">extends</span> <span class="n">Stateful위젯</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">ScheduleBottomSheet</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">ScheduleBottomSheet</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_ScheduleBottomSheetState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_ScheduleBottomSheetState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">ScheduleBottomSheet</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="err">위젯</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">bottomInset</span> <span class="o">=</span> <span class="n">MediaQuery</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">viewInsets</span><span class="p">.</span><span class="n">bottom</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">SafeArea</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">child:</span> <span class="n">Container</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">height:</span> <span class="n">MediaQuery</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="m">2</span> <span class="o">+</span> <span class="n">bottomInset</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">white</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="n">Padding</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">padding:</span>
+</span></span><span class="line"><span class="cl">              <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">only</span><span class="p">(</span><span class="nl">left:</span> <span class="m">8</span><span class="p">,</span> <span class="nl">right:</span> <span class="m">8</span><span class="p">,</span> <span class="nl">top:</span> <span class="m">8</span><span class="p">,</span> <span class="nl">bottom:</span> <span class="n">bottomInset</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">              <span class="kd">const</span> <span class="n">Row</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">child:</span> <span class="n">CustomTextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">label:</span> <span class="s1">&#39;시작 시간&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">isTime:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">SizedBox</span><span class="p">(</span><span class="nl">width:</span> <span class="m">16.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">child:</span> <span class="n">CustomTextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">label:</span> <span class="s1">&#39;종료 시간&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">isTime:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">],</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="kd">const</span> <span class="n">SizedBox</span><span class="p">(</span><span class="nl">height:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="kd">const</span> <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">child:</span> <span class="n">CustomTextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">label:</span> <span class="s1">&#39;내용&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">isTime:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="n">SizedBox</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">width:</span> <span class="kt">double</span><span class="p">.</span><span class="n">infinity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">child:</span> <span class="n">ElevatedButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">onPressed:</span> <span class="n">onSavePressed</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">style:</span> <span class="n">ElevatedButton</span><span class="p">.</span><span class="n">styleFrom</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">backgroundColor:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">child:</span> <span class="kd">const</span> <span class="n">Text</span><span class="p">(</span><span class="s1">&#39;저장&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onSavePressed</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>HomeScreen</code>에서 <code>FloatingActionButton</code>을 누르면 ScheduleBottomSheet가 화면에 나오도록 동작한다.</p>
+<ul>
+<li>
+<p><code>floatingActionButton</code>매개 변수에 FloatingActionButton 위젯을 입력해준 후 bottom sheet를 실행하는 <code>showModalButtomSheet()</code> 함수를 이용해서 ScheduleBottomSheet 위젯을 bottom sheet로 실행한다.</p>
+</li>
+<li>
+<p><code>showModalBottomSheet</code>의 <code>isDismissible</code> 매개 변수에 true 값을 입력해서 배경을 눌렀을 때 ScheduleBottomSheet가 닫히게 해준다.</p>
+</li>
+</ul>
+<h3 id="일정-내용-필드-구현">일정 내용 필드 구현</h3>
+<h4 id="lib위젯scustom_text_fielddart">lib/위젯s/custom_text_field.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/services.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">CustomTextField</span> <span class="kd">extends</span> <span class="n">Stateless위젯</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">label</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">bool</span> <span class="n">isTime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">CustomTextField</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">label</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">isTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="err">위젯</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">crossAxisAlignment:</span> <span class="n">CrossAxisAlignment</span><span class="p">.</span><span class="n">start</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="n">label</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">style:</span> <span class="kd">const</span> <span class="n">TextStyle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">color:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">w600</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">flex:</span> <span class="n">isTime</span> <span class="o">?</span> <span class="m">0</span> <span class="o">:</span> <span class="m">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">child:</span> <span class="n">TextFormField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">cursorColor:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">grey</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">maxLines:</span> <span class="n">isTime</span> <span class="o">?</span> <span class="m">1</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">expands:</span> <span class="o">!</span><span class="n">isTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">keyboardType:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">isTime</span> <span class="o">?</span> <span class="n">TextInputType</span><span class="p">.</span><span class="n">number</span> <span class="o">:</span> <span class="n">TextInputType</span><span class="p">.</span><span class="n">multiline</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">inputFormatters:</span> <span class="n">isTime</span>
+</span></span><span class="line"><span class="cl">                <span class="o">?</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">FilteringTextInputFormatter</span><span class="p">.</span><span class="n">digitsOnly</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="o">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">decoration:</span> <span class="n">InputDecoration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">border:</span> <span class="n">InputBorder</span><span class="p">.</span><span class="n">none</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">filled:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">fillColor:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">grey</span><span class="p">[</span><span class="m">300</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">suffixText:</span> <span class="n">isTime</span> <span class="o">?</span> <span class="s1">&#39;시&#39;</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TextFormField</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>플러터에서 텍스트 필드는 <code>TextField</code> VS <code>TextFormField</code>로 나눌 수 있다. TextField 위젯은 각 텍스트 필드가 독립된 형태일 때 많이 사용되고 TextFormField는 여러개의 텍스트 필드를 하나의 폼으로 제어할 때 사용한다. 저장 버튼을 눌렀을 때 시간 텍스트(시작, 종료) 필드 2개와 내용 텍스트 필드 하나를 제어할 계획이니 <code>TextFormField</code>를 사용해준다.</p>
+<p>텍스트 필드의 제목과 텍스트 필드가 위아래로 위치해야 하므로 Column 위젯을 사용해서 Text 위젯과 TextFormField 위젯을 세로로 배치해준다.</p>
+<ul>
+<li>
+<p><code>maxLines</code>: 텍스트 필드에 값을 입력할 때 허락되는 최대 줄 개수이다. int 값을 입력할 수 있으며 null을 넣으면 개수를 제한하지 않는다. 시간을 입력할 때는 한 줄만 입력하도록 하고 아니면 제한을 두지 않는다.</p>
+</li>
+<li>
+<p><code>expands</code>: 텍스트 필드를 부모 위젯 크기만큼 세로로 늘릴지 결정한다. 기본값은 false이며 true로 입력하면 부모의 위젯 크기만큼 텍스트 필드를 늘릴 수 있다.</p>
+</li>
+<li>
+<p><code>keyboardType</code>: 텍스트 필드를 선택했을 때 화면에 어떤 키보드가 보여질 지 선택할 수 있다. <code>TextInputType.number</code>는 숫자만 입력하는 키보드를 보여줄 수 있고 <code>TextInputType.multIline</code>은 줄바꿈 키가 존재하는 일반 키보드를 보여줄 수 있다.</p>
+</li>
+<li>
+<p><code>inputFormatters</code>: 텍스트 필드에 입력되는 값들을 제한할 수 있다. 어뜻 보면 키보드의 종류를 정의 하는 keyboardType 과 비슷해보이지만 큰 차이가 있다. keyboardType 매개변수는 핸드폰에서 보여주는 키보드만 제한할 수 있고 블루투스 키보드나 보안 키보드처럼 커스텀 구현된 키보드를 사용할 때는 입력되는 값을 제한할 수 없다. inputFormatters 매개변수의 경우 특정 입력 자체를 강제할 수 있다. 리스트로 원하는 만큼 제한을 넣어줄 수 있으며 <code>FilteringTextInputFormatter.digitsOnly</code>는 숫자만 입력되도록 제한한다.</p>
+</li>
+<li>
+<p>시간과 관련된 텍스트 필드는 최소한의 높이를, 내용 텍스트 필드는 최대한의 높이를 차지한다. 추가적으로 <code>isTime</code>을 false로 지정할 경우 <code>expands</code> 매개변수가 true로 지정되니 Column 위젯 안에서 최대한 크기를 차지하도록 Expanded 위젯을 사용해줘야 한다.</p>
+</li>
+<li>
+<p>시작 시간과 종료 시간을 표현할 텍스트 필드는 하나의 <code>Row</code> 위젯에 감싸서 좌우로 펼쳐지게 한다. 그리고 해당 Row 위젯을 <code>Column</code> 위젯에 한 번 더 감싸서 내용을 담는 텍스트 필드가 남는 공간을 모두 차지하게 한다. 마지막으로 <code>ElevatedButton</code>을 하단에 추가해준다.</p>
+</li>
+<li>
+<p><code>MediaQuery</code>의 <code>viewInsets</code>를 가져오면 시스템이 차지하는 화면 아랫부분 크기를 알 수 있다. 일반적으로 이 값은 키보드가 보일 때 차지하는 크기가 된다. 최대 높이에 키보드 크기만큼 높이를 더해줘서 키보드가 화면에 보일 때 컨테이너 크기를 늘려준다. <code>Container</code>의 높이가 늘어난 만큼 아래에 패딩을 추가해줘서 위젯들이 잘 보이는 위치로 끌어올려 준다.</p>
+</li>
+</ul>
+<h4 id="libscreenshome_screendart">lib/screens/home_screen.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/main_calendar.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/schedule_bottom_sheet.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/schedule_card.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/today_banner.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">HomeScreen</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">HomeScreen</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_HomeScreenState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_HomeScreenState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DateTime</span> <span class="n">selectedDate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">utc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">year</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">month</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">day</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Scaffold</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">floatingActionButton:</span> <span class="n">FloatingActionButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">backgroundColor:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">onPressed:</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">showModalBottomSheet</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">context:</span> <span class="n">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">isDismissible:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">builder:</span> <span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">ScheduleBottomSheet</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">isScrollControlled:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="kd">const</span> <span class="n">Icon</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="n">Icons</span><span class="p">.</span><span class="n">add</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">body:</span> <span class="n">SafeArea</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">MainCalendar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">onDaySelected:</span> <span class="n">onDaySelected</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">TodayBanner</span><span class="p">(</span><span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span> <span class="nl">count:</span> <span class="m">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">const</span> <span class="n">SizedBox</span><span class="p">(</span><span class="nl">height:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ScheduleCard</span><span class="p">(</span><span class="nl">startTime:</span> <span class="m">12</span><span class="p">,</span> <span class="nl">endTime:</span> <span class="m">14</span><span class="p">,</span> <span class="nl">content:</span> <span class="s1">&#39;flutter 프로젝트&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onDaySelected</span><span class="p">(</span><span class="n">DateTime</span> <span class="n">selectedDate</span><span class="p">,</span> <span class="n">DateTime</span> <span class="n">focusedDate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">selectedDate</span> <span class="o">=</span> <span class="n">selectedDate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>HomeScreen</code> 위젯에서 <code>showModalBottomSheet()</code> 함수를 약간 변경해줘야 한다. showModalBottomSheet() 함수는 기본적으로 최대 높이를 화면의 밖으로 규정한다. 하지만 <code>isScrollControlled</code> 매개변수에 true를 넣어주면서 간단하게 최대 높이를 화면 전체로 변경할 수 있다. 코드를 변경한 후 <code>ScheduleBottomSheet</code>에서 텍스트 필드를 선택할 경우 키보드가 보이는 만큼 ScheduleBottomSheet 위젯이 위로 이동되는 것을 볼 수 있다.</p>
+<h3 id="i18n-적용하기">i18n 적용하기</h3>
+<p><code>intl</code> 패키지와 <code>TableCalendar</code>의 언어를 변경한다. main.dart 파일에서 intl 패키지를 초기화해준다. main() 함수를 비동기로 변경하고 코드 두 줄을 추가해서 간단하게 intl 패키지를 프로젝트에서 사용할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/screens/home_screen.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:intl/date_symbol_data_local.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WidgetsFlutterBinding</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">await</span> <span class="n">initializeDateFormatting</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">runApp</span><span class="p">(</span><span class="kd">const</span> <span class="n">MyApp</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyApp</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">MyApp</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// This widget is the root of your application.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">MaterialApp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">debugShowCheckedModeBanner:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">home:</span> <span class="n">HomeScreen</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
