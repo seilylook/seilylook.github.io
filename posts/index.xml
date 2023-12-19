@@ -4,7 +4,29 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 18 Dec 2023 18:32:43 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter Calendar Scheduler</title>
+    <link>https://seilylook.github.io/posts/flutter-calendar-scheduler/</link>
+    <pubDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-calendar-scheduler/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/scheduler.png" referrerpolicy="no-referrer">
+            </div>Introduction 달력 형태의 Widget인 TableCalendar를 사용해서 일정 관리 앱 구현.
+Dependency table_calendar
+intl
+drift
+sqlite3_flutter_libs
+path_provider
+path
+get_it
+dio
+provider
+uuid
+구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
+1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors.grey[300]!; 달력 구현 HomeScreen의 화면 윗부분의 달력을 MainCalendar 클래스로 만들어준다.]]></description>
+</item>
+<item>
     <title>Flutter Youtube Streaming</title>
     <link>https://seilylook.github.io/posts/flutter-youtube-streaming/</link>
     <pubDate>Mon, 18 Dec 2023 18:32:43 &#43;0900</pubDate>
@@ -126,19 +148,6 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
 Three.js https://threejs.org/
 1. 시작 1.1 설치 three.js는 npm을 포함한 빌드 툴에서 설치가 가능하고, CDN이나 static 호스팅으로 빠르게 사용이 가능하다. 대부분의 경우 npm을 통한 설치가 가장 좋은 선택이다.
 three.js의 모든 메서드들은 ES modules에 기반하고 있으며, 마지막 프로젝트에 필요한 부분만 불러오도록 할 것이다.]]></description>
-</item>
-<item>
-    <title>Rust</title>
-    <link>https://seilylook.github.io/posts/rust/</link>
-    <pubDate>Thu, 24 Aug 2023 14:14:21 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/rust/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/rust-logo.svg" referrerpolicy="no-referrer">
-            </div>Rust: Rust는 시스템 프로그래밍 언어로서, 안전성, 속도, 병행성(Concurrency)을 중요한 목표로 개발된 언어입니다. Mozilla에서 개발한 Rust는 C와 C++과 같은 언어의 잠재적인 문제를 극복하고자 설계되었습니다. Rust는 메모리 안전성을 강조하며, 코드의 버그와 런타임 에러를 최소화하고 안전한 병행성을 제공하기 위한 다양한 기능을 제공합니다.
-Rust https://www.rust-lang.org/
-1. 시작 1.1 설치하기 Rust는 rustup이라고 하는 러스트 버전 및 관련 도구들을 관리하기 위한 커맨드 라인 도구를 통해 러스트를 다운받을 수 있다.
-Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh.]]></description>
 </item>
 </channel>
 </rss>

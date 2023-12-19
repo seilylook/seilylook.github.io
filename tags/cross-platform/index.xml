@@ -4,7 +4,29 @@
         <link>https://seilylook.github.io/tags/cross-platform/</link>
         <description>Cross Platform - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 18 Dec 2023 18:32:43 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/cross-platform/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/cross-platform/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter Calendar Scheduler</title>
+    <link>https://seilylook.github.io/posts/flutter-calendar-scheduler/</link>
+    <pubDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-calendar-scheduler/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/scheduler.png" referrerpolicy="no-referrer">
+            </div>Introduction 달력 형태의 Widget인 TableCalendar를 사용해서 일정 관리 앱 구현.
+Dependency table_calendar
+intl
+drift
+sqlite3_flutter_libs
+path_provider
+path
+get_it
+dio
+provider
+uuid
+구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
+1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors.grey[300]!; 달력 구현 HomeScreen의 화면 윗부분의 달력을 MainCalendar 클래스로 만들어준다.]]></description>
+</item>
+<item>
     <title>Flutter Youtube Streaming</title>
     <link>https://seilylook.github.io/posts/flutter-youtube-streaming/</link>
     <pubDate>Mon, 18 Dec 2023 18:32:43 &#43;0900</pubDate>
