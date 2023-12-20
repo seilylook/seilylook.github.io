@@ -7,6 +7,8 @@
 
 ## Dependency
 
+### Client
+
 - `table_calendar`
 
 - `intl`
@@ -27,7 +29,17 @@
 
 - `uuid`
 
-## 구현
+### Server
+
+- `NestJS`
+
+### DB
+
+- `SQLite`
+
+- `Firebase`
+
+## UI 구현
 
 ### 테마 색상 설정
 
@@ -542,4 +554,133 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+## DB 연결
+
+`Drift` 플러그인을 사용하면 직접 SQL을 작성하지 않고도 SQLite를 사용할 수 있다.
+
+{{<admonition tip SQLite>}}
+SQLite는 프론트엔드에서 흔히 사용하는 가벼운 데이터베이스이다.
+{{</admonition>}}
+
+### Model 구축
+
+드리프트를 사용하면 클래스를 선언해서 테이블을 생성할 수 있다. 테이블은 드리프크 패키지의 Table 클래스를 상속하면 선언할 수 있다. 그 다음 자식 클래스에 열로 정의하고 싶은 값들을 Getter로 선언해주면 된ㄷ다. 열 선언은 세가지 요로소 나누어 진다. 열의 타입, 열의 이름, 열의 속성읻다. 열의 타입으로는 IntColumn, TextColumn, DateTimeColumn 등이 있다.
+
+#### lib/model/schedules.dart
+
+```dart
+import 'package:drift/drift.dart';
+
+class Schedules extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get content => text()();
+  DateTimeColumn get date => dateTime()();
+  IntColumn get startTime => integer()();
+  IntColumn get endTime => integer()();
+}
+```
+
+드리프트에 생성한 `Schedules` 테이블을 등록해주면 자동으로 테이블과 관련된 기능을 코드로 생성한다.
+
+{{<admonition info Part>}}
+어떤 플러터 패키지에서든 코드 생성을 사용하려면 `part` 파일을 지정해줘야 한다. `part` 파일은 `part` 키워드를 사용해서 지정하면 된다. 코드 생성을 사용하는 각각 패키지별로 `part` 파일의 이름 패턴은 약간 다르지만, 대부분은 현재 파일 이름에 `.g.dart`를 추가하는 형식이다. 드리프트 또한 현재 파일명에 `.g.dart`를 추가하면 된다. 해당 파일이 아직 존재하지 않을 때 코드 생성을 실행하면 자동으로 `<FILENAME>.g.dart`가 생성된다.
+{{</admonition>}}
+
+#### lib/database/schedule.dart
+
+```dart
+import 'dart:io';
+
+import 'package:calendar_scheduler/model/schedule.dart';
+import 'package:drift/drift.dart';
+import 'package:drift/native.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
+
+part 'drift_database.g.dart';
+
+@DriftDatabase(
+  tables: [
+    Schedules,
+  ],
+)
+class LocalDatabase extends _$LocalDatabase {
+  LocalDatabase() : super(_openConnection());
+  Stream<List<Schedule>> watchSchedules(DateTime date) =>
+      (select(schedules)..where((tbl) => tbl.date.equals(date))).watch();
+
+  Future<int> createSchedule(SchedulesCompanion data) =>
+      into(schedules).insert(data);
+
+  Future<int> removeSchedule(int id) =>
+      (delete(schedules)..where((tbl) => tbl.id.equals(id))).go();
+
+  @override
+  int get schemaVersion => 1;
+}
+
+LazyDatabase _openConnection() {
+  return LazyDatabase(() async {
+    final dbFolder = await getApplicationDocumentsDirectory();
+    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    return NativeDatabase(file);
+  });
+}
+```
+
+1. 드리프트 관련 쿼리를 작성할 클래스를 하나 작성하고 이 클래스의 이름 앞에 `_$`를 추가한 부모 클래스를 상속한다. 이 클래스는 현재 존재하지 않지만 코드 생성을 실행하면 생성된다.
+
+{{<admonition tip>}}
+`part` 파일은 import와 비슷한 기능을 갖고 있다. part 파일로 파일을 지정하면 해당 파일의 값들을 현재 파일에서 사용할 수 있다. 하지만 public 값들만 사용할 수 있는 import 기능과 달리 part 파일은 private 값들도 사용가능 하기에 보안에 유의해야 한다.
+{{</admonition>}}
+
+2. 이제 코드 생성을 통해 쿼리를 작성하는 데 필요한 기능을 생성해야 한다. `flutter pub run build_runner build` 명령어를 실행해서 코드 생성을 진행한다.
+
+- `watchSchedules`: 이 함수가 반환하는 값을 `watch()` 또는 `get()` 함수를 실행할 수 있다. 특정 날짜에 해당되는 일정만 불러오기 때문에 `where` 함수를 통해서 관련 일정을 먼저 필터링해야 한다. 결론적으로 `where()` 함수가 아닌 `select()` 함수에 `watch()` 함수가 직접 실행되어야 하기 때문에 괄호가 한 번 더 감싸진 형태이다.
+
+- `createSchedule`: `into()` 함수를 먼저 사용해서 어떤 테이블에 데이터를 넣을 지 지정해준 다음 `insert()` 함수를 이어서 사용해야 한다. 추가적으로 코드 생성을 실행하면 몯든 테이블의 `Companion` 클래스가 생성된다. 데이터를 생성할 때는 꼭 생성된 `Companion` 클래스를 통해서 값들을 넣어줘야 하기 때문에 Schedules 테이블에 해당되는 SchedulesCompanion 클래스를 입력받아서 insert() 함수에 전달해준다.
+
+- `removeSchedule`: `delete()` 함수에는 `go()` 함수를 실행해줘야 삭제가 된다. 특정 ID에 해당되는 값만 삭제해야 하니 매개 변수에 id를 입력받고 해당 id에 일치하는 일정만 삭제해준다.
+
+- 드리프트 데이터베이스 클래스는 필수로 `schemaVersion` 값을 지정해줘야 한다. 기본적으로 1부터 시작하고 테이블의 변화가 있을 때마다 1씩 올려줘서 테이블 구조가 변경된다는 걸 드리프트에 인지키셔주는 기능이다.
+
+- 드리프트 테이터베이스 객체는 부모 생성자에 `LazyDatabase`를 필수로 넣어줘야 한다. `LazyDatabase` 객체에는 데이터베이스를 생성할 위치에 대한 정보를 입력해준다.
+
+### 데이터베이스 초기화
+
+#### lib/main.dart
+
+```dart
+import 'package:calendar_scheduler/screens/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:calendar_scheduler/database/drift_database.dart';
+import 'package:get_it/get_it.dart';
+
+void main() async {
+  WidgetsFlutterBinding();
+  await initializeDateFormatting();
+  final database = LocalDatabase();
+  GetIt.I.registerSingleton<LocalDatabase>(database);
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
+    );
+  }
+}
+```
+
+미리 정의핻둔 `LocalDatabase` 클래스를 인스터화해준다.
+
+- `get_it`: Dependency Injection 의존성 주입을 구현하는 플러그인이다. LocalDatabase 클래스를 프로젝트 전역에서 사용할 수 있어야 하는데 서브 위젯으로 계속 값을 넘겨주기에는 반복적인 코드를 너무 많이 사용해야 한다. `GetIt`으로 값을 한 번 등록해주면 어디서든 처음에 주입한 값 즉, 같은 database 변수를 `GetIt`을 통해 전역적으로 사용 가능하다.
 

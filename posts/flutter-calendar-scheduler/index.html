@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <title>Flutter Calendar Scheduler - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Flutter Calendar Scheduler" />
 <meta property="og:description" content="Introduction 달력 형태의 위젯인 TableCalendar를 사용해서 일정 관리 앱 구현.
-Dependency table_calendar
+Dependency Client table_calendar
 intl
 drift
 sqlite3_flutter_libs
@@ -16,8 +16,10 @@ get_it
 dio
 provider
 uuid
-구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
-1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors.grey[300]!; 달력 구현 HomeScreen의 화면 윗부분의 달력을 MainCalendar 클래스로 만들어준다." />
+Server NestJS DB SQLite
+Firebase
+UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
+1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-calendar-scheduler/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-19T11:52:16+09:00" />
@@ -27,7 +29,7 @@ uuid
 
 <meta name="twitter:title" content="Flutter Calendar Scheduler"/>
 <meta name="twitter:description" content="Introduction 달력 형태의 위젯인 TableCalendar를 사용해서 일정 관리 앱 구현.
-Dependency table_calendar
+Dependency Client table_calendar
 intl
 drift
 sqlite3_flutter_libs
@@ -37,8 +39,10 @@ get_it
 dio
 provider
 uuid
-구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
-1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors.grey[300]!; 달력 구현 HomeScreen의 화면 윗부분의 달력을 MainCalendar 클래스로 만들어준다."/>
+Server NestJS DB SQLite
+Firebase
+UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
+1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/flutter-calendar-scheduler/" /><link rel="prev" href="https://seilylook.github.io/posts/flutter-youtube-streaming/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -51,7 +55,7 @@ uuid
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  1896 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  2568 ,
         "url": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/","datePublished": "2023-12-19T11:52:16+09:00","dateModified": "2023-12-19T20:37:19+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -99,8 +103,8 @@ uuid
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Calendar Scheduler</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1896 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2568 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -115,8 +119,14 @@ uuid
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#dependency">Dependency</a></li>
-    <li><a href="#구현">구현</a>
+    <li><a href="#dependency">Dependency</a>
+      <ul>
+        <li><a href="#client">Client</a></li>
+        <li><a href="#server">Server</a></li>
+        <li><a href="#db">DB</a></li>
+      </ul>
+    </li>
+    <li><a href="#ui-구현">UI 구현</a>
       <ul>
         <li><a href="#테마-색상-설정">테마 색상 설정</a>
           <ul>
@@ -152,11 +162,27 @@ uuid
         <li><a href="#i18n-적용하기">i18n 적용하기</a></li>
       </ul>
     </li>
+    <li><a href="#db-연결">DB 연결</a>
+      <ul>
+        <li><a href="#model-구축">Model 구축</a>
+          <ul>
+            <li><a href="#libmodelschedulesdart">lib/model/schedules.dart</a></li>
+            <li><a href="#libdatabasescheduledart">lib/database/schedule.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#데이터베이스-초기화">데이터베이스 초기화</a>
+          <ul>
+            <li><a href="#libmaindart">lib/main.dart</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
 <p>달력 형태의 위젯인 <code>TableCalendar</code>를 사용해서 일정 관리 앱 구현.</p>
 <h2 id="dependency">Dependency</h2>
+<h3 id="client">Client</h3>
 <ul>
 <li>
 <p><code>table_calendar</code></p>
@@ -189,7 +215,20 @@ uuid
 <p><code>uuid</code></p>
 </li>
 </ul>
-<h2 id="구현">구현</h2>
+<h3 id="server">Server</h3>
+<ul>
+<li><code>NestJS</code></li>
+</ul>
+<h3 id="db">DB</h3>
+<ul>
+<li>
+<p><code>SQLite</code></p>
+</li>
+<li>
+<p><code>Firebase</code></p>
+</li>
+</ul>
+<h2 id="ui-구현">UI 구현</h2>
 <h3 id="테마-색상-설정">테마 색상 설정</h3>
 <h4 id="libconstantscolordart">lib/constants/color.dart</h4>
 <p>이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.</p>
@@ -1127,7 +1166,229 @@ uuid
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="db-연결">DB 연결</h2>
+<p><code>Drift</code> 플러그인을 사용하면 직접 SQL을 작성하지 않고도 SQLite를 사용할 수 있다.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>SQLite<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">SQLite는 프론트엔드에서 흔히 사용하는 가벼운 데이터베이스이다.</div>
+        </div>
+    </div>
+<h3 id="model-구축">Model 구축</h3>
+<p>드리프트를 사용하면 클래스를 선언해서 테이블을 생성할 수 있다. 테이블은 드리프크 패키지의 Table 클래스를 상속하면 선언할 수 있다. 그 다음 자식 클래스에 열로 정의하고 싶은 값들을 Getter로 선언해주면 된ㄷ다. 열 선언은 세가지 요로소 나누어 진다. 열의 타입, 열의 이름, 열의 속성읻다. 열의 타입으로는 IntColumn, TextColumn, DateTimeColumn 등이 있다.</p>
+<h4 id="libmodelschedulesdart">lib/model/schedules.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:drift/drift.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Schedules</span> <span class="kd">extends</span> <span class="n">Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">IntColumn</span> <span class="kd">get</span> <span class="n">id</span> <span class="o">=&gt;</span> <span class="n">integer</span><span class="p">().</span><span class="n">autoIncrement</span><span class="p">()();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TextColumn</span> <span class="kd">get</span> <span class="n">content</span> <span class="o">=&gt;</span> <span class="n">text</span><span class="p">()();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DateTimeColumn</span> <span class="kd">get</span> <span class="n">date</span> <span class="o">=&gt;</span> <span class="n">dateTime</span><span class="p">()();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">IntColumn</span> <span class="kd">get</span> <span class="n">startTime</span> <span class="o">=&gt;</span> <span class="n">integer</span><span class="p">()();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">IntColumn</span> <span class="kd">get</span> <span class="n">endTime</span> <span class="o">=&gt;</span> <span class="n">integer</span><span class="p">()();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>드리프트에 생성한 <code>Schedules</code> 테이블을 등록해주면 자동으로 테이블과 관련된 기능을 코드로 생성한다.</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Part<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">어떤 플러터 패키지에서든 코드 생성을 사용하려면 <code>part</code> 파일을 지정해줘야 한다. <code>part</code> 파일은 <code>part</code> 키워드를 사용해서 지정하면 된다. 코드 생성을 사용하는 각각 패키지별로 <code>part</code> 파일의 이름 패턴은 약간 다르지만, 대부분은 현재 파일 이름에 <code>.g.dart</code>를 추가하는 형식이다. 드리프트 또한 현재 파일명에 <code>.g.dart</code>를 추가하면 된다. 해당 파일이 아직 존재하지 않을 때 코드 생성을 실행하면 자동으로 <code>&lt;FILENAME&gt;.g.dart</code>가 생성된다.</div>
+        </div>
+    </div>
+<h4 id="libdatabasescheduledart">lib/database/schedule.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;dart:io&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/model/schedule.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:drift/drift.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:drift/native.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:path_provider/path_provider.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:path/path.dart&#39;</span> <span class="k">as</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">part</span> <span class="s1">&#39;drift_database.g.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">DriftDatabase</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nl">tables:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Schedules</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">LocalDatabase</span> <span class="kd">extends</span> <span class="n">_$LocalDatabase</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LocalDatabase</span><span class="p">()</span> <span class="o">:</span> <span class="k">super</span><span class="p">(</span><span class="n">_openConnection</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Stream</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;&gt;</span> <span class="n">watchSchedules</span><span class="p">(</span><span class="n">DateTime</span> <span class="n">date</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">schedules</span><span class="p">)..</span><span class="n">where</span><span class="p">((</span><span class="n">tbl</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">tbl</span><span class="p">.</span><span class="n">date</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">date</span><span class="p">))).</span><span class="n">watch</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">createSchedule</span><span class="p">(</span><span class="n">SchedulesCompanion</span> <span class="n">data</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">into</span><span class="p">(</span><span class="n">schedules</span><span class="p">).</span><span class="n">insert</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">removeSchedule</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">delete</span><span class="p">(</span><span class="n">schedules</span><span class="p">)..</span><span class="n">where</span><span class="p">((</span><span class="n">tbl</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">tbl</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="n">id</span><span class="p">))).</span><span class="n">go</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="kd">get</span> <span class="n">schemaVersion</span> <span class="o">=&gt;</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">LazyDatabase</span> <span class="n">_openConnection</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">LazyDatabase</span><span class="p">(()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">dbFolder</span> <span class="o">=</span> <span class="kd">await</span> <span class="n">getApplicationDocumentsDirectory</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">dbFolder</span><span class="p">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;db.sqlite&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">NativeDatabase</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>드리프트 관련 쿼리를 작성할 클래스를 하나 작성하고 이 클래스의 이름 앞에 <code>_$</code>를 추가한 부모 클래스를 상속한다. 이 클래스는 현재 존재하지 않지만 코드 생성을 실행하면 생성된다.</li>
+</ol>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>part</code> 파일은 import와 비슷한 기능을 갖고 있다. part 파일로 파일을 지정하면 해당 파일의 값들을 현재 파일에서 사용할 수 있다. 하지만 public 값들만 사용할 수 있는 import 기능과 달리 part 파일은 private 값들도 사용가능 하기에 보안에 유의해야 한다.</div>
+        </div>
+    </div>
+<ol start="2">
+<li>이제 코드 생성을 통해 쿼리를 작성하는 데 필요한 기능을 생성해야 한다. <code>flutter pub run build_runner build</code> 명령어를 실행해서 코드 생성을 진행한다.</li>
+</ol>
+<ul>
+<li>
+<p><code>watchSchedules</code>: 이 함수가 반환하는 값을 <code>watch()</code> 또는 <code>get()</code> 함수를 실행할 수 있다. 특정 날짜에 해당되는 일정만 불러오기 때문에 <code>where</code> 함수를 통해서 관련 일정을 먼저 필터링해야 한다. 결론적으로 <code>where()</code> 함수가 아닌 <code>select()</code> 함수에 <code>watch()</code> 함수가 직접 실행되어야 하기 때문에 괄호가 한 번 더 감싸진 형태이다.</p>
+</li>
+<li>
+<p><code>createSchedule</code>: <code>into()</code> 함수를 먼저 사용해서 어떤 테이블에 데이터를 넣을 지 지정해준 다음 <code>insert()</code> 함수를 이어서 사용해야 한다. 추가적으로 코드 생성을 실행하면 몯든 테이블의 <code>Companion</code> 클래스가 생성된다. 데이터를 생성할 때는 꼭 생성된 <code>Companion</code> 클래스를 통해서 값들을 넣어줘야 하기 때문에 Schedules 테이블에 해당되는 SchedulesCompanion 클래스를 입력받아서 insert() 함수에 전달해준다.</p>
+</li>
+<li>
+<p><code>removeSchedule</code>: <code>delete()</code> 함수에는 <code>go()</code> 함수를 실행해줘야 삭제가 된다. 특정 ID에 해당되는 값만 삭제해야 하니 매개 변수에 id를 입력받고 해당 id에 일치하는 일정만 삭제해준다.</p>
+</li>
+<li>
+<p>드리프트 데이터베이스 클래스는 필수로 <code>schemaVersion</code> 값을 지정해줘야 한다. 기본적으로 1부터 시작하고 테이블의 변화가 있을 때마다 1씩 올려줘서 테이블 구조가 변경된다는 걸 드리프트에 인지키셔주는 기능이다.</p>
+</li>
+<li>
+<p>드리프트 테이터베이스 객체는 부모 생성자에 <code>LazyDatabase</code>를 필수로 넣어줘야 한다. <code>LazyDatabase</code> 객체에는 데이터베이스를 생성할 위치에 대한 정보를 입력해준다.</p>
+</li>
+</ul>
+<h3 id="데이터베이스-초기화">데이터베이스 초기화</h3>
+<h4 id="libmaindart">lib/main.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/screens/home_screen.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:intl/date_symbol_data_local.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/database/drift_database.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WidgetsFlutterBinding</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">await</span> <span class="n">initializeDateFormatting</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">database</span> <span class="o">=</span> <span class="n">LocalDatabase</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="p">.</span><span class="n">registerSingleton</span><span class="o">&lt;</span><span class="n">LocalDatabase</span><span class="o">&gt;</span><span class="p">(</span><span class="n">database</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">runApp</span><span class="p">(</span><span class="kd">const</span> <span class="n">MyApp</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyApp</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">MyApp</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// This widget is the root of your application.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">MaterialApp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">debugShowCheckedModeBanner:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">home:</span> <span class="n">HomeScreen</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>미리 정의핻둔 <code>LocalDatabase</code> 클래스를 인스터화해준다.</p>
+<ul>
+<li><code>get_it</code>: Dependency Injection 의존성 주입을 구현하는 플러그인이다. LocalDatabase 클래스를 프로젝트 전역에서 사용할 수 있어야 하는데 서브 위젯으로 계속 값을 넘겨주기에는 반복적인 코드를 너무 많이 사용해야 한다. <code>GetIt</code>으로 값을 한 번 등록해주면 어디서든 처음에 주입한 값 즉, 같은 database 변수를 <code>GetIt</code>을 통해 전역적으로 사용 가능하다.</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
