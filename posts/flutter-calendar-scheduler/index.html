@@ -23,7 +23,7 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-calendar-scheduler/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-19T11:52:16+09:00" />
-<meta property="article:modified_time" content="2023-12-19T20:37:19+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-12-20T13:51:16+09:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png"/>
 
@@ -55,8 +55,8 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  2568 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/","datePublished": "2023-12-19T11:52:16+09:00","dateModified": "2023-12-19T20:37:19+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  3573 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/","datePublished": "2023-12-19T11:52:16+09:00","dateModified": "2023-12-20T13:51:16+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -103,8 +103,8 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Calendar Scheduler</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2568 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3573 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -173,6 +173,12 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
         <li><a href="#데이터베이스-초기화">데이터베이스 초기화</a>
           <ul>
             <li><a href="#libmaindart">lib/main.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#일정-데이터-생성">일정 데이터 생성</a>
+          <ul>
+            <li><a href="#libwidgetscustom_text_fielddart">lib/widgets/custom_text_field.dart</a></li>
+            <li><a href="#libwidgetsschedule_bottom_sheetdart">lib/widgets/schedule_bottom_sheet.dart</a></li>
           </ul>
         </li>
       </ul>
@@ -1388,12 +1394,479 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
 <ul>
 <li><code>get_it</code>: Dependency Injection 의존성 주입을 구현하는 플러그인이다. LocalDatabase 클래스를 프로젝트 전역에서 사용할 수 있어야 하는데 서브 위젯으로 계속 값을 넘겨주기에는 반복적인 코드를 너무 많이 사용해야 한다. <code>GetIt</code>으로 값을 한 번 등록해주면 어디서든 처음에 주입한 값 즉, 같은 database 변수를 <code>GetIt</code>을 통해 전역적으로 사용 가능하다.</li>
 </ul>
+<h3 id="일정-데이터-생성">일정 데이터 생성</h3>
+<p>텍스트 필드를 TextFormField 위젯을 기반으로 구현했기 때문에 상위에 Form 위젯을 사용해주면 쉽게 데이터를 가져올 수 있다.</p>
+<h4 id="libwidgetscustom_text_fielddart">lib/widgets/custom_text_field.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/services.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">CustomTextField</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">label</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">bool</span> <span class="n">isTime</span><span class="p">;</span> <span class="c1">// 시간 선택하는 텍스트 필드인지 여부
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">final</span> <span class="n">FormFieldSetter</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">onSaved</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">FormFieldValidator</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">validator</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">CustomTextField</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">label</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">isTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">onSaved</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">validator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Key</span><span class="o">?</span> <span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span> <span class="o">:</span> <span class="k">super</span><span class="p">(</span><span class="nl">key:</span> <span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ➋ 세로로 텍스트와 텍스트 필드를 위치
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nl">crossAxisAlignment:</span> <span class="n">CrossAxisAlignment</span><span class="p">.</span><span class="n">start</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="n">label</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">style:</span> <span class="n">TextStyle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">color:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">w600</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">flex:</span> <span class="n">isTime</span> <span class="o">?</span> <span class="m">0</span> <span class="o">:</span> <span class="m">1</span><span class="p">,</span> <span class="c1">// ➏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nl">child:</span> <span class="n">TextFormField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onSaved:</span> <span class="n">onSaved</span><span class="p">,</span> <span class="c1">// ➊ 폼 저장했을 때 실행할 함수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">validator:</span> <span class="n">validator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">cursorColor:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">grey</span><span class="p">,</span> <span class="c1">// 커서 색상 변경
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">maxLines:</span> <span class="n">isTime</span> <span class="o">?</span> <span class="m">1</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// ➊ 시간 관련 텍스트 필드가 아니면 한 줄이상 작성 가능
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">expands:</span> <span class="o">!</span><span class="n">isTime</span><span class="p">,</span> <span class="c1">// ➋ 시간 관련 텍스트 필드는 공간 최대 차지
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">keyboardType:</span> <span class="n">isTime</span>
+</span></span><span class="line"><span class="cl">                <span class="o">?</span> <span class="n">TextInputType</span><span class="p">.</span><span class="n">number</span>
+</span></span><span class="line"><span class="cl">                <span class="o">:</span> <span class="n">TextInputType</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">.</span><span class="n">multiline</span><span class="p">,</span> <span class="c1">// ➌ 시간 관련 텍스트 필드는 기본 숫자 키보드 아니면 일반 글자 키보드 보여주기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">inputFormatters:</span> <span class="n">isTime</span>
+</span></span><span class="line"><span class="cl">                <span class="o">?</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">FilteringTextInputFormatter</span><span class="p">.</span><span class="n">digitsOnly</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="o">:</span> <span class="p">[],</span> <span class="c1">// ➍ 시간 관련 텍스트 필드는 숫자만 입력하도록 제한
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">decoration:</span> <span class="n">InputDecoration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">border:</span> <span class="n">InputBorder</span><span class="p">.</span><span class="n">none</span><span class="p">,</span> <span class="c1">// 테두리 삭제
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="nl">filled:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// 배경색을 지정하겠다는 선언
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="nl">fillColor:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">grey</span><span class="p">[</span><span class="m">300</span><span class="p">],</span> <span class="c1">// 배경색
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="nl">suffixText:</span> <span class="n">isTime</span> <span class="o">?</span> <span class="s1">&#39;시&#39;</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// ➎ 시간 관련 텍스트 필드는 ‘시&#39; 접미사 추가
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이어서 CustomTextField 위젯을 사용하는 상위 위젯은 ScheduleBottomSheet도 작성해준다.</p>
+<h4 id="libwidgetsschedule_bottom_sheetdart">lib/widgets/schedule_bottom_sheet.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/custom_text_field.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:drift/drift.dart&#39;</span> <span class="k">hide</span> <span class="n">Column</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/database/drift_database.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">ScheduleBottomSheet</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span> <span class="n">selectedDate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">ScheduleBottomSheet</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Key</span><span class="o">?</span> <span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span> <span class="o">:</span> <span class="k">super</span><span class="p">(</span><span class="nl">key:</span> <span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">ScheduleBottomSheet</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_ScheduleBottomSheetState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_ScheduleBottomSheetState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">ScheduleBottomSheet</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">GlobalKey</span><span class="o">&lt;</span><span class="n">FormState</span><span class="o">&gt;</span> <span class="n">formKey</span> <span class="o">=</span> <span class="n">GlobalKey</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span><span class="o">?</span> <span class="n">startTime</span><span class="p">;</span> <span class="c1">// 시작 시간 저장 변수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span><span class="o">?</span> <span class="n">endTime</span><span class="p">;</span> <span class="c1">// 종료 시간 저장 변수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">String</span><span class="o">?</span> <span class="n">content</span><span class="p">;</span> <span class="c1">// 일정 내용 저장 변수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">bottomInset</span> <span class="o">=</span> <span class="n">MediaQuery</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">viewInsets</span><span class="p">.</span><span class="n">bottom</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Form</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ➊ 텍스트 필드를 한 번에 관리할 수 있는 폼
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nl">key:</span> <span class="n">formKey</span><span class="p">,</span> <span class="c1">// ➋ Form을 조작할 키값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nl">child:</span> <span class="n">SafeArea</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="n">Container</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">height:</span> <span class="n">MediaQuery</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="m">2</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">              <span class="n">bottomInset</span><span class="p">,</span> <span class="c1">// ➋ 화면 반 높이에 키보드 높이 추가하기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nl">color:</span> <span class="n">Colors</span><span class="p">.</span><span class="n">white</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">child:</span> <span class="n">Padding</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">padding:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">only</span><span class="p">(</span><span class="nl">left:</span> <span class="m">8</span><span class="p">,</span> <span class="nl">right:</span> <span class="m">8</span><span class="p">,</span> <span class="nl">top:</span> <span class="m">8</span><span class="p">,</span> <span class="nl">bottom:</span> <span class="n">bottomInset</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="c1">// ➋ 시간 관련 텍스트 필드와 내용관련 텍스트 필드 세로로 배치
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Row</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="c1">// ➊ 시작 시간 종료 시간 가로로 배치
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                  <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">child:</span> <span class="n">CustomTextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 시작시간 입력 필드
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="nl">label:</span> <span class="s1">&#39;시작 시간&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">isTime:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">onSaved:</span> <span class="p">(</span><span class="kt">String</span><span class="o">?</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                          <span class="c1">// 저장이 실행되면 startTime 변수에 텍스트 필드 값 저장
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                          <span class="n">startTime</span> <span class="o">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">val</span><span class="o">!</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">validator:</span> <span class="n">timeValidator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="kd">const</span> <span class="n">SizedBox</span><span class="p">(</span><span class="nl">width:</span> <span class="m">16.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">child:</span> <span class="n">CustomTextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 종료시간 입력 필드
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="nl">label:</span> <span class="s1">&#39;종료 시간&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">isTime:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">onSaved:</span> <span class="p">(</span><span class="kt">String</span><span class="o">?</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                          <span class="c1">// 저장이 실행되면 endTime 변수에 텍스트 필드 값 저장
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                          <span class="n">endTime</span> <span class="o">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">val</span><span class="o">!</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">validator:</span> <span class="n">timeValidator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">SizedBox</span><span class="p">(</span><span class="nl">height:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">child:</span> <span class="n">CustomTextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 내용 입력 필드
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="nl">label:</span> <span class="s1">&#39;내용&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">isTime:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">onSaved:</span> <span class="p">(</span><span class="kt">String</span><span class="o">?</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                      <span class="c1">// 저장이 실행되면 content 변수에 텍스트 필드 값 저장
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                      <span class="n">content</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">validator:</span> <span class="n">contentValidator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">SizedBox</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">width:</span> <span class="kt">double</span><span class="p">.</span><span class="n">infinity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">child:</span> <span class="n">ElevatedButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// [저장] 버튼
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// ➌ [저장] 버튼
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="nl">onPressed:</span> <span class="n">onSavePressed</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">style:</span> <span class="n">ElevatedButton</span><span class="p">.</span><span class="n">styleFrom</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">primary:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span><span class="s1">&#39;저장&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onSavePressed</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">formKey</span><span class="p">.</span><span class="n">currentState</span><span class="o">!</span><span class="p">.</span><span class="n">validate</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// ➊ 폼 검증하기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">formKey</span><span class="p">.</span><span class="n">currentState</span><span class="o">!</span><span class="p">.</span><span class="n">save</span><span class="p">();</span> <span class="c1">// ➋ 폼 저장하기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">      <span class="kd">await</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">LocalDatabase</span><span class="o">&gt;</span><span class="p">().</span><span class="n">createSchedule</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ➊ 일정 생성하기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SchedulesCompanion</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">startTime:</span> <span class="n">Value</span><span class="p">(</span><span class="n">startTime</span><span class="o">!</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">endTime:</span> <span class="n">Value</span><span class="p">(</span><span class="n">endTime</span><span class="o">!</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">content:</span> <span class="n">Value</span><span class="p">(</span><span class="n">content</span><span class="o">!</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">date:</span> <span class="n">Value</span><span class="p">(</span><span class="n">widget</span><span class="p">.</span><span class="n">selectedDate</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">Navigator</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">String</span><span class="o">?</span> <span class="n">timeValidator</span><span class="p">(</span><span class="kt">String</span><span class="o">?</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="s1">&#39;값을 입력해주세요&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">?</span> <span class="n">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">number</span> <span class="o">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="s1">&#39;숫자를 입력해주세요&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">&lt;</span> <span class="m">0</span> <span class="o">||</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="m">24</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="s1">&#39;0시부터 24시 사이를 입력해주세요&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c1">// 시간값 검증
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="kt">String</span><span class="o">?</span> <span class="n">contentValidator</span><span class="p">(</span><span class="kt">String</span><span class="o">?</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">val</span><span class="p">.</span><span class="n">length</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="s1">&#39;값을 입력해주세요&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c1">// 내용값 검증
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>formKey</code>: <code>save()</code> 함수와 <code>validate()</code> 함수를 실행할 수 있다. validate() 함수를 실행하면 Form 서브에 있는 모든 TextFormField들의 validator 매개 변수에 제공된 함수가 실행된다. 이 함수의 첫 번째 매개 변수에는 입력된 값이 제공되며 에러가 있을 경우 해당 에러 메시지를 String 값으로 반환하고 에러가 없으면 null을 반환한다.</p>
+</li>
+<li>
+<p><code>timeValidator</code>: 시간이 잘 입력되었는 지 검증하는 함수이다. 값이 입력되지 않았거나 숫자가 입력되지 않았을 때 0과 24 사이의 값이 아니라면 해당 에러 메세지를 반환한다.</p>
+</li>
+<li>
+<p><code>contentValidator</code>: 일정 내용을 검증하는 함수다. null 값이 입력되거나 글자 길이가 0이면 에러 메세지를 반환한다.</p>
+</li>
+<li>
+<p><code>onSavePressed</code></p>
+</li>
+</ul>
+<ol>
+<li>
+<p><code>validate()</code> 함수는 Form의 서브에 있는 모든 TextFormField의 validate 매개 변수에 입력된 함수들을 실행한다. 모든 함수들이 null을 반환하면 <code>validate()</code> 함수가 true를 반환하고 만약에 어느 한 함수라도 String 값을 반환해서 에러를 발생시키면 <code>validate()</code> 함수는 false를 반환한다.</p>
+</li>
+<li>
+<p><code>save()</code>: 모든 서브 TextFormField들에 <code>onSaved</code> 매개 변수에 입력된 함수를 실행한다. 이 함수들은 작성한 것처럼 텍스트 필드의 값을 변수에 저장하는 역할을 한다. 그러니 <code>validate()</code> 함수를 실행해서 true를 반환받으면 텍스트 필드 검증에 문제가 없다느 뜻이니 <code>save()</code> 함수를 실행해서 테스트 필드의 값들을 변수에 저장하면 된다.</p>
+</li>
+</ol>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c1114c95d6b2fcacdd1d8ca2c60376c758772265" target="_blank" title="commit by seilylook(seilylook@naver.com) c1114c95d6b2fcacdd1d8ca2c60376c758772265: complete: calendar scheduler UI">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c1114c9</a></span>
+                <span>Updated on 2023-12-20&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/9dd45ca08a107800702c98fa66f65d3a40609aea" target="_blank" title="commit by seilylook(seilylook@naver.com) 9dd45ca08a107800702c98fa66f65d3a40609aea: docs: database set up">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9dd45ca</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

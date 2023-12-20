@@ -684,3 +684,245 @@ class MyApp extends StatelessWidget {
 
 - `get_it`: Dependency Injection 의존성 주입을 구현하는 플러그인이다. LocalDatabase 클래스를 프로젝트 전역에서 사용할 수 있어야 하는데 서브 위젯으로 계속 값을 넘겨주기에는 반복적인 코드를 너무 많이 사용해야 한다. `GetIt`으로 값을 한 번 등록해주면 어디서든 처음에 주입한 값 즉, 같은 database 변수를 `GetIt`을 통해 전역적으로 사용 가능하다.
 
+### 일정 데이터 생성
+
+텍스트 필드를 TextFormField 위젯을 기반으로 구현했기 때문에 상위에 Form 위젯을 사용해주면 쉽게 데이터를 가져올 수 있다.
+
+#### lib/widgets/custom_text_field.dart
+
+```dart
+import 'package:calendar_scheduler/constants/constants.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class CustomTextField extends StatelessWidget {
+  final String label;
+  final bool isTime; // 시간 선택하는 텍스트 필드인지 여부
+  final FormFieldSetter<String> onSaved;
+  final FormFieldValidator<String> validator;
+
+  const CustomTextField({
+    required this.label,
+    required this.isTime,
+    required this.onSaved,
+    required this.validator,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      // ➋ 세로로 텍스트와 텍스트 필드를 위치
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: PRIMARY_COLOR,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Expanded(
+          flex: isTime ? 0 : 1, // ➏
+          child: TextFormField(
+            onSaved: onSaved, // ➊ 폼 저장했을 때 실행할 함수
+            validator: validator,
+            cursorColor: Colors.grey, // 커서 색상 변경
+            maxLines: isTime ? 1 : null, // ➊ 시간 관련 텍스트 필드가 아니면 한 줄이상 작성 가능
+            expands: !isTime, // ➋ 시간 관련 텍스트 필드는 공간 최대 차지
+            keyboardType: isTime
+                ? TextInputType.number
+                : TextInputType
+                    .multiline, // ➌ 시간 관련 텍스트 필드는 기본 숫자 키보드 아니면 일반 글자 키보드 보여주기
+            inputFormatters: isTime
+                ? [
+                    FilteringTextInputFormatter.digitsOnly,
+                  ]
+                : [], // ➍ 시간 관련 텍스트 필드는 숫자만 입력하도록 제한
+            decoration: InputDecoration(
+              border: InputBorder.none, // 테두리 삭제
+              filled: true, // 배경색을 지정하겠다는 선언
+              fillColor: Colors.grey[300], // 배경색
+              suffixText: isTime ? '시' : null, // ➎ 시간 관련 텍스트 필드는 ‘시' 접미사 추가
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+이어서 CustomTextField 위젯을 사용하는 상위 위젯은 ScheduleBottomSheet도 작성해준다.
+
+#### lib/widgets/schedule_bottom_sheet.dart
+
+```dart
+import 'package:calendar_scheduler/constants/constants.dart';
+import 'package:calendar_scheduler/widgets/custom_text_field.dart';
+import 'package:flutter/material.dart';
+import 'package:drift/drift.dart' hide Column;
+import 'package:get_it/get_it.dart';
+import 'package:calendar_scheduler/database/drift_database.dart';
+
+class ScheduleBottomSheet extends StatefulWidget {
+  final DateTime selectedDate;
+
+  const ScheduleBottomSheet({
+    required this.selectedDate,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<ScheduleBottomSheet> createState() => _ScheduleBottomSheetState();
+}
+
+class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+  int? startTime; // 시작 시간 저장 변수
+  int? endTime; // 종료 시간 저장 변수
+  String? content; // 일정 내용 저장 변수
+
+  @override
+  Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
+    return Form(
+      // ➊ 텍스트 필드를 한 번에 관리할 수 있는 폼
+      key: formKey, // ➋ Form을 조작할 키값
+      child: SafeArea(
+        child: Container(
+          height: MediaQuery.of(context).size.height / 2 +
+              bottomInset, // ➋ 화면 반 높이에 키보드 높이 추가하기
+          color: Colors.white,
+          child: Padding(
+            padding:
+                EdgeInsets.only(left: 8, right: 8, top: 8, bottom: bottomInset),
+            child: Column(
+              // ➋ 시간 관련 텍스트 필드와 내용관련 텍스트 필드 세로로 배치
+              children: [
+                Row(
+                  // ➊ 시작 시간 종료 시간 가로로 배치
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        // 시작시간 입력 필드
+                        label: '시작 시간',
+                        isTime: true,
+                        onSaved: (String? val) {
+                          // 저장이 실행되면 startTime 변수에 텍스트 필드 값 저장
+                          startTime = int.parse(val!);
+                        },
+                        validator: timeValidator,
+                      ),
+                    ),
+                    const SizedBox(width: 16.0),
+                    Expanded(
+                      child: CustomTextField(
+                        // 종료시간 입력 필드
+                        label: '종료 시간',
+                        isTime: true,
+                        onSaved: (String? val) {
+                          // 저장이 실행되면 endTime 변수에 텍스트 필드 값 저장
+                          endTime = int.parse(val!);
+                        },
+                        validator: timeValidator,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8.0),
+                Expanded(
+                  child: CustomTextField(
+                    // 내용 입력 필드
+                    label: '내용',
+                    isTime: false,
+                    onSaved: (String? val) {
+                      // 저장이 실행되면 content 변수에 텍스트 필드 값 저장
+                      content = val;
+                    },
+                    validator: contentValidator,
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    // [저장] 버튼
+                    // ➌ [저장] 버튼
+                    onPressed: onSavePressed,
+                    style: ElevatedButton.styleFrom(
+                      primary: PRIMARY_COLOR,
+                    ),
+                    child: Text('저장'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void onSavePressed() async {
+    if (formKey.currentState!.validate()) {
+      // ➊ 폼 검증하기
+      formKey.currentState!.save(); // ➋ 폼 저장하기
+
+      await GetIt.I<LocalDatabase>().createSchedule(
+        // ➊ 일정 생성하기
+        SchedulesCompanion(
+          startTime: Value(startTime!),
+          endTime: Value(endTime!),
+          content: Value(content!),
+          date: Value(widget.selectedDate),
+        ),
+      );
+
+      Navigator.of(context).pop();
+    }
+  }
+
+  String? timeValidator(String? val) {
+    if (val == null) {
+      return '값을 입력해주세요';
+    }
+
+    int? number;
+
+    try {
+      number = int.parse(val);
+    } catch (e) {
+      return '숫자를 입력해주세요';
+    }
+
+    if (number < 0 || number > 24) {
+      return '0시부터 24시 사이를 입력해주세요';
+    }
+
+    return null;
+  } // 시간값 검증
+
+  String? contentValidator(String? val) {
+    if (val == null || val.length == 0) {
+      return '값을 입력해주세요';
+    }
+
+    return null;
+  } // 내용값 검증
+}
+```
+
+- `formKey`: `save()` 함수와 `validate()` 함수를 실행할 수 있다. validate() 함수를 실행하면 Form 서브에 있는 모든 TextFormField들의 validator 매개 변수에 제공된 함수가 실행된다. 이 함수의 첫 번째 매개 변수에는 입력된 값이 제공되며 에러가 있을 경우 해당 에러 메시지를 String 값으로 반환하고 에러가 없으면 null을 반환한다.
+
+- `timeValidator`: 시간이 잘 입력되었는 지 검증하는 함수이다. 값이 입력되지 않았거나 숫자가 입력되지 않았을 때 0과 24 사이의 값이 아니라면 해당 에러 메세지를 반환한다.
+
+- `contentValidator`: 일정 내용을 검증하는 함수다. null 값이 입력되거나 글자 길이가 0이면 에러 메세지를 반환한다.
+
+- `onSavePressed`
+
+1. `validate()` 함수는 Form의 서브에 있는 모든 TextFormField의 validate 매개 변수에 입력된 함수들을 실행한다. 모든 함수들이 null을 반환하면 `validate()` 함수가 true를 반환하고 만약에 어느 한 함수라도 String 값을 반환해서 에러를 발생시키면 `validate()` 함수는 false를 반환한다.
+
+2. `save()`: 모든 서브 TextFormField들에 `onSaved` 매개 변수에 입력된 함수를 실행한다. 이 함수들은 작성한 것처럼 텍스트 필드의 값을 변수에 저장하는 역할을 한다. 그러니 `validate()` 함수를 실행해서 true를 반환받으면 텍스트 필드 검증에 문제가 없다느 뜻이니 `save()` 함수를 실행해서 테스트 필드의 값들을 변수에 저장하면 된다.
+
