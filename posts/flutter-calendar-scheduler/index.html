@@ -55,7 +55,7 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  3573 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  4142 ,
         "url": "https:\/\/seilylook.github.io\/posts\/flutter-calendar-scheduler\/","datePublished": "2023-12-19T11:52:16+09:00","dateModified": "2023-12-20T14:25:00+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -103,8 +103,8 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Calendar Scheduler</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3573 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-19">2023-12-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4142 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;20 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -179,6 +179,11 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
           <ul>
             <li><a href="#libwidgetscustom_text_fielddart">lib/widgets/custom_text_field.dart</a></li>
             <li><a href="#libwidgetsschedule_bottom_sheetdart">lib/widgets/schedule_bottom_sheet.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#일정-데이터-일기">일정 데이터 일기</a>
+          <ul>
+            <li><a href="#libscreenshome_screendart-1">lib/screens/home_screen.dart</a></li>
           </ul>
         </li>
       </ul>
@@ -1861,6 +1866,247 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
 <p><code>save()</code>: 모든 서브 TextFormField들에 <code>onSaved</code> 매개 변수에 입력된 함수를 실행한다. 이 함수들은 작성한 것처럼 텍스트 필드의 값을 변수에 저장하는 역할을 한다. 그러니 <code>validate()</code> 함수를 실행해서 true를 반환받으면 텍스트 필드 검증에 문제가 없다느 뜻이니 <code>save()</code> 함수를 실행해서 테스트 필드의 값들을 변수에 저장하면 된다.</p>
 </li>
 </ol>
+<ul>
+<li><code>createSchedule()</code>: 설계한 대로 일정 데이터를 SQLite 데이터베이스에 입력할 수 있다. 다만 매개 변수에 꼭 <code>SchedulesCompanion</code> 을 입력해줘야 하는데 SchedulesCompanion에는 실제 Schedules 테이블에 입력된 값들을 드리프트 패키지에서 제공하는 <code>Value</code> 클래스로 감싸서 입력해준다.</li>
+</ul>
+<h3 id="일정-데이터-일기">일정 데이터 일기</h3>
+<h4 id="libscreenshome_screendart-1">lib/screens/home_screen.dart</h4>
+<p>일정을 저장하는 기능은 끝났지만 값이 제대로 저장되는지 아직 확인할 길이 없다. <code>LocalDatabase</code> 클래스의 <code>watchSchedules()</code> 함수를 사용해서 달력에서 선택한 날짜에 해당되는 일정들을 불러와 화면에 반영한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/database/drift_database.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/main_calendar.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/schedule_bottom_sheet.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/schedule_card.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/today_banner.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:get_it/get_it.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">HomeScreen</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">HomeScreen</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_HomeScreenState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_HomeScreenState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DateTime</span> <span class="n">selectedDate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">utc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">year</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">month</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">day</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Scaffold</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">floatingActionButton:</span> <span class="n">FloatingActionButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">backgroundColor:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">onPressed:</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">showModalBottomSheet</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">context:</span> <span class="n">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">isDismissible:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">builder:</span> <span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">ScheduleBottomSheet</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">isScrollControlled:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="kd">const</span> <span class="n">Icon</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="n">Icons</span><span class="p">.</span><span class="n">add</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">body:</span> <span class="n">SafeArea</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">MainCalendar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">onDaySelected:</span> <span class="n">onDaySelected</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">const</span> <span class="n">SizedBox</span><span class="p">(</span><span class="nl">height:</span> <span class="m">8.9</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">StreamBuilder</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">stream:</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">LocalDatabase</span><span class="o">&gt;</span><span class="p">().</span><span class="n">watchSchedules</span><span class="p">(</span><span class="n">selectedDate</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">builder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">snapshot</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">TodayBanner</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">count:</span> <span class="n">snapshot</span><span class="p">.</span><span class="n">data</span><span class="o">?</span><span class="p">.</span><span class="n">length</span> <span class="o">??</span> <span class="m">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">const</span> <span class="n">SizedBox</span><span class="p">(</span><span class="nl">height:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">child:</span> <span class="n">StreamBuilder</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">stream:</span> <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">LocalDatabase</span><span class="o">&gt;</span><span class="p">().</span><span class="n">watchSchedules</span><span class="p">(</span><span class="n">selectedDate</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">builder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">snapshot</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">snapshot</span><span class="p">.</span><span class="n">hasData</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">Container</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                  <span class="k">return</span> <span class="n">ListView</span><span class="p">.</span><span class="n">builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">itemCount:</span> <span class="n">snapshot</span><span class="p">.</span><span class="n">data</span><span class="o">!</span><span class="p">.</span><span class="n">length</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">itemBuilder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                      <span class="kd">final</span> <span class="n">schedule</span> <span class="o">=</span> <span class="n">snapshot</span><span class="p">.</span><span class="n">data</span><span class="o">!</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                      <span class="k">return</span> <span class="n">Dismissible</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">key:</span> <span class="n">ObjectKey</span><span class="p">(</span><span class="n">schedule</span><span class="p">.</span><span class="n">id</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">direction:</span> <span class="n">DismissDirection</span><span class="p">.</span><span class="n">startToEnd</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">onDismissed:</span> <span class="p">(</span><span class="n">DismissDirection</span> <span class="n">direction</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                          <span class="n">GetIt</span><span class="p">.</span><span class="n">I</span><span class="o">&lt;</span><span class="n">LocalDatabase</span><span class="o">&gt;</span><span class="p">().</span><span class="n">removeSchedule</span><span class="p">(</span><span class="n">schedule</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">child:</span> <span class="n">Padding</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                          <span class="nl">padding:</span> <span class="kd">const</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">only</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                            <span class="nl">bottom:</span> <span class="m">8.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="nl">left:</span> <span class="m">8.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="nl">right:</span> <span class="m">8.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                          <span class="nl">child:</span> <span class="n">ScheduleCard</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                            <span class="nl">startTime:</span> <span class="n">schedule</span><span class="p">.</span><span class="n">startTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="nl">endTime:</span> <span class="n">schedule</span><span class="p">.</span><span class="n">endTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="nl">content:</span> <span class="n">schedule</span><span class="p">.</span><span class="n">content</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onDaySelected</span><span class="p">(</span><span class="n">DateTime</span> <span class="n">selectedDate</span><span class="p">,</span> <span class="n">DateTime</span> <span class="n">focusedDate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">selectedDate</span> <span class="o">=</span> <span class="n">selectedDate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>달력과 현재 날짜 외의 모든 공간을 리스트가 차지하도록 <code>Expanded</code> 위젯을 사용해준다.</p>
+<ul>
+<li>
+<p><code>watchSchedules()</code>: 이 함수는 <code>Stream</code>을 반환해준다. 그렇기 때문에 StreamBuilder를 사용해서 일정 관련 데이터가 변경될 때마다 위젯들을 새로 렌더링해준다. <code>watchSchedules()</code> 함수에 매개변수로 <code>selectedDate</code>를 입력해서 선택한 날짜의 일정만 따로 필터링해서 불러온다. 일정이 존재하지 않으면 아무것도 들어 있지 않은 <code>Container</code> 위젯을 렌더링해준다.</p>
+</li>
+<li>
+<p><code>ListView.builder</code>를 사용하면 여러 개의 위젯을 스크롤 가능한 위젯에 구현할 수 있다. 주요 매개 변수로는 구현할 리스트의 객체 개수를 입력할 수 있는 <code>itemCount</code>와 각 객체를 구현할 수 있는 <code>itemBuilder</code>가 있다. itemBuilder 매개 변수로 입력되는 함수에는 context와 index 변수가 순서대로 제공되어 순서별로 원하는 위젯을 그려낼 수 있다.</p>
+</li>
+<li>
+<p><code>Dismissible</code>: 사용자 제스처에 따라 일정을 삭제하는 기능을 제공하는 위젯이다. <code>key</code> 매개변수에는 각 일정별로 절대 겹치지 않은 값을 <code>ObjectKey</code>에 감싸서 입력해줘야 한다. 이 값은 삭제 제스처가 어디에 적용됐는지 구분할 수 있는 요소로 사용된다. <code>direction</code> 매개변수는 밀기 제스처를 어떻게 제한할지 지정할 수 있다. <code>DismissDirection.endToStart</code>를 적용해줌녀 끝부터 시작, 즉 글을 읽는 방향의 반대인 왼쪽부터 오른쪽으로 미는 제스처만 인식한다. <code>onDismissed</code> 매개변수에 입력되는 함수는 제스처가 인식됐을 때 실행할 함수를 입력할 수 있다. 첫번째 매개 변수로 어떤 방향으로 제스처가 입력됐는지 알 수 있다.</p>
+</li>
+<li>
+<p>일정을 삭제했을 때 <code>TodayBanner</code>에 나타나던 일정 개수가 변하도록 적용한다. <code>ListView</code>에 적용했듯이 <code>StreamBuilder</code>로 <code>TodayBanner</code>를 감싸준 다음에 일정 개수를 <code>count</code> 매개변수에 넣어주면 된다. 만약 값이 없을 떄를 대비해서 null 값이 입력되면 0이 입력되도록 설정해준다.</p>
+</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

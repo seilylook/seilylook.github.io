@@ -926,3 +926,131 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
 
 2. `save()`: 모든 서브 TextFormField들에 `onSaved` 매개 변수에 입력된 함수를 실행한다. 이 함수들은 작성한 것처럼 텍스트 필드의 값을 변수에 저장하는 역할을 한다. 그러니 `validate()` 함수를 실행해서 true를 반환받으면 텍스트 필드 검증에 문제가 없다느 뜻이니 `save()` 함수를 실행해서 테스트 필드의 값들을 변수에 저장하면 된다.
 
+- `createSchedule()`: 설계한 대로 일정 데이터를 SQLite 데이터베이스에 입력할 수 있다. 다만 매개 변수에 꼭 `SchedulesCompanion` 을 입력해줘야 하는데 SchedulesCompanion에는 실제 Schedules 테이블에 입력된 값들을 드리프트 패키지에서 제공하는 `Value` 클래스로 감싸서 입력해준다.
+
+### 일정 데이터 일기
+
+#### lib/screens/home_screen.dart
+
+일정을 저장하는 기능은 끝났지만 값이 제대로 저장되는지 아직 확인할 길이 없다. `LocalDatabase` 클래스의 `watchSchedules()` 함수를 사용해서 달력에서 선택한 날짜에 해당되는 일정들을 불러와 화면에 반영한다.
+
+```dart
+import 'package:calendar_scheduler/constants/constants.dart';
+import 'package:calendar_scheduler/database/drift_database.dart';
+import 'package:calendar_scheduler/widgets/main_calendar.dart';
+import 'package:calendar_scheduler/widgets/schedule_bottom_sheet.dart';
+import 'package:calendar_scheduler/widgets/schedule_card.dart';
+import 'package:calendar_scheduler/widgets/today_banner.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  DateTime selectedDate = DateTime.utc(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: PRIMARY_COLOR,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isDismissible: true,
+            builder: (_) => ScheduleBottomSheet(
+              selectedDate: selectedDate,
+            ),
+            isScrollControlled: true,
+          );
+        },
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            MainCalendar(
+              selectedDate: selectedDate,
+              onDaySelected: onDaySelected,
+            ),
+            const SizedBox(height: 8.9),
+            StreamBuilder<List<Schedule>>(
+              stream: GetIt.I<LocalDatabase>().watchSchedules(selectedDate),
+              builder: (context, snapshot) {
+                return TodayBanner(
+                  selectedDate: selectedDate,
+                  count: snapshot.data?.length ?? 0,
+                );
+              },
+            ),
+            const SizedBox(height: 8.0),
+            Expanded(
+              child: StreamBuilder<List<Schedule>>(
+                stream: GetIt.I<LocalDatabase>().watchSchedules(selectedDate),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container();
+                  }
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      final schedule = snapshot.data![index];
+                      return Dismissible(
+                        key: ObjectKey(schedule.id),
+                        direction: DismissDirection.startToEnd,
+                        onDismissed: (DismissDirection direction) {
+                          GetIt.I<LocalDatabase>().removeSchedule(schedule.id);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 8.0,
+                            left: 8.0,
+                            right: 8.0,
+                          ),
+                          child: ScheduleCard(
+                            startTime: schedule.startTime,
+                            endTime: schedule.endTime,
+                            content: schedule.content,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onDaySelected(DateTime selectedDate, DateTime focusedDate) {
+    setState(() {
+      this.selectedDate = selectedDate;
+    });
+  }
+}
+```
+
+달력과 현재 날짜 외의 모든 공간을 리스트가 차지하도록 `Expanded` 위젯을 사용해준다.
+
+- `watchSchedules()`: 이 함수는 `Stream`을 반환해준다. 그렇기 때문에 StreamBuilder를 사용해서 일정 관련 데이터가 변경될 때마다 위젯들을 새로 렌더링해준다. `watchSchedules()` 함수에 매개변수로 `selectedDate`를 입력해서 선택한 날짜의 일정만 따로 필터링해서 불러온다. 일정이 존재하지 않으면 아무것도 들어 있지 않은 `Container` 위젯을 렌더링해준다.
+
+- `ListView.builder`를 사용하면 여러 개의 위젯을 스크롤 가능한 위젯에 구현할 수 있다. 주요 매개 변수로는 구현할 리스트의 객체 개수를 입력할 수 있는 `itemCount`와 각 객체를 구현할 수 있는 `itemBuilder`가 있다. itemBuilder 매개 변수로 입력되는 함수에는 context와 index 변수가 순서대로 제공되어 순서별로 원하는 위젯을 그려낼 수 있다.
+
+- `Dismissible`: 사용자 제스처에 따라 일정을 삭제하는 기능을 제공하는 위젯이다. `key` 매개변수에는 각 일정별로 절대 겹치지 않은 값을 `ObjectKey`에 감싸서 입력해줘야 한다. 이 값은 삭제 제스처가 어디에 적용됐는지 구분할 수 있는 요소로 사용된다. `direction` 매개변수는 밀기 제스처를 어떻게 제한할지 지정할 수 있다. `DismissDirection.endToStart`를 적용해줌녀 끝부터 시작, 즉 글을 읽는 방향의 반대인 왼쪽부터 오른쪽으로 미는 제스처만 인식한다. `onDismissed` 매개변수에 입력되는 함수는 제스처가 인식됐을 때 실행할 함수를 입력할 수 있다. 첫번째 매개 변수로 어떤 방향으로 제스처가 입력됐는지 알 수 있다.
+
+- 일정을 삭제했을 때 `TodayBanner`에 나타나던 일정 개수가 변하도록 적용한다. `ListView`에 적용했듯이 `StreamBuilder`로 `TodayBanner`를 감싸준 다음에 일정 개수를 `count` 매개변수에 넣어주면 된다. 만약 값이 없을 떄를 대비해서 null 값이 입력되면 0이 입력되도록 설정해준다.
+
