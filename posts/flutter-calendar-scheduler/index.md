@@ -1054,3 +1054,509 @@ class _HomeScreenState extends State<HomeScreen> {
 
 - 일정을 삭제했을 때 `TodayBanner`에 나타나던 일정 개수가 변하도록 적용한다. `ListView`에 적용했듯이 `StreamBuilder`로 `TodayBanner`를 감싸준 다음에 일정 개수를 `count` 매개변수에 넣어주면 된다. 만약 값이 없을 떄를 대비해서 null 값이 입력되면 0이 입력되도록 설정해준다.
 
+## 서버 연동
+
+### 상태 관리
+
+기존에는 `StatefulWidget`의 `setState()` 함수를 호출하면서 상태관리를 해왔다. 리액트와 마찬가지로 Component || Widget의 개수가 많아질수록 이런 방식은 매우 비효율적이기에 `글로버 상태 관리 툴`을 사용해서 전역 상태 관리가 가능하도록 수정해준다. 플러터에서는 주로 사용하는 `Bloc`, `GetX`, `Riverpod`, `Provider` 같은 상태 관리 플러그인이 있다.
+
+### 캐시와 긍정적 응답
+
+실제 서버를 운영하는 상황에는 서벗를 구매하거나 클라우드에서 운영하게 되는데 그러면 자녕적으로 지연이 생기게 된다. 현재는 서버와 앱을 같은 컴퓨터 즉, local 환경에서 실행하고 있기 때문에 네트워크 요청에 대한 지연이 존재하지 않는다. 이는 실제와 다르고 실제는 약간의 지연이 작용할 수 밖에 없다. 이 지연되는 시간 동안 사용자는 내부 구현 과정에 대해서 모르고 동작에만 관심이 있기 때문에 앱이 느리니까 별로이다고 생각한다. 이런 문제를 해결하기 위해 `Cache` 캐싱이라는 기법을 사용한다.
+
+캐싱은 데이터를 기억한다는 뜻이다. 예를 들어 현재 구현한 `ScheduleProvider`에는 `cache`라는 변수가 존재하며 이 변수에는 GET 메서드로 불러온 모든 일정 정보가 전부 담겨 있다. 그렇기 때문에 특정 날짜를 처음 선택했을 때는 데이터를 불러오는 시간이 걸리지만 같은 날짜를 다시 요청할 때는 기존 요청에서 기억하는 데이터를 지연 없이 불러올 수 있다.
+
+<img src="/images/provider-logic.PNG" />
+
+1. 사용자가 달력에서 날짜를 선택한다.
+
+2. 날짜가 선택되면 `ScheduleProvider`의 `changeSelectedDate()`함수가 실행된다. changeSelectedDate()의 로직이 모두 실행되면 UI를 다시 build() 하기 위해
+
+3. `notifyListeners()`함수가 실행된다. notifyListeners()가 실행되면 HomeScreen 위젯의 build()가 재실행되며 변경된 selectedDate 변수에 따른
+
+4. UI 업데이트가 진행된다. 이때 해당되는 날짜에 한 번도 GET 메서드로 일정을 가져온 적이 없다면 UI 업데이트까지 수행해 빈 리스트가 화면에 보여진다. 하지만 기존에 GET 메서드를 사용해 가져온 데
+   이터가 저장되어 있다면 API 요청을 기다리지 않고 즉시 화면에 현재 cache값을 반영할 수 있다. changeSelectedDate() 함수의 실행이 끝나면
+
+5. `getSchedules()`함수가 실행된다. getSchedules() 함수 내부에는 ScheduleAPI를 통해서
+
+6. `getSchedules()`함수를 추가로 실행한다. 이 함수로 선택한 날짜에 해당되는 데이터를 서버에서 가져온다. ScheduleAPI의 getSchedules() 함수를 실행해서 가져온 값으로
+
+7. `cache`를 업데이트한다. GET 메서드로 일정들을 가져오는 데 성공하며
+
+8. `notifyListeners()`함수가 실행된다. notifyListeners() 함수가 실행되녀 HomeScreen 위젯의 build() 함수가 재실행된다. 만약 ScheduleAPI의 getSchedules() 함수에서 가져온 값들이 이미 cache 변수에 존재하면 일정 리스트 UI는 변화가 없다. 하지만 만약에 다른 값이 들어온다면 변경된 값을 화면에 다시 반영해주게 된다. cache 변수에 있는 값을 미리 보여주었기 때문에 사용자는 로딩이 전혀 없었던 것 같이 느낀다.
+
+### 구현
+
+#### 모델 구축 lib/model/schedule_model.dart
+
+```dart
+class ScheduleModel {
+  final String id;
+  final String content;
+  final DateTime date;
+  final int startTime;
+  final int endTime;
+
+  ScheduleModel({
+    required this.id,
+    required this.content,
+    required this.date,
+    required this.startTime,
+    required this.endTime,
+  });
+
+  ScheduleModel.fromJson({
+    // ➊ JSON으로부터 모델을 만들어내는 생성자
+    required Map<String, dynamic> json,
+  })  : id = json['id'],
+        content = json['content'],
+        date = DateTime.parse(json['date']),
+        startTime = json['startTime'],
+        endTime = json['endTime'];
+
+  Map<String, dynamic> toJson() {
+    // ➋ 모델을 다시 JSON으로 변환하는 함수
+    return {
+      'id': id,
+      'content': content,
+      'date':
+          '${date.year}${date.month.toString().padLeft(2, '0')}${date.day.toString().padLeft(2, '0')}',
+      'startTime': startTime,
+      'endTime': endTime,
+    };
+  }
+
+  ScheduleModel copyWith({
+    // ➌ 현재 모델을 특정 속성만 변환해서 새로 생성
+    String? id,
+    String? content,
+    DateTime? date,
+    int? startTime,
+    int? endTime,
+  }) {
+    return ScheduleModel(
+      id: id ?? this.id,
+      content: content ?? this.content,
+      date: date ?? this.date,
+      startTime: startTime ?? this.startTime,
+      endTime: endTime ?? this.endTime,
+    );
+  }
+}
+```
+
+1. REST API 요청 응답을 받으면 JSON 형식의 데이터로 받게 된다. JSON 형식 그대로 `fromJson` 생성자에 넣어주면 자동으로 `ScheduleModel`에 매핑된다.
+
+2. `toJson()`은 ScheduleModel을 JSON 형식으로 변환하는 함수이다. 플러터에서 데이터를 관리할 때는 클래스 형태로 관리하면 편하지만 서버로 네트워크 요청을 보낼 때는 다시 JSON 형식으로 데이터를 변환해야 한다.
+
+3. `copyWith()`함수는 플러터에서 흔히 사용되는 함수이다. 현대에는 불변성 즉, 한번 선언한 인스턴스를 다시 변경하지 않는 기법을 많이 사용한다. 하지만 이미 존재하는 인스턴스에서 몇 개의 값만 변경해야할 경우가 생긴다. 그럴 때 copyWith() 같은 함수를 생성해 입력하지 않은 값들을 그대로 보존하고 입력해준 값들을 새로 저장할 수 있다.
+
+#### API 요청 구현 lib/apis/schedule_api.dart
+
+```dart
+import 'dart:async';
+import 'dart:io';
+
+import 'package:calendar_scheduler/model/schedule_model.dart';
+import 'package:dio/dio.dart';
+
+class ScheduleAPI {
+  final _dio = Dio();
+  final _targetUrl =
+      'http://${Platform.isAndroid ? '10.0.2.2' : 'localhost'}:3000/schedule';
+
+  Future<List<ScheduleModel>> getSchedules({required DateTime date}) async {
+    final response = await _dio.get(
+      _targetUrl,
+      queryParameters: {
+        'date':
+            '${date.year}${date.month.toString().padLeft(2, '0')}${date.day.toString().padLeft(2, '0')}',
+      },
+    );
+
+    return response.data
+        .map<ScheduleModel>(
+          (x) => ScheduleModel.fromJson(
+            json: x,
+          ),
+        )
+        .toList();
+  }
+
+  Future<String> createSchedule({required ScheduleModel schedule}) async {
+    final json = schedule.toJson();
+    final response = await _dio.post(_targetUrl, data: json);
+    return response.data?['id'];
+  }
+
+  Future<String> deleteSchedule({required String id}) async {
+    final response = await _dio.delete(_targetUrl, data: {
+      'id': id,
+    });
+
+    return response.data?['id'];
+  }
+}
+```
+
+#### Global 상태 관리 구현: ScheduleProvider
+
+`Provider`는 `ChangeNotifier`를 상속하기만 하면 어떤 클래스든 프로바이더로 상태 관리를 하도록 만들 수 있다.
+
+- `ScheduleProvider`클래스를 생성하고 `material` 패키지에서 제공하는 `ChangeNotifier` 클래스를 상속받는다. ScheduleProvider에는 변수 3개가 필요하다. 첫 번째는 `ScheduleAPI`, 두번째는 `selectedDate`, 마지막으로 API 요청을 통해서 받아온 일정 정보를 저장할 `cache` 변수이다.
+
+```dart
+import 'package:calendar_scheduler/model/schedule_model.dart';
+import 'package:calendar_scheduler/apis/schedule_api.dart';
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
+class ScheduleProvider extends ChangeNotifier {
+  final ScheduleAPI api;
+
+  DateTime selectedDate = DateTime.utc(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
+
+  Map<DateTime, List<ScheduleModel>> cache = {};
+
+  ScheduleProvider({required this.api}) : super() {
+    getSchedules(date: selectedDate);
+  }
+
+  void getSchedules({required DateTime date}) async {
+    final response = await api.getSchedules(date: date);
+    cache.update(date, (value) => response, ifAbsent: () => response);
+    notifyListeners();
+  }
+
+  void createSchedule({required ScheduleModel schedule}) async {
+    final targetDate = schedule.date;
+    final uuid = Uuid();
+    final tempId = uuid.v4();
+    final newSchedule = schedule.copyWith(id: tempId);
+    final savedSchedule = await api.createSchedule(schedule: schedule);
+
+    cache.update(
+      targetDate,
+      (value) => [
+        ...value,
+        newSchedule,
+      ]..sort(
+          (a, b) => a.startTime.compareTo(
+            b.startTime,
+          ),
+        ),
+      ifAbsent: () => [newSchedule],
+    );
+
+    notifyListeners();
+
+    try {
+      final savedSchedule = await api.createSchedule(schedule: schedule);
+
+      cache.update(
+        targetDate,
+        (value) => value
+            .map((e) => e.id == tempId
+                ? e.copyWith(
+                    id: savedSchedule,
+                  )
+                : e)
+            .toList(),
+      );
+    } catch (e) {
+      cache.update(
+          targetDate, (value) => value.where((e) => e.id != tempId).toList());
+    }
+  }
+
+  void deleteSchedule({required DateTime date, required String id}) async {
+    final targetSchedule =
+        cache[date]!.firstWhere((element) => element.id == id);
+
+    cache.update(
+      date,
+      (value) => value.where((element) => element.id != id).toList(),
+      ifAbsent: () => [],
+    );
+
+    try {
+      await api.deleteSchedule(id: id);
+    } catch (e) {
+      cache.update(
+        date,
+        (value) => [...value, targetSchedule]..sort(
+            (a, b) => a.startTime.compareTo(b.startTime),
+          ),
+      );
+    }
+    notifyListeners();
+  }
+
+  void changeSelectedDate({required DateTime date}) {
+    selectedDate = date;
+    notifyListeners();
+  }
+}
+```
+
+- `api`: API 요청 로직을 담은 ScheduleAPI이다.
+
+- `selectedDate`: 서버에서 불러온 일정을 저장할 변수이다. 일정을 날짜별로 정리하기 위해 DateTime을 키로 입력받고 `List<ScheduleModel>`을 값으로 입력받는다. 원하는 날짜에 해당되는 일정들을 가져올 때 `cache`변수에 해당되는 날짜를 key 값으로 제공해주면 일정들을 리스트로 받아올 수 있다.
+
+- `cache`: 일정 정보를 저장해둘 캐시 변수. 키값에 날짜를 입력하고 날짜에 해당되는 일정들을 리스트로 값에 저장한다.
+
+- `notifyListeners()`: 현재 클래스를 watch()하는 모든 위젯들의 build() 함수를 다시 실행한다. 위젯들은 cache 변수를 바라보도록 할 계획이니 cache 변수가 업데이트될 때마다 notifyListeners() 함수를 실행해서 위젯을 다시 빌드해준다.
+
+#### Provider 초기화하기 lib/main.dart
+
+프로바이더는 글로벌 상태 관리 툴이기 때문에 한 번 최상위에 선언을 해줌녀 최하단 위젯까지 모두 프로바디어의 속성들을 사용할 수 있어야 한다. 이렇게 하려면 프로젝트 최상위(lib/main.dart)에 `ScheduleProvider`를 초기화해야 한다.
+
+1. 먼저 `ScheduleAPI` & `ScheduleProvider`를 인스턴스화 해준다. 그리고 `ChangeNotifierProvider` 위젯으로 `MaterialApp` 위젯을 감싸준다. ChangeNotifierProvider 위젯은 프로바이더를 현재 위치에 주입시키고 주입한 위치의 서브에 있는 모든 위젯에서 프로바이더를 사용해준다.
+
+```dart
+import 'package:calendar_scheduler/apis/schedule_api.dart';
+import 'package:calendar_scheduler/provider/schedule_provider.dart';
+import 'package:calendar_scheduler/screens/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:calendar_scheduler/database/drift_database.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+
+void main() async {
+  WidgetsFlutterBinding();
+  await initializeDateFormatting();
+  final database = LocalDatabase();
+  GetIt.I.registerSingleton<LocalDatabase>(database);
+  final api = ScheduleAPI();
+  final scheduleProvider = ScheduleProvider(api: api);
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => scheduleProvider,
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
+    );
+  }
+}
+```
+
+#### Drift를 Provider로 대체하기
+
+드리프트를 사용할 때는 StreamBuilder를 사용해서 Stream 값을 리스닝했지만 프로바이더를 사용하면 더는 StreamBuilder를 사용할 필요가 없다. 프로바이더는 데이터를 불러올 수 있는 `watch()` & `read()` 함수를 제공해주기 때문이다. `watch()` 함수는 StreamBuilder와 같이 지속적으로 값이 변경될 때마다 즉, `notifyListeners()` 함수가 실행될 때마다 build() 함수를 재실행해준다. `read()` 함수의 경우 FutureBuilder와 유사하며 단발성으로 값을 가져올 때 사용된다.
+
+한 변수의 값에 따라 UI를 다르게 보여줘야 할 경우 `watch`
+
+버튼 탭 같은 특정 액션 후에 값을 가져올 떄는 `read()`
+
+Provider를 사용하기에 HomeScreen을 Stateful Widget이 아닌 Stateless Widget으로 바꿔준다.
+
+```dart
+import 'package:calendar_scheduler/constants/constants.dart';
+import 'package:calendar_scheduler/provider/schedule_provider.dart';
+import 'package:calendar_scheduler/widgets/main_calendar.dart';
+import 'package:calendar_scheduler/widgets/schedule_bottom_sheet.dart';
+import 'package:calendar_scheduler/widgets/schedule_card.dart';
+import 'package:calendar_scheduler/widgets/today_banner.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class HomeScreen extends StatelessWidget {
+  DateTime selectedDate = DateTime.utc(
+    // ➋ 선택된 날짜를 관리할 변수
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    final provider =
+        context.watch<ScheduleProvider>(); // ➋ 프로바이더 변경이 있을 때마다 build() 함수 재실행
+    final selectedDate = provider.selectedDate; // ➌ 선택된 날짜 가져오기
+    final schedules = provider.cache[selectedDate] ?? [];
+
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        // ➊ 새 일정 버튼
+        backgroundColor: PRIMARY_COLOR,
+        onPressed: () {
+          showModalBottomSheet(
+            // ➋ BottomSheet 열기
+            context: context,
+            isDismissible: true, // ➌ 배경 탭했을 때 BottomSheet 닫기
+            isScrollControlled: true,
+            builder: (_) => ScheduleBottomSheet(
+              selectedDate: selectedDate, // 선택된 날짜 (selectedDate) 넘겨주기
+            ),
+          );
+        },
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
+      body: SafeArea(
+        // 시스템 UI 피해서 UI 구현하기
+        child: Column(
+          // 달력과 리스트를 세로로 배치
+          children: [
+            MainCalendar(
+              selectedDate: selectedDate, // 선택된 날짜 전달하기
+
+              // 날짜가 선택됐을 때 실행할 함수
+              onDaySelected: (selectedDate, focusedDate) =>
+                  onDaySelected(selectedDate, focusedDate, context),
+            ),
+            const SizedBox(height: 8.0),
+            TodayBanner(
+              // ➊ 배너 추가하기
+              selectedDate: selectedDate,
+              count: schedules.length,
+            ),
+            const SizedBox(height: 8.0),
+            Expanded(
+              child: ListView.builder(
+                itemCount: schedules.length,
+                itemBuilder: (context, index) {
+                  final schedule = schedules[index];
+
+                  return Dismissible(
+                    key: ObjectKey(schedule.id),
+                    direction: DismissDirection.startToEnd,
+                    onDismissed: (DismissDirection direction) {
+                      provider.deleteSchedule(
+                          date: selectedDate, id: schedule.id); // ➊
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 8.0, left: 8.0, right: 8.0),
+                      child: ScheduleCard(
+                        startTime: schedule.startTime,
+                        endTime: schedule.endTime,
+                        content: schedule.content,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onDaySelected(
+    DateTime selectedDate,
+    DateTime focusedDate,
+    BuildContext context,
+  ) {
+    final provider = context.read<ScheduleProvider>();
+    provider.changeSelectedDate(
+      date: selectedDate,
+    );
+    provider.getSchedules(date: selectedDate);
+  }
+}
+```
+
+Provider 패키지를 불러오면 BuildContext가 제공되는 어느 곳에서든 `context.watch()` 함수 및 `context.read()` 함수를 실행할 수 있다. `context.watch()` 함수에는 불러오고 싶은 Provider 타입을 제네릭으로 전달해주면 된다. `context.watch()`가 build() 함수 내에서 실행되는 순간 불러온 Provider에서 notifyListeners() 함수가 실행되면 build() 함수가 다시 실행된다. 결과적으로 새로 갱신된 값에 의해서 위젯이 새로 렌더링된다. `context.watch()`는 main.dart에 선언해둔 같은 인스턴스의 scheduleProvider 변수에 반환해준다.
+
+`selectedDate` 변수를 이제 더는 위젯에서 관리하지 않고 프로바이더에서 관리하기 때문에 provider로부터 selectedDate 값을 가져와야 한다.
+
+`ScheduleProvider`에는 일정을 날짜별로 정리한 `cache` 값을 저장해두었다. 그러니 현재 선택한 날짜에 해당되는 일정들을 불러오려면 `cache` 변수에서 `selectedDate key`에 해당되는 value를 불러온다.
+
+#### Cache 적용하기 lib/providers/schedule_provider.dart
+
+```dart
+  void createSchedule({required ScheduleModel schedule}) async {
+    final targetDate = schedule.date;
+    final uuid = Uuid();
+    final tempId = uuid.v4();
+    final newSchedule = schedule.copyWith(id: tempId);
+    final savedSchedule = await api.createSchedule(schedule: schedule);
+
+    cache.update(
+      targetDate,
+      (value) => [
+        ...value,
+        newSchedule,
+      ]..sort(
+          (a, b) => a.startTime.compareTo(
+            b.startTime,
+          ),
+        ),
+      ifAbsent: () => [newSchedule],
+    );
+
+    notifyListeners();
+
+    try {
+      final savedSchedule = await api.createSchedule(schedule: schedule);
+
+      cache.update(
+        targetDate,
+        (value) => value
+            .map((e) => e.id == tempId
+                ? e.copyWith(
+                    id: savedSchedule,
+                  )
+                : e)
+            .toList(),
+      );
+    } catch (e) {
+      cache.update(
+          targetDate, (value) => value.where((e) => e.id != tempId).toList());
+    }
+  }
+
+  void deleteSchedule({required DateTime date, required String id}) async {
+    final targetSchedule =
+        cache[date]!.firstWhere((element) => element.id == id);
+
+    cache.update(
+      date,
+      (value) => value.where((element) => element.id != id).toList(),
+      ifAbsent: () => [],
+    );
+
+    try {
+      await api.deleteSchedule(id: id);
+    } catch (e) {
+      cache.update(
+        date,
+        (value) => [...value, targetSchedule]..sort(
+            (a, b) => a.startTime.compareTo(b.startTime),
+          ),
+      );
+    }
+    notifyListeners();
+  }
+```
+
+1. API 요청이 성공하면 임시로 저장한 일정의 ID만 서버에서 생성된 값으로 변경해준다.
+
+2. 에러가 발생한다면 일정 값이 제대로 저장되지 않았다는 뜻이다. 그러니 캐시에서도 일정을 삭제해준다.
+
+3. 일정을 삭제하는 API 요청을 보낸다. 이미 일정을 삭제했기 때문에 만약에 요청이 성공하면 캐시를 따로 수정할 필요가 없다.
+
+4. 만약에 API 요청에서 에러가 난다면 기억해둔 일정을 다시 캐시에 추가한다.
+
