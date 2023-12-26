@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/tags/cross-platform/</link>
         <description>Cross Platform - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/cross-platform/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 26 Dec 2023 13:18:15 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/cross-platform/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter Firebase</title>
+    <link>https://seilylook.github.io/posts/flutter-firebase/</link>
+    <pubDate>Tue, 26 Dec 2023 13:18:15 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-firebase/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/flutter-firebase.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction 기존에 만들던 Calendar Scheduler 앱에 Firebase의 FireStore 데이터베이스를 연결해준다.
+Dependency 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 table_calendar: ^3.0.9 intl: ^0.18.1 drift: ^2.14.1 sqlite3_flutter_libs: ^0.5.18 path_provider: ^2.1.1 path: ^1.8.3 get_it: ^7.]]></description>
+</item>
+<item>
     <title>Flutter Calendar Scheduler</title>
     <link>https://seilylook.github.io/posts/flutter-calendar-scheduler/</link>
     <pubDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</pubDate>

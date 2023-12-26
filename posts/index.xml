@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 26 Dec 2023 13:18:15 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter Firebase</title>
+    <link>https://seilylook.github.io/posts/flutter-firebase/</link>
+    <pubDate>Tue, 26 Dec 2023 13:18:15 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-firebase/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/flutter-firebase.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction 기존에 만들던 Calendar Scheduler 앱에 Firebase의 FireStore 데이터베이스를 연결해준다.
+Dependency 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 table_calendar: ^3.0.9 intl: ^0.18.1 drift: ^2.14.1 sqlite3_flutter_libs: ^0.5.18 path_provider: ^2.1.1 path: ^1.8.3 get_it: ^7.]]></description>
+</item>
+<item>
     <title>Flutter Calendar Scheduler</title>
     <link>https://seilylook.github.io/posts/flutter-calendar-scheduler/</link>
     <pubDate>Tue, 19 Dec 2023 11:52:16 &#43;0900</pubDate>
@@ -137,19 +148,6 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/flutter-logo.jpg" referrerpolicy="no-referrer">
             </div>]]></description>
-</item>
-<item>
-    <title>Three.js</title>
-    <link>https://seilylook.github.io/posts/three.js/</link>
-    <pubDate>Thu, 24 Aug 2023 16:13:40 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/three.js/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/threejs-logo.png" referrerpolicy="no-referrer">
-            </div>Three.js: three.js는 3D 그래픽을 생성하고 렌더링하기 위한 JavaScript 3D 라이브러리입니다. 웹 브라우저에서 3D 그래픽을 만들고 다루기 위해 사용되며, WebGL 기술을 기반으로 하여 다양한 3D 시각화 및 인터랙티브 웹 애플리케이션을 개발할 수 있게 해줍니다.
-Three.js https://threejs.org/
-1. 시작 1.1 설치 three.js는 npm을 포함한 빌드 툴에서 설치가 가능하고, CDN이나 static 호스팅으로 빠르게 사용이 가능하다. 대부분의 경우 npm을 통한 설치가 가장 좋은 선택이다.
-three.js의 모든 메서드들은 ES modules에 기반하고 있으며, 마지막 프로젝트에 필요한 부분만 불러오도록 할 것이다.]]></description>
 </item>
 </channel>
 </rss>

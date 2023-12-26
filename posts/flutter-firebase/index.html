@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Flutter Firebase - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Flutter Firebase" />
+<meta property="og:description" content="Introduction 기존에 만들던 Calendar Scheduler 앱에 Firebase의 FireStore 데이터베이스를 연결해준다.
+Dependency 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 table_calendar: ^3.0.9 intl: ^0.18.1 drift: ^2.14.1 sqlite3_flutter_libs: ^0.5.18 path_provider: ^2.1.1 path: ^1.8.3 get_it: ^7." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/flutter-firebase/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-26T13:18:15+09:00" />
+<meta property="article:modified_time" content="2023-12-26T13:18:15+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Flutter Firebase"/>
+<meta name="twitter:description" content="Introduction 기존에 만들던 Calendar Scheduler 앱에 Firebase의 FireStore 데이터베이스를 연결해준다.
+Dependency 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 table_calendar: ^3.0.9 intl: ^0.18.1 drift: ^2.14.1 sqlite3_flutter_libs: ^0.5.18 path_provider: ^2.1.1 path: ^1.8.3 get_it: ^7."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/flutter-firebase/" /><link rel="prev" href="https://seilylook.github.io/posts/flutter-calendar-scheduler/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Flutter Firebase",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/flutter-firebase\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart","wordcount":  1251 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-firebase\/","datePublished": "2023-12-26T13:18:15+09:00","dateModified": "2023-12-26T13:18:15+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/flutter-firebase/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/flutter-firebase/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Firebase</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-26">2023-12-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1251 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/flutter-firebase.jpeg"
+        data-srcset="/images/flutter-firebase.jpeg, /images/flutter-firebase.jpeg 1.5x, /images/flutter-firebase.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/flutter-firebase.jpeg"
+        title="/images/flutter-firebase.jpeg" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#dependency">Dependency</a></li>
+    <li><a href="#firebase란"><code>Firebase</code>란?</a></li>
+    <li><a href="#firestore란"><code>Firestore</code>란?</a>
+      <ul>
+        <li><a href="#파이어스토어-문서-삽입">파이어스토어 문서 삽입</a></li>
+        <li><a href="#파이어스토어-문서-조회">파이어스토어 문서 조회</a></li>
+      </ul>
+    </li>
+    <li><a href="#파이어베이스-및-파이어스토어-설치-및-설정">파이어베이스 및 파이어스토어 설치 및 설정</a>
+      <ul>
+        <li><a href="#파이어베이스-cli-설치-및-로그인하기">파이어베이스 CLI 설치 및 로그인하기</a></li>
+        <li><a href="#프로젝트에-파이어베이스-추가하기">프로젝트에 파이어베이스 추가하기</a>
+          <ul>
+            <li><a href="#터미널에서-아래의-명령어를-입력해-flutterfire-cli를-설치해준다">터미널에서 아래의 명령어를 입력해 FlutterFire CLI를 설치해준다.</a></li>
+            <li><a href="#환경-변수를-설정해준다">환경 변수를 설정해준다.</a></li>
+            <li><a href="#파이어베이스-console로-가서-프로젝트를-생성해준다">파이어베이스 console로 가서 프로젝트를 생성해준다.</a></li>
+            <li><a href="#프로젝트-연결">프로젝트 연결</a></li>
+            <li><a href="#파이어스토어-데이터베이스-생성하기">파이어스토어 데이터베이스 생성하기</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#구현">구현</a>
+      <ul>
+        <li><a href="#firebase_coer를-통해-프로젝트에-파이어베이스-연결">firebase_coer를 통해 프로젝트에 파이어베이스 연결</a></li>
+        <li><a href="#일정-데이터-삽입">일정 데이터 삽입</a></li>
+        <li><a href="#일정-데이터-받아오기">일정 데이터 받아오기</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>기존에 만들던 <code>Calendar Scheduler</code> 앱에 <code>Firebase</code>의 <code>FireStore</code> 데이터베이스를 연결해준다.</p>
+<h2 id="dependency">Dependency</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">dependencies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">flutter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sdk</span><span class="p">:</span><span class="w"> </span><span class="l">flutter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># The following adds the Cupertino Icons font to your application.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Use with the CupertinoIcons class for iOS style icons.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cupertino_icons</span><span class="p">:</span><span class="w"> </span><span class="l">^1.0.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">table_calendar</span><span class="p">:</span><span class="w"> </span><span class="l">^3.0.9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">intl</span><span class="p">:</span><span class="w"> </span><span class="l">^0.18.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">drift</span><span class="p">:</span><span class="w"> </span><span class="l">^2.14.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sqlite3_flutter_libs</span><span class="p">:</span><span class="w"> </span><span class="l">^0.5.18</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path_provider</span><span class="p">:</span><span class="w"> </span><span class="l">^2.1.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">^1.8.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">get_it</span><span class="p">:</span><span class="w"> </span><span class="l">^7.6.4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">dio</span><span class="p">:</span><span class="w"> </span><span class="l">^5.4.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">^6.1.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uuid</span><span class="p">:</span><span class="w"> </span><span class="l">^4.2.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">firebase_core</span><span class="p">:</span><span class="w"> </span><span class="l">^2.24.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cloud_firestore</span><span class="p">:</span><span class="w"> </span><span class="l">^4.13.6</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="firebase란"><code>Firebase</code>란?</h2>
+<p>파이어베이스는 구글이 인수한 모바일 앱 개발에 최적화된 기능을 제공하는 서비스이다. 플러터 뿐만 아니라 다른 앱 개발 프레임워크 그리고 웹이나 서버에서도 이용할 수 있다. 파이어베이스으이 데이터베이스 기능인 <code>Firestore</code>를 사용할 수 있다.</p>
+<h2 id="firestore란"><code>Firestore</code>란?</h2>
+<p>파이어스토어는 <code>NoSQL</code> 데이터베이스이다. 필요한 서버와 인프라 관리를 구글에서 해주기 때문에 백엔드 프로그래밍에 대해 크게 신경쓸 필요가 없다. 클라이언트와 서버의 데이터를 실시간으로 연동하고 오프라인 지원이 자동으로 되어서 네트워크 지연과 인터넷 연결과 관계없이 데이털르 저장할 수 있다. 또한 파이어베이스에서 제공하는 파이어스토어 SDK를 사용하면 따로 HTTP 요청 코드를 작성할 필요 없이 제공되는 SDK로 직관적으로 프로그래밍 할 수 있다.</p>
+<p>파이어스토어는 NoSQL 답게 두 가지 데이터 개념이 있다. <code>Collection</code>과 <code>Document</code>이다. SQL 기반의 데이터베이스와 비교하면 컬렉션은 테이블에 해당되고 문서는 열에 해당된다. NoSQL 문서는 SQL 데이터베이스와 비교해 더 유연한 데이터 구조를 사용할 수 있다. 예를 들어 SQL의 테이블에는 행과 열의 조합으로 하나의 행과 열 조합에는 하나의 값만 입력할 수 있다. 하지만 NoSQL의 문서에서는 키와 값의 조합으로 하나의 값이 들어가는 위치에 리스트나 맵 등 완전한 JSON 구조를 통째로 넣을 수 있다.</p>
+<h3 id="파이어스토어-문서-삽입">파이어스토어 문서 삽입</h3>
+<p>파이어스토어에 문서를 삽입하는 방법은 대표적으로 두가지가 있다. 첫 번째로 <code>add()</code> 함수를 이용한 삽입 방법이다. <code>add()</code> 함수를 이용해서 문서를 삽입하면 파이어스토어에서 자동으로 문서의 ID 값을 생성해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">final</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;seilylook&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="m">31</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;favorites&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;guitar&#39;</span><span class="p">,</span> <span class="s1">&#39;coffee&#39;</span><span class="p">,</span> <span class="s1">&#39;beer&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">FirebaseFirestore</span><span class="p">.</span><span class="n">instance</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="n">collection</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="파이어스토어-문서-조회">파이어스토어 문서 조회</h3>
+<p>파이어스토어는 아주 강력한 문서 조회 기능을 제공한다. 데이터가 변경될 때마다 실시간으로 (Stream) 업데이트를 받영받을 수 있고 1회성으로 (Future) 데이터를 업데이트 받을 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="n">FirebaseFirestore</span><span class="p">.</span><span class="n">intance</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="n">collection</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="n">snapshots</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>collection()</code> 함수에 <code>snapshots()</code> 함수를 실행하면 컬렉션의 모든 문서를 Stream<QuerySnapshot> 형태로 받아올 수 있다. Stream 형태로 받아오기 때문에 컬렉션의 데이터가 업데이트되면 즉시 화면에 반영된다.</p>
+<p>Stream 형태로 문서를 받아오면 데이터 조회를 과도하게 많이 하게 될 수 있다. 그래서 파이어스토어는 Future 형태로 일회성으로 데이털르 가져오는 기능도 제공한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="n">FirebaseFirestore</span><span class="p">.</span><span class="n">intance</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="n">collection</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>get()</code> 함수를 실행하면 Future<QuerySnapshot>이 반환된다. 즉 실행하는 순간 한 번만 데이터를 받아오고 지속적으로 업데이트 하지 않는다.</p>
+<h2 id="파이어베이스-및-파이어스토어-설치-및-설정">파이어베이스 및 파이어스토어 설치 및 설정</h2>
+<h3 id="파이어베이스-cli-설치-및-로그인하기">파이어베이스 CLI 설치 및 로그인하기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -sL https://firebase.tools <span class="p">|</span> bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>CLI를 설치해주고 구글 아이디를 통해 로그인을 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">firebase login
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="프로젝트에-파이어베이스-추가하기">프로젝트에 파이어베이스 추가하기</h3>
+<p>플러터 프로젝트에 파이어베이스 설정을 추가하려면 <code>FlutterFire CLI</code>를 설치하고 설정 기능을 실행해줘야 한다.</p>
+<h4 id="터미널에서-아래의-명령어를-입력해-flutterfire-cli를-설치해준다">터미널에서 아래의 명령어를 입력해 FlutterFire CLI를 설치해준다.</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">dart pub global activate flutterfire_cli
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="환경-변수를-설정해준다">환경 변수를 설정해준다.</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$PATH</span><span class="s2">&#34;</span>:<span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.pub-cache/bin&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="파이어베이스-console로-가서-프로젝트를-생성해준다">파이어베이스 console로 가서 프로젝트를 생성해준다.</h4>
+<img src="/images/firestore-connection-1.png" />
+<h4 id="프로젝트-연결">프로젝트 연결</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> calendar_scheduler
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">flutterfire configure
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>프로젝트 설정이 완료되면 lib/firebase_option.dart 파일이 생성된다.</p>
+<h4 id="파이어스토어-데이터베이스-생성하기">파이어스토어 데이터베이스 생성하기</h4>
+<p>Firebase console로 이동해서</p>
+<ol>
+<li>
+<p>빌드 탭 클릭</p>
+</li>
+<li>
+<p>Firestore database 탭 클릭</p>
+</li>
+<li>
+<p>규칙을 <code>allow read, write: if true;</code>로 바꿔준다.</p>
+</li>
+</ol>
+<img src="/images/firestore-connection-4.png" />
+<img src="/images/firestore-connection-3.png" />
+<h2 id="구현">구현</h2>
+<h3 id="firebase_coer를-통해-프로젝트에-파이어베이스-연결">firebase_coer를 통해 프로젝트에 파이어베이스 연결</h3>
+<p>firebase_core 플러그인에서 제공하는 <code>Firebase.initializeApp()</code> 함수를 사용하면 플러터 앱에 파이어베이스 설정을 추가할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/screens/home_screen.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:intl/date_symbol_data_local.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:firebase_core/firebase_core.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/firebase_options.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">WidgetsFlutterBinding</span><span class="p">.</span><span class="n">ensureInitialized</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">await</span> <span class="n">Firebase</span><span class="p">.</span><span class="n">initializeApp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nl">options:</span> <span class="n">DefaultFirebaseOptions</span><span class="p">.</span><span class="n">currentPlatform</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">await</span> <span class="n">initializeDateFormatting</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">runApp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">const</span> <span class="n">MyApp</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyApp</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">MyApp</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// This widget is the root of your application.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">MaterialApp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">debugShowCheckedModeBanner:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">home:</span> <span class="n">HomeScreen</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="일정-데이터-삽입">일정 데이터 삽입</h3>
+<p>widgets/schedule_bottom.dart 파일에 있는 ScheduleBottomSheet 위젯의 <code>onSavePressed()</code> 함수에서 저장 기능을 실행한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onSavePressed</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">formKey</span><span class="p">.</span><span class="n">currentState</span><span class="o">!</span><span class="p">.</span><span class="n">validate</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">formKey</span><span class="p">.</span><span class="n">currentState</span><span class="o">!</span><span class="p">.</span><span class="n">save</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="kd">final</span> <span class="n">schedule</span> <span class="o">=</span> <span class="n">ScheduleModel</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">id:</span> <span class="n">Uuid</span><span class="p">().</span><span class="n">v4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">content:</span> <span class="n">content</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">date:</span> <span class="n">widget</span><span class="p">.</span><span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">startTime:</span> <span class="n">startTime</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">endTime:</span> <span class="n">endTime</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="kd">await</span> <span class="n">FirebaseFirestore</span><span class="p">.</span><span class="n">instance</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="n">collection</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;schedule&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="n">doc</span><span class="p">(</span><span class="n">schedule</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="n">schedule</span><span class="p">.</span><span class="n">toJson</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">Navigator</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/images/firestore-connection-2.png" />
+<h3 id="일정-데이터-받아오기">일정 데이터 받아오기</h3>
+<p>lib/screens/home_screen.dart 파일의 HomeScreen 위젯에서 더는 <code>provider</code>가 필요 없다. 파이어베이스에서 바로 데이터를 가져올 수 있기 때문이다.</p>
+<p>Provider를 사용할 때는 provider의 내부에서 선택된 날짜를 관리했다. 하지만 이제는 provider를 사용하지 않으니 HomeScreen을 <code>StatefulWidget</code>으로 변경해서 선택된 날짜와 관련된 상태 관리를 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/constants/constants.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/model/schedule_model.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/main_calendar.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/schedule_bottom_sheet.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/schedule_card.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:calendar_scheduler/widgets/today_banner.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:cloud_firestore/cloud_firestore.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">HomeScreen</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_HomeScreenState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_HomeScreenState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">HomeScreen</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DateTime</span> <span class="n">selectedDate</span> <span class="o">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">utc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ➋ 선택된 날짜를 관리할 변수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">year</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">month</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">day</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Scaffold</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">floatingActionButton:</span> <span class="n">FloatingActionButton</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ➊ 새 일정 버튼
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nl">backgroundColor:</span> <span class="n">PRIMARY_COLOR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">onPressed:</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">showModalBottomSheet</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// ➋ BottomSheet 열기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">context:</span> <span class="n">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">isDismissible:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// ➌ 배경 탭했을 때 BottomSheet 닫기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nl">isScrollControlled:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">builder:</span> <span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">ScheduleBottomSheet</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span> <span class="c1">// 선택된 날짜 (selectedDate) 넘겨주기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">child:</span> <span class="kd">const</span> <span class="n">Icon</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="n">Icons</span><span class="p">.</span><span class="n">add</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">body:</span> <span class="n">SafeArea</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 시스템 UI 피해서 UI 구현하기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nl">child:</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// 달력과 리스트를 세로로 배치
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">MainCalendar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span> <span class="c1">// 선택된 날짜 전달하기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">              <span class="c1">// 날짜가 선택됐을 때 실행할 함수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="nl">onDaySelected:</span> <span class="p">(</span><span class="n">selectedDate</span><span class="p">,</span> <span class="n">focusedDate</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">onDaySelected</span><span class="p">(</span><span class="n">selectedDate</span><span class="p">,</span> <span class="n">focusedDate</span><span class="p">,</span> <span class="n">context</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">const</span> <span class="n">SizedBox</span><span class="p">(</span><span class="nl">height:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">StreamBuilder</span><span class="o">&lt;</span><span class="n">QuerySnapshot</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">stream:</span> <span class="n">FirebaseFirestore</span><span class="p">.</span><span class="n">instance</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">collection</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;schedule&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">where</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;date&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">isEqualTo:</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;</span><span class="si">${</span><span class="n">selectedDate</span><span class="p">.</span><span class="n">year</span><span class="si">}${</span><span class="n">selectedDate</span><span class="p">.</span><span class="n">month</span><span class="si">}${</span><span class="n">selectedDate</span><span class="p">.</span><span class="n">day</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">snapshots</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">builder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">snapshot</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">TodayBanner</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">selectedDate:</span> <span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">count:</span> <span class="n">snapshot</span><span class="p">.</span><span class="n">data</span><span class="o">?</span><span class="p">.</span><span class="n">docs</span><span class="p">.</span><span class="n">length</span> <span class="o">??</span> <span class="m">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">const</span> <span class="n">SizedBox</span><span class="p">(</span><span class="nl">height:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Expanded</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">child:</span> <span class="n">StreamBuilder</span><span class="o">&lt;</span><span class="n">QuerySnapshot</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">stream:</span> <span class="n">FirebaseFirestore</span><span class="p">.</span><span class="n">instance</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">collection</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;schedule&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">where</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;date&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">isEqualTo:</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;</span><span class="si">${</span><span class="n">selectedDate</span><span class="p">.</span><span class="n">year</span><span class="si">}${</span><span class="n">selectedDate</span><span class="p">.</span><span class="n">month</span><span class="si">}${</span><span class="n">selectedDate</span><span class="p">.</span><span class="n">day</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">snapshots</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">builder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">snapshot</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">snapshot</span><span class="p">.</span><span class="n">hasError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="k">return</span> <span class="kd">const</span> <span class="n">Center</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span><span class="s1">&#39;일정 정보를 가져오지 못했습니다.&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">snapshot</span><span class="p">.</span><span class="n">connectionState</span> <span class="o">==</span> <span class="n">ConnectionState</span><span class="p">.</span><span class="n">waiting</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="k">return</span> <span class="kd">const</span> <span class="n">Center</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="nl">child:</span> <span class="n">CircularProgressIndicator</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="kd">final</span> <span class="n">schedules</span> <span class="o">=</span> <span class="n">snapshot</span><span class="p">.</span><span class="n">data</span><span class="o">!</span><span class="p">.</span><span class="n">docs</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">.</span><span class="n">map</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">(</span><span class="n">QueryDocumentSnapshot</span> <span class="n">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">ScheduleModel</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                          <span class="nl">json:</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">as</span> <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">.</span><span class="n">toList</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">ListView</span><span class="p">.</span><span class="n">builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">itemCount:</span> <span class="n">schedules</span><span class="p">.</span><span class="n">length</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">itemBuilder:</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kd">final</span> <span class="n">schedule</span> <span class="o">=</span> <span class="n">schedules</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">Dismissible</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">key:</span> <span class="n">ObjectKey</span><span class="p">(</span><span class="n">schedule</span><span class="p">.</span><span class="n">id</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">direction:</span> <span class="n">DismissDirection</span><span class="p">.</span><span class="n">startToEnd</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">onDismissed:</span> <span class="p">(</span><span class="n">DismissDirection</span> <span class="n">direction</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">FirebaseFirestore</span><span class="p">.</span><span class="n">instance</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">.</span><span class="n">collection</span><span class="p">(</span><span class="s1">&#39;schedule&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">.</span><span class="n">doc</span><span class="p">(</span><span class="n">schedule</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">.</span><span class="n">delete</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                      <span class="nl">child:</span> <span class="n">Padding</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">padding:</span> <span class="kd">const</span> <span class="n">EdgeInsets</span><span class="p">.</span><span class="n">only</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                            <span class="nl">left:</span> <span class="m">8.0</span><span class="p">,</span> <span class="nl">right:</span> <span class="m">8.0</span><span class="p">,</span> <span class="nl">bottom:</span> <span class="m">8.0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                        <span class="nl">child:</span> <span class="n">ScheduleCard</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                          <span class="nl">startTime:</span> <span class="n">schedule</span><span class="p">.</span><span class="n">startTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="nl">endTime:</span> <span class="n">schedule</span><span class="p">.</span><span class="n">endTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="nl">content:</span> <span class="n">schedule</span><span class="p">.</span><span class="n">content</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">onDaySelected</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span> <span class="n">selectedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span> <span class="n">focusedDate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">BuildContext</span> <span class="n">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setState</span><span class="p">(()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">selectedDate</span> <span class="o">=</span> <span class="n">selectedDate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>
+<p><code>FirebaseFirestore.collection('schedule').snapshots()</code>를 실행하면 파이어스토어의 schedule 컬렉션에 있는 모든 데이터를 스트림으로 받아올 수 있다. 하지만 가져오고 싶은 일정은 selectedDate 값과 date 속성이 같은 일정이기 때문에 <code>where()</code> 함수를 싱행해서 필터를 진행한다. <code>where()</code> 함수의 첫 번째 매개변수에는 필터를 적용할 필드인 <code>date</code>를 입력하고 <code>isEqualTo</code> 매개변수에 등가비교할 값인 <code>selectedDate</code>를 년, 월, 일 순으로 입력해준다.</p>
+</li>
+<li>
+<p><code>QuerySnapshot</code>의 <code>data.docs</code> 값을 불러오면 쿼리에서 제공받은 모든 데이터를 리스트로 받아올 수 있다. 이 각 값은 <code>QueryDocumentSnapshot</code> 형태로 제공된다. <code>ScheduleModel.fromJson</code> 생성자는 <code>Map&lt;String, dynamic&gt;</code> 형태를 입력받기 때문에 <code>QueryDocumentSnapshot</code>에 <code>data()</code> 함수를 실행해서 <code>Map&lt;String, dynamic&gt;</code> 형태로 데이터를 전환하면 <code>ScheduleModel</code>로 데이터를 매핑할 수 있다.</p>
+</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/flutter-firebase/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/flutter-firebase/" data-title="Flutter Firebase" data-hashtags="Development,Cross Platform,Flutter,Dart"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/flutter-firebase/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/flutter-firebase/" data-title="Flutter Firebase"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/flutter-firebase/" data-title="Flutter Firebase"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/flutter-firebase/" data-title="Flutter Firebase" data-image="/images/flutter-firebase.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/flutter-calendar-scheduler/" class="prev" rel="prev" title="Flutter Calendar Scheduler"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Flutter Calendar Scheduler</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
