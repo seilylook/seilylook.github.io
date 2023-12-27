@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 26 Dec 2023 13:18:15 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 27 Dec 2023 15:45:26 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Calendar Scheduler Deploy</title>
+    <link>https://seilylook.github.io/posts/calendar-scheduler-deploy/</link>
+    <pubDate>Wed, 27 Dec 2023 15:45:26 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/calendar-scheduler-deploy/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/deploy-image.png" referrerpolicy="no-referrer">
+            </div>Introduction 기존에 작업하던 calendar-scheduler를 배포.
+앱 Bundle ID 설정하기 Bundle ID는 앱을 식별하는 유일한 값이다. 세 개의 단어를 마침표로 구분해서 입력하며 같은 플랫폼(안드로이드, iOS 등) 내에서 다른 앱과 절대로 겹칠 수가 없다. 일반적으로 도메인을 거꾸로 입력한 형태를 띈다.
+직접 모든 파일에 적힌 Bundle ID를 변경해 줄 수도 있지만 그러면 실수가 생길 수도 있고 시간이 오래 걸리기 때문에 플러그인을 사용한다.
+change_app_package_name 설치 1 flutter pub add change_app_package_name bundle id 바꿔주기 1 flutter pub run change_app_package_name:main &lt;바꿔 줄 이름&gt; 변경된 Bundle ID를 피어어베이스에 등록해주기 위해 설정해준다.]]></description>
+</item>
+<item>
     <title>Flutter Firebase</title>
     <link>https://seilylook.github.io/posts/flutter-firebase/</link>
     <pubDate>Tue, 26 Dec 2023 13:18:15 &#43;0900</pubDate>
@@ -138,16 +151,6 @@ SQLx: SQL 비동기 도구
 PostgreSQL: 데이터베이스
 Redis: 토큰 만료 등을 도와주는 라이브러리
 1. 시작 1.1 프로젝트 생성 1 2 3 4 5 6 7 cd Rust mkdir auth-svelte-rust cd auth-svelte-rust cargo new backend cd backend를 통해 들어가서 Cargo.]]></description>
-</item>
-<item>
-    <title>Flutter</title>
-    <link>https://seilylook.github.io/posts/flutter/</link>
-    <pubDate>Fri, 25 Aug 2023 14:01:59 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/flutter/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/flutter-logo.jpg" referrerpolicy="no-referrer">
-            </div>]]></description>
 </item>
 </channel>
 </rss>
