@@ -170,3 +170,50 @@
 
 {{</admonition>}}
 
+### 7. Calendar Scheduler
+
+<center>
+  <a href="https://github.com/seilylook/flutter-scheduler.git">
+      <img src="https://github-readme-stats.vercel.app/api/pin/?username=seilylook&repo=flutter-scheduler" alt="Readme Card" style="width:450px;">
+  </a>
+</center>
+
+{{<admonition success Demo>}}
+
+<img src="/images/flutter-scheduler-1.png" />
+
+<table>
+  <tr>
+    <td><img src="/images/flutter-scheduler-2.png"></td>
+    <td><img src="/images/flutter-scheduler-3.png"></td>
+    <td><img src="/images/flutter-scheduler-4.png"></td>
+  </tr>
+</table>
+
+{{</admonition>}}
+
+### 8. Flutter Twitter
+
+<center>
+  <a href="https://github.com/seilylook/flutter-twitter.git">
+      <img src="https://github-readme-stats.vercel.app/api/pin/?username=seilylook&repo=flutter-twitter" alt="Readme Card" style="width:450px;">
+  </a>
+</center>
+
+{{<admonition success Demo>}}
+
+<table>
+  <tr>
+    <td><img src="/images/flutter-twitter-1.png"></td>
+    <td><img src="/images/flutter-twitter-2.png"></td>
+    <td><img src="/images/flutter-twitter-3.png"></td>
+  </tr>
+  <tr>
+    <td><img src="/images/flutter-twitter-4.png"></td>
+    <td><img src="/images/flutter-twitter-5.png"></td>
+    <td><img src="/images/flutter-twitter-6.png"></td>
+  </tr>
+</table>
+
+{{</admonition>}}
+
