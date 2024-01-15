@@ -184,7 +184,6 @@
 
 <table>
   <tr>
-    <td><img src="/images/flutter-scheduler-2.png"></td>
     <td><img src="/images/flutter-scheduler-3.png"></td>
     <td><img src="/images/flutter-scheduler-4.png"></td>
   </tr>
