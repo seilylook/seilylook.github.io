@@ -122,3 +122,66 @@ class _HomeState extends ConsumerState<Home> {
 }
 ```
 
+## Implement
+
+### Reading Providers using ConsumerWidget
+
+먼저, 앞서 말했듯이 root의 main.dart에 ProviderScope를 설정해 하위 모든 위젯에서 Provider를 사용해 데이터를 주시하도록 만들어준다.
+
+#### lib/main.dart
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_state_management/home_screen.dart';
+
+final nameProvider = Provider<String>((ref) {
+  return 'seilyook';
+});
+
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  ...
+}
+```
+
+주목할 부분은 `nameProvider` Provider `<Return 값>`이다. 앞서 말했듯이, `ref`를 통해서 다른 위젯에서 값을 캐싱하고 데이터 바인딩을 할 수 있다.
+
+#### lib/home_screen.dart
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_state_management/main.dart';
+
+class HomeScreen extends ConsumerWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final name = ref.watch(nameProvider);
+
+    return Scaffold(
+      body: Center(
+        child: Text(
+          name,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+상위 위젯인 main.dart에서 지정한 `nameProvider`의 데이터를 하위 위젯인 HomeScreen에서 바인딩 할 수 있다.
+
