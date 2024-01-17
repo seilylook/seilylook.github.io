@@ -5,25 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Flutter Riverpod - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Flutter Riverpod" />
-<meta property="og:description" content="Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. 정의: 리액티브 캐싱, 데이터 바인딩 프레임워크.
-Install 1 2 3 4 5 6 dependencies: flutter: sdk: flutter cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.9 provider/network request Network request는 모든 애플리케이션의 가장 중요한 기능이다. 하지만 네트워크 요청을 구축하기 위해서는 필수적으로 고려해야 할 사항들이 있다.
-요청이 이루어 질 때 보여줄 UI 렌더링
-에러들은 유연하게 처리되어야 한다.
-요청은 Caching 되어야 한다.
-Setting up ProviderScrope 네트워크 요청을 구축하기 전, ProviderScope를 애플리케이션 루트 파일인 main." />
+<meta property="og:description" content="Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. Flutter는 선언형 UI이며 각각의 상태를 포함하고 있는 위젯 트리를 기반으로 구성되기 때문에 State management가 매우 중요하다. 단일 위젯에서만 사용하는 상태일 경우는 상태 관리가 특별하기 관리되지 않아도 괜찮지만, 프로젝트 규모가 커질 수록 여러 위젯에섯 여러 상태에 대해 접근해야 된다. 이런 여러 위젯에서 사용하는 상태를 App State라고 부르며 App State 관리를 지원하는 여러 라이브러리가 존재하는데 Riverpod가 그 중 가장 대중적이다.
+What is Riverpod?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-riverpod/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-17T11:26:36+09:00" />
-<meta property="article:modified_time" content="2024-01-17T11:26:36+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-01-17T12:05:59+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Flutter Riverpod"/>
-<meta name="twitter:description" content="Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. 정의: 리액티브 캐싱, 데이터 바인딩 프레임워크.
-Install 1 2 3 4 5 6 dependencies: flutter: sdk: flutter cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.9 provider/network request Network request는 모든 애플리케이션의 가장 중요한 기능이다. 하지만 네트워크 요청을 구축하기 위해서는 필수적으로 고려해야 할 사항들이 있다.
-요청이 이루어 질 때 보여줄 UI 렌더링
-에러들은 유연하게 처리되어야 한다.
-요청은 Caching 되어야 한다.
-Setting up ProviderScrope 네트워크 요청을 구축하기 전, ProviderScope를 애플리케이션 루트 파일인 main."/>
+<meta name="twitter:description" content="Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. Flutter는 선언형 UI이며 각각의 상태를 포함하고 있는 위젯 트리를 기반으로 구성되기 때문에 State management가 매우 중요하다. 단일 위젯에서만 사용하는 상태일 경우는 상태 관리가 특별하기 관리되지 않아도 괜찮지만, 프로젝트 규모가 커질 수록 여러 위젯에섯 여러 상태에 대해 접근해야 된다. 이런 여러 위젯에서 사용하는 상태를 App State라고 부르며 App State 관리를 지원하는 여러 라이브러리가 존재하는데 Riverpod가 그 중 가장 대중적이다.
+What is Riverpod?"/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/flutter-riverpod/" /><link rel="prev" href="https://seilylook.github.io/posts/calendar-scheduler-deploy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -36,8 +28,8 @@ Setting up ProviderScrope 네트워크 요청을 구축하기 전, ProviderScope
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-riverpod\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart, Riverpod","wordcount":  431 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/flutter-riverpod\/","datePublished": "2024-01-17T11:26:36+09:00","dateModified": "2024-01-17T11:26:36+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart, Riverpod","wordcount":  614 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-riverpod\/","datePublished": "2024-01-17T11:26:36+09:00","dateModified": "2024-01-17T12:05:59+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -84,7 +76,7 @@ Setting up ProviderScrope 네트워크 요청을 구축하기 전, ProviderScope
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Riverpod</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a>&nbsp;<a href="/categories/study/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Study</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-17">2024-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;431 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-17">2024-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;614 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -100,6 +92,12 @@ Setting up ProviderScrope 네트워크 요청을 구축하기 전, ProviderScope
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#what-is-riverpod">What is Riverpod?</a>
+      <ul>
+        <li><a href="#reactive-caching">Reactive Caching</a></li>
+        <li><a href="#data-binding">Data Binding</a></li>
+      </ul>
+    </li>
     <li><a href="#install">Install</a></li>
     <li><a href="#providernetwork-request">provider/network request</a>
       <ul>
@@ -115,7 +113,13 @@ Setting up ProviderScrope 네트워크 요청을 구축하기 전, ProviderScope
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
-<p><code>Flutter</code> 전용 상태 관리 라이브러리인 <code>Riverpod</code> 연구를 위한 포스팅. 정의: 리액티브 캐싱, 데이터 바인딩 프레임워크.</p>
+<p><code>Flutter</code> 전용 상태 관리 라이브러리인 <code>Riverpod</code> 연구를 위한 포스팅. Flutter는 선언형 UI이며 각각의 상태를 포함하고 있는 위젯 트리를 기반으로 구성되기 때문에 <code>State management</code>가 매우 중요하다. 단일 위젯에서만 사용하는 상태일 경우는 상태 관리가 특별하기 관리되지 않아도 괜찮지만, 프로젝트 규모가 커질 수록 여러 위젯에섯 여러 상태에 대해 접근해야 된다. 이런 여러 위젯에서 사용하는 상태를 App State라고 부르며 App State 관리를 지원하는 여러 라이브러리가 존재하는데 Riverpod가 그 중 가장 대중적이다.</p>
+<h2 id="what-is-riverpod">What is Riverpod?</h2>
+<p>Riverpod은 InheritedWidget과 비슷한 동작을 하는 새로운 매커니즘으로 재구현한 상태 관리 패키지이다. Riverpod는 리액티브 캐싱, 데이터 바인딩을 지원하는 프레임워크이다.</p>
+<h3 id="reactive-caching">Reactive Caching</h3>
+<p>리액티브 캐싱이란, 데이터를 비동기적으로 계산할 때 캐싱해 해당 데이터가 필요한 모든 곳에서 쉽게 접근할 수 있도록 하는 기술이다. Riverpod에서는 Provider를 이용해 상태를 지속적으로 캐시하고 노출함으로써 데이터를 쉽게 공유하고 동기화할 수 있다. 예를 들어, Riverpod의 Provider를 사용하면, 처음 데이터를 가져온 뒤에는 동일한 데이터를 다른 컴포넌트에서 다시 가져올 필요 없이, 이미 캐시된 데이터를 활용해 중복 호출을 줄이며 상태를 효율적으로 관리하고 성능을 향상시킬 수 있다.</p>
+<h3 id="data-binding">Data Binding</h3>
+<p>데이터 바인딩이란, UI와 데이터를 결합하는 기술로 데이터의 변경에 따라 UI를 자동으로 변경하도록 해준다. Riverpod를 이용하면 상태를 나타내는 Provider 및 <code>ref</code> 객체의 <code>watch</code> 메소드를 통해 상태의 변경을 관찰해 상태가 변경되면 UI가 자동으로 업데이트 되도록 할 수 있다. 즉, Riverpod을 이용하며 MVVM 패턴을 구현할 수 있다.</p>
 <h2 id="install">Install</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -300,7 +304,8 @@ The type of this object is determined by the name of the function/class.</div>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-01-17</span>
+                <span>Updated on 2024-01-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/70f74144145371b031d6fe10fe1bf2f8e297bc95" target="_blank" title="commit by seilylook(seilylook@naver.com) 70f74144145371b031d6fe10fe1bf2f8e297bc95: docs: flutter riverpod">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>70f7414</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

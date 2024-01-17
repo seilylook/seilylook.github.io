@@ -14,12 +14,8 @@
     <guid>https://seilylook.github.io/posts/flutter-riverpod/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/riverpod.png" referrerpolicy="no-referrer">
-            </div>Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. 정의: 리액티브 캐싱, 데이터 바인딩 프레임워크.
-Install 1 2 3 4 5 6 dependencies: flutter: sdk: flutter cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.9 provider/network request Network request는 모든 애플리케이션의 가장 중요한 기능이다. 하지만 네트워크 요청을 구축하기 위해서는 필수적으로 고려해야 할 사항들이 있다.
-요청이 이루어 질 때 보여줄 UI 렌더링
-에러들은 유연하게 처리되어야 한다.
-요청은 Caching 되어야 한다.
-Setting up ProviderScrope 네트워크 요청을 구축하기 전, ProviderScope를 애플리케이션 루트 파일인 main.]]></description>
+            </div>Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. Flutter는 선언형 UI이며 각각의 상태를 포함하고 있는 위젯 트리를 기반으로 구성되기 때문에 State management가 매우 중요하다. 단일 위젯에서만 사용하는 상태일 경우는 상태 관리가 특별하기 관리되지 않아도 괜찮지만, 프로젝트 규모가 커질 수록 여러 위젯에섯 여러 상태에 대해 접근해야 된다. 이런 여러 위젯에서 사용하는 상태를 App State라고 부르며 App State 관리를 지원하는 여러 라이브러리가 존재하는데 Riverpod가 그 중 가장 대중적이다.
+What is Riverpod?]]></description>
 </item>
 <item>
     <title>Calendar Scheduler Deploy</title>
