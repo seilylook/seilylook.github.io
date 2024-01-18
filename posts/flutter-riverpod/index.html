@@ -10,7 +10,7 @@ What is Riverpod?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-riverpod/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-17T11:26:36+09:00" />
-<meta property="article:modified_time" content="2024-01-17T12:29:03+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-01-17T13:07:50+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Flutter Riverpod"/>
@@ -28,8 +28,8 @@ What is Riverpod?"/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-riverpod\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart, Riverpod","wordcount":  787 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/flutter-riverpod\/","datePublished": "2024-01-17T11:26:36+09:00","dateModified": "2024-01-17T12:29:03+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart, Riverpod","wordcount":  1683 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-riverpod\/","datePublished": "2024-01-17T11:26:36+09:00","dateModified": "2024-01-17T13:07:50+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -76,8 +76,8 @@ What is Riverpod?"/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Riverpod</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a>&nbsp;<a href="/categories/study/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Study</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-17">2024-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;787 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-17">2024-01-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1683 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -116,6 +116,20 @@ What is Riverpod?"/>
           <ul>
             <li><a href="#libmaindart">lib/main.dart</a></li>
             <li><a href="#libhome_screendart">lib/home_screen.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#stateprovider">StateProvider</a>
+          <ul>
+            <li><a href="#libmaindart-1">lib/main.dart</a></li>
+            <li><a href="#libhome_screendart-1">lib/home_screen.dart</a></li>
+          </ul>
+        </li>
+        <li><a href="#statenotifier--statenotifierprovider">StateNotifier &amp; StateNotifierProvider</a>
+          <ul>
+            <li><a href="#model---libuserdart">model - lib/user.dart</a></li>
+            <li><a href="#statenotifier---libuserdart">StateNotifier - lib/user.dart</a></li>
+            <li><a href="#statenotifierprovider---libmaindart">StateNotifierProvider - lib/main.dart</a></li>
+            <li><a href="#libhome_screendart-2">lib/home_screen.dart</a></li>
           </ul>
         </li>
       </ul>
@@ -415,12 +429,498 @@ The type of this object is determined by the name of the function/class.</div>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>상위 위젯인 main.dart에서 지정한 <code>nameProvider</code>의 데이터를 하위 위젯인 HomeScreen에서 바인딩 할 수 있다.</p>
-</div><div class="post-footer" id="post-footer">
+<ul>
+<li><code>ref.watch</code>: 위젯의 build 메서드 내부 또는 Provider의 본문 내부에서 사용되어 해당 위젯 또는 프로바이더가 다른 프로바이더를 감시하도록 사용된다.</li>
+</ul>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>watch</code> 메서드는 비동기적으로 호출되지 않아야 하며 ElevatedButton의 <code>onPressed</code> 내부 또는 initState 및 상태 라이프 사이클 내에서 사용해서는 안된다. 이러한 경우는 <code>ref.read</code>를 사용하는 것이 좋다.</div>
+        </div>
+    </div>
+<ul>
+<li><code>ref.listen</code>: 위젯 똔느 프로바이더를 감시하는 것이 가능하다. 두 메서드 간의 주요 차이점은 감시 대상 프로바이더가 변경될 때 위젯/프로바이더를 다시 빌드하는 대신 ref.listen을 사용하면 사용자가 지정한 콜백 함수를 호출한다. 이는 특정 변경이 발생할 떄 액션을 수행하는 데 유용하며, 예를 들어 오류 발생 시 스낵바를 등의 작업에 활용될 수 있다.</li>
+</ul>
+<p>ref.listen 메서드는 두 개의 parameter가 필요하며, 첫 번째는 프로바디어이고 두 번째는 상태 변경 시 실행하려는 콜백 함수이다. 호출된 콜백 함에는 이전 상태의 값과 새로운 상태의 값 두 가지 값이 전달된다.</p>
+<p>ref.listen 메서드는 프로바이더, 위젯의 body 내부에서 사용될 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="err">@</span><span class="n">riverpod</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Counter</span> <span class="kd">extends</span> <span class="n">_$Counter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">build</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">HomeView</span> <span class="kd">extends</span> <span class="n">ConsumerWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">HomeView</span><span class="p">({</span><span class="n">Key</span><span class="o">?</span> <span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">WidgetRef</span> <span class="n">ref</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ref</span><span class="p">.</span><span class="n">listen</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">counterProvider</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="o">?</span> <span class="n">previousCount</span><span class="p">,</span> <span class="kt">int</span> <span class="n">newCount</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">print</span><span class="p">(</span><span class="s1">&#39;The counter changed </span><span class="si">$</span><span class="n">newCount</span><span class="s1">&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Container</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">주의: <code>listen</code> 메서드는 비동기적으로 호출되지 않아야 하며 ElevatedButton의 onPressed 내부 또는 initState 및 기타 상태 라이프 사이클 내에서 사용해서는 안됩니다.</div>
+        </div>
+    </div>
+<ul>
+<li><code>ref.read</code>: 일반적으로 사용자 상호작용에서 트리거된 함수 내부에서 자주 사용된다. 예를 들어 사용자가 버튼을 클릭할 때 카운터를 증가시키기 위해 ref.read를 사용한다.</li>
+</ul>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">ref.read 사용은 가능한 한 피해야 합니다. 왜냐하면 이는 반응적이지 않기 때문입니다.</div>
+        </div>
+    </div>
+<h3 id="stateprovider">StateProvider</h3>
+<p>StateProvider는 상태를 수정하는 방법을 노출하는 프로바이더이다. 이는 매우 간단한 사용 사례에 대한 NotifierProvider의 단순화된 버전으로, 매우 간단한 경우에 Notifier 클래스를 작성하지 않아도 되도록 설계되었다.</p>
+<p>StateProvider는 주로 사용자 인터페이스에서 간단한 변수의 수정을 허용하기 위해 존재한다. StateProvider의 상태는 일반적으로 다음 중 하나이다.</p>
+<ul>
+<li>
+<p>Enum</p>
+</li>
+<li>
+<p>문자열, 일반적으로 텍스트 필드의 내용</p>
+</li>
+<li>
+<p>체크 박스용 bool 값</p>
+</li>
+<li>
+<p>페이지네이션이나 나이 폼 필드를 위한 숫자</p>
+</li>
+</ul>
+<p>다음 상황에서 StateProvider를 사용하지 않아야 한다.</p>
+<ul>
+<li>
+<p>상태에 유효성 검사 논리가 필요한 경우</p>
+</li>
+<li>
+<p>상태가 복잡한 객체인 경우(사용자 정의 클래스, 목록/맵 등)</p>
+</li>
+<li>
+<p>상태를 수정하는 논리가 복잡한 경우</p>
+</li>
+</ul>
+<h4 id="libmaindart-1">lib/main.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">final</span> <span class="n">nameProvider</span> <span class="o">=</span> <span class="n">StateProvider</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">?&gt;</span><span class="p">((</span><span class="n">ref</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kc">null</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="libhome_screendart-1">lib/home_screen.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter_riverpod/flutter_riverpod.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter_state_management/main.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">HomeScreen</span> <span class="kd">extends</span> <span class="n">ConsumerWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">HomeScreen</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// notifier가 상태 값을 변경하도록 도와준다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="n">onSubmitted</span><span class="p">(</span><span class="n">WidgetRef</span> <span class="n">ref</span><span class="p">,</span> <span class="kt">String</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">name</span> <span class="o">=</span> <span class="n">ref</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">nameProvider</span><span class="p">.</span><span class="n">notifier</span><span class="p">).</span><span class="n">update</span><span class="p">((</span><span class="n">state</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">WidgetRef</span> <span class="n">ref</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">name</span> <span class="o">=</span> <span class="n">ref</span><span class="p">.</span><span class="n">watch</span><span class="p">(</span><span class="n">nameProvider</span><span class="p">)</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Scaffold</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">appBar:</span> <span class="n">AppBar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">title:</span> <span class="kd">const</span> <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">&#39;Home&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">body:</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="n">TextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onSubmitted:</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">onSubmitted</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">Center</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">child:</span> <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="nl">style:</span> <span class="kd">const</span> <span class="n">TextStyle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">fontSize:</span> <span class="m">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">bold</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="statenotifier--statenotifierprovider">StateNotifier &amp; StateNotifierProvider</h3>
+<p>StateProvider보다 복잡한 데이터의 변경을 위해서 사용하는 것이 <code>StateNotifier</code>이다. 데이터 베이스 모델에 담긴 데이터 변경을 위해 주로 사용한다.</p>
+<h4 id="model---libuserdart">model - lib/user.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="err">@</span><span class="n">immutable</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">User</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">User</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="k">this</span><span class="p">.</span><span class="n">age</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">User</span> <span class="n">copyWith</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">?</span> <span class="n">age</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">User</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">name:</span> <span class="n">name</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">age:</span> <span class="n">age</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">age</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">toMap</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="n">age</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">factory</span> <span class="n">User</span><span class="p">.</span><span class="n">fromMap</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">User</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">name:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">age:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">String</span> <span class="n">toJson</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">json</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">toMap</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">factory</span> <span class="n">User</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="kt">String</span> <span class="k">source</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">User</span><span class="p">.</span><span class="n">fromMap</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="k">source</span><span class="p">)</span> <span class="o">as</span> <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">String</span> <span class="n">toString</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">&#39;User(name: </span><span class="si">$</span><span class="n">name</span><span class="s1">, age: </span><span class="si">$</span><span class="n">age</span><span class="s1">)&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="kd">operator</span> <span class="o">==</span><span class="p">(</span><span class="n">covariant</span> <span class="n">User</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">identical</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">other</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span> <span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="kd">get</span> <span class="n">hashCode</span> <span class="o">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span> <span class="n">age</span><span class="p">.</span><span class="n">hashCode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>class 안에 final String name, final int age만 적어놓고 data generator를 통해 여러 메서드를 쉽게 생성해준다.</p>
+<h4 id="statenotifier---libuserdart">StateNotifier - lib/user.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">UserNotifier</span> <span class="kd">extends</span> <span class="n">StateNotifier</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">UserNotifier</span><span class="p">(</span><span class="k">super</span><span class="p">.</span><span class="n">state</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">updateName</span><span class="p">(</span><span class="kt">String</span> <span class="n">newName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// state의 모든 값 name, age를 복사하고
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 그 중에서 name 값만을 번경해준다는 뜻이다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">state</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">copyWith</span><span class="p">(</span><span class="nl">name:</span> <span class="n">newName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="statenotifierprovider---libmaindart">StateNotifierProvider - lib/main.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">final</span> <span class="n">userProvider</span> <span class="o">=</span> <span class="n">StateNotifierProvider</span><span class="o">&lt;</span><span class="n">UserNotifier</span><span class="p">,</span> <span class="n">User</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">ref</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">UserNotifier</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">const</span> <span class="n">User</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">name:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">age:</span> <span class="m">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 StateNotifierProvider를 사용해서 데이터를 읽고, 변경하도록 수정해준다.</p>
+<h4 id="libhome_screendart-2">lib/home_screen.dart</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter_riverpod/flutter_riverpod.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter_state_management/main.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">HomeScreen</span> <span class="kd">extends</span> <span class="n">ConsumerWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">HomeScreen</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// notifier가 상태 값을 변경하도록 도와준다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="n">onSubmitted</span><span class="p">(</span><span class="n">WidgetRef</span> <span class="n">ref</span><span class="p">,</span> <span class="kt">String</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ref</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">userProvider</span><span class="p">.</span><span class="n">notifier</span><span class="p">).</span><span class="n">updateName</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">WidgetRef</span> <span class="n">ref</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">user</span> <span class="o">=</span> <span class="n">ref</span><span class="p">.</span><span class="n">watch</span><span class="p">(</span><span class="n">userProvider</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Scaffold</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">appBar:</span> <span class="n">AppBar</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">title:</span> <span class="kd">const</span> <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="s1">&#39;Home&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">body:</span> <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="n">TextField</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">onSubmitted:</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">onSubmitted</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="n">Column</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">children:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">              <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">style:</span> <span class="kd">const</span> <span class="n">TextStyle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">fontSize:</span> <span class="m">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">bold</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="n">Text</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">user</span><span class="p">.</span><span class="n">age</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="nl">style:</span> <span class="kd">const</span> <span class="n">TextStyle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">fontSize:</span> <span class="m">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="nl">fontWeight:</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">bold</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">),</span>
+</span></span><span class="line"><span class="cl">              <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">          <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-01-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/3c5eec9036769f5aa33aaca50549356c50e967ee" target="_blank" title="commit by seilylook(seilylook@naver.com) 3c5eec9036769f5aa33aaca50549356c50e967ee: add: riverpod">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3c5eec9</a></span>
+                <span>Updated on 2024-01-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/59c4da9056e7d52d4a69690e8e65b9a0cab7d948" target="_blank" title="commit by seilylook(seilylook@naver.com) 59c4da9056e7d52d4a69690e8e65b9a0cab7d948: add: reading provider with consumerwidget">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>59c4da9</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
