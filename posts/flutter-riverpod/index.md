@@ -486,3 +486,11 @@ final userProvider = StateNotifierProvider<UserNotifier, User>(
 );
 ```
 
+마지막으로 어떻게 하면 Constructor를 호출할 수 있는가, 즉, UserNotifier가 시작하자마자 어떤 동작을 하도록 원한다면 다음과 같이 수정할 수 있다.
+
+#### StateNotifier - lib/user.dart
+
+```dart
+
+```
+
