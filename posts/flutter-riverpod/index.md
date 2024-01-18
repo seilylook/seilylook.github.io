@@ -455,3 +455,34 @@ class HomeScreen extends ConsumerWidget {
 }
 ```
 
+만약 직접 값을 변경하고자 한다면, 다음과 같이 수정할 수 있다.
+
+#### StateNotifier - lib/user.dart
+
+```dart
+class UserNotifier extends StateNotifier<User> {
+  UserNotifier()
+      : super(
+          const User(name: '', age: 0),
+        );
+
+  void updateName(String newName) {
+    // state의 모든 값 name, age를 복사하고
+    // 그 중에서 name 값만을 번경해준다는 뜻이다.
+    state = state.copyWith(name: newName);
+  }
+
+  void updateAge(int newAge) {
+    state = state.copyWith(age: newAge);
+  }
+}
+```
+
+#### StateNotifierProvider - lib/main.dart
+
+```dart
+final userProvider = StateNotifierProvider<UserNotifier, User>(
+  (ref) => UserNotifier(),
+);
+```
+
