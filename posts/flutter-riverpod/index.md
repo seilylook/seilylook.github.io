@@ -486,3 +486,145 @@ final userProvider = StateNotifierProvider<UserNotifier, User>(
 );
 ```
 
+### StreamProvider를 사용해 비동기 데이터 가져오기
+
+사용하는 프로바이더에 따라서, 취득 가능한 값의 종류가 다양해 질 수 있다. 예를 들어 `StreamProvider`를 사용할 때를 생각해보자.
+
+{{<admonition tip>}}
+StreamProvider는 FutureProvider와 유사하지만 Future 대신에 Stream에 대한 것입니다.
+
+StreamProvider는 일반적으로 다음과 같은 용도로 사용됩니다:
+
+Firebase 또는 웹 소켓을 듣기 위해
+몇 초마다 다른 프로바이더를 다시 빌드하기 위해
+스트림이 자연스럽게 업데이트를 듣기 위한 방법을 노출하므로 어떤 사람들은 StreamProvider를 사용하는 것이 가치가 낮다고 생각할 수 있습니다. 특히 Flutter의 StreamBuilder를 사용하여 스트림을 듣는 것만으로 충분하다고 여길 수 있지만, 이는 오해입니다.
+
+StreamProvider를 StreamBuilder 대신 사용하는 것에는 여러 가지 이점이 있습니다:
+
+ref.watch를 사용하여 다른 프로바이더가 스트림을 듣도록 허용합니다.
+AsyncValue 덕분에 로딩 및 오류 상황이 적절히 처리됩니다.
+브로드캐스트 스트림 대 일반 스트림을 구별할 필요가 없어집니다.
+스트림에 의해 방출된 가장 최신 값이 캐시되어, 이벤트가 방출된 후에 리스너가 추가되더라도 리스너가 가장 최신 이벤트에 즉시 액세스할 수 있도록 보장합니다.
+StreamProvider를 오버라이드하여 테스트 중에 간단하게 스트림을 모의화할 수 있습니다.
+{{</admonition>}}
+
+```dart
+final userProvider = StreamProvider<User>(...);
+```
+
+`userProvider`를 읽으려고 할 때 아래와 같이 사용할 수 있다.
+
+- `userProvider` 자체를 읽는 것으로 동기화된 현재 상태 값을 읽을 수 있다.
+
+```dart
+Widget build(BuildContext context, WidgetRef ref) {
+  AsyncValue<User> user = ref.watch(userProvider);
+
+  return user.when(
+    loading: () => const CircularProgressIndicator(),
+    error: (error, stack) => const Text('Oops'),
+    data: (user) => Text(user.name),
+  );
+}
+```
+
+- `userProvider.stream`을 사용해 연결된 Stream을 얻을 수 있다.
+
+{{<admonition tip>}}
+What is Stream?
+
+비동기 데이터 이벤트의 소스.
+
+스트림은 이벤트의 시퀀스를 수신하는 방법을 제공합니다. 각 이벤트는 데이터 이벤트 또는 스트림의 요소라고도 하는 것이거나 실패했다는 것을 알리는 오류 이벤트 중 하나입니다. 스트림이 모든 이벤트를 방출하면 "done" 이벤트 하나가 청취자에게 끝이 도달했음을 알리게 됩니다.
+
+스트림을 청취하여 이벤트 생성을 시작하고, 이벤트를 받는 청취자를 설정합니다. 청취할 때는 이벤트를 제공하는 활성 객체 인 StreamSubscription 개체를 받습니다. 이 객체는 이벤트를 제공하며 청취를 중지하거나 구독에서 일시적으로 이벤트를 일시 중지하는 데 사용할 수 있습니다.
+
+두 가지 종류의 스트림이 있습니다: "단일 구독" 스트림과 "브로드캐스트" 스트림.
+
+단일 구독 스트림은 스트림의 전체 수명 동안 하나의 청취자만 허용합니다. 청취자가 없을 때 이벤트 생성을 시작하지 않으며 청취자가 구독을 취소하면 이벤트를 더 제공할 수 있는 이벤트 소스라도 이벤트 전송을 중단합니다.
+
+단일 구독 스트림에 두 번 청취하는 것은 허용되지 않으며, 첫 번째 구독이 취소된 후에도 불가능합니다.
+
+단일 구독 스트림은 일반적으로 파일 I/O와 같은 큰 연속 데이터의 청크를 스트리밍하는 데 사용됩니다.
+
+브로드캐스트 스트림은 여러 청취자를 허용하며, 청취자가 있든 없든 이벤트가 준비되면 해당 이벤트를 발생시킵니다.
+
+브로드캐스트 스트림은 독립적인 이벤트/옵저버에 사용됩니다.
+{{</admonition>}}
+
+```dart
+Widget build(BuildContext context, WidgetRef ref) {
+  Stream<User> user = ref.watch(userProvider.stream);
+}
+```
+
+- `userProvider.future`를 사용해 가장 최근 상태값을 가진 Future를 얻을 수 있다.
+
+{{<admonition tip>}}
+What is Future?
+
+지연된 계산을 나타내는 객체이다.
+
+Future는 미래에 어떤 시점에 사용 가능한 잠재적인 값 또는 오류를 나타내기 위해 사용됩니다. Future의 수신자는 값 또는 오류를 처리하는 콜백을 등록할 수 있습니다. Future는 두 가지 방법으로 완료될 수 있습니다: 값으로 ("미래가 성공함") 또는 오류로 ("미래가 실패함"). 사용자는 각 경우에 대한 콜백을 설치할 수 있습니다.
+{{</admonition>}}
+
+### Select
+
+widget/provider의 재빌드를 수를 감소하거나 제한하는 방법이 있다. 프로바이더를 지켜보는 것은, 그 프로바이더가 공개하는 객체의 모든 속성을 감시하는 것이다. 그러나 특정 경우에는 바라보는 범위를 좁히고 특정 속성만 모니터링 대상으로 만들 수 있다.
+
+예를 들어, 프로바이더는 `User` 상태값을 가진다고 가정해본다.
+
+```dart
+abstract class User {
+  String get name;
+  int get age;
+}
+```
+
+그런데 위젯에서는 단순히 `User`와 `name` 값만 사용하고 있다.
+
+```dart
+Widget build(BuildContext context, WidgetRef ref) {
+  User user = ref.watch(userProvider);
+  return Text(user.name);
+}
+```
+
+만약 `ref.watch`를 사용하면 `User`의 `age` 속성이 변경되면 위젯이 재빌드 될 것이다.
+
+여기서 해결방법은 `select`를 사용하는 것이다. select는 Riverpod에서 `User`의 특정 속성만 관찰하고 싶을 떄 사용한다. 앞서 widget을 다음과 같이 수정할 수 있다.
+
+```dart
+Widget build(BuildContext context, WidgetRef ref) {
+  String name = ref.watch(userProvider.select((user) => user.name));
+  return Text(name);
+}
+```
+
+`select`를 통해 관찰하고 싶은 상태값을 선택하고 선택한 속성 값의 변화가 발생했을 때 사용할 수 있다.
+
+그리고 `User` 값이 변하면, Riverpod은 이 함수를 호출해 이전 값과 새로운 값을 비교한다. 만약 상태값이 다르다면(예를 들어 name이 변경 되었다면), Riverpod은 위젯을 다시 빌드하는 작업을 처리할 것이다. 그러나 만약 값이 같다면(예를 들어 `age`만 변경되었다면), Riverpod은 위젯을 재빌드하지 않을 것이다.
+
+{{<admonition info>}}
+select는 ref.listen과 함께 사용할 수 있다.
+
+```dart
+ref.listen<String>(
+  userProvider.select((user) => user.name),
+  (String? previousName, String newName) {
+    print('The user name changed $newName');
+  }
+);
+```
+
+{{</admonition>}}
+
+{{<admonition tip>}}
+`select`를 사용하는 경우 반환하는 값이 반드시 객체일 필요는 없다. `==` 연산자의 오버라이드로 객체 동일하다고 정의된다면 반환 값으로 무엇이 오든 상관없다.
+
+```dart
+final label = ref.watch(userProvider.select((user) => 'Mr ${user.name}'));
+```
+
+{{</admonition>}}
+
