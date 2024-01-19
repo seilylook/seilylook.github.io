@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-01-19T16:17:28&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/categories/"
@@ -14,7 +14,7 @@
             <loc>https://seilylook.github.io/tags/cross-platform/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/dart/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/development/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/</loc><lastmod>2024-01-19T16:17:28&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/"
@@ -29,7 +29,7 @@
             <loc>https://seilylook.github.io/categories/project/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/riverpod/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/categories/study/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-01-19T16:05:31&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-01-19T16:17:28&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/tags/"
@@ -74,8 +74,8 @@
             <loc>https://seilylook.github.io/posts/rust/</loc><lastmod>2023-09-22T19:30:35&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/server/</loc><lastmod>2023-09-22T19:30:35&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/web3.0/</loc><lastmod>2023-09-22T19:30:35&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/about/</loc><lastmod>2024-01-15T19:10:06&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/about/</loc><lastmod>2024-01-15T19:10:06&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/about/</loc><lastmod>2024-01-15T19:10:06&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/about/</loc><lastmod>2024-01-19T16:17:28&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/about/</loc><lastmod>2024-01-19T16:17:28&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/about/</loc><lastmod>2024-01-19T16:17:28&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/devlog-setting/</loc><lastmod>2023-09-22T19:30:35&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/vlog/</loc><lastmod>2023-09-22T19:30:35&#43;09:00</lastmod></url></urlset>

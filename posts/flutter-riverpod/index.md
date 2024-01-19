@@ -628,3 +628,159 @@ final label = ref.watch(userProvider.select((user) => 'Mr ${user.name}'));
 
 {{</admonition>}}
 
+### FutureProvider
+
+비동기 통신에 사용되는 Provider이다. 사용 방법은 다음과 같다.
+
+#### lib/main.dart
+
+```dart
+final fetchUserProvider = FutureProvider((ref) async {
+  const url = 'https://jsonplaceholder.typicode.com/todos/1';
+
+  final res = await http.get(Uri.parse(url));
+
+  logger.d(res.body);
+  return User.fromJson(res.body);
+});
+```
+
+`http` 라이브러리를 설치해서, http request를 쉽게 보내준다. `Uri`는 flutter 자체 내장 라이브러리이다. 가져온 데이터를 `User Model`에서 미리 만들어 둔, `fromJson`을 사용해서 가공해준다.
+
+#### lib/user.dart
+
+```dart
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+@immutable
+class User {
+  final int userId;
+  final int id;
+  final String title;
+  final bool completed;
+
+  const User({
+    required this.userId,
+    required this.id,
+    required this.title,
+    required this.completed,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'userId': userId,
+      'id': id,
+      'title': title,
+      'completed': completed,
+    };
+  }
+
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      userId: map['userId'] as int,
+      id: map['id'] as int,
+      title: map['title'] as String,
+      completed: map['completed'] as bool,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory User.fromJson(String source) =>
+      User.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  User copyWith({
+    int? userId,
+    int? id,
+    String? title,
+    bool? completed,
+  }) {
+    return User(
+      userId: userId ?? this.userId,
+      id: id ?? this.id,
+      title: title ?? this.title,
+      completed: completed ?? this.completed,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'User(userId: $userId, id: $id, title: $title, completed: $completed)';
+  }
+
+  @override
+  bool operator ==(covariant User other) {
+    if (identical(this, other)) return true;
+
+    return other.userId == userId &&
+        other.id == id &&
+        other.title == title &&
+        other.completed == completed;
+  }
+
+  @override
+  int get hashCode {
+    return userId.hashCode ^ id.hashCode ^ title.hashCode ^ completed.hashCode;
+  }
+}
+```
+
+마지막으로 가장 핵심인 U를 보여주는 작업을 해준다. `FutureBuilder` 이므로 비동기적으로 데이터를 사용해야 한다. `when` 메서드를 사용해서 구현할 수 있다.
+
+#### lib/home_screen.dart
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_state_management/main.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
+
+class HomeScreen extends ConsumerWidget {
+  const HomeScreen({super.key});
+
+  // notifier가 상태 값을 변경하도록 도와준다.
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(fetchUserProvider).when(data: (data) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          children: [
+            Center(
+              child: Text(data.userId.toString()),
+            ),
+            Center(
+              child: Text(data.id.toString()),
+            ),
+            Center(
+              child: Text(data.title),
+            ),
+            Center(
+                child: Checkbox(
+              onChanged: (value) => null,
+              value: data.completed,
+            ))
+          ],
+        ),
+      );
+    }, error: (error, st) {
+      return Center(
+        child: Text(
+          error.toString(),
+        ),
+      );
+    }, loading: () {
+      return const Center(child: CircularProgressIndicator());
+    });
+  }
+}
+```
+
