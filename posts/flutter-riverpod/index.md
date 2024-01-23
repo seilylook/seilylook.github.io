@@ -818,8 +818,21 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   ]))})}}
 ```
 
-{{<admonition warn>}}
+{{<admonition warning>}}
 주의할 점
+
 `family`는 매개 변수로 하나만 받을 수 있다.
 {{</admonition>}}
+
+### 지금까지 정리
+
+- `Provider`: provider는 read-only 객체이다.
+
+- `StateProvider`: provider에 데이터를 변경하고 싶을 때 사용한다.
+
+- `StateNotifierProvider`: 주로 좀 더 복잡한 데이터 상태를 다루어야 할 때 사용한다. 예를 들어, User class에 대해서 업데이트 및 수정할 때 경우이다.
+
+- `FutureProvider`: asynchoronous 한 동작을 수행해야 할 때 사용한다. 예를 들어, API 요청.
+
+- `StreamProvider`: FutureProvider와 마찬가지로 비동기로 데이터를 가져올 때 사용하지만, 차이점은 `Stream` 데이터를 가져오는 것이다.
 
