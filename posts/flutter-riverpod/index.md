@@ -784,3 +784,37 @@ class HomeScreen extends ConsumerWidget {
 }
 ```
 
+#### .family
+
+`family`는 API 요청할 때 Query Parameter로 전달할 수 있도록 도와주는 라이브러리이다.
+
+예를 들어, family을 FutureProvider와 결합해 원하는 ID의 데이터를 가져올 수 있다.
+
+```dart
+final messagesFamily = FutureProvider.family<Message, String>((ref, id) async {
+  return dio.get('http://my_api.dev/messages/$id');
+});
+```
+
+provider에 호출할 때는 편하게 매개변수로 넣어주면 된다.
+
+```dart
+class _MyHomePageState extends ConsumerState<MyHomePage> {
+  String userNo = '1';
+
+  @override
+  Widget build(BuildContext context) {
+    return ref.watch(fetchUserProvider(userNo)).when(data: (data) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          children: [
+            TextField(
+              onSubmitted: (value) => setState(() {
+                userNo = value;
+              }),
+            ),
+  ...
+  ]))})}}
+```
+
