@@ -216,7 +216,25 @@
 
 {{</admonition>}}
 
-### 9. TuneFun
+### 9. Flutter Voice Assistant
+
+<center>
+  <a href="https://github.com/seilylook/flutter-voice-assistant">
+      <img src="https://github-readme-stats.vercel.app/api/pin/?username=seilylook&repo=flutter-voice-assistant" alt="Readme Card" style="width:450px;">
+  </a>
+</center>
+
+{{<admonition success Demo>}}
+
+<table>
+  <tr>
+    <td><img src="/images/flutter-voice-assistant.png"></td>
+  </tr>
+</table>
+
+{{</admonition>}}
+
+### 10. TuneFun
 
 <!-- <center>
   <a href="https://github.com/seilylook/flutter-twitter.git">
