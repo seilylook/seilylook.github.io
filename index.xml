@@ -4,9 +4,19 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 17 Jan 2024 11:26:36 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Flutter Amplify</title>
+    <link>https://seilylook.github.io/posts/flutter-amplify/</link>
+    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-amplify/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/aws-amplify.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Flutter Riverpod</title>
     <link>https://seilylook.github.io/posts/flutter-riverpod/</link>
     <pubDate>Wed, 17 Jan 2024 11:26:36 &#43;0900</pubDate>
@@ -126,19 +136,6 @@ hardhat chai ethers (version 5) ethereum-waffle(version 4) Directory structure 1
                 <img src="/images/web3.0-image.jpg" referrerpolicy="no-referrer">
             </div>Introduction Web 1.0 | Web 2.0 | Web 3.0은 기술적 차이점도 존재하지만 궁극적으로 웹이 사용되는 방식에따라 구분 짓는다.
 Web 1.0 | Web 2.0 | Web 3.0 차이점 Web 1.0: World Wide Web의 첫 단계이다. 1991년부터 2004년 동안 우리는 인터넷 1세대를 경험했다. 이 당시는 하이퍼링크를 포함한 커다란 하나의 사이트에 불과했다. 사이트에 무엇을 업로드하면 단순히 보여주기만 하는 기능을 제공했다. 즉 Read-only web이라고 할 수 있다. 사용자와 상호 작용은 전혀 존재하지 않았다. Comments, Authentication, Analytic와 같은 기능이 존재하지 않았다.]]></description>
-</item>
-<item>
-    <title>Blockchain</title>
-    <link>https://seilylook.github.io/posts/blockchain/</link>
-    <pubDate>Fri, 22 Sep 2023 18:40:05 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/blockchain/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/blockchain.jpg" referrerpolicy="no-referrer">
-            </div>Introduction Blockchain 개발의 영역은 크게 3가지 나뉜다.
-서비스 개발자
-1.1 프론트엔드 개발자: 프론트엔드 개발자는 React와 같은 웹 기반 개발 스택을 기본적으로 잘 다룰 줄 알아야하며, 사용하고자 하는 체인에 맞는 라이브러리를 숙달해야 한다. 이를 통해 MetaMask, Kaikas 등과 같은 지갑 시스템과 연동하거나, 서버 또는 스마트 컨트랙트에서 처리되는 트랜잭션 데이터를 화면에 표현해준다.
-1.2 백엔드 개발자: 백엔드 개발자는 스마트 컨트랙트와 프런트엔드 영역 그리고 데이터베이스 사이의 통신 시스템을 구성합니다. 스마트 컨트랙트 개발자는 블록체인 가상 머신(Virtual Machine, 이하 VM) 위에서 시스템을 작동할 수 있도록 코드를 구현하고 유지, 보수합니다.]]></description>
 </item>
 </channel>
 </rss>

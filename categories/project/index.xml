@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/categories/project/</link>
         <description>Project - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 17 Jan 2024 11:26:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/project/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/project/" rel="self" type="application/rss+xml" /><item>
+    <title>Flutter Amplify</title>
+    <link>https://seilylook.github.io/posts/flutter-amplify/</link>
+    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/flutter-amplify/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/aws-amplify.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Flutter Riverpod</title>
     <link>https://seilylook.github.io/posts/flutter-riverpod/</link>
     <pubDate>Wed, 17 Jan 2024 11:26:36 &#43;0900</pubDate>
