@@ -5,15 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Flutter Amplify - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Flutter Amplify" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="Introduction 이 포스팅은 Flutter에 Amplify 서비스를 연동하는 과정을 다룬다.
+AWS Amplify는 모바일 및 프론트엔드 웹 개발자가 AWS에서 구동되는 안전하고 확장 가능한 풀 스택 애플리케이션을 개발하도록 지원하는 도구 및 서비스이다.
+현재 Amplify에서 제공하는 대표적인 서비스는 다음과 같다.
+소셜 미디어 로그인, OAuth 등을 위한 AWS Cognito
+미디어 스토리지 파일용 AWS S3
+앱에 대한 분석 데이터를 수집하는 AWS Analytics
+Amplify 사전 작업 AWS 계정 생성 Create Account
+Amplify CLI 설치 Amplify 명령어를 입력하기 위한 툴체인을 설치해준다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/flutter-amplify/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-21T14:03:51+09:00" />
-<meta property="article:modified_time" content="2024-02-21T14:03:51+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-21T14:07:05+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Flutter Amplify"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="Introduction 이 포스팅은 Flutter에 Amplify 서비스를 연동하는 과정을 다룬다.
+AWS Amplify는 모바일 및 프론트엔드 웹 개발자가 AWS에서 구동되는 안전하고 확장 가능한 풀 스택 애플리케이션을 개발하도록 지원하는 도구 및 서비스이다.
+현재 Amplify에서 제공하는 대표적인 서비스는 다음과 같다.
+소셜 미디어 로그인, OAuth 등을 위한 AWS Cognito
+미디어 스토리지 파일용 AWS S3
+앱에 대한 분석 데이터를 수집하는 AWS Analytics
+Amplify 사전 작업 AWS 계정 생성 Create Account
+Amplify CLI 설치 Amplify 명령어를 입력하기 위한 툴체인을 설치해준다."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/flutter-amplify/" /><link rel="prev" href="https://seilylook.github.io/posts/flutter-riverpod/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -26,8 +40,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/flutter-amplify\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart, AWS, Amplify","wordcount":  0 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/flutter-amplify\/","datePublished": "2024-02-21T14:03:51+09:00","dateModified": "2024-02-21T14:03:51+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart, AWS, Amplify","wordcount":  563 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/flutter-amplify\/","datePublished": "2024-02-21T14:03:51+09:00","dateModified": "2024-02-21T14:07:05+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -74,8 +88,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Flutter Amplify</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a>&nbsp;<a href="/categories/study/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Study</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-21">2024-02-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-21">2024-02-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;563 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -88,12 +102,342 @@
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#amplify-사전-작업">Amplify 사전 작업</a>
+      <ul>
+        <li><a href="#aws-계정-생성">AWS 계정 생성</a></li>
+        <li><a href="#amplify-cli-설치">Amplify CLI 설치</a></li>
+        <li><a href="#amplify-configuration">Amplify Configuration</a></li>
+        <li><a href="#aws-iam-유저-생성">AWS IAM 유저 생성</a></li>
+      </ul>
+    </li>
+    <li><a href="#flutter와-amplify-연동">Flutter와 Amplify 연동</a>
+      <ul>
+        <li><a href="#amplify-관련-라이브러리-설치">Amplify 관련 라이브러리 설치</a></li>
+        <li><a href="#amplify-초기화">Amplify 초기화</a></li>
+        <li><a href="#amplify-서비스-생성">Amplify 서비스 생성</a></li>
+        <li><a href="#flutter에서-amplify-서비스-연결-확인">Flutter에서 Amplify 서비스 연결 확인</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>이 포스팅은 Flutter에 Amplify 서비스를 연동하는 과정을 다룬다.</p>
+<p>AWS Amplify는 모바일 및 프론트엔드 웹 개발자가 AWS에서 구동되는 안전하고 확장 가능한 풀 스택 애플리케이션을 개발하도록 지원하는 도구 및 서비스이다.</p>
+<p>현재 Amplify에서 제공하는 대표적인 서비스는 다음과 같다.</p>
+<ul>
+<li>
+<p>소셜 미디어 로그인, OAuth 등을 위한 AWS Cognito</p>
+</li>
+<li>
+<p>미디어 스토리지 파일용 AWS S3</p>
+</li>
+<li>
+<p>앱에 대한 분석 데이터를 수집하는 AWS Analytics</p>
+</li>
+</ul>
+<h2 id="amplify-사전-작업">Amplify 사전 작업</h2>
+<h3 id="aws-계정-생성">AWS 계정 생성</h3>
+<p><a href="https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fportal.aws.amazon.com%2Fbilling%2Fsignup%2Fresume&amp;client_id=signup&amp;code_challenge_method=SHA-256&amp;code_challenge=4WC0ztLzwAULzWOGoAv09NnZAJDGEs8nrJ8WvlTGfjk#/start" target="_blank" rel="noopener noreffer ">Create Account</a></p>
+<h3 id="amplify-cli-설치">Amplify CLI 설치</h3>
+<p>Amplify 명령어를 입력하기 위한 툴체인을 설치해준다.</p>
+<p>Windows</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -sL https://aws-amplify.github.io/amplify-cli/install-win -o install.cmd <span class="o">&amp;&amp;</span> install.cmd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>MAC</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -sL https://aws-amplify.github.io/amplify-cli/install <span class="p">|</span> bash <span class="o">&amp;&amp;</span> <span class="nv">$SHELL</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="amplify-configuration">Amplify Configuration</h3>
+<p>Amplify CLI를 설치한 후, 터미널을 통해 명령어를 실행해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">amplify configure
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>웹 브라우저가 실행되면서 AWS Console에 접속하고 로그인한다. 다시 터미널로 돌아와 엔터를 입력한다.</p>
+<h3 id="aws-iam-유저-생성">AWS IAM 유저 생성</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>IAM는 AWS 서비스와 리소스에 대한 액세스를 안전하게 관리할 수 있습니다. 또한, AWS 사용자 및 그룹을 만들고 관리하며 AWS 리소스에 대한 액세스를 허용 및 거부할 수 있습니다.</p>
+<p>추후에 사용자 회원가입, 로그인을 진행하기 위해서는 필수적으로 필요하다.</p>
+</div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Specify the AWS Region
+</span></span><span class="line"><span class="cl">? region:  <span class="c1"># Your preferred region</span>
+</span></span><span class="line"><span class="cl">Specify the username of the new IAM user:
+</span></span><span class="line"><span class="cl">? user name:  <span class="c1"># User name for Amplify IAM user</span>
+</span></span><span class="line"><span class="cl">Complete the user creation using the AWS console
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>지역(서울), username(tunefun-sehyun)를 입력해준다.</p>
+<p>이어서, IAM 계정에 <code>액세스 키</code>를 생성해준다.</p>
+<img src="/images/flutter-amplify-1.png">
+<p>생성한 액세스 키 Id, 액세스 키를 입력해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Enter the access key of the newly created user:
+</span></span><span class="line"><span class="cl">? accessKeyId:  <span class="c1"># YOUR_ACCESS_KEY_ID</span>
+</span></span><span class="line"><span class="cl">? secretAccessKey:  <span class="c1"># YOUR_SECRET_ACCESS_KEY</span>
+</span></span><span class="line"><span class="cl">This would update/create the AWS Profile in your <span class="nb">local</span> machine
+</span></span><span class="line"><span class="cl">? Profile Name:  <span class="c1"># (default)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Successfully <span class="nb">set</span> up the new user.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="flutter와-amplify-연동">Flutter와 Amplify 연동</h2>
+<h3 id="amplify-관련-라이브러리-설치">Amplify 관련 라이브러리 설치</h3>
+<p>pubspec.yaml에</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">dependencies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">amplify_flutter</span><span class="p">:</span><span class="w"> </span><span class="l">^1.6.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">amplify_core</span><span class="p">:</span><span class="w"> </span><span class="l">^1.6.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">amplify_analytics_pinpoint</span><span class="p">:</span><span class="w"> </span><span class="l">^1.6.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">amplify_auth_cognito</span><span class="p">:</span><span class="w"> </span><span class="l">^1.6.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="amplify-초기화">Amplify 초기화</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">amplify init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>프로젝트 특성에 맞게 적절히 입력해준다.</p>
+<img src='/images/flutter-amplify-2.png' />
+<p>초기화가 성공했다면 다음의 결과 화면이 보인다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">✔ Successfully created initial AWS cloud resources <span class="k">for</span> deployments.
+</span></span><span class="line"><span class="cl">✔ Initialized provider successfully.
+</span></span><span class="line"><span class="cl">Initialized your environment successfully.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Your project has been successfully initialized and connected to the cloud!
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="amplify-서비스-생성">Amplify 서비스 생성</h3>
+<p>사용자 로그인 <code>auth</code>, 앱 데이터 분석을 위한 <code>analytics</code>를 추가해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">amplify add auth
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">amplify add analytics
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">amplify push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>올바로 서비스가 추가되었다면 다음과 같다.</p>
+<img src="/images/flutter-amplify-3.png" />
+<img src="/images/flutter-amplify-4.png" />
+<h3 id="flutter에서-amplify-서비스-연결-확인">Flutter에서 Amplify 서비스 연결 확인</h3>
+<p>프로젝트의 루트 디렉토리의 main.dart에 다음 코드를 추가해 연결이 성공적인지 테스트한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:amplify_analytics_pinpoint/amplify_analytics_pinpoint.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:amplify_auth_cognito/amplify_auth_cognito.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:amplify_core/amplify_core.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/material.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter_riverpod/flutter_riverpod.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:logger/logger.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:tunefun_front/features/home/views/home_view.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:tunefun_front/theme/theme.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;amplifyconfiguration.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">runApp</span><span class="p">(</span><span class="kd">const</span> <span class="n">ProviderScope</span><span class="p">(</span><span class="nl">child:</span> <span class="n">MyApp</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyApp</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">MyApp</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">MyApp</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_MyAppState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_MyAppState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">MyApp</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">isConfigured</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">initState</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">super</span><span class="p">.</span><span class="n">initState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_configureAmplify</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// This widget is the root of your application.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">MaterialApp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">title:</span> <span class="s1">&#39;TuneFun&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">debugShowCheckedModeBanner:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">theme:</span> <span class="n">AppTheme</span><span class="p">.</span><span class="n">theme</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">home:</span> <span class="kd">const</span> <span class="n">HomeScreen</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">_configureAmplify</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">auth</span> <span class="o">=</span> <span class="n">AmplifyAuthCognito</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">analytics</span> <span class="o">=</span> <span class="n">AmplifyAnalyticsPinpoint</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Amplify</span><span class="p">.</span><span class="n">addPlugins</span><span class="p">([</span><span class="n">auth</span><span class="p">,</span> <span class="n">analytics</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">await</span> <span class="n">Amplify</span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="n">amplifyconfig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">isConfigured</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">logger</span><span class="p">.</span><span class="n">e</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">isConfigured</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">logger</span><span class="p">.</span><span class="n">i</span><span class="p">(</span><span class="s1">&#39;Successfully configured Amplify 🎉&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>테스트 성공했다면 다음이 디버그 콘솔에 나타난다.</p>
+<img src="/images/flutter-amplify-5.png" />
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-02-21</span>
+                <span>Updated on 2024-02-21&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f29c504a6bb171d8a233efa9a4c56e18a3ee169a" target="_blank" title="commit by seilylook(seilylook@naver.com) f29c504a6bb171d8a233efa9a4c56e18a3ee169a: post: flutter amplify init">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f29c504</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

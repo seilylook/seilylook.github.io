@@ -12,7 +12,14 @@
     <guid>https://seilylook.github.io/posts/flutter-amplify/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/aws-amplify.png" referrerpolicy="no-referrer">
-            </div>]]></description>
+            </div>Introduction 이 포스팅은 Flutter에 Amplify 서비스를 연동하는 과정을 다룬다.
+AWS Amplify는 모바일 및 프론트엔드 웹 개발자가 AWS에서 구동되는 안전하고 확장 가능한 풀 스택 애플리케이션을 개발하도록 지원하는 도구 및 서비스이다.
+현재 Amplify에서 제공하는 대표적인 서비스는 다음과 같다.
+소셜 미디어 로그인, OAuth 등을 위한 AWS Cognito
+미디어 스토리지 파일용 AWS S3
+앱에 대한 분석 데이터를 수집하는 AWS Analytics
+Amplify 사전 작업 AWS 계정 생성 Create Account
+Amplify CLI 설치 Amplify 명령어를 입력하기 위한 툴체인을 설치해준다.]]></description>
 </item>
 </channel>
 </rss>

@@ -2,9 +2,9 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://seilylook.github.io/tags/amplify/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/aws/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/tags/amplify/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/aws/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/categories/"
@@ -13,10 +13,10 @@
                     hreflang="en"
                     href="https://seilylook.github.io/categories/"
                     /></url><url>
-            <loc>https://seilylook.github.io/tags/cross-platform/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/dart/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/development/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/tags/cross-platform/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/dart/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/development/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/"
@@ -25,12 +25,12 @@
                     hreflang="en"
                     href="https://seilylook.github.io/"
                     /></url><url>
-            <loc>https://seilylook.github.io/tags/flutter/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/flutter-amplify/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/project/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/study/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-02-21T14:03:51&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/tags/flutter/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/flutter-amplify/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/project/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/study/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-02-21T14:07:05&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/tags/"
