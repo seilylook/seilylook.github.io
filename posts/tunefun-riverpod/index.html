@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Tunefun Riverpod - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Tunefun Riverpod" />
+<meta property="og:description" content="Introduction Riverpod을 실제 프로젝트에 처음으로 적용해보고 이해한 것을 정리하기 위한 포스팅이다.
+목표 User Authentication - 회원가입, 로그인 기능 전체를 구현하고 사용자 정보를 Storage에 저장해 로그인 유지를 구축하고 싶었다.
+Dependency 1 2 3 4 5 6 7 8 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.10 구현 Model 구축하기 사용자 정보에 대한 데이터베이스를 위한 모델을 만들어준다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/tunefun-riverpod/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-09T16:55:50+09:00" />
+<meta property="article:modified_time" content="2024-03-09T16:55:50+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Tunefun Riverpod"/>
+<meta name="twitter:description" content="Introduction Riverpod을 실제 프로젝트에 처음으로 적용해보고 이해한 것을 정리하기 위한 포스팅이다.
+목표 User Authentication - 회원가입, 로그인 기능 전체를 구현하고 사용자 정보를 Storage에 저장해 로그인 유지를 구축하고 싶었다.
+Dependency 1 2 3 4 5 6 7 8 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.10 구현 Model 구축하기 사용자 정보에 대한 데이터베이스를 위한 모델을 만들어준다."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/tunefun-riverpod/" /><link rel="prev" href="https://seilylook.github.io/posts/flutter-amplify/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Tunefun Riverpod",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/tunefun-riverpod\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Development, Cross Platform, Flutter, Dart, Riverpod","wordcount":  1483 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/tunefun-riverpod\/","datePublished": "2024-03-09T16:55:50+09:00","dateModified": "2024-03-09T16:55:50+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/tunefun-riverpod/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/tunefun-riverpod/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Tunefun Riverpod</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a>&nbsp;<a href="/categories/study/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Study</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-09">2024-03-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1483 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/project-image.jpeg"
+        data-srcset="/images/project-image.jpeg, /images/project-image.jpeg 1.5x, /images/project-image.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/project-image.jpeg"
+        title="/images/project-image.jpeg" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#목표">목표</a></li>
+    <li><a href="#dependency">Dependency</a></li>
+    <li><a href="#구현">구현</a>
+      <ul>
+        <li><a href="#model-구축하기">Model 구축하기</a></li>
+        <li><a href="#ui-작업">UI 작업</a>
+          <ul>
+            <li><a href="#log-in">Log In</a></li>
+          </ul>
+        </li>
+        <li><a href="#controller-작업">Controller 작업</a>
+          <ul>
+            <li><a href="#libauth_controllerdart">lib/auth_controller.dart</a>
+              <ul>
+                <li><a href="#authcontrollerprovider"><code>authControllerProvider</code></a></li>
+                <li><a href="#usercontrollerprovider"><code>userControllerProvider</code></a></li>
+                <li><a href="#usercontroller">UserController</a></li>
+                <li><a href="#authcontroller">AuthController</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p><code>Riverpod</code>을 실제 프로젝트에 처음으로 적용해보고 이해한 것을 정리하기 위한 포스팅이다.</p>
+<h2 id="목표">목표</h2>
+<p>User Authentication - 회원가입, 로그인 기능 전체를 구현하고 사용자 정보를 Storage에 저장해 로그인 유지를 구축하고 싶었다.</p>
+<h2 id="dependency">Dependency</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">dependencies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">flutter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sdk</span><span class="p">:</span><span class="w"> </span><span class="l">flutter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># The following adds the Cupertino Icons font to your application.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Use with the CupertinoIcons class for iOS style icons.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cupertino_icons</span><span class="p">:</span><span class="w"> </span><span class="l">^1.0.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">flutter_riverpod</span><span class="p">:</span><span class="w"> </span><span class="l">^2.4.10</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="구현">구현</h2>
+<h3 id="model-구축하기">Model 구축하기</h3>
+<p>사용자 정보에 대한 데이터베이스를 위한 모델을 만들어준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="c1">// ignore_for_file: public_member_api_docs, sort_constructors_first
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">import</span> <span class="s1">&#39;dart:convert&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:flutter/foundation.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">immutable</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">AccountModel</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span><span class="o">?</span> <span class="n">username</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span><span class="o">?</span> <span class="n">password</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span><span class="o">?</span> <span class="n">email</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span><span class="o">?</span> <span class="n">nickname</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">bool</span><span class="o">?</span> <span class="n">voteProgressNotification</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">bool</span><span class="o">?</span> <span class="n">voteEndNotification</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">bool</span><span class="o">?</span> <span class="n">voteDeliveryNotification</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;?</span> <span class="n">roles</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span><span class="o">?</span> <span class="n">accessToken</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span><span class="o">?</span> <span class="n">refreshToken</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span><span class="o">?</span> <span class="n">lastLoginAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span><span class="o">?</span> <span class="n">lastLogoutAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="kt">String</span><span class="o">?</span> <span class="n">profileImageUrl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span><span class="o">?</span> <span class="n">emailVerifiedAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span><span class="o">?</span> <span class="n">withdrawalAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span><span class="o">?</span> <span class="n">createdAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span><span class="o">?</span> <span class="n">updatedAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">DateTime</span><span class="o">?</span> <span class="n">deletedAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">AccountModel</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">password</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">email</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">nickname</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">voteProgressNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">voteEndNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">voteDeliveryNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">roles</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">accessToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">refreshToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">lastLoginAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">lastLogoutAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">profileImageUrl</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">emailVerifiedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">withdrawalAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">createdAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">updatedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">deletedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">AccountModel</span> <span class="n">copyWith</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">username</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">password</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">email</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">nickname</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span><span class="o">?</span> <span class="n">voteProgressNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span><span class="o">?</span> <span class="n">voteEndNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span><span class="o">?</span> <span class="n">voteDeliveryNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;?</span> <span class="n">roles</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">accessToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">refreshToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="o">?</span> <span class="n">lastLoginAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="o">?</span> <span class="n">lastLogoutAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">String</span><span class="o">?</span> <span class="n">profileImageUrl</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="o">?</span> <span class="n">emailVerifiedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="o">?</span> <span class="n">withdrawalAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="o">?</span> <span class="n">createdAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="o">?</span> <span class="n">updatedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span><span class="o">?</span> <span class="n">deletedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">AccountModel</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">username:</span> <span class="n">username</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">username</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">password:</span> <span class="n">password</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">password</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">email:</span> <span class="n">email</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">email</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">nickname:</span> <span class="n">nickname</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">nickname</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">voteProgressNotification:</span>
+</span></span><span class="line"><span class="cl">          <span class="n">voteProgressNotification</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">voteProgressNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">voteEndNotification:</span> <span class="n">voteEndNotification</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">voteEndNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">voteDeliveryNotification:</span>
+</span></span><span class="line"><span class="cl">          <span class="n">voteDeliveryNotification</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">voteDeliveryNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">roles:</span> <span class="n">roles</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">roles</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">accessToken:</span> <span class="n">accessToken</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">accessToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">refreshToken:</span> <span class="n">refreshToken</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">refreshToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">lastLoginAt:</span> <span class="n">lastLoginAt</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">lastLoginAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">lastLogoutAt:</span> <span class="n">lastLogoutAt</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">lastLogoutAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">profileImageUrl:</span> <span class="n">profileImageUrl</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">profileImageUrl</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">emailVerifiedAt:</span> <span class="n">emailVerifiedAt</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">emailVerifiedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">withdrawalAt:</span> <span class="n">withdrawalAt</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">withdrawalAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">createdAt:</span> <span class="n">createdAt</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">createdAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">updatedAt:</span> <span class="n">updatedAt</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">updatedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">deletedAt:</span> <span class="n">deletedAt</span> <span class="o">??</span> <span class="k">this</span><span class="p">.</span><span class="n">deletedAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">toMap</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;username&#39;</span><span class="o">:</span> <span class="n">username</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;password&#39;</span><span class="o">:</span> <span class="n">password</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;email&#39;</span><span class="o">:</span> <span class="n">email</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;nickname&#39;</span><span class="o">:</span> <span class="n">nickname</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;voteProgressNotification&#39;</span><span class="o">:</span> <span class="n">voteProgressNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;voteEndNotification&#39;</span><span class="o">:</span> <span class="n">voteEndNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;voteDeliveryNotification&#39;</span><span class="o">:</span> <span class="n">voteDeliveryNotification</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;roles&#39;</span><span class="o">:</span> <span class="n">roles</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;accessToken&#39;</span><span class="o">:</span> <span class="n">accessToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;refreshToken&#39;</span><span class="o">:</span> <span class="n">refreshToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;lastLoginAt&#39;</span><span class="o">:</span> <span class="n">lastLoginAt</span><span class="o">?</span><span class="p">.</span><span class="n">millisecondsSinceEpoch</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;lastLogoutAt&#39;</span><span class="o">:</span> <span class="n">lastLogoutAt</span><span class="o">?</span><span class="p">.</span><span class="n">millisecondsSinceEpoch</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;profileImageUrl&#39;</span><span class="o">:</span> <span class="n">profileImageUrl</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;emailVerifiedAt&#39;</span><span class="o">:</span> <span class="n">emailVerifiedAt</span><span class="o">?</span><span class="p">.</span><span class="n">millisecondsSinceEpoch</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;withdrawalAt&#39;</span><span class="o">:</span> <span class="n">withdrawalAt</span><span class="o">?</span><span class="p">.</span><span class="n">millisecondsSinceEpoch</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;createdAt&#39;</span><span class="o">:</span> <span class="n">createdAt</span><span class="o">?</span><span class="p">.</span><span class="n">millisecondsSinceEpoch</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;updatedAt&#39;</span><span class="o">:</span> <span class="n">updatedAt</span><span class="o">?</span><span class="p">.</span><span class="n">millisecondsSinceEpoch</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;deletedAt&#39;</span><span class="o">:</span> <span class="n">deletedAt</span><span class="o">?</span><span class="p">.</span><span class="n">millisecondsSinceEpoch</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">factory</span> <span class="n">AccountModel</span><span class="p">.</span><span class="n">fromMap</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">AccountModel</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">username:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">password:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">email:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">nickname:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;nickname&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">voteProgressNotification:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;voteProgressNotification&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;voteProgressNotification&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">voteEndNotification:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;voteEndNotification&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;voteEndNotification&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">voteDeliveryNotification:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;voteDeliveryNotification&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;voteDeliveryNotification&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">roles:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;roles&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">.</span><span class="n">from</span><span class="p">((</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;roles&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">accessToken:</span>
+</span></span><span class="line"><span class="cl">          <span class="n">map</span><span class="p">[</span><span class="s1">&#39;accessToken&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;accessToken&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">refreshToken:</span>
+</span></span><span class="line"><span class="cl">          <span class="n">map</span><span class="p">[</span><span class="s1">&#39;refreshToken&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;refreshToken&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">lastLoginAt:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;lastLoginAt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">fromMillisecondsSinceEpoch</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;lastLoginAt&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">lastLogoutAt:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;lastLogoutAt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">fromMillisecondsSinceEpoch</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;lastLogoutAt&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">profileImageUrl:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;profileImageUrl&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;profileImageUrl&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">String</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">emailVerifiedAt:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;emailVerifiedAt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">fromMillisecondsSinceEpoch</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;emailVerifiedAt&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">withdrawalAt:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;withdrawalAt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">fromMillisecondsSinceEpoch</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;withdrawalAt&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">createdAt:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;createdAt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">fromMillisecondsSinceEpoch</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;createdAt&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">updatedAt:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;updatedAt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">fromMillisecondsSinceEpoch</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;updatedAt&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">deletedAt:</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;deletedAt&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">          <span class="o">?</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">fromMillisecondsSinceEpoch</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;deletedAt&#39;</span><span class="p">]</span> <span class="o">as</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">String</span> <span class="n">toJson</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">json</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">toMap</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">factory</span> <span class="n">AccountModel</span><span class="p">.</span><span class="n">fromJson</span><span class="p">(</span><span class="kt">String</span> <span class="k">source</span><span class="p">)</span> <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">AccountModel</span><span class="p">.</span><span class="n">fromMap</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="k">source</span><span class="p">)</span> <span class="o">as</span> <span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">String</span> <span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;AccountModel(username: </span><span class="si">$</span><span class="n">username</span><span class="s1">, password: </span><span class="si">$</span><span class="n">password</span><span class="s1">, email: </span><span class="si">$</span><span class="n">email</span><span class="s1">, nickname: </span><span class="si">$</span><span class="n">nickname</span><span class="s1">, voteProgressNotification: </span><span class="si">$</span><span class="n">voteProgressNotification</span><span class="s1">, voteEndNotification: </span><span class="si">$</span><span class="n">voteEndNotification</span><span class="s1">, voteDeliveryNotification: </span><span class="si">$</span><span class="n">voteDeliveryNotification</span><span class="s1">, roles: </span><span class="si">$</span><span class="n">roles</span><span class="s1">, accessToken: </span><span class="si">$</span><span class="n">accessToken</span><span class="s1">, refreshToken: </span><span class="si">$</span><span class="n">refreshToken</span><span class="s1">, lastLoginAt: </span><span class="si">$</span><span class="n">lastLoginAt</span><span class="s1">, lastLogoutAt: </span><span class="si">$</span><span class="n">lastLogoutAt</span><span class="s1">, profileImageUrl: </span><span class="si">$</span><span class="n">profileImageUrl</span><span class="s1">, emailVerifiedAt: </span><span class="si">$</span><span class="n">emailVerifiedAt</span><span class="s1">, withdrawalAt: </span><span class="si">$</span><span class="n">withdrawalAt</span><span class="s1">, createdAt: </span><span class="si">$</span><span class="n">createdAt</span><span class="s1">, updatedAt: </span><span class="si">$</span><span class="n">updatedAt</span><span class="s1">, deletedAt: </span><span class="si">$</span><span class="n">deletedAt</span><span class="s1">)&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="kd">operator</span> <span class="o">==</span><span class="p">(</span><span class="n">covariant</span> <span class="n">AccountModel</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">identical</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">other</span><span class="p">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">username</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">password</span> <span class="o">==</span> <span class="n">password</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">email</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">nickname</span> <span class="o">==</span> <span class="n">nickname</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">voteProgressNotification</span> <span class="o">==</span> <span class="n">voteProgressNotification</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">voteEndNotification</span> <span class="o">==</span> <span class="n">voteEndNotification</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">voteDeliveryNotification</span> <span class="o">==</span> <span class="n">voteDeliveryNotification</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">listEquals</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">roles</span><span class="p">,</span> <span class="n">roles</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">accessToken</span> <span class="o">==</span> <span class="n">accessToken</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">refreshToken</span> <span class="o">==</span> <span class="n">refreshToken</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">lastLoginAt</span> <span class="o">==</span> <span class="n">lastLoginAt</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">lastLogoutAt</span> <span class="o">==</span> <span class="n">lastLogoutAt</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">profileImageUrl</span> <span class="o">==</span> <span class="n">profileImageUrl</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">emailVerifiedAt</span> <span class="o">==</span> <span class="n">emailVerifiedAt</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">withdrawalAt</span> <span class="o">==</span> <span class="n">withdrawalAt</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">createdAt</span> <span class="o">==</span> <span class="n">createdAt</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">updatedAt</span> <span class="o">==</span> <span class="n">updatedAt</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">deletedAt</span> <span class="o">==</span> <span class="n">deletedAt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="kd">get</span> <span class="n">hashCode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">username</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">password</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">email</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nickname</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">voteProgressNotification</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">voteEndNotification</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">voteDeliveryNotification</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">roles</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">accessToken</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">refreshToken</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lastLoginAt</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lastLogoutAt</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">profileImageUrl</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">emailVerifiedAt</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">withdrawalAt</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">createdAt</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">updatedAt</span><span class="p">.</span><span class="n">hashCode</span> <span class="o">^</span>
+</span></span><span class="line"><span class="cl">        <span class="n">deletedAt</span><span class="p">.</span><span class="n">hashCode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>백엔드와 사용자 정보에 대해 의견을 나누고 데이터베이스와 일치하도록 만들어준다. 하지만 이 데이터는 추후에 서비스 상태와 서버 요구에 의해 변할 수 있다.</p>
+<h3 id="ui-작업">UI 작업</h3>
+<p>기본적인 회원가입 / 로그인 화면을 구성해준다.</p>
+<h4 id="log-in">Log In</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">logIn</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ref</span><span class="p">.</span><span class="n">watch</span><span class="p">(</span><span class="n">authControllerProvider</span><span class="p">.</span><span class="n">notifier</span><span class="p">).</span><span class="n">login</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">username:</span> <span class="n">usernameController</span><span class="p">.</span><span class="n">text</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">password:</span> <span class="n">passwordController</span><span class="p">.</span><span class="n">text</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">context:</span> <span class="n">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이제 <code>Riverpod</code>을 사용한다. <code>ConsumerStatefulWidget</code>을 사용해서 전역 상태의 변화를 실시간으로 관찰할 수 있다.</p>
+<h3 id="controller-작업">Controller 작업</h3>
+<p>가장 중요한 실질적인 데이터를 처리하기 위한 Controller 작업을 진행한다.</p>
+<h4 id="libauth_controllerdart">lib/auth_controller.dart</h4>
+<h5 id="authcontrollerprovider"><code>authControllerProvider</code></h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">final</span> <span class="n">authControllerProvider</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">StateNotifierProvider</span><span class="o">&lt;</span><span class="n">AuthController</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;</span><span class="p">((</span><span class="n">ref</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">AuthController</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nl">authAPI:</span> <span class="n">ref</span><span class="p">.</span><span class="n">watch</span><span class="p">(</span><span class="n">authAPIProvider</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nl">userController:</span> <span class="n">ref</span><span class="p">.</span><span class="n">watch</span><span class="p">(</span><span class="n">userControllerProvider</span><span class="p">.</span><span class="n">notifier</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 Provider는 StateNotifierProvider로서 상태 변화가 감지되면 이를 알려주는 기능을 수행한다.</p>
+<p>중요한 것은 &lt;AuthController, bool&gt;이다.</p>
+<p>AuthController는 실질적인 API와 통신하고 Screen에 넘겨줄 데이터에 대한 로직을 담당하는 Class이다.</p>
+<p><code>bool</code>은 <code>State</code>. 변경된 데이터를 ref.watch()를 하는 곳에 넘겨준다.</p>
+<p>이 코드는 bool을 넘겨주기 때문에 화면에서 서버에 보낸 Request가 정상적으로 바뀌었는지 확인할 수 있다.</p>
+<h5 id="usercontrollerprovider"><code>userControllerProvider</code></h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">final</span> <span class="n">userControllerProvider</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">StateNotifierProvider</span><span class="o">&lt;</span><span class="n">UserController</span><span class="p">,</span> <span class="n">AccountModel</span><span class="o">?&gt;</span><span class="p">((</span><span class="n">ref</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">UserController</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 Provider는 로그인 유지를 위해서 사용자의 로그인이 성공했다면 AccountModel의 상태를 변경해줌으로서 로그인을 유지해 줄 수 있다.</p>
+<p>기존에 authControllerProvider가 API와 통신은 이미했으니 authAPI는 필요하지 않다.</p>
+<p>필요한 것은 UserController class를 참조하도록 해주는 것과</p>
+<p><code>AccountModel</code>은 <code>State</code>. 서버에서 받은 사용자 데이터를 상태에 저장시켜 ref.watch()를 통해 전역적으로 참조할 수 있게 해준다.</p>
+<h5 id="usercontroller">UserController</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">UserController</span> <span class="kd">extends</span> <span class="n">StateNotifier</span><span class="o">&lt;</span><span class="n">AccountModel</span><span class="o">?&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">UserController</span><span class="p">(</span><span class="n">AccountModel</span><span class="o">?</span> <span class="n">state</span><span class="p">)</span> <span class="o">:</span> <span class="k">super</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">setCurrentUser</span><span class="p">(</span><span class="n">AccountModel</span> <span class="n">accountModel</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">state</span> <span class="o">=</span> <span class="n">accountModel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>StateNotifier</code>라는 이름에서 알 수 있듯이, 상태가 변한 것을 Provider에 알려준다. <code>&lt;&gt;</code>안에 들어있는 것이 state이다.</p>
+<p><code>AuchController</code>에서 서버로부터 받아온 사용자 데이터를 UserController의 <code>setCurrentuser</code> 함수에 전달해준다.</p>
+<p>그럼 setCurrentUser에서 state에 저장해준다.</p>
+<h5 id="authcontroller">AuthController</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">AuthController</span> <span class="kd">extends</span> <span class="n">StateNotifier</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">AuthAPI</span> <span class="n">_authAPI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">final</span> <span class="n">UserController</span> <span class="n">_userController</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">AuthController</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="n">AuthAPI</span> <span class="n">authAPI</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="n">UserController</span> <span class="n">userController</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>  <span class="o">:</span> <span class="n">_authAPI</span> <span class="o">=</span> <span class="n">authAPI</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_userController</span> <span class="o">=</span> <span class="n">userController</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">login</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="kt">String</span> <span class="n">username</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="kt">String</span> <span class="n">password</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">required</span> <span class="n">BuildContext</span> <span class="n">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">state</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">response</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">await</span> <span class="n">_authAPI</span><span class="p">.</span><span class="n">login</span><span class="p">(</span><span class="nl">username:</span> <span class="n">username</span><span class="p">,</span> <span class="nl">password:</span> <span class="n">password</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">state</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">response</span><span class="p">.</span><span class="n">fold</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="p">.</span><span class="n">i</span><span class="p">(</span><span class="s1">&#39;Error happened&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">errorJson</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">errorMessage</span> <span class="o">=</span> <span class="n">errorJson</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">showSnackBar</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">errorMessage</span><span class="p">.</span><span class="n">toString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="p">.</span><span class="n">e</span><span class="p">(</span><span class="n">errorMessage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">response</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">right</span><span class="p">.</span><span class="n">bodyBytes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">responseJson</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">right</span><span class="p">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="m">400</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="kd">final</span> <span class="n">message</span> <span class="o">=</span> <span class="n">responseJson</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="n">showSnackBar</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">right</span><span class="p">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="m">500</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="kd">final</span> <span class="n">message</span> <span class="o">=</span> <span class="n">responseJson</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="n">showSnackBar</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">right</span><span class="p">.</span><span class="n">statusCode</span> <span class="o">==</span> <span class="m">200</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">roles</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">          <span class="kd">var</span> <span class="n">rolesList</span> <span class="o">=</span> <span class="n">responseJson</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;roles&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="n">rolesList</span><span class="p">.</span><span class="n">forEach</span><span class="p">((</span><span class="n">role</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">roles</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">role</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="kd">final</span> <span class="kt">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">responseJson</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;access_token&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="kd">final</span> <span class="kt">String</span> <span class="n">refreshToken</span> <span class="o">=</span> <span class="n">responseJson</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;refresh_token&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="n">AccountModel</span> <span class="n">account</span> <span class="o">=</span> <span class="n">AccountModel</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">username:</span> <span class="n">username</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">roles:</span> <span class="n">roles</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">accessToken:</span> <span class="n">accessToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nl">refreshToken:</span> <span class="n">refreshToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="n">showSnackBar</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s1">&#39;로그인 성공&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">Navigator</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">HomeScreen</span><span class="p">.</span><span class="n">route</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">          <span class="kd">await</span> <span class="n">_userController</span><span class="p">.</span><span class="n">setCurrentUser</span><span class="p">(</span><span class="n">account</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>간단하게 로그인만 살펴본다.</p>
+<p><code>AuthController</code>의 상태 <code>&lt;&gt;</code> 는 <code>bool</code>이다.</p>
+<p><code>state = false</code>를 통해 서버에 요청 보내기 전에는 false로 해놓고, 서버에서 올바르게 데이터가 온다면 <code>state = true</code>로 상태를 바꿔준다.</p>
+<p>상태를 바꿔주면 <code>authControllerProvider</code> == <code>StateNotifierProvider</code>에서 변경된 데이터를 참조해 알려준다.</p>
+<p>API 요청에 대해 <code>response</code> 변수에 저장해주고, 이 값에 따라 left = 실패, right = 성공에 따른 작업을 진행해준다.</p>
+<p>right.statusCode == 200. 서버로부터 성공적으로 응답이 온다면, <code>AccoumtModel</code>을 만들고</p>
+<p>위에서 만들었던 <code>userController</code>의 <code>setCurrentUser</code>에 AccountModel을 넘겨준다.</p>
+<p>이렇게 하면 userController에서 상태를 변화시키고, 마지막으로 <code>userControllerProvider</code>에서 변경된 데이터에 대해서 전역으로 알려준다.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-03-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/tunefun-riverpod/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/tunefun-riverpod/" data-title="Tunefun Riverpod" data-hashtags="Development,Cross Platform,Flutter,Dart,Riverpod"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/tunefun-riverpod/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/tunefun-riverpod/" data-title="Tunefun Riverpod"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/tunefun-riverpod/" data-title="Tunefun Riverpod"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/tunefun-riverpod/" data-title="Tunefun Riverpod" data-image="/images/project-image.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a>,&nbsp;<a href="/tags/riverpod/">Riverpod</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/flutter-amplify/" class="prev" rel="prev" title="Flutter Amplify"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Flutter Amplify</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

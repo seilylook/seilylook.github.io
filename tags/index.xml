@@ -4,7 +4,47 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Cross Platform</title>
+    <link>https://seilylook.github.io/tags/cross-platform/</link>
+    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/cross-platform/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Dart</title>
+    <link>https://seilylook.github.io/tags/dart/</link>
+    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/dart/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Development</title>
+    <link>https://seilylook.github.io/tags/development/</link>
+    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/development/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Flutter</title>
+    <link>https://seilylook.github.io/tags/flutter/</link>
+    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/flutter/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Riverpod</title>
+    <link>https://seilylook.github.io/tags/riverpod/</link>
+    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/riverpod/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Amplify</title>
     <link>https://seilylook.github.io/tags/amplify/</link>
     <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
@@ -18,46 +58,6 @@
     <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/aws/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Cross Platform</title>
-    <link>https://seilylook.github.io/tags/cross-platform/</link>
-    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/cross-platform/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Dart</title>
-    <link>https://seilylook.github.io/tags/dart/</link>
-    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/dart/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Development</title>
-    <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/development/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Flutter</title>
-    <link>https://seilylook.github.io/tags/flutter/</link>
-    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/flutter/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Riverpod</title>
-    <link>https://seilylook.github.io/tags/riverpod/</link>
-    <pubDate>Wed, 17 Jan 2024 11:26:36 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/riverpod/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>

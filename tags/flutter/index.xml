@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/tags/flutter/</link>
         <description>Flutter - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/flutter/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/flutter/" rel="self" type="application/rss+xml" /><item>
+    <title>Tunefun Riverpod</title>
+    <link>https://seilylook.github.io/posts/tunefun-riverpod/</link>
+    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/tunefun-riverpod/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/project-image.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction Riverpod을 실제 프로젝트에 처음으로 적용해보고 이해한 것을 정리하기 위한 포스팅이다.
+목표 User Authentication - 회원가입, 로그인 기능 전체를 구현하고 사용자 정보를 Storage에 저장해 로그인 유지를 구축하고 싶었다.
+Dependency 1 2 3 4 5 6 7 8 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.10 구현 Model 구축하기 사용자 정보에 대한 데이터베이스를 위한 모델을 만들어준다.]]></description>
+</item>
+<item>
     <title>Flutter Amplify</title>
     <link>https://seilylook.github.io/posts/flutter-amplify/</link>
     <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
