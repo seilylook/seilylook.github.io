@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Patrol</title>
+    <link>https://seilylook.github.io/posts/patrol/</link>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/patrol/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/patrol.png" referrerpolicy="no-referrer">
+            </div>Introduction Flutter는 테스트 코드 작성을 도와주는 자체 라이브러리인 integrated test package가 존재한다. 하지만 한계점도 존재하는데, 이 한계를 해결하기 위해 등장한 라이브러리가 바로 Patrol이다.
+Patrol 설치 1 2 3 4 5 6 7 8 9 10 11 12 13 14 dependencies: # ... dev_dependencies: # ... patrol: app_name: My App android: package_name: com.example.myapp ios: bundle_id: com.example.MyApp macos: bundle_id: com.example.macos.MyApp app_name, package_name, ios: bundle_id, macos: bundle_id는 각 프로젝트에 맞게 설정해 주어야 한다.]]></description>
+</item>
+<item>
     <title>Tunefun Riverpod</title>
     <link>https://seilylook.github.io/posts/tunefun-riverpod/</link>
     <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
@@ -129,19 +140,6 @@ Chapter 1 1.1 Contract Solidity 언어는 Contract 안에 쌓여 있다. Contrac
 즉 모든 프로젝트의 시작점이다.
 Version Pragma 모든 Solidity 소스 코드는 version pragma로 시작해야 한다. 이는 해당 코드가 사용해야 하는 Solidity 버전을 선언하는 것이다. 이를 통해 이후에 새로운 컴파일러 버전이 나와도 기존 코드가 깨지지 않도록 예방하는 것이다.
 Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문에 에러 처리한 경험이 많은데, 위의 기능은 편리하다고 생각된다.]]></description>
-</item>
-<item>
-    <title>Krypto</title>
-    <link>https://seilylook.github.io/posts/krypto/</link>
-    <pubDate>Wed, 18 Oct 2023 16:13:56 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/krypto/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/ethereum-image.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction React와 Solidity를 사용해 Ethereum 거래 서비스 구현.
-Tech stack Front-end
-React Tailwindcss ethers (version 5) vite Smart Contract
-hardhat chai ethers (version 5) ethereum-waffle(version 4) Directory structure 1 2 3 4 5 6 7 8 9 10 11 12 client/ ├── images ├── public/ ├── src/ │ ├── assets/ | |── components/ | |── context/ | |── utils/ | |── App.jsx ├── package.json/ ├── tailwind.config.js/ ├── vite.config.js/ 1 2 3 4 5 6 7 8 smart_contract/ ├── artifacts/ ├── cache/ ├── contract/ │ ├── Transactions.]]></description>
 </item>
 </channel>
 </rss>

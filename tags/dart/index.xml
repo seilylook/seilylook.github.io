@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/tags/dart/</link>
         <description>Dart - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/dart/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/dart/" rel="self" type="application/rss+xml" /><item>
+    <title>Patrol</title>
+    <link>https://seilylook.github.io/posts/patrol/</link>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/patrol/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/patrol.png" referrerpolicy="no-referrer">
+            </div>Introduction Flutter는 테스트 코드 작성을 도와주는 자체 라이브러리인 integrated test package가 존재한다. 하지만 한계점도 존재하는데, 이 한계를 해결하기 위해 등장한 라이브러리가 바로 Patrol이다.
+Patrol 설치 1 2 3 4 5 6 7 8 9 10 11 12 13 14 dependencies: # ... dev_dependencies: # ... patrol: app_name: My App android: package_name: com.example.myapp ios: bundle_id: com.example.MyApp macos: bundle_id: com.example.macos.MyApp app_name, package_name, ios: bundle_id, macos: bundle_id는 각 프로젝트에 맞게 설정해 주어야 한다.]]></description>
+</item>
+<item>
     <title>Tunefun Riverpod</title>
     <link>https://seilylook.github.io/posts/tunefun-riverpod/</link>
     <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>

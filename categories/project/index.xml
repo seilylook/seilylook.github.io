@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/categories/project/</link>
         <description>Project - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/project/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/project/" rel="self" type="application/rss+xml" /><item>
+    <title>Patrol</title>
+    <link>https://seilylook.github.io/posts/patrol/</link>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/patrol/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/patrol.png" referrerpolicy="no-referrer">
+            </div>Introduction Flutter는 테스트 코드 작성을 도와주는 자체 라이브러리인 integrated test package가 존재한다. 하지만 한계점도 존재하는데, 이 한계를 해결하기 위해 등장한 라이브러리가 바로 Patrol이다.
+Patrol 설치 1 2 3 4 5 6 7 8 9 10 11 12 13 14 dependencies: # ... dev_dependencies: # ... patrol: app_name: My App android: package_name: com.example.myapp ios: bundle_id: com.example.MyApp macos: bundle_id: com.example.macos.MyApp app_name, package_name, ios: bundle_id, macos: bundle_id는 각 프로젝트에 맞게 설정해 주어야 한다.]]></description>
+</item>
+<item>
     <title>Tunefun Riverpod</title>
     <link>https://seilylook.github.io/posts/tunefun-riverpod/</link>
     <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
@@ -128,31 +139,6 @@ pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 
 Tech stack Front-end
 React Tailwindcss ethers (version 5) vite Smart Contract
 hardhat chai ethers (version 5) ethereum-waffle(version 4) Directory structure 1 2 3 4 5 6 7 8 9 10 11 12 client/ ├── images ├── public/ ├── src/ │ ├── assets/ | |── components/ | |── context/ | |── utils/ | |── App.jsx ├── package.json/ ├── tailwind.config.js/ ├── vite.config.js/ 1 2 3 4 5 6 7 8 smart_contract/ ├── artifacts/ ├── cache/ ├── contract/ │ ├── Transactions.]]></description>
-</item>
-<item>
-    <title>Authentication Svelte Rust</title>
-    <link>https://seilylook.github.io/posts/authentication-svelte-rust/</link>
-    <pubDate>Fri, 08 Sep 2023 14:26:14 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/authentication-svelte-rust/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/user-auth.jpg" referrerpolicy="no-referrer">
-            </div>Introduction Svelte와 Rust를 사용해서 사용자 인증 시스템을 구현한 프로젝트.
-Tech stack Front-end
-Sveltekit
-Typescript
-tailwindcss
-vite
-pnpm
-Back-end
-Actix-web: Rust 전용 웹 프레임워크
-tokio: Rust 전용 비동기 프레임워크
-serde: Rust 데이터 구조에 대한 직렬화, 역직렬화를 제공하는 라이브러리
-minijinja: 템플릿 엔진
-SQLx: SQL 비동기 도구
-PostgreSQL: 데이터베이스
-Redis: 토큰 만료 등을 도와주는 라이브러리
-1. 시작 1.1 프로젝트 생성 1 2 3 4 5 6 7 cd Rust mkdir auth-svelte-rust cd auth-svelte-rust cargo new backend cd backend를 통해 들어가서 Cargo.]]></description>
 </item>
 </channel>
 </rss>

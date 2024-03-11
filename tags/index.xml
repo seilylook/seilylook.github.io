@@ -4,10 +4,10 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
     <title>Cross Platform</title>
     <link>https://seilylook.github.io/tags/cross-platform/</link>
-    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/cross-platform/</guid>
     <description><![CDATA[]]></description>
@@ -15,7 +15,7 @@
 <item>
     <title>Dart</title>
     <link>https://seilylook.github.io/tags/dart/</link>
-    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/dart/</guid>
     <description><![CDATA[]]></description>
@@ -23,17 +23,41 @@
 <item>
     <title>Development</title>
     <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/development/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
+    <title>E2E Test</title>
+    <link>https://seilylook.github.io/tags/e2e-test/</link>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/e2e-test/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Flutter</title>
     <link>https://seilylook.github.io/tags/flutter/</link>
-    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/flutter/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Patrol</title>
+    <link>https://seilylook.github.io/tags/patrol/</link>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/patrol/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Test Library</title>
+    <link>https://seilylook.github.io/tags/test-library/</link>
+    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/test-library/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -58,30 +82,6 @@
     <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/aws/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Blockchain</title>
-    <link>https://seilylook.github.io/tags/blockchain/</link>
-    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/blockchain/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Language</title>
-    <link>https://seilylook.github.io/tags/language/</link>
-    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/language/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Smart Contract</title>
-    <link>https://seilylook.github.io/tags/smart-contract/</link>
-    <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/smart-contract/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
