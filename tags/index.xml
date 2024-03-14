@@ -4,7 +4,39 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Architecture</title>
+    <link>https://seilylook.github.io/tags/architecture/</link>
+    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/architecture/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>DDD</title>
+    <link>https://seilylook.github.io/tags/ddd/</link>
+    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/ddd/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Design</title>
+    <link>https://seilylook.github.io/tags/design/</link>
+    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/design/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Development</title>
+    <link>https://seilylook.github.io/tags/development/</link>
+    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/development/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Cross Platform</title>
     <link>https://seilylook.github.io/tags/cross-platform/</link>
     <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
@@ -18,14 +50,6 @@
     <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/dart/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Development</title>
-    <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/development/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -58,30 +82,6 @@
     <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/test-library/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Riverpod</title>
-    <link>https://seilylook.github.io/tags/riverpod/</link>
-    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/riverpod/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Amplify</title>
-    <link>https://seilylook.github.io/tags/amplify/</link>
-    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/amplify/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>AWS</title>
-    <link>https://seilylook.github.io/tags/aws/</link>
-    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/aws/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

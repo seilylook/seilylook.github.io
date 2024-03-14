@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/categories/study/</link>
         <description>Study - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/study/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/study/" rel="self" type="application/rss+xml" /><item>
+    <title>Domain Driven Design</title>
+    <link>https://seilylook.github.io/posts/domain-driven-design/</link>
+    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/domain-driven-design/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/domain-image.webp" referrerpolicy="no-referrer">
+            </div>Introduction 소프트웨어 개발 방법론에 대해서 들어는 봤지만, 정확한 의미를 파악하고 용어를 이해하기 위해 정리해본다. 첫번째는 DDD(Domain Driven Design)이다.
+도메인 주도 설계 우리가 서비스를 개발한다면, 그 서비스가 그 상태 그대로 변경되지 않는 경우는 없다. 대부분의 서비스는 고객의 요구 사항이나 비즈니스 환경의 변화에 따라 지속적으로 업데이트되고 변화한다. 그러나 이런 변화를 수용하면서 시스템의 복잡성을 관리하는 것은 어렵다. 이런 문제를 해결하기 위해 제안된 개발 방법론이 바로 DDD, Domain Driven Design이다.
+도메인 주도 설계는 서비스의 “기능”을 기준으로 코드를 구분하지 않고, “도메인”이라는 비즈니스 영역을 기준으로 코드를 구분하는 것이 가장 핵심적이다.]]></description>
+</item>
+<item>
     <title>Patrol</title>
     <link>https://seilylook.github.io/posts/patrol/</link>
     <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
