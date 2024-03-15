@@ -4,10 +4,26 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Development Methology</title>
+    <link>https://seilylook.github.io/tags/development-methology/</link>
+    <pubDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/development-methology/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Scrum</title>
+    <link>https://seilylook.github.io/tags/scrum/</link>
+    <pubDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/scrum/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Architecture</title>
     <link>https://seilylook.github.io/tags/architecture/</link>
-    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/architecture/</guid>
     <description><![CDATA[]]></description>
@@ -15,7 +31,7 @@
 <item>
     <title>DDD</title>
     <link>https://seilylook.github.io/tags/ddd/</link>
-    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/ddd/</guid>
     <description><![CDATA[]]></description>
@@ -23,9 +39,17 @@
 <item>
     <title>Design</title>
     <link>https://seilylook.github.io/tags/design/</link>
-    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
+    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/design/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>MSA</title>
+    <link>https://seilylook.github.io/tags/msa/</link>
+    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/msa/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -58,30 +82,6 @@
     <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/e2e-test/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Flutter</title>
-    <link>https://seilylook.github.io/tags/flutter/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/flutter/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Patrol</title>
-    <link>https://seilylook.github.io/tags/patrol/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/patrol/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Test Library</title>
-    <link>https://seilylook.github.io/tags/test-library/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/test-library/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -4,9 +4,39 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Scrum</title>
+    <link>https://seilylook.github.io/posts/scrum/</link>
+    <pubDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/scrum/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/scrum-image.webp" referrerpolicy="no-referrer">
+            </div>스크럼이란? 스크럼(Scrum)은 팀이 협업하고 영향력이 큰 업무를 수행하는 데 도움이 되는 애자일 프레임워크이다. 스크럼 프레임워크는 팀이 반복과 지속적인 개선에 집중할 수 있도록 가치, 역할, 지침의 청사진을 제공한다.
+전통적으로 스크럼은 스프린트라고 하는 보통 2주간의 업무 세션으로 구성되며, 마지막에 특정 결과물이 산출된다. 스크럼에는 2가지 추가 이벤트가 있다. 일일 스탠드업 미팅은 이름에서 알 수 있듯이 하루에 한 번 수행한다. 일일 스탠드업 미팅은 스크럼 팀이 15분 동안 논의하며 일상 활동을 조율할 기회이다. 두 번째 이벤트인 스프린트 회고는 스프린트가 끝나면 수행한다.]]></description>
+</item>
+<item>
+    <title>Ubiquitous Language</title>
+    <link>https://seilylook.github.io/posts/ubiquitous-language/</link>
+    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/ubiquitous-language/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ubiquitous-image.png" referrerpolicy="no-referrer">
+            </div>Introduction 프로젝트를 진행하다보면 다음과 같은 상황을 겪는 경우가 많다.
+회원 관련
+사용자1: 신규 회원을 등록한다.
+사용자2: 신규 회원을 추가한다.
+사용자가 말하는 등록과 추가는 무슨 의미일까? 모두 신규 회원이 가입되었다는 의미로 사용하는 것인가?
+상품 관련
+MD1: 노트북 상품을 추가한다.
+MD2: 노트북 제품을 등록한다.
+사용자가 말하는 상품과 제품은 같은 의미로 사용하는 걸까? 추가와 등록은 이전 회원에 비해 헷갈린다. 단순히 수량을 추가하는 걸까? 새롭게 상품&amp;제품을 등록하는 것일까?
+이렇듯 같은 팀내에서 도메인에 대한 용어가 제 각각일 경우를 겪는 일이 많다.]]></description>
+</item>
+<item>
     <title>Domain Driven Design</title>
     <link>https://seilylook.github.io/posts/domain-driven-design/</link>
     <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
@@ -116,30 +146,6 @@ Server NestJS DB SQLite
 Firebase
 UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
 1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors.]]></description>
-</item>
-<item>
-    <title>Flutter Youtube Streaming</title>
-    <link>https://seilylook.github.io/posts/flutter-youtube-streaming/</link>
-    <pubDate>Mon, 18 Dec 2023 18:32:43 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/flutter-youtube-streaming/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/youtube-logo.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction Flutter 기능 구현 - YouTube 동영상 데이터 가져오기.
-HTTP 요청의 응답을 담을 모델 클래스를 구현하고, UI를 작성한 다음, Dio를 사용해서 직접 API 요청을 진행한다. 마지막으로 요청을 다시 실행하고 리스트를 갱신할 수 있는 새로고침 기능을 추가해준다.
-Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 구현 VideoModel 유튜브 API를 사용하면 굉장히 많은 정보를 가져올 수 있다. 그 중에서 동영상 ID와 제목만 활용해본다. 이 정보를 담을 VideoModel 클래스를 구현해서 데이터를 관리한다.]]></description>
-</item>
-<item>
-    <title>Flutter Image Picker</title>
-    <link>https://seilylook.github.io/posts/flutter-image-picker/</link>
-    <pubDate>Fri, 15 Dec 2023 14:43:56 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/flutter-image-picker/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/flutter-image-picker.png" referrerpolicy="no-referrer">
-            </div>Introduction Flutter 기능 구현 - Image Pick &amp; Update &amp; Save
-Chapter 1 프로젝트 생성 및 이미지 추가 1 2 3 flutter create image_picker cd image_picker Root 디렉토리에 assets/img 폴더를 만들고, 해당 폴더에 사용할 이미지들을 넣어준다.
-pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application.]]></description>
 </item>
 </channel>
 </rss>

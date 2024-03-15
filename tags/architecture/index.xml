@@ -4,7 +4,26 @@
         <link>https://seilylook.github.io/tags/architecture/</link>
         <description>Architecture - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/architecture/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/architecture/" rel="self" type="application/rss+xml" /><item>
+    <title>Ubiquitous Language</title>
+    <link>https://seilylook.github.io/posts/ubiquitous-language/</link>
+    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/ubiquitous-language/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ubiquitous-image.png" referrerpolicy="no-referrer">
+            </div>Introduction 프로젝트를 진행하다보면 다음과 같은 상황을 겪는 경우가 많다.
+회원 관련
+사용자1: 신규 회원을 등록한다.
+사용자2: 신규 회원을 추가한다.
+사용자가 말하는 등록과 추가는 무슨 의미일까? 모두 신규 회원이 가입되었다는 의미로 사용하는 것인가?
+상품 관련
+MD1: 노트북 상품을 추가한다.
+MD2: 노트북 제품을 등록한다.
+사용자가 말하는 상품과 제품은 같은 의미로 사용하는 걸까? 추가와 등록은 이전 회원에 비해 헷갈린다. 단순히 수량을 추가하는 걸까? 새롭게 상품&amp;제품을 등록하는 것일까?
+이렇듯 같은 팀내에서 도메인에 대한 용어가 제 각각일 경우를 겪는 일이 많다.]]></description>
+</item>
+<item>
     <title>Domain Driven Design</title>
     <link>https://seilylook.github.io/posts/domain-driven-design/</link>
     <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
