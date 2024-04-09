@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Configuration</title>
+    <link>https://seilylook.github.io/tags/configuration/</link>
+    <pubDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/configuration/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Docker</title>
+    <link>https://seilylook.github.io/tags/docker/</link>
+    <pubDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/docker/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Development Methology</title>
     <link>https://seilylook.github.io/tags/development-methology/</link>
     <pubDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/cross-platform/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Dart</title>
-    <link>https://seilylook.github.io/tags/dart/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/dart/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>E2E Test</title>
-    <link>https://seilylook.github.io/tags/e2e-test/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/e2e-test/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
