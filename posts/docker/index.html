@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/docker/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-09T18:07:56+09:00" />
-<meta property="article:modified_time" content="2024-04-09T18:07:56+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-04-09T19:38:50+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Docker"/>
@@ -30,8 +30,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/docker\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Docker, Configuration","wordcount":  862 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/docker\/","datePublished": "2024-04-09T18:07:56+09:00","dateModified": "2024-04-09T18:07:56+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Docker, Configuration","wordcount":  922 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/docker\/","datePublished": "2024-04-09T18:07:56+09:00","dateModified": "2024-04-09T19:38:50+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -78,7 +78,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Docker</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-09">2024-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;862 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-09">2024-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;922 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -101,6 +101,7 @@
   <ul>
     <li><a href="#docker-image">Docker Image</a></li>
     <li><a href="#docker-container">Docker Container</a></li>
+    <li><a href="#docker-compose-volume">Docker Compose Volume</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
@@ -170,13 +171,16 @@
             <div class="admonition-content">운영체계를 기반으로 만들어진 대부분의 Software는 그 실행을 위하여 OS와 Software가 사용하는 동적 Library에 대하여 의존성을 갖습니다. 즉, Software의 실행을 위해선 OS와 Library를 포함, Software가 필요로 하는 파일 등으로 구성된 실행환경이 필요한데, 하나의 시스템 위에서 둘 이상의 Software를 동시에 실행하려고 한다면 문제가 발생할 수 있습니다. 예를 들어, Software A와 B가 동일한 Library를 사용하지만 서로 다른 버전을 필요로 하는 경우라던지 두 software의 운영 체제가 다를 경우 등 다양한 경우에서 문제가 발생할 수 있습니다. 이런 상황에서가장 간단한 해결책은 두 Software를 위한 시스템을 각각 준비하는 것인데, 시스템을 각각 준비할 경우 비용의 문제가 발생하게 된다(10개의 software일 경우 10개의 시스템이 필요). 이러한 문제점을 효율적으로 해결한 것이 바로 컨테이너입니다. 컨테이너(Container)는 개별 Software의 실행에 필요한 실행환경을 독립적으로 운용할 수 있도록 기반환경 또는 다른 실행환경과의 간섭을 막고 실행의 독립성을 확보해주는 운영체계 수준의 격리 기술을 말합니다. 컨테이너는 애플리케이션을 실제 구동 환경으로부터 추상화할 수 있는 논리 패키징 메커니즘을 제공합니다.</div>
         </div>
     </div>
+<h2 id="docker-compose-volume">Docker Compose Volume</h2>
+<p>Docker Compose에서의 &ldquo;volume&quot;은 컨테이너 내부의 파일 시스템 경로와 호스트의 파일 시스템 경로 간에 데이터를 공유하는 방법을 지칭합니다. 즉, 컨테이너가 실행되는 동안 데이터를 저장하고 유지하기 위해 호스트 시스템과 컨테이너 간에 지속적으로 연결된 디렉토리나 파일을 제공합니다. 이를 통해 데이터의 지속성을 보장하고 데이터를 컨테이너 사이에 쉽게 전달할 수 있습니다. 예를 들어, 데이터베이스 컨테이너가 종료되더라도 볼륨을 통해 데이터를 보존할 수 있습니다.</p>
 <h1 id="docker-실습">Docker 실습</h1>
 <p><a href="https://docs.docker.com/get-started/02_our_app/" target="_blank" rel="noopener noreffer ">Docker 공식 문서</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-09</span>
+                <span>Updated on 2024-04-09&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/3e2948f6fd655ac9b3eb832cfea8dd188b55f94e" target="_blank" title="commit by seilylook(seilylook@naver.com) 3e2948f6fd655ac9b3eb832cfea8dd188b55f94e: add: docker">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3e2948f</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
