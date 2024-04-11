@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>DataLake - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="DataLake" />
+<meta property="og:description" content="데이터 레이크란 무엇인가요? 데이터 레이크는 모든 규모의 정형 및 비정형 데이터를 저장할 수 있는 중앙 집중식 리포지토리입니다. 먼저 데이터를 구조화하지 않고도 데이터를 있는 그대로 저장할 수 있고 대시보드 및 시각화에서 빅 데이터 처리, 실시간 분석, 기계 학습에 이르기까지 다양한 유형의 분석을 실행하여 더 나은 의사 결정을 내릴 수 있도록 안내합니다.
+데이터 레이크와 분석 솔루션의 필수 요소는 무엇입니까? 조직은 데이터 레이크와 분석 플랫폼을 구축할 때 다음과 같은 여러 주요 기능을 고려해야 합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/datalake/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-11T16:59:27+09:00" />
+<meta property="article:modified_time" content="2024-04-11T16:59:27+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="DataLake"/>
+<meta name="twitter:description" content="데이터 레이크란 무엇인가요? 데이터 레이크는 모든 규모의 정형 및 비정형 데이터를 저장할 수 있는 중앙 집중식 리포지토리입니다. 먼저 데이터를 구조화하지 않고도 데이터를 있는 그대로 저장할 수 있고 대시보드 및 시각화에서 빅 데이터 처리, 실시간 분석, 기계 학습에 이르기까지 다양한 유형의 분석을 실행하여 더 나은 의사 결정을 내릴 수 있도록 안내합니다.
+데이터 레이크와 분석 솔루션의 필수 요소는 무엇입니까? 조직은 데이터 레이크와 분석 플랫폼을 구축할 때 다음과 같은 여러 주요 기능을 고려해야 합니다."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/datalake/" /><link rel="prev" href="https://seilylook.github.io/posts/datawarehouse/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "DataLake",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/datalake\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Data Lake, Data Engineering","wordcount":  655 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/datalake\/","datePublished": "2024-04-11T16:59:27+09:00","dateModified": "2024-04-11T16:59:27+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/datalake/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/datalake/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">DataLake</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-11">2024-04-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;655 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/data-lake.png"
+        data-srcset="/images/data-lake.png, /images/data-lake.png 1.5x, /images/data-lake.png 2x"
+        data-sizes="auto"
+        alt="/images/data-lake.png"
+        title="/images/data-lake.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#데이터-이동">데이터 이동</a></li>
+    <li><a href="#데이터를-안전하게-저장하고-카탈로그-작성">데이터를 안전하게 저장하고 카탈로그 작성</a></li>
+    <li><a href="#분석">분석</a></li>
+    <li><a href="#기계-학습">기계 학습</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#고객-상호-작용-개선">고객 상호 작용 개선</a></li>
+    <li><a href="#rd-혁신-선택-개선">R&amp;D 혁신 선택 개선</a></li>
+    <li><a href="#운영-효율성-증대">운영 효율성 증대</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="데이터-레이크란-무엇인가요">데이터 레이크란 무엇인가요?</h1>
+<p>데이터 레이크는 모든 규모의 정형 및 비정형 데이터를 저장할 수 있는 중앙 집중식 리포지토리입니다. 먼저 데이터를 구조화하지 않고도 데이터를 있는 그대로 저장할 수 있고 대시보드 및 시각화에서 빅 데이터 처리, 실시간 분석, 기계 학습에 이르기까지 다양한 유형의 분석을 실행하여 더 나은 의사 결정을 내릴 수 있도록 안내합니다.</p>
+<h1 id="데이터-레이크와-분석-솔루션의-필수-요소는-무엇입니까">데이터 레이크와 분석 솔루션의 필수 요소는 무엇입니까?</h1>
+<p>조직은 데이터 레이크와 분석 플랫폼을 구축할 때 다음과 같은 여러 주요 기능을 고려해야 합니다.</p>
+<h2 id="데이터-이동">데이터 이동</h2>
+<p>데이터 레이크를 사용하면 실시간으로 수신되는 모든 양의 데이터를 가져올 수 있습니다. 데이터는 여러 소스에서 수집되어 원래 형식으로 데이터 레이크로 이동합니다. 이 프로세스를 사용하면 데이터 구조, 스키마 및 변환을 정의하는 시간을 절약하면서 모든 크기의 데이터로 확장할 수 있습니다.</p>
+<h2 id="데이터를-안전하게-저장하고-카탈로그-작성">데이터를 안전하게 저장하고 카탈로그 작성</h2>
+<p>데이터 레이크를 사용하면 운영 데이터베이스, 업무용 애플리케이션 데이터 등의 관계형 데이터와 모바일 앱, IoT 기기, 소셜 미디어와 같은 비관계형 데이터를 저장할 수 있습니다. 또한 데이터의 크롤링, 카탈로그 작성 및 인덱싱을 통해 레이크에 어떤 데이터가 있는지 파악할 수 있습니다. 마지막으로, 데이터 자산을 보호하려면 데이터의 보안을 유지해야 합니다.</p>
+<h2 id="분석">분석</h2>
+<p>데이터 레이크를 사용하면 데이터 사이언티스트, 데이터 개발자, 비즈니스 분석가와 같은 조직의 다양한 역할이 선택한 분석 도구 및 프레임워크를 사용하여 데이터에 액세스할 수 있습니다. 여기에는 Apache Hadoop, Presto, Apache Spark와 같은 오픈 소스 프레임워크와 데이터 웨어하우스 및 비즈니스 인텔리전스 공급업체의 상용 제품이 포함됩니다. 데이터 레이크를 사용하면 데이터를 별도의 분석 시스템으로 이동할 필요 없이 분석을 실행할 수 있습니다.</p>
+<h2 id="기계-학습">기계 학습</h2>
+<p>데이터 레이크를 통해 조직은 과거 데이터를 보고하고 예상 결과를 예측하도록 모델을 구축하고, 최적의 결과를 달성하기 위해 규정된 다양한 조치를 제안하는 기계 학습을 수행하는 등 다양한 유형의 인사이트를 생성할 수 있습니다.</p>
+<h1 id="데이터-웨어하우스는-데이터-레이크와-어떻게-다릅니까">데이터 웨어하우스는 데이터 레이크와 어떻게 다릅니까?</h1>
+<p>요구 사항에 따라 일반적인 조직에는 요구 사항과 사용 사례가 서로 다른 데이터 웨어하우스와 데이터 레이크가 모두 필요합니다.</p>
+<p>데이터 웨어하우스는 트랜잭션 시스템과 비즈니스 애플리케이션 라인에서 오는 관계형 데이터를 분석하도록 최적화된 데이터베이스입니다. 데이터 구조 및 스키마는 빠른 SQL 쿼리에 최적화하기 위해 미리 정의되며, 이 경우 결과는 일반적으로 운영 보고 및 분석에 사용됩니다. 데이터는 사용자가 신뢰할 수 있는 &ldquo;단일 정보 소스&rdquo; 역할을 하도록 정제, 강화 및 전환됩니다.</p>
+<p>데이터 레이크는 업무용 애플리케이션의 관계형 데이터와 모바일 앱, IoT 기기 및 소셜 미디어의 비관계형 데이터를 저장한다는 점에서 다릅니다. 데이터 또는 스키마의 구조는 데이터를 캡처할 때 정의되지 않습니다. 즉, 신중하게 설계하거나 향후 어떤 질문에 대한 답변이 필요한지 알 필요가 없이 모든 데이터를 저장할 수 있습니다. SQL 쿼리, 빅 데이터 분석, 전체 텍스트 검색, 실시간 분석 및 기계 학습과 같은 데이터에 대한 다양한 유형의 분석을 사용하여 인사이트를 발견할 수 있습니다.</p>
+<p>데이터 웨어하우스를 보유한 조직은 데이터 레이크의 이점을 인식하면서 데이터 레이크를 포함하고 새로운 정보 모델을 발견하기 위한 다양한 쿼리 기능, 데이터 과학 사용 사례 및 고급 기능을 지원하도록 웨어하우스를 발전시키고 있습니다. Gartner는 이러한 진화를 “분석을 위한 데이터 관리 솔루션” 또는 “DMSA”라고 부릅니다.</p>
+<h1 id="데이터-레이크의-가치는-무엇입니까">데이터 레이크의 가치는 무엇입니까?</h1>
+<p>더 짧은 시간에 더 많은 소스에서 더 많은 데이터를 활용하고, 사용자가 다양한 방식으로 협업하고 데이터를 분석할 수 있도록 지원하면 더 효과적이고 빠른 의사 결정을 내릴 수 있습니다. 데이터 레이크가 부가 가치를 창출한 예시는 다음과 같습니다.</p>
+<h2 id="고객-상호-작용-개선">고객 상호 작용 개선</h2>
+<p>데이터 레이크는 CRM 플랫폼의 고객 데이터를 소셜 미디어 분석, 구매 내역이 포함된 마케팅 플랫폼, 인시던트 티켓과 결합하여 비즈니스가 가장 수익성이 높은 고객 집단, 고객 이탈의 원인, 충성도를 높일 프로모션 또는 보상을 파악할 수 있도록 지원합니다.</p>
+<h2 id="rd-혁신-선택-개선">R&amp;D 혁신 선택 개선</h2>
+<p>데이터 레이크는 R&amp;D 팀이 가설을 테스트하고, 가정을 구체화하고, 결과를 평가하는 데 도움이 될 수 있습니다. 예를 들어 제품 설계에서 올바른 재료를 선택하여 성능을 높이고, 게놈 연구를 수행하여 약물 효과를 높이거나, 다양한 특성에 대한 고객의 지불 의향을 파악할 수 있습니다.</p>
+<h2 id="운영-효율성-증대">운영 효율성 증대</h2>
+<p>사물 인터넷(IoT)은 인터넷 연결 장치에서 제공되는 실시간 데이터를 통해 제조와 같은 프로세스에 대한 데이터를 수집하는 더 많은 방법을 도입했습니다. 데이터 레이크를 사용하면 기계 생성 IoT 데이터를 쉽게 저장하고 분석을 실행하여 운영 비용을 줄이고 품질을 높이는 방법을 찾을 수 있습니다.</p>
+<h1 id="데이터-레이크의-어려움에는-무엇이-있나요">데이터 레이크의 어려움에는 무엇이 있나요?</h1>
+<p>데이터 레이크 아키텍처의 주요 문제는 콘텐츠에 대한 감독 없이 원시 데이터가 저장된다는 것입니다. 데이터 레이크가 데이터를 사용할 수 있게 하려면 데이터를 분류하고 보호할 수 있는 정의된 메커니즘이 있어야 합니다. 이러한 요소가 없으면 데이터를 찾을 수 없고 신뢰할 수 없어 “데이터 늪지”가 발생합니다.” 더 많은 청중의 요구를 충족하려면 데이터 레이크에 거버넌스, 시맨틱 일관성 및 액세스 제어 기능이 있어야 합니다.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-04-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/datalake/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/datalake/" data-title="DataLake" data-hashtags="Data Lake,Data Engineering"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/datalake/" data-hashtag="Data Lake"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/datalake/" data-title="DataLake"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/datalake/" data-title="DataLake"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/datalake/" data-title="DataLake" data-image="/images/data-lake.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-lake/">Data Lake</a>,&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/datawarehouse/" class="prev" rel="prev" title="DataWarehouse"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>DataWarehouse</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

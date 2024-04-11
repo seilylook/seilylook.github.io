@@ -4,7 +4,63 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 16:59:27 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Data Engineering</title>
+    <link>https://seilylook.github.io/tags/data-engineering/</link>
+    <pubDate>Thu, 11 Apr 2024 16:59:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Data Lake</title>
+    <link>https://seilylook.github.io/tags/data-lake/</link>
+    <pubDate>Thu, 11 Apr 2024 16:59:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-lake/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Data Warehouse</title>
+    <link>https://seilylook.github.io/tags/data-warehouse/</link>
+    <pubDate>Thu, 11 Apr 2024 16:39:24 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-warehouse/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ELT</title>
+    <link>https://seilylook.github.io/tags/elt/</link>
+    <pubDate>Thu, 11 Apr 2024 16:15:34 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/elt/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ETL</title>
+    <link>https://seilylook.github.io/tags/etl/</link>
+    <pubDate>Thu, 11 Apr 2024 16:15:34 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/etl/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Kafka</title>
+    <link>https://seilylook.github.io/tags/kafka/</link>
+    <pubDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/kafka/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Spark</title>
+    <link>https://seilylook.github.io/tags/spark/</link>
+    <pubDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/spark/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Machine Learning</title>
     <link>https://seilylook.github.io/tags/machine-learning/</link>
     <pubDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</pubDate>
@@ -26,62 +82,6 @@
     <pubDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/gpu/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Hardware</title>
-    <link>https://seilylook.github.io/tags/hardware/</link>
-    <pubDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/hardware/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Configuration</title>
-    <link>https://seilylook.github.io/tags/configuration/</link>
-    <pubDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/configuration/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Docker</title>
-    <link>https://seilylook.github.io/tags/docker/</link>
-    <pubDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/docker/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Development Methology</title>
-    <link>https://seilylook.github.io/tags/development-methology/</link>
-    <pubDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/development-methology/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Scrum</title>
-    <link>https://seilylook.github.io/tags/scrum/</link>
-    <pubDate>Fri, 15 Mar 2024 15:24:36 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/scrum/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Architecture</title>
-    <link>https://seilylook.github.io/tags/architecture/</link>
-    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/architecture/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>DDD</title>
-    <link>https://seilylook.github.io/tags/ddd/</link>
-    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/ddd/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

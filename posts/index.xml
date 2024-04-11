@@ -4,7 +4,61 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 16:59:27 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>DataLake</title>
+    <link>https://seilylook.github.io/posts/datalake/</link>
+    <pubDate>Thu, 11 Apr 2024 16:59:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/datalake/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/data-lake.png" referrerpolicy="no-referrer">
+            </div>데이터 레이크란 무엇인가요? 데이터 레이크는 모든 규모의 정형 및 비정형 데이터를 저장할 수 있는 중앙 집중식 리포지토리입니다. 먼저 데이터를 구조화하지 않고도 데이터를 있는 그대로 저장할 수 있고 대시보드 및 시각화에서 빅 데이터 처리, 실시간 분석, 기계 학습에 이르기까지 다양한 유형의 분석을 실행하여 더 나은 의사 결정을 내릴 수 있도록 안내합니다.
+데이터 레이크와 분석 솔루션의 필수 요소는 무엇입니까? 조직은 데이터 레이크와 분석 플랫폼을 구축할 때 다음과 같은 여러 주요 기능을 고려해야 합니다.]]></description>
+</item>
+<item>
+    <title>DataWarehouse</title>
+    <link>https://seilylook.github.io/posts/datawarehouse/</link>
+    <pubDate>Thu, 11 Apr 2024 16:39:24 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/datawarehouse/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/data-warehouse.webp" referrerpolicy="no-referrer">
+            </div>데이터 웨어하우스란 무엇입니까? 데이터 웨어하우스는 보다 정보에 입각한 의사 결정을 내릴 수 있도록 분석 가능한 정보의 중앙 리포지토리입니다. 데이터는 트랜잭션 시스템, 관계형 데이터베이스 및 기타 소스로부터 보통 정기적으로 데이터 웨어하우스로 들어갑니다. 비즈니스 애널리스트, 데이터 엔지니어, 데이터 사이언티스트 및 의사 결정권자는 비즈니스 인텔리전스(BI) 도구, SQL 클라이언트 및 기타 분석 애플리케이션을 통해 데이터에 액세스합니다.
+데이터 및 분석은 비즈니스가 경쟁력을 유지하는 데 없어서는 안 되는 부분이 되었습니다. 비즈니스 사용자는 보고서, 대시보드 및 분석 도구를 활용하여 데이터에서 통찰력을 찾아내고, 비즈니스 성과를 모니터링하며, 의사 결정을 지원합니다.]]></description>
+</item>
+<item>
+    <title>ETL</title>
+    <link>https://seilylook.github.io/posts/etl/</link>
+    <pubDate>Thu, 11 Apr 2024 16:15:34 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/etl/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ETL.jpeg" referrerpolicy="no-referrer">
+            </div>ETL이란 무엇인가요? 추출, 전환, 적재(ETL)는 다양한 소스의 데이터를 데이터 웨어하우스라고 부르는 대형 중앙 집중식 리포지토리에 결합하는 과정입니다. ETL은 원시 데이터를 정리 및 구성해서 스토리지, 데이터 분석, 기계 학습(ML)용으로 준비하기 위한 비즈니스 규칙 세트입니다. 사용자는 데이터 분석(비즈니스 의사 결정의 결과 예측, 보고서 및 대시보드 생성, 운영 비효율성 저감 등)을 통해 특정 비즈니스 인텔리전스 요구 사항을 해결할 수 있습니다.
+ETL이 중요한 이유는 무엇인가요? 오늘날 조직은 다음과 같은 다양한 소스의 정형 데이터와 비정형 데이터를 모두 보유하고 있습니다.]]></description>
+</item>
+<item>
+    <title>Kafka Spark</title>
+    <link>https://seilylook.github.io/posts/kafka-spark/</link>
+    <pubDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kafka-spark/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/spark-kafka.webp" referrerpolicy="no-referrer">
+            </div>Kafka와 Spark의 차이점은 무엇일까요? Apache Kafka는 스트림 처리 엔진이고 Apache Spark는 분산 데이터 처리 엔진입니다. 분석에서 조직은 두 가지 주요 방법, 즉 배치 처리와 스트림 처리를 사용하여 데이터를 처리합니다. 배치 처리에서는 단일 워크로드에서 매우 많은 양의 데이터를 처리합니다. 스트림 처리에서는 작은 단위의 데이터를 실시간 흐름으로 연속적으로 처리합니다. 원래 Spark는 배치 처리용으로 설계되었고 Kafka는 스트림 처리용으로 설계되었습니다. 이후 Spark는 Spark 스트리밍 모듈을 기본 분산 아키텍처에 추가 기능으로 추가했습니다. 하지만 Kafka는 대부분의 스트리밍 데이터 사용 사례에서 더 낮은 지연 시간과 더 높은 처리량을 제공합니다.]]></description>
+</item>
+<item>
+    <title>Spark</title>
+    <link>https://seilylook.github.io/posts/spark/</link>
+    <pubDate>Thu, 11 Apr 2024 14:51:35 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/spark.png" referrerpolicy="no-referrer">
+            </div>Apache Spark란 무엇입니까? Apache Spark는 빅 데이터 워크로드에 사용되는 오픈 소스 분산 처리 시스템입니다. Apache Spark는 인 메모리 캐시 및 최적화된 쿼리 실행을 활용하여 모든 크기의 데이터에 대해 빠른 분석 쿼리를 실행합니다. Java, Scala, Python 및 R로 개발 API를 제공하고 일괄 처리, 대화형 쿼리, 실시간 분석, 기계 학습, 그래프 처리 등 여러 워크로드에서 코드 재사용을 지원합니다. FINRA, Yelp, Zillow, DataXu, Urban Institute 및 CrowdStrike를 포함한 모든 업계의 조직에서 사용됩니다.
+Apache Spark는 어떻게 작동하나요?]]></description>
+</item>
+<item>
     <title>MLOps</title>
     <link>https://seilylook.github.io/posts/mlops/</link>
     <pubDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</pubDate>
@@ -67,69 +121,6 @@ MD1: 노트북 상품을 추가한다.
 MD2: 노트북 제품을 등록한다.
 사용자가 말하는 상품과 제품은 같은 의미로 사용하는 걸까? 추가와 등록은 이전 회원에 비해 헷갈린다. 단순히 수량을 추가하는 걸까? 새롭게 상품&amp;제품을 등록하는 것일까?
 이렇듯 같은 팀내에서 도메인에 대한 용어가 제 각각일 경우를 겪는 일이 많다.]]></description>
-</item>
-<item>
-    <title>Domain Driven Design</title>
-    <link>https://seilylook.github.io/posts/domain-driven-design/</link>
-    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/domain-driven-design/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/domain-image.webp" referrerpolicy="no-referrer">
-            </div>Introduction 소프트웨어 개발 방법론에 대해서 들어는 봤지만, 정확한 의미를 파악하고 용어를 이해하기 위해 정리해본다. 첫번째는 DDD(Domain Driven Design)이다.
-도메인 주도 설계 우리가 서비스를 개발한다면, 그 서비스가 그 상태 그대로 변경되지 않는 경우는 없다. 대부분의 서비스는 고객의 요구 사항이나 비즈니스 환경의 변화에 따라 지속적으로 업데이트되고 변화한다. 그러나 이런 변화를 수용하면서 시스템의 복잡성을 관리하는 것은 어렵다. 이런 문제를 해결하기 위해 제안된 개발 방법론이 바로 DDD, Domain Driven Design이다.
-도메인 주도 설계는 서비스의 “기능”을 기준으로 코드를 구분하지 않고, “도메인”이라는 비즈니스 영역을 기준으로 코드를 구분하는 것이 가장 핵심적이다.]]></description>
-</item>
-<item>
-    <title>Patrol</title>
-    <link>https://seilylook.github.io/posts/patrol/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/patrol/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/patrol.png" referrerpolicy="no-referrer">
-            </div>Introduction Flutter는 테스트 코드 작성을 도와주는 자체 라이브러리인 integrated test package가 존재한다. 하지만 한계점도 존재하는데, 이 한계를 해결하기 위해 등장한 라이브러리가 바로 Patrol이다.
-Patrol 설치 1 2 3 4 5 6 7 8 9 10 11 12 13 14 dependencies: # ... dev_dependencies: # ... patrol: app_name: My App android: package_name: com.example.myapp ios: bundle_id: com.example.MyApp macos: bundle_id: com.example.macos.MyApp app_name, package_name, ios: bundle_id, macos: bundle_id는 각 프로젝트에 맞게 설정해 주어야 한다.]]></description>
-</item>
-<item>
-    <title>Tunefun Riverpod</title>
-    <link>https://seilylook.github.io/posts/tunefun-riverpod/</link>
-    <pubDate>Sat, 09 Mar 2024 16:55:50 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/tunefun-riverpod/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/project-image.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction Riverpod을 실제 프로젝트에 처음으로 적용해보고 이해한 것을 정리하기 위한 포스팅이다.
-목표 User Authentication - 회원가입, 로그인 기능 전체를 구현하고 사용자 정보를 Storage에 저장해 로그인 유지를 구축하고 싶었다.
-Dependency 1 2 3 4 5 6 7 8 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.10 구현 Model 구축하기 사용자 정보에 대한 데이터베이스를 위한 모델을 만들어준다.]]></description>
-</item>
-<item>
-    <title>Flutter Amplify</title>
-    <link>https://seilylook.github.io/posts/flutter-amplify/</link>
-    <pubDate>Wed, 21 Feb 2024 14:03:51 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/flutter-amplify/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/aws-amplify.png" referrerpolicy="no-referrer">
-            </div>Introduction 이 포스팅은 Flutter에 Amplify 서비스를 연동하는 과정을 다룬다.
-AWS Amplify는 모바일 및 프론트엔드 웹 개발자가 AWS에서 구동되는 안전하고 확장 가능한 풀 스택 애플리케이션을 개발하도록 지원하는 도구 및 서비스이다.
-현재 Amplify에서 제공하는 대표적인 서비스는 다음과 같다.
-소셜 미디어 로그인, OAuth 등을 위한 AWS Cognito
-미디어 스토리지 파일용 AWS S3
-앱에 대한 분석 데이터를 수집하는 AWS Analytics
-Amplify 사전 작업 AWS 계정 생성 Create Account
-Amplify CLI 설치 Amplify 명령어를 입력하기 위한 툴체인을 설치해준다.]]></description>
-</item>
-<item>
-    <title>Flutter Riverpod</title>
-    <link>https://seilylook.github.io/posts/flutter-riverpod/</link>
-    <pubDate>Wed, 17 Jan 2024 11:26:36 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/flutter-riverpod/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/riverpod.png" referrerpolicy="no-referrer">
-            </div>Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. Flutter는 선언형 UI이며 각각의 상태를 포함하고 있는 위젯 트리를 기반으로 구성되기 때문에 State management가 매우 중요하다. 단일 위젯에서만 사용하는 상태일 경우는 상태 관리가 특별하기 관리되지 않아도 괜찮지만, 프로젝트 규모가 커질 수록 여러 위젯에섯 여러 상태에 대해 접근해야 된다. 이런 여러 위젯에서 사용하는 상태를 App State라고 부르며 App State 관리를 지원하는 여러 라이브러리가 존재하는데 Riverpod가 그 중 가장 대중적이다.
-What is Riverpod?]]></description>
 </item>
 </channel>
 </rss>
