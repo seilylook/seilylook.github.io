@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>GPU</title>
+    <link>https://seilylook.github.io/tags/gpu/</link>
+    <pubDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/gpu/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Hardware</title>
+    <link>https://seilylook.github.io/tags/hardware/</link>
+    <pubDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/hardware/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Configuration</title>
     <link>https://seilylook.github.io/tags/configuration/</link>
     <pubDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/msa/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Development</title>
-    <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Thu, 14 Mar 2024 14:04:50 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/development/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Cross Platform</title>
-    <link>https://seilylook.github.io/tags/cross-platform/</link>
-    <pubDate>Mon, 11 Mar 2024 15:21:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/cross-platform/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

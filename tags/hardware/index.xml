@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Hardware - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/hardware/</link>
+        <description>Hardware - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/hardware/" rel="self" type="application/rss+xml" /><item>
+    <title>GPU</title>
+    <link>https://seilylook.github.io/posts/gpu/</link>
+    <pubDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/gpu/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/gpu-image.png" referrerpolicy="no-referrer">
+            </div>Introduction 중앙 처리 장치(CPU)는 서버의 핵심 계산 장치인 하드웨어 구성 요소입니다. CPU는 운영 체제 및 애플리케이션을 실행하는 데 필요한 모든 유형의 컴퓨팅 작업을 처리합니다. 그래픽 처리 장치(GPU)는 유사한 하드웨어 구성 요소이지만 더 전문화되어 있습니다. GPU는 일반 CPU보다 병렬로 실행되는 복잡한 수학 연산을 더 효율적으로 처리할 수 있습니다. 처음에 GPU는 게임과 애니메이션의 그래픽 렌더링 작업을 처리하기 위해 만들어졌지만 이제는 그 이상으로 그 용도가 확장되고 있습니다. 특히 3D 모델링, 머신러닝, 블록체인 분야에서 필수적이게 되었습니다.]]></description>
+</item>
+</channel>
+</rss>

@@ -4,9 +4,19 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>GPU</title>
+    <link>https://seilylook.github.io/posts/gpu/</link>
+    <pubDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/gpu/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/gpu-image.png" referrerpolicy="no-referrer">
+            </div>Introduction 중앙 처리 장치(CPU)는 서버의 핵심 계산 장치인 하드웨어 구성 요소입니다. CPU는 운영 체제 및 애플리케이션을 실행하는 데 필요한 모든 유형의 컴퓨팅 작업을 처리합니다. 그래픽 처리 장치(GPU)는 유사한 하드웨어 구성 요소이지만 더 전문화되어 있습니다. GPU는 일반 CPU보다 병렬로 실행되는 복잡한 수학 연산을 더 효율적으로 처리할 수 있습니다. 처음에 GPU는 게임과 애니메이션의 그래픽 렌더링 작업을 처리하기 위해 만들어졌지만 이제는 그 이상으로 그 용도가 확장되고 있습니다. 특히 3D 모델링, 머신러닝, 블록체인 분야에서 필수적이게 되었습니다.]]></description>
+</item>
+<item>
     <title>Docker</title>
     <link>https://seilylook.github.io/posts/docker/</link>
     <pubDate>Tue, 09 Apr 2024 18:07:56 &#43;0900</pubDate>
@@ -123,17 +133,6 @@ What is Riverpod?]]></description>
 앱 Bundle ID 설정하기 Bundle ID는 앱을 식별하는 유일한 값이다. 세 개의 단어를 마침표로 구분해서 입력하며 같은 플랫폼(안드로이드, iOS 등) 내에서 다른 앱과 절대로 겹칠 수가 없다. 일반적으로 도메인을 거꾸로 입력한 형태를 띈다.
 직접 모든 파일에 적힌 Bundle ID를 변경해 줄 수도 있지만 그러면 실수가 생길 수도 있고 시간이 오래 걸리기 때문에 플러그인을 사용한다.
 change_app_package_name 설치 1 flutter pub add change_app_package_name bundle id 바꿔주기 1 flutter pub run change_app_package_name:main &lt;바꿔 줄 이름&gt; 변경된 Bundle ID를 피어어베이스에 등록해주기 위해 설정해준다.]]></description>
-</item>
-<item>
-    <title>Flutter Firebase</title>
-    <link>https://seilylook.github.io/posts/flutter-firebase/</link>
-    <pubDate>Tue, 26 Dec 2023 13:18:15 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/flutter-firebase/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/flutter-firebase.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction 기존에 만들던 Calendar Scheduler 앱에 Firebase의 FireStore 데이터베이스를 연결해준다.
-Dependency 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 table_calendar: ^3.0.9 intl: ^0.18.1 drift: ^2.14.1 sqlite3_flutter_libs: ^0.5.18 path_provider: ^2.1.1 path: ^1.8.3 get_it: ^7.]]></description>
 </item>
 </channel>
 </rss>

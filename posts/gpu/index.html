@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>GPU - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="GPU" />
+<meta property="og:description" content="Introduction 중앙 처리 장치(CPU)는 서버의 핵심 계산 장치인 하드웨어 구성 요소입니다. CPU는 운영 체제 및 애플리케이션을 실행하는 데 필요한 모든 유형의 컴퓨팅 작업을 처리합니다. 그래픽 처리 장치(GPU)는 유사한 하드웨어 구성 요소이지만 더 전문화되어 있습니다. GPU는 일반 CPU보다 병렬로 실행되는 복잡한 수학 연산을 더 효율적으로 처리할 수 있습니다. 처음에 GPU는 게임과 애니메이션의 그래픽 렌더링 작업을 처리하기 위해 만들어졌지만 이제는 그 이상으로 그 용도가 확장되고 있습니다. 특히 3D 모델링, 머신러닝, 블록체인 분야에서 필수적이게 되었습니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/gpu/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-11T13:20:06+09:00" />
+<meta property="article:modified_time" content="2024-04-11T13:20:06+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="GPU"/>
+<meta name="twitter:description" content="Introduction 중앙 처리 장치(CPU)는 서버의 핵심 계산 장치인 하드웨어 구성 요소입니다. CPU는 운영 체제 및 애플리케이션을 실행하는 데 필요한 모든 유형의 컴퓨팅 작업을 처리합니다. 그래픽 처리 장치(GPU)는 유사한 하드웨어 구성 요소이지만 더 전문화되어 있습니다. GPU는 일반 CPU보다 병렬로 실행되는 복잡한 수학 연산을 더 효율적으로 처리할 수 있습니다. 처음에 GPU는 게임과 애니메이션의 그래픽 렌더링 작업을 처리하기 위해 만들어졌지만 이제는 그 이상으로 그 용도가 확장되고 있습니다. 특히 3D 모델링, 머신러닝, 블록체인 분야에서 필수적이게 되었습니다."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/gpu/" /><link rel="prev" href="https://seilylook.github.io/posts/docker/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "GPU",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/gpu\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "GPU, Hardware","wordcount":  804 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/gpu\/","datePublished": "2024-04-11T13:20:06+09:00","dateModified": "2024-04-11T13:20:06+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/gpu/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/gpu/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">GPU</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/computer/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Computer</a>&nbsp;<a href="/categories/technology/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Technology</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-11">2024-04-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;804 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/gpu-image.png"
+        data-srcset="/images/gpu-image.png, /images/gpu-image.png 1.5x, /images/gpu-image.png 2x"
+        data-sizes="auto"
+        alt="/images/gpu-image.png"
+        title="/images/gpu-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#코어">코어</a></li>
+    <li><a href="#메모리">메모리</a></li>
+    <li><a href="#제어-장치">제어 장치</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#연산">연산</a></li>
+    <li><a href="#설계">설계</a></li>
+    <li><a href="#차이점의-예">차이점의 예</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#딥-러닝">딥 러닝</a></li>
+    <li><a href="#고성능-컴퓨팅">고성능 컴퓨팅</a></li>
+    <li><a href="#자율-주행-교통-수단">자율 주행 교통 수단</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>중앙 처리 장치(CPU)는 서버의 핵심 계산 장치인 하드웨어 구성 요소입니다. CPU는 운영 체제 및 애플리케이션을 실행하는 데 필요한 모든 유형의 컴퓨팅 작업을 처리합니다. 그래픽 처리 장치(GPU)는 유사한 하드웨어 구성 요소이지만 더 전문화되어 있습니다. GPU는 일반 CPU보다 병렬로 실행되는 복잡한 수학 연산을 더 효율적으로 처리할 수 있습니다. 처음에 GPU는 게임과 애니메이션의 그래픽 렌더링 작업을 처리하기 위해 만들어졌지만 이제는 그 이상으로 그 용도가 확장되고 있습니다. 특히 3D 모델링, 머신러닝, 블록체인 분야에서 필수적이게 되었습니다.</p>
+<h1 id="gpu와-cpu의-유사점">GPU와 CPU의 유사점</h1>
+<p>CPU와 그래픽 처리 장치(GPU)는 모두 컴퓨터를 작동시키는 하드웨어 장치입니다. 컴퓨터 디바이스의 두뇌 역할을 수행한다고 생각하면 됩니다. 둘 다 코어, 메모리 및 제어 장치를 포함하여 유사한 내부 구성 요소를 가지고 있습니다.</p>
+<h2 id="코어">코어</h2>
+<p>GPU와 CPU 아키텍처는 모든 계산과 논리 함수를 실행하는 코어를 가지고 있습니다. 코어는 비트라고 하는 디지털 신호 양식으로 메모리에서 명령을 가져옵니다. 그리고 명령을 디코딩하고 명령 실행 주기라고 하는 시간 프레임 내에서 논리적 게이트를 통해 명령을 실행합니다. CPU는 초기에 단일 코어를 사용했지만 오늘날에는 멀티코어 CPU와 GPU가 일반적입니다.</p>
+<h2 id="메모리">메모리</h2>
+<p>CPU와 GPU 모두 초당 수백만 건의 계산을 완료하고 내부 메모리를 사용하여 처리 성능을 개선합니다. 캐시는 빠른 데이터 액세스를 활용하는 내장 메모리입니다. CPU에서 레이블 L1, L2 또는 L3은 캐시 배열을 나타냅니다. L1이 가장 빠르고 L3이 가장 느립니다. 메모리 관리 장치(MMU)는 모든 명령 실행 주기에서 CPU 코어, 캐시 및 RAM 간의 데이터 이동을 제어합니다.</p>
+<h2 id="제어-장치">제어 장치</h2>
+<p>제어 장치는 처리 작업을 동기화하고 처리 장치가 생성하는 전기 펄스의 주파수를 결정합니다. 주파수가 높은 CPU 및 GPU의 성능이 더 높습니다. 그러나 이러한 구성 요소의 설계 및 구성은 CPU와 GPU에서 서로 다르므로, 두 구성 요소가 유용한 상황도 서로 다릅니다.</p>
+<h1 id="gpu와-cpu의-차이점">GPU와 CPU의 차이점</h1>
+<p>컴퓨터 그래픽과 애니메이션이 등장하면서 CPU에서 처리하도록 설계되지 않은 최초의 컴퓨팅 집약적 워크로드가 생겼습니다. 예를 들어, 비디오 게임 애니메이션을 구현하려면 애플리케이션은 각각 고유한 개별 색상, 광도, 이동의 특성을 지닌 수천 개의 픽셀을 표시하도록 데이터를 처리해야 했습니다. 당시 CPU의 기하 산술 계산 능력으로는 성능 문제가 발생할 수밖에 없었습니다.</p>
+<p>하드웨어 제조업체는 일반적인 멀티미디어 중심 작업을 오프로드하면 CPU 사용량을 줄이고 성능을 높일 수 있다는 사실을 깨닫기 시작했습니다. 오늘날 그래픽 처리 장치(GPU) 워크로드는 기계 학습 및 인공 지능과 같은 컴퓨팅 집약적인 여러 애플리케이션을 CPU보다 더 효율적으로 처리합니다.</p>
+<h2 id="연산">연산</h2>
+<p>CPU와 GPU의 주요 차이점은 연산 능력에 있습니다. CPU 없이는 서버를 실행할 수 없습니다. CPU는 서버의 모든 소프트웨어를 올바르게 실행하는 데 필요한 모든 작업을 처리합니다. 반면, GPU는 CPU가 동시 계산을 수행할 수 있도록 지원합니다. GPU는 작업을 더 작은 구성 요소로 나누고 병렬로 완료할 수 있기 때문에 단순하고 반복적인 작업을 훨씬 빠르게 완료할 수 있습니다.</p>
+<h2 id="설계">설계</h2>
+<p>GPU는 여러 코어 또는 산술 논리 장치(ALU)를 통한 병렬 처리에 탁월합니다. GPU 코어는 CPU 코어보다 성능이 낮고 메모리가 적습니다. CPU는 서로 다른 명령 세트 사이를 빠르게 전환할 수 있는 반면, GPU는 많은 양의 동일한 명령을 가져와 빠른 속도로 푸시하기만 하면 됩니다. 따라서 GPU 연산은 병렬 컴퓨팅에서 중요한 역할을 합니다.</p>
+<h2 id="차이점의-예">차이점의 예</h2>
+<p>다음 비유를 통해 더 쉽게 이해할 수 있습니다. CPU는 대형 레스토랑에서 수백 개의 햄버거를 뒤집어야 하는 주방장과 같습니다. 주방장이 직접 할 수 있지만 그러면 시간상 효율적이지 못합니다. 주방장이 간단하지만 시간이 오래 걸리는 이 작업을 완료하는 동안 모든 주방 운영이 중단되거나 느려질 수 있습니다. 이를 방지하기 위해 주방장은 여러 개의 햄버거를 동시에 뒤집는 주방 보조에게 이 일을 맡길 수 있습니다. GPU는 10초 안에 100개의 햄버거를 뒤집을 수 있는 열 개의 손을 가진 주방 보조와 같습니다.</p>
+<h1 id="cpu보다-gpu를-사용해야-하는-경우">CPU보다 GPU를 사용해야 하는 경우</h1>
+<p>CPU와 그래픽 처리 장치(GPU) 사이에서 선택할 때 서로 배타적이지 않다는 점에 유의해야 합니다. 클라우드의 모든 서버 또는 서버 인스턴스를 실행하려면 CPU가 필요합니다. 그러나 일부 서버에는 GPU를 추가 코프로세서로 포함하기도 합니다. 특정 워크로드는 특정 함수를 보다 효율적으로 수행하는 GPU가 있는 서버에서 실행하는 것이 더 적합합니다. 예를 들어, GPU는 부동 소수점 숫자 계산, 그래픽 처리 또는 데이터 패턴 매칭에 유용할 수 있습니다.</p>
+<p>다음은 CPU보다 GPU를 사용하는 것이 더 유용한 몇 가지 분야입니다.</p>
+<h2 id="딥-러닝">딥 러닝</h2>
+<p>딥 러닝은 인간의 두뇌에서 영감을 얻은 방식으로 데이터를 처리하도록 컴퓨터를 가르치는 인공 지능(AI) 방식입니다. 예를 들어, 딥 러닝 알고리즘은 그림, 텍스트, 사운드 및 기타 데이터의 복잡한 패턴을 인식하여 정확한 인사이트와 예측을 생성할 수 있습니다. GPU 기반 서버는 기계 학습, 신경망 및 딥 러닝 작업에 고성능을 제공합니다.</p>
+<h2 id="고성능-컴퓨팅">고성능 컴퓨팅</h2>
+<p>고성능 컴퓨팅이라는 용어는 매우 뛰어난 컴퓨팅 성능이 필요한 작업을 의미합니다. 다음은 몇 가지 예입니다.</p>
+<ul>
+<li>지구과학 시뮬레이션과 지진 처리를 빠르게 대규모로 실행해야 하는 경우</li>
+<li>제품 포트폴리오 위험, 헤지 기회 등을 식별하도록 재무 시뮬레이션을 계획해야 하는 경우</li>
+<li>의학, 유전체학 및 신약 개발 분야에서 예측, 실시간 또는 회귀적 데이터 과학 애플리케이션을 구축해야 하는 경우
+GPU 기반 컴퓨터 시스템은 이와 같은 고성능 컴퓨팅 작업에 더 적합합니다.</li>
+</ul>
+<h2 id="자율-주행-교통-수단">자율 주행 교통 수단</h2>
+<p>고급 운전자 지원 시스템(ADAS)과 자율 주행 교통 수단(AV) 시스템을 개발하고 배포하려면 확장성이 뛰어난 컴퓨팅, 스토리지, 네트워킹 및 분석 기술이 필요합니다. 예를 들어, 데이터 수집, 레이블링 및 주석, 지도 개발, 알고리즘 개발, 시뮬레이션 및 검증을 위한 기능이 필요합니다. 이러한 복잡한 워크로드에서는 효율적인 연산을 위해 GPU 기반 컴퓨터 시스템의 지원이 필요합니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>CPU</th>
+<th>GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>함수</td>
+<td>서버의 주요 처리 연산을 해결하는 일반화된 구성 요소</td>
+<td>병렬 컴퓨팅에 탁월한 전문화된 구성 요소</td>
+</tr>
+<tr>
+<td>처리 중</td>
+<td>직렬 명령 처리를 위해 설계</td>
+<td>병렬 처리를 위해 설계</td>
+</tr>
+<tr>
+<td>설계</td>
+<td>코어 수는 더 적지만 코어 성능은 더 강력함</td>
+<td>CPU보다 코어 수는 더 많지만 CPU 코어보다 성능이 떨어짐</td>
+</tr>
+<tr>
+<td>가장 적합한 용도</td>
+<td>범용 컴퓨팅 애플리케이션</td>
+<td>고성능 컴퓨팅 애플리케이션</td>
+</tr>
+</tbody>
+</table>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-04-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/gpu/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/gpu/" data-title="GPU" data-hashtags="GPU,Hardware"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/gpu/" data-hashtag="GPU"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/gpu/" data-title="GPU"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/gpu/" data-title="GPU"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/gpu/" data-title="GPU" data-image="/images/gpu-image.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/gpu/">GPU</a>,&nbsp;<a href="/tags/hardware/">Hardware</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/docker/" class="prev" rel="prev" title="Docker"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Docker</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
