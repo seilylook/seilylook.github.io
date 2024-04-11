@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Machine Learning</title>
+    <link>https://seilylook.github.io/tags/machine-learning/</link>
+    <pubDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/machine-learning/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Ops</title>
+    <link>https://seilylook.github.io/tags/ops/</link>
+    <pubDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/ops/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>GPU</title>
     <link>https://seilylook.github.io/tags/gpu/</link>
     <pubDate>Thu, 11 Apr 2024 13:20:06 &#43;0900</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/ddd/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Design</title>
-    <link>https://seilylook.github.io/tags/design/</link>
-    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/design/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>MSA</title>
-    <link>https://seilylook.github.io/tags/msa/</link>
-    <pubDate>Fri, 15 Mar 2024 15:03:37 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/msa/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

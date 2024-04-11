@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Machine Learning - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/machine-learning/</link>
+        <description>Machine Learning - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/machine-learning/" rel="self" type="application/rss+xml" /><item>
+    <title>MLOps</title>
+    <link>https://seilylook.github.io/posts/mlops/</link>
+    <pubDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/mlops/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/mlops-image.png" referrerpolicy="no-referrer">
+            </div>Introduction 개발과 운영을 따로 나누지 않고 개발의 생산성과 운영의 안정성을 최적화하기 위한 문화이지 방법론이 DevOps이며, 이를 ML 시스템에 적용한 것이 MLOps이다.
+MLOps는 ML의 전체 Lifecycle를 관리해야 한다.
+MLOps란 단순히 ML 모델뿐만 아니라, 데이터를 수집하고 분석하는 단계(Data Collection, Ingestion, Analysis, Labeling, Validation, Preparation), 그리고 ML 모델을 학습하고 배포하는 단계(Model Training, Validation, Deployment)까지 전 과정을 AI Lifecycle로 보고, MLOps의 대상으로 보고 있다. ML에 기여하는 Engineer들(Data Scientist, Data Engineer, SW Engineer)이 이 Lifecycle을 관리하고 모니터링해야 한다.]]></description>
+</item>
+</channel>
+</rss>
