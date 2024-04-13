@@ -103,7 +103,7 @@ COPY elt_script.py .
 CMD ["python", "elt_script.py"]
 ```
 
-# elf_script.py
+# ELT Pipeline
 
 `Dockerfile`에서 수행하도록 명령어는 적어줬으니 실질적으로 postgreSQL에 연결할 코드를 작성해준다.
 
@@ -190,1013 +190,346 @@ subprocess.run(load_command, env=subprocess_env, check=True)
 print("Ending ELT script...")
 ```
 
-{{<admonition tip>}}
-`pg_dump`는 PostgreSQL 데이터베이스의 데이터를 백업하는 데 사용되는 유틸리티입니다. 이 도구는 PostgreSQL 서버에서 데이터베이스를 백업하고 그것을 복원하는 데 도움이 됩니다.
+## 라이브러리 가져오기
 
-pg_dump는 SQL 스크립트 형식으로 데이터베이스 구조(schema) 및 데이터를 추출하여 저장할 수 있습니다. 이것은 데이터베이스를 다른 서버로 이전하거나, 예기치 않은 데이터 손실을 방지하기 위해 주기적으로 백업하는 데 유용합니다. 이 백업 파일을 사용하여 데이터를 다시 복원할 수 있습니다.
-{{</admonition>}}
-
-# Docker Container 실행
-
-```
- ✘ {seilylook} ~/Development/DataEngineering/elt main ± docker compose up
-[+] Running 16/16
- ✔ source_postgres 14 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                         22.0s
-   ✔ 25d3892798f8 Pull complete                                                                               5.8s
-   ✔ 77c2305dd978 Pull complete                                                                               2.0s
-   ✔ 54c99c28f11f Pull complete                                                                               1.8s
-   ✔ 5feeada49781 Pull complete                                                                               2.8s
-   ✔ 6baaea6e6673 Pull complete                                                                               4.5s
-   ✔ c1dcdf0cbea0 Pull complete                                                                               4.3s
-   ✔ 3bb7d395f8d0 Pull complete                                                                               5.5s
-   ✔ 6047577c3718 Pull complete                                                                               5.2s
-   ✔ a2ecdbb9172a Pull complete                                                                              16.1s
-   ✔ 258c83b0abc3 Pull complete                                                                               6.2s
-   ✔ 5af381ce9c20 Pull complete                                                                               6.6s
-   ✔ e43fd3818d7d Pull complete                                                                               8.0s
-   ✔ 48dab18ebdde Pull complete                                                                               8.6s
-   ✔ 5bd2657647e7 Pull complete                                                                               8.8s
- ✔ destination_postgres Pulled                                                                               22.0s
-[+] Building 9.6s (9/9) FINISHED                                                              docker:desktop-linux
- => [elt_scripts internal] load .dockerignore                                                                 0.0s
- => => transferring context: 2B                                                                               0.0s
- => [elt_scripts internal] load build definition from Dockerfile                                              0.0s
- => => transferring dockerfile: 287B                                                                          0.0s
- => [elt_scripts internal] load metadata for docker.io/library/python:3.11-slim                               2.7s
- => [elt_scripts auth] library/python:pull token for registry-1.docker.io                                     0.0s
- => [elt_scripts 1/3] FROM docker.io/library/python:3.11-slim@sha256:dad770592ab3582ab2dabcf0e18a863df9d86bd  2.3s
- => => resolve docker.io/library/python:3.11-slim@sha256:dad770592ab3582ab2dabcf0e18a863df9d86bd9d23efcfa614  0.0s
- => => sha256:dad770592ab3582ab2dabcf0e18a863df9d86bd9d23efcfa614110ce49ac20e4 1.65kB / 1.65kB                0.0s
- => => sha256:521521eaabcbd63c13e6d99c58a16c1e229c8a3fc5f951193d75684bcf23f4ed 1.37kB / 1.37kB                0.0s
- => => sha256:f8e98f0336d5bb3c8a1e3430ad91f3579d5ce98624c02045d480f8905229c8c8 6.93kB / 6.93kB                0.0s
- => => sha256:5aa60d344ce833ecc2c54477647f85648d7b36158bcaba859d607398ea2b5f9b 12.84MB / 12.84MB              1.8s
- => => sha256:7ae832c8db1427050a19bf0bacd9c4a41556a5184f98fb65d4f38c10d597d0a9 241B / 241B                    0.2s
- => => sha256:f98a62eb7798aead5a082b12b4f03c8a27d45d3f9085d46ff15b7403ab6d4de2 3.41MB / 3.41MB                1.1s
- => => extracting sha256:5aa60d344ce833ecc2c54477647f85648d7b36158bcaba859d607398ea2b5f9b                     0.3s
- => => extracting sha256:7ae832c8db1427050a19bf0bacd9c4a41556a5184f98fb65d4f38c10d597d0a9                     0.0s
- => => extracting sha256:f98a62eb7798aead5a082b12b4f03c8a27d45d3f9085d46ff15b7403ab6d4de2                     0.1s
- => [elt_scripts internal] load build context                                                                 0.0s
- => => transferring context: 72B                                                                              0.0s
- => [elt_scripts 2/3] RUN apt-get update && apt-get install -y postgresql-client                              4.4s
- => [elt_scripts 3/3] COPY elt_script.py .                                                                    0.0s
- => [elt_scripts] exporting to image                                                                          0.2s
- => => exporting layers                                                                                       0.2s
- => => writing image sha256:d9e7fd37e79aee91e6c50209c5cc16248b035d17fe433dba0e363f311846c470                  0.0s
- => => naming to docker.io/library/elt-elt_scripts                                                            0.0s
-[+] Running 4/4
- ✔ Network elt_elt_network               Created                                                              0.0s
- ✔ Container elt-destination_postgres-1  Created                                                              0.0s
- ✔ Container elt-source_postgres-1       Created                                                              0.0s
- ✔ Container elt-elt_scripts-1           Created                                                              0.1s
-Attaching to destination_postgres-1, elt_scripts-1, source_postgres-1
-destination_postgres-1  | The files belonging to this database system will be owned by user "postgres".
-destination_postgres-1  | This user must also own the server process.
-source_postgres-1       | The files belonging to this database system will be owned by user "postgres".
-destination_postgres-1  |
-source_postgres-1       | This user must also own the server process.
-source_postgres-1       |
-source_postgres-1       | The database cluster will be initialized with locale "en_US.utf8".
-destination_postgres-1  | The database cluster will be initialized with locale "en_US.utf8".
-destination_postgres-1  | The default database encoding has accordingly been set to "UTF8".
-destination_postgres-1  | The default text search configuration will be set to "english".
-destination_postgres-1  |
-destination_postgres-1  | Data page checksums are disabled.
-source_postgres-1       | The default database encoding has accordingly been set to "UTF8".
-destination_postgres-1  |
-source_postgres-1       | The default text search configuration will be set to "english".
-destination_postgres-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
-source_postgres-1       |
-source_postgres-1       | Data page checksums are disabled.
-destination_postgres-1  | creating subdirectories ... ok
-source_postgres-1       |
-source_postgres-1       | fixing permissions on existing directory /var/lib/postgresql/data ... ok
-destination_postgres-1  | selecting dynamic shared memory implementation ... posix
-source_postgres-1       | creating subdirectories ... ok
-source_postgres-1       | selecting dynamic shared memory implementation ... posix
-source_postgres-1       | selecting default max_connections ... 100
-destination_postgres-1  | selecting default max_connections ... 100
-source_postgres-1       | selecting default shared_buffers ... 128MB
-destination_postgres-1  | selecting default shared_buffers ... 128MB
-destination_postgres-1  | selecting default time zone ... Etc/UTC
-destination_postgres-1  | creating configuration files ... ok
-source_postgres-1       | selecting default time zone ... Etc/UTC
-source_postgres-1       | creating configuration files ... ok
-destination_postgres-1  | running bootstrap script ... ok
-source_postgres-1       | running bootstrap script ... ok
-source_postgres-1       | performing post-bootstrap initialization ... ok
-destination_postgres-1  | performing post-bootstrap initialization ... ok
-destination_postgres-1  | syncing data to disk ... ok
-destination_postgres-1  |
-destination_postgres-1  |
-destination_postgres-1  | Success. You can now start the database server using:
-destination_postgres-1  |
-destination_postgres-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
-destination_postgres-1  |
-source_postgres-1       | syncing data to disk ... ok
-destination_postgres-1  | initdb: warning: enabling "trust" authentication for local connections
-source_postgres-1       |
-source_postgres-1       |
-source_postgres-1       | Success. You can now start the database server using:
-source_postgres-1       |
-source_postgres-1       |     pg_ctl -D /var/lib/postgresql/data -l logfile start
-destination_postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
-source_postgres-1       |
-source_postgres-1       | initdb: warning: enabling "trust" authentication for local connections
-source_postgres-1       | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
-destination_postgres-1  | waiting for server to start....2024-04-10 08:22:48.668 UTC [48] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-source_postgres-1       | waiting for server to start....2024-04-10 08:22:48.668 UTC [48] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-destination_postgres-1  | 2024-04-10 08:22:48.668 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-source_postgres-1       | 2024-04-10 08:22:48.668 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-destination_postgres-1  | 2024-04-10 08:22:48.671 UTC [51] LOG:  database system was shut down at 2024-04-10 08:22:48 UTC
-source_postgres-1       | 2024-04-10 08:22:48.671 UTC [51] LOG:  database system was shut down at 2024-04-10 08:22:48 UTC
-destination_postgres-1  | 2024-04-10 08:22:48.673 UTC [48] LOG:  database system is ready to accept connections
-source_postgres-1       | 2024-04-10 08:22:48.673 UTC [48] LOG:  database system is ready to accept connections
-destination_postgres-1  |  done
-destination_postgres-1  | server started
-source_postgres-1       |  done
-source_postgres-1       | server started
-source_postgres-1       | CREATE DATABASE
-destination_postgres-1  | CREATE DATABASE
-destination_postgres-1  |
-source_postgres-1       |
-source_postgres-1       |
-source_postgres-1       | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
-destination_postgres-1  |
-destination_postgres-1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
-destination_postgres-1  |
-destination_postgres-1  | waiting for server to shut down...2024-04-10 08:22:48.807 UTC [48] LOG:  received fast shutdown request
-destination_postgres-1  | .2024-04-10 08:22:48.808 UTC [48] LOG:  aborting any active transactions
-destination_postgres-1  | 2024-04-10 08:22:48.809 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
-destination_postgres-1  | 2024-04-10 08:22:48.809 UTC [49] LOG:  shutting down
-destination_postgres-1  | 2024-04-10 08:22:48.810 UTC [49] LOG:  checkpoint starting: shutdown immediate
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | INSERT 0 14
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | INSERT 0 20
-source_postgres-1       | CREATE TABLE
-destination_postgres-1  | 2024-04-10 08:22:48.832 UTC [49] LOG:  checkpoint complete: wrote 918 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.015 s, total=0.024 s; sync files=301, longest=0.005 s, average=0.001 s; distance=4223 kB, estimate=4223 kB
-source_postgres-1       | INSERT 0 39
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | INSERT 0 20
-destination_postgres-1  | 2024-04-10 08:22:48.836 UTC [48] LOG:  database system is shut down
-source_postgres-1       | INSERT 0 20
-source_postgres-1       |
-source_postgres-1       |
-source_postgres-1       | 2024-04-10 08:22:48.837 UTC [48] LOG:  received fast shutdown request
-source_postgres-1       | waiting for server to shut down....2024-04-10 08:22:48.837 UTC [48] LOG:  aborting any active transactions
-source_postgres-1       | 2024-04-10 08:22:48.838 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
-source_postgres-1       | 2024-04-10 08:22:48.838 UTC [49] LOG:  shutting down
-source_postgres-1       | 2024-04-10 08:22:48.839 UTC [49] LOG:  checkpoint starting: shutdown immediate
-source_postgres-1       | 2024-04-10 08:22:48.861 UTC [49] LOG:  checkpoint complete: wrote 950 buffers (5.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.013 s, total=0.023 s; sync files=315, longest=0.004 s, average=0.001 s; distance=4325 kB, estimate=4325 kB
-source_postgres-1       | 2024-04-10 08:22:48.864 UTC [48] LOG:  database system is shut down
-destination_postgres-1  |  done
-destination_postgres-1  | server stopped
-destination_postgres-1  |
-destination_postgres-1  | PostgreSQL init process complete; ready for start up.
-destination_postgres-1  |
-destination_postgres-1  | 2024-04-10 08:22:48.921 UTC [1] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-destination_postgres-1  | 2024-04-10 08:22:48.921 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-destination_postgres-1  | 2024-04-10 08:22:48.921 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-destination_postgres-1  | 2024-04-10 08:22:48.922 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-destination_postgres-1  | 2024-04-10 08:22:48.924 UTC [64] LOG:  database system was shut down at 2024-04-10 08:22:48 UTC
-destination_postgres-1  | 2024-04-10 08:22:48.926 UTC [1] LOG:  database system is ready to accept connections
-source_postgres-1       |  done
-source_postgres-1       | server stopped
-source_postgres-1       |
-source_postgres-1       | PostgreSQL init process complete; ready for start up.
-source_postgres-1       |
-source_postgres-1       | 2024-04-10 08:22:48.948 UTC [1] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-source_postgres-1       | 2024-04-10 08:22:48.948 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-source_postgres-1       | 2024-04-10 08:22:48.948 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-source_postgres-1       | 2024-04-10 08:22:48.949 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-source_postgres-1       | 2024-04-10 08:22:48.951 UTC [66] LOG:  database system was shut down at 2024-04-10 08:22:48 UTC
-source_postgres-1       | 2024-04-10 08:22:48.953 UTC [1] LOG:  database system is ready to accept connections
-source_postgres-1       | 2024-04-10 08:22:53.497 UTC [70] FATAL:  password authentication failed for user "root"
-source_postgres-1       | 2024-04-10 08:22:53.497 UTC [70] DETAIL:  Role "root" does not exist.
-source_postgres-1       |       Connection matched pg_hba.conf line 100: "host all all all scram-sha-256"
-elt_scripts-1           | --
-elt_scripts-1           | -- PostgreSQL database dump
-elt_scripts-1           | --
-elt_scripts-1           | -- Dumped from database version 15.5 (Debian 15.5-1.pgdg120+1)
-elt_scripts-1           | -- Dumped by pg_dump version 15.6 (Debian 15.6-0+deb12u1)
-elt_scripts-1           | SET statement_timeout = 0;
-elt_scripts-1           | SET
-elt_scripts-1           | SET lock_timeout = 0;
-elt_scripts-1           | SET
-elt_scripts-1           | SET idle_in_transaction_session_timeout = 0;
-elt_scripts-1           | SET
-elt_scripts-1           | SET client_encoding = 'UTF8';
-elt_scripts-1           | SET
-elt_scripts-1           | SET standard_conforming_strings = on;
-elt_scripts-1           | SET
-elt_scripts-1           | SELECT pg_catalog.set_config('search_path', '', false);
-elt_scripts-1           |  set_config
-elt_scripts-1           | ------------
-elt_scripts-1           |
-elt_scripts-1           | (1 row)
-elt_scripts-1           |
-elt_scripts-1           | SET check_function_bodies = false;
-elt_scripts-1           | SET
-elt_scripts-1           | SET xmloption = content;
-elt_scripts-1           | SET
-elt_scripts-1           | SET client_min_messages = warning;
-elt_scripts-1           | SET
-elt_scripts-1           | SET row_security = off;
-elt_scripts-1           | SET
-elt_scripts-1           | SET default_tablespace = '';
-elt_scripts-1           | SET
-elt_scripts-1           | SET default_table_access_method = heap;
-elt_scripts-1           | SET
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: actors; Type: TABLE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE TABLE public.actors (
-elt_scripts-1           |     actor_id integer NOT NULL,
-elt_scripts-1           |     actor_name character varying(255) NOT NULL
-elt_scripts-1           | );
-elt_scripts-1           | CREATE TABLE
-elt_scripts-1           | ALTER TABLE public.actors OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: actors_actor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE SEQUENCE public.actors_actor_id_seq
-elt_scripts-1           |     AS integer
-elt_scripts-1           |     START WITH 1
-elt_scripts-1           |     INCREMENT BY 1
-elt_scripts-1           |     NO MINVALUE
-elt_scripts-1           |     NO MAXVALUE
-elt_scripts-1           |     CACHE 1;
-elt_scripts-1           | CREATE SEQUENCE
-elt_scripts-1           | ALTER TABLE public.actors_actor_id_seq OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: actors_actor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER SEQUENCE public.actors_actor_id_seq OWNED BY public.actors.actor_id;
-elt_scripts-1           | ALTER SEQUENCE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_actors; Type: TABLE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE TABLE public.film_actors (
-elt_scripts-1           |     film_id integer NOT NULL,
-elt_scripts-1           |     actor_id integer NOT NULL
-elt_scripts-1           | );
-elt_scripts-1           | CREATE TABLE
-elt_scripts-1           | ALTER TABLE public.film_actors OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_category; Type: TABLE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE TABLE public.film_category (
-elt_scripts-1           |     category_id integer NOT NULL,
-elt_scripts-1           |     film_id integer,
-elt_scripts-1           |     category_name character varying(50) NOT NULL
-elt_scripts-1           | );
-elt_scripts-1           | CREATE TABLE
-elt_scripts-1           | ALTER TABLE public.film_category OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_category_category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE SEQUENCE public.film_category_category_id_seq
-elt_scripts-1           |     AS integer
-elt_scripts-1           |     START WITH 1
-elt_scripts-1           |     INCREMENT BY 1
-elt_scripts-1           |     NO MINVALUE
-elt_scripts-1           |     NO MAXVALUE
-elt_scripts-1           |     CACHE 1;
-elt_scripts-1           | CREATE SEQUENCE
-elt_scripts-1           | ALTER TABLE public.film_category_category_id_seq OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_category_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER SEQUENCE public.film_category_category_id_seq OWNED BY public.film_category.category_id;
-elt_scripts-1           | ALTER SEQUENCE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: films; Type: TABLE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE TABLE public.films (
-elt_scripts-1           |     film_id integer NOT NULL,
-elt_scripts-1           |     title character varying(255) NOT NULL,
-elt_scripts-1           |     release_date date,
-elt_scripts-1           |     price numeric(5,2),
-elt_scripts-1           |     rating character varying(10),
-elt_scripts-1           |     user_rating numeric(2,1),
-elt_scripts-1           |     CONSTRAINT films_user_rating_check CHECK (((user_rating >= (1)::numeric) AND (user_rating <= (5)::numeric)))
-elt_scripts-1           | );
-elt_scripts-1           | CREATE TABLE
-elt_scripts-1           | ALTER TABLE public.films OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: films_film_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE SEQUENCE public.films_film_id_seq
-elt_scripts-1           |     AS integer
-elt_scripts-1           |     START WITH 1
-elt_scripts-1           |     INCREMENT BY 1
-elt_scripts-1           |     NO MINVALUE
-elt_scripts-1           |     NO MAXVALUE
-elt_scripts-1           |     CACHE 1;
-elt_scripts-1           | CREATE SEQUENCE
-elt_scripts-1           | ALTER TABLE public.films_film_id_seq OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: films_film_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER SEQUENCE public.films_film_id_seq OWNED BY public.films.film_id;
-elt_scripts-1           | ALTER SEQUENCE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: users; Type: TABLE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE TABLE public.users (
-elt_scripts-1           |     id integer NOT NULL,
-elt_scripts-1           |     first_name character varying(50),
-elt_scripts-1           |     last_name character varying(50),
-elt_scripts-1           |     email character varying(100),
-elt_scripts-1           |     date_of_birth date
-elt_scripts-1           | );
-elt_scripts-1           | CREATE TABLE
-elt_scripts-1           | ALTER TABLE public.users OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | CREATE SEQUENCE public.users_id_seq
-elt_scripts-1           |     AS integer
-elt_scripts-1           |     START WITH 1
-elt_scripts-1           |     INCREMENT BY 1
-elt_scripts-1           |     NO MINVALUE
-elt_scripts-1           |     NO MAXVALUE
-elt_scripts-1           |     CACHE 1;
-elt_scripts-1           | CREATE SEQUENCE
-elt_scripts-1           | ALTER TABLE public.users_id_seq OWNER TO postgres;
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-elt_scripts-1           | ALTER SEQUENCE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: actors actor_id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.actors ALTER COLUMN actor_id SET DEFAULT nextval('public.actors_actor_id_seq'::regclass);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_category category_id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.film_category ALTER COLUMN category_id SET DEFAULT nextval('public.film_category_category_id_seq'::regclass);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: films film_id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.films ALTER COLUMN film_id SET DEFAULT nextval('public.films_film_id_seq'::regclass);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Data for Name: actors; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | COPY public.actors (actor_id, actor_name) FROM stdin;
-elt_scripts-1           | COPY 20
-elt_scripts-1           | --
-elt_scripts-1           | -- Data for Name: film_actors; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | COPY public.film_actors (film_id, actor_id) FROM stdin;
-elt_scripts-1           | COPY 20
-elt_scripts-1           | --
-elt_scripts-1           | -- Data for Name: film_category; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | COPY public.film_category (category_id, film_id, category_name) FROM stdin;
-elt_scripts-1           | COPY 39
-elt_scripts-1           | --
-elt_scripts-1           | -- Data for Name: films; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | COPY public.films (film_id, title, release_date, price, rating, user_rating) FROM stdin;
-elt_scripts-1           | COPY 20
-elt_scripts-1           | --
-elt_scripts-1           | -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | COPY public.users (id, first_name, last_name, email, date_of_birth) FROM stdin;
-elt_scripts-1           | COPY 14
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: actors_actor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | SELECT pg_catalog.setval('public.actors_actor_id_seq', 20, true);
-elt_scripts-1           |  setval
-elt_scripts-1           | --------
-elt_scripts-1           |      20
-elt_scripts-1           | (1 row)
-elt_scripts-1           |
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_category_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | SELECT pg_catalog.setval('public.film_category_category_id_seq', 39, true);
-elt_scripts-1           |  setval
-elt_scripts-1           | --------
-elt_scripts-1           |      39
-elt_scripts-1           | (1 row)
-elt_scripts-1           |
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: films_film_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | SELECT pg_catalog.setval('public.films_film_id_seq', 20, true);
-elt_scripts-1           |  setval
-elt_scripts-1           | --------
-elt_scripts-1           |      20
-elt_scripts-1           | (1 row)
-elt_scripts-1           |
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | SELECT pg_catalog.setval('public.users_id_seq', 14, true);
-elt_scripts-1           |  setval
-elt_scripts-1           | --------
-elt_scripts-1           |      14
-elt_scripts-1           | (1 row)
-elt_scripts-1           |
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: actors actors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.actors
-elt_scripts-1           |     ADD CONSTRAINT actors_pkey PRIMARY KEY (actor_id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_actors film_actors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.film_actors
-elt_scripts-1           |     ADD CONSTRAINT film_actors_pkey PRIMARY KEY (film_id, actor_id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_category film_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.film_category
-elt_scripts-1           |     ADD CONSTRAINT film_category_pkey PRIMARY KEY (category_id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: films films_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.films
-elt_scripts-1           |     ADD CONSTRAINT films_pkey PRIMARY KEY (film_id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.users
-elt_scripts-1           |     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_actors film_actors_actor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.film_actors
-elt_scripts-1           |     ADD CONSTRAINT film_actors_actor_id_fkey FOREIGN KEY (actor_id) REFERENCES public.actors(actor_id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_actors film_actors_film_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.film_actors
-elt_scripts-1           |     ADD CONSTRAINT film_actors_film_id_fkey FOREIGN KEY (film_id) REFERENCES public.films(film_id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- Name: film_category film_category_film_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
-elt_scripts-1           | --
-elt_scripts-1           | ALTER TABLE ONLY public.film_category
-elt_scripts-1           |     ADD CONSTRAINT film_category_film_id_fkey FOREIGN KEY (film_id) REFERENCES public.films(film_id);
-elt_scripts-1           | ALTER TABLE
-elt_scripts-1           | --
-elt_scripts-1           | -- PostgreSQL database dump complete
-elt_scripts-1           | --
-elt_scripts-1           | Error connecting to PostgreSQL: Command '['pg_isready', '-h', 'source_postgres']' returned non-zero exit status 2.
-elt_scripts-1           | Retrying in 5 seconds... (Attempt 1/5)
-elt_scripts-1           | Successfully connected to PostgreSQL!
-elt_scripts-1           | Starting ELT script...
-elt_scripts-1           | Ending ELT script...
-elt_scripts-1 exited with code 0
+```python
+import subprocess
+import time
 ```
 
-앞서 작성했던 파이썬 코드에서 올바로 연결됐다면 `Ending ELT script...`을 출력하도록 했기에 올바로 연결된 것을 확인할 수 있다.
+- subprocess: 이 모듈은 추가적인 프로세스와 작업하는 더 높은 수준의 인터페이스를 제공합니다. 새로운 프로세스를 생성하고, 그들의 입력/출력/오류 파이프에 연결하고, 반환 코드를 얻을 수 있습니다. 이것은 Python 스크립트에서 쉘 명령을 직접 실행하는 강력한 도구입니다.
+
+- time: 이 모듈은 시간 관련 함수를 제공합니다. 이 스크립트에서는 주로 sleep 함수를 사용하여 지연을 도입하는 데 사용됩니다.
+
+## wait_for_postgres 함수
+
+```python
+def wait_for_postgres(host, max_retries=5, delay_seconds=5):
+    ...
+```
+
+이 함수의 목적은 PostgreSQL 인스턴스가 연결을 수용할 준비가 될 때까지 반복적으로 확인하는 것입니다.
+
+- host: PostgreSQL 서버의 호스트 이름 또는 IP 주소입니다.
+
+- max_retries: 함수가 데이터베이스가 사용 가능하지 않을 경우 무한 루프를 방지하기 위해 몇 번이나 데이터베이스에 연결을 시도할지를 제한합니다.
+
+- delay_seconds: 각 실패한 시도 후 함수가 다시 시도하기 전에 기다리는 시간(초)입니다.
+
+함수 내부:
+
+- pg_isready: PostgreSQL과 함께 제공되는 명령 줄 유틸리티입니다. PostgreSQL 데이터베이스 인스턴스의 연결 상태를 확인합니다. 함수는 이 유틸리티를 사용하여 데이터베이스가 준비되었는지 확인합니다.
+
+- ubprocess.run(): 이 메서드는 pg_isready 명령을 실행하는 데 사용됩니다. 명령이 실패하면(즉, 데이터베이스가 준비되지 않은 경우), 함수는 이를 처리하고 대기하고 다시 시도합니다.
+
+## ELT 프로세스 초기화
+
+```python
+if not wait_for_postgres(host="source_postgres"):
+    exit(1)
+```
+
+주요 ELT 프로세스가 시작되기 전에 스크립트는 소스 PostgreSQL 데이터베이스가 작동하는지 확인합니다. 지정된 재시도 횟수 후에 데이터베이스가 준비되지 않은 경우, 스크립트는 오류 코드(exit(1))로 종료됩니다.
+
+## 데이터베이스 구성
+
+```python
+source_config = {...}
+destination_config = {...}
+```
+
+이 딕셔너리들은 소스와 대상 PostgreSQL 데이터베이스에 대한 필요한 구성을 저장합니다:
+
+- dbname: 데이터베이스의 이름입니다.
+
+- user: 연결할 사용자 이름입니다.
+
+- password: 인증에 사용되는 비밀번호입니다.
+
+- host: 서버의 호스트 이름 또는 IP 주소입니다. Docker Compose의 컨텍스트에서는 호스트 이름으로 서비스 이름을 사용할 수 있습니다.
+
+## 소스 데이터베이스에서 데이터 덤프하기
+
+```python
+dump_command = [...]
+```
+
+이 섹션에서는 PostgreSQL 데이터베이스를 백업하는 유틸리티인 **pg_dump**를 사용하는 명령을 구성합니다. 명령의 매개변수는 다음과 같습니다:
+
+- h: 서버의 호스트 이름을 지정합니다.
+
+- U: 연결할 사용자 이름을 지정합니다.
+
+- d: 연결할 데이터베이스의 이름을 지정합니다.
+
+- f: 덤프를 작성할 파일 이름을 지정합니다.
+
+- w: **pg_dump**가 비밀번호를 묻지 않도록 합니다.
+
+## 대상 데이터베이스로 데이터 로드하기
+
+```python
+load_command = [...]
+```
+
+이 섹션에서는 PostgreSQL에 대한 터미널 기반 프론트엔드인 **psql**을 사용하는 명령을 구성합니다. 명령의 매개변수는 다음과 같습니다:
+
+- h: 서버의 호스트 이름을 지정합니다.
+
+- U: 연결할 사용자 이름을 지정합니다.
+
+- d: 연결할 데이터베이스의 이름을 지정합니다.
+
+- a: 스크립트에서 모든 입력을 표준 출력으로 복사합니다.
+
+- f: 실행할 명령을 포함한 파일 이름을 지정합니다.
+
+## 인증을 위한 환경 변수
+
+```python
+subprocess_env = dict(PGPASSWORD=source_config['password'])
+```
+
+**pg_dump**와 **psql**을 실행할 때 비밀번호를 묻지 않기 위해 스크립트는 PGPASSWORD 환경 변수를 설정합니다. 이 변수에는 지정된 PostgreSQL 사용자의 비밀번호가 포함됩니다.
+
+## 명령 실행
+
+```python
+subprocess.run(dump_command, env=subprocess_env, check=True)
+```
+
+subprocess.run() 메서드는 구성된 명령을 실행하는 데 사용됩니다. env 매개변수는 명령에 환경 변수를 전달하는 데 사용됩니다. check=True 매개변수는 명령이 오류로 인해 실패하면 CalledProcessError 예외가 발생하도록 합니다.
 
 # DBT
 
-## docker compose
+## Common Table Expression(CTEs)
 
-```
- {seilylook} 🐸 ~/Development/DataEngineering/elt main ± docker compose up
-[+] Running 26/26
- ✔ destination_postgres 14 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                       16.4s
-   ✔ 25d3892798f8 Pull complete                                                                  1.8s
-   ✔ 77c2305dd978 Pull complete                                                                  2.5s
-   ✔ 54c99c28f11f Pull complete                                                                  3.4s
-   ✔ 5feeada49781 Pull complete                                                                  4.3s
-   ✔ 6baaea6e6673 Pull complete                                                                  5.3s
-   ✔ c1dcdf0cbea0 Pull complete                                                                  5.1s
-   ✔ 3bb7d395f8d0 Pull complete                                                                  5.9s
-   ✔ 6047577c3718 Pull complete                                                                  6.4s
-   ✔ a2ecdbb9172a Pull complete                                                                 10.5s
-   ✔ 258c83b0abc3 Pull complete                                                                  7.2s
-   ✔ 5af381ce9c20 Pull complete                                                                  8.0s
-   ✔ e43fd3818d7d Pull complete                                                                  8.7s
-   ✔ 48dab18ebdde Pull complete                                                                  9.5s
-   ✔ 5bd2657647e7 Pull complete                                                                 10.3s
- ✔ dbt 9 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                              20.8s
-   ✔ bd159e379b3b Pull complete                                                                  1.4s
-   ✔ de08aeb7fd50 Pull complete                                                                  0.3s
-   ✔ 30527e10f55a Pull complete                                                                  2.6s
-   ✔ 693e7a5ba2a8 Pull complete                                                                  0.7s
-   ✔ c7b6f7685fa5 Pull complete                                                                  1.3s
-   ✔ 4a19a8d29898 Pull complete                                                                 15.3s
-   ✔ 17cbd16df279 Pull complete                                                                  2.7s
-   ✔ 5ab9f619a37a Pull complete                                                                  2.0s
-   ✔ d92081e773c3 Pull complete                                                                  6.9s
- ✔ source_postgres Pulled                                                                       16.4s
-[+] Building 3.2s (9/9) FINISHED                                                 docker:desktop-linux
- => [elt_script internal] load build definition from Dockerfile                                  0.0s
- => => transferring dockerfile: 287B                                                             0.0s
- => [elt_script internal] load .dockerignore                                                     0.0s
- => => transferring context: 2B                                                                  0.0s
- => [elt_script internal] load metadata for docker.io/library/python:3.11-slim                   3.2s
- => [elt_script auth] library/python:pull token for registry-1.docker.io                         0.0s
- => [elt_script 1/3] FROM docker.io/library/python:3.11-slim@sha256:dad770592ab3582ab2dabcf0e18  0.0s
- => [elt_script internal] load build context                                                     0.0s
- => => transferring context: 72B                                                                 0.0s
- => CACHED [elt_script 2/3] RUN apt-get update && apt-get install -y postgresql-client           0.0s
- => CACHED [elt_script 3/3] COPY elt_script.py .                                                 0.0s
- => [elt_script] exporting to image                                                              0.0s
- => => exporting layers                                                                          0.0s
- => => writing image sha256:692bb35622552e2a7a743f1d0cf3c3ccf8061afeb87ef7a00575124b7a27c802     0.0s
- => => naming to docker.io/library/elt-elt_script                                                0.0s
-[+] Running 6/4
- ✔ Network elt_elt_network                                                                                                                            Created0.0s                                      0.0s
- ✔ Container elt-source_postgres-1                                                                                                                    Created0.0s                                      0.0s
- ✔ Container elt-destination_postgres-1                                                                                                               Created0.0s
- ✔ Container elt-elt_script-1                                                                                                                         Created0.0s
- ✔ Container elt-dbt-1                                                                                                                                Created0.0s
- ! dbt The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested 0.0s
-Attaching to dbt-1, destination_postgres-1, elt_script-1, source_postgres-1
-source_postgres-1       | The files belonging to this database system will be owned by user "postgres".
-source_postgres-1       | This user must also own the server process.
-source_postgres-1       |
-source_postgres-1       | The database cluster will be initialized with locale "en_US.utf8".
-source_postgres-1       | The default database encoding has accordingly been set to "UTF8".
-source_postgres-1       | The default text search configuration will be set to "english".
-source_postgres-1       |
-source_postgres-1       | Data page checksums are disabled.
-source_postgres-1       |
-source_postgres-1       | fixing permissions on existing directory /var/lib/postgresql/data ... ok
-source_postgres-1       | creating subdirectories ... ok
-source_postgres-1       | selecting dynamic shared memory implementation ... posix
-source_postgres-1       | selecting default max_connections ... 100
-source_postgres-1       | selecting default shared_buffers ... 128MB
-source_postgres-1       | selecting default time zone ... Etc/UTC
-source_postgres-1       | creating configuration files ... ok
-source_postgres-1       | running bootstrap script ... ok
-destination_postgres-1  | The files belonging to this database system will be owned by user "postgres".
-destination_postgres-1  | This user must also own the server process.
-destination_postgres-1  |
-destination_postgres-1  | The database cluster will be initialized with locale "en_US.utf8".
-destination_postgres-1  | The default database encoding has accordingly been set to "UTF8".
-destination_postgres-1  | The default text search configuration will be set to "english".
-destination_postgres-1  |
-destination_postgres-1  | Data page checksums are disabled.
-destination_postgres-1  |
-destination_postgres-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
-destination_postgres-1  | creating subdirectories ... ok
-destination_postgres-1  | selecting dynamic shared memory implementation ... posix
-destination_postgres-1  | selecting default max_connections ... 100
-destination_postgres-1  | selecting default shared_buffers ... 128MB
-destination_postgres-1  | selecting default time zone ... Etc/UTC
-destination_postgres-1  | creating configuration files ... ok
-destination_postgres-1  | running bootstrap script ... ok
-source_postgres-1       | performing post-bootstrap initialization ... ok
-source_postgres-1       | syncing data to disk ... ok
-source_postgres-1       |
-source_postgres-1       |
-source_postgres-1       | Success. You can now start the database server using:
-source_postgres-1       |
-source_postgres-1       |     pg_ctl -D /var/lib/postgresql/data -l logfile start
-source_postgres-1       |
-source_postgres-1       | initdb: warning: enabling "trust" authentication for local connections
-source_postgres-1       | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
-destination_postgres-1  | performing post-bootstrap initialization ... ok
-source_postgres-1       | waiting for server to start....2024-04-12 07:27:13.103 UTC [48] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-source_postgres-1       | 2024-04-12 07:27:13.110 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-source_postgres-1       | 2024-04-12 07:27:13.113 UTC [51] LOG:  database system was shut down at 2024-04-12 07:27:13 UTC
-source_postgres-1       | 2024-04-12 07:27:13.115 UTC [48] LOG:  database system is ready to accept connections
-destination_postgres-1  | initdb: warning: enabling "trust" authentication for local connections
-destination_postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
-destination_postgres-1  | syncing data to disk ... ok
-destination_postgres-1  |
-destination_postgres-1  |
-destination_postgres-1  | Success. You can now start the database server using:
-destination_postgres-1  |
-destination_postgres-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
-destination_postgres-1  |
-destination_postgres-1  | waiting for server to start....2024-04-12 07:27:13.160 UTC [48] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-destination_postgres-1  | 2024-04-12 07:27:13.161 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-destination_postgres-1  | 2024-04-12 07:27:13.163 UTC [51] LOG:  database system was shut down at 2024-04-12 07:27:13 UTC
-destination_postgres-1  | 2024-04-12 07:27:13.165 UTC [48] LOG:  database system is ready to accept connections
-source_postgres-1       |  done
-source_postgres-1       | server started
-source_postgres-1       | CREATE DATABASE
-source_postgres-1       |
-source_postgres-1       |
-source_postgres-1       | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | INSERT 0 14
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | INSERT 0 20
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | INSERT 0 39
-destination_postgres-1  |  done
-destination_postgres-1  | server started
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | CREATE TABLE
-source_postgres-1       | INSERT 0 20
-source_postgres-1       | INSERT 0 20
-source_postgres-1       |
-source_postgres-1       |
-source_postgres-1       | waiting for server to shut down...2024-04-12 07:27:13.256 UTC [48] LOG:  received fast shutdown request
-source_postgres-1       | .2024-04-12 07:27:13.256 UTC [48] LOG:  aborting any active transactions
-source_postgres-1       | 2024-04-12 07:27:13.257 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
-source_postgres-1       | 2024-04-12 07:27:13.257 UTC [49] LOG:  shutting down
-source_postgres-1       | 2024-04-12 07:27:13.257 UTC [49] LOG:  checkpoint starting: shutdown immediate
-source_postgres-1       | 2024-04-12 07:27:13.281 UTC [49] LOG:  checkpoint complete: wrote 950 buffers (5.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.015 s, total=0.024 s; sync files=315, longest=0.006 s, average=0.001 s; distance=4325 kB, estimate=4325 kB
-source_postgres-1       | 2024-04-12 07:27:13.283 UTC [48] LOG:  database system is shut down
-destination_postgres-1  | CREATE DATABASE
-destination_postgres-1  |
-destination_postgres-1  |
-destination_postgres-1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
-destination_postgres-1  |
-destination_postgres-1  | waiting for server to shut down...2024-04-12 07:27:13.299 UTC [48] LOG:  received fast shutdown request
-destination_postgres-1  | .2024-04-12 07:27:13.300 UTC [48] LOG:  aborting any active transactions
-destination_postgres-1  | 2024-04-12 07:27:13.300 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
-destination_postgres-1  | 2024-04-12 07:27:13.300 UTC [49] LOG:  shutting down
-destination_postgres-1  | 2024-04-12 07:27:13.301 UTC [49] LOG:  checkpoint starting: shutdown immediate
-destination_postgres-1  | 2024-04-12 07:27:13.324 UTC [49] LOG:  checkpoint complete: wrote 918 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.015 s, total=0.024 s; sync files=301, longest=0.007 s, average=0.001 s; distance=4223 kB, estimate=4223 kB
-destination_postgres-1  | 2024-04-12 07:27:13.327 UTC [48] LOG:  database system is shut down
-source_postgres-1       |  done
-source_postgres-1       | server stopped
-source_postgres-1       |
-source_postgres-1       | PostgreSQL init process complete; ready for start up.
-source_postgres-1       |
-source_postgres-1       | 2024-04-12 07:27:13.367 UTC [1] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-source_postgres-1       | 2024-04-12 07:27:13.367 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-source_postgres-1       | 2024-04-12 07:27:13.367 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-source_postgres-1       | 2024-04-12 07:27:13.368 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-source_postgres-1       | 2024-04-12 07:27:13.370 UTC [66] LOG:  database system was shut down at 2024-04-12 07:27:13 UTC
-source_postgres-1       | 2024-04-12 07:27:13.372 UTC [1] LOG:  database system is ready to accept connections
-destination_postgres-1  |  done
-destination_postgres-1  | server stopped
-destination_postgres-1  |
-destination_postgres-1  | PostgreSQL init process complete; ready for start up.
-destination_postgres-1  |
-destination_postgres-1  | 2024-04-12 07:27:13.414 UTC [1] LOG:  starting PostgreSQL 15.5 (Debian 15.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
-destination_postgres-1  | 2024-04-12 07:27:13.414 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-destination_postgres-1  | 2024-04-12 07:27:13.414 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-destination_postgres-1  | 2024-04-12 07:27:13.415 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-destination_postgres-1  | 2024-04-12 07:27:13.417 UTC [64] LOG:  database system was shut down at 2024-04-12 07:27:13 UTC
-destination_postgres-1  | 2024-04-12 07:27:13.419 UTC [1] LOG:  database system is ready to accept connections
-source_postgres-1       | 2024-04-12 07:27:18.125 UTC [70] FATAL:  password authentication failed for user "root"
-source_postgres-1       | 2024-04-12 07:27:18.125 UTC [70] DETAIL:  Role "root" does not exist.
-source_postgres-1       |       Connection matched pg_hba.conf line 100: "host all all all scram-sha-256"
-elt_script-1            | --
-elt_script-1            | -- PostgreSQL database dump
-elt_script-1            | --
-elt_script-1            | -- Dumped from database version 15.5 (Debian 15.5-1.pgdg120+1)
-elt_script-1            | -- Dumped by pg_dump version 15.6 (Debian 15.6-0+deb12u1)
-elt_script-1            | SET statement_timeout = 0;
-elt_script-1            | SET
-elt_script-1            | SET lock_timeout = 0;
-elt_script-1            | SET
-elt_script-1            | SET idle_in_transaction_session_timeout = 0;
-elt_script-1            | SET
-elt_script-1            | SET client_encoding = 'UTF8';
-elt_script-1            | SET
-elt_script-1            | SET standard_conforming_strings = on;
-elt_script-1            | SET
-elt_script-1            | SELECT pg_catalog.set_config('search_path', '', false);
-elt_script-1            |  set_config
-elt_script-1            | ------------
-elt_script-1            |
-elt_script-1            | (1 row)
-elt_script-1            |
-elt_script-1            | SET check_function_bodies = false;
-elt_script-1            | SET
-elt_script-1            | SET xmloption = content;
-elt_script-1            | SET
-elt_script-1            | SET client_min_messages = warning;
-elt_script-1            | SET
-elt_script-1            | SET row_security = off;
-elt_script-1            | SET
-elt_script-1            | SET default_tablespace = '';
-elt_script-1            | SET
-elt_script-1            | SET default_table_access_method = heap;
-elt_script-1            | SET
-elt_script-1            | --
-elt_script-1            | -- Name: actors; Type: TABLE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE TABLE public.actors (
-elt_script-1            |     actor_id integer NOT NULL,
-elt_script-1            |     actor_name character varying(255) NOT NULL
-elt_script-1            | );
-elt_script-1            | CREATE TABLE
-elt_script-1            | ALTER TABLE public.actors OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: actors_actor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE SEQUENCE public.actors_actor_id_seq
-elt_script-1            |     AS integer
-elt_script-1            |     START WITH 1
-elt_script-1            |     INCREMENT BY 1
-elt_script-1            |     NO MINVALUE
-elt_script-1            |     NO MAXVALUE
-elt_script-1            |     CACHE 1;
-elt_script-1            | CREATE SEQUENCE
-elt_script-1            | ALTER TABLE public.actors_actor_id_seq OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: actors_actor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER SEQUENCE public.actors_actor_id_seq OWNED BY public.actors.actor_id;
-elt_script-1            | ALTER SEQUENCE
-elt_script-1            | --
-elt_script-1            | -- Name: film_actors; Type: TABLE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE TABLE public.film_actors (
-elt_script-1            |     film_id integer NOT NULL,
-elt_script-1            |     actor_id integer NOT NULL
-elt_script-1            | );
-elt_script-1            | CREATE TABLE
-elt_script-1            | ALTER TABLE public.film_actors OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_category; Type: TABLE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE TABLE public.film_category (
-elt_script-1            |     category_id integer NOT NULL,
-elt_script-1            |     film_id integer,
-elt_script-1            |     category_name character varying(50) NOT NULL
-elt_script-1            | );
-elt_script-1            | CREATE TABLE
-elt_script-1            | ALTER TABLE public.film_category OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_category_category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE SEQUENCE public.film_category_category_id_seq
-elt_script-1            |     AS integer
-elt_script-1            |     START WITH 1
-elt_script-1            |     INCREMENT BY 1
-elt_script-1            |     NO MINVALUE
-elt_script-1            |     NO MAXVALUE
-elt_script-1            |     CACHE 1;
-elt_script-1            | CREATE SEQUENCE
-elt_script-1            | ALTER TABLE public.film_category_category_id_seq OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_category_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER SEQUENCE public.film_category_category_id_seq OWNED BY public.film_category.category_id;
-elt_script-1            | ALTER SEQUENCE
-elt_script-1            | --
-elt_script-1            | -- Name: films; Type: TABLE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE TABLE public.films (
-elt_script-1            |     film_id integer NOT NULL,
-elt_script-1            |     title character varying(255) NOT NULL,
-elt_script-1            |     release_date date,
-elt_script-1            |     price numeric(5,2),
-elt_script-1            |     rating character varying(10),
-elt_script-1            |     user_rating numeric(2,1),
-elt_script-1            |     CONSTRAINT films_user_rating_check CHECK (((user_rating >= (1)::numeric) AND (user_rating <= (5)::numeric)))
-elt_script-1            | );
-elt_script-1            | CREATE TABLE
-elt_script-1            | ALTER TABLE public.films OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: films_film_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE SEQUENCE public.films_film_id_seq
-elt_script-1            |     AS integer
-elt_script-1            |     START WITH 1
-elt_script-1            |     INCREMENT BY 1
-elt_script-1            |     NO MINVALUE
-elt_script-1            |     NO MAXVALUE
-elt_script-1            |     CACHE 1;
-elt_script-1            | CREATE SEQUENCE
-elt_script-1            | ALTER TABLE public.films_film_id_seq OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: films_film_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER SEQUENCE public.films_film_id_seq OWNED BY public.films.film_id;
-elt_script-1            | ALTER SEQUENCE
-elt_script-1            | --
-elt_script-1            | -- Name: users; Type: TABLE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE TABLE public.users (
-elt_script-1            |     id integer NOT NULL,
-elt_script-1            |     first_name character varying(50),
-elt_script-1            |     last_name character varying(50),
-elt_script-1            |     email character varying(100),
-elt_script-1            |     date_of_birth date
-elt_script-1            | );
-elt_script-1            | CREATE TABLE
-elt_script-1            | ALTER TABLE public.users OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | CREATE SEQUENCE public.users_id_seq
-elt_script-1            |     AS integer
-elt_script-1            |     START WITH 1
-elt_script-1            |     INCREMENT BY 1
-elt_script-1            |     NO MINVALUE
-elt_script-1            |     NO MAXVALUE
-elt_script-1            |     CACHE 1;
-elt_script-1            | CREATE SEQUENCE
-elt_script-1            | ALTER TABLE public.users_id_seq OWNER TO postgres;
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-elt_script-1            | ALTER SEQUENCE
-elt_script-1            | --
-elt_script-1            | -- Name: actors actor_id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.actors ALTER COLUMN actor_id SET DEFAULT nextval('public.actors_actor_id_seq'::regclass);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_category category_id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.film_category ALTER COLUMN category_id SET DEFAULT nextval('public.film_category_category_id_seq'::regclass);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: films film_id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.films ALTER COLUMN film_id SET DEFAULT nextval('public.films_film_id_seq'::regclass);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Data for Name: actors; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | COPY public.actors (actor_id, actor_name) FROM stdin;
-elt_script-1            | COPY 20
-elt_script-1            | --
-elt_script-1            | -- Data for Name: film_actors; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | COPY public.film_actors (film_id, actor_id) FROM stdin;
-elt_script-1            | COPY 20
-elt_script-1            | --
-elt_script-1            | -- Data for Name: film_category; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | COPY public.film_category (category_id, film_id, category_name) FROM stdin;
-elt_script-1            | COPY 39
-elt_script-1            | --
-elt_script-1            | -- Data for Name: films; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | COPY public.films (film_id, title, release_date, price, rating, user_rating) FROM stdin;
-elt_script-1            | COPY 20
-elt_script-1            | --
-elt_script-1            | -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | COPY public.users (id, first_name, last_name, email, date_of_birth) FROM stdin;
-elt_script-1            | COPY 14
-elt_script-1            | --
-elt_script-1            | -- Name: actors_actor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | SELECT pg_catalog.setval('public.actors_actor_id_seq', 20, true);
-elt_script-1            |  setval
-elt_script-1            | --------
-elt_script-1            |      20
-elt_script-1            | (1 row)
-elt_script-1            |
-elt_script-1            | --
-elt_script-1            | -- Name: film_category_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | SELECT pg_catalog.setval('public.film_category_category_id_seq', 39, true);
-elt_script-1            |  setval
-elt_script-1            | --------
-elt_script-1            |      39
-elt_script-1            | (1 row)
-elt_script-1            |
-elt_script-1            | --
-elt_script-1            | -- Name: films_film_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | SELECT pg_catalog.setval('public.films_film_id_seq', 20, true);
-elt_script-1            |  setval
-elt_script-1            | --------
-elt_script-1            |      20
-elt_script-1            | (1 row)
-elt_script-1            |
-elt_script-1            | --
-elt_script-1            | -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | SELECT pg_catalog.setval('public.users_id_seq', 14, true);
-elt_script-1            |  setval
-elt_script-1            | --------
-elt_script-1            |      14
-elt_script-1            | (1 row)
-elt_script-1            |
-elt_script-1            | --
-elt_script-1            | -- Name: actors actors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.actors
-elt_script-1            |     ADD CONSTRAINT actors_pkey PRIMARY KEY (actor_id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_actors film_actors_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.film_actors
-elt_script-1            |     ADD CONSTRAINT film_actors_pkey PRIMARY KEY (film_id, actor_id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_category film_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.film_category
-elt_script-1            |     ADD CONSTRAINT film_category_pkey PRIMARY KEY (category_id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: films films_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.films
-elt_script-1            |     ADD CONSTRAINT films_pkey PRIMARY KEY (film_id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.users
-elt_script-1            |     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_actors film_actors_actor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.film_actors
-elt_script-1            |     ADD CONSTRAINT film_actors_actor_id_fkey FOREIGN KEY (actor_id) REFERENCES public.actors(actor_id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_actors film_actors_film_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.film_actors
-elt_script-1            |     ADD CONSTRAINT film_actors_film_id_fkey FOREIGN KEY (film_id) REFERENCES public.films(film_id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- Name: film_category film_category_film_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
-elt_script-1            | --
-elt_script-1            | ALTER TABLE ONLY public.film_category
-elt_script-1            |     ADD CONSTRAINT film_category_film_id_fkey FOREIGN KEY (film_id) REFERENCES public.films(film_id);
-elt_script-1            | ALTER TABLE
-elt_script-1            | --
-elt_script-1            | -- PostgreSQL database dump complete
-elt_script-1            | --
-elt_script-1            | Error connecting to PostgreSQL: Command '['pg_isready', '-h', 'source_postgres']' returned non-zero exit status 2.
-elt_script-1            | Retrying in 5 seconds... (Attempt 1/5)
-elt_script-1            | Successfully connected to PostgreSQL!
-elt_script-1            | Starting ELT script...
-elt_script-1            | Ending ELT script...
-elt_script-1 exited with code 0
-dbt-1                   | 07:27:19  Running with dbt=1.4.7
-dbt-1                   | 07:27:19  Found 4 models, 19 tests, 0 snapshots, 0 analyses, 291 macros, 0 operations, 0 seed files, 3 sources, 0 exposures, 0 metrics
-dbt-1                   | 07:27:19
-destination_postgres-1  | 2024-04-12 07:27:19.906 UTC [70] WARNING:  there is already a transaction in progress
-destination_postgres-1  | 2024-04-12 07:27:19.920 UTC [71] WARNING:  there is already a transaction in progress
-destination_postgres-1  | 2024-04-12 07:27:19.926 UTC [71] WARNING:  there is already a transaction in progress
-dbt-1                   | 07:27:19  Concurrency: 1 threads (target='dev')
-dbt-1                   | 07:27:19
-dbt-1                   | 07:27:19  1 of 4 START sql table model public.actors ..................................... [RUN]
-destination_postgres-1  | 2024-04-12 07:27:19.976 UTC [72] WARNING:  there is already a transaction in progress
-dbt-1                   | 07:27:20  1 of 4 OK created sql table model public.actors ................................ [SELECT 20 in 0.07s]
-dbt-1                   | 07:27:20  2 of 4 START sql table model public.film_actors ................................ [RUN]
-destination_postgres-1  | 2024-04-12 07:27:20.020 UTC [73] WARNING:  there is already a transaction in progress
-dbt-1                   | 07:27:20  2 of 4 OK created sql table model public.film_actors ........................... [SELECT 20 in 0.03s]
-dbt-1                   | 07:27:20  3 of 4 START sql table model public.films ...................................... [RUN]
-destination_postgres-1  | 2024-04-12 07:27:20.048 UTC [74] WARNING:  there is already a transaction in progress
-dbt-1                   | 07:27:20  3 of 4 OK created sql table model public.films ................................. [SELECT 20 in 0.03s]
-dbt-1                   | 07:27:20  4 of 4 START sql table model public.film_ratings ............................... [RUN]
-destination_postgres-1  | 2024-04-12 07:27:20.078 UTC [75] WARNING:  there is already a transaction in progress
-dbt-1                   | 07:27:20  4 of 4 OK created sql table model public.film_ratings .......................... [SELECT 20 in 0.03s]
-destination_postgres-1  | 2024-04-12 07:27:20.099 UTC [76] WARNING:  there is already a transaction in progress
-dbt-1                   | 07:27:20
-dbt-1                   | 07:27:20  Finished running 4 table models in 0 hours 0 minutes and 0.25 seconds (0.25s).
-dbt-1                   | 07:27:20
-dbt-1                   | 07:27:20  Completed successfully
-dbt-1                   | 07:27:20
-dbt-1                   | 07:27:20  Done. PASS=4 WARN=0 ERROR=0 SKIP=0 TOTAL=4
-dbt-1 exited with code 0
+CTE, 또는 공통 테이블 표현식(Common Table Expression),은 SQL에서 임시 결과 집합으로, SELECT, INSERT, UPDATE 또는 DELETE 문 내에서 참조할 수 있습니다. WITH 키워드로 도입됩니다.
+CTE는 복잡한 SQL 쿼리를 간단한 부분으로 분해하여 쿼리를 더 읽기 쉽고 유지 관리 가능하게 만드는 데 사용됩니다.
+CTE는 파생 테이블이나 하위 쿼리와 유사하지만 더 나은 가독성을 제공하며 주 쿼리에서 여러 번 참조될 수 있습니다.
+CTE의 범위는 정의된 쿼리로 제한됩니다. 데이터베이스에 객체로 저장되지 않으며 쿼리 실행 이후에도 지속되지 않습니다.
+
+```python
+WITH cte_name AS (
+    SELECT column1, column2
+    FROM table_name
+    WHERE condition
+)
+SELECT column1, column2
+FROM cte_name;
 ```
 
-## 생성된 DB 확인 - psql
+## DBT 모델 작성을 위한 전제 조건
+
+- 초기화
+
+  모델을 작성하기 전에 dbt init 명령을 사용하여 dbt 프로젝트를 초기화해야 합니다. 이는 dbt에 필요한 디렉토리 구조와 설정 파일을 설정합니다.
+
+- 구성
+
+  profiles.yml 파일을 데이터베이스에 대한 연결 세부 정보로 설정해야 합니다. 이 파일은 dbt가 데이터 웨어하우스나 데이터베이스에 연결하는 방법을 알려줍니다.
+
+- 디렉토리 구조
+
+  dbt 모델은 dbt 프로젝트의 models 디렉토리에 배치되어야 합니다. 이 디렉토리는 dbt 프로젝트를 초기화할 때 생성됩니다.
+
+- 의존성
+
+  모델이 ref() 함수를 사용하여 다른 모델을 참조하는 경우, 참조된 모델은 이미 dbt 프로젝트에 존재해야 합니다.
+
+- 패키지(선택사항)
+
+  dbt 패키지를 사용하는 경우(이는 dbt 모델, 매크로, 테스트 등의 세트로, dbt 프로젝트에 가져올 수 있습니다), 모델을 실행하기 전에 dbt deps 명령을 사용하여 패키지를 설치해야 합니다.
+
+- 테스트(선택사항)
+
+  dbt 모델에 테스트를 추가하려는 경우, tests 디렉토리에 테스트를 설정하고 dbt test 명령을 사용하여 실행해야 합니다.
+
+## jinja and Macros
+
+dbt에서 Jinja는 동적 SQL 생성을 가능하게 하는 템플릿 엔진이며, 매크로는 여러 곳에서 호출할 수 있는 재사용 가능한 SQL 코드입니다. Jinja와 매크로는 dbt의 기능적 요소로서, 더 모듈화되고 동적인 SQL 코드를 가능하게 합니다.
+
+예시:
+여러 모델에서 특정한 방식으로 날짜를 형식화해야 할 때를 가정해 보겠습니다. 각 모델마다 형식화 SQL을 작성하는 대신에 매크로를 정의할 수 있습니다:
+
+```sql
+-- macros/date_formatting.sql
+{% macro format_date(column_name) %}
+    TO_CHAR({{ column_name }}, 'YYYY-MM-DD')
+{% endmacro %}
+```
+
+그런 다음 모델에서 이 매크로를 사용할 수 있습니다:
+
+```sql
+SELECT
+    {{ format_date('created_at') }} as formatted_date,
+    ...
+FROM some_table
+```
+
+### Macro Example
+
+1. `film_ratings.sql`
+
+`macros/` 디렉토리에 `film_ratings_macro.sql`을 만들어준다.
+
+```sql
+sqlCopy code
+-- macros/film_ratings_macro.sql
+
+{% macro generate_film_ratings() %}
+
+WITH films_with_ratings AS (
+    SELECT
+        film_id,
+        title,
+        release_date,
+        price,
+        rating,
+        user_rating,
+        CASE
+            WHEN user_rating >= 4.5 THEN 'Excellent'
+            WHEN user_rating >= 4.0 THEN 'Good'
+            WHEN user_rating >= 3.0 THEN 'Average'
+            ELSE 'Poor'
+        END AS rating_category
+    FROM {{ ref('films') }}  -- Using dbt's ref function to reference the films table
+),
+
+films_with_actors AS (
+    SELECT
+        f.film_id,
+        f.title,
+        STRING_AGG(a.actor_name, ', ') AS actors  -- Aggregating actor names for each film
+    FROM {{ ref('films') }} f
+    LEFT JOIN {{ ref('film_actors') }} fa ON f.film_id = fa.film_id
+    LEFT JOIN {{ ref('actors') }} a ON fa.actor_id = a.actor_id
+    GROUP BY f.film_id, f.title
+)
+
+SELECT
+    fwf.*,
+    fwa.actors
+FROM films_with_ratings fwf
+LEFT JOIN films_with_actors fwa ON fwf.film_id = fwa.film_id
+
+{% endmacro %}
+```
+
+3. `film_ratings_macro.sql` 사용하기
+
+`film_ratings.sql`에 다음과 같이 작성해준다.
+
+```sql
+sqlCopy code
+-- models/example/film_ratings.sql
+{{ generate_film_ratings() }}
+```
+
+### Jinja Example
+
+`film_ratings.sql`을 위한 jinja template이다.
+
+```sql
+sqlCopy code
+-- models/example/film_ratings.sql
+
+{% set excellent_threshold = 4.5 %}
+{% set good_threshold = 4.0 %}
+{% set average_threshold = 3.0 %}
+
+WITH films_with_ratings AS (
+    SELECT
+        film_id,
+        title,
+        release_date,
+        price,
+        rating,
+        user_rating,
+        CASE
+            WHEN user_rating >= {{ excellent_threshold }} THEN 'Excellent'
+            WHEN user_rating >= {{ good_threshold }} THEN 'Good'
+            WHEN user_rating >= {{ average_threshold }} THEN 'Average'
+            ELSE 'Poor'
+        END AS rating_category
+    FROM {{ ref('films') }}  -- Using dbt's ref function to reference the films table
+),
+
+films_with_actors AS (
+    SELECT
+        f.film_id,
+        f.title,
+        STRING_AGG(a.actor_name, ', ') AS actors  -- Aggregating actor names for each film
+    FROM {{ ref('films') }} f
+    LEFT JOIN {{ ref('film_actors') }} fa ON f.film_id = fa.film_id
+    LEFT JOIN {{ ref('actors') }} a ON fa.actor_id = a.actor_id
+    GROUP BY f.film_id, f.title
+)
+
+SELECT
+    fwf.*,
+    fwa.actors
+FROM films_with_ratings fwf
+LEFT JOIN films_with_actors fwa ON fwf.film_id = fwa.film_id
+```
+
+### Jinja 템플릿
+
+Jinja를 사용하면 SQL 코드 내에서 제어 구조를 사용할 수 있습니다. 예를 들어, 환경(개발 vs. 프로덕션)에 따라 다른 열을 선택하고 싶을 수 있습니다:
+
+```sql
+sqlCopy code
+SELECT
+    film_id,
+    title,
+    user_rating,
+    {% if target.name == 'dev' %}
+    -- 개발 환경에서는 상세 리뷰 코멘트만 선택합니다.
+    review_comments,
+    {% endif %}
+    release_date
+FROM {{ ref('films') }}
+```
+
+개발 환경에서는 리뷰 코멘트를 선택하지만, 프로덕션에서는 영화의 기본 정보만 선택합니다.
+
+### DBT Macro
+
+이제 영화를 사용자 평점에 따라 분류하는 매크로를 만들어 보겠습니다:
+
+```sql
+sqlCopy code
+-- macros/classify_ratings.sql
+
+{% macro classify_ratings(column_name) %}
+    CASE
+        WHEN {{ column_name }} >= 4.5 THEN 'Excellent'
+        WHEN {{ column_name }} >= 4.0 THEN 'Good'
+        WHEN {{ column_name }} >= 3.0 THEN 'Average'
+        ELSE 'Poor'
+    END
+{% endmacro %}
+```
+
+### Use together
+
+이제 macro를 사용해 영화를 분류할 수 있다.
+
+```sql
+sqlCopy code
+-- models/film_classification.sql
+
+SELECT
+    film_id,
+    title,
+    user_rating,
+    {{ classify_ratings('user_rating') }} AS rating_category,
+    release_date
+FROM {{ ref('films') }}
+```
+
+## DBT 이후 생성된 DB 확인 - psql
 
 ```SQL
 postgres=# \c destination_db
@@ -1212,5 +545,50 @@ destination_db=# \dt
  public | films         | table | postgres
  public | users         | table | postgres
 (6 rows)
+```
+
+```Bash
+{seilylook} 🌙  ~/Development/DataEngineering/elt main docker exec -it elt-destination_postgres-1 psql -U postgres
+psql (15.5 (Debian 15.5-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# \c destination_db
+You are now connected to database "destination_db" as user "postgres".
+destination_db=# \dt
+             List of relations
+ Schema |     Name      | Type  |  Owner
+--------+---------------+-------+----------
+ public | actors        | table | postgres
+ public | film_actors   | table | postgres
+ public | film_category | table | postgres
+ public | film_ratings  | table | postgres
+ public | films         | table | postgres
+ public | users         | table | postgres
+(6 rows)
+
+destination_db=# select * from film_ratings;
+ film_id |               title               | release_date | price | rating | user_rating | rating_category |      actors
+---------+-----------------------------------+--------------+-------+--------+-------------+-----------------+-------------------
+       1 | Inception                         | 2010-07-16   | 12.99 | PG-13  |         4.8 | Excellent       | Leonardo DiCaprio
+       2 | The Shawshank Redemption          | 1994-09-23   |  9.99 | R      |         4.9 | Excellent       | Tim Robbins
+       3 | The Godfather                     | 1972-03-24   | 14.99 | R      |         4.7 | Excellent       | Marlon Brando
+       4 | The Dark Knight                   | 2008-07-18   | 11.99 | PG-13  |         4.8 | Excellent       | Christian Bale
+       5 | Pulp Fiction                      | 1994-10-14   | 10.99 | R      |         4.6 | Excellent       | John Travolta
+       6 | The Matrix                        | 1999-03-31   |  9.99 | R      |         4.7 | Excellent       | Keanu Reeves
+       7 | Forrest Gump                      | 1994-07-06   |  8.99 | PG-13  |         4.5 | Excellent       | Tom Hanks
+       8 | Toy Story                         | 1995-11-22   |  7.99 | G      |         4.4 | Good            | Tom Hanks
+       9 | Jurassic Park                     | 1993-06-11   |  9.99 | PG-13  |         4.3 | Good            | Sam Neill
+      10 | Avatar                            | 2009-12-18   | 12.99 | PG-13  |         4.2 | Good            | Sam Worthington
+      11 | Blade Runner 2049                 | 2017-10-06   | 13.99 | R      |         4.3 | Good            | Ryan Gosling
+      12 | Mad Max: Fury Road                | 2015-05-15   | 11.99 | R      |         4.6 | Excellent       | Tom Hardy
+      13 | Coco                              | 2017-11-22   |  9.99 | PG     |         4.8 | Excellent       | Anthony Gonzalez
+      14 | Dunkirk                           | 2017-07-21   | 12.99 | PG-13  |         4.5 | Excellent       | Fionn Whitehead
+      15 | Spider-Man: Into the Spider-Verse | 2018-12-14   | 10.99 | PG     |         4.9 | Excellent       | Shameik Moore
+      16 | Parasite                          | 2019-10-11   | 14.99 | R      |         4.6 | Excellent       | Song Kang-ho
+      17 | Whiplash                          | 2014-10-10   |  9.99 | R      |         4.7 | Excellent       | Miles Teller
+      18 | Inside Out                        | 2015-06-19   |  9.99 | PG     |         4.8 | Excellent       | Amy Poehler
+      19 | The Grand Budapest Hotel          | 2014-03-28   | 10.99 | R      |         4.4 | Good            | Ralph Fiennes
+      20 | La La Land                        | 2016-12-09   | 11.99 | PG-13  |         4.5 | Excellent       | Emma Stone
+(20 rows)
 ```
 
