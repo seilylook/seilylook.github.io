@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Big Data Research Note - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Big Data Research Note" />
+<meta property="og:description" content="What is Big Data? Big data is data whose scale, diversity, and complexity require new architecture, techniques, algorithms, and analytics to manage it and extract value and hidden knowledge from it.
+Big data is refers to things one can do at a largee scale that cannot be done at a smaller one, to extract new insights or create new forms of value,
+in ways that change markets, organizations, the relationship between citizens and governments, and more." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/big-data-research-note/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-15T13:33:18+09:00" />
+<meta property="article:modified_time" content="2024-04-15T13:33:18+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Big Data Research Note"/>
+<meta name="twitter:description" content="What is Big Data? Big data is data whose scale, diversity, and complexity require new architecture, techniques, algorithms, and analytics to manage it and extract value and hidden knowledge from it.
+Big data is refers to things one can do at a largee scale that cannot be done at a smaller one, to extract new insights or create new forms of value,
+in ways that change markets, organizations, the relationship between citizens and governments, and more."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/big-data-research-note/" /><link rel="prev" href="https://seilylook.github.io/posts/airflow/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Big Data Research Note",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/big-data-research-note\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Big-Data, Data Engineering","wordcount":  335 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/big-data-research-note\/","datePublished": "2024-04-15T13:33:18+09:00","dateModified": "2024-04-15T13:33:18+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/big-data-research-note/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/big-data-research-note/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Big Data Research Note</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a>&nbsp;<a href="/categories/research/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Research</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-15">2024-04-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;335 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/big-data.webp"
+        data-srcset="/images/big-data.webp, /images/big-data.webp 1.5x, /images/big-data.webp 2x"
+        data-sizes="auto"
+        alt="/images/big-data.webp"
+        title="/images/big-data.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#data-volume">Data Volume</a></li>
+    <li><a href="#data-variety">Data Variety</a></li>
+    <li><a href="#data-velocity">Data Velocity</a>
+      <ul>
+        <li><a href="#example">example</a></li>
+      </ul>
+    </li>
+    <li><a href="#data-veracity">Data Veracity</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#acquisition-획득">Acquisition 획득</a></li>
+    <li><a href="#storage-저장">Storage 저장</a></li>
+    <li><a href="#analysis-분석">Analysis 분석</a></li>
+    <li><a href="#access-접근">Access 접근</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="what-is-big-data">What is Big Data?</h1>
+<p><code>Big data</code> is data whose scale, diversity, and complexity <code>require</code> new architecture, techniques, algorithms, and analytics to <code>manage</code> it and <code>extract value and hidden knowledge</code> from it.</p>
+<p><code>Big data</code> is refers to things one can do at a largee scale that cannot be done at a smaller one, to <code>extract new insights or create new forms</code> of value,</p>
+<p>in ways that change markets, organizations, the relationship between citizens and governments, and more.</p>
+<h1 id="4v-in-big-data">4V in Big Data</h1>
+<h2 id="data-volume">Data Volume</h2>
+<p>44x increase from 2009 to 2020.</p>
+<p>From 0.8 zettabytes to 35zb.</p>
+<p>Data volume is increasing exponentially.</p>
+<h2 id="data-variety">Data Variety</h2>
+<p>Various formats, types, and structures Text, numericial, images, audio, video, sequences, time series, social media data, multi-dimensional arrays, etc&hellip; Static data vs streaming data.</p>
+<h2 id="data-velocity">Data Velocity</h2>
+<p>Data is being generated fast and need to be processed fast(e.g., online data analytics)</p>
+<p>Late desicion -&gt; missing opportunities</p>
+<h3 id="example">example</h3>
+<ul>
+<li>
+<p>e-promotions: your current location, your purchase history, what you like - send promotions right now for stores next to you.</p>
+</li>
+<li>
+<p>heathcare monitoring: sensors monitoring your activities and body - find any abnormal measurements that require immediate reaction.</p>
+</li>
+</ul>
+<h2 id="data-veracity">Data Veracity</h2>
+<p>This property means data quality or accuracy. It sometimes get referred to as validity or volatility referring to the lifetime of the data.</p>
+<p>Data is of no value if it&rsquo;s not accurate, the results of big data analysis are only as good as the data being analyzed.</p>
+<p>Veracity is very important for making big data operational.</p>
+<h1 id="big-data-field">Big Data Field</h1>
+<ul>
+<li>
+<p>Smart Healthcare</p>
+</li>
+<li>
+<p>Mul-ti channel Sales</p>
+</li>
+<li>
+<p>Finance</p>
+</li>
+<li>
+<p>Log Analysis</p>
+</li>
+<li>
+<p>Homeland Security</p>
+</li>
+<li>
+<p>Traffic Control</p>
+</li>
+<li>
+<p>Telecom</p>
+</li>
+<li>
+<p>Search Quality</p>
+</li>
+<li>
+<p>Manufacturing</p>
+</li>
+<li>
+<p>Trading Anaysis</p>
+</li>
+<li>
+<p>Fraud and Risk</p>
+</li>
+<li>
+<p>Retail: Chum, NBO</p>
+</li>
+</ul>
+<h1 id="big-data-processing-steps">Big Data Processing Steps</h1>
+<h2 id="acquisition-획득">Acquisition 획득</h2>
+<ul>
+<li>
+<p>Transaction data</p>
+</li>
+<li>
+<p>Web data</p>
+</li>
+<li>
+<p>Social interaction data</p>
+</li>
+<li>
+<p>Mobile / Sensor data</p>
+</li>
+<li>
+<p><code>Real time collection and update</code></p>
+</li>
+</ul>
+<h2 id="storage-저장">Storage 저장</h2>
+<ul>
+<li>
+<p>Distributed file system</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+<li>
+<p>Data warehouse</p>
+</li>
+<li>
+<p><code>ETL and integration</code></p>
+</li>
+<li>
+<p><code>Data Security and privacy</code></p>
+</li>
+</ul>
+<h2 id="analysis-분석">Analysis 분석</h2>
+<ul>
+<li>
+<p>Data Mining</p>
+</li>
+<li>
+<p>Text analytics</p>
+</li>
+<li>
+<p>OLAP</p>
+</li>
+<li>
+<p>High-perfomanct BI</p>
+</li>
+<li>
+<p>Data visualization</p>
+</li>
+<li>
+<p><code>New, integratice analysis</code></p>
+</li>
+</ul>
+<h2 id="access-접근">Access 접근</h2>
+<ul>
+<li>
+<p>Improved productivity</p>
+</li>
+<li>
+<p>Effective decision making</p>
+</li>
+<li>
+<p>Enhanced customner satisfaction</p>
+</li>
+<li>
+<p>Increased business competitiveness</p>
+</li>
+<li>
+<p><code>Learning from feedback</code></p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-04-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/big-data-research-note/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/big-data-research-note/" data-title="Big Data Research Note" data-hashtags="Big-Data,Data Engineering"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/big-data-research-note/" data-hashtag="Big-Data"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/big-data-research-note/" data-title="Big Data Research Note"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/big-data-research-note/" data-title="Big Data Research Note"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/big-data-research-note/" data-title="Big Data Research Note" data-image="/images/big-data.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/big-data/">Big-Data</a>,&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/airflow/" class="prev" rel="prev" title="Airflow"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Airflow</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

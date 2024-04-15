@@ -2,6 +2,8 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://seilylook.github.io/posts/big-data-research-note/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/big-data/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
@@ -24,8 +26,6 @@
                     /></url><url>
             <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/categories/research/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/spark/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/spark-research-note/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-04-15T13:33:18&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
@@ -49,6 +49,7 @@
             <loc>https://seilylook.github.io/posts/etl/</loc><lastmod>2024-04-11T17:08:14&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/kafka/</loc><lastmod>2024-04-11T17:08:14&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/kafka-spark/</loc><lastmod>2024-04-11T17:08:14&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/spark/</loc><lastmod>2024-04-11T17:08:14&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/spark/</loc><lastmod>2024-04-11T17:08:14&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/categories/development/</loc><lastmod>2024-04-11T14:28:35&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/machine-learning/</loc><lastmod>2024-04-11T14:28:35&#43;09:00</lastmod></url><url>
