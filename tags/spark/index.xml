@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/tags/spark/</link>
         <description>Spark - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/spark/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 15 Apr 2024 13:33:18 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/spark/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark Research Note</title>
+    <link>https://seilylook.github.io/posts/spark-research-note/</link>
+    <pubDate>Mon, 15 Apr 2024 13:33:18 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-research-note/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/research.jpeg" referrerpolicy="no-referrer">
+            </div> ]]></description>
+</item>
+<item>
     <title>Kafka Spark</title>
     <link>https://seilylook.github.io/posts/kafka-spark/</link>
     <pubDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</pubDate>
