@@ -4351,7 +4351,7 @@ print(text)
 ## 실행
 
 ```shell
-(venv)  {seilylook} 🍻 ~/Development/DataEngineering/2024_BIGDATA  python3 1_weather.py 109 | more
+(venv)  {seilylook} 🍻 python3 1_weather.py 109 | more
 ```
 
 # Tutorial 2
@@ -4359,9 +4359,9 @@ print(text)
 ## package install
 
 ```shell
-(venv)  {seilylook} 🚀 ~/Development/DataEngineering/2024_BIGDATA pip3 install requests
+(venv)  {seilylook} 🚀 pip3 install requests
 
-(venv)  {seilylook} 🚀 ~/Development/DataEngineering/2024_BIGDATA pip3 install beautifulsoup4
+(venv)  {seilylook} 🚀 pip3 install beautifulsoup4
 ```
 
 ## 데이터 가져와서 정제하는 파이썬 코드
@@ -4440,4 +4440,32 @@ City: 서귀포 | Date: 2024-04-20 00:00 | Weather: 흐리고 비
 # Tutorial 3
 
 네이버 증권 데이터 `Extract` 해오기
+
+## 데이터 Extract하는 파이썬 코드 작성
+
+```python
+from bs4 import BeautifulSoup
+import urllib.request as req
+import datetime
+
+url = "https://finance.naver.com/marketindex/"
+
+now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+response = req.urlopen(url).read()
+
+soup = BeautifulSoup(response, 'html.parser')
+
+currency = soup.select_one("#exchangeList > li:nth-child(1) > a.head.usd > div > span.value")
+
+print(f"Date: {now} | USD: {currency.string}")
+```
+
+## 결과 확인
+
+```shell
+(venv)  {seilylook} 🚀 python3 market.py
+
+Date: 2024-04-17 17:15:49 | USD: 1,385.00
+```
 

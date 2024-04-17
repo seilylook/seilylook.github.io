@@ -15,7 +15,7 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/korea-weather-rss/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-17T13:47:18+09:00" />
-<meta property="article:modified_time" content="2024-04-17T13:47:18+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-04-17T16:40:41+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Korea Weather RSS"/>
@@ -38,8 +38,8 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/korea-weather-rss\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Data Engineering, Weather Data","wordcount":  9894 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/korea-weather-rss\/","datePublished": "2024-04-17T13:47:18+09:00","dateModified": "2024-04-17T13:47:18+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Data Engineering, Weather Data","wordcount":  9966 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/korea-weather-rss\/","datePublished": "2024-04-17T13:47:18+09:00","dateModified": "2024-04-17T16:40:41+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -86,7 +86,7 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Korea Weather RSS</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-17">2024-04-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;9894 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-17">2024-04-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;9966 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;47 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -111,6 +111,11 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
     <li><a href="#package-install">package install</a></li>
     <li><a href="#데이터-가져와서-정제하는-파이썬-코드">데이터 가져와서 정제하는 파이썬 코드</a></li>
     <li><a href="#실행-및-결과-확인">실행 및 결과 확인</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#데이터-extract하는-파이썬-코드-작성">데이터 Extract하는 파이썬 코드 작성</a></li>
+    <li><a href="#결과-확인">결과 확인</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="url-format">URL Format</h1>
@@ -8767,7 +8772,7 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🍻 ~/Development/DataEngineering/2024_BIGDATA  python3 1_weather.py <span class="m">109</span> <span class="p">|</span> more
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🍻 python3 1_weather.py <span class="m">109</span> <span class="p">|</span> more
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="tutorial-2">Tutorial 2</h1>
@@ -8779,9 +8784,9 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 ~/Development/DataEngineering/2024_BIGDATA pip3 install requests
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 pip3 install requests
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 ~/Development/DataEngineering/2024_BIGDATA pip3 install beautifulsoup4
+</span></span><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 pip3 install beautifulsoup4
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="데이터-가져와서-정제하는-파이썬-코드">데이터 가져와서 정제하는 파이썬 코드</h2>
@@ -8926,11 +8931,62 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
 </div>
 </div><h1 id="tutorial-3">Tutorial 3</h1>
 <p>네이버 증권 데이터 <code>Extract</code> 해오기</p>
-</div><div class="post-footer" id="post-footer">
+<h2 id="데이터-extract하는-파이썬-코드-작성">데이터 Extract하는 파이썬 코드 작성</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">urllib.request</span> <span class="k">as</span> <span class="nn">req</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datetime</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;https://finance.naver.com/marketindex/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">currency</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s2">&#34;#exchangeList &gt; li:nth-child(1) &gt; a.head.usd &gt; div &gt; span.value&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Date: </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2"> | USD: </span><span class="si">{</span><span class="n">currency</span><span class="o">.</span><span class="n">string</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="결과-확인">결과 확인</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 python3 market.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Date: 2024-04-17 17:15:49 <span class="p">|</span> USD: 1,385.00
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-17</span>
+                <span>Updated on 2024-04-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/7715f7e9114fc23c4fe684693352c56885f4c2b0" target="_blank" title="commit by seilylook(seilylook@naver.com) 7715f7e9114fc23c4fe684693352c56885f4c2b0: init: 2024_BIGDATA">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>7715f7e</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
