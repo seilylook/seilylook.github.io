@@ -70,6 +70,21 @@
         alt="/images/profile.png"
         title="/images/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/flutter-riverpod/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/riverpod.png"
+        data-srcset="/images/riverpod.png, /images/riverpod.png 1.5x, /images/riverpod.png 2x"
+        data-sizes="auto"
+        alt="/images/riverpod.png"
+        title="/images/riverpod.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/flutter-riverpod/">Flutter Riverpod</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-01-17">2024-01-17</time></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a>&nbsp;<a href="/categories/study/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Study</a></span></div><div class="content">Introduction Flutter 전용 상태 관리 라이브러리인 Riverpod 연구를 위한 포스팅. Flutter는 선언형 UI이며 각각의 상태를 포함하고 있는 위젯 트리를 기반으로 구성되기 때문에 State management가 매우 중요하다. 단일 위젯에서만 사용하는 상태일 경우는 상태 관리가 특별하기 관리되지 않아도 괜찮지만, 프로젝트 규모가 커질 수록 여러 위젯에섯 여러 상태에 대해 접근해야 된다. 이런 여러 위젯에서 사용하는 상태를 App State라고 부르며 App State 관리를 지원하는 여러 라이브러리가 존재하는데 Riverpod가 그 중 가장 대중적이다.
+What is Riverpod?</div><div class="post-footer">
+        <a href="/posts/flutter-riverpod/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a>,&nbsp;<a href="/tags/riverpod/">Riverpod</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/calendar-scheduler-deploy/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -161,24 +176,6 @@ Chapter 1 프로젝트 생성 및 이미지 추가 1 2 3 flutter create image_pi
 pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application.</div><div class="post-footer">
         <a href="/posts/flutter-image-picker/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/solidity/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/solidity-image.png"
-        data-srcset="/images/solidity-image.png, /images/solidity-image.png 1.5x, /images/solidity-image.png 2x"
-        data-sizes="auto"
-        alt="/images/solidity-image.png"
-        title="/images/solidity-image.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/solidity/">Solidity</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-10-19">2023-10-19</time></span>&nbsp;<span class="post-category">included in <a href="/categories/language/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Language</a></span></div><div class="content">Introduction Solidity 언어 학습 기록.
-Chapter 1 1.1 Contract Solidity 언어는 Contract 안에 쌓여 있다. Contract는 Ethereum 애플리케이션의 기본적인 구성 요소로, 모든 변수와 함수는 어느 한 Contract 에 속하게 되어 있다.
-즉 모든 프로젝트의 시작점이다.
-Version Pragma 모든 Solidity 소스 코드는 version pragma로 시작해야 한다. 이는 해당 코드가 사용해야 하는 Solidity 버전을 선언하는 것이다. 이를 통해 이후에 새로운 컴파일러 버전이 나와도 기존 코드가 깨지지 않도록 예방하는 것이다.
-Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문에 에러 처리한 경험이 많은데, 위의 기능은 편리하다고 생각된다.</div><div class="post-footer">
-        <a href="/posts/solidity/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/technology/">Technology</a>,&nbsp;<a href="/tags/language/">Language</a>,&nbsp;<a href="/tags/smart-contract/">Smart Contract</a>,&nbsp;<a href="/tags/blockchain/">Blockchain</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

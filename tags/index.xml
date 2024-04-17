@@ -4,20 +4,28 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 15 Apr 2024 13:33:18 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 17 Apr 2024 13:47:18 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Data Engineering</title>
+    <link>https://seilylook.github.io/tags/data-engineering/</link>
+    <pubDate>Wed, 17 Apr 2024 13:47:18 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Weather Data</title>
+    <link>https://seilylook.github.io/tags/weather-data/</link>
+    <pubDate>Wed, 17 Apr 2024 13:47:18 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/weather-data/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Big-Data</title>
     <link>https://seilylook.github.io/tags/big-data/</link>
     <pubDate>Mon, 15 Apr 2024 13:33:18 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/big-data/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Data Engineering</title>
-    <link>https://seilylook.github.io/tags/data-engineering/</link>
-    <pubDate>Mon, 15 Apr 2024 13:33:18 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -74,14 +82,6 @@
     <pubDate>Thu, 11 Apr 2024 16:15:34 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/etl/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Kafka</title>
-    <link>https://seilylook.github.io/tags/kafka/</link>
-    <pubDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/kafka/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -121,3 +121,21 @@ Veracity is very important for making big data operational.
 
 - `Learning from feedback`
 
+# Scheduler?
+
+## What if a schedule's added with the market-index crawler?
+
+In Linux there is a handy scheduling damon called `cron`.
+
+The cron daemon is a long-running process that `executes commands at specific times`.
+
+This is to `schedule` activites, either as `one-time` events or as `recurring` tasks.
+
+## 작업 스케쥴 설정
+
+```bash
+* * * * * 명령어
+```
+
+<img src="/images/cron-cmd.png" />
+
