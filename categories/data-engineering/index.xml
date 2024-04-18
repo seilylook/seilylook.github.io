@@ -5,11 +5,11 @@
         <description>Data Engineering - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
             <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 17 Apr 2024 13:47:18 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
-    <title>Korea Weather RSS</title>
-    <link>https://seilylook.github.io/posts/korea-weather-rss/</link>
+    <title>Crawling &amp; Scraping &amp; Selenium</title>
+    <link>https://seilylook.github.io/posts/crawling-scraping-selenium/</link>
     <pubDate>Wed, 17 Apr 2024 13:47:18 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/korea-weather-rss/</guid>
+    <guid>https://seilylook.github.io/posts/crawling-scraping-selenium/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/project-image.jpeg" referrerpolicy="no-referrer">
             </div>URL Format Ex)
