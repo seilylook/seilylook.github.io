@@ -70,6 +70,27 @@
         alt="/images/profile.png"
         title="/images/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/flutter-amplify/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/aws-amplify.png"
+        data-srcset="/images/aws-amplify.png, /images/aws-amplify.png 1.5x, /images/aws-amplify.png 2x"
+        data-sizes="auto"
+        alt="/images/aws-amplify.png"
+        title="/images/aws-amplify.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/flutter-amplify/">Flutter Amplify</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-02-21">2024-02-21</time></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a>&nbsp;<a href="/categories/study/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Study</a></span></div><div class="content">Introduction 이 포스팅은 Flutter에 Amplify 서비스를 연동하는 과정을 다룬다.
+AWS Amplify는 모바일 및 프론트엔드 웹 개발자가 AWS에서 구동되는 안전하고 확장 가능한 풀 스택 애플리케이션을 개발하도록 지원하는 도구 및 서비스이다.
+현재 Amplify에서 제공하는 대표적인 서비스는 다음과 같다.
+소셜 미디어 로그인, OAuth 등을 위한 AWS Cognito
+미디어 스토리지 파일용 AWS S3
+앱에 대한 분석 데이터를 수집하는 AWS Analytics
+Amplify 사전 작업 AWS 계정 생성 Create Account
+Amplify CLI 설치 Amplify 명령어를 입력하기 위한 툴체인을 설치해준다.</div><div class="post-footer">
+        <a href="/posts/flutter-amplify/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a>,&nbsp;<a href="/tags/aws/">AWS</a>,&nbsp;<a href="/tags/amplify/">Amplify</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/flutter-riverpod/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -159,22 +180,6 @@ UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에�
 HTTP 요청의 응답을 담을 모델 클래스를 구현하고, UI를 작성한 다음, Dio를 사용해서 직접 API 요청을 진행한다. 마지막으로 요청을 다시 실행하고 리스트를 갱신할 수 있는 새로고침 기능을 추가해준다.
 Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 구현 VideoModel 유튜브 API를 사용하면 굉장히 많은 정보를 가져올 수 있다. 그 중에서 동영상 ID와 제목만 활용해본다. 이 정보를 담을 VideoModel 클래스를 구현해서 데이터를 관리한다.</div><div class="post-footer">
         <a href="/posts/flutter-youtube-streaming/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/flutter-image-picker/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/flutter-image-picker.png"
-        data-srcset="/images/flutter-image-picker.png, /images/flutter-image-picker.png 1.5x, /images/flutter-image-picker.png 2x"
-        data-sizes="auto"
-        alt="/images/flutter-image-picker.png"
-        title="/images/flutter-image-picker.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/flutter-image-picker/">Flutter Image Picker</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-15">2023-12-15</time></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div><div class="content">Introduction Flutter 기능 구현 - Image Pick &amp; Update &amp; Save
-Chapter 1 프로젝트 생성 및 이미지 추가 1 2 3 flutter create image_picker cd image_picker Root 디렉토리에 assets/img 폴더를 만들고, 해당 폴더에 사용할 이미지들을 넣어준다.
-pubspec.yaml 설정 1 flutter pub add image_picker, image_gallery_saver, uuid 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application.</div><div class="post-footer">
-        <a href="/posts/flutter-image-picker/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
