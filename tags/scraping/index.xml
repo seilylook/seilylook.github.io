@@ -16,12 +16,12 @@
 extract links in the html
 downloads the links if they are a file
 if the file is a html file, go back to the first task
-python 공식 문서의 데이터들 가져오기.
 Selenium Advanced LinkedIn 접속 -&gt; 로그인 -&gt; 특정 조건 검색 -&gt; 지원
 Web API Client(Http Request) -&gt; Server(Http Response) -&gt; Client
 Client == Customer
 Server == Kitchen
-API == Waiter]]></description>
+API == Waiter
+Features == Side Effect Crawling 표적이 될 수 있다.]]></description>
 </item>
 <item>
     <title>Data-Acquisition-Begin</title>

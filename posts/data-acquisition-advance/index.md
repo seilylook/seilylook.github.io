@@ -13,8 +13,6 @@
 
 4. if the file is a html file, go back to the first task
 
-python 공식 문서의 데이터들 가져오기.
-
 # Selenium Advanced
 
 LinkedIn 접속 -> 로그인 -> 특정 조건 검색 -> 지원
@@ -143,4 +141,110 @@ Client에서 Server로 요청 시 직접 요청이 아닌 Proxy Server를 거쳐
 Forward와 반대로 Server에서 Client로 직접 데이터를 전달하지 않고 Proxy Server를 거치는 방식
 
 <img src="/images/reverse-proxy.png" />
+
+# Practice 1
+
+Recursive crawling - 파이썬 공식 라이브러리 세부 문서 데이터 재귀적으로 가져오기
+
+## 파이썬 코드
+
+```python
+from bs4 import BeautifulSoup
+from urllib.request import *
+from urllib.parse import *
+from os import makedirs
+import os.path, time, re
+
+proc_files = {}
+
+def enum_links(html, base):
+    soup = BeautifulSoup(html, "html.parser")
+    links = soup.select("link[rel='stylesheet']") # css
+    links += soup.select("a[href]") # link
+    result = []
+
+    for a in links:
+        href = a.attrs['href']
+        url = urljoin(base, href)
+        result.append(url)
+
+    return result
+
+
+def analyze_html(url, root_url):
+    savepath = download_file(url)
+    if savepath is None: return
+    if savepath in proc_files: return
+
+    proc_files[savepath] = True
+    print("Analyze html=", url)
+
+    html = open(savepath, "r", encoding="utf-8").read()
+    links = enum_links(html, url)
+
+    for link_url in links:
+        # 가져온 links 리스트를 돌면서 확인해준다.
+        # 만약 받은 link가 혹시 다른 root_url을 가지고 있으면 무시
+        if link_url.find(root_url) != 0:
+            if not re.search(r".css$", link_url):
+                continue
+
+        if re.search(r".(html|htm)$", link_url):
+            analyze_html(link_url, root_url)
+            continue
+
+        download_file(link_url)
+
+
+def download_file(url):
+    o = urlparse(url)
+    savepath = "./" + o.netloc + o.path
+
+    if re.search(r"/$", savepath):
+        savepath += "index.html"
+
+    savedir = os.path.dirname(savepath)
+
+    if os.path.exists(savepath): return savepath
+
+    if not os.path.exists(savedir):
+        print("mkdir", savedir)
+        makedirs(savedir)
+
+    try:
+        print("Download=", url)
+        urlretrieve(url, savepath)
+        time.sleep(1)
+        return savepath
+
+    except Exception as e:
+        print(e)
+        return None
+
+
+if __name__ == "__main__":
+    url = "https://docs.python.org/3.5/library/"
+    analyze_html(url, url)
+```
+
+## 결과 확인
+
+```shell
+(venv)  {seilylook} 👑 python3 practice_1.py
+Analyze html= https://docs.python.org/3.5/library/
+Download= https://docs.python.org/3.5/library/intro.html
+Analyze html= https://docs.python.org/3.5/library/intro.html
+Download= https://docs.python.org/3.5/library/functions.html
+Analyze html= https://docs.python.org/3.5/library/functions.html
+Download= https://docs.python.org/3.5/library/constants.html
+Analyze html= https://docs.python.org/3.5/library/constants.html
+Download= https://docs.python.org/3.5/library/stdtypes.html
+Analyze html= https://docs.python.org/3.5/library/stdtypes.html
+Download= https://docs.python.org/3.5/library/exceptions.html
+Analyze html= https://docs.python.org/3.5/library/exceptions.html
+Download= https://docs.python.org/3.5/library/text.html
+Analyze html= https://docs.python.org/3.5/library/text.html
+Download= https://docs.python.org/3.5/library/string.html
+Analyze html= https://docs.python.org/3.5/library/string.html
+```
 
