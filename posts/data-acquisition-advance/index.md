@@ -170,32 +170,6 @@ def enum_links(html, base):
 
     return result
 
-
-def analyze_html(url, root_url):
-    savepath = download_file(url)
-    if savepath is None: return
-    if savepath in proc_files: return
-
-    proc_files[savepath] = True
-    print("Analyze html=", url)
-
-    html = open(savepath, "r", encoding="utf-8").read()
-    links = enum_links(html, url)
-
-    for link_url in links:
-        # 가져온 links 리스트를 돌면서 확인해준다.
-        # 만약 받은 link가 혹시 다른 root_url을 가지고 있으면 무시
-        if link_url.find(root_url) != 0:
-            if not re.search(r".css$", link_url):
-                continue
-
-        if re.search(r".(html|htm)$", link_url):
-            analyze_html(link_url, root_url)
-            continue
-
-        download_file(link_url)
-
-
 def download_file(url):
     o = urlparse(url)
     savepath = "./" + o.netloc + o.path
@@ -220,6 +194,31 @@ def download_file(url):
     except Exception as e:
         print(e)
         return None
+
+
+def analyze_html(url, root_url):
+    savepath = download_file(url)
+    if savepath is None: return
+    if savepath in proc_files: return
+
+    proc_files[savepath] = True
+    print("Analyze html=", url)
+
+    html = open(savepath, "r", encoding="utf-8").read()
+    links = enum_links(html, url)
+
+    for link_url in links:
+        # 가져온 links 리스트를 돌면서 확인해준다.
+        # 만약 받은 link가 혹시 다른 root_url을 가지고 있으면 무시
+        if link_url.find(root_url) != 0:
+            if not re.search(r".css$", link_url):
+                continue
+
+        if re.search(r".(html|htm)$", link_url):
+            analyze_html(link_url, root_url)
+            continue
+
+        download_file(link_url)
 
 
 if __name__ == "__main__":
