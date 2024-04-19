@@ -2,7 +2,9 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/tags/apache-hadoop/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/big-data/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/categories/"
@@ -11,11 +13,8 @@
                     hreflang="en"
                     href="https://seilylook.github.io/categories/"
                     /></url><url>
-            <loc>https://seilylook.github.io/tags/crawling/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/data-acquisition-advance/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/data-engineering/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/data-engineering/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/computer/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/"
@@ -24,10 +23,9 @@
                     hreflang="en"
                     href="https://seilylook.github.io/"
                     /></url><url>
-            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/scraping/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/selenium/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-04-19T15:31:23&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/posts/hdfs/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/tags/"
@@ -36,9 +34,15 @@
                     hreflang="en"
                     href="https://seilylook.github.io/tags/"
                     /></url><url>
+            <loc>https://seilylook.github.io/categories/technology/</loc><lastmod>2024-04-20T07:46:46&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/crawling/</loc><lastmod>2024-04-19T20:40:04&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/data-acquisition-advance/</loc><lastmod>2024-04-19T20:40:04&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/data-engineering/</loc><lastmod>2024-04-19T20:40:04&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/data-engineering/</loc><lastmod>2024-04-19T20:40:04&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/scraping/</loc><lastmod>2024-04-19T20:40:04&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/selenium/</loc><lastmod>2024-04-19T20:40:04&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/data-acquisition-begin/</loc><lastmod>2024-04-18T15:37:45&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/big-data-research-note/</loc><lastmod>2024-04-17T16:40:41&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/big-data/</loc><lastmod>2024-04-17T16:40:41&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/categories/research/</loc><lastmod>2024-04-17T16:40:41&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/airflow/</loc><lastmod>2024-04-13T17:18:44&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/data-pipeline/</loc><lastmod>2024-04-13T17:18:44&#43;09:00</lastmod></url><url>
@@ -61,11 +65,9 @@
             <loc>https://seilylook.github.io/categories/machine-learning/</loc><lastmod>2024-04-11T14:28:35&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/mlops/</loc><lastmod>2024-04-11T14:28:35&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/ops/</loc><lastmod>2024-04-11T14:28:35&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/computer/</loc><lastmod>2024-04-11T13:37:20&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/gpu/</loc><lastmod>2024-04-11T13:37:20&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/gpu/</loc><lastmod>2024-04-11T13:37:20&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/hardware/</loc><lastmod>2024-04-11T13:37:20&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/technology/</loc><lastmod>2024-04-11T13:37:20&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/configuration/</loc><lastmod>2024-04-10T14:22:01&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/docker/</loc><lastmod>2024-04-10T14:22:01&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/docker/</loc><lastmod>2024-04-10T14:22:01&#43;09:00</lastmod></url><url>

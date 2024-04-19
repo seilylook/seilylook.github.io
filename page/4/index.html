@@ -70,6 +70,22 @@
         alt="/images/profile.png"
         title="/images/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/tunefun-riverpod/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/project-image.jpeg"
+        data-srcset="/images/project-image.jpeg, /images/project-image.jpeg 1.5x, /images/project-image.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/project-image.jpeg"
+        title="/images/project-image.jpeg" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/tunefun-riverpod/">Tunefun Riverpod</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-03-09">2024-03-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a>&nbsp;<a href="/categories/study/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Study</a></span></div><div class="content">Introduction Riverpod을 실제 프로젝트에 처음으로 적용해보고 이해한 것을 정리하기 위한 포스팅이다.
+목표 User Authentication - 회원가입, 로그인 기능 전체를 구현하고 사용자 정보를 Storage에 저장해 로그인 유지를 구축하고 싶었다.
+Dependency 1 2 3 4 5 6 7 8 dependencies: flutter: sdk: flutter # The following adds the Cupertino Icons font to your application. # Use with the CupertinoIcons class for iOS style icons. cupertino_icons: ^1.0.2 flutter_riverpod: ^2.4.10 구현 Model 구축하기 사용자 정보에 대한 데이터베이스를 위한 모델을 만들어준다.</div><div class="post-footer">
+        <a href="/posts/tunefun-riverpod/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a>,&nbsp;<a href="/tags/riverpod/">Riverpod</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/flutter-amplify/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -164,22 +180,6 @@ Firebase
 UI 구현 테마 색상 설정 lib/constants/color.dart 이번 프로젝트에서 사용할 색상은 세 가지이다. 주색상인 초록색, 옅은 회색, 어두운 회색 그릭고 텍스트 필드 배경색이다.
 1 2 3 4 5 6 import &#39;package:flutter/material.dart&#39;; const PRIMARY_COLOR = Color(0xFF0DB2B2); final LIGHT_GREY_COLOR = Colors.grey[200]!; final DARK_GREY_COLOR = Colors.grey[600]!; final TEXT_FIELD_COLOR = Colors.</div><div class="post-footer">
         <a href="/posts/flutter-calendar-scheduler/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/flutter-youtube-streaming/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/youtube-logo.jpeg"
-        data-srcset="/images/youtube-logo.jpeg, /images/youtube-logo.jpeg 1.5x, /images/youtube-logo.jpeg 2x"
-        data-sizes="auto"
-        alt="/images/youtube-logo.jpeg"
-        title="/images/youtube-logo.jpeg" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/flutter-youtube-streaming/">Flutter Youtube Streaming</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-18">2023-12-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div><div class="content">Introduction Flutter 기능 구현 - YouTube 동영상 데이터 가져오기.
-HTTP 요청의 응답을 담을 모델 클래스를 구현하고, UI를 작성한 다음, Dio를 사용해서 직접 API 요청을 진행한다. 마지막으로 요청을 다시 실행하고 리스트를 갱신할 수 있는 새로고침 기능을 추가해준다.
-Dependency Dio youtube_player_flutter flutter_dotenv API: YouTube Data API V3 구현 VideoModel 유튜브 API를 사용하면 굉장히 많은 정보를 가져올 수 있다. 그 중에서 동영상 ID와 제목만 활용해본다. 이 정보를 담을 VideoModel 클래스를 구현해서 데이터를 관리한다.</div><div class="post-footer">
-        <a href="/posts/flutter-youtube-streaming/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/cross-platform/">Cross Platform</a>,&nbsp;<a href="/tags/flutter/">Flutter</a>,&nbsp;<a href="/tags/dart/">Dart</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">

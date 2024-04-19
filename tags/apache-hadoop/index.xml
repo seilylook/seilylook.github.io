@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Big-Data - Tag - Devlog</title>
-        <link>https://seilylook.github.io/tags/big-data/</link>
-        <description>Big-Data - Tag - Devlog</description>
+        <title>Apache Hadoop - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/apache-hadoop/</link>
+        <description>Apache Hadoop - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/big-data/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/apache-hadoop/" rel="self" type="application/rss+xml" /><item>
     <title>HDFS</title>
     <link>https://seilylook.github.io/posts/hdfs/</link>
     <pubDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</pubDate>
@@ -15,18 +15,6 @@
             </div>Introduction HDFS(하둡 분산형 파일 시스템)는 하둡 애플리케이션에서 사용하는 기본 스토리지 시스템입니다. 이 오픈 소스 프레임워크는 노드 사이에 데이터를 고속으로 전송하며 주로 빅데이터를 처리하고 저장해야 하는 기업이 사용하는 경우가 많습니다. HDFS는 빅데이터를 관리하고 빅데이터 분석을 지원하는 수단을 제공하기 때문에 많은 하둡 시스템의 핵심 구성 요소입니다.
 전세계 많은 기업들이 사용하고 있는 HDFS란 정확히 무엇이며 왜 필요할까요? HDFS가 무엇이며 기업에 유용한 이유에 대해 자세히 살펴보겠습니다.
 Info POSIX는 Portable Operating System InterFace for Unix의 약자로 IEEE에서 지정한 운영체제간 호환성을 유지하기 위한 표준이다.]]></description>
-</item>
-<item>
-    <title>Big Data Research Note</title>
-    <link>https://seilylook.github.io/posts/big-data-research-note/</link>
-    <pubDate>Mon, 15 Apr 2024 13:33:18 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/big-data-research-note/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/big-data.webp" referrerpolicy="no-referrer">
-            </div>What is Big Data? Big data is data whose scale, diversity, and complexity require new architecture, techniques, algorithms, and analytics to manage it and extract value and hidden knowledge from it.
-Big data is refers to things one can do at a largee scale that cannot be done at a smaller one, to extract new insights or create new forms of value,
-in ways that change markets, organizations, the relationship between citizens and governments, and more.]]></description>
 </item>
 </channel>
 </rss>
