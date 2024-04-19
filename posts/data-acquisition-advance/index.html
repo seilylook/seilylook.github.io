@@ -18,7 +18,7 @@ Features == Side Effect Crawling 표적이 될 수 있다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/data-acquisition-advance/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-18T13:47:30+09:00" />
-<meta property="article:modified_time" content="2024-04-19T15:18:02+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-04-19T15:31:23+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Data Acquisition Advance"/>
@@ -44,8 +44,8 @@ Features == Side Effect Crawling 표적이 될 수 있다."/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/data-acquisition-advance\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Data Engineering, Crawling, Scraping, Selenium","wordcount":  866 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/data-acquisition-advance\/","datePublished": "2024-04-18T13:47:30+09:00","dateModified": "2024-04-19T15:18:02+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Data Engineering, Crawling, Scraping, Selenium","wordcount":  1071 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/data-acquisition-advance\/","datePublished": "2024-04-18T13:47:30+09:00","dateModified": "2024-04-19T15:31:23+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -92,8 +92,8 @@ Features == Side Effect Crawling 표적이 될 수 있다."/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Data Acquisition Advance</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-18">2024-04-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;866 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-18">2024-04-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1071 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -149,6 +149,11 @@ Features == Side Effect Crawling 표적이 될 수 있다."/>
   <ul>
     <li><a href="#파이썬-코드">파이썬 코드</a></li>
     <li><a href="#결과-확인">결과 확인</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#파이썬-코드-1">파이썬 코드</a></li>
+    <li><a href="#cron-shell-code-작성">cron shell code 작성</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="crawling--recursive-way">Crawling &gt; Recursive way</h1>
@@ -514,12 +519,127 @@ Features == Side Effect Crawling 표적이 될 수 있다."/>
 </span></span><span class="line"><span class="cl">Analyze <span class="nv">html</span><span class="o">=</span> https://docs.python.org/3.5/library/string.html
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h1 id="practice-2">Practice 2</h1>
+<p>Crontab - 실시간 달러 환율 조회</p>
+<h2 id="파이썬-코드-1">파이썬 코드</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">urllib.request</span> <span class="k">as</span> <span class="nn">req</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datetime</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;https://finance.naver.com/marketindex/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">html</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&#34;html.parser&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">price</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s2">&#34;#exchangeList &gt; li:nth-child(1) &gt; a.head.usd &gt; div &gt; span.value&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Date: </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2"> | Price: </span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cron-shell-code-작성">cron shell code 작성</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚦 crontab -e
+</span></span><span class="line"><span class="cl">crontab: installing new crontab
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">* * * * * python3 /Users/seilylook/Development/DataEngineering/Data_Extract_Advanced/market/market.py &gt;&gt; /Users/seilylook/Development/DataEngineering/Data_Extract_Advanced/market/market.log
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">매 시간마다 python3 <span class="o">{</span>특정 디렉토리 접근<span class="o">}</span> market.py 실행 &gt;&gt; 그 결과 값을 <span class="o">{</span>특정 디렉토리 접근<span class="o">}</span> market log에 저장해라
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Crontab이 실행되지 않는 경우</p>
+<h3 id="permission-denied">Permission Denied</h3>
+<p>이 오류는 해당 파일을 실행하기 위한 권한을 아직 부여하지 않았기 때문에 발생.</p>
+<h3 id="해결-방법">해결 방법</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 해결</span>
+</span></span><span class="line"><span class="cl">chmod +x /users/main.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 실행시, 별도 응답은 없습니다 ^^;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="operation-not-permitted">Operation not permitted</h3>
+<p>이 오류는 Mac에서 CRON 실행 프로그램이 Disk에 대한 접근 권한을 가지고 있지 않아 발생한다.</p>
+<h3 id="해결-방법-1">해결 방법</h3>
+<img src="/images/cron-error-1.png" />
+<ul>
+<li>
+<p>시스템 설정</p>
+</li>
+<li>
+<p>개인정보 보호 및 보안</p>
+</li>
+<li>
+<p>전체 디스크 접근 권한</p>
+</li>
+</ul>
+<img src="/images/cron-error-2.png" />
+<ul>
+<li><code>+</code> 을 클릭</li>
+</ul>
+<img src="/images/cron-error-3.png" />
+<ul>
+<li>디렉토리 선택창이 뜨면 <code>/usr/sbin/cron</code>을 입력하면 위와 같이 <code>cron</code>이 나타나고 아래의 링크를 클릭해서 추가해주면 전체 디스크 접근 항목에 추가 된다.</li>
+</ul>
+<img src="/images/cron-error-4.png" />
+<ul>
+<li><code>CRON</code>이 전체 디스크에 접근 권한이 생겼는지 확인 가능.</li>
+</ul>
+</div>
+        </div>
+    </div>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/0fca5bbd2ca9b97584491ecf3d7d82a864c79afb" target="_blank" title="commit by seilylook(seilylook@naver.com) 0fca5bbd2ca9b97584491ecf3d7d82a864c79afb: add: recursive crawling">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>0fca5bb</a></span>
+                <span>Updated on 2024-04-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/66560b8e1fe2e233e479120393776e4fab2bce71" target="_blank" title="commit by seilylook(seilylook@naver.com) 66560b8e1fe2e233e479120393776e4fab2bce71: common: change the func position">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>66560b8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

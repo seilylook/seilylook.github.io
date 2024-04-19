@@ -247,3 +247,84 @@ Download= https://docs.python.org/3.5/library/string.html
 Analyze html= https://docs.python.org/3.5/library/string.html
 ```
 
+# Practice 2
+
+Crontab - 실시간 달러 환율 조회
+
+## 파이썬 코드
+
+```python
+from bs4 import BeautifulSoup
+import urllib.request as req
+import datetime
+
+url = "https://finance.naver.com/marketindex/"
+
+now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+html = req.urlopen(url).read()
+
+soup = BeautifulSoup(html, "html.parser")
+
+price = soup.select_one("#exchangeList > li:nth-child(1) > a.head.usd > div > span.value")
+
+print(f"Date: {now} | Price: {price}")
+```
+
+## cron shell code 작성
+
+```bash
+(venv)  {seilylook} 🚦 crontab -e
+crontab: installing new crontab
+```
+
+```shell
+* * * * * python3 /Users/seilylook/Development/DataEngineering/Data_Extract_Advanced/market/market.py >> /Users/seilylook/Development/DataEngineering/Data_Extract_Advanced/market/market.log
+
+매 시간마다 python3 {특정 디렉토리 접근} market.py 실행 >> 그 결과 값을 {특정 디렉토리 접근} market log에 저장해라
+```
+
+{{<admonition warning>}}
+Crontab이 실행되지 않는 경우
+
+### Permission Denied
+
+이 오류는 해당 파일을 실행하기 위한 권한을 아직 부여하지 않았기 때문에 발생.
+
+### 해결 방법
+
+```shell
+# 해결
+chmod +x /users/main.py
+
+# 실행시, 별도 응답은 없습니다 ^^;
+```
+
+### Operation not permitted
+
+이 오류는 Mac에서 CRON 실행 프로그램이 Disk에 대한 접근 권한을 가지고 있지 않아 발생한다.
+
+### 해결 방법
+
+<img src="/images/cron-error-1.png" />
+
+- 시스템 설정
+
+- 개인정보 보호 및 보안
+
+- 전체 디스크 접근 권한
+
+<img src="/images/cron-error-2.png" />
+
+- `+` 을 클릭
+
+<img src="/images/cron-error-3.png" />
+
+- 디렉토리 선택창이 뜨면 `/usr/sbin/cron`을 입력하면 위와 같이 `cron`이 나타나고 아래의 링크를 클릭해서 추가해주면 전체 디스크 접근 항목에 추가 된다.
+
+<img src="/images/cron-error-4.png" />
+
+- `CRON`이 전체 디스크에 접근 권한이 생겼는지 확인 가능.
+
+{{</admonition>}}
+
