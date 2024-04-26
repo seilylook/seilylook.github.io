@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>S3 - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="S3" />
+<meta property="og:description" content="Introduction 데이터 스토리지는 대량의 데이터를 저장, 관리, 그리고 검색하도록 설계된 스토리지 인프라다.
+어플리케이션 및 서비스가 작동하는 방식으로 빅데이터를 대량의 데이터를 쉽게 액세스하고 사용할 수 있고 처리할 수 있도록 저장 및 정렬을 할 수 있다. 또한 필요에 따라서 크기를 유연하게 확장시킬 수 있다.
+What is S3? Amazon Simple Storage Service(Amazon S3)는 업계 최고의 확장성, 데이터 가용성, 보안 및 성능을 제공하는 객체 스토리지 서비스입니다. 모든 규모와 업종의 고객은 Amazon S3를 사용하여 데이터 레이크, 웹 사이트, 모바일 애플리케이션, 백업 및 복원, 아카이브, 엔터프라이즈 애플리케이션, IoT 디바이스, 빅 데이터 분석 등 다양한 사용 사례에서 원하는 양의 데이터를 저장하고 보호할 수 있습니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/s3/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-25T17:34:25+09:00" />
+<meta property="article:modified_time" content="2024-04-25T17:34:25+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="S3"/>
+<meta name="twitter:description" content="Introduction 데이터 스토리지는 대량의 데이터를 저장, 관리, 그리고 검색하도록 설계된 스토리지 인프라다.
+어플리케이션 및 서비스가 작동하는 방식으로 빅데이터를 대량의 데이터를 쉽게 액세스하고 사용할 수 있고 처리할 수 있도록 저장 및 정렬을 할 수 있다. 또한 필요에 따라서 크기를 유연하게 확장시킬 수 있다.
+What is S3? Amazon Simple Storage Service(Amazon S3)는 업계 최고의 확장성, 데이터 가용성, 보안 및 성능을 제공하는 객체 스토리지 서비스입니다. 모든 규모와 업종의 고객은 Amazon S3를 사용하여 데이터 레이크, 웹 사이트, 모바일 애플리케이션, 백업 및 복원, 아카이브, 엔터프라이즈 애플리케이션, IoT 디바이스, 빅 데이터 분석 등 다양한 사용 사례에서 원하는 양의 데이터를 저장하고 보호할 수 있습니다."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/s3/" /><link rel="prev" href="https://seilylook.github.io/posts/hdfs/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "S3",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/s3\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Data Storage, Big Data","wordcount":  678 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/s3\/","datePublished": "2024-04-25T17:34:25+09:00","dateModified": "2024-04-25T17:34:25+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/s3/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/s3/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">S3</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/computer/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Computer</a>&nbsp;<a href="/categories/technology/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Technology</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-25">2024-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;678 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/s3.png"
+        data-srcset="/images/s3.png, /images/s3.png 1.5x, /images/s3.png 2x"
+        data-sizes="auto"
+        alt="/images/s3.png"
+        title="/images/s3.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#versioning">Versioning</a></li>
+    <li><a href="#server-access-logging">Server Access Logging</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#aws-credential-설정">aws credential 설정</a></li>
+    <li><a href="#boto3">boto3</a></li>
+    <li><a href="#object-download">Object Download</a></li>
+    <li><a href="#object-upload">Object Upload</a></li>
+    <li><a href="#object-acl-public">Object ACL Public</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#use-case-1">Use case 1</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>데이터 스토리지는 대량의 데이터를 저장, 관리, 그리고 검색하도록 설계된 스토리지 인프라다.</p>
+<p>어플리케이션 및 서비스가 작동하는 방식으로 빅데이터를 대량의 데이터를 쉽게 액세스하고 사용할 수 있고 처리할 수 있도록 저장 및 정렬을 할 수 있다. 또한 필요에 따라서 크기를 유연하게 확장시킬 수 있다.</p>
+<h1 id="what-is-s3">What is S3?</h1>
+<p>Amazon Simple Storage Service(Amazon S3)는 업계 최고의 확장성, 데이터 가용성, 보안 및 성능을 제공하는 객체 스토리지 서비스입니다. 모든 규모와 업종의 고객은 Amazon S3를 사용하여 데이터 레이크, 웹 사이트, 모바일 애플리케이션, 백업 및 복원, 아카이브, 엔터프라이즈 애플리케이션, IoT 디바이스, 빅 데이터 분석 등 다양한 사용 사례에서 원하는 양의 데이터를 저장하고 보호할 수 있습니다. Amazon S3는 특정 비즈니스, 조직 및 규정 준수 요구 사항에 맞게 데이터에 대한 액세스를 최적화, 구조화 및 구성할 수 있는 관리 기능을 제공합니다.</p>
+<h1 id="bucket">Bucket?</h1>
+<h2 id="versioning">Versioning</h2>
+<p>Means of keeping multiple variants of an object in the same bucket. For example, you can have <code>two objects with the same key</code>, but <code>different version IDs</code>, such as photo.gif(version 11111) and photo.gif(version 121212)</p>
+<h2 id="server-access-logging">Server Access Logging</h2>
+<p>To track requests for access to your bucket, you can enable access logging. <code>Each access log record</code> provides details about a single access request, such as <code>a requester, bucket name, request action, response status, and error code</code>.</p>
+<h1 id="버킷-생성">버킷 생성</h1>
+<img src="/images/s3-1.png"/>
+<h1 id="파일객체-업로드">파일(객체) 업로드</h1>
+<img src="/images/s3-2.png"/>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">This XML file does not appear to have any style information associated with it. The document tree is shown below.
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Error&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Code&gt;</span>AccessDenied<span class="nt">&lt;/Code&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Message&gt;</span>Access Denied<span class="nt">&lt;/Message&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;RequestId&gt;</span>TNXA9QVCN72YQK6J<span class="nt">&lt;/RequestId&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;HostId&gt;</span>
+</span></span><span class="line"><span class="cl">        4B4Xg8AX0J4PzI3HFImdeusNL4fvOiSFfRp/DN3lTo1p0KNoHiscDbHC7xU0im0xuZlO9tVrFgk=
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/HostId&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Error&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>위의 access denied를 해결하기 위해서는 다음 동작을 취해주어야 한다.</p>
+<h1 id="public-bucket">Public Bucket</h1>
+<p>publicly accessible s3 bucket</p>
+<ul>
+<li>
+<p>Customize ACL(Access Control List)</p>
+</li>
+<li>
+<p>Add Bucket Policy</p>
+</li>
+</ul>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Access Control List</p>
+<p>접근 제어 목록 또는 액세스 제어 목록은 객체나 개체 속성에 적용되어 있는 허가 목록.</p>
+<p>(이 목록은 누가 또는 무엇인 객체 접근 허가를 받는지, 어떤 작업이 객체에 수행되도록 허가를 받을지를 지정한다.)</p>
+</div>
+        </div>
+    </div>
+<img src="/images/s3-4.png"/>
+<img src="/images/s3-3.png"/>
+<h1 id="bucket-policy">Bucket Policy</h1>
+<p><a href="https://awspolicygen.s3.amazonaws.com/policygen.html" target="_blank" rel="noopener noreffer ">Bucket Policy Generator</a></p>
+<img src="/images/s3-5.png"/>
+<img src="/images/s3-6.png"/>
+<img src="/images/s3-7.png"/>
+<img src="/images/s3-8.png"/>
+<img src="/images/s3-9.png"/>
+<img src="/images/s3-10.png"/>
+<img src="/images/s3-11.png"/>
+<img src="/images/s3-12.png"/>
+<img src="/images/s3-13.png"/>
+<img src="/images/s3-14.png"/>
+<h1 id="lifecycle-bucket">Lifecycle Bucket</h1>
+<img src="/images/s3-15.png"/>
+<img src="/images/s3-16.png"/>
+<img src="/images/s3-17.png"/>
+<h1 id="실습">실습</h1>
+<h2 id="aws-credential-설정">aws credential 설정</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim ~/.aws/config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>default<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">region</span> <span class="o">=</span> ap-northest-2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim ~/.aws/credentials
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>default<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">aws_access_key_id</span> <span class="o">=</span> &lt;KEY ID OF DEFAULT ACCOUNT&gt;
+</span></span><span class="line"><span class="cl"><span class="nv">aws_secret_access_key</span> <span class="o">=</span> &lt;SECRET ACCESS KEY OF DEFAULT ACCOUNT&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="boto3">boto3</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip3 install boto3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">profile_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">s3</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">bucket</span> <span class="ow">in</span> <span class="n">s3</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">bucket</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🦄 python3 s3_list.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2024-big-data-course-seilylook
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="object-download">Object Download</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">bucket</span> <span class="o">=</span> <span class="s2">&#34;2024-big-data-course-seilylook&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">folder_name</span> <span class="o">=</span> <span class="s2">&#34;2024/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">path</span> <span class="o">=</span> <span class="s2">&#34;test.jpg&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">obj</span> <span class="o">=</span> <span class="s2">&#34;test.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">profile_name</span><span class="o">=</span><span class="s2">&#34;default&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s3</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">folder_name</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">s3</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">folder_name</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="s2">&#34;./&#34;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🦄 python3 s3_download.py
+</span></span><span class="line"><span class="cl">2024/test.jpg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🦄 ll
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">total <span class="m">88</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--@ <span class="m">1</span> seilylook  staff   347B  <span class="m">4</span> <span class="m">26</span> 14:45 s3_download.py
+</span></span><span class="line"><span class="cl">-rw-r--r--@ <span class="m">1</span> seilylook  staff   144B  <span class="m">4</span> <span class="m">26</span> 14:21 s3_list.py
+</span></span><span class="line"><span class="cl">-rw-r--r--@ <span class="m">1</span> seilylook  staff    33K  <span class="m">4</span> <span class="m">26</span> 14:46 test.jpg
+</span></span><span class="line"><span class="cl">drwxr-xr-x@ <span class="m">6</span> seilylook  staff   192B  <span class="m">4</span> <span class="m">26</span> 14:15 venv
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="object-upload">Object Upload</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">bucket</span> <span class="o">=</span> <span class="s2">&#34;2024-big-data-course-seilylook&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">obj</span> <span class="o">=</span> <span class="s2">&#34;test.jpg&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">local_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;/&#34;</span> <span class="o">+</span> <span class="n">obj</span>
+</span></span><span class="line"><span class="cl"><span class="n">target_file_name</span> <span class="o">=</span> <span class="s2">&#34;new_test_image.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">profile_name</span><span class="o">=</span><span class="s2">&#34;default&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s3</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_file_path</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">target_file_name</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="object-acl-public">Object ACL Public</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">bucket</span> <span class="o">=</span> <span class="s2">&#34;2024-big-data-course-seilylook&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">obj</span> <span class="o">=</span> <span class="s2">&#34;test.jpg&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">local_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;/&#34;</span> <span class="o">+</span> <span class="n">obj</span>
+</span></span><span class="line"><span class="cl"><span class="n">target_file_name</span> <span class="o">=</span> <span class="s2">&#34;new_test_image.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">profile_name</span><span class="o">=</span><span class="s2">&#34;default&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s3</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">s3</span><span class="o">.</span><span class="n">put_object_acl</span><span class="p">(</span><span class="n">ACL</span><span class="o">=</span><span class="s2">&#34;public-read&#34;</span><span class="p">,</span> <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">,</span> <span class="n">Key</span><span class="o">=</span><span class="n">target_file_name</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="lambda-service">Lambda Service</h1>
+<p>AWS Lambda은(는) 서버를 프로비저닝하거나 관리하지 않고도 코드를 실행할 수 있게 해주는 컴퓨팅 서비스입니다.</p>
+<p>Lambda는 고가용성 컴퓨팅 인프라에서 코드를 실행하고 서버와 운영 체제 유지 관리, 용량 프로비저닝 및 자동 조정, 코드 및 보안 패치 배포, 로깅 등 모든 컴퓨팅 리소스 관리를 수행합니다. Lambda를 사용하면 Lambda가 지원하는 언어 런타임 중 하나로 코드를 제공하기만 하면 됩니다.</p>
+<p>Lambda 함수에 코드를 구성합니다. Lambda 서비스는 필요할 때만 함수를 실행하고 자동으로 확장됩니다. 사용한 컴퓨팅 시간만큼만 비용을 지불하고, 코드가 실행되지 않을 때는 요금이 부과되지 않습니다.</p>
+<h2 id="use-case-1">Use case 1</h2>
+<p>AWS Lambda를 활용한 썸네일 생성하기</p>
+<ol>
+<li>
+<p>큰 이미지 업로드</p>
+</li>
+<li>
+<p>AWS s3 파일 업로드</p>
+</li>
+<li>
+<p>AWS lambda 코드 실행</p>
+</li>
+<li>
+<p>압축 및 파일 크기 변경</p>
+</li>
+<li>
+<p>AWS s3에 저장</p>
+</li>
+</ol>
+<img src="/images/lambda1.png" />
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/s3/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/s3/" data-title="S3" data-hashtags="Data Storage,Big Data"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/s3/" data-hashtag="Data Storage"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/s3/" data-title="S3"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/s3/" data-title="S3"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/s3/" data-title="S3" data-image="/images/s3.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-storage/">Data Storage</a>,&nbsp;<a href="/tags/big-data/">Big-Data</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/hdfs/" class="prev" rel="prev" title="HDFS"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HDFS</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

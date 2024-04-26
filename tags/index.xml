@@ -4,20 +4,28 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 25 Apr 2024 17:34:25 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Big-Data</title>
+    <link>https://seilylook.github.io/tags/big-data/</link>
+    <pubDate>Thu, 25 Apr 2024 17:34:25 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/big-data/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Data Storage</title>
+    <link>https://seilylook.github.io/tags/data-storage/</link>
+    <pubDate>Thu, 25 Apr 2024 17:34:25 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-storage/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Apache Hadoop</title>
     <link>https://seilylook.github.io/tags/apache-hadoop/</link>
     <pubDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/apache-hadoop/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Big-Data</title>
-    <link>https://seilylook.github.io/tags/big-data/</link>
-    <pubDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/big-data/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -74,14 +82,6 @@
     <pubDate>Fri, 12 Apr 2024 13:01:33 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/elt/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>PostgreSQL</title>
-    <link>https://seilylook.github.io/tags/postgresql/</link>
-    <pubDate>Fri, 12 Apr 2024 13:01:33 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/postgresql/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

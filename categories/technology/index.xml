@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/categories/technology/</link>
         <description>Technology - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/technology/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 25 Apr 2024 17:34:25 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/technology/" rel="self" type="application/rss+xml" /><item>
+    <title>S3</title>
+    <link>https://seilylook.github.io/posts/s3/</link>
+    <pubDate>Thu, 25 Apr 2024 17:34:25 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/s3/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/s3.png" referrerpolicy="no-referrer">
+            </div>Introduction 데이터 스토리지는 대량의 데이터를 저장, 관리, 그리고 검색하도록 설계된 스토리지 인프라다.
+어플리케이션 및 서비스가 작동하는 방식으로 빅데이터를 대량의 데이터를 쉽게 액세스하고 사용할 수 있고 처리할 수 있도록 저장 및 정렬을 할 수 있다. 또한 필요에 따라서 크기를 유연하게 확장시킬 수 있다.
+What is S3? Amazon Simple Storage Service(Amazon S3)는 업계 최고의 확장성, 데이터 가용성, 보안 및 성능을 제공하는 객체 스토리지 서비스입니다. 모든 규모와 업종의 고객은 Amazon S3를 사용하여 데이터 레이크, 웹 사이트, 모바일 애플리케이션, 백업 및 복원, 아카이브, 엔터프라이즈 애플리케이션, IoT 디바이스, 빅 데이터 분석 등 다양한 사용 사례에서 원하는 양의 데이터를 저장하고 보호할 수 있습니다.]]></description>
+</item>
+<item>
     <title>HDFS</title>
     <link>https://seilylook.github.io/posts/hdfs/</link>
     <pubDate>Sat, 20 Apr 2024 07:46:46 &#43;0900</pubDate>
