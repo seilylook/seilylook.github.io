@@ -3,15 +3,17 @@
 
 # Install Hadoop
 
+강의대로 2.7.6으로 하려했는데, 도저히 에러가 잡히지 않아, 3.3.2로 진행.
+
 ```bash
-# https://hadoop.apache.org/release/2.7.6.html
-# 접속해서 hadoop-2.7.6.tar.gz 다운로드
+# https://hadoop.apache.org/release/3.3.2.html
+# 접속해서 hadoop-3.3.2.tar.gz 다운로드
 
 # 압축 해제
-tar -xvf hadoop-2.7.6.tar.gz
+tar -xvf hadoop-3.3.2.tar.gz
 
 # 링크 연결
-ln -s hadoop-2.7.6 hadoop
+ln -s hadoop-3.3.2 hadoop
 
 # 환경 세팅
 (venv)  {seilylook} 👑 vim hadoop/etc/hadoop/*
@@ -37,8 +39,8 @@ ln -s hadoop-2.7.6 hadoop
 ```bash
 (venv)  {seilylook} 👑 ll
 
-hadoop -> hadoop-2.7.6
-hadoop-2.7.6
+hadoop -> hadoop-3.3.2
+hadoop-3.3.2
 venv
 ```
 
@@ -79,5 +81,184 @@ The key's randomart image is:
 ```bash
  {seilylook} 😎 ssh localhost
 Last login: Sun Apr 28 17:10:23 2024 from ::1
+```
+
+# Hadoop Configuration
+
+## JDK & Hadoop path 지정
+
+```bash
+{seilylook} 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2 cd etc/hadoop
+
+{seilylook} 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop vim hadoop-env.sh
+```
+
+### hadoop-env.sh
+
+파일 가장 아래에 다음과 같이 JAVA_HOME 설정을 해준다.
+
+```shell
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
+```
+
+## core site 설정
+
+```bash
+{seilylook} 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim core-site.xml
+```
+
+### core-site.xml
+
+```xml
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
+</configuration>
+```
+
+## hdfs site 설정
+
+```bash
+{seilylook} 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim hdfs-site.xml
+```
+
+### hdfs-site.xml
+
+```xml
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+
+    <property>
+        <name>dfs.block.size</name>
+        <value>268435456</value>
+    </property>
+</configuration>
+```
+
+이제 로컬에서 `MapReduce`를 실행해 볼 수 있지만,
+
+YARN으로 맵리듀스 및 리소스매니저와 노드매니저 `daemon`을 실행해보기 위해 추가적으로 더 환경 변수를 수정해준다.
+
+## mapred site 설정
+
+```bash
+{seilylook} 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim mapred-site.xml
+```
+
+### mapred-site.xml
+
+```xml
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+  <property>
+    <name>mapreduce.application.classpath</name>
+    <value
+      >$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value
+    >
+  </property>
+</configuration>
+```
+
+## yarn site 설정
+
+```bash
+{seilylook} 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim yarn-site.xml
+```
+
+### yarn-site.xml
+
+```xml
+<configuration>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.env-whitelist</name>
+    <value
+      >JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME</value
+    >
+  </property>
+</configuration>
+```
+
+## Execution, Namemode front
+
+```bash
+{seilylook} 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop cd ../../
+
+{seilylook} 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2 bin/hadoop namenode -format
+```
+
+## Execution
+
+### Hadoop 실행
+
+```bash
+{seilylook} 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2 cd sbin
+
+./start-all.sh
+# 또는 로컬에서 맵리듀스 실행
+./start-dfs.sh
+# 또는 yarn에서 맵리듀스 실행
+./start-yarn.sh
+```
+
+위 명령어를 입력해주면 실행된다.
+
+또한 `MapReduce` 실행을 위해서 HDFS 디렉터리가 필요하므로 만들어둔다.
+
+```bash
+# 경로는 하둡 최상위 경로에서 실행
+# cd /opt/homebrew/Cellar/hadoop/3.3.2
+bin/hdfs dfs -mkdir /user
+bin/hdfs dfs -mkdir /user/<username>
+```
+
+### 실행 확인
+
+```bash
+jps
+```
+
+jps를 터미널에 입력하면, 하둡이 정상 설치 및 실행되고 있음을 보여준다.
+
+```bash
+{seilylook} 🇰 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/sbin jps
+
+52304 DataNode
+52448 SecondaryNameNode
+52198 NameNode
+52554 Jps
+```
+
+그럼 이제 localhost 로 접속해서 확인해보자
+
+Cluster status : http://localhost:8088
+
+HDFS status : http://localhost:9870
+
+Secondary NameNode status : http://localhost:9868
+
+### 실행 종료
+
+```bash
+## 만약 경로가 하둡 최상단 경로가 아니라면 다시 들어가준다.
+## 하지만 해당 경로에서 ./start-all.sh 로 실행 해 줬기 때문에
+## 그냥 아래 ./stop-all.sh만 실행해주면 된다.
+
+./stop-all.sh
+# 또는
+./stop-dfs.sh
+# 또는
+./stop-yarn.sh
 ```
 

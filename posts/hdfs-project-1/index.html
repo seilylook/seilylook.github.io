@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>HDFS Project 1 - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="HDFS Project 1" />
-<meta property="og:description" content="Install Hadoop 1 2 3 4 5 6 7 8 9 10 11 # https://hadoop.apache.org/release/2.7.6.html # 접속해서 hadoop-2.7.6.tar.gz 다운로드 # 압축 해제 tar -xvf hadoop-2.7.6.tar.gz # 링크 연결 ln -s hadoop-2.7.6 hadoop # 환경 세팅 (venv) {seilylook} 👑 vim hadoop/etc/hadoop/* Info 리눅스 명령어 -ln
+<meta property="og:description" content="Install Hadoop 강의대로 2.7.6으로 하려했는데, 도저히 에러가 잡히지 않아, 3.3.2로 진행.
+1 2 3 4 5 6 7 8 9 10 11 # https://hadoop.apache.org/release/3.3.2.html # 접속해서 hadoop-3.3.2.tar.gz 다운로드 # 압축 해제 tar -xvf hadoop-3.3.2.tar.gz # 링크 연결 ln -s hadoop-3.3.2 hadoop # 환경 세팅 (venv) {seilylook} 👑 vim hadoop/etc/hadoop/* Info 리눅스 명령어 -ln
 리눅스에서 ln 명령어를 사용하면 리눅스 파일 시스템에서 링크 파일을 생성할 수 있다.
 심볼릭 링크 단순히 원본 파일을 가리키도록 링크만 걸어둔 것으로 MS의 윈도우 시스템에서 흔히 사용하는 &lsquo;바로가기&rsquo; 같은 것이며, 원본 파일을 가리키고만 있으므로 원본 파일의 크기와는 무관하다." />
 <meta property="og:type" content="article" />
@@ -15,7 +16,8 @@
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="HDFS Project 1"/>
-<meta name="twitter:description" content="Install Hadoop 1 2 3 4 5 6 7 8 9 10 11 # https://hadoop.apache.org/release/2.7.6.html # 접속해서 hadoop-2.7.6.tar.gz 다운로드 # 압축 해제 tar -xvf hadoop-2.7.6.tar.gz # 링크 연결 ln -s hadoop-2.7.6 hadoop # 환경 세팅 (venv) {seilylook} 👑 vim hadoop/etc/hadoop/* Info 리눅스 명령어 -ln
+<meta name="twitter:description" content="Install Hadoop 강의대로 2.7.6으로 하려했는데, 도저히 에러가 잡히지 않아, 3.3.2로 진행.
+1 2 3 4 5 6 7 8 9 10 11 # https://hadoop.apache.org/release/3.3.2.html # 접속해서 hadoop-3.3.2.tar.gz 다운로드 # 압축 해제 tar -xvf hadoop-3.3.2.tar.gz # 링크 연결 ln -s hadoop-3.3.2 hadoop # 환경 세팅 (venv) {seilylook} 👑 vim hadoop/etc/hadoop/* Info 리눅스 명령어 -ln
 리눅스에서 ln 명령어를 사용하면 리눅스 파일 시스템에서 링크 파일을 생성할 수 있다.
 심볼릭 링크 단순히 원본 파일을 가리키도록 링크만 걸어둔 것으로 MS의 윈도우 시스템에서 흔히 사용하는 &lsquo;바로가기&rsquo; 같은 것이며, 원본 파일을 가리키고만 있으므로 원본 파일의 크기와는 무관하다."/>
 <meta name="application-name" content="seilylook">
@@ -30,7 +32,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/hdfs-project-1\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Apache Hadoop, Big Data","wordcount":  320 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Apache Hadoop, Big Data","wordcount":  682 ,
         "url": "https:\/\/seilylook.github.io\/posts\/hdfs-project-1\/","datePublished": "2024-04-28T15:57:39+09:00","dateModified": "2024-04-28T17:11:46+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -78,8 +80,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HDFS Project 1</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/computer/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Computer</a>&nbsp;<a href="/categories/technology/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Technology</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-28">2024-04-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;320 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-28">2024-04-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;682 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -92,8 +94,45 @@
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#jdk--hadoop-path-지정">JDK &amp; Hadoop path 지정</a>
+      <ul>
+        <li><a href="#hadoop-envsh">hadoop-env.sh</a></li>
+      </ul>
+    </li>
+    <li><a href="#core-site-설정">core site 설정</a>
+      <ul>
+        <li><a href="#core-sitexml">core-site.xml</a></li>
+      </ul>
+    </li>
+    <li><a href="#hdfs-site-설정">hdfs site 설정</a>
+      <ul>
+        <li><a href="#hdfs-sitexml">hdfs-site.xml</a></li>
+      </ul>
+    </li>
+    <li><a href="#mapred-site-설정">mapred site 설정</a>
+      <ul>
+        <li><a href="#mapred-sitexml">mapred-site.xml</a></li>
+      </ul>
+    </li>
+    <li><a href="#yarn-site-설정">yarn site 설정</a>
+      <ul>
+        <li><a href="#yarn-sitexml">yarn-site.xml</a></li>
+      </ul>
+    </li>
+    <li><a href="#execution-namemode-front">Execution, Namemode front</a></li>
+    <li><a href="#execution">Execution</a>
+      <ul>
+        <li><a href="#hadoop-실행">Hadoop 실행</a></li>
+        <li><a href="#실행-확인">실행 확인</a></li>
+        <li><a href="#실행-종료">실행 종료</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
             </div><div class="content" id="content"><h1 id="install-hadoop">Install Hadoop</h1>
+<p>강의대로 2.7.6으로 하려했는데, 도저히 에러가 잡히지 않아, 3.3.2로 진행.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -109,14 +148,14 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># https://hadoop.apache.org/release/2.7.6.html</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 접속해서 hadoop-2.7.6.tar.gz 다운로드</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># https://hadoop.apache.org/release/3.3.2.html</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 접속해서 hadoop-3.3.2.tar.gz 다운로드</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 압축 해제</span>
-</span></span><span class="line"><span class="cl">tar -xvf hadoop-2.7.6.tar.gz
+</span></span><span class="line"><span class="cl">tar -xvf hadoop-3.3.2.tar.gz
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 링크 연결</span>
-</span></span><span class="line"><span class="cl">ln -s hadoop-2.7.6 hadoop
+</span></span><span class="line"><span class="cl">ln -s hadoop-3.3.2 hadoop
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 환경 세팅</span>
 </span></span><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 👑 vim hadoop/etc/hadoop/*
@@ -156,8 +195,8 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 👑 ll
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">hadoop -&gt; hadoop-2.7.6
-</span></span><span class="line"><span class="cl">hadoop-2.7.6
+</span></span><span class="line"><span class="cl">hadoop -&gt; hadoop-3.3.2
+</span></span><span class="line"><span class="cl">hadoop-3.3.2
 </span></span><span class="line"><span class="cl">venv
 </span></span></code></pre></td></tr></table>
 </div>
@@ -231,6 +270,286 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 😎 ssh localhost
 </span></span><span class="line"><span class="cl">Last login: Sun Apr <span class="m">28</span> 17:10:23 <span class="m">2024</span> from ::1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="hadoop-configuration">Hadoop Configuration</h1>
+<h2 id="jdk--hadoop-path-지정">JDK &amp; Hadoop path 지정</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2 <span class="nb">cd</span> etc/hadoop
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop vim hadoop-env.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="hadoop-envsh">hadoop-env.sh</h3>
+<p>파일 가장 아래에 다음과 같이 JAVA_HOME 설정을 해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="core-site-설정">core site 설정</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim core-site.xml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="core-sitexml">core-site.xml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;property&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;name&gt;</span>fs.defaultFS<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;value&gt;</span>hdfs://localhost:9000<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="hdfs-site-설정">hdfs site 설정</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim hdfs-site.xml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="hdfs-sitexml">hdfs-site.xml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;name&gt;</span>dfs.replication<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;name&gt;</span>dfs.block.size<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;value&gt;</span>268435456<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이제 로컬에서 <code>MapReduce</code>를 실행해 볼 수 있지만,</p>
+<p>YARN으로 맵리듀스 및 리소스매니저와 노드매니저 <code>daemon</code>을 실행해보기 위해 추가적으로 더 환경 변수를 수정해준다.</p>
+<h2 id="mapred-site-설정">mapred site 설정</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim mapred-site.xml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mapred-sitexml">mapred-site.xml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;property&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;name&gt;</span>mapreduce.framework.name<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;value&gt;</span>yarn<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;property&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;name&gt;</span>mapreduce.application.classpath<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;value</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&gt;</span>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*<span class="nt">&lt;/value
+</span></span></span><span class="line"><span class="cl"><span class="nt">    &gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="yarn-site-설정">yarn site 설정</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡   ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop  vim yarn-site.xml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="yarn-sitexml">yarn-site.xml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;property&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;name&gt;</span>yarn.nodemanager.aux-services<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;value&gt;</span>mapreduce_shuffle<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;property&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;name&gt;</span>yarn.nodemanager.env-whitelist<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;value</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&gt;</span>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME<span class="nt">&lt;/value
+</span></span></span><span class="line"><span class="cl"><span class="nt">    &gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="execution-namemode-front">Execution, Namemode front</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/etc/hadoop <span class="nb">cd</span> ../../
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2 bin/hadoop namenode -format
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="execution">Execution</h2>
+<h3 id="hadoop-실행">Hadoop 실행</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2 <span class="nb">cd</span> sbin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./start-all.sh
+</span></span><span class="line"><span class="cl"><span class="c1"># 또는 로컬에서 맵리듀스 실행</span>
+</span></span><span class="line"><span class="cl">./start-dfs.sh
+</span></span><span class="line"><span class="cl"><span class="c1"># 또는 yarn에서 맵리듀스 실행</span>
+</span></span><span class="line"><span class="cl">./start-yarn.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>위 명령어를 입력해주면 실행된다.</p>
+<p>또한 <code>MapReduce</code> 실행을 위해서 HDFS 디렉터리가 필요하므로 만들어둔다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 경로는 하둡 최상위 경로에서 실행</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># cd /opt/homebrew/Cellar/hadoop/3.3.2</span>
+</span></span><span class="line"><span class="cl">bin/hdfs dfs -mkdir /user
+</span></span><span class="line"><span class="cl">bin/hdfs dfs -mkdir /user/&lt;username&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="실행-확인">실행 확인</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jps
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>jps를 터미널에 입력하면, 하둡이 정상 설치 및 실행되고 있음을 보여준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 🇰 ~/Development/DataEngineering/Data_HDFS/hadoop-3.3.2/sbin jps
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">52304</span> DataNode
+</span></span><span class="line"><span class="cl"><span class="m">52448</span> SecondaryNameNode
+</span></span><span class="line"><span class="cl"><span class="m">52198</span> NameNode
+</span></span><span class="line"><span class="cl"><span class="m">52554</span> Jps
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>그럼 이제 localhost 로 접속해서 확인해보자</p>
+<p>Cluster status : http://localhost:8088</p>
+<p>HDFS status : http://localhost:9870</p>
+<p>Secondary NameNode status : http://localhost:9868</p>
+<h3 id="실행-종료">실행 종료</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 만약 경로가 하둡 최상단 경로가 아니라면 다시 들어가준다.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 하지만 해당 경로에서 ./start-all.sh 로 실행 해 줬기 때문에</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 그냥 아래 ./stop-all.sh만 실행해주면 된다.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./stop-all.sh
+</span></span><span class="line"><span class="cl"><span class="c1"># 또는</span>
+</span></span><span class="line"><span class="cl">./stop-dfs.sh
+</span></span><span class="line"><span class="cl"><span class="c1"># 또는</span>
+</span></span><span class="line"><span class="cl">./stop-yarn.sh
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
