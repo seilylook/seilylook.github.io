@@ -44,3 +44,19 @@ alias setJava8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8); export PATH="
 alias setJava11='export JAVA_HOME=$(/usr/libexec/java_home -v 11); export PATH="$JAVA_HOME/bin:$PATH"'
 ```
 
+## 버전 변경
+
+```bash
+{seilylook} 💡 setJava8
+{seilylook} 💡 java -version
+openjdk version "1.8.0_412"
+OpenJDK Runtime Environment (Temurin)(build 1.8.0_412-b08)
+OpenJDK 64-Bit Server VM (Temurin)(build 25.412-b08, mixed mode)
+
+{seilylook} 💡 setJava11
+{seilylook} 💡 java -version
+openjdk version "11.0.22" 2024-01-16
+OpenJDK Runtime Environment Homebrew (build 11.0.22+0)
+OpenJDK 64-Bit Server VM Homebrew (build 11.0.22+0, mixed mode)
+```
+

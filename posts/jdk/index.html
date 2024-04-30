@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/jdk/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-30T12:28:24+09:00" />
-<meta property="article:modified_time" content="2024-04-30T12:28:24+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-04-30T12:40:04+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="JDK Version Change"/>
@@ -28,8 +28,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/jdk\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Java, JDK, Java Virtual Machine","wordcount":  127 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/jdk\/","datePublished": "2024-04-30T12:28:24+09:00","dateModified": "2024-04-30T12:28:24+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Java, JDK, Java Virtual Machine","wordcount":  189 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/jdk\/","datePublished": "2024-04-30T12:28:24+09:00","dateModified": "2024-04-30T12:40:04+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -76,7 +76,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JDK Version Change</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/language/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Language</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-30">2024-04-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;127 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-30">2024-04-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;189 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -94,6 +94,7 @@
   <ul>
     <li><a href="#temurin-8-설치">temurin 8 설치</a></li>
     <li><a href="#zsh-script-수정">ZSH script 수정</a></li>
+    <li><a href="#버전-변경">버전 변경</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="openjdk-version-여러개-사용하기">openJDK version 여러개 사용하기</h1>
@@ -167,11 +168,41 @@
 </span></span><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">setJava11</span><span class="o">=</span><span class="s1">&#39;export JAVA_HOME=$(/usr/libexec/java_home -v 11); export PATH=&#34;$JAVA_HOME/bin:$PATH&#34;&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="버전-변경">버전 변경</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 setJava8
+</span></span><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 java -version
+</span></span><span class="line"><span class="cl">openjdk version <span class="s2">&#34;1.8.0_412&#34;</span>
+</span></span><span class="line"><span class="cl">OpenJDK Runtime Environment <span class="o">(</span>Temurin<span class="o">)(</span>build 1.8.0_412-b08<span class="o">)</span>
+</span></span><span class="line"><span class="cl">OpenJDK 64-Bit Server VM <span class="o">(</span>Temurin<span class="o">)(</span>build 25.412-b08, mixed mode<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 setJava11
+</span></span><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 💡 java -version
+</span></span><span class="line"><span class="cl">openjdk version <span class="s2">&#34;11.0.22&#34;</span> 2024-01-16
+</span></span><span class="line"><span class="cl">OpenJDK Runtime Environment Homebrew <span class="o">(</span>build 11.0.22+0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">OpenJDK 64-Bit Server VM Homebrew <span class="o">(</span>build 11.0.22+0, mixed mode<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-30</span>
+                <span>Updated on 2024-04-30&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/5b0cbb5f30fa184a3d0d1783d4c274244de3c7a2" target="_blank" title="commit by seilylook(seilylook@naver.com) 5b0cbb5f30fa184a3d0d1783d4c274244de3c7a2: init commit: JDK version selection">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5b0cbb5</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
