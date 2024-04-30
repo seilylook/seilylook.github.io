@@ -4,7 +4,31 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sun, 28 Apr 2024 15:57:39 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Java</title>
+    <link>https://seilylook.github.io/tags/java/</link>
+    <pubDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/java/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Java Virtual Machine</title>
+    <link>https://seilylook.github.io/tags/java-virtual-machine/</link>
+    <pubDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/java-virtual-machine/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>JDK</title>
+    <link>https://seilylook.github.io/tags/jdk/</link>
+    <pubDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/jdk/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Apache Hadoop</title>
     <link>https://seilylook.github.io/tags/apache-hadoop/</link>
     <pubDate>Sun, 28 Apr 2024 15:57:39 &#43;0900</pubDate>
@@ -58,30 +82,6 @@
     <pubDate>Thu, 18 Apr 2024 13:47:30 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/selenium/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Data Pipeline</title>
-    <link>https://seilylook.github.io/tags/data-pipeline/</link>
-    <pubDate>Sat, 13 Apr 2024 15:51:18 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/data-pipeline/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Orchestration</title>
-    <link>https://seilylook.github.io/tags/orchestration/</link>
-    <pubDate>Sat, 13 Apr 2024 15:51:18 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/orchestration/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>ELT</title>
-    <link>https://seilylook.github.io/tags/elt/</link>
-    <pubDate>Fri, 12 Apr 2024 13:01:33 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/elt/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

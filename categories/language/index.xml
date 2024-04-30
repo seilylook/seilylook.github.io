@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/categories/language/</link>
         <description>Language - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/language/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/language/" rel="self" type="application/rss+xml" /><item>
+    <title>JDK Version Change</title>
+    <link>https://seilylook.github.io/posts/jdk/</link>
+    <pubDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/jdk/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/java.png" referrerpolicy="no-referrer">
+            </div>openJDK version 여러개 사용하기 Tip 2024년 4월 기준으로 adoptopenjdk의 JDK 8 버전은 deprecated 되었다. 이를 해결하기 위해 temurin을 사용해 JDK 8 버전을 설치해야 한다. temurin 8 설치 1 brew install --cask temurin@8 설치하고나서 확인하면 다음과 같이 2개 버전의 자바를 djk를 볼 수 있다.
+1 2 3 4 5 6 {seilylook} 💡 /usr/libexec/java_home -V Matching Java Virtual Machines (2): 11.0.22 (arm64) &#34;Homebrew&#34; - &#34;OpenJDK 11.0.22&#34; /opt/homebrew/Cellar/openjdk@11/11.0.22/libexec/openjdk.jdk/Contents/Home 1.8.0_412 (x86_64) &#34;Eclipse Temurin&#34; - &#34;Eclipse Temurin 8&#34; /Library/Java/JavaVirtualMachines/temurin-8.]]></description>
+</item>
+<item>
     <title>Solidity</title>
     <link>https://seilylook.github.io/posts/solidity/</link>
     <pubDate>Thu, 19 Oct 2023 20:34:45 &#43;0900</pubDate>
