@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/tags/spark/</link>
         <description>Spark - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/spark/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 01 May 2024 12:44:15 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/spark/" rel="self" type="application/rss+xml" /><item>
+    <title>Databricks Certified Associate Developer for Apache Spark</title>
+    <link>https://seilylook.github.io/posts/databricks-certified-associate-developer-for-apache-spark/</link>
+    <pubDate>Wed, 01 May 2024 12:44:15 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/databricks-certified-associate-developer-for-apache-spark/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/spark.png" referrerpolicy="no-referrer">
+            </div>Architecture Spark는 여러 모듈로 구성되어 있습니다. 크게 두 부분으로 나누어 보면, 컴퓨터 Cluster의 리소스를 관리하는 Cluster Manager와 그 위에서 동작하는 사용자 프로그램인 Spark Application으로 구분됩니다.
+Spark Cluster Manager로는 Spark에 built-in된 기본 모듈 Spark Standalone과 Hadoop에서 사용되는 Yarn가 있습니다. 최근의 Spark 2.3부터는 Container Orchestration 도구로 유명한 Kubernetes도 Spark의 Cluster Manager로 사용할 수 있게 되었습니다.
+Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드에는 Spark Master 프로세스가 실행되고, 나머지 노드에는 Spark Worker 프로세스가 실행되죠.]]></description>
+</item>
+<item>
     <title>Kafka Spark</title>
     <link>https://seilylook.github.io/posts/kafka-spark/</link>
     <pubDate>Thu, 11 Apr 2024 15:58:05 &#43;0900</pubDate>
