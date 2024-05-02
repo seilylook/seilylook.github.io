@@ -338,3 +338,7 @@ Spark internally records metadata to indicate that this operation is requested. 
 
 - Actions mean `performing` the functions.
 
+# DataFrame
+
+DataFrame is a programming abstraction in the Spark SQL module. DataFrames resemble relational database tables or excel spreadsheets with headers: the data resides in rows and columns of different datatypes.
+

@@ -30,7 +30,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/databricks-certified-associate-developer-for-apache-spark\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Data Engineering","wordcount":  888 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Data Engineering","wordcount":  934 ,
         "url": "https:\/\/seilylook.github.io\/posts\/databricks-certified-associate-developer-for-apache-spark\/","datePublished": "2024-05-01T12:44:15+09:00","dateModified": "2024-05-01T14:57:01+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -78,7 +78,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Databricks Certified Associate Developer for Apache Spark</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-01">2024-05-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;888 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-01">2024-05-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;934 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -95,6 +95,10 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#quiz">Quiz</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#spark-env-setting">Spark Env Setting</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="architecture">Architecture</h1>
@@ -191,10 +195,36 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </ul>
 </li>
 <li>
-<p>작업이 끝나면 Executor가 종료되고 클러스터 매니저가 할당한 리소르를 회수한다.</p>
+<p>작업이 끝나면 Executor가 종료되고 클러스터 매니저가 할당한 리소스를 회수한다.</p>
 </li>
 </ol>
-</div><div class="post-footer" id="post-footer">
+<h1 id="실습">실습</h1>
+<h2 id="spark-env-setting">Spark Env Setting</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 🚀 ~/Development/DataEngineering/Spark_RDD python3 -m virtualenv venv
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">{</span>seilylook<span class="o">}</span> 🚀 ~/Development/DataEngineering/Spark_RDD <span class="nb">source</span> venv/bin/activate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 ~/Development/DataEngineering/Spark_RDD pip3 install jupyter
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 ~/Development/DataEngineering/Spark_RDD pip3 install findspark
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🚀 ~/Development/DataEngineering/Spark_RDD pip3 install ipykernel
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

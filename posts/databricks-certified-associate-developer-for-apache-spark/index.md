@@ -111,5 +111,21 @@ SparkContext를 통해 Application에서 요구하는 리소스를 요청하면,
 
    - 작업 진행 도중 워커 노드에 문제가 생기면 Task는 다른 Executor에 전달되고 다시 실행된다.
 
-6. 작업이 끝나면 Executor가 종료되고 클러스터 매니저가 할당한 리소르를 회수한다.
+6. 작업이 끝나면 Executor가 종료되고 클러스터 매니저가 할당한 리소스를 회수한다.
+
+# 실습
+
+## Spark Env Setting
+
+```bash
+{seilylook} 🚀 ~/Development/DataEngineering/Spark_RDD python3 -m virtualenv venv
+
+{seilylook} 🚀 ~/Development/DataEngineering/Spark_RDD source venv/bin/activate
+
+(venv)  {seilylook} 🚀 ~/Development/DataEngineering/Spark_RDD pip3 install jupyter
+
+(venv)  {seilylook} 🚀 ~/Development/DataEngineering/Spark_RDD pip3 install findspark
+
+(venv)  {seilylook} 🚀 ~/Development/DataEngineering/Spark_RDD pip3 install ipykernel
+```
 
