@@ -11,7 +11,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/databricks-certified-associate-developer-for-apache-spark/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-01T12:44:15+09:00" />
-<meta property="article:modified_time" content="2024-05-02T16:23:27+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-04T12:37:18+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Databricks Certified Associate Developer for Apache Spark"/>
@@ -30,8 +30,8 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/databricks-certified-associate-developer-for-apache-spark\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Data Engineering","wordcount":  1708 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/databricks-certified-associate-developer-for-apache-spark\/","datePublished": "2024-05-01T12:44:15+09:00","dateModified": "2024-05-02T16:23:27+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Data Engineering","wordcount":  1749 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/databricks-certified-associate-developer-for-apache-spark\/","datePublished": "2024-05-01T12:44:15+09:00","dateModified": "2024-05-04T12:37:18+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -78,7 +78,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Databricks Certified Associate Developer for Apache Spark</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-01">2024-05-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1708 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-01">2024-05-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1749 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -111,7 +111,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
           <ul>
             <li><a href="#json">JSON</a></li>
             <li><a href="#parquet-files">Parquet files</a></li>
-            <li><a href="#parquet-files-1">Parquet files</a></li>
+            <li><a href="#text-files">Text files</a></li>
           </ul>
         </li>
       </ul>
@@ -296,7 +296,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span></span><span class="line"><span class="cl"><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span> \
 </span></span><span class="line"><span class="cl">         <span class="o">.</span><span class="n">builder</span> \
 </span></span><span class="line"><span class="cl">         <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&#34;Python Spark SQL basic example&#34;</span><span class="p">)</span> \
-</span></span><span class="line"><span class="cl">         <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&#34;spark.some.config.option&#34;</span><span class="p">,</span> <span class="s2">&#34;save-value&#34;</span><span class="p">)</span> \
+</span></span><span class="line"><span class="cl">         <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&#34;spark.some.config.option&#34;</span><span class="p">,</span> <span class="s2">&#34;some-value&#34;</span><span class="p">)</span> \
 </span></span><span class="line"><span class="cl">         <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -312,38 +312,40 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="o">*</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">sc</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span>
 </span></span><span class="line"><span class="cl"><span class="n">lines</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s2">&#34;people.txt&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="n">people</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">Row</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">age</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">parts</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">people</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">Row</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">age</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
 </span></span><span class="line"><span class="cl"><span class="n">peopledf</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="specify-schema">Specify Schema</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">people</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">Row</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">age</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())))</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">people</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">Row</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                                 <span class="n">age</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())))</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">schemaString</span> <span class="o">=</span> <span class="s2">&#34;name age&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">StructField</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">schemaString</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl"><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">StructField</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> <span class="k">for</span>
+</span></span><span class="line"><span class="cl">            <span class="n">field_name</span> <span class="ow">in</span> <span class="n">schemaString</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -428,7 +430,20 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df3</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&#34;users.parquet&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="parquet-files-1">Parquet files</h4>
+</div><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Parquet 파일 형식이란?</p>
+<p>파케이(parquet)이란 하둡에서 칼럼방식으로 저장하는 저장 포맷을 말합니다. 파케이는 프로그래밍 언어, 데이터 모델 혹은 데이터 처리 엔진과 독립적으로 엔진과 하둡 생태계에 속한 프로젝트에서 칼럼 방식으로 데이터를 효율적으로 저장하여 처리 성능을 비약적으로 향상시킬 수 있습니다.</p>
+<p>열(Column)기반 압축을 하고있는데 이는 칼럼의 데이터가 연속된 구조로 저장되어 있다.</p>
+<img src="/image/parquet-format.png" />
+<p>열을 기반으로 데이터를 처리하면 행 기반으로 압축했을때에 비해 데이터의 압축률이 더 높고, 필요한 열의 데이터만 읽어서 처리하는 것이 가능하기 때문에 데이터 처리에 들어가는 지원을 절약할 수 있습니다.</p>
+</div>
+        </div>
+    </div>
+<h4 id="text-files">Text files</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -490,7 +505,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Show all entries in firstName column</span>
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="s2">&#34;lastName&#34;</span><span class="p">)</span> \
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="c1"># Show all entries in firstName, age and type</span>
 </span></span><span class="line"><span class="cl">            <span class="s2">&#34;age&#34;</span><span class="p">,</span>
@@ -502,7 +517,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&#34;firstName&#34;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&#34;age&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># Show all entries in firstName and age,</span>
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>                                <span class="c1"># add 1 to entries of age</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>                                <span class="c1"># add 1 to entries of age</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&#34;age&#34;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Show all entries where age &gt; 24</span>
 </span></span></code></pre></td></tr></table>
@@ -524,8 +539,8 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> \
 </span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">firstName</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="s2">&#34;Jane&#34;</span><span class="p">,</span> <span class="s2">&#34;Boris&#34;</span><span class="p">)]</span> <span class="c1"># Show firstName if in the given options</span>
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">firstName</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="s2">&#34;Jane&#34;</span><span class="p">,</span><span class="s2">&#34;Boris&#34;</span><span class="p">)]</span> <span class="c1">#Show firstName if in the given options</span>
+</span></span><span class="line"><span class="cl">               <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="like">Like</h3>
@@ -536,9 +551,9 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="c1"># Show firstName, and lastName is TRUE if lastName is like Smith</span>
-</span></span><span class="line"><span class="cl">         <span class="n">df</span><span class="o">.</span><span class="n">lastName</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s2">&#34;Smith&#34;</span><span class="p">))</span> \
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="c1">#Show firstName, and lastName is TRUE if lastName is like Smith</span>
+</span></span><span class="line"><span class="cl">              <span class="n">df</span><span class="o">.</span><span class="n">lastName</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s2">&#34;Smith&#34;</span><span class="p">))</span> \
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="startswith---endswith">Startswith - Endswith</h3>
@@ -553,13 +568,13 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="c1"># Show firstName, and TRUE if lastName starts with Sm</span>
-</span></span><span class="line"><span class="cl">         <span class="n">df</span><span class="o">.</span><span class="n">lastName</span> \
-</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;Sm&#34;</span><span class="p">))</span> \
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="c1">#Show firstName, and TRUE if lastName starts with Sm</span>
+</span></span><span class="line"><span class="cl">              <span class="n">df</span><span class="o">.</span><span class="n">lastName</span> \
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;Sm&#34;</span><span class="p">))</span> \
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lastName</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;th&#34;</span><span class="p">))</span> <span class="c1"># Show last names ending in th</span>
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lastName</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;th&#34;</span><span class="p">))</span>\ <span class="c1">#Show last names ending in th</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="substring">SubString</h3>
@@ -570,9 +585,9 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">firstName</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> \ <span class="c1"># Return substrings of firstName</span>
-</span></span><span class="line"><span class="cl">                        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">))</span> \
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">firstName</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> \ <span class="c1">#Return substrings of firstName</span>
+</span></span><span class="line"><span class="cl">                          <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">))</span> \
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="between">Between</h3>
@@ -582,8 +597,8 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span> \ <span class="c1"># Show age: values are TRUE if between 22 and 24</span>
-</span></span><span class="line"><span class="cl">   <span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span> \ <span class="c1">#Show age: values are TRUE if between 22 and 24</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="add-update--remove-columns">Add, Update &amp; Remove Columns</h2>
@@ -598,7 +613,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">city</span><span class="p">)</span> \
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">city</span><span class="p">)</span> \
 </span></span><span class="line"><span class="cl">       <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;postalCode&#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">postalCode</span><span class="p">)</span> \
 </span></span><span class="line"><span class="cl">       <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">state</span><span class="p">)</span> \
 </span></span><span class="line"><span class="cl">       <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;streetAddress&#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">streetAddress</span><span class="p">)</span> \
@@ -638,11 +653,11 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Replace null values</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1">#Replace null values</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Return new df deleting rows with null values</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1">#Return new df omitting rows with null values</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">na</span> \ <span class="c1"># Return new df replacing one value with anothter</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">na</span> \ <span class="c1">#Return new df replacing one value with another</span>
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> \
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
@@ -655,7 +670,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&#34;age&#34;</span><span class="p">)</span> \ <span class="c1"># Group by age, count the members in the groups</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&#34;age&#34;</span><span class="p">)</span>\ <span class="c1">#Group by age, count the members in the groups</span>
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">count</span><span class="p">()</span> \
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
@@ -675,7 +690,7 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">&#34;age&#34;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">orderBy</span><span class="p">([</span><span class="s2">&#34;age&#34;</span><span class="p">,</span> <span class="s2">&#34;city&#34;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> \
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">orderBy</span><span class="p">([</span><span class="s2">&#34;age&#34;</span><span class="p">,</span><span class="s2">&#34;city&#34;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>\
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -689,9 +704,9 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> \ <span class="c1"># df with 10 partitions</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> \ <span class="c1">#df with 10 partitions</span>
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">rdd</span> \
-</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">getNUmPartitions</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span> <span class="c1">#df with 1 partition</span>
 </span></span></code></pre></td></tr></table>
@@ -744,16 +759,16 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span> <span class="c1"># Return df column names and data types</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Display the content of df</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># Return first n rows</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="c1"># Return first row</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Return the fist n rows &gt;&gt;&gt; df.schema Return the schema of df</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Computer summary statistics &gt;&gt;&gt; df.columns Return the columns of df</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1"># Count the number of orws in df</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1"># Count the number of distinct row in df</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span> <span class="c1"># Print the schema of df</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span> <span class="c1"># Print the (logical and physical) plans</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span> <span class="c1">#Return df column names and data types</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1">#Display the content of df</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1">#Return first n rows</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="c1">#Return first row</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#Return the first n rows &gt;&gt;&gt; df.schema Return the schema of df</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1">#Compute summary statistics &gt;&gt;&gt; df.columns Return the columns of df</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1">#Count the number of rows in df</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1">#Count the number of distinct rows in df</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span> <span class="c1">#Print the schema of df</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span> <span class="c1">#Print the (logical and physical) plans</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="output">Output</h2>
@@ -767,11 +782,11 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">rdd1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rdd</span> <span class="c1"># Convert df into an RDD</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">rdd1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rdd</span> <span class="c1">#Convert df into an RDD</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">toJSON</span><span class="p">()</span><span class="o">.</span><span class="n">rist</span><span class="p">()</span> <span class="c1"># Conver df into a RDD of string</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">toJSON</span><span class="p">()</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="c1">#Convert df into a RDD of string</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span> <span class="c1"># Return the contents of df as Pandas DataFrame</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span> <span class="c1">#Return the contents of df as Pandas DataFrame</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="write--save-to-files">Write &amp; Save to Files</h3>
@@ -786,13 +801,13 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;fistName&#34;</span><span class="p">,</span> <span class="s2">&#34;city&#34;</span><span class="p">)</span> \
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="s2">&#34;city&#34;</span><span class="p">)</span>\
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">write</span> \
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&#34;nameAndCity.parquet&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstName&#34;</span><span class="p">,</span> <span class="s2">&#34;age&#34;</span><span class="p">)</span> \
 </span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">write</span> \
-</span></span><span class="line"><span class="cl">  <span class="n">save</span><span class="p">(</span><span class="s2">&#34;nameAndAges.json&#34;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&#34;json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&#34;namesAndAges.json&#34;</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s2">&#34;json&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="stopping-sparksession">Stopping SparkSession</h2>
@@ -808,8 +823,8 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-02&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/2a46af82a1bbf080fac909aba222d45b4058b223" target="_blank" title="commit by seilylook(seilylook@naver.com) 2a46af82a1bbf080fac909aba222d45b4058b223: add: DataFrame in Spark &amp; setting Spark">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>2a46af8</a></span>
+                <span>Updated on 2024-05-04&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/78cab90e9a329f0f21cf25699587bf2ada04519b" target="_blank" title="commit by seilylook(seilylook@naver.com) 78cab90e9a329f0f21cf25699587bf2ada04519b: add: DataFrame APIs">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>78cab90</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

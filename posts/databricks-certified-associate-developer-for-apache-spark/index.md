@@ -139,7 +139,7 @@ from pyspark.sql import SparkSession
 spark = SparkSession \
          .builder \
          .appName("Python Spark SQL basic example") \
-         .config("spark.some.config.option", "save-value") \
+         .config("spark.some.config.option", "some-value") \
          .getOrCreate()
 ```
 
@@ -154,20 +154,21 @@ from pyspark.sql.types import *
 
 sc = spark.sparkContext
 lines = sc.textFile("people.txt")
-
-parts = line.map(lambda l: l.split(","))
-people = parts.map(lambda p: Row(name=p[0], age=int(p[1])))
-
+parts = lines.map(lambda l: l.split(","))
+people = parts.map(lambda p: Row(name=p[0],age=int(p[1])))
 peopledf = spark.createDataFrame(people)
 ```
 
 #### Specify Schema
 
 ```python
-people = parts.map(lambda p: Row(name=p[0], age=int(p[1].strip())))
+people = parts.map(lambda p: Row(name=p[0],
+                                 age=int(p[1].strip())))
+
 schemaString = "name age"
 
-fields = [StructField(field_name, StringType(), True) for field_name in schemaString.split()]
+fields = [StructField(field_name, StringType(), True) for
+            field_name in schemaString.split()]
 
 schema = StructType(fields)
 
@@ -204,7 +205,19 @@ df2 = spark.read.load("people.json", format="json")
 df3 = spark.read.load("users.parquet")
 ```
 
-#### Parquet files
+{{<admonition info>}}
+Parquet 파일 형식이란?
+
+파케이(parquet)이란 하둡에서 칼럼방식으로 저장하는 저장 포맷을 말합니다. 파케이는 프로그래밍 언어, 데이터 모델 혹은 데이터 처리 엔진과 독립적으로 엔진과 하둡 생태계에 속한 프로젝트에서 칼럼 방식으로 데이터를 효율적으로 저장하여 처리 성능을 비약적으로 향상시킬 수 있습니다.
+
+열(Column)기반 압축을 하고있는데 이는 칼럼의 데이터가 연속된 구조로 저장되어 있다.
+
+<img src="/image/parquet-format.png" />
+
+열을 기반으로 데이터를 처리하면 행 기반으로 압축했을때에 비해 데이터의 압축률이 더 높고, 필요한 열의 데이터만 읽어서 처리하는 것이 가능하기 때문에 데이터 처리에 들어가는 지원을 절약할 수 있습니다.
+{{</admonition>}}
+
+#### Text files
 
 ```python
 df3 = spark.read.text("people.txt")
@@ -234,7 +247,7 @@ from pyspark.sql import functions as F
 ```python
 df.select("firstName").show() # Show all entries in firstName column
 df.select("firstName", "lastName") \
-   .show()
+  .show()
 
 df.select("firstName", # Show all entries in firstName, age and type
             "age",
@@ -246,7 +259,7 @@ df.select("firstName", # Show all entries in firstName, age and type
    .show()
 
 df.select(df["firstName"], df["age"] + 1) # Show all entries in firstName and age,
-   .show()                                # add 1 to entries of age
+  .show()                                # add 1 to entries of age
 
 df.select(df["age"] > 24).show() # Show all entries where age > 24
 ```
@@ -259,43 +272,44 @@ df.select("firstName", # Show firstName and 0 or 1 depending on age > 30
             .otherwise(0)) \
    .show()
 
-df.[df.firstName.isin("Jane", "Boris")] # Show firstName if in the given options
-   .collect()
+df[df.firstName.isin("Jane","Boris")] #Show firstName if in the given options
+               .collect()
 ```
 
 ### Like
 
 ```python
-df.select("firstName", # Show firstName, and lastName is TRUE if lastName is like Smith
-         df.lastName.like("Smith")) \
-   .show()
+df.select("firstName", #Show firstName, and lastName is TRUE if lastName is like Smith
+              df.lastName.like("Smith")) \
+  .show()
+
 ```
 
 ### Startswith - Endswith
 
 ```python
-df.select("firstName", # Show firstName, and TRUE if lastName starts with Sm
-         df.lastName \
-            .startswith("Sm")) \
-   .show()
+df.select("firstName", #Show firstName, and TRUE if lastName starts with Sm
+              df.lastName \
+                .startswith("Sm")) \
+  .show()
 
-df.select(df.lastName.endswith("th")) # Show last names ending in th
-   .show()
+df.select(df.lastName.endswith("th"))\ #Show last names ending in th
+  .show()
 ```
 
 ### SubString
 
 ```python
-df.select(df.firstName.substr(1, 3) \ # Return substrings of firstName
-                        .alias("name")) \
-   .collect()
+df.select(df.firstName.substr(1, 3) \ #Return substrings of firstName
+                          .alias("name")) \
+  .collect()
 ```
 
 ### Between
 
 ```python
-df.select(df.age.between(22, 24)) \ # Show age: values are TRUE if between 22 and 24
-   .show()
+df.select(df.age.between(22, 24)) \ #Show age: values are TRUE if between 22 and 24
+  .show()
 ```
 
 ## Add, Update & Remove Columns
@@ -303,7 +317,7 @@ df.select(df.age.between(22, 24)) \ # Show age: values are TRUE if between 22 an
 ### Adding Columns
 
 ```python
-df = df.withColumn('city', df.address.city) \
+df = df.withColumn('city',df.address.city) \
        .withColumn('postalCode',df.address.postalCode) \
        .withColumn('state',df.address.state) \
        .withColumn('streetAddress',df.address.streetAddress) \
@@ -327,11 +341,11 @@ df = df.drop(df.address).drop(df.phoneNumber)
 ## Missing & Replacing Values
 
 ```python
-df.na.fill(50).show() # Replace null values
+df.na.fill(50).show() #Replace null values
 
-df.na.drop().show() # Return new df deleting rows with null values
+df.na.drop().show() #Return new df omitting rows with null values
 
-df.na \ # Return new df replacing one value with anothter
+df.na \ #Return new df replacing one value with another
   .replace(10, 20) \
   .show()
 ```
@@ -339,7 +353,7 @@ df.na \ # Return new df replacing one value with anothter
 ## GroupBy
 
 ```python
-df.groupBy("age") \ # Group by age, count the members in the groups
+df.groupBy("age")\ #Group by age, count the members in the groups
   .count() \
   .show()
 ```
@@ -351,16 +365,16 @@ peopledf.sort(peopledf.age.desc()).collect()
 
 df.sort("age", ascending=False).collect()
 
-df.orderBy(["age", "city"], ascending=[0, 1]) \
+df.orderBy(["age","city"],ascending=[0,1])\
   .collect()
 ```
 
 ## Repartitioning
 
 ```python
-df.repartition(10) \ # df with 10 partitions
+df.repartition(10) \ #df with 10 partitions
   .rdd \
-  .getNUmPartitions()
+  .getNumPartitions()
 
 df.coalesce(1).rdd.getNumPartitions() #df with 1 partition
 ```
@@ -389,16 +403,16 @@ peopledf2 = spark.sql("SELECT * FROM global_temp.people")\
 ## Inspect Data
 
 ```python
-df.dtypes # Return df column names and data types
-df.show() # Display the content of df
-df.head() # Return first n rows
-df.first() # Return first row
-df.take(2) # Return the fist n rows >>> df.schema Return the schema of df
-df.describe().show() # Computer summary statistics >>> df.columns Return the columns of df
-df.count() # Count the number of orws in df
-df.distinct().count() # Count the number of distinct row in df
-df.printSchema() # Print the schema of df
-df.explain() # Print the (logical and physical) plans
+df.dtypes #Return df column names and data types
+df.show() #Display the content of df
+df.head() #Return first n rows
+df.first() #Return first row
+df.take(2) #Return the first n rows >>> df.schema Return the schema of df
+df.describe().show() #Compute summary statistics >>> df.columns Return the columns of df
+df.count() #Count the number of rows in df
+df.distinct().count() #Count the number of distinct rows in df
+df.printSchema() #Print the schema of df
+df.explain() #Print the (logical and physical) plans
 ```
 
 ## Output
@@ -406,23 +420,24 @@ df.explain() # Print the (logical and physical) plans
 ### Data Structures
 
 ```python
-rdd1 = df.rdd # Convert df into an RDD
+rdd1 = df.rdd #Convert df into an RDD
 
-df.toJSON().rist() # Conver df into a RDD of string
+df.toJSON().first() #Convert df into a RDD of string
 
-df.toPandas() # Return the contents of df as Pandas DataFrame
+df.toPandas() #Return the contents of df as Pandas DataFrame
+
 ```
 
 ### Write & Save to Files
 
 ```python
-df.select("fistName", "city") \
+df.select("firstName", "city")\
   .write \
   .save("nameAndCity.parquet")
 
 df.select("firstName", "age") \
   .write \
-  save("nameAndAges.json", format="json")
+  .save("namesAndAges.json",format="json")
 ```
 
 ## Stopping SparkSession
