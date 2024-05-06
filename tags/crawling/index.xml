@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/data-acquisition-advance/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/project-image.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/project.jpeg" referrerpolicy="no-referrer">
             </div>Crawling &gt; Recursive way Recursive Way Crawling analyze a html file
 extract links in the html
 downloads the links if they are a file
@@ -30,7 +30,7 @@ Features == Side Effect Crawling 표적이 될 수 있다.]]></description>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/data-acquisition-begin/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/project-image.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/project.jpeg" referrerpolicy="no-referrer">
             </div>URL Format Ex)
 https://ce.snu.ac.kr?key1=v1&key2=v2 Shebang? 스크립트 언어를 표현한다.
 #!/bin/sh

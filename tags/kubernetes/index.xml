@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/kubernetes/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/kubernetes/kubernetes.png" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/kubernetes-logo.png" referrerpolicy="no-referrer">
             </div>What is Kubernetes or K8s Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.
 To understand Kubernetes, we must first understand two things - Container and Orchestration.
 Containers Why do you need containers? In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible.]]></description>

@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/solidity/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/solidity-logo-featured-image.png" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/solidity-logo.png" referrerpolicy="no-referrer">
             </div>Introduction Solidity 언어 학습 기록.
 Chapter 1 1.1 Contract Solidity 언어는 Contract 안에 쌓여 있다. Contract는 Ethereum 애플리케이션의 기본적인 구성 요소로, 모든 변수와 함수는 어느 한 Contract 에 속하게 되어 있다.
 즉 모든 프로젝트의 시작점이다.
@@ -25,7 +25,7 @@ Info npm을 사용한 프로젝트를 개발할 때마다 version 관리 때문�
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/krypto/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/ethereum-featured-image.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/ethereum.jpeg" referrerpolicy="no-referrer">
             </div>Introduction React와 Solidity를 사용해 Ethereum 거래 서비스 구현.
 Tech stack Front-end
 React Tailwindcss ethers (version 5) vite Smart Contract

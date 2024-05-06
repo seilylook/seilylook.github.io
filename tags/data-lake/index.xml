@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/datalake/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/data-lake-featured-image.png" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/data-lake.png" referrerpolicy="no-referrer">
             </div>데이터 레이크란 무엇인가요? 데이터 레이크는 모든 규모의 정형 및 비정형 데이터를 저장할 수 있는 중앙 집중식 리포지토리입니다. 먼저 데이터를 구조화하지 않고도 데이터를 있는 그대로 저장할 수 있고 대시보드 및 시각화에서 빅 데이터 처리, 실시간 분석, 기계 학습에 이르기까지 다양한 유형의 분석을 실행하여 더 나은 의사 결정을 내릴 수 있도록 안내합니다.
 데이터 레이크와 분석 솔루션의 필수 요소는 무엇입니까? 조직은 데이터 레이크와 분석 플랫폼을 구축할 때 다음과 같은 여러 주요 기능을 고려해야 합니다.]]></description>
 </item>

@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/devlog-setting/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/hugo-logo-featured-image.png" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/hugo-logo.png" referrerpolicy="no-referrer">
             </div>Hogo: The worlds&rsquo;s fastest framework for building static website.
 Hugo https://gohugo.io/
 hugo 설치 1 2 3 4 5 # Install brew ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34; # download hugo brew install hugo 프로젝트 생성 1 2 3 4 5 6 7 # 프로젝트 생성 디렉터리 접근 cd development hugo new site &lt;원하는 파일 이름&gt; # 나의 경우 hugo new site devlog 주의 hugo version upgrade인지 대부분의 사이트에서 말하는 것과 다르게 사이트를 hugo new site를 통해 프로젝트를 생성하면 config.]]></description>

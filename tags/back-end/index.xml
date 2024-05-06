@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/blockchain/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/blockchain.jpg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/blockchain.jpg" referrerpolicy="no-referrer">
             </div>Introduction Blockchain 개발의 영역은 크게 3가지 나뉜다.
 서비스 개발자
 1.1 프론트엔드 개발자: 프론트엔드 개발자는 React와 같은 웹 기반 개발 스택을 기본적으로 잘 다룰 줄 알아야하며, 사용하고자 하는 체인에 맞는 라이브러리를 숙달해야 한다. 이를 통해 MetaMask, Kaikas 등과 같은 지갑 시스템과 연동하거나, 서버 또는 스마트 컨트랙트에서 처리되는 트랜잭션 데이터를 화면에 표현해준다.
@@ -24,7 +24,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/authentication-svelte-rust/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/user-auth-featured-image.jpg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/user-auth.jpg" referrerpolicy="no-referrer">
             </div>Introduction Svelte와 Rust를 사용해서 사용자 인증 시스템을 구현한 프로젝트.
 Tech stack Front-end
 Sveltekit
@@ -49,7 +49,7 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/rust/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/rust-logo-featured-image.svg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/rust-logo.svg" referrerpolicy="no-referrer">
             </div>Rust: Rust는 시스템 프로그래밍 언어로서, 안전성, 속도, 병행성(Concurrency)을 중요한 목표로 개발된 언어입니다. Mozilla에서 개발한 Rust는 C와 C++과 같은 언어의 잠재적인 문제를 극복하고자 설계되었습니다. Rust는 메모리 안전성을 강조하며, 코드의 버그와 런타임 에러를 최소화하고 안전한 병행성을 제공하기 위한 다양한 기능을 제공합니다.
 Rust https://www.rust-lang.org/
 1. 시작 1.1 설치하기 Rust는 rustup이라고 하는 러스트 버전 및 관련 도구들을 관리하기 위한 커맨드 라인 도구를 통해 러스트를 다운받을 수 있다.

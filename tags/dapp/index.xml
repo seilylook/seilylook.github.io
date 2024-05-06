@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/blockchain/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/blockchain.jpg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/blockchain.jpg" referrerpolicy="no-referrer">
             </div>Introduction Blockchain 개발의 영역은 크게 3가지 나뉜다.
 서비스 개발자
 1.1 프론트엔드 개발자: 프론트엔드 개발자는 React와 같은 웹 기반 개발 스택을 기본적으로 잘 다룰 줄 알아야하며, 사용하고자 하는 체인에 맞는 라이브러리를 숙달해야 한다. 이를 통해 MetaMask, Kaikas 등과 같은 지갑 시스템과 연동하거나, 서버 또는 스마트 컨트랙트에서 처리되는 트랜잭션 데이터를 화면에 표현해준다.

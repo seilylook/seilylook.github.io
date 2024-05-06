@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/elt-postgresql/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/project-featured-image.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/project.jpeg" referrerpolicy="no-referrer">
             </div>Introduction Data Engineering 학습을 시작하고 처음 시작하는 간단한 ELT(Extract, Load, Transform) 프로세스 시연.
 Structure 1 2 3 4 5 6 ├── elf_script │ ├── Dockerfile │ └── elf_script.py ├── source_db_init │ └──init.sql ├── docker-compose.yaml Docker Compose configuration docker compose 파일 생성 1 touch docker-compose.yaml docker compose script 작성 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 version: &#34;3&#34; services: source_postgres: # 여기때문에 계속 동작하지 않았다.]]></description>
 </item>
