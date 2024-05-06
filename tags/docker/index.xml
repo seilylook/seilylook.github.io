@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/docker/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/docker/featured-image/docker-logo.webp" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/docker-logo.webp" referrerpolicy="no-referrer">
             </div>Introduction 도커(Docker)는 컨테이너 기반 가상화 플랫폼으로, 응용 프로그램과 그 종속성을 격리된 환경인 컨테이너로 패키징하여 실행하는 기술이다. 이를 통해 응용 프로그램을 서로 다른 환경에서도 일관되게 실행할 수 있고, 개발 환경과 운영 환경 사이의 차이로 인한 문제를 줄일 수 있다. 도커 컨테이너는 가볍고 빠르며 확장성이 좋아서 개발 및 배포 프로세스를 간소화하는 데 사용된다.
 컨테이너 : 가상화 기술을 이용하여 어플리케이션과 개발 환경을 격리된 공간에서 실행하는 단위
 도커 컴포즈(Docker Compose)는 여러 개의 도커 컨테이너를 정의하고 실행하기 위한 도구로, 하나의 설정 파일로 여러 개의 컨테이너를 관리하고, 컨테이너 간의 네트워크 및 종속성을 설정하는 데 사용된다.]]></description>
