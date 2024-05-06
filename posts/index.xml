@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 01 May 2024 12:44:15 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 06 May 2024 10:58:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes</title>
+    <link>https://seilylook.github.io/posts/kubernetes/</link>
+    <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>What is Kubernetes or K8s Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.
+To understand Kubernetes, we must first understand two things - Container and Orchestration.
+Containers Why do you need containers? In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible.]]></description>
+</item>
+<item>
     <title>Databricks Certified Associate Developer for Apache Spark</title>
     <link>https://seilylook.github.io/posts/databricks-certified-associate-developer-for-apache-spark/</link>
     <pubDate>Wed, 01 May 2024 12:44:15 &#43;0900</pubDate>
@@ -122,17 +134,6 @@ in ways that change markets, organizations, the relationship between citizens an
             </div>Airflow? Airflow는 Python 코드로 워크플로우(workflow)를 작성하고, 스케쥴링, 모니터링 하는 플랫폼입니다. Airflow를 통해서 데이터엔지니어링의 ETL 작업을 자동화하고, DAG(Directed Acyclic Graph) 형태의 워크플로우 작성이 가능합니다. 이를 통해 더 정교한 dependency를 가진 파이프라인을 설정할 수 있습니다. 또한 AWS, GCP 모두 Airflow managed service를 제공할 정도로 전세계 데이터팀들에게 널리 사용되고 있으며 그만큼 넓은 커뮤니티를 형성하고 있습니다.
 Airflow 동작 원리 Airflow는 여러가지 구성요소를 가지고 있습니다.
 Scheduler : 모든 DAG와 Task에 대하여 모니터링 및 관리하고, 실행해야할 Task를 스케줄링 해줍니다.]]></description>
-</item>
-<item>
-    <title>ELT PostgreSQL</title>
-    <link>https://seilylook.github.io/posts/elt-postgresql/</link>
-    <pubDate>Fri, 12 Apr 2024 13:01:33 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/elt-postgresql/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/project-image.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction Data Engineering 학습을 시작하고 처음 시작하는 간단한 ELT(Extract, Load, Transform) 프로세스 시연.
-Structure 1 2 3 4 5 6 ├── elf_script │ ├── Dockerfile │ └── elf_script.py ├── source_db_init │ └──init.sql ├── docker-compose.yaml Docker Compose configuration docker compose 파일 생성 1 touch docker-compose.yaml docker compose script 작성 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 version: &#34;3&#34; services: source_postgres: # 여기때문에 계속 동작하지 않았다.]]></description>
 </item>
 </channel>
 </rss>

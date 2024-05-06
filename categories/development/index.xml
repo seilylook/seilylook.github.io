@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 06 May 2024 10:58:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes</title>
+    <link>https://seilylook.github.io/posts/kubernetes/</link>
+    <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>What is Kubernetes or K8s Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.
+To understand Kubernetes, we must first understand two things - Container and Orchestration.
+Containers Why do you need containers? In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible.]]></description>
+</item>
+<item>
     <title>MLOps</title>
     <link>https://seilylook.github.io/posts/mlops/</link>
     <pubDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</pubDate>
