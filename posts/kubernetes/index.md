@@ -155,3 +155,180 @@ An image is a package or a template, just like a VM template that you might have
 
 Containers are running instances of images that are isolated and have their own enviroments and set of processes.
 
+## Container Advantage
+
+Traditionally developers developed applications. Then they hand it
+over to Ops team to deploy and manage it in production environments. They do that
+by providing a set of instructions such as information about how the hosts must be
+setup, what pre-requisites are to be installed on the host and how the dependencies
+are to be configured etc. Since the Ops team did not develop the application on their
+own, they struggle with setting it up. When they hit an issue, they work with the
+developers to resolve it.
+
+With Docker, a major portion of work involved in setting up the infrastructure is now
+in the hands of the developers in the form of a Docker file. The guide that the
+developers built previously to setup the infrastructure can now easily put together
+into a Dockerfile to create an image for their applications. This image can now run on
+any container platform and is guaranteed to run the same way everywhere. So the
+Ops team now can simply use the image to deploy the application. Since the image
+was already working when the developer built it and operations are not modifying it,
+it continues to work the same when deployed in production.
+
+# Container Orchestration
+
+<img src="/images/kubernetes-7.png"/>
+
+So we learned about containers and we now have our application packaged into a
+docker container. But what next? How do you run it in production? What if your
+application relies on other containers such as database or messaging services or
+other backend services? What if the number of users increase and you need to scale
+your application? You would also like to scale down when the load decreases.
+
+To enable these functionalities you need an underlying platform with a set of
+resources. The platform needs to orchestrate the connectivity between the
+containers and automatically scale up or down based on the load. This whole process
+of automatically deploying and managing containers is known as `Container Orchestration`.
+
+## Orchestration Technologies
+
+Kubernetes is thus a container orchestration technology. There are multiple such
+technologies available today – Docker has its own tool called Docker Swarm.
+Kubernetes from Google and Mesos from Apache. While Docker Swarm is really easy
+to setup and get started, it lacks some of the advanced autoscaling features required
+for complex applications. Mesos on the other hand is quite difficult to setup and get
+started, but supports many advanced features. Kubernetes - arguably the most
+popular of it all – is a bit difficult to setup and get started but provides a lot of options
+to customize deployments and supports deployment of complex architectures.
+Kubernetes is now supported on all public cloud service providers like GCP, Azure and
+AWS and the kubernetes project is one of the top ranked projects in Github.
+
+## Kubernetes Advantage
+
+<img src="/images/kubernetes-8.png"/>
+
+There are various advantages of container orchestration. Your application is now
+highly available as hardware failures do not bring your application down because you
+have multiple instances of your application running on different nodes. The user
+traffic is load balanced across the various containers. When demand increases,
+deploy more instances of the application seamlessly and within a matter of second
+and we have the ability to do that at a service level. When we run out of hardware
+resources, scale the number of nodes up/down without having to take down the
+application. And do all of these easily with a set of declarative object configuration
+files.
+
+It is a container Orchestration technology used to
+orchestrate the deployment and management of 100s and 1000s of containers in a
+clustered environment.
+
+# Architecture
+
+## Nodes(Minions)
+
+<img src="/images/kubernetes-9.png"/>
+
+A node is a machine – physical or virtual – on which
+kubernetes is installed. A node is a worker machine and this is were containers will be
+launched by kubernetes.
+
+It was also known as Minions in the past. So you might here these terms used inter
+changeably.
+
+But what if the node on which our application is running fails? Well, obviously our
+application goes down. So you need to have more than one nodes.
+
+## Cluster
+
+<img src="/images/kubernetes-10.png"/>
+
+A cluster is a set of nodes grouped together. This way even if one node fails you have
+your application still accessible from the other nodes. Moreover having multiple
+nodes helps in sharing load as well.
+
+## Master
+
+<img src="/images/kubernetes-11.png"/>
+
+Now we have a cluster, but who is responsible for managing the cluster? Were is the
+information about the members of the cluster stored? How are the nodes
+monitored? When a node fails how do you move the workload of the failed node to
+another worker node?
+
+That’s were the Master comes in. The master is another node
+with Kubernetes installed in it, and is configured as a Master. The master watches
+over the nodes in the cluster and is responsible for the actual orchestration of
+containers on the worker nodes.
+
+## Components
+
+<img src="/images/kubernetes-12.png"/>
+
+When you install Kubernetes on a System, you are actually installing the following
+components. An API Server. An ETCD service. A kubelet service. A Container Runtime,
+Controllers and Schedulers.
+
+The API server acts as the front-end for kubernetes. The users, management devices,
+Command line interfaces all talk to the API server to interact with the kubernetes
+cluster.
+
+Next is the ETCD key store. ETCD is a distributed reliable key-value store used by
+kubernetes to store all data used to manage the cluster. Think of it this way, when you
+have multiple nodes and multiple masters in your cluster, etcd stores all that
+information on all the nodes in the cluster in a distributed manner. ETCD is
+responsible for implementing locks within the cluster to ensure there are no conflicts
+between the Masters.
+
+The scheduler is responsible for distributing work or containers across multiple
+nodes. It looks for newly created containers and assigns them to Nodes.
+
+The controllers are the brain behind orchestration. They are responsible for noticing
+and responding when nodes, containers or endpoints goes down. The controllers
+makes decisions to bring up new containers in such cases.
+
+The container runtime is the underlying software that is used to run containers. In our
+case it happens to be Docker.
+
+And finally kubelet is the agent that runs on each node in the cluster. The agent is
+responsible for making sure that the containers are running on the nodes as
+expected.
+
+## Master VS Work Nodes
+
+<img src="/images/kubernetes-13.png"/>
+
+So far we saw two types of servers – Master and Worker and a set of components
+that make up Kubernetes. But how are these components distributed across different
+types of servers. In other words, how does one server become a master and the
+other slave?
+
+The worker node (or minion) as it is also known, is were the containers are hosted.
+For example Docker containers, and to run docker containers on a system, we need a
+container runtime installed. And that’s were the container runtime falls. In this case it
+happens to be Docker. This doesn’t HAVE to be docker, there are other container
+runtime alternatives available such as Rocket or CRIO.
+
+The master server has the kube-apiserver and that is what makes it a master.
+
+Similarly the worker nodes have the kubelet agent that is responsible for interacting
+with the master to provide health information of the worker node and carry out
+actions requested by the master on the worker nodes.
+
+All the information gathered are stored in a key-value store on the Master. The key
+value store is based on the popular etcd framework as we just discussed.
+
+The master also has the controller manager and the scheduler.
+
+## Kubectl
+
+<img src="/images/kubernetes-14.png"/>
+
+And finally, we also need to learn a little bit about ONE of the command line utilities
+known as the kube command line tool or kubectl or kube control as it is also called.
+
+The kube control tool is used to deploy and manage applications on a kubernetes
+cluster, to get cluster information, get the status of nodes in the cluster and many
+other things.
+
+The kubectl run command is used to deploy an application on the cluster. The kubectl
+cluster-info command is used to view information about the cluster and the kubectl
+get pod command is used to list all the nodes part of the cluster.
+
