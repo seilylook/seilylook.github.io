@@ -11,7 +11,7 @@ Containers Why do you need containers? In one of my previos projects, I had this
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-06T10:58:44+09:00" />
-<meta property="article:modified_time" content="2024-05-06T12:00:02+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-06T13:00:53+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Kubernetes"/>
@@ -30,8 +30,8 @@ Containers Why do you need containers? In one of my previos projects, I had this
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  2834 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes\/","datePublished": "2024-05-06T10:58:44+09:00","dateModified": "2024-05-06T12:00:02+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  3203 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes\/","datePublished": "2024-05-06T10:58:44+09:00","dateModified": "2024-05-06T13:00:53+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -78,8 +78,8 @@ Containers Why do you need containers? In one of my previos projects, I had this
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-06">2024-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2834 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-06">2024-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3203 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -118,13 +118,17 @@ Containers Why do you need containers? In one of my previos projects, I had this
     <li><a href="#master-vs-work-nodes">Master VS Work Nodes</a></li>
     <li><a href="#kubectl">Kubectl</a></li>
   </ul>
+
+  <ul>
+    <li><a href="#minikube">Minikube</a></li>
+  </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="what-is-kubernetes-or-k8s">What is Kubernetes or K8s</h1>
 <p>Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.</p>
 <p>To understand Kubernetes, we must first understand two things - <code>Container</code> and <code>Orchestration</code>.</p>
 <h1 id="containers">Containers</h1>
 <h2 id="why-do-you-need-containers">Why do you need containers?</h2>
-<img src="/images/kubernetes-1.png" />
+<img src="/images/kubernetes/kubernetes-1.png" />
 <p>In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible. We had a lot of issues developing this application with all these different
 components. First, their compatibility with the underlying OS. We had to ensure that
 all these different services were compatible with the version of the OS we were
@@ -149,7 +153,7 @@ one and so we couldn’t gurantee the application that we were building would ru
 same way in different environments. And So all of this made our life in developing,
 building and shipping the application really difficult.</p>
 <h2 id="what-can-it-do">What can it do?</h2>
-<img src="/images/kubernetes-2.png"/>
+<img src="/images/kubernetes/kubernetes-2.png"/>
 <p>So I needed something that could help us with the compatibility issue. And
 something that will allow us to modify or change these components without affecting
 the other components and even modify the underlying operating systems as
@@ -161,7 +165,7 @@ started with a simple “docker run” command. Irrespective of what underlying 
 run, all they needed to do was to make sure they had Docker installed on their
 systems.</p>
 <h2 id="what-is-containers">What is Containers?</h2>
-<img src="/images/kubernetes-3.png"/>
+<img src="/images/kubernetes/kubernetes-3.png"/>
 <p>Containers are completely isolated enviroments, as in they can have their own processes or services, their own network interfaces, their own mounts, just like Virtual machines, except that they all share the same OS Kernel. W</p>
 <p>But its also important to note that containers are not new with Docker. Containers have existed for about 10 years now and some of the different types of containers are LXC, LXD, LXCFS etc. Docker utilized LXC and that is were Docker offeres a high-level tool with several powerful functionalities making it really easy for end users like us.</p>
 <h2 id="operating-system">Operating system</h2>
@@ -175,7 +179,7 @@ Interface, drivers, compilers, File managers, developer tools etc. SO you have a
 common Linux Kernel shared across all Oses and some custom softwares that
 differentiate Operating systems from each other.</p>
 <h2 id="sharing-the-kernel">Sharing the Kernel</h2>
-<img src="/images/kubernetes-4.png"/>
+<img src="/images/kubernetes/kubernetes-4.png"/>
 <p>We said earlier that Docker containers share the underlying kernel. What does that
 actually mean – sharing the kernel? Let’s say we have a system with an Ubuntu OS
 with Docker installed on it. Docker can run any flavor of OS on top of it as long as they
@@ -193,7 +197,7 @@ virtualize and run different Operating systems and kernels on the same hardware.
 main purpose of Docker is to containerize applications and to ship them and run
 them.</p>
 <h2 id="containers-vs-virtual-machines">Containers VS Virtual Machines</h2>
-<img src="/images/kubernetes-5.png"/>
+<img src="/images/kubernetes/kubernetes-5.png"/>
 <p>So that brings us to the differences between virtual machines and containers.
 Something that we tend to do, especially those from a Virtualization.</p>
 <p>As you can see on the right, in case of Docker, we have the underlying hardware
@@ -230,7 +234,7 @@ instances of the web service, simply add as many instances as you need, and
 configure a load balancer of some kind in the front. In case one of the instances was
 to fail, simply destroy that instance and launch a new instance.</p>
 <h2 id="container-vs-image">Container VS Image</h2>
-<img src="/images/kubernetes-6.png"/>
+<img src="/images/kubernetes/kubernetes-6.png"/>
 <p>An image is a package or a template, just like a VM template that you might have worked with in the virtualization world. It is used to create one or more containers.</p>
 <p>Containers are running instances of images that are isolated and have their own enviroments and set of processes.</p>
 <h2 id="container-advantage">Container Advantage</h2>
@@ -250,7 +254,7 @@ Ops team now can simply use the image to deploy the application. Since the image
 was already working when the developer built it and operations are not modifying it,
 it continues to work the same when deployed in production.</p>
 <h1 id="container-orchestration">Container Orchestration</h1>
-<img src="/images/kubernetes-7.png"/>
+<img src="/images/kubernetes/kubernetes-7.png"/>
 <p>So we learned about containers and we now have our application packaged into a
 docker container. But what next? How do you run it in production? What if your
 application relies on other containers such as database or messaging services or
@@ -272,7 +276,7 @@ to customize deployments and supports deployment of complex architectures.
 Kubernetes is now supported on all public cloud service providers like GCP, Azure and
 AWS and the kubernetes project is one of the top ranked projects in Github.</p>
 <h2 id="kubernetes-advantage">Kubernetes Advantage</h2>
-<img src="/images/kubernetes-8.png"/>
+<img src="/images/kubernetes/kubernetes-8.png"/>
 <p>There are various advantages of container orchestration. Your application is now
 highly available as hardware failures do not bring your application down because you
 have multiple instances of your application running on different nodes. The user
@@ -287,7 +291,7 @@ orchestrate the deployment and management of 100s and 1000s of containers in a
 clustered environment.</p>
 <h1 id="architecture">Architecture</h1>
 <h2 id="nodesminions">Nodes(Minions)</h2>
-<img src="/images/kubernetes-9.png"/>
+<img src="/images/kubernetes/kubernetes-9.png"/>
 <p>A node is a machine – physical or virtual – on which
 kubernetes is installed. A node is a worker machine and this is were containers will be
 launched by kubernetes.</p>
@@ -296,12 +300,12 @@ changeably.</p>
 <p>But what if the node on which our application is running fails? Well, obviously our
 application goes down. So you need to have more than one nodes.</p>
 <h2 id="cluster">Cluster</h2>
-<img src="/images/kubernetes-10.png"/>
+<img src="/images/kubernetes/kubernetes-10.png"/>
 <p>A cluster is a set of nodes grouped together. This way even if one node fails you have
 your application still accessible from the other nodes. Moreover having multiple
 nodes helps in sharing load as well.</p>
 <h2 id="master">Master</h2>
-<img src="/images/kubernetes-11.png"/>
+<img src="/images/kubernetes/kubernetes-11.png"/>
 <p>Now we have a cluster, but who is responsible for managing the cluster? Were is the
 information about the members of the cluster stored? How are the nodes
 monitored? When a node fails how do you move the workload of the failed node to
@@ -311,7 +315,7 @@ with Kubernetes installed in it, and is configured as a Master. The master watch
 over the nodes in the cluster and is responsible for the actual orchestration of
 containers on the worker nodes.</p>
 <h2 id="components">Components</h2>
-<img src="/images/kubernetes-12.png"/>
+<img src="/images/kubernetes/kubernetes-12.png"/>
 <p>When you install Kubernetes on a System, you are actually installing the following
 components. An API Server. An ETCD service. A kubelet service. A Container Runtime,
 Controllers and Schedulers.</p>
@@ -335,7 +339,7 @@ case it happens to be Docker.</p>
 responsible for making sure that the containers are running on the nodes as
 expected.</p>
 <h2 id="master-vs-work-nodes">Master VS Work Nodes</h2>
-<img src="/images/kubernetes-13.png"/>
+<img src="/images/kubernetes/kubernetes-13.png"/>
 <p>So far we saw two types of servers – Master and Worker and a set of components
 that make up Kubernetes. But how are these components distributed across different
 types of servers. In other words, how does one server become a master and the
@@ -353,7 +357,7 @@ actions requested by the master on the worker nodes.</p>
 value store is based on the popular etcd framework as we just discussed.</p>
 <p>The master also has the controller manager and the scheduler.</p>
 <h2 id="kubectl">Kubectl</h2>
-<img src="/images/kubernetes-14.png"/>
+<img src="/images/kubernetes/kubernetes-14.png"/>
 <p>And finally, we also need to learn a little bit about ONE of the command line utilities
 known as the kube command line tool or kubectl or kube control as it is also called.</p>
 <p>The kube control tool is used to deploy and manage applications on a kubernetes
@@ -362,12 +366,47 @@ other things.</p>
 <p>The kubectl run command is used to deploy an application on the cluster. The kubectl
 cluster-info command is used to view information about the cluster and the kubectl
 get pod command is used to list all the nodes part of the cluster.</p>
+<h1 id="setup">Setup</h1>
+<p>There are lots of ways to setup Kubernetes. We can setup it up ourselves locally on
+our laptops or virtual machines using solutions like Minikube and Kubeadmin.
+Minikube is a tool used to setup a single instance of Kubernetes in an All-in-one setup
+and kubeadmin is a tool used to configure kubernetes in a multi-node setup.</p>
+<p>There are also hosted solutions available for setting up kubernetes in a cloud
+environment such as GCP and AWS.</p>
+<p>And finally if you don’t have the resources or if you don’t want to go through the
+hassle of setting it all up yourself, and you simply want to get your hands on a
+kubernetes cluster instantly to play with, checkout play-with-k8s.com.</p>
+<h2 id="minikube">Minikube</h2>
+<img src="/images/kubernetes/kubernetes-16.png"/>
+<p>We will start with Minikube which is the easiest way to get started with Kubernetes
+on a local system. Before we head into the demo it’s good to understand how it works.
+Earlier we talked about the different components of Kubernetes that make up a
+Master and worker nodes such as the api server, etcd key value store, controllers and
+scheduler on the master and kubelets and container runtime on the worker nodes. It
+would take a lot of time and effort to setup and install all of these various
+components on different systems individually by ourlselves.</p>
+<p>Minikube bundles all of these different components into a single image providing us a
+pre-configured single node kubernetes cluster so we can get started in a matter of
+minutes.</p>
+<p>The whole bundle is packaged into an ISO image and is available online for
+download.</p>
+<img src="/images/kubernetes/kubernetes-17.png"/>
+<p>Now you don’t HAVE to download it yourself. Minikube provides an executable
+command line utility that will AUTOMATICALLY download the ISO and deploy it in a
+virtualization platform such as Oracle Virtualbox or Vmware fusion. So you must have
+a Hypervisor installed on your system. For windows you could use Virtualbox or
+Hyper-V and for Linux use Virtualbox or KVM.</p>
+<p>And finally to interact with the kubernetes cluster, you must have the kubectl
+kubernetes command line tool also installed on your machine. So you need 3 things
+to get this working, you must have a hypervisor installed, kubectl installed and
+minikube executable installed on your system.</p>
+<h1 id="setup---kubeadm">Setup - Kubeadm</h1>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-06&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/cc2e7fb6e2707204f0296885406db83ea66005bc" target="_blank" title="commit by seilylook(seilylook@naver.com) cc2e7fb6e2707204f0296885406db83ea66005bc: init commit: kubernets">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>cc2e7fb</a></span>
+                <span>Updated on 2024-05-06&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/336d896a9a0005517cf98784a73ef0a195a881ca" target="_blank" title="commit by seilylook(seilylook@naver.com) 336d896a9a0005517cf98784a73ef0a195a881ca: add: Kubernetes Architectures">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>336d896</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

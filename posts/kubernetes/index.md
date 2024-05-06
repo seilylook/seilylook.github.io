@@ -11,7 +11,7 @@ To understand Kubernetes, we must first understand two things - `Container` and 
 
 ## Why do you need containers?
 
-<img src="/images/kubernetes-1.png" />
+<img src="/images/kubernetes/kubernetes-1.png" />
 
 In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible. We had a lot of issues developing this application with all these different
 components. First, their compatibility with the underlying OS. We had to ensure that
@@ -43,7 +43,7 @@ building and shipping the application really difficult.
 
 ## What can it do?
 
-<img src="/images/kubernetes-2.png"/>
+<img src="/images/kubernetes/kubernetes-2.png"/>
 
 So I needed something that could help us with the compatibility issue. And
 something that will allow us to modify or change these components without affecting
@@ -58,7 +58,7 @@ systems.
 
 ## What is Containers?
 
-<img src="/images/kubernetes-3.png"/>
+<img src="/images/kubernetes/kubernetes-3.png"/>
 
 Containers are completely isolated enviroments, as in they can have their own processes or services, their own network interfaces, their own mounts, just like Virtual machines, except that they all share the same OS Kernel. W
 
@@ -78,7 +78,7 @@ differentiate Operating systems from each other.
 
 ## Sharing the Kernel
 
-<img src="/images/kubernetes-4.png"/>
+<img src="/images/kubernetes/kubernetes-4.png"/>
 
 We said earlier that Docker containers share the underlying kernel. What does that
 actually mean – sharing the kernel? Let’s say we have a system with an Ubuntu OS
@@ -101,7 +101,7 @@ them.
 
 ## Containers VS Virtual Machines
 
-<img src="/images/kubernetes-5.png"/>
+<img src="/images/kubernetes/kubernetes-5.png"/>
 
 So that brings us to the differences between virtual machines and containers.
 Something that we tend to do, especially those from a Virtualization.
@@ -149,7 +149,7 @@ to fail, simply destroy that instance and launch a new instance.
 
 ## Container VS Image
 
-<img src="/images/kubernetes-6.png"/>
+<img src="/images/kubernetes/kubernetes-6.png"/>
 
 An image is a package or a template, just like a VM template that you might have worked with in the virtualization world. It is used to create one or more containers.
 
@@ -176,7 +176,7 @@ it continues to work the same when deployed in production.
 
 # Container Orchestration
 
-<img src="/images/kubernetes-7.png"/>
+<img src="/images/kubernetes/kubernetes-7.png"/>
 
 So we learned about containers and we now have our application packaged into a
 docker container. But what next? How do you run it in production? What if your
@@ -204,7 +204,7 @@ AWS and the kubernetes project is one of the top ranked projects in Github.
 
 ## Kubernetes Advantage
 
-<img src="/images/kubernetes-8.png"/>
+<img src="/images/kubernetes/kubernetes-8.png"/>
 
 There are various advantages of container orchestration. Your application is now
 highly available as hardware failures do not bring your application down because you
@@ -224,7 +224,7 @@ clustered environment.
 
 ## Nodes(Minions)
 
-<img src="/images/kubernetes-9.png"/>
+<img src="/images/kubernetes/kubernetes-9.png"/>
 
 A node is a machine – physical or virtual – on which
 kubernetes is installed. A node is a worker machine and this is were containers will be
@@ -238,7 +238,7 @@ application goes down. So you need to have more than one nodes.
 
 ## Cluster
 
-<img src="/images/kubernetes-10.png"/>
+<img src="/images/kubernetes/kubernetes-10.png"/>
 
 A cluster is a set of nodes grouped together. This way even if one node fails you have
 your application still accessible from the other nodes. Moreover having multiple
@@ -246,7 +246,7 @@ nodes helps in sharing load as well.
 
 ## Master
 
-<img src="/images/kubernetes-11.png"/>
+<img src="/images/kubernetes/kubernetes-11.png"/>
 
 Now we have a cluster, but who is responsible for managing the cluster? Were is the
 information about the members of the cluster stored? How are the nodes
@@ -260,7 +260,7 @@ containers on the worker nodes.
 
 ## Components
 
-<img src="/images/kubernetes-12.png"/>
+<img src="/images/kubernetes/kubernetes-12.png"/>
 
 When you install Kubernetes on a System, you are actually installing the following
 components. An API Server. An ETCD service. A kubelet service. A Container Runtime,
@@ -293,7 +293,7 @@ expected.
 
 ## Master VS Work Nodes
 
-<img src="/images/kubernetes-13.png"/>
+<img src="/images/kubernetes/kubernetes-13.png"/>
 
 So far we saw two types of servers – Master and Worker and a set of components
 that make up Kubernetes. But how are these components distributed across different
@@ -319,7 +319,7 @@ The master also has the controller manager and the scheduler.
 
 ## Kubectl
 
-<img src="/images/kubernetes-14.png"/>
+<img src="/images/kubernetes/kubernetes-14.png"/>
 
 And finally, we also need to learn a little bit about ONE of the command line utilities
 known as the kube command line tool or kubectl or kube control as it is also called.
@@ -331,4 +331,52 @@ other things.
 The kubectl run command is used to deploy an application on the cluster. The kubectl
 cluster-info command is used to view information about the cluster and the kubectl
 get pod command is used to list all the nodes part of the cluster.
+
+# Setup
+
+There are lots of ways to setup Kubernetes. We can setup it up ourselves locally on
+our laptops or virtual machines using solutions like Minikube and Kubeadmin.
+Minikube is a tool used to setup a single instance of Kubernetes in an All-in-one setup
+and kubeadmin is a tool used to configure kubernetes in a multi-node setup.
+
+There are also hosted solutions available for setting up kubernetes in a cloud
+environment such as GCP and AWS.
+
+And finally if you don’t have the resources or if you don’t want to go through the
+hassle of setting it all up yourself, and you simply want to get your hands on a
+kubernetes cluster instantly to play with, checkout play-with-k8s.com.
+
+## Minikube
+
+<img src="/images/kubernetes/kubernetes-16.png"/>
+
+We will start with Minikube which is the easiest way to get started with Kubernetes
+on a local system. Before we head into the demo it’s good to understand how it works.
+Earlier we talked about the different components of Kubernetes that make up a
+Master and worker nodes such as the api server, etcd key value store, controllers and
+scheduler on the master and kubelets and container runtime on the worker nodes. It
+would take a lot of time and effort to setup and install all of these various
+components on different systems individually by ourlselves.
+
+Minikube bundles all of these different components into a single image providing us a
+pre-configured single node kubernetes cluster so we can get started in a matter of
+minutes.
+
+The whole bundle is packaged into an ISO image and is available online for
+download.
+
+<img src="/images/kubernetes/kubernetes-17.png"/>
+
+Now you don’t HAVE to download it yourself. Minikube provides an executable
+command line utility that will AUTOMATICALLY download the ISO and deploy it in a
+virtualization platform such as Oracle Virtualbox or Vmware fusion. So you must have
+a Hypervisor installed on your system. For windows you could use Virtualbox or
+Hyper-V and for Linux use Virtualbox or KVM.
+
+And finally to interact with the kubernetes cluster, you must have the kubectl
+kubernetes command line tool also installed on your machine. So you need 3 things
+to get this working, you must have a hypervisor installed, kubectl installed and
+minikube executable installed on your system.
+
+# Setup - Kubeadm
 
