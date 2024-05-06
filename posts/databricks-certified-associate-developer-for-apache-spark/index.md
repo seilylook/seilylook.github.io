@@ -26,12 +26,12 @@ Computer Clustering?
 
 클러스터 컴퓨터: 독립적인 컴퓨터들이 네트워크를 통해 상호 연결되어 하나의 컴퓨팅 자원으로서 동작하는 병렬처리 혹은 분산 처리 시스템의 한 형태
 
-<img src="/images/computer-cluster.png" />
+<img src="/images/spark/computer-cluster.png" />
 {{</admonition>}}
 
-<img src="/images/spark-architecture.png" />
+<img src="/images/spark/spark-architecture.png" />
 
-<img src="/images/cluster-overview.png" />
+<img src="/images/spark/cluster-overview.png" />
 
 ◎ (Spark) Application: Spark에서 수행되는 사용자 프로그램으로, Driver Program과 여러 Executor 프로세스로 구성
 

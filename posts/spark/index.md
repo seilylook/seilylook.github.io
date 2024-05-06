@@ -49,7 +49,7 @@ Spark 프레임워크에는 다음이 포함됩니다.
 
 - 그래프 처리를 위한 Spark GraphX
 
-<img src="/images/spark2.png" />
+<img src="/images/spark/spark2.png" />
 
 ## Spark Core
 

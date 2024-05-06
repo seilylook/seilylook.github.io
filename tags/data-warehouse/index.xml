@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/datawarehouse/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/data-warehouse.webp" referrerpolicy="no-referrer">
+                <img src="/images/data-warehouse-featured-image.webp" referrerpolicy="no-referrer">
             </div>데이터 웨어하우스란 무엇입니까? 데이터 웨어하우스는 보다 정보에 입각한 의사 결정을 내릴 수 있도록 분석 가능한 정보의 중앙 리포지토리입니다. 데이터는 트랜잭션 시스템, 관계형 데이터베이스 및 기타 소스로부터 보통 정기적으로 데이터 웨어하우스로 들어갑니다. 비즈니스 애널리스트, 데이터 엔지니어, 데이터 사이언티스트 및 의사 결정권자는 비즈니스 인텔리전스(BI) 도구, SQL 클라이언트 및 기타 분석 애플리케이션을 통해 데이터에 액세스합니다.
 데이터 및 분석은 비즈니스가 경쟁력을 유지하는 데 없어서는 안 되는 부분이 되었습니다. 비즈니스 사용자는 보고서, 대시보드 및 분석 도구를 활용하여 데이터에서 통찰력을 찾아내고, 비즈니스 성과를 모니터링하며, 의사 결정을 지원합니다.]]></description>
 </item>

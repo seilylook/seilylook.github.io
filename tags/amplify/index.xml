@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/flutter-amplify/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/aws-amplify.png" referrerpolicy="no-referrer">
+                <img src="/images/aws-amplify-logo-featured-image.png" referrerpolicy="no-referrer">
             </div>Introduction 이 포스팅은 Flutter에 Amplify 서비스를 연동하는 과정을 다룬다.
 AWS Amplify는 모바일 및 프론트엔드 웹 개발자가 AWS에서 구동되는 안전하고 확장 가능한 풀 스택 애플리케이션을 개발하도록 지원하는 도구 및 서비스이다.
 현재 Amplify에서 제공하는 대표적인 서비스는 다음과 같다.

@@ -815,7 +815,7 @@ let s2 = s1;
 
 문자열의 내용물을 담고 있는 메모리의 포인터, 길이, 그리고 용량입니다. 이 데이터의 그룹은 스택에 저장됩니다. 내용물을 담은 오른쪽의 것은 힙 메모리에 있습니다.
 
-<img src="/images/string-pointer-01.svg" />
+<img src="/images/rust/string-pointer-01.svg" />
 
 ☝️ Figure 4-3: s1 변수에 "hello"값이 저장된 String의 메모리 구조
 
@@ -823,13 +823,13 @@ let s2 = s1;
 
 `s2`에 `s1`을 대입하면, String 데이터가 복사되는데, 이는 스택에 있는 포인터, 길이값, 그리고 용량값이 복사된다는 의미입니다. 포인터가 가리키고 있는 힙 메모리 상의 데이터는 복사되지 않습니다. 달리 말하면, 메모리 내의 데이터 구조는 Figure 4-4와 같이 됩니다.
 
-<img src="/images/string-pointer-02.svg" />
+<img src="/images/rust/string-pointer-02.svg" />
 
 ☝️ Figure 4-4: s1의 포인터, 길이값, 용량값이 복사된 s2 변수의 메모리 구조
 
 메모리 구조는 Figure 4-5와 같지 않는데, 이 그림은 러스트가 힙 메모리 상의 데이터까지도 복사한다면 벌어질 일입니다. 만일 러스트가 이렇게 동작한다면, 힙 안의 데이터가 클 경우 `s2 = s1` 연산은 런타임 상에서 매우 느려질 가능성이 있습니다.
 
-<img src="/images/string-pointer-03.svg" />
+<img src="/images/rust/string-pointer-03.svg" />
 
 ☝️ Figure 4-5: 러스트가 힙 데이터까지 복사하게 될 경우 `s2 = s1`가 만들 또다른 가능성
 
@@ -915,7 +915,7 @@ print(deep_copy_list)        # 출력: [1, 2, [99, 4]]
 
 하지만 러스트는 첫 번째 변수를 무효화시키기도 하기 때문에, 이를 얕은 복사라고 부르는 대신 `이동(Move)`라고 합니다. 여기서 우리는 s1이 s2로 이동되었ㄷ다라고 말하는 식으로 위 콛드를 읽을 것 입니다. 그러므로 실제로 일어낸 일은 Figure 4-6과 같습니다.
 
-<img src="/images/string-pointer-04.svg" />
+<img src="/images/rust/string-pointer-04.svg" />
 
 ☝️ Figure 4-6: s1이 무효화된 후의 메모리 구조
 

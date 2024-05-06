@@ -121,13 +121,13 @@
 
 #### 도메인 이벤트 도출
 
-<img src="/images/domain-event.png" />
+<img src="/images/domain/domain-event.png" />
 
 `도메인 이벤트 도출` 단계는 서비스에서 발생할 수 있는 비즈니스 이벤트를 분석하는 단계이다. 이번 요구 사항을 기반으로는 `렌트 요청`, `렌트 반환`, `렌트 수락`, `렌트 거절`, `알림 발송` 등 총 5개의 이벤트를 도출할 수 있다.
 
 #### 이벤트에 따른 정책 도출
 
-<img src="/images/domain-policy.png" />
+<img src="/images/domain/domain-policy.png" />
 
 `이벤트에 따른 정책(Policy) 도출` 단계는 도메인 이벤트 발생 후 그에 따라 추가적으로 반응하는 행위인 정책(Policy)을 도출하는 단계이다.
 
@@ -135,7 +135,7 @@
 
 #### 커맨드와 액터 식별
 
-<img src="/images/domain-command.png" />
+<img src="/images/domain/domain-command.png" />
 
 `커맨드(Command)와 액터(Actor) 식별` 단계는 도메인 이벤트를 발생시키는 `행위`인 커맨드(Command)와 행위를 수행하는 `주체`인 액터(Actor) 도출하는 단계이다.
 
@@ -143,19 +143,19 @@
 
 #### 어그리게이트 매핑
 
-<img src="/images/aggregate.png" />
+<img src="/images/domain/aggregate.png" />
 
 `어그리게이트(Aggregate) 매핑` 단계는 커맨드와 이벤트가 사용하는 데이터를 정의하는 단계이다. 이번 사례에서는 간략하게 `고객(Customer)`, `매장(Store)`, `알림(Notification)`등의 대표적인 데이터를 사용하였지만, 세부 단계에서는 어그리게이트 내부에서 사용하는 상세 데이터도 함께 지정하여 더욱 명확한 이벤트 스토밍을 진행하게 될 것이다.
 
 #### 바운디드 컨텍스트
 
-<img src="/images/bounded-context.png" />
+<img src="/images/domain/bounded-context.png" />
 
 `바운디드 컨텍스트(Bound Context)` 단계는 지금까지의 결과물들을 바운디드 컨텍스트를 이용해 묶어주는 단계이다. 이벤트 스토밍이 완료되었을 때, 이 단계에서 생성된 바운디드 컨텍스트들은 각각의 마이크로 서비스가 될 가능성이 있다.
 
 #### 컨텍스트 매핑
 
-<img src="/images/context-mapping.png" />
+<img src="/images/domain/context-mapping.png" />
 
 마지막으로 `컨텍스트 매핑(Context Mapping)` 단계는 최종적으로 구성요소간의 관계를 설정하는 단계이다. 이 단계에서는 고려하지 못했던 외부 시스템(External System)이나, 추가적으로 도출된 도메인 이벤트나 커맨드 등을 포함하여 전체 시스템을 검토해야한다.
 

@@ -85,11 +85,11 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/rust-logo.svg"
-        data-srcset="/images/rust-logo.svg, /images/rust-logo.svg 1.5x, /images/rust-logo.svg 2x"
+        data-src="/images/rust-logo-featued-image.svg"
+        data-srcset="/images/rust-logo-featued-image.svg, /images/rust-logo-featued-image.svg 1.5x, /images/rust-logo-featued-image.svg 2x"
         data-sizes="auto"
-        alt="/images/rust-logo.svg"
-        title="/images/rust-logo.svg" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/rust-logo-featued-image.svg"
+        title="/images/rust-logo-featued-image.svg" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -1291,14 +1291,14 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
 <p>즉, 두번째 줄이 s1의 복사본을 만들어서 s2에 묶어놓는 식으로 말이죠. 그렇지만 이는 실제 동작과 다른 생각입니다.</p>
 <p>좀 더 완전히 설명하기 위해, String이 Figure 4-3에서와 같이 생겼다는 것을 주목합시다. String은 그림의 왼쪽과 같이 세 개의 부분으로 이루어져 있습니다:</p>
 <p>문자열의 내용물을 담고 있는 메모리의 포인터, 길이, 그리고 용량입니다. 이 데이터의 그룹은 스택에 저장됩니다. 내용물을 담은 오른쪽의 것은 힙 메모리에 있습니다.</p>
-<img src="/images/string-pointer-01.svg" />
+<img src="/images/rust/string-pointer-01.svg" />
 <p>☝️ Figure 4-3: s1 변수에 &ldquo;hello&quot;값이 저장된 String의 메모리 구조</p>
 <p>길이 값은 바이트 단위로 String의 내용물이 얼마나 많은 메모리를 현재 사용하고 있는지를 말합니다. 용량값은 바이트 단위로 String이 운영체제로부터 얼마나 많은 양의 메모리를 할당 받았는지를 말합니다.</p>
 <p><code>s2</code>에 <code>s1</code>을 대입하면, String 데이터가 복사되는데, 이는 스택에 있는 포인터, 길이값, 그리고 용량값이 복사된다는 의미입니다. 포인터가 가리키고 있는 힙 메모리 상의 데이터는 복사되지 않습니다. 달리 말하면, 메모리 내의 데이터 구조는 Figure 4-4와 같이 됩니다.</p>
-<img src="/images/string-pointer-02.svg" />
+<img src="/images/rust/string-pointer-02.svg" />
 <p>☝️ Figure 4-4: s1의 포인터, 길이값, 용량값이 복사된 s2 변수의 메모리 구조</p>
 <p>메모리 구조는 Figure 4-5와 같지 않는데, 이 그림은 러스트가 힙 메모리 상의 데이터까지도 복사한다면 벌어질 일입니다. 만일 러스트가 이렇게 동작한다면, 힙 안의 데이터가 클 경우 <code>s2 = s1</code> 연산은 런타임 상에서 매우 느려질 가능성이 있습니다.</p>
-<img src="/images/string-pointer-03.svg" />
+<img src="/images/rust/string-pointer-03.svg" />
 <p>☝️ Figure 4-5: 러스트가 힙 데이터까지 복사하게 될 경우 <code>s2 = s1</code>가 만들 또다른 가능성</p>
 <p>앞서 우리는 변숙가 스코프 밖으로 벗어날 때, 러스트는 자동적으로 drop 함수를 호출하여 해당 변수가 사용하는 힙 메모미를 제거한다고 했습니다. 하지만 Figure 4-4에서는 두 데이터 포인터가 모두 같은 곳을 가리키고 있습니다. 이는 곧 문제가 됩니다:</p>
 <p>s2와 s1이 스코프 밖으로 벗어나게 되면, 둘 다 같은 메모리를 해제하려 할 것 입니다. 이는 <code>두번 해제</code>오류라고 알려져 있으며 이전에 언급한 바 있는 메모리 안정성 버그들 중 하나입니다. 메모리를 두번 해제하는 것은 메모리 손상의 원인이 되는데, 이는 보안 취약성 문제를 일으킬 가능성이 있습니다.</p>
@@ -1416,7 +1416,7 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
         </div>
     </div>
 <p>하지만 러스트는 첫 번째 변수를 무효화시키기도 하기 때문에, 이를 얕은 복사라고 부르는 대신 <code>이동(Move)</code>라고 합니다. 여기서 우리는 s1이 s2로 이동되었ㄷ다라고 말하는 식으로 위 콛드를 읽을 것 입니다. 그러므로 실제로 일어낸 일은 Figure 4-6과 같습니다.</p>
-<img src="/images/string-pointer-04.svg" />
+<img src="/images/rust/string-pointer-04.svg" />
 <p>☝️ Figure 4-6: s1이 무효화된 후의 메모리 구조</p>
 <p>이것이 우리 문제를 해결해줍니다! 오직 s2만 유효한 상황에서, 스코프 밖으로 벗어나면 혼자 메모리를 해제할 것이고, 일이 잘 처리되었습니다.</p>
 <p>여기에 더해서, 이러한 경우가 함축하는 디자인 선택이 있습니다:</p>
@@ -2368,7 +2368,7 @@ Linux &amp;&amp; MacOS에서 Rustup 설치 1 $ curl https://sh."/>
                             <a class="link-to-markdown" href="/posts/rust/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-hashtags="Development,Language,Web3.0,Blockchain,Server,Back-end"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/rust/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-image="/images/rust-logo.svg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-hashtags="Development,Language,Web3.0,Blockchain,Server,Back-end"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/rust/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/rust/" data-title="Rust" data-image="/images/rust-logo-featued-image.svg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

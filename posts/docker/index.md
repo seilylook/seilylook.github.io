@@ -11,13 +11,13 @@
 
 # Virtual Machine vs Docker
 
-<img src="/images/docker2.jpeg" />
+<img src="/images/docker/docker2.jpeg" />
 
 컨테이너 기술이 아닌 기존의 가상화 방식은 주로 OS를 가상화했다. VMware, VirtualBox와 같은 가상머신은 호스트 OS 위에 게스트 OS 전체를 가상화하여 사용하는 방식으로 도커의 컨테이너 방식과는 큰 차이가 있다.
 
 ## 가상머신
 
-<img src="/images/docker3.png" />
+<img src="/images/docker/docker3.png" />
 
 기존의 가상화 기술인 `가상머신(Virtual Machine)`은 하이퍼바이저를 이용해 여러개의 운영체제를 하나의 호스트에서 생성해서 사용하는 방식이다.
 
@@ -35,7 +35,7 @@
 
 ## Docker 컨테이너
 
-<img src="/images/docker4.png" />
+<img src="/images/docker/docker4.png" />
 
 도커 컨테이너는 가상화된 공간을 생성하기 위해 리눅스 자체 기능은 chroot, 네임스페이스, cgroup을 사용함으로서 프로세스 단위의 격리 환경을 만들기 때문에 성능 손실이 거의 없다. 컨테이너에 필요한 커널을 공유해서 사용하고, 컨테이너 안에는 애플리케이션을 구동하는 데 필요한 라이브러리 및 실행 파일만 존재하기 때문에 컨테이너를 이미지로 만들었을 때 이미지의 용량 또한 가상 머신에 비해 대폭 줄어든다. 따라서 컨테이너를 이미지로 만들어 배포하는 시간이 가상 머신에 비해 빠르며, 가상화된 공간을 사용할 떄의 성능 손실도 거의 없다.
 
@@ -47,7 +47,7 @@
 
 # 도커 구성 요소
 
-<img src="/images/docker5.png" />
+<img src="/images/docker/docker5.png" />
 
 `Docker Client`: 도커를 설치하면 그것이 Client이며 build, pull, run 등의 도커 명령어를 수행한다.
 
@@ -65,7 +65,7 @@
 
 도커 이미와 컨테이너의 관계는 운영체제에서의 프로그램 <-> 프로세스, 객체 지향의 클래스 <-> 인스턴스 관계와 비슷하다.
 
-<img src="/images/docker6.png" />
+<img src="/images/docker/docker6.png" />
 
 `Dockerfile -> Docker Image`: Dockerfile은 도커 이미지를 만들 때 사용하는 스크립트 파일이다. `docker build` 명령어를 통해 실행한다.
 

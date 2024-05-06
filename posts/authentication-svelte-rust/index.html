@@ -45,7 +45,7 @@ PostgreSQL: 데이터베이스
 Redis: 토큰 만료 등을 도와주는 라이브러리
 1. 시작 1.1 프로젝트 생성 1 2 3 4 5 6 7 cd Rust mkdir auth-svelte-rust cd auth-svelte-rust cargo new backend cd backend를 통해 들어가서 Cargo."/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/authentication-svelte-rust/" /><link rel="prev" href="https://seilylook.github.io/posts/flutter/" /><link rel="next" href="https://seilylook.github.io/posts/blockchain/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/authentication-svelte-rust/" /><link rel="prev" href="https://seilylook.github.io/posts/three.js/" /><link rel="next" href="https://seilylook.github.io/posts/blockchain/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -109,11 +109,11 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/user-auth.jpg"
-        data-srcset="/images/user-auth.jpg, /images/user-auth.jpg 1.5x, /images/user-auth.jpg 2x"
+        data-src="/images/user-auth-featured-image.jpg"
+        data-srcset="/images/user-auth-featured-image.jpg, /images/user-auth-featured-image.jpg 1.5x, /images/user-auth-featured-image.jpg 2x"
         data-sizes="auto"
-        alt="/images/user-auth.jpg"
-        title="/images/user-auth.jpg" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/user-auth-featured-image.jpg"
+        title="/images/user-auth-featured-image.jpg" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -3311,7 +3311,7 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
                             <a class="link-to-markdown" href="/posts/authentication-svelte-rust/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust" data-hashtags="Development,Project,Front-end,Back-end"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust" data-image="/images/user-auth.jpg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust" data-hashtags="Development,Project,Front-end,Back-end"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/authentication-svelte-rust/" data-title="Authentication Svelte Rust" data-image="/images/user-auth-featured-image.jpg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -3323,7 +3323,7 @@ Redis: 토큰 만료 등을 도와주는 라이브러리
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/flutter/" class="prev" rel="prev" title="Flutter"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Flutter</a>
+    <div class="post-nav"><a href="/posts/three.js/" class="prev" rel="prev" title="Three.js"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Three.js</a>
             <a href="/posts/blockchain/" class="next" rel="next" title="Blockchain">Blockchain<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>

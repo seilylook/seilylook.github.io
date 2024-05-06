@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/etl/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/ETL.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/ETL-featured-image.jpeg" referrerpolicy="no-referrer">
             </div>ETL이란 무엇인가요? 추출, 전환, 적재(ETL)는 다양한 소스의 데이터를 데이터 웨어하우스라고 부르는 대형 중앙 집중식 리포지토리에 결합하는 과정입니다. ETL은 원시 데이터를 정리 및 구성해서 스토리지, 데이터 분석, 기계 학습(ML)용으로 준비하기 위한 비즈니스 규칙 세트입니다. 사용자는 데이터 분석(비즈니스 의사 결정의 결과 예측, 보고서 및 대시보드 생성, 운영 비효율성 저감 등)을 통해 특정 비즈니스 인텔리전스 요구 사항을 해결할 수 있습니다.
 ETL이 중요한 이유는 무엇인가요? 오늘날 조직은 다음과 같은 다양한 소스의 정형 데이터와 비정형 데이터를 모두 보유하고 있습니다.]]></description>
 </item>

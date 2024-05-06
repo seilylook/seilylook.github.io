@@ -23,7 +23,7 @@ To track requests for access to your bucket, you can enable access logging. `Eac
 
 # 버킷 생성
 
-<img src="/images/s3-1.png"/>
+<img src="/images/s3/s3-1.png"/>
 
 # 파일(객체) 업로드
 
@@ -59,41 +59,41 @@ Access Control List
 (이 목록은 누가 또는 무엇인 객체 접근 허가를 받는지, 어떤 작업이 객체에 수행되도록 허가를 받을지를 지정한다.)
 {{</admonition>}}
 
-<img src="/images/s3-4.png"/>
+<img src="/images/s3/s3-4.png"/>
 
-<img src="/images/s3-3.png"/>
+<img src="/images/s3/s3-3.png"/>
 
 # Bucket Policy
 
 [Bucket Policy Generator](https://awspolicygen.s3.amazonaws.com/policygen.html)
 
-<img src="/images/s3-5.png"/>
+<img src="/images/s3/s3-5.png"/>
 
-<img src="/images/s3-6.png"/>
+<img src="/images/s3/s3-6.png"/>
 
-<img src="/images/s3-7.png"/>
+<img src="/images/s3/s3-7.png"/>
 
-<img src="/images/s3-8.png"/>
+<img src="/images/s3/s3-8.png"/>
 
-<img src="/images/s3-9.png"/>
+<img src="/images/s3/s3-9.png"/>
 
-<img src="/images/s3-10.png"/>
+<img src="/images/s3/s3-10.png"/>
 
-<img src="/images/s3-11.png"/>
+<img src="/images/s3/s3-11.png"/>
 
-<img src="/images/s3-12.png"/>
+<img src="/images/s3/s3-12.png"/>
 
-<img src="/images/s3-13.png"/>
+<img src="/images/s3/s3-13.png"/>
 
-<img src="/images/s3-14.png"/>
+<img src="/images/s3/s3-14.png"/>
 
 # Lifecycle Bucket
 
-<img src="/images/s3-15.png"/>
+<img src="/images/s3/s3-15.png"/>
 
-<img src="/images/s3-16.png"/>
+<img src="/images/s3/s3-16.png"/>
 
-<img src="/images/s3-17.png"/>
+<img src="/images/s3/s3-17.png"/>
 
 # 실습
 

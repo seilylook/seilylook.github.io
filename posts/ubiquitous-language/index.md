@@ -33,7 +33,7 @@
 
 모두가 이해하는 유비쿼터스 언어는 단순히 명사 뿐만 아니라 동사가지 용어 사전으로 관리해야 한다. 팀 공동 프로젝트 도구들을 사용하면 된다. 예), JIRA, Notion 등.
 
-<img src="/images/ubiquitous-term-dict.png" />
+<img src="/images/ubiquitous/ubiquitous-term-dict.png" />
 
 ### 효과적인 모델링
 
@@ -43,5 +43,5 @@
 
 표현해야 할 것ㅇ르 더 쉽게 말하는 방법을 찾아낸 다음에 새로운 아이디어를 다어이그램과 코드에 적용한다.
 
-<img src="/images/ubiquitous-modeling.png" />
+<img src="/images/ubiquitous/ubiquitous-modeling.png" />
 

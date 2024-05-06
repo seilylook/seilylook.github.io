@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/krypto/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/ethereum-image.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/ethereum-featured-image.jpeg" referrerpolicy="no-referrer">
             </div>Introduction React와 Solidity를 사용해 Ethereum 거래 서비스 구현.
 Tech stack Front-end
 React Tailwindcss ethers (version 5) vite Smart Contract
@@ -24,7 +24,7 @@ hardhat chai ethers (version 5) ethereum-waffle(version 4) Directory structure 1
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/authentication-svelte-rust/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/user-auth.jpg" referrerpolicy="no-referrer">
+                <img src="/images/user-auth-featured-image.jpg" referrerpolicy="no-referrer">
             </div>Introduction Svelte와 Rust를 사용해서 사용자 인증 시스템을 구현한 프로젝트.
 Tech stack Front-end
 Sveltekit

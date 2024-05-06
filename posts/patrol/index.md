@@ -60,7 +60,7 @@ patrol doctor
 
 이 명령어를 입력했을 때, 다음과 같이 떠야 정상적으로 설치된 것이다.
 
-<img src="/images/patrol-doctor.png" />
+<img src="/images/patrol/patrol-doctor.png" />
 
 {{<admonition danger>}}
 만약 설치 이후에도, `partol doctor` 명령어가 실행되지 않는다면 환경 변수를 설정해주지 않아서이다.
@@ -180,15 +180,15 @@ public class MainActivityTest {
 
 2. `File > New > Target`을 선택한다. `UI Testing Bundle`을 선택한다. `Product Name`을 `RunnerUITests`으로 바꿔준다. `Organization Identifier`을 `Runner`와 동일하게 바꿔준다. `Target to Tested`를 `Runner` 그리고 언어를 `Objective-c`로 바꾸고 finish.
 
-<img src="/images/patrol-setting-1.png" />
-<img src="/images/patrol-setting-2.png" />
-<img src="/images/patrol-setting-3.png" />
+<img src="/images/patrol/patrol-setting-1.png" />
+<img src="/images/patrol/patrol-setting-2.png" />
+<img src="/images/patrol/patrol-setting-3.png" />
 
 3. 2개의 파일이 생성된다. `RunnerUITest.m` & `RunnerUITestsLaunchTests.m`. `RunnerUITestsLaunchTests.m` 파일은 삭제한다.
 
 4. `RunnerUITests`의 Build Settins의 iOS Deployment Target을 `Runner`와 동일하게 해준다. iOS version을 의미한다.
 
-<img src="/images/patrol-setting-6.png" />
+<img src="/images/patrol/patrol-setting-6.png" />
 
 5. `RunnerUITests.m` 파일에 있는 코드를 모두 지우고 다음 코드를 적는다.
 
@@ -214,7 +214,7 @@ end
 
 ```
 
-<img src="/images/patrol-setting-8.png" />
+<img src="/images/patrol/patrol-setting-8.png" />
 
 6. Root Directory에 `integration_test/example_test.dart` 폴더와 파일을 만들어준다. 그리고 다음 명령어를 입력해준다.
 
@@ -222,7 +222,7 @@ end
 $ flutter build ios --config-only integration_test/example_test.dart
 ```
 
-<img src="/images/patrol-setting-10.png" />
+<img src="/images/patrol/patrol-setting-10.png" />
 
 7. `ios` 디렉토리로 이동해서 다음 명령어를 입력해준다.
 
@@ -230,19 +230,19 @@ $ flutter build ios --config-only integration_test/example_test.dart
 pod install --repo-update
 ```
 
-<img src="/images/patrol-setting-11.png" />
+<img src="/images/patrol/patrol-setting-11.png" />
 
 8. Xcode를 열어서 각각의 build configuration, `RunnerUITests`이 `Runner`와 동일하게 바꿔준다.
 
-<img src="/images/patrol-setting-12.png" />
+<img src="/images/patrol/patrol-setting-12.png" />
 
 9. RunnerUITests => Build Phases으로 들어가서 2개의 `Run Script Phase`를 추가해준다. 각각의 이름을 `xcode_backend build` & `xcode_backend embed_and_thin`으로 설정해준다.
 
-<img src="/images/patrol-setting-13.png" />
+<img src="/images/patrol/patrol-setting-13.png" />
 
 10. 작성한 2개의 Script Phase의 위치를 다음과 같이 수정해준다.
 
-<img src="/images/patrol-setting-14.png" />
+<img src="/images/patrol/patrol-setting-14.png" />
 
 11. `xcode_backend build`에 다음 코드를 적는다.
 
@@ -250,7 +250,7 @@ pod install --repo-update
 /bin/sh "$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh" build
 ```
 
-<img src="/images/patrol-setting-15.png" />
+<img src="/images/patrol/patrol-setting-15.png" />
 
 12. `xcode_backend embed_and_thin`에 다음 코드를 적는다.
 
@@ -258,16 +258,16 @@ pod install --repo-update
 /bin/sh "$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh" embed_and_thin
 ```
 
-<img src="/images/patrol-setting-16.png" />
+<img src="/images/patrol/patrol-setting-16.png" />
 
 13. parallel execution을 disable로 바꿔준다.
 
-<img src="/images/patrol-setting-17.png" />
-<img src="/images/patrol-setting-18.png" />
-<img src="/images/patrol-setting-19.png" />
-<img src="/images/patrol-setting-20.png" />
+<img src="/images/patrol/patrol-setting-17.png" />
+<img src="/images/patrol/patrol-setting-18.png" />
+<img src="/images/patrol/patrol-setting-19.png" />
+<img src="/images/patrol/patrol-setting-20.png" />
 
 14. `RunnerUITests` => `Build Settins`에 들어가서, `User Script Sandboxing`을 찾아서 `No`로 변경해준다.
 
-<img src="/images/patrol-setting-21.png" />
+<img src="/images/patrol/patrol-setting-21.png" />
 

@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/three.js/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/threejs-logo.png" referrerpolicy="no-referrer">
+                <img src="/images/threejs-logo-featured-image.png" referrerpolicy="no-referrer">
             </div>Three.js: three.js는 3D 그래픽을 생성하고 렌더링하기 위한 JavaScript 3D 라이브러리입니다. 웹 브라우저에서 3D 그래픽을 만들고 다루기 위해 사용되며, WebGL 기술을 기반으로 하여 다양한 3D 시각화 및 인터랙티브 웹 애플리케이션을 개발할 수 있게 해줍니다.
 Three.js https://threejs.org/
 1. 시작 1.1 설치 three.js는 npm을 포함한 빌드 툴에서 설치가 가능하고, CDN이나 static 호스팅으로 빠르게 사용이 가능하다. 대부분의 경우 npm을 통한 설치가 가장 좋은 선택이다.

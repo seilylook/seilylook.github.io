@@ -137,5 +137,5 @@ This is to `schedule` activites, either as `one-time` events or as `recurring` t
 * * * * * 명령어
 ```
 
-<img src="/images/cron-cmd.png" />
+<img src="/images/cron/cron-cmd.png" />
 

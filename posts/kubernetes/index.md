@@ -380,3 +380,35 @@ minikube executable installed on your system.
 
 # Setup - Kubeadm
 
+<img src="/images/kubernetes/kubernetes-19.png"/>
+
+With the minikube utility you could only setup a single node kubernetes cluster. The
+kubeadmin tool helps us setup a multi node cluster with master and workers on
+separate machines. Installing all of these various components individually on different
+nodes and modifying the configuration files to make it work is a tedious task.
+Kubeadmin tool helps us in doing all of that very easily.
+
+<img src="/images/kubernetes/kubernetes-20.png"/>
+
+First, you must have multiple systems or virtual
+machines created for configuring a cluster. Once the systems are created, designate
+one as master and others as worker nodes.
+
+The next step is to install a container runtime on the hosts. We will be using Docker,
+so we must install Docker on all the nodes.
+
+The next step is to install kubeadmin tool on all the nodes. The kubeadmin tool helps
+us bootstrap the kubernetes solution by installing and configuring all the required
+components in the right nodes.
+
+The third step is to initialize the Master server. During this process all the required
+components are installed and configured on the master server. That way we can start
+the cluster level configurations from the master server.
+
+Once the master is initialized and before joining the worker nodes to the master, we
+must ensure that the network pre-requisites are met. A normal network connectivity
+between the systems is not SUFFICIENT for this. Kubernetes requires a special network between the master and worker nodes which is called as a POD network.
+
+The last step is to join the worker nodes to the master node. We are then all set to
+launch our application in the kubernetes environment.
+

@@ -83,11 +83,11 @@
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/domain-image.webp"
-        data-srcset="/images/domain-image.webp, /images/domain-image.webp 1.5x, /images/domain-image.webp 2x"
+        data-src="/images/domain-featured-image.webp"
+        data-srcset="/images/domain-featured-image.webp, /images/domain-featured-image.webp 1.5x, /images/domain-featured-image.webp 2x"
         data-sizes="auto"
-        alt="/images/domain-image.webp"
-        title="/images/domain-image.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/domain-featured-image.webp"
+        title="/images/domain-featured-image.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -260,24 +260,24 @@
 </li>
 </ol>
 <h4 id="도메인-이벤트-도출">도메인 이벤트 도출</h4>
-<img src="/images/domain-event.png" />
+<img src="/images/domain/domain-event.png" />
 <p><code>도메인 이벤트 도출</code> 단계는 서비스에서 발생할 수 있는 비즈니스 이벤트를 분석하는 단계이다. 이번 요구 사항을 기반으로는 <code>렌트 요청</code>, <code>렌트 반환</code>, <code>렌트 수락</code>, <code>렌트 거절</code>, <code>알림 발송</code> 등 총 5개의 이벤트를 도출할 수 있다.</p>
 <h4 id="이벤트에-따른-정책-도출">이벤트에 따른 정책 도출</h4>
-<img src="/images/domain-policy.png" />
+<img src="/images/domain/domain-policy.png" />
 <p><code>이벤트에 따른 정책(Policy) 도출</code> 단계는 도메인 이벤트 발생 후 그에 따라 추가적으로 반응하는 행위인 정책(Policy)을 도출하는 단계이다.</p>
 <p>고객이 <code>자동차 렌트 요청</code>을 하면, 대여점에는 <code>렌트 요청 생성</code>이 발생하며, 고객 또는 대여점이 렌트를 <code>수락</code>, <code>거절</code>, <code>반환</code> 하게된다면, <code>렌트 상태 변경</code>이 발생하게 될 것이다. 또한 상태 변경시마다 알림이 전송되어 <code>알림 발송</code>도 함께 발생하게 될 것이다.</p>
 <h4 id="커맨드와-액터-식별">커맨드와 액터 식별</h4>
-<img src="/images/domain-command.png" />
+<img src="/images/domain/domain-command.png" />
 <p><code>커맨드(Command)와 액터(Actor) 식별</code> 단계는 도메인 이벤트를 발생시키는 <code>행위</code>인 커맨드(Command)와 행위를 수행하는 <code>주체</code>인 액터(Actor) 도출하는 단계이다.</p>
 <p><code>고객</code>이 <code>자동차 렌트 요청</code>을 하면, 고객이라는 <code>주체</code>가 자동차 렌트 요청 이라는 <code>행위</code>를 하게되므로 액터와 커맨드를 도출해낼 수 있게된다.</p>
 <h4 id="어그리게이트-매핑">어그리게이트 매핑</h4>
-<img src="/images/aggregate.png" />
+<img src="/images/domain/aggregate.png" />
 <p><code>어그리게이트(Aggregate) 매핑</code> 단계는 커맨드와 이벤트가 사용하는 데이터를 정의하는 단계이다. 이번 사례에서는 간략하게 <code>고객(Customer)</code>, <code>매장(Store)</code>, <code>알림(Notification)</code>등의 대표적인 데이터를 사용하였지만, 세부 단계에서는 어그리게이트 내부에서 사용하는 상세 데이터도 함께 지정하여 더욱 명확한 이벤트 스토밍을 진행하게 될 것이다.</p>
 <h4 id="바운디드-컨텍스트">바운디드 컨텍스트</h4>
-<img src="/images/bounded-context.png" />
+<img src="/images/domain/bounded-context.png" />
 <p><code>바운디드 컨텍스트(Bound Context)</code> 단계는 지금까지의 결과물들을 바운디드 컨텍스트를 이용해 묶어주는 단계이다. 이벤트 스토밍이 완료되었을 때, 이 단계에서 생성된 바운디드 컨텍스트들은 각각의 마이크로 서비스가 될 가능성이 있다.</p>
 <h4 id="컨텍스트-매핑">컨텍스트 매핑</h4>
-<img src="/images/context-mapping.png" />
+<img src="/images/domain/context-mapping.png" />
 <p>마지막으로 <code>컨텍스트 매핑(Context Mapping)</code> 단계는 최종적으로 구성요소간의 관계를 설정하는 단계이다. 이 단계에서는 고려하지 못했던 외부 시스템(External System)이나, 추가적으로 도출된 도메인 이벤트나 커맨드 등을 포함하여 전체 시스템을 검토해야한다.</p>
 <p>예를들어 매장에서 발생하는 <code>렌트 수락됨</code>, <code>렌트 거절됨</code>과 같은 이벤트를 <code>렌트 상태 변경됨</code>으로 통합하거나, 알림(Notification) 바운디드 컨텍스트에서 사용하는 외부 시스템(External System)을 추가할 수 있다.</p>
 <p>최종적으로는 EDA(Event Driven Architecture)를 이용하여 각 도메인 간의 통신을 유연하게 구성하게 될 것이다.</p>
@@ -293,7 +293,7 @@
                             <a class="link-to-markdown" href="/posts/domain-driven-design/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design" data-hashtags="Development,Architecture,Design,DDD"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design" data-image="/images/domain-image.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design" data-hashtags="Development,Architecture,Design,DDD"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-hashtag="Development"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/domain-driven-design/" data-title="Domain Driven Design" data-image="/images/domain-featured-image.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

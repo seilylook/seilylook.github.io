@@ -11,7 +11,7 @@
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/kafka-spark/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/spark-kafka.webp" referrerpolicy="no-referrer">
+                <img src="/images/spark-kafka-featured-image.webp" referrerpolicy="no-referrer">
             </div>Kafka와 Spark의 차이점은 무엇일까요? Apache Kafka는 스트림 처리 엔진이고 Apache Spark는 분산 데이터 처리 엔진입니다. 분석에서 조직은 두 가지 주요 방법, 즉 배치 처리와 스트림 처리를 사용하여 데이터를 처리합니다. 배치 처리에서는 단일 워크로드에서 매우 많은 양의 데이터를 처리합니다. 스트림 처리에서는 작은 단위의 데이터를 실시간 흐름으로 연속적으로 처리합니다. 원래 Spark는 배치 처리용으로 설계되었고 Kafka는 스트림 처리용으로 설계되었습니다. 이후 Spark는 Spark 스트리밍 모듈을 기본 분산 아키텍처에 추가 기능으로 추가했습니다. 하지만 Kafka는 대부분의 스트리밍 데이터 사용 사례에서 더 낮은 지연 시간과 더 높은 처리량을 제공합니다.]]></description>
 </item>
 </channel>

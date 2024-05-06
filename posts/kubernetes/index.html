@@ -11,7 +11,7 @@ Containers Why do you need containers? In one of my previos projects, I had this
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-06T10:58:44+09:00" />
-<meta property="article:modified_time" content="2024-05-06T13:00:53+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-06T14:37:46+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Kubernetes"/>
@@ -30,8 +30,8 @@ Containers Why do you need containers? In one of my previos projects, I had this
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  3203 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes\/","datePublished": "2024-05-06T10:58:44+09:00","dateModified": "2024-05-06T13:00:53+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  3470 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes\/","datePublished": "2024-05-06T10:58:44+09:00","dateModified": "2024-05-06T14:37:46+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -78,16 +78,16 @@ Containers Why do you need containers? In one of my previos projects, I had this
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-06">2024-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3203 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-06">2024-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3470 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/kubernetes.png"
-        data-srcset="/images/kubernetes.png, /images/kubernetes.png 1.5x, /images/kubernetes.png 2x"
+        data-src="/images/kubernetes/kubernetes.png"
+        data-srcset="/images/kubernetes/kubernetes.png, /images/kubernetes/kubernetes.png 1.5x, /images/kubernetes/kubernetes.png 2x"
         data-sizes="auto"
-        alt="/images/kubernetes.png"
-        title="/images/kubernetes.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/kubernetes/kubernetes.png"
+        title="/images/kubernetes/kubernetes.png" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -401,19 +401,42 @@ kubernetes command line tool also installed on your machine. So you need 3 thing
 to get this working, you must have a hypervisor installed, kubectl installed and
 minikube executable installed on your system.</p>
 <h1 id="setup---kubeadm">Setup - Kubeadm</h1>
+<img src="/images/kubernetes/kubernetes-19.png"/>
+<p>With the minikube utility you could only setup a single node kubernetes cluster. The
+kubeadmin tool helps us setup a multi node cluster with master and workers on
+separate machines. Installing all of these various components individually on different
+nodes and modifying the configuration files to make it work is a tedious task.
+Kubeadmin tool helps us in doing all of that very easily.</p>
+<img src="/images/kubernetes/kubernetes-20.png"/>
+<p>First, you must have multiple systems or virtual
+machines created for configuring a cluster. Once the systems are created, designate
+one as master and others as worker nodes.</p>
+<p>The next step is to install a container runtime on the hosts. We will be using Docker,
+so we must install Docker on all the nodes.</p>
+<p>The next step is to install kubeadmin tool on all the nodes. The kubeadmin tool helps
+us bootstrap the kubernetes solution by installing and configuring all the required
+components in the right nodes.</p>
+<p>The third step is to initialize the Master server. During this process all the required
+components are installed and configured on the master server. That way we can start
+the cluster level configurations from the master server.</p>
+<p>Once the master is initialized and before joining the worker nodes to the master, we
+must ensure that the network pre-requisites are met. A normal network connectivity
+between the systems is not SUFFICIENT for this. Kubernetes requires a special network between the master and worker nodes which is called as a POD network.</p>
+<p>The last step is to join the worker nodes to the master node. We are then all set to
+launch our application in the kubernetes environment.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-06&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/336d896a9a0005517cf98784a73ef0a195a881ca" target="_blank" title="commit by seilylook(seilylook@naver.com) 336d896a9a0005517cf98784a73ef0a195a881ca: add: Kubernetes Architectures">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>336d896</a></span>
+                <span>Updated on 2024-05-06&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/6a204dbc3ef68ae9cddb7e7e5a56c316dccb6217" target="_blank" title="commit by seilylook(seilylook@naver.com) 6a204dbc3ef68ae9cddb7e7e5a56c316dccb6217: common: change img directory Kubernetes">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6a204db</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/posts/kubernetes/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes" data-hashtags="Kubernetes"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/kubernetes/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes" data-image="/images/kubernetes.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes" data-hashtags="Kubernetes"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/kubernetes/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/kubernetes/" data-title="Kubernetes" data-image="/images/kubernetes/kubernetes.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

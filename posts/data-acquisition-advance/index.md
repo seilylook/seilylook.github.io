@@ -134,13 +134,13 @@ Server에서 특정 Target 서비스에 크롤링을 위해 많은 요청을 보
 
 Client에서 Server로 요청 시 직접 요청이 아닌 Proxy Server를 거쳐, Forward Proxy라 지칭
 
-<img src="/images/forward-proxy.png" />
+<img src="/images/data-acquisition/forward-proxy.png" />
 
 ### Reverse Proxy
 
 Forward와 반대로 Server에서 Client로 직접 데이터를 전달하지 않고 Proxy Server를 거치는 방식
 
-<img src="/images/reverse-proxy.png" />
+<img src="/images/data-acquisition/reverse-proxy.png" />
 
 # Practice 1
 
@@ -306,7 +306,7 @@ chmod +x /users/main.py
 
 ### 해결 방법
 
-<img src="/images/cron-error-1.png" />
+<img src="/images/cron/cron-error-1.png" />
 
 - 시스템 설정
 
@@ -314,15 +314,15 @@ chmod +x /users/main.py
 
 - 전체 디스크 접근 권한
 
-<img src="/images/cron-error-2.png" />
+<img src="/images/cron/cron-error-2.png" />
 
 - `+` 을 클릭
 
-<img src="/images/cron-error-3.png" />
+<img src="/images/cron/cron-error-3.png" />
 
 - 디렉토리 선택창이 뜨면 `/usr/sbin/cron`을 입력하면 위와 같이 `cron`이 나타나고 아래의 링크를 클릭해서 추가해주면 전체 디스크 접근 항목에 추가 된다.
 
-<img src="/images/cron-error-4.png" />
+<img src="/images/cron/cron-error-4.png" />
 
 - `CRON`이 전체 디스크에 접근 권한이 생겼는지 확인 가능.
 
