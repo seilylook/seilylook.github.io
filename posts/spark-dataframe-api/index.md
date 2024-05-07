@@ -111,3 +111,25 @@ customerDf \
 .select("firstname", "lastname", "birthdate")
 ```
 
+## Create Group of Rows: GroupBy
+
+## DataFrame Statics
+
+## Joining DataFrames - Inner Join
+
+## Joining DataFrames - Right Outer Join
+
+## Joining DataFrames - Left Outer Join
+
+## Appending Rows to a DataFrame - Union
+
+## Cashing a DataFrame
+
+## DataFrameWriter I
+
+## DataFrameWriter II - PartitionBy
+
+## User Defined Functions
+
+# Apache Spark Architecture: Execution
+

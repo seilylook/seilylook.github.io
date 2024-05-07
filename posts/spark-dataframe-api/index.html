@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/spark-dataframe-api/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-07T13:12:28+09:00" />
-<meta property="article:modified_time" content="2024-05-07T13:12:28+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-07T14:43:25+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Spark DataFrame API"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/spark-dataframe-api\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, DataFrame, API","wordcount":  323 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/spark-dataframe-api\/","datePublished": "2024-05-07T13:12:28+09:00","dateModified": "2024-05-07T13:12:28+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, DataFrame, API","wordcount":  370 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/spark-dataframe-api\/","datePublished": "2024-05-07T13:12:28+09:00","dateModified": "2024-05-07T14:43:25+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -74,7 +74,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark DataFrame API</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-07">2024-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;323 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-07">2024-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;370 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -113,6 +113,16 @@
       </ul>
     </li>
     <li><a href="#sort-and-order-rows---sort--orderby">Sort and Order Rows - Sort &amp; OrderBy</a></li>
+    <li><a href="#create-group-of-rows-groupby">Create Group of Rows: GroupBy</a></li>
+    <li><a href="#dataframe-statics">DataFrame Statics</a></li>
+    <li><a href="#joining-dataframes---inner-join">Joining DataFrames - Inner Join</a></li>
+    <li><a href="#joining-dataframes---right-outer-join">Joining DataFrames - Right Outer Join</a></li>
+    <li><a href="#joining-dataframes---left-outer-join">Joining DataFrames - Left Outer Join</a></li>
+    <li><a href="#appending-rows-to-a-dataframe---union">Appending Rows to a DataFrame - Union</a></li>
+    <li><a href="#cashing-a-dataframe">Cashing a DataFrame</a></li>
+    <li><a href="#dataframewriter-i">DataFrameWriter I</a></li>
+    <li><a href="#dataframewriter-ii---partitionby">DataFrameWriter II - PartitionBy</a></li>
+    <li><a href="#user-defined-functions">User Defined Functions</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="dataframe-transformations">DataFrame Transformations</h1>
@@ -308,11 +318,23 @@
 </span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstname&#34;</span><span class="p">,</span> <span class="s2">&#34;lastname&#34;</span><span class="p">,</span> <span class="s2">&#34;birthdate&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="create-group-of-rows-groupby">Create Group of Rows: GroupBy</h2>
+<h2 id="dataframe-statics">DataFrame Statics</h2>
+<h2 id="joining-dataframes---inner-join">Joining DataFrames - Inner Join</h2>
+<h2 id="joining-dataframes---right-outer-join">Joining DataFrames - Right Outer Join</h2>
+<h2 id="joining-dataframes---left-outer-join">Joining DataFrames - Left Outer Join</h2>
+<h2 id="appending-rows-to-a-dataframe---union">Appending Rows to a DataFrame - Union</h2>
+<h2 id="cashing-a-dataframe">Cashing a DataFrame</h2>
+<h2 id="dataframewriter-i">DataFrameWriter I</h2>
+<h2 id="dataframewriter-ii---partitionby">DataFrameWriter II - PartitionBy</h2>
+<h2 id="user-defined-functions">User Defined Functions</h2>
+<h1 id="apache-spark-architecture-execution">Apache Spark Architecture: Execution</h1>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-07</span>
+                <span>Updated on 2024-05-07&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c5aced8cfa57675721b7421ab1131cb119edef61" target="_blank" title="commit by seilylook(seilylook@naver.com) c5aced8cfa57675721b7421ab1131cb119edef61: add: DataFrame API total script">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c5aced8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
