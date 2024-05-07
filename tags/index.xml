@@ -4,7 +4,31 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 06 May 2024 10:58:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 07 May 2024 13:12:28 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>API</title>
+    <link>https://seilylook.github.io/tags/api/</link>
+    <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/api/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>DataFrame</title>
+    <link>https://seilylook.github.io/tags/dataframe/</link>
+    <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/dataframe/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Spark</title>
+    <link>https://seilylook.github.io/tags/spark/</link>
+    <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/spark/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Kubernetes</title>
     <link>https://seilylook.github.io/tags/kubernetes/</link>
     <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
@@ -18,14 +42,6 @@
     <pubDate>Wed, 01 May 2024 12:44:15 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/data-engineering/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Spark</title>
-    <link>https://seilylook.github.io/tags/spark/</link>
-    <pubDate>Wed, 01 May 2024 12:44:15 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/spark/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -66,22 +82,6 @@
     <pubDate>Sun, 28 Apr 2024 15:57:39 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/big-data/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Data Storage</title>
-    <link>https://seilylook.github.io/tags/data-storage/</link>
-    <pubDate>Thu, 25 Apr 2024 17:34:25 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/data-storage/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Crawling</title>
-    <link>https://seilylook.github.io/tags/crawling/</link>
-    <pubDate>Thu, 18 Apr 2024 13:47:30 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/crawling/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

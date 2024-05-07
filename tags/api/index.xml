@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>API - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/api/</link>
+        <description>API - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 07 May 2024 13:12:28 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/api/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark DataFrame API</title>
+    <link>https://seilylook.github.io/posts/spark-dataframe-api/</link>
+    <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-dataframe-api/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/api.jpeg" referrerpolicy="no-referrer">
+            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( \ &#34;salutation&#34;, \ &#34;firstname&#34;, \ &#34;lastname&#34;, \ &#34;email_address&#34;, \ &#34;year(birthdate) birthyear&#34; \ ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
+</item>
+</channel>
+</rss>

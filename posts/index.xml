@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 06 May 2024 10:58:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 07 May 2024 13:12:28 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark DataFrame API</title>
+    <link>https://seilylook.github.io/posts/spark-dataframe-api/</link>
+    <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-dataframe-api/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/api.jpeg" referrerpolicy="no-referrer">
+            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( \ &#34;salutation&#34;, \ &#34;firstname&#34;, \ &#34;lastname&#34;, \ &#34;email_address&#34;, \ &#34;year(birthdate) birthyear&#34; \ ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
+</item>
+<item>
     <title>Kubernetes</title>
     <link>https://seilylook.github.io/posts/kubernetes/</link>
     <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
@@ -122,18 +132,6 @@ Virtual Env configuration 1 2 3 (venv) {seilylook} 🍻 python3 -m virtualenv ve
             </div>What is Big Data? Big data is data whose scale, diversity, and complexity require new architecture, techniques, algorithms, and analytics to manage it and extract value and hidden knowledge from it.
 Big data is refers to things one can do at a largee scale that cannot be done at a smaller one, to extract new insights or create new forms of value,
 in ways that change markets, organizations, the relationship between citizens and governments, and more.]]></description>
-</item>
-<item>
-    <title>Airflow</title>
-    <link>https://seilylook.github.io/posts/airflow/</link>
-    <pubDate>Sat, 13 Apr 2024 15:51:18 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/airflow/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/airflow-logo.png" referrerpolicy="no-referrer">
-            </div>Airflow? Airflow는 Python 코드로 워크플로우(workflow)를 작성하고, 스케쥴링, 모니터링 하는 플랫폼입니다. Airflow를 통해서 데이터엔지니어링의 ETL 작업을 자동화하고, DAG(Directed Acyclic Graph) 형태의 워크플로우 작성이 가능합니다. 이를 통해 더 정교한 dependency를 가진 파이프라인을 설정할 수 있습니다. 또한 AWS, GCP 모두 Airflow managed service를 제공할 정도로 전세계 데이터팀들에게 널리 사용되고 있으며 그만큼 넓은 커뮤니티를 형성하고 있습니다.
-Airflow 동작 원리 Airflow는 여러가지 구성요소를 가지고 있습니다.
-Scheduler : 모든 DAG와 Task에 대하여 모니터링 및 관리하고, 실행해야할 Task를 스케줄링 해줍니다.]]></description>
 </item>
 </channel>
 </rss>
