@@ -43,8 +43,9 @@
 - `Language`: Python, Scala, Javascript, Dart
 - `Frontend`: React.js, Svelte, Flutter
 - `Backend`: NestJS, Express
+- `Database`: MongoDB, PostgreSQL
 - `Big Data`: Spark, Kafka
-- `DevOps`: Kubernetes
+- `Infra`: Airflow, Kubernetes, Docker, GCP, AWS
 
 <br/>
 

@@ -412,3 +412,128 @@ between the systems is not SUFFICIENT for this. Kubernetes requires a special ne
 The last step is to join the worker nodes to the master node. We are then all set to
 launch our application in the kubernetes environment.
 
+# Install
+
+[How to install Kubernetes?](https://kubernetes.io/docs/tasks/tools/)
+
+[How to install Virtual Box](https://formulae.brew.sh/cask/virtualbox#default)
+
+[How to install minikube?](https://minikube.sigs.k8s.io/docs/start/)
+
+[Start Minikube with Docker](https://minikube.sigs.k8s.io/docs/drivers/docker/)
+
+{{<admonition warning>}}
+
+```bash
+😄 Darwin 14.4.1 (arm64) 의 minikube v1.33.0
+✨ 유저 환경 설정 정보에 기반하여 virtualbox 드라이버를 사용하는 중
+
+❌ Exiting due to DRV_UNSUPPORTED_OS: The driver 'virtualbox' is not supported on darwin/arm64
+```
+
+Apple M3 Pro 칩 환경은 아직 Minikube - Virtual Box를 지원하지 않는 듯 하다. 할 수 없이 Docker를 사용해본다.  
+{{</admonition>}}
+
+```bash
+ {seilylook} 🔥   ~  minikube start --driver=docker
+😄  Darwin 14.4.1 (arm64) 의 minikube v1.33.0
+✨  유저 환경 설정 정보에 기반하여 docker 드라이버를 사용하는 중
+📌  Using Docker Desktop driver with root privileges
+👍  Starting "minikube" primary control-plane node in "minikube" cluster
+🚜  Pulling base image v0.0.43 ...
+💾  쿠버네티스 v1.30.0 을 다운로드 중 ...
+    > preloaded-images-k8s-v18-v1...:  319.81 MiB / 319.81 MiB  100.00% 31.20 M
+    > gcr.io/k8s-minikube/kicbase...:  434.52 MiB / 434.52 MiB  100.00% 21.03 M
+🔥  Creating docker container (CPUs=2, Memory=4600MB) ...
+🐳  쿠버네티스 v1.30.0 을 Docker 26.0.1 런타임으로 설치하는 중
+    ▪ 인증서 및 키를 생성하는 중 ...
+    ▪ 컨트롤 플레인을 부팅하는 중 ...
+    ▪ RBAC 규칙을 구성하는 중 ...
+🔗  bridge CNI (Container Networking Interface) 를 구성하는 중 ...
+🔎  Kubernetes 구성 요소를 확인...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  애드온 활성화 : storage-provisioner, default-storageclass
+🏄  끝났습니다! kubectl이 "minikube" 클러스터와 "default" 네임스페이스를 기본적으로 사용하도록 구성되었습니다.
+```
+
+## Manage Cluster
+
+Start
+
+```bash
+minikube start
+```
+
+Pause Kubernetes without impacting deployed applications:
+
+```bash
+minikube pause
+```
+
+Unpause a paused instance:
+
+```bash
+minikube unpause
+```
+
+Halt the cluster:
+
+```bash
+minikube stop
+```
+
+Change the default memory limit (requires a restart):
+
+```bash
+minikube config set memory 9001
+```
+
+Browse the catalog of easily installed Kubernetes services:
+
+```bash
+minikube addons list
+```
+
+Create a second cluster running an older Kubernetes release:
+
+```bash
+minikube start -p aged --kubernetes-version=v1.16.1
+```
+
+Delete all of the minikube clusters:
+
+```bash
+minikube delete --all
+```
+
+# Hello Minikube
+
+[Hello Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)
+
+## Create Deployment
+
+1. Use the kubectl create command to create a Deployment that manages a Pod. The Pod runs a Container based on the provided Docker image.
+
+   ```bash
+   # Run a test container image that includes a webserver
+   kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080
+   ```
+
+2. View the Deployment
+
+   ```bash
+   kubectl get deployments
+   ```
+
+## Create Service
+
+1. Expose the Pod to the public internet using the kubectl expose command:
+
+   ```bash
+   kubectl expose deployment hello-node --type=LoadBalancer --port=8080
+   ```
+
+   The `--type=LoadBalancer` flag indicates that you want to expose your Service outside of the cluster.
+
+   The application code inside the test image only listens on TCP port 8080. If you used `kubectl expose` to expose a different port, clients could not connect to that other port.
+

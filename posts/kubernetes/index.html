@@ -30,7 +30,7 @@ Containers Why do you need containers? In one of my previos projects, I had this
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  3470 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  3910 ,
         "url": "https:\/\/seilylook.github.io\/posts\/kubernetes\/","datePublished": "2024-05-06T10:58:44+09:00","dateModified": "2024-05-06T17:23:29+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -78,8 +78,8 @@ Containers Why do you need containers? In one of my previos projects, I had this
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-06">2024-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3470 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-06">2024-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3910 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -121,6 +121,15 @@ Containers Why do you need containers? In one of my previos projects, I had this
 
   <ul>
     <li><a href="#minikube">Minikube</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#manage-cluster">Manage Cluster</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#create-deployment">Create Deployment</a></li>
+    <li><a href="#create-service">Create Service</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="what-is-kubernetes-or-k8s">What is Kubernetes or K8s</h1>
@@ -424,6 +433,195 @@ must ensure that the network pre-requisites are met. A normal network connectivi
 between the systems is not SUFFICIENT for this. Kubernetes requires a special network between the master and worker nodes which is called as a POD network.</p>
 <p>The last step is to join the worker nodes to the master node. We are then all set to
 launch our application in the kubernetes environment.</p>
+<h1 id="install">Install</h1>
+<p><a href="https://kubernetes.io/docs/tasks/tools/" target="_blank" rel="noopener noreffer ">How to install Kubernetes?</a></p>
+<p><a href="https://formulae.brew.sh/cask/virtualbox#default" target="_blank" rel="noopener noreffer ">How to install Virtual Box</a></p>
+<p><a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener noreffer ">How to install minikube?</a></p>
+<p><a href="https://minikube.sigs.k8s.io/docs/drivers/docker/" target="_blank" rel="noopener noreffer ">Start Minikube with Docker</a></p>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">😄 Darwin 14.4.1 <span class="o">(</span>arm64<span class="o">)</span> 의 minikube v1.33.0
+</span></span><span class="line"><span class="cl">✨ 유저 환경 설정 정보에 기반하여 virtualbox 드라이버를 사용하는 중
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">❌ Exiting due to DRV_UNSUPPORTED_OS: The driver <span class="s1">&#39;virtualbox&#39;</span> is not supported on darwin/arm64
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Apple M3 Pro 칩 환경은 아직 Minikube - Virtual Box를 지원하지 않는 듯 하다. 할 수 없이 Docker를 사용해본다.</p></div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 🔥   ~  minikube start --driver<span class="o">=</span>docker
+</span></span><span class="line"><span class="cl">😄  Darwin 14.4.1 <span class="o">(</span>arm64<span class="o">)</span> 의 minikube v1.33.0
+</span></span><span class="line"><span class="cl">✨  유저 환경 설정 정보에 기반하여 docker 드라이버를 사용하는 중
+</span></span><span class="line"><span class="cl">📌  Using Docker Desktop driver with root privileges
+</span></span><span class="line"><span class="cl">👍  Starting <span class="s2">&#34;minikube&#34;</span> primary control-plane node in <span class="s2">&#34;minikube&#34;</span> cluster
+</span></span><span class="line"><span class="cl">🚜  Pulling base image v0.0.43 ...
+</span></span><span class="line"><span class="cl">💾  쿠버네티스 v1.30.0 을 다운로드 중 ...
+</span></span><span class="line"><span class="cl">    &gt; preloaded-images-k8s-v18-v1...:  319.81 MiB / 319.81 MiB  100.00% 31.20 M
+</span></span><span class="line"><span class="cl">    &gt; gcr.io/k8s-minikube/kicbase...:  434.52 MiB / 434.52 MiB  100.00% 21.03 M
+</span></span><span class="line"><span class="cl">🔥  Creating docker container <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>4600MB<span class="o">)</span> ...
+</span></span><span class="line"><span class="cl">🐳  쿠버네티스 v1.30.0 을 Docker 26.0.1 런타임으로 설치하는 중
+</span></span><span class="line"><span class="cl">    ▪ 인증서 및 키를 생성하는 중 ...
+</span></span><span class="line"><span class="cl">    ▪ 컨트롤 플레인을 부팅하는 중 ...
+</span></span><span class="line"><span class="cl">    ▪ RBAC 규칙을 구성하는 중 ...
+</span></span><span class="line"><span class="cl">🔗  bridge CNI <span class="o">(</span>Container Networking Interface<span class="o">)</span> 를 구성하는 중 ...
+</span></span><span class="line"><span class="cl">🔎  Kubernetes 구성 요소를 확인...
+</span></span><span class="line"><span class="cl">    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+</span></span><span class="line"><span class="cl">🌟  애드온 활성화 : storage-provisioner, default-storageclass
+</span></span><span class="line"><span class="cl">🏄  끝났습니다! kubectl이 <span class="s2">&#34;minikube&#34;</span> 클러스터와 <span class="s2">&#34;default&#34;</span> 네임스페이스를 기본적으로 사용하도록 구성되었습니다.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="manage-cluster">Manage Cluster</h2>
+<p>Start</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Pause Kubernetes without impacting deployed applications:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube pause
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Unpause a paused instance:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube unpause
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Halt the cluster:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube stop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Change the default memory limit (requires a restart):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube config <span class="nb">set</span> memory <span class="m">9001</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Browse the catalog of easily installed Kubernetes services:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube addons list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create a second cluster running an older Kubernetes release:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube start -p aged --kubernetes-version<span class="o">=</span>v1.16.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Delete all of the minikube clusters:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">minikube delete --all
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="hello-minikube">Hello Minikube</h1>
+<p><a href="https://kubernetes.io/docs/tutorials/hello-minikube/" target="_blank" rel="noopener noreffer ">Hello Minikube</a></p>
+<h2 id="create-deployment">Create Deployment</h2>
+<ol>
+<li>
+<p>Use the kubectl create command to create a Deployment that manages a Pod. The Pod runs a Container based on the provided Docker image.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Run a test container image that includes a webserver</span>
+</span></span><span class="line"><span class="cl">kubectl create deployment hello-node --image<span class="o">=</span>registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port<span class="o">=</span><span class="m">8080</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>View the Deployment</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get deployments
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="create-service">Create Service</h2>
+<ol>
+<li>
+<p>Expose the Pod to the public internet using the kubectl expose command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl expose deployment hello-node --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">8080</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The <code>--type=LoadBalancer</code> flag indicates that you want to expose your Service outside of the cluster.</p>
+<p>The application code inside the test image only listens on TCP port 8080. If you used <code>kubectl expose</code> to expose a different port, clients could not connect to that other port.</p>
+</li>
+</ol>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
