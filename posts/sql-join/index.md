@@ -41,6 +41,12 @@ on u.userid=b.userid
 where u.userid="111" -- join을 완료하고 그다음 조건을 따진다.
 ```
 
+```sql
+SELECT A.ID, A.ENAME, A.KNAME
+FROM A INNER JOIN B
+ON A.ID = B.ID
+```
+
 | ID  | ENAME | KNAME |
 | :-: | :---: | :---: |
 |  1  |  AAA  |  가   |
@@ -72,6 +78,12 @@ ON STUDENT.PID = PROFESSOR.ID
 WHERE GRADE = 1
 ```
 
+```sql
+SELECT A.ID, A.ENAME, A.KNAME
+FROM A LEFT OUTER JOIN B
+ON A.ID = B.ID
+```
+
 | ID  | ENAME | KNAME |
 | :-: | :---: | :---: |
 |  1  |  AAA  |  가   |
@@ -94,38 +106,18 @@ ON STUDENT.PID = PROFESSOR.ID
 WHERE GRADE = 1
 ```
 
+```sql
+SELECT A.ID, A.ENAME, A.KNAME
+FROM A RIGHT OUTER JOIN B
+ON A.ID = B.ID
+```
+
 | ID  | ENAME | KNAME |
 | :-: | :---: | :---: |
 |  1  |  AAA  |  가   |
 |  2  |  BBB  |  나   |
 |  4  | NULL  |  라   |
 |  5  | NULL  |  마   |
-
-## Union
-
-UNION은 여러 개의 SELECT 문의 결과를 하나의 테이블이나 결과 집합으로 표현할 때 사용
-
-이때 각각의 SELECT 문으로 선택된 필드의 개수와 타입은 모두 같아야 하며, 필드의 순서 또한 같아야 한다.
-
-기본 집합 쿼리에는 (DISTINCT) 중복제거가 자동 포함되어있다.
-
-```sql
-SELECT 필드이름 FROM 테이블이름
-UNION
-SELECT 필드이름 FROM 테이블이름
-```
-
-## Union All
-
-UNION은 DISTINCT 자동 포함이라 중복되는 레코드를 제거한다.
-
-따라서 중복되는 레코드까지 모두 출력하고 싶다면, ALL 키워드를 사용하면 된다.
-
-```sql
-SELECT 필드이름 FROM 테이블이름
-UNION ALL
-SELECT 필드이름 FROM 테이블이름
-```
 
 ## Exclusive Left / Right Join
 
@@ -154,6 +146,13 @@ ON A.ID_SEQ = B.ID_SEQ
 WHERE B.ID_SEQ IS NULL
 ```
 
+```sql
+SELECT A.ID, A.ENAME, A.KNAME
+FROM A LEFT OUTER JOIN B
+ON A.ID = B.ID
+WHERE B.ID IS NULL
+```
+
 | ID  | ENAME | KNAME |
 | :-: | :---: | :---: |
 |  3  |  CCC  | NULL  |
@@ -176,6 +175,13 @@ ON A.ID_SEQ = B.ID_SEQ
 WHERE A.ID_SEQ IS NULL
 ```
 
+```sql
+SELECT A.ID, A.ENAME, A.KNAME
+FROM A RIGHT OUTER JOIN B
+ON A.ID = B.ID
+WHERE A.ID IS NULL
+```
+
 | ID  | ENAME | KNAME |
 | :-: | :---: | :---: |
 |  4  | NULL  |  라   |
@@ -193,5 +199,31 @@ WHERE A.ID_SEQ IS NULL
 SELECT E.EMPNAME as 사원, M.EMPNAME as 직속상관
 FROM EMPLOYEE E, EMPLOYEE M -- inner join
 WHERE E.MANAGER = M.EMPNO;
+```
+
+## Union
+
+UNION은 여러 개의 SELECT 문의 결과를 하나의 테이블이나 결과 집합으로 표현할 때 사용
+
+이때 각각의 SELECT 문으로 선택된 필드의 개수와 타입은 모두 같아야 하며, 필드의 순서 또한 같아야 한다.
+
+기본 집합 쿼리에는 (DISTINCT) 중복제거가 자동 포함되어있다.
+
+```sql
+SELECT 필드이름 FROM 테이블이름
+UNION
+SELECT 필드이름 FROM 테이블이름
+```
+
+## Union All
+
+UNION은 DISTINCT 자동 포함이라 중복되는 레코드를 제거한다.
+
+따라서 중복되는 레코드까지 모두 출력하고 싶다면, ALL 키워드를 사용하면 된다.
+
+```sql
+SELECT 필드이름 FROM 테이블이름
+UNION ALL
+SELECT 필드이름 FROM 테이블이름
 ```
 

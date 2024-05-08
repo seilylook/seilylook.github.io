@@ -15,7 +15,7 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/sql-join/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-08T13:08:19+09:00" />
-<meta property="article:modified_time" content="2024-05-08T15:54:34+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-08T17:55:50+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="SQL Join"/>
@@ -38,8 +38,8 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/sql-join\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "SQL","wordcount":  626 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/sql-join\/","datePublished": "2024-05-08T13:08:19+09:00","dateModified": "2024-05-08T15:54:34+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "SQL","wordcount":  720 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/sql-join\/","datePublished": "2024-05-08T13:08:19+09:00","dateModified": "2024-05-08T17:55:50+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -86,8 +86,8 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">SQL Join</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-08">2024-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;626 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-08">2024-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;720 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -109,8 +109,6 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
         <li><a href="#right-outer-join">Right Outer Join</a></li>
       </ul>
     </li>
-    <li><a href="#union">Union</a></li>
-    <li><a href="#union-all">Union All</a></li>
     <li><a href="#exclusive-left--right-join">Exclusive Left / Right Join</a>
       <ul>
         <li><a href="#exclusive-left-join">Exclusive Left Join</a></li>
@@ -118,6 +116,8 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
       </ul>
     </li>
     <li><a href="#self-join">Self Join</a></li>
+    <li><a href="#union">Union</a></li>
+    <li><a href="#union-all">Union All</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="join">Join?</h1>
@@ -200,6 +200,18 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">userid</span><span class="o">=</span><span class="s2">&#34;111&#34;</span><span class="w"> </span><span class="c1">-- join을 완료하고 그다음 조건을 따진다.
 </span></span></span></code></pre></td></tr></table>
 </div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ENAME</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">KNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
 </div><table>
 <thead>
 <tr>
@@ -247,6 +259,18 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">STUDENT</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="w"> </span><span class="c1">-- STUDENT를 기준으로 왼쪽 조인
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ON</span><span class="w"> </span><span class="n">STUDENT</span><span class="p">.</span><span class="n">PID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="p">.</span><span class="n">ID</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRADE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ENAME</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">KNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><table>
@@ -298,6 +322,18 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRADE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ENAME</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">KNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">RIGHT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
 </div><table>
 <thead>
 <tr>
@@ -329,38 +365,7 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 </tr>
 </tbody>
 </table>
-<h2 id="union">Union</h2>
-<p>UNION은 여러 개의 SELECT 문의 결과를 하나의 테이블이나 결과 집합으로 표현할 때 사용</p>
-<p>이때 각각의 SELECT 문으로 선택된 필드의 개수와 타입은 모두 같아야 하며, 필드의 순서 또한 같아야 한다.</p>
-<p>기본 집합 쿼리에는 (DISTINCT) 중복제거가 자동 포함되어있다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="union-all">Union All</h2>
-<p>UNION은 DISTINCT 자동 포함이라 중복되는 레코드를 제거한다.</p>
-<p>따라서 중복되는 레코드까지 모두 출력하고 싶다면, ALL 키워드를 사용하면 된다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="exclusive-left--right-join">Exclusive Left / Right Join</h2>
+<h2 id="exclusive-left--right-join">Exclusive Left / Right Join</h2>
 <table>
     <tr>
         <td><img src="/images/SQL/sql-5.png"/></td>
@@ -389,6 +394,20 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span><span class="w"> </span><span class="n">B</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ENAME</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">KNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><table>
@@ -429,6 +448,20 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">RIGHT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span><span class="w"> </span><span class="n">B</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ENAME</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">KNAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">RIGHT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><table>
@@ -474,12 +507,43 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">MANAGER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">EMPNO</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="union">Union</h2>
+<p>UNION은 여러 개의 SELECT 문의 결과를 하나의 테이블이나 결과 집합으로 표현할 때 사용</p>
+<p>이때 각각의 SELECT 문으로 선택된 필드의 개수와 타입은 모두 같아야 하며, 필드의 순서 또한 같아야 한다.</p>
+<p>기본 집합 쿼리에는 (DISTINCT) 중복제거가 자동 포함되어있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="union-all">Union All</h2>
+<p>UNION은 DISTINCT 자동 포함이라 중복되는 레코드를 제거한다.</p>
+<p>따라서 중복되는 레코드까지 모두 출력하고 싶다면, ALL 키워드를 사용하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-08&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f518be98495344451e2a80fe570f3201ae1ba69f" target="_blank" title="commit by seilylook(seilylook@naver.com) f518be98495344451e2a80fe570f3201ae1ba69f: add: DataFrame API contents">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f518be9</a></span>
+                <span>Updated on 2024-05-08&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/8e926784b21a1e1629c06abe3814462c492ec2b4" target="_blank" title="commit by seilylook(seilylook@naver.com) 8e926784b21a1e1629c06abe3814462c492ec2b4: add: SQL JOIN">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8e92678</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
