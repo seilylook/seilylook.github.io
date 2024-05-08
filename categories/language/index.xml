@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/categories/language/</link>
         <description>Language - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/language/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 08 May 2024 18:42:48 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/language/" rel="self" type="application/rss+xml" /><item>
+    <title>YAML</title>
+    <link>https://seilylook.github.io/posts/yaml/</link>
+    <pubDate>Wed, 08 May 2024 18:42:48 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/yaml/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/yaml.jpeg" referrerpolicy="no-referrer">
+            </div>What is YAML? YAML is a programming language that is frequently combined with a wide range of other languages and is mostly used for creating configuration files.
+When creating configuration files for application projects, languages like Python and the Google-developed Flutter framework for Dart both use YAML (.yaml). Since it can be used to format containerized files, YAML is also well-liked among cloud engineers.
+Types Key - Value Pair 1 2 3 4 Fruit: Apple Vegetable: Carrot Liquid: Water Meat: Chicken Array | Lists 1 2 3 4 5 6 7 8 9 Fruits: - Orange - Apple - Banana Vegetables: - Carrot - Cauliflower - Tomato Dictionary | Map 1 2 3 4 5 6 7 8 9 Banana: Calories: 105 Fat: 0.]]></description>
+</item>
+<item>
     <title>JDK Version Change</title>
     <link>https://seilylook.github.io/posts/jdk/</link>
     <pubDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</pubDate>
