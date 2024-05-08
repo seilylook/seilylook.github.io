@@ -12,7 +12,7 @@
     <guid>https://seilylook.github.io/posts/spark-dataframe-api/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/api.jpeg" referrerpolicy="no-referrer">
-            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( \ &#34;salutation&#34;, \ &#34;firstname&#34;, \ &#34;lastname&#34;, \ &#34;email_address&#34;, \ &#34;year(birthdate) birthyear&#34; \ ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
+            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
 </item>
 <item>
     <title>Databricks Certified Associate Developer for Apache Spark</title>

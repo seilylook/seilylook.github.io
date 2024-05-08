@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>SQL - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/sql/</link>
+        <description>SQL - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 08 May 2024 13:08:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/sql/" rel="self" type="application/rss+xml" /><item>
+    <title>SQL Join</title>
+    <link>https://seilylook.github.io/posts/sql-join/</link>
+    <pubDate>Wed, 08 May 2024 13:08:19 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/sql-join/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/sql.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+</channel>
+</rss>

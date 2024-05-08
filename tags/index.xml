@@ -4,7 +4,15 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 07 May 2024 13:12:28 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 08 May 2024 13:08:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>SQL</title>
+    <link>https://seilylook.github.io/tags/sql/</link>
+    <pubDate>Wed, 08 May 2024 13:08:19 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/sql/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>API</title>
     <link>https://seilylook.github.io/tags/api/</link>
     <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Sun, 28 Apr 2024 15:57:39 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/apache-hadoop/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Big-Data</title>
-    <link>https://seilylook.github.io/tags/big-data/</link>
-    <pubDate>Sun, 28 Apr 2024 15:57:39 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/big-data/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

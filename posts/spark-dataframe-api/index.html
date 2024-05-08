@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Spark DataFrame API - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Spark DataFrame API" />
-<meta property="og:description" content="DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( \ &#34;salutation&#34;, \ &#34;firstname&#34;, \ &#34;lastname&#34;, \ &#34;email_address&#34;, \ &#34;year(birthdate) birthyear&#34; \ ) salutation firstname lastname email_address birthyear null James null james@efsefa." />
+<meta property="og:description" content="DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/spark-dataframe-api/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-07T13:12:28+09:00" />
@@ -13,9 +13,9 @@
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Spark DataFrame API"/>
-<meta name="twitter:description" content="DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( \ &#34;salutation&#34;, \ &#34;firstname&#34;, \ &#34;lastname&#34;, \ &#34;email_address&#34;, \ &#34;year(birthdate) birthyear&#34; \ ) salutation firstname lastname email_address birthyear null James null james@efsefa."/>
+<meta name="twitter:description" content="DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa."/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-dataframe-api/" /><link rel="prev" href="https://seilylook.github.io/posts/kubernetes/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-dataframe-api/" /><link rel="prev" href="https://seilylook.github.io/posts/kubernetes/" /><link rel="next" href="https://seilylook.github.io/posts/sql-join/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/spark-dataframe-api\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, DataFrame, API","wordcount":  370 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, DataFrame, API","wordcount":  830 ,
         "url": "https:\/\/seilylook.github.io\/posts\/spark-dataframe-api\/","datePublished": "2024-05-07T13:12:28+09:00","dateModified": "2024-05-07T15:59:22+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -74,8 +74,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark DataFrame API</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-07">2024-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;370 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-07">2024-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;830 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -113,8 +113,16 @@
       </ul>
     </li>
     <li><a href="#sort-and-order-rows---sort--orderby">Sort and Order Rows - Sort &amp; OrderBy</a></li>
-    <li><a href="#create-group-of-rows-groupby">Create Group of Rows: GroupBy</a></li>
-    <li><a href="#dataframe-statics">DataFrame Statics</a></li>
+    <li><a href="#create-group-of-rows-groupby">Create Group of Rows: GroupBy</a>
+      <ul>
+        <li><a href="#groupby-사용">groupBy 사용</a></li>
+      </ul>
+    </li>
+    <li><a href="#dataframe-statics">DataFrame Statics</a>
+      <ul>
+        <li><a href="#aggregation-사용">aggregation 사용</a></li>
+      </ul>
+    </li>
     <li><a href="#joining-dataframes---inner-join">Joining DataFrames - Inner Join</a></li>
     <li><a href="#joining-dataframes---right-outer-join">Joining DataFrames - Right Outer Join</a></li>
     <li><a href="#joining-dataframes---left-outer-join">Joining DataFrames - Left Outer Join</a></li>
@@ -122,7 +130,12 @@
     <li><a href="#cashing-a-dataframe">Cashing a DataFrame</a></li>
     <li><a href="#dataframewriter-i">DataFrameWriter I</a></li>
     <li><a href="#dataframewriter-ii---partitionby">DataFrameWriter II - PartitionBy</a></li>
-    <li><a href="#user-defined-functions">User Defined Functions</a></li>
+    <li><a href="#user-defined-functions">User Defined Functions</a>
+      <ul>
+        <li><a href="#함수-정의">함수 정의</a></li>
+        <li><a href="#함수-등록">함수 등록</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="dataframe-transformations">DataFrame Transformations</h1>
@@ -149,12 +162,12 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Dfn</span> <span class="o">=</span> <span class="n">customerDf</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;salutation&#34;</span><span class="p">,</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;firstname&#34;</span><span class="p">,</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;lastname&#34;</span><span class="p">,</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;email_address&#34;</span><span class="p">,</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;year(birthdate) birthyear&#34;</span> \
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Dfn</span> <span class="o">=</span> <span class="n">customerDf</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;salutation&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;firstname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;lastname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;email_address&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;year(birthdate) birthyear&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -269,11 +282,11 @@
 </span></span><span class="line"><span class="cl"><span class="n">Dfn</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s2">&#34;abcdefg&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 특정 Column이 NULL 값일 때 특정 값을 채워줄 수 있다.</span>
-</span></span><span class="line"><span class="cl"><span class="n">Dfn</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;salutation&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;Unknown&#34;</span><span class="p">,</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;firstname&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;lastname&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;Doe&#34;</span><span class="p">,</span> \
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;bithyear&#34;</span> <span class="o">-&gt;</span> <span class="mi">9999</span> \
+</span></span><span class="line"><span class="cl"><span class="n">Dfn</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">Map</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;salutation&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;Unknown&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;firstname&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;lastname&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;Doe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;bithyear&#34;</span> <span class="o">-&gt;</span> <span class="mi">9999</span>
 </span></span><span class="line"><span class="cl"><span class="p">))</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -305,30 +318,541 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># sort와 orderBy는 서로 연관이 없기 때문에</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 최종적으로는 firstname 정렬은 적용되지 않고 month만 적용된다.</span>
-</span></span><span class="line"><span class="cl"><span class="n">customerDf</span> \
-</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&#34;any&#34;</span><span class="p">)</span> \
-</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">&#34;firstname&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">expr</span><span class="p">(</span><span class="s2">&#34;firstname&#34;</span><span class="p">))</span> \
+</span></span><span class="line"><span class="cl"><span class="n">customerDf</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&#34;any&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s2">&#34;firstname&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">expr</span><span class="p">(</span><span class="s2">&#34;firstname&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">expr</span><span class="p">(</span><span class="s2">&#34;month(birthdate)&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstname&#34;</span><span class="p">,</span> <span class="s2">&#34;lastname&#34;</span><span class="p">,</span> <span class="s2">&#34;birthdate&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># firtname 오름차순 &amp; lastname 내림차순으로 정렬하려면 다음과 같다.</span>
-</span></span><span class="line"><span class="cl"><span class="n">customerDf</span> \
-</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&#34;any&#34;</span><span class="p">)</span> \
-</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="err">$</span><span class="s2">&#34;firstname&#34;</span><span class="p">,</span> <span class="err">$</span><span class="s2">&#34;lastname&#34;</span><span class="o">.</span><span class="n">desc</span><span class="p">)</span> \
+</span></span><span class="line"><span class="cl"><span class="n">customerDf</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&#34;any&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="err">$</span><span class="s2">&#34;firstname&#34;</span><span class="p">,</span> <span class="err">$</span><span class="s2">&#34;lastname&#34;</span><span class="o">.</span><span class="n">desc</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;firstname&#34;</span><span class="p">,</span> <span class="s2">&#34;lastname&#34;</span><span class="p">,</span> <span class="s2">&#34;birthdate&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="create-group-of-rows-groupby">Create Group of Rows: GroupBy</h2>
-<h2 id="dataframe-statics">DataFrame Statics</h2>
-<h2 id="joining-dataframes---inner-join">Joining DataFrames - Inner Join</h2>
-<h2 id="joining-dataframes---right-outer-join">Joining DataFrames - Right Outer Join</h2>
-<h2 id="joining-dataframes---left-outer-join">Joining DataFrames - Left Outer Join</h2>
-<h2 id="appending-rows-to-a-dataframe---union">Appending Rows to a DataFrame - Union</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">customerPurchases</span> <span class="o">=</span> <span class="n">webSalesDf</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ws_bill_customer_sk customer_id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ws_item_sk item_id&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>item_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>83074</td>
+<td>4591</td>
+</tr>
+<tr>
+<td>83074</td>
+<td>3566</td>
+</tr>
+<tr>
+<td>83074</td>
+<td>7286</td>
+</tr>
+<tr>
+<td>83074</td>
+<td>2755</td>
+</tr>
+<tr>
+<td>83074</td>
+<td>2516</td>
+</tr>
+</tbody>
+</table>
+<h3 id="groupby-사용">groupBy 사용</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># customer_id로 묶고</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 각 customer가 구매한 모든 물품 개수를 count</span>
+</span></span><span class="line"><span class="cl"><span class="n">customerPurchases</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customer_id&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="s2">&#34;item_id&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&#34;item_count&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dataframe-statics">DataFrame Statics</h2>
+<h3 id="aggregation-사용">aggregation 사용</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">webSalesDf</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">max</span><span class="p">(</span><span class="s2">&#34;ws_sales_price&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">min</span><span class="p">(</span><span class="s2">&#34;ws_sales_price&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avg</span><span class="p">(</span><span class="s2">&#34;ws_sales_price&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">count</span><span class="p">(</span><span class="s2">&#34;ws_sales_price&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="joining-dataframes---inner-join">Joining DataFrames - Inner Join</h2>
+<p>Address DF</p>
+<table>
+<thead>
+<tr>
+<th>address_id</th>
+<th>country</th>
+<th>state</th>
+<th>city</th>
+<th>zip</th>
+<th>street_name</th>
+<th>street_number</th>
+<th>location_type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>United States</td>
+<td>AZ</td>
+<td>FairField</td>
+<td>86192</td>
+<td>Jackson</td>
+<td>18</td>
+<td>condo</td>
+</tr>
+<tr>
+<td>2</td>
+<td>United States</td>
+<td>NM</td>
+<td>Fairview</td>
+<td>85709</td>
+<td>Washington 6th</td>
+<td>362</td>
+<td>condo</td>
+</tr>
+</tbody>
+</table>
+<p>Customer DF</p>
+<table>
+<thead>
+<tr>
+<th>address_id</th>
+<th>birth_country</th>
+<th>birthdate</th>
+<th>customer_id</th>
+<th>demographics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2133</td>
+<td>RWANDA</td>
+<td>1935-09-13</td>
+<td>45721</td>
+<td>&ldquo;buy_potential&rdquo;: &ldquo;10000&rdquo;, &ldquo;credint_rating&rdquo;: &ldquo;High Rist&rdquo;, &ldquo;education_status&rdquo;: &ldquo;Secondary&rdquo;</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Apache Spark의 default JOIN = Inner</span>
+</span></span><span class="line"><span class="cl"><span class="n">customerWithAddress</span> <span class="o">=</span> <span class="n">customerDf</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addressDf</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customerDf</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&#34;address_id&#34;</span><span class="p">)</span> <span class="o">===</span> <span class="n">addressDf</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&#34;address_id&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;inner&#34;</span> <span class="c1"># 생략 가능</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customer_id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;address_id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;demographics.education_status&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;location_type&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;country&#34;</span><span class="p">,</span> <span class="s2">&#34;city&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;street_name&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="joining-dataframes---right-outer-join">Joining DataFrames - Right Outer Join</h2>
+<p>Right table을 기준으로 Left table에서 일치하는 값들을 매핑 해준다. 만약 Left table에서 일치하는 값이 없다면 NULL을 넣는다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">webSalesDf</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customerDf</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customer_id&#34;</span> <span class="o">===</span> <span class="s2">&#34;ws_bill_customer_sk&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;right&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customer_id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ws_bill_customer_sk&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ws_bill_customer_sk is null&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="joining-dataframes---left-outer-join">Joining DataFrames - Left Outer Join</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">webSalesDf</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customerDf</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="s2">&#34;customer_id&#34;</span> <span class="o">===</span> <span class="err">$</span><span class="s2">&#34;ws_bill_customer_sk&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;left&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="appending-rows-to-a-dataframe---union">Appending Rows to a DataFrame - Union</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df1</span> <span class="o">=</span> <span class="n">customerDf</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;firstname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;lastname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customer_id&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;from&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lit</span><span class="p">(</span><span class="s2">&#34;df1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df2</span> <span class="o">=</span> <span class="n">customerDf</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;lastname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;firstname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customer_id&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;from&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lit</span><span class="p">(</span><span class="s2">&#34;df2&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># df2 의 모든 데이터를 df1에 합쳐준다.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 같은 데이터 임에도 column 위치를 기반으로 합치기 때문에 다른 것으로 인식한다.</span>
+</span></span><span class="line"><span class="cl"><span class="n">df1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>firstname</th>
+<th>lastname</th>
+<th>customer_id</th>
+<th>from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tiffany</td>
+<td>Skinner</td>
+<td>45721</td>
+<td>df1</td>
+</tr>
+<tr>
+<td>Skinner</td>
+<td>Tiffany</td>
+<td>45721</td>
+<td>df2</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df1</span><span class="o">.</span><span class="n">unionByName</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>firstname</th>
+<th>lastname</th>
+<th>customer_id</th>
+<th>from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tiffany</td>
+<td>Skinner</td>
+<td>45721</td>
+<td>df1</td>
+</tr>
+<tr>
+<td>Tiffany</td>
+<td>Skinner</td>
+<td>45721</td>
+<td>df2</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># distinct() 와 결합해서 중복을 없애준다.</span>
+</span></span><span class="line"><span class="cl"><span class="n">df1</span><span class="o">.</span><span class="n">unionByName</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>firstname</th>
+<th>lastname</th>
+<th>customer_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tiffany</td>
+<td>Skinner</td>
+<td>45721</td>
+</tr>
+<tr>
+<td>Tiffany</td>
+<td>Skinner</td>
+<td>45721</td>
+</tr>
+</tbody>
+</table>
 <h2 id="cashing-a-dataframe">Cashing a DataFrame</h2>
 <h2 id="dataframewriter-i">DataFrameWriter I</h2>
-<h2 id="dataframewriter-ii---partitionby">DataFrameWriter II - PartitionBy</h2>
-<h2 id="user-defined-functions">User Defined Functions</h2>
-<h1 id="apache-spark-architecture-execution">Apache Spark Architecture: Execution</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">customerWithAddress</span> <span class="o">=</span> <span class="n">customerDf</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&#34;any&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addressDf</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customerDf</span><span class="o">.</span><span class="n">address_id</span> <span class="o">==</span> <span class="n">addressDf</span><span class="o">.</span><span class="n">address_id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;customer_id&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;demographics&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">concat_ws</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="s2">&#34;firstname&#34;</span><span class="p">,</span> <span class="s2">&#34;lastname&#34;</span><span class="p">)</span><span class="o">.</span><span class="k">as</span><span class="p">(</span><span class="s2">&#34;Name&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addressDf</span><span class="p">(</span><span class="s2">&#34;*&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">salesWithItem</span> <span class="o">=</span> <span class="n">webSalesDf</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&#34;any&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">itemDf</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">webSalesDf</span><span class="o">.</span><span class="n">ws_item_sk</span> <span class="o">==</span> <span class="n">itemDf</span><span class="o">.</span><span class="n">i_item_sk</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ws_bill_customer_sk customer_id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ws_ship_addr_sk ship_address_id&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># default로 partition은 200이다.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 불필요하게 많은 경우, 8개로 낮춰준다.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 파일 형식은 json으로 해준다.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># SaveMode.Overwrite로 똑같은 파일을 덮어써준다.</span>
+</span></span><span class="line"><span class="cl"><span class="n">customerWithAddress</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">write</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">SaveMode</span><span class="o">.</span><span class="n">Overwrite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&#34;path&#34;</span><span class="p">,</span> <span class="s2">&#34;tmp/output/customerWithAddress&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">save</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dataframewriter-ii---partitionby">DataFrameWriter II - PartitionBy</h2>
+<p>Partitions the output by the given columns on the file system.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">customerWithAddress</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">write</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">&#34;item_category&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">SaveMode</span><span class="o">.</span><span class="n">Overwrite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&#34;path&#34;</span><span class="p">,</span> <span class="s2">&#34;tmp/output/customerWithAddress&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">save</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="user-defined-functions">User Defined Functions</h2>
+<h3 id="함수-정의">함수 정의</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@udf</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">stringConcat</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">first</span> <span class="o">+</span> <span class="n">sep</span> <span class="o">+</span> <span class="n">second</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="함수-등록">함수 등록</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">customerDf</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;firstname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;lastname&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stringConcat</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;firstname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;lastname&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="apache-spark-architecture-execution">Apache Spark Architecture: Execution</h1>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -353,7 +877,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/kubernetes/" class="prev" rel="prev" title="Kubernetes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Kubernetes</a></div>
+    <div class="post-nav"><a href="/posts/kubernetes/" class="prev" rel="prev" title="Kubernetes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Kubernetes</a>
+            <a href="/posts/sql-join/" class="next" rel="next" title="SQL Join">SQL Join<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
