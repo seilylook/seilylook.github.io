@@ -5,15 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>SQL Join - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="SQL Join" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="Join? JOIN은 데이터베이스 내의 여러 테이블에서 가져온 레코드를 조합하여 하나의 테이블이나 결과 집합으로 표현해 주는 것이다.
+Inner join: 교집합
+Left / Right join: 부분 집합
+Outer Join: 합집합
+예시 데이터
+ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하는 테이블의 ON 절의 조건일 일치하는 결과만 출력
+1 2 3 4 select u.userid, name from usertbl as u inner join buytbl as b on u." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/sql-join/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-08T13:08:19+09:00" />
-<meta property="article:modified_time" content="2024-05-08T13:08:19+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-08T15:54:34+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="SQL Join"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="Join? JOIN은 데이터베이스 내의 여러 테이블에서 가져온 레코드를 조합하여 하나의 테이블이나 결과 집합으로 표현해 주는 것이다.
+Inner join: 교집합
+Left / Right join: 부분 집합
+Outer Join: 합집합
+예시 데이터
+ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하는 테이블의 ON 절의 조건일 일치하는 결과만 출력
+1 2 3 4 select u.userid, name from usertbl as u inner join buytbl as b on u."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/sql-join/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-dataframe-api/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -26,8 +38,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/sql-join\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "SQL","wordcount":  0 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/sql-join\/","datePublished": "2024-05-08T13:08:19+09:00","dateModified": "2024-05-08T13:08:19+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "SQL","wordcount":  626 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/sql-join\/","datePublished": "2024-05-08T13:08:19+09:00","dateModified": "2024-05-08T15:54:34+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -74,8 +86,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">SQL Join</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-08">2024-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-08">2024-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;626 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -88,12 +100,386 @@
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#inner-join">Inner Join</a></li>
+    <li><a href="#left--right-outer-join">Left / Right Outer Join</a>
+      <ul>
+        <li><a href="#left-outer-join">Left Outer Join</a></li>
+        <li><a href="#right-outer-join">Right Outer Join</a></li>
+      </ul>
+    </li>
+    <li><a href="#union">Union</a></li>
+    <li><a href="#union-all">Union All</a></li>
+    <li><a href="#exclusive-left--right-join">Exclusive Left / Right Join</a>
+      <ul>
+        <li><a href="#exclusive-left-join">Exclusive Left Join</a></li>
+        <li><a href="#exclusive-right-join">Exclusive Right Join</a></li>
+      </ul>
+    </li>
+    <li><a href="#self-join">Self Join</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="join">Join?</h1>
+<p>JOIN은 데이터베이스 내의 여러 테이블에서 가져온 레코드를 조합하여 하나의 테이블이나 결과 집합으로 표현해 주는 것이다.</p>
+<ul>
+<li>
+<p>Inner join: 교집합</p>
+</li>
+<li>
+<p>Left / Right join: 부분 집합</p>
+</li>
+<li>
+<p>Outer Join: 합집합</p>
+</li>
+</ul>
+<img src="/images/SQL/sql-1.png"/>
+<p>예시 데이터</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">ENAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">AAA</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">BBB</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">CCC</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">KNAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">가</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">나</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">라</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">마</td>
+</tr>
+</tbody>
+</table>
+<h2 id="inner-join">Inner Join</h2>
+<p>조인하는 테이블의 ON 절의 조건일 일치하는 결과만 출력</p>
+<img src="/images/SQL/sql-2.png"/>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">userid</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">usertbl</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">buytbl</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">b</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">on</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">userid</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">userid</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">userid</span><span class="o">=</span><span class="s2">&#34;111&#34;</span><span class="w"> </span><span class="c1">-- join을 완료하고 그다음 조건을 따진다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">ENAME</th>
+<th style="text-align:center">KNAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">AAA</td>
+<td style="text-align:center">가</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">BBB</td>
+<td style="text-align:center">나</td>
+</tr>
+</tbody>
+</table>
+<h2 id="left--right-outer-join">Left / Right Outer Join</h2>
+<p>두 테이블이 합쳐 질때 왼쪽/오른쪽을 기준으로 했느냐에 따라 기준 테이블의 것은 모두 출력되어야 한다고 이해하면 된다.</p>
+<p>OUTER JOIN은 조인하는 테이블의 ON 절의 조건 중 한쪽의 데이터를 모두 가져온다</p>
+<p>OUTER JOIN은 LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN 이렇게 3가지가 있다.</p>
+<p>LEFT OUTER JOIN을 거의 대부분 사용하여, FULL OUTER JOIN은 성능상 거의 사용하지 않는다.</p>
+<h3 id="left-outer-join">Left Outer Join</h3>
+<img src="/images/SQL/sql-3.png"/>
+<p>LEFT JOIN은 두 테이블이 있을 경우, 첫 번째 테이블을 기준으로 두 번째 테이블을 조합하는 JOIN이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 예) 1학년 학생의 이름과 지도교수명을 출력하라.
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 단, 지도교수가 지정되지 않은 학생도 출력되게 하라.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">STUDENT</span><span class="p">.</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="p">.</span><span class="n">NAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">STUDENT</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="w"> </span><span class="c1">-- STUDENT를 기준으로 왼쪽 조인
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ON</span><span class="w"> </span><span class="n">STUDENT</span><span class="p">.</span><span class="n">PID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRADE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">ENAME</th>
+<th style="text-align:center">KNAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">AAA</td>
+<td style="text-align:center">가</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">BBB</td>
+<td style="text-align:center">나</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">CCC</td>
+<td style="text-align:center">NULL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="right-outer-join">Right Outer Join</h3>
+<img src="/images/SQL/sql-4.png"/>
+<p>RIGHT JOIN은 두 테이블이 있을 경우, 두 번째 테이블을 기준으로 첫 번째 테이블을 조합하는 JOIN이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 예) 1학년 학생의 이름과 지도교수명을 출력하라.
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 단, 지도교수가 지정되지 않은 학생도 출력되게 하라.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">STUDENT</span><span class="p">.</span><span class="n">NAME</span><span class="p">,</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="p">.</span><span class="n">NAME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">STUDENT</span><span class="w"> </span><span class="k">RIGHT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="w"> </span><span class="c1">-- PROFESSOR를 기준으로 오른쪽 조인
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ON</span><span class="w"> </span><span class="n">STUDENT</span><span class="p">.</span><span class="n">PID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PROFESSOR</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">GRADE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">ENAME</th>
+<th style="text-align:center">KNAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">AAA</td>
+<td style="text-align:center">가</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">BBB</td>
+<td style="text-align:center">나</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center">라</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center">마</td>
+</tr>
+</tbody>
+</table>
+<h2 id="union">Union</h2>
+<p>UNION은 여러 개의 SELECT 문의 결과를 하나의 테이블이나 결과 집합으로 표현할 때 사용</p>
+<p>이때 각각의 SELECT 문으로 선택된 필드의 개수와 타입은 모두 같아야 하며, 필드의 순서 또한 같아야 한다.</p>
+<p>기본 집합 쿼리에는 (DISTINCT) 중복제거가 자동 포함되어있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="union-all">Union All</h2>
+<p>UNION은 DISTINCT 자동 포함이라 중복되는 레코드를 제거한다.</p>
+<p>따라서 중복되는 레코드까지 모두 출력하고 싶다면, ALL 키워드를 사용하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="err">필드이름</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">테이블이름</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="exclusive-left--right-join">Exclusive Left / Right Join</h2>
+<table>
+    <tr>
+        <td><img src="/images/SQL/sql-5.png"/></td>
+        <td><img src="/images/SQL/sql-6.png"/></td>
+    </tr>
+</table>
+<h3 id="exclusive-left-join">Exclusive Left Join</h3>
+<p>어느 특정 테이블에 있는 레코드만 가져오는 것</p>
+<p>​EXCLUSIVE JOIN는 만약 테이블 두개를 JOIN한다면 둘중 한가지 테이블에만 있는 데이터를 가져온다.</p>
+<p>다른 JOIN들과는 다르게 별도의 EXCLUSIVE JOIN함수가 있는 것은 아니고 기존의 LEFT JOIN과 Where절의 조건을 함께 사용하여 만드는 JOIN 문법이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 조인한 B 테이블의 값이 null만 출력하라는 말은,
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 조인이 안된 A 레코드 나머지값만 출력하라는 말
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">ENAME</th>
+<th style="text-align:center">KNAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">CCC</td>
+<td style="text-align:center">NULL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exclusive-right-join">Exclusive Right Join</h3>
+<p>어느 특정 테이블에 있는 레코드만 가져오는 것</p>
+<p>​EXCLUSIVE JOIN는 만약 테이블 두개를 JOIN한다면 둘중 한가지 테이블에만 있는 데이터를 가져온다.</p>
+<p>다른 JOIN들과는 다르게 별도의 EXCLUSIVE JOIN함수가 있는 것은 아니고 기존의 RIGHT JOIN과 Where절의 조건을 함께 사용하여 만드는 JOIN 문법이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 조인한 A 테이블의 값이 null만 출력하라는 말은,
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 조인이 안된 B 레코드 나머지값만 출력하라는 말
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">RIGHT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span><span class="w"> </span><span class="n">B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ID_SEQ</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">ENAME</th>
+<th style="text-align:center">KNAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center">라</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center">마</td>
+</tr>
+</tbody>
+</table>
+<h2 id="self-join">Self Join</h2>
+<img src="/images/SQL/sql-7.png"/>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 예) 모든 사원에 대해 사원의 이름과 직속 상사의 이름을 검색 해라.
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- EMPNAME 테이블에 어떤 사원의 MANAGER 번호가 같은
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 테이블 내에서 어떤 사원의 EMPNO와 같으면 그 사원이 직속 상관
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">EMPNAME</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">사원</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">EMPNAME</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">직속상관</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">EMPLOYEE</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="c1">-- inner join
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">MANAGER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">EMPNO</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-08</span>
+                <span>Updated on 2024-05-08&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f518be98495344451e2a80fe570f3201ae1ba69f" target="_blank" title="commit by seilylook(seilylook@naver.com) f518be98495344451e2a80fe570f3201ae1ba69f: add: DataFrame API contents">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f518be9</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

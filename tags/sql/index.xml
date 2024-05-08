@@ -12,7 +12,13 @@
     <guid>https://seilylook.github.io/posts/sql-join/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/sql.png" referrerpolicy="no-referrer">
-            </div>]]></description>
+            </div>Join? JOIN은 데이터베이스 내의 여러 테이블에서 가져온 레코드를 조합하여 하나의 테이블이나 결과 집합으로 표현해 주는 것이다.
+Inner join: 교집합
+Left / Right join: 부분 집합
+Outer Join: 합집합
+예시 데이터
+ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하는 테이블의 ON 절의 조건일 일치하는 결과만 출력
+1 2 3 4 select u.userid, name from usertbl as u inner join buytbl as b on u.]]></description>
 </item>
 </channel>
 </rss>
