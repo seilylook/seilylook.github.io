@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/spark-dataframe-api\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, DataFrame, API","wordcount":  830 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, DataFrame, API","wordcount":  984 ,
         "url": "https:\/\/seilylook.github.io\/posts\/spark-dataframe-api\/","datePublished": "2024-05-07T13:12:28+09:00","dateModified": "2024-05-08T15:54:34+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -74,8 +74,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark DataFrame API</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-07">2024-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;830 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-07">2024-05-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;984 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -136,6 +136,11 @@
         <li><a href="#함수-등록">함수 등록</a></li>
       </ul>
     </li>
+  </ul>
+
+  <ul>
+    <li><a href="#partitioning-a-dataframe">Partitioning a DataFrame</a></li>
+    <li><a href="#repartition-vs-coalesce">Repartition VS Coalesce</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="dataframe-transformations">DataFrame Transformations</h1>
@@ -853,6 +858,28 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="apache-spark-architecture-execution">Apache Spark Architecture: Execution</h1>
+<h2 id="partitioning-a-dataframe">Partitioning a DataFrame</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>\ <span class="c1"># df with 10 partitions</span>
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">rdd</span> \
+</span></span><span class="line"><span class="cl">      <span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span> <span class="c1">#df with 1 partition```</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="repartition-vs-coalesce">Repartition VS Coalesce</h2>
+<p>RDD를 생성한 뒤 filter() 연산을 비롯한 다양한 transformation 연산을 수행하다보면 최초에 설정된 partition 개수가 적합하지 않은 경우가 발생할 수 있다.</p>
+<p>이 경우 <code>coalesce()</code>나 <code>repartition()</code>연산을 사용해 현재의 RDD의 파티션 개수를 조정할 수 있다.</p>
+<p>두 메서드는 모두 파티션의 크기를 나타내는 정수를 인자로 받아서 파티션의 수를 조정한다는 점에서 공통점이 있지만 <strong>repartition()이 파티션 수를 늘리거나 줄이는 것을 모두 할 수 있는 반면 coalesce()는 줄이는 것만 가능</strong>하다.</p>
+<p>그럼 모든 것이 가능한 repartition() 메서드가 있음에도 coalesce() 메서드를 따로 두는 이유는 바로 처리 방식에 따른 성능 차이 때문이다. 즉 <strong>repartition()은 셔플을 기반으로 동작을 수행</strong>하는 데 반해 <strong>coalesce()는 강제로 셔플을 수행하라는 옵션을 지정하지 않는 한 셔플을 사용하지 않기 때문이다.</strong> 따라서 데이터 필터링 등의 작업으로 데이터 수가 줄어들어 파티션 수를 줄이고자 할 때는 상대적으로 성능이 좋은 coalesce()를 사용하고, 파티션 수를 늘려야 하는 경우에만 repartition() 메서드를 사용하는 것이 좋다.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

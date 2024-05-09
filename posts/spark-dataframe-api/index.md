@@ -355,3 +355,23 @@ customerDf.select(
 
 # Apache Spark Architecture: Execution
 
+## Partitioning a DataFrame
+
+````python
+df.repartition(10)\ # df with 10 partitions
+      .rdd \
+      .getNumPartitions()
+
+df.coalesce(1).rdd.getNumPartitions() #df with 1 partition```
+````
+
+## Repartition VS Coalesce
+
+RDD를 생성한 뒤 filter() 연산을 비롯한 다양한 transformation 연산을 수행하다보면 최초에 설정된 partition 개수가 적합하지 않은 경우가 발생할 수 있다.
+
+이 경우 `coalesce()`나 `repartition()`연산을 사용해 현재의 RDD의 파티션 개수를 조정할 수 있다.
+
+두 메서드는 모두 파티션의 크기를 나타내는 정수를 인자로 받아서 파티션의 수를 조정한다는 점에서 공통점이 있지만 **repartition()이 파티션 수를 늘리거나 줄이는 것을 모두 할 수 있는 반면 coalesce()는 줄이는 것만 가능**하다.
+
+그럼 모든 것이 가능한 repartition() 메서드가 있음에도 coalesce() 메서드를 따로 두는 이유는 바로 처리 방식에 따른 성능 차이 때문이다. 즉 **repartition()은 셔플을 기반으로 동작을 수행**하는 데 반해 **coalesce()는 강제로 셔플을 수행하라는 옵션을 지정하지 않는 한 셔플을 사용하지 않기 때문이다.** 따라서 데이터 필터링 등의 작업으로 데이터 수가 줄어들어 파티션 수를 줄이고자 할 때는 상대적으로 성능이 좋은 coalesce()를 사용하고, 파티션 수를 늘려야 하는 경우에만 repartition() 메서드를 사용하는 것이 좋다.
+
