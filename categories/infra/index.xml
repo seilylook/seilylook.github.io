@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Infra - Category - Devlog</title>
+        <link>https://seilylook.github.io/categories/infra/</link>
+        <description>Infra - Category - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 09 May 2024 18:14:00 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/infra/" rel="self" type="application/rss+xml" /><item>
+    <title>CKA Begin</title>
+    <link>https://seilylook.github.io/posts/cka-begin/</link>
+    <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/cka-begin/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/begin.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+</channel>
+</rss>

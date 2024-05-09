@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 06 May 2024 10:58:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 09 May 2024 18:14:00 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>CKA Begin</title>
+    <link>https://seilylook.github.io/posts/cka-begin/</link>
+    <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/cka-begin/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/begin.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Kubernetes</title>
     <link>https://seilylook.github.io/posts/kubernetes/</link>
     <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
