@@ -13,33 +13,15 @@ To understand Kubernetes, we must first understand two things - `Container` and 
 
 <img src="/images/kubernetes/kubernetes-1.png" />
 
-In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible. We had a lot of issues developing this application with all these different
-components. First, their compatibility with the underlying OS. We had to ensure that
-all these different services were compatible with the version of the OS we were
-planning to use. There have been times when certain version of these services were
-not compatible with the OS, and we have had to go back and look for another OS that
-was compatible with all of these different services.
+In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible. We had a lot of issues developing this application with all these different components. First, their compatibility with the underlying OS. We had to ensure that all these different services were compatible with the version of the OS we were planning to use. There have been times when certain version of these services were not compatible with the OS, and we have had to go back and look for another OS that was compatible with all of these different services.
 
-Secondly, we had to check the compatibility between these services and the libraries
-and dependencies on the OS. We have had issues were one service requires one
-version of a dependent library whereas another service required another version.
+Secondly, we had to check the compatibility between these services and the libraries and dependencies on the OS. We have had issues were one service requires one version of a dependent library whereas another service required another version.
 
-The architecture of our application changed over time, we have had to upgrade to
-newer versions of these components, or change the database etc and everytime
-something changed we had to go through the same process of checking compatibility
-between these various components and the underlying infrastructure. This compatibility matrix issue is usually referred to as the matrix from hell.
+The architecture of our application changed over time, we have had to upgrade to newer versions of these components, or change the database etc and everytime something changed we had to go through the same process of checking compatibility between these various components and the underlying infrastructure. This compatibility matrix issue is usually referred to as the matrix from hell.
 
-Next, everytime we had a new developer on board, we found it really difficult to
-setup a new environment. The new developers had to follow a large set of
-instructions and run 100s of commands to finally setup their environments. They had
-to make sure they were using the right Operating System, the right versions of each
-of these components and each developer had to set all that up by himself each time.
+Next, everytime we had a new developer on board, we found it really difficult to setup a new environment. The new developers had to follow a large set of instructions and run 100s of commands to finally setup their environments. They had to make sure they were using the right Operating System, the right versions of each of these components and each developer had to set all that up by himself each time.
 
-We also had different development test and production environments. One
-developer may be comfortable using one OS, and the others may be using another
-one and so we couldn’t gurantee the application that we were building would run the
-same way in different environments. And So all of this made our life in developing,
-building and shipping the application really difficult.
+We also had different development test and production environments. One developer may be comfortable using one OS, and the others may be using another one and so we couldn’t gurantee the application that we were building would run the same way in different environments. And So all of this made our life in developing, building and shipping the application really difficult.
 
 ## What can it do?
 
@@ -536,4 +518,36 @@ minikube delete --all
    The `--type=LoadBalancer` flag indicates that you want to expose your Service outside of the cluster.
 
    The application code inside the test image only listens on TCP port 8080. If you used `kubectl expose` to expose a different port, clients could not connect to that other port.
+
+# Pod
+
+<img src="/images/kubernetes/pod-1.png" />
+With kubernetes our ultimate aim is to deploy our application in the form of containers on a set of machines that are configured as worker nodes in a cluster.
+
+However, kubernetes does not deploy containers directly
+on the worker nodes. The containers are encapsulated into a Kubernetes object
+known as PODs. A POD is a single instance of an application. A POD is the smallest
+object, that you can create in kubernetes.
+
+<img src="/images/kubernetes/pod-2.png"/>
+
+Here we see the simplest of simplest cases were you have a single node kubernetes cluster with a single instance of your application running in a single docker container encapsulated in a POD. What if the number of users accessing your application increase and you need to scale your application? You need to add additional instances of your web application to share the load. Now, were would you spin up additional instances? Do we bring up a new container instance within the same POD? No! We create a new POD altogether with a new instance of the same application. As you can see we now have two instances of our web application running on two separate PODs on the same kubernetes system or node.
+
+What if the user base FURTHER increases and your current node has no sufficient capacity? Well THEN you can always deploy additional PODs on a new node in the cluster. You will have a new node added to the cluster to expand the cluster’s physical capacity. SO, what I am trying to illustrate in this slide is that, PODs usually have a one-to-one relationship with containers running your application. To scale UP you create new PODs and to scale down you delete PODs. You do not add additional containers to an existing POD to scale your application.
+
+# Replication Controller
+
+<img src="/images/kubernetes/replication-controller-1.png" />
+
+What if for some
+reason, our application crashes and the POD fails? Users will no longer be able to
+access our application. To prevent users from losing access to our application, we
+would like to have more than one instance or POD running at the same time. That
+way if one fails we still have our application running on the other one. **The replication controller helps us run multiple instances of a single POD in the kubernetes cluster thus providing High Availability.**
+
+So does that mean you can’t use a replication controller if you plan to have a single POD? No! Even if you have a single POD, the replication controller can help by automatically bringing up a new POD when the existing one fails. Thus the replication controller ensures that the specified number of PODs are running at all times. Even if it’s just 1 or 100.
+
+<img src="/images/kubernetes/replication-controller-2.png"/>
+
+Another reason we need replication controller is to create multiple PODs to share the load across them. For example, in this simple scenario we have a single POD serving a set of users. When the number of users increase we deploy additional POD to balance the load across the two pods. If the demand further increases and If we were to run out of resources on the first node, we could deploy additional PODs across other nodes in the cluster. As you can see, the replication controller spans across multiple nodes in the cluster. It helps us balance the load across multiple pods on different nodes as well as scale our application when the demand increases.
 

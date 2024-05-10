@@ -14,7 +14,9 @@
     <guid>https://seilylook.github.io/posts/cka-begin/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/begin.png" referrerpolicy="no-referrer">
-            </div>]]></description>
+            </div>Lab 1 Question How many nodes are part of the cluster?
+Answer 1 2 3 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 26m v1.29.0+k3s1 Question What is the flavor and version of Operating System on which the Kubernetes nodes are running?
+Answer 1 2 3 4 controlplane ~ ✖ kubectl get nodes -o wide NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP OS-IMAGE KERNEL-VERSION CONTAINER-RUNTIME controlplane Ready control-plane,master 30m v1.]]></description>
 </item>
 <item>
     <title>Spark Partition</title>
