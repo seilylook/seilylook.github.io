@@ -4,9 +4,32 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 09 May 2024 18:14:00 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 11 May 2024 21:39:09 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Spark Architecture</title>
+    <link>https://seilylook.github.io/posts/spark-architecture/</link>
+    <pubDate>Sat, 11 May 2024 21:39:09 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-architecture/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/architecture.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction Terms Term Meainig Application User program built on Spark. Consists of a driver program and executors on the cluster. Application jar A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime. Driver program The process running the main() function of the application and creating the SparkContext Cluster manager An external service for acquiring resources on the cluster (e.]]></description>
+</item>
+<item>
+    <title>Spark QA Note</title>
+    <link>https://seilylook.github.io/posts/spark-qa-note/</link>
+    <pubDate>Sat, 11 May 2024 11:44:43 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-qa-note/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/exam.jpg" referrerpolicy="no-referrer">
+            </div>Test 1 Question Which of the following options describes the responsibility of the executors in Spark?
+Answer The executors accept tasks from the driver, execute those tasks, and return results to the driver.
+6 Question Which of the following is the deepest level in Spark&rsquo;s execution hierarchy ? Success Task Description The hierarchy is, from top to bottom: Job, State, Task.
+Executors and slots facilitate the execution of tasks, but they are not directly part of the hierarchy.]]></description>
+</item>
+<item>
     <title>CKA Begin</title>
     <link>https://seilylook.github.io/posts/cka-begin/</link>
     <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>
@@ -103,31 +126,6 @@ Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드
                 <img src="/images/featured-image/java-logo.png" referrerpolicy="no-referrer">
             </div>openJDK version 여러개 사용하기 Tip 2024년 4월 기준으로 adoptopenjdk의 JDK 8 버전은 deprecated 되었다. 이를 해결하기 위해 temurin을 사용해 JDK 8 버전을 설치해야 한다. temurin 8 설치 1 brew install --cask temurin@8 설치하고나서 확인하면 다음과 같이 2개 버전의 자바를 djk를 볼 수 있다.
 1 2 3 4 5 6 {seilylook} 💡 /usr/libexec/java_home -V Matching Java Virtual Machines (2): 11.0.22 (arm64) &#34;Homebrew&#34; - &#34;OpenJDK 11.0.22&#34; /opt/homebrew/Cellar/openjdk@11/11.0.22/libexec/openjdk.jdk/Contents/Home 1.8.0_412 (x86_64) &#34;Eclipse Temurin&#34; - &#34;Eclipse Temurin 8&#34; /Library/Java/JavaVirtualMachines/temurin-8.]]></description>
-</item>
-<item>
-    <title>HDFS Project 1</title>
-    <link>https://seilylook.github.io/posts/hdfs-project-1/</link>
-    <pubDate>Sun, 28 Apr 2024 15:57:39 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/hdfs-project-1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/project.jpeg" referrerpolicy="no-referrer">
-            </div>Install Hadoop 강의대로 2.7.6으로 하려했는데, 도저히 에러가 잡히지 않아, 3.3.2로 진행.
-1 2 3 4 5 6 7 8 9 10 11 # https://hadoop.apache.org/release/3.3.2.html # 접속해서 hadoop-3.3.2.tar.gz 다운로드 # 압축 해제 tar -xvf hadoop-3.3.2.tar.gz # 링크 연결 ln -s hadoop-3.3.2 hadoop # 환경 세팅 (venv) {seilylook} 👑 vim hadoop/etc/hadoop/* Info 리눅스 명령어 -ln
-리눅스에서 ln 명령어를 사용하면 리눅스 파일 시스템에서 링크 파일을 생성할 수 있다.
-심볼릭 링크 단순히 원본 파일을 가리키도록 링크만 걸어둔 것으로 MS의 윈도우 시스템에서 흔히 사용하는 &lsquo;바로가기&rsquo; 같은 것이며, 원본 파일을 가리키고만 있으므로 원본 파일의 크기와는 무관하다.]]></description>
-</item>
-<item>
-    <title>S3</title>
-    <link>https://seilylook.github.io/posts/s3/</link>
-    <pubDate>Thu, 25 Apr 2024 17:34:25 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/s3/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/s3-logo.png" referrerpolicy="no-referrer">
-            </div>Introduction 데이터 스토리지는 대량의 데이터를 저장, 관리, 그리고 검색하도록 설계된 스토리지 인프라다.
-어플리케이션 및 서비스가 작동하는 방식으로 빅데이터를 대량의 데이터를 쉽게 액세스하고 사용할 수 있고 처리할 수 있도록 저장 및 정렬을 할 수 있다. 또한 필요에 따라서 크기를 유연하게 확장시킬 수 있다.
-What is S3? Amazon Simple Storage Service(Amazon S3)는 업계 최고의 확장성, 데이터 가용성, 보안 및 성능을 제공하는 객체 스토리지 서비스입니다. 모든 규모와 업종의 고객은 Amazon S3를 사용하여 데이터 레이크, 웹 사이트, 모바일 애플리케이션, 백업 및 복원, 아카이브, 엔터프라이즈 애플리케이션, IoT 디바이스, 빅 데이터 분석 등 다양한 사용 사례에서 원하는 양의 데이터를 저장하고 보호할 수 있습니다.]]></description>
 </item>
 </channel>
 </rss>

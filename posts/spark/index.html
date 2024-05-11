@@ -28,7 +28,7 @@ Apache Spark는 어떻게 작동하나요?"/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/spark\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Data Engineering","wordcount":  1755 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Data Engineering","wordcount":  1643 ,
         "url": "https:\/\/seilylook.github.io\/posts\/spark\/","datePublished": "2024-04-11T14:51:35+09:00","dateModified": "2024-05-09T14:36:24+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -76,8 +76,8 @@ Apache Spark는 어떻게 작동하나요?"/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-11">2024-04-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1755 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-11">2024-04-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1643 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -97,12 +97,6 @@ Apache Spark는 어떻게 작동하나요?"/>
     <li><a href="#spark-streaming">Spark Streaming</a></li>
     <li><a href="#spark-sql">Spark SQL</a></li>
     <li><a href="#graphx">GraphX</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#client-mode">Client mode</a></li>
-    <li><a href="#cluster-mode">Cluster mode</a></li>
-    <li><a href="#local-mode">Local mode</a></li>
   </ul>
 
   <ul>
@@ -188,14 +182,7 @@ Apache Spark는 어떻게 작동하나요?"/>
 <h2 id="graphx">GraphX</h2>
 <p>그래프 프로세싱</p>
 <p>Spark GraphX는 Spark를 기반으로 구축된 분산 그래프 처리 프레임워크입니다. GraphX는 ETL, 탐색적 분석 및 반복적 그래프 계산을 제공하여 사용자가 대화형 방식으로 그래프 데이터 구조를 대규모로 구축하고 변환할 수 있도록 합니다. 매우 유연한 API와 다양한 분산 그래프 알고리즘이 함께 제공됩니다.</p>
-<h1 id="execution-modes-in-spark">Execution modes in Spark?</h1>
-<p>The Spark framework has three execution modes.</p>
-<h2 id="client-mode">Client mode</h2>
-<p>In the Client mode, Spark Driver remains on the Client machine that submits the Spark application. All the executors run in the Spark cluster. The downside of this is that three can latency issues here.</p>
-<h2 id="cluster-mode">Cluster mode</h2>
-<p>In the Cluster mode, Spark Driver runs on one of the worker nodes within the Spark cluster. This removes the dependency on the client and lowers the latency issues.</p>
-<h2 id="local-mode">Local mode</h2>
-<p>In the Local mode, the Spark Driver and executors run on a single machine. This is purely ofr testing purposes as it is not feasible to achive <code>distribution</code> on a single machine.</p>
+<h1 id="spark-architecturehttpsseilylookgithubiopostsspark-architecture"><a href="https://seilylook.github.io/posts/spark-architecture/" target="_blank" rel="noopener noreffer ">Spark Architecture</a></h1>
 <h1 id="rdd">RDD</h1>
 <p>Resilient Distributed Datasets(RDDs)</p>
 <ul>
@@ -352,8 +339,7 @@ Apache Spark는 어떻게 작동하나요?"/>
 <p>Actions mean <code>performing</code> the functions.</p>
 </li>
 </ul>
-<h1 id="dataframe-apis">DataFrame APIs</h1>
-<p><a href="https://seilylook.github.io/posts/spark-dataframe-api/" target="_blank" rel="noopener noreffer ">바로가기</a></p>
+<h1 id="dataframe-apishttpsseilylookgithubiopostsspark-dataframe-api"><a href="https://seilylook.github.io/posts/spark-dataframe-api/" target="_blank" rel="noopener noreffer ">DataFrame APIs</a></h1>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

@@ -95,21 +95,7 @@ Spark SQL은 MapReduce보다 최대 100배 빠른 지연 시간이 짧은 대화
 
 Spark GraphX는 Spark를 기반으로 구축된 분산 그래프 처리 프레임워크입니다. GraphX는 ETL, 탐색적 분석 및 반복적 그래프 계산을 제공하여 사용자가 대화형 방식으로 그래프 데이터 구조를 대규모로 구축하고 변환할 수 있도록 합니다. 매우 유연한 API와 다양한 분산 그래프 알고리즘이 함께 제공됩니다.
 
-# Execution modes in Spark?
-
-The Spark framework has three execution modes.
-
-## Client mode
-
-In the Client mode, Spark Driver remains on the Client machine that submits the Spark application. All the executors run in the Spark cluster. The downside of this is that three can latency issues here.
-
-## Cluster mode
-
-In the Cluster mode, Spark Driver runs on one of the worker nodes within the Spark cluster. This removes the dependency on the client and lowers the latency issues.
-
-## Local mode
-
-In the Local mode, the Spark Driver and executors run on a single machine. This is purely ofr testing purposes as it is not feasible to achive `distribution` on a single machine.
+# [Spark Architecture](https://seilylook.github.io/posts/spark-architecture/)
 
 # RDD
 
@@ -214,7 +200,5 @@ Spark internally records metadata to indicate that this operation is requested. 
 
 - Actions mean `performing` the functions.
 
-# DataFrame APIs
-
-[바로가기](https://seilylook.github.io/posts/spark-dataframe-api/)
+# [DataFrame APIs](https://seilylook.github.io/posts/spark-dataframe-api/)
 
