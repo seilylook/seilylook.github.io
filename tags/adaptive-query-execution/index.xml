@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Adaptive Query Execution - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/adaptive-query-execution/</link>
+        <description>Adaptive Query Execution - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 13 May 2024 17:51:10 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/adaptive-query-execution/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark AQE</title>
+    <link>https://seilylook.github.io/posts/spark-aqe/</link>
+    <pubDate>Mon, 13 May 2024 17:51:10 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-aqe/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>true Partition은 RDDs나 Dataset를 구성하고 있는 최소 단위 객체입니다. 각 Partition은 서로 다른 노드에서 분산 처리됩니다. Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리됩니다. 또한, 하나의 Task는 하나의 Core가 연산 처리합니다.
+즉, 1 Core = 1 Task = 1 Partition입니다.
+설정된 Partition 수에 따라 각 Partition의 크기가 결정됩니다. 그리고 이 Partition의 크기가 결국 Core 당 필요한 메모리 크기를 결정하게 됩니다.
+◼️ Partition 수 → Core 수]]></description>
+</item>
+</channel>
+</rss>
