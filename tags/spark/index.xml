@@ -15,19 +15,6 @@
             </div>Terms Term Meainig Application User program built on Spark. Consists of a driver program and executors on the cluster. Application jar A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime. Driver program The process running the main() function of the application and creating the SparkContext Cluster manager An external service for acquiring resources on the cluster (e.]]></description>
 </item>
 <item>
-    <title>Spark QA Note</title>
-    <link>https://seilylook.github.io/posts/spark-qa-note/</link>
-    <pubDate>Sat, 11 May 2024 11:44:43 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-qa-note/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/exam.jpg" referrerpolicy="no-referrer">
-            </div>Test 1 Question Which of the following options describes the responsibility of the executors in Spark?
-Answer The executors accept tasks from the driver, execute those tasks, and return results to the driver.
-6 Question Which of the following is the deepest level in Spark&rsquo;s execution hierarchy ? Success Task Description The hierarchy is, from top to bottom: Job, State, Task.
-Executors and slots facilitate the execution of tasks, but they are not directly part of the hierarchy.]]></description>
-</item>
-<item>
     <title>Spark Partition</title>
     <link>https://seilylook.github.io/posts/spark-partition/</link>
     <pubDate>Thu, 09 May 2024 13:27:06 &#43;0900</pubDate>
