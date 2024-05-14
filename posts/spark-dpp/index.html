@@ -19,7 +19,7 @@
 1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; 이 간단한 쿼리에서는, 우리는 과목이 영어인 학생들의 레코드를 식별하고 찾으려고 합니다. 이것은 스캔 위에 필터가 있는 간단한 형태로 전환되는데, 이는 전체 데이터가 먼저 스캔되고 조건에 맞게 필터링되는 것을 의미합니다.
 이제 대부분의 쿼리 옵티마이저는 필터를 최상위 스캔에서 가능한 한 데이터 소스에 가깝게 밀어내려 스캔하는 전체 데이터 집합을 피할 수 있도록합니다."/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-dpp/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-aqe/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-dpp/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-aqe/" /><link rel="next" href="https://seilylook.github.io/posts/spark-dependency/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -216,7 +216,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/spark-aqe/" class="prev" rel="prev" title="Spark AQE"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spark AQE</a></div>
+    <div class="post-nav"><a href="/posts/spark-aqe/" class="prev" rel="prev" title="Spark AQE"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spark AQE</a>
+            <a href="/posts/spark-dependency/" class="next" rel="next" title="Spark Dependency">Spark Dependency<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.

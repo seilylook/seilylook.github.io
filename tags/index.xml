@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 14 May 2024 10:52:10 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 14 May 2024 17:38:35 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Architecture</title>
+    <link>https://seilylook.github.io/tags/architecture/</link>
+    <pubDate>Tue, 14 May 2024 17:38:35 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/architecture/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Spark</title>
+    <link>https://seilylook.github.io/tags/spark/</link>
+    <pubDate>Tue, 14 May 2024 17:38:35 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/spark/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Dynamic Partition Pruning</title>
     <link>https://seilylook.github.io/tags/dynamic-partition-pruning/</link>
     <pubDate>Tue, 14 May 2024 10:52:10 &#43;0900</pubDate>
@@ -13,27 +29,11 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Spark</title>
-    <link>https://seilylook.github.io/tags/spark/</link>
-    <pubDate>Tue, 14 May 2024 10:52:10 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/spark/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
     <title>Adaptive Query Execution</title>
     <link>https://seilylook.github.io/tags/adaptive-query-execution/</link>
     <pubDate>Mon, 13 May 2024 17:51:10 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/adaptive-query-execution/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Architecture</title>
-    <link>https://seilylook.github.io/tags/architecture/</link>
-    <pubDate>Sat, 11 May 2024 21:39:09 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/architecture/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>

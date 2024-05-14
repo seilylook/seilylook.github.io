@@ -70,6 +70,23 @@
         alt="/images/profile.png"
         title="/images/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/hdfs-project-1/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/project.jpeg"
+        data-srcset="/images/featured-image/project.jpeg, /images/featured-image/project.jpeg 1.5x, /images/featured-image/project.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/project.jpeg"
+        title="/images/featured-image/project.jpeg" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/hdfs-project-1/">HDFS Project 1</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-04-28">2024-04-28</time></span>&nbsp;<span class="post-category">included in <a href="/categories/computer/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Computer</a>&nbsp;<a href="/categories/technology/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Technology</a></span></div><div class="content">Install Hadoop 강의대로 2.7.6으로 하려했는데, 도저히 에러가 잡히지 않아, 3.3.2로 진행.
+1 2 3 4 5 6 7 8 9 10 11 # https://hadoop.apache.org/release/3.3.2.html # 접속해서 hadoop-3.3.2.tar.gz 다운로드 # 압축 해제 tar -xvf hadoop-3.3.2.tar.gz # 링크 연결 ln -s hadoop-3.3.2 hadoop # 환경 세팅 (venv) {seilylook} 👑 vim hadoop/etc/hadoop/* Info 리눅스 명령어 -ln
+리눅스에서 ln 명령어를 사용하면 리눅스 파일 시스템에서 링크 파일을 생성할 수 있다.
+심볼릭 링크 단순히 원본 파일을 가리키도록 링크만 걸어둔 것으로 MS의 윈도우 시스템에서 흔히 사용하는 &lsquo;바로가기&rsquo; 같은 것이며, 원본 파일을 가리키고만 있으므로 원본 파일의 크기와는 무관하다.</div><div class="post-footer">
+        <a href="/posts/hdfs-project-1/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/apache-hadoop/">Apache Hadoop</a>,&nbsp;<a href="/tags/big-data/">Big-Data</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/s3/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -160,22 +177,6 @@ Big data is refers to things one can do at a largee scale that cannot be done at
 in ways that change markets, organizations, the relationship between citizens and governments, and more.</div><div class="post-footer">
         <a href="/posts/big-data-research-note/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/big-data/">Big-Data</a>,&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/airflow/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/featured-image/airflow-logo.png"
-        data-srcset="/images/featured-image/airflow-logo.png, /images/featured-image/airflow-logo.png 1.5x, /images/featured-image/airflow-logo.png 2x"
-        data-sizes="auto"
-        alt="/images/featured-image/airflow-logo.png"
-        title="/images/featured-image/airflow-logo.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/airflow/">Airflow</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-04-13">2024-04-13</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Airflow? Airflow는 Python 코드로 워크플로우(workflow)를 작성하고, 스케쥴링, 모니터링 하는 플랫폼입니다. Airflow를 통해서 데이터엔지니어링의 ETL 작업을 자동화하고, DAG(Directed Acyclic Graph) 형태의 워크플로우 작성이 가능합니다. 이를 통해 더 정교한 dependency를 가진 파이프라인을 설정할 수 있습니다. 또한 AWS, GCP 모두 Airflow managed service를 제공할 정도로 전세계 데이터팀들에게 널리 사용되고 있으며 그만큼 넓은 커뮤니티를 형성하고 있습니다.
-Airflow 동작 원리 Airflow는 여러가지 구성요소를 가지고 있습니다.
-Scheduler : 모든 DAG와 Task에 대하여 모니터링 및 관리하고, 실행해야할 Task를 스케줄링 해줍니다.</div><div class="post-footer">
-        <a href="/posts/airflow/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/orchestration/">Orchestration</a>,&nbsp;<a href="/tags/data-pipeline/">Data Pipeline</a>,&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
