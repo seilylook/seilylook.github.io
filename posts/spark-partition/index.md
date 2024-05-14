@@ -77,7 +77,7 @@ Use Case
 
 관련 설정: spark.sql.shuffle.partitions
 
-Spark 성능에 가장 큰 영향을 미치는 Partitiondmfh, `Join`, `groupBy` 등의 연산을 수행할 때 Shuffle Partition이 쓰인다.
+Spark 성능에 가장 큰 영향을 미치는 Partition으로, `Join`, `groupBy` 등의 연산을 수행할 때 Shuffle Partition이 쓰인다.
 
 설정값은 spark.sql.shuffle.partitions이고, 이 설정값에 따라 Join, groupBy 수행 시 Partition의 수(또는 Task의 수)가 결정된다.
 

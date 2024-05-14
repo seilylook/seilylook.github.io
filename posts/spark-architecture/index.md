@@ -48,9 +48,9 @@ The driver and its subcomponents - the Spark context and scheduler - are respons
 
 ### Two basic ways the driver program can be run are:
 
-- **In this mode, the driver process runs as a seperate JVM process inside a cluster, and the cluster manages its resources(mostly JVM heap memory)**.
+- **Cluster mode: the driver process runs as a seperate JVM process inside a cluster, and the cluster manages its resources(mostly JVM heap memory)**.
 
-- **In this mode, the driver's running inside the client's JVM process and communicates with the executors managed by the cluster**.
+- **Client mode: the driver's running inside the client's JVM process and communicates with the executors managed by the cluster**.
 
 ## Responsibilities of the `executors`
 
@@ -66,7 +66,9 @@ There can be only on Spark context per JVM.
 
 A Spark context comes with many useful methods for creating RDDs, loading data, and is the main interface for accessing Spark runtime.
 
-# Spark cluster types
+<img src="/images/spark/spark-context.png"/>
+
+# Spark cluster manager types
 
 ## Spark standalone cluster
 

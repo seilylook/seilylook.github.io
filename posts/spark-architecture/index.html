@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/spark-architecture\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Architecture","wordcount":  831 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Architecture","wordcount":  830 ,
         "url": "https:\/\/seilylook.github.io\/posts\/spark-architecture\/","datePublished": "2024-05-11T21:39:09+09:00","dateModified": "2024-05-13T12:03:16+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
@@ -74,7 +74,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark Architecture</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-11">2024-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;831 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-11">2024-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;830 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -200,10 +200,10 @@ The driver and its subcomponents - the Spark context and scheduler - are respons
 <h3 id="two-basic-ways-the-driver-program-can-be-run-are">Two basic ways the driver program can be run are:</h3>
 <ul>
 <li>
-<p><strong>In this mode, the driver process runs as a seperate JVM process inside a cluster, and the cluster manages its resources(mostly JVM heap memory)</strong>.</p>
+<p><strong>Cluster mode: the driver process runs as a seperate JVM process inside a cluster, and the cluster manages its resources(mostly JVM heap memory)</strong>.</p>
 </li>
 <li>
-<p><strong>In this mode, the driver&rsquo;s running inside the client&rsquo;s JVM process and communicates with the executors managed by the cluster</strong>.</p>
+<p><strong>Client mode: the driver&rsquo;s running inside the client&rsquo;s JVM process and communicates with the executors managed by the cluster</strong>.</p>
 </li>
 </ul>
 <h2 id="responsibilities-of-the-executors">Responsibilities of the <code>executors</code></h2>
@@ -213,7 +213,8 @@ The driver and its subcomponents - the Spark context and scheduler - are respons
 <p>Once the driver is started, it configures an instance of SparkContext. When running a Spark REPL shell, the shell is the driver program. Your Spark context is already preconfigured and available as a sc variable. When running running a standalone Spark applicaion by submitting a jar file, or by using Spark API from another program, yout Spark application starts and configures the Spark context.</p>
 <p>There can be only on Spark context per JVM.</p>
 <p>A Spark context comes with many useful methods for creating RDDs, loading data, and is the main interface for accessing Spark runtime.</p>
-<h1 id="spark-cluster-types">Spark cluster types</h1>
+<img src="/images/spark/spark-context.png"/>
+<h1 id="spark-cluster-manager-types">Spark cluster manager types</h1>
 <h2 id="spark-standalone-cluster">Spark standalone cluster</h2>
 <p>A Spark standalone cluster is a Spark-specific cluster. Because a standalone cluter&rsquo;s built specifically for Spark applications, it doesn&rsquo;t support communication with an HDFS secured with Kerberos authentication protocol.</p>
 <h2 id="yarn-cluster">YARN cluster</h2>
