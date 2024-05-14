@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Spark DPP - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Spark DPP" />
+<meta property="og:description" content="Partition Pruning in Spark 일반적인 데이터베이스에서의 프루닝은 옵티마이저가 원하는 데이터를 포함할 수 없는 파일을 읽지 않도록 하는 것을 의미합니다. 예를 들어,
+1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; 이 간단한 쿼리에서는, 우리는 과목이 영어인 학생들의 레코드를 식별하고 찾으려고 합니다. 이것은 스캔 위에 필터가 있는 간단한 형태로 전환되는데, 이는 전체 데이터가 먼저 스캔되고 조건에 맞게 필터링되는 것을 의미합니다.
+이제 대부분의 쿼리 옵티마이저는 필터를 최상위 스캔에서 가능한 한 데이터 소스에 가깝게 밀어내려 스캔하는 전체 데이터 집합을 피할 수 있도록합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/spark-dpp/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-14T10:52:10+09:00" />
+<meta property="article:modified_time" content="2024-05-14T10:52:10+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Spark DPP"/>
+<meta name="twitter:description" content="Partition Pruning in Spark 일반적인 데이터베이스에서의 프루닝은 옵티마이저가 원하는 데이터를 포함할 수 없는 파일을 읽지 않도록 하는 것을 의미합니다. 예를 들어,
+1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; 이 간단한 쿼리에서는, 우리는 과목이 영어인 학생들의 레코드를 식별하고 찾으려고 합니다. 이것은 스캔 위에 필터가 있는 간단한 형태로 전환되는데, 이는 전체 데이터가 먼저 스캔되고 조건에 맞게 필터링되는 것을 의미합니다.
+이제 대부분의 쿼리 옵티마이저는 필터를 최상위 스캔에서 가능한 한 데이터 소스에 가깝게 밀어내려 스캔하는 전체 데이터 집합을 피할 수 있도록합니다."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-dpp/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-aqe/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Spark DPP",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/spark-dpp\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Dynamic Partition Pruning","wordcount":  790 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/spark-dpp\/","datePublished": "2024-05-14T10:52:10+09:00","dateModified": "2024-05-14T10:52:10+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/spark-dpp/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/spark-dpp/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark DPP</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-14">2024-05-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;790 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/knowledge.jpeg"
+        data-srcset="/images/featured-image/knowledge.jpeg, /images/featured-image/knowledge.jpeg 1.5x, /images/featured-image/knowledge.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/knowledge.jpeg"
+        title="/images/featured-image/knowledge.jpeg" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><h1 id="partition-pruning-in-spark">Partition Pruning in Spark</h1>
+<p>일반적인 데이터베이스에서의 프루닝은 옵티마이저가 원하는 데이터를 포함할 수 없는 파일을 읽지 않도록 하는 것을 의미합니다. 예를 들어,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">students</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;English&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 간단한 쿼리에서는, 우리는 과목이 영어인 학생들의 레코드를 식별하고 찾으려고 합니다. 이것은 스캔 위에 필터가 있는 간단한 형태로 전환되는데, 이는 전체 데이터가 먼저 스캔되고 조건에 맞게 필터링되는 것을 의미합니다.</p>
+<center>
+    <img src="/images/spark/spark-dpp-1.png"/>
+</center>
+<p>이제 대부분의 쿼리 옵티마이저는 필터를 최상위 스캔에서 가능한 한 데이터 소스에 가깝게 밀어내려 스캔하는 전체 데이터 집합을 피할 수 있도록합니다.</p>
+<center>
+    <img src="/images/spark/spark-dpp-2.png"/>
+</center>
+<p>파티션 프루닝 기술에서는 필터 푸시 다운 방법을 따르며 데이터 집합이 파티션으로 나뉘어집니다. 이 경우 쿼리에 파티션 열에 대한 필터가 있는 경우 완전한 세트의 파티션 파일을 건너 뛸 수 있습니다.</p>
+<p>Spark에서의 파티션 프루닝은 Spark가 쿼리를 실행할 때 읽는 파일과 파티션의 수를 제한하여 성능을 향상시키는 성능 최적화입니다. 데이터를 파티션으로 분할한 후 일부 디렉토리와 파일만 읽도록 하는 쿼리는 성능을 향상시킵니다. 파티션 필터가 존재하는 경우 Catalyst 옵티마이저는 파티션 필터를 아래로 밀어내고 스캔은 파티션 필터와 일치하는 디렉토리만 읽기 때문에 디스크 I/O가 줄어듭니다.</p>
+<p>그러나 실제로 데이터 엔지니어들은 단일 쿼리나 쿼리의 단일 필터만 실행하는 것이 아니라 차원 테이블, 큰 팩트 테이블과 조인해야 할 작은 테이블을 가지고 있는 경우가 많습니다. 이 경우 더 이상 정적 파티션 프루닝을 적용할 수 없으며, 필터가 조인의 한 쪽에 있고 파티션 프루닝이 더 매력적인 테이블이 조인의 다른 쪽에 있는 경우입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">students</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">JOIN</span><span class="w"> </span><span class="n">DailyRoutine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">DailylRoutine</span><span class="p">.</span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;English&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><center>
+    <img src="/images/spark/spark-dpp-3.png"/>
+</center>
+<p>일부 사람들은 차원 테이블을 사전에 팩트 테이블과 조인할 수 있다고 제안할 수 있습니다. 이렇게 함으로써 여전히 단일 테이블에 대한 정적 프루닝을 트리거할 수 있습니다. 그리고 그들은 필터를 별도의 쿼리에서 실행할 수 있습니다. 아래에 나와 있는 것처럼요.</p>
+<center>
+    <img src="/images/spark/spark-dpp-4.png"/>
+</center>
+<p>이러한 접근 방식에는 명백한 단점이 있습니다. 먼저 이 비용이 꽤 많이 들게 됩니다. 데이터를 복제해야 하므로 중간 테이블을 생성해야 합니다. 이 테이블은 상당히 넓을 수 있으며 큰 테이블과 여러 작은 테이블을 결합하여 생성되기 때문에 관리하기가 매우 어렵습니다. 차원 테이블을 업데이트할 때 이러한 접근 방식은 실제로 전체 파이프라인을 다시 실행해야 하므로 비효율적입니다.</p>
+<h1 id="dynamic-partition-pruning-in-spark">Dynamic Partition Pruning in Spark</h1>
+<p>Spark SQL에서 사용자는 일반적으로 좋아하는 API와 프로그래밍 언어로 쿼리를 제출합니다. Spark는 이 쿼리를 이해할 수 있는 형태인 쿼리의 <strong>logical plan</strong>으로 변환합니다. 이 단계에서 Spark는 열 프루닝, 상수 폴딩, 필터 푸시 다운과 같은 규칙 기반의 변환을 적용하여 Logical plan을 최적화합니다. 그리고 나중에 실제 <strong>physical plan</strong>에 도달할 것입니다.</p>
+<p>Physical plan에서 Spark는 실행 가능한 계획을 생성합니다. 이 계획은 여러 대의 기계 클러스터에 계산을 분산시킵니다. 여기서 Physical plan 수준에서 동적 파티션 프루닝을 어떻게 구현할 수 있는지 살펴보겠습니다. 그리고 나중에 이를 Physical plan 중에 더 최적화하는 방법을 살펴보겠습니다.</p>
+<center>
+    <img src="/images/spark/spark-dpp-5.png"/>
+</center>
+<h1 id="optimization-at-logical-level">Optimization at Logical Level</h1>
+<p>Logical plan 수준에서의 최적화 기회부터 살펴보겠습니다. 여러 파일로 분할된 데이터 세트를 고려해 보겠습니다. 각 파티션은 특정한 색깔로 구분될 것입니다. 반대편에는 파티션이 아닐 수 있는 작은 테이블인 차원 테이블이 있을 것입니다. 그리고 이러한 데이터 세트 위에 일반적인 스캔 연산자가 있을 것입니다.</p>
+<p>차원 테이블을 필터링할 때마다, 조인의 반대쪽에서 두 파티션에 해당하는 행만이 실제로 관련있는 예제를 고려해 보겠습니다. 따라서 최종 조인 작업을 완료할 때, 조인에 의해 실제로 유지될 것은 이 두 파티션뿐입니다.</p>
+<p>따라서 차원 테이블에서 발생하는 두 개의 필터링 파티션에 관심이 있기 때문에 실제로 전체 팩트 테이블을 스캔할 필요가 없습니다. 이를 피하기 위한 간단한 접근 방법은 차원 테이블에서 필터를 가져와 하위 쿼리로 포함시킨 다음, 해당 하위 쿼리를 팩트 테이블의 스캔 아래에서 실행하는 것입니다.</p>
+<p>이렇게 함으로써 우리는 조인의 팩트 측을 계획할 때 어떤 데이터가 필요한지 파악할 수 있습니다. 이것은 간단한 접근 방법입니다.</p>
+<center>
+    <img src="/images/spark/spark-dpp-6.png"/>
+</center>
+<p>그러나 이는 실제로 비용이 많이 들 수 있습니다. 이 하위 쿼리 중복을 제거하고 더 효율적으로 수행할 방법을 찾아야 합니다. 이를 위해 우리는 Spark가 Physical plan 중에 조인을 실행하는 방법과 Spark가 이러한 Physical plan 단계에서 쿼리를 변환하는 방법을 살펴볼 것입니다.</p>
+<h1 id="optimization-at-physical-level">Optimization at Physical Level</h1>
+<p>만약 차원 테이블이 작다면, Spark가 조인을 브로드캐스트 해시 조인으로 실행할 가능성이 높습니다. 두 개의 테이블이 해시 조인인 경우, 다음과 같은 여러 가지 일이 발생합니다:</p>
+<ol>
+<li>
+<p>먼저, Spark는 차원 테이블에서 해시 테이블을 구축합니다. 이를 빌드 관계라고 합니다.</p>
+</li>
+<li>
+<p>빌드 관계를 실행한 후, 그 결과를 브로드캐스트 변수에 넣습니다. Spark는 해당 변수를 계산에 참여하는 모든 워커에게 분배합니다.</p>
+</li>
+<li>
+<p>이렇게 함으로써 셔플 없이 조인을 실행할 수 있습니다.</p>
+</li>
+<li>
+<p>그런 다음 Spark는 각 워커 노드에서 팩트 테이블에서 나오는 행을 해시 테이블과 비교하기 시작합니다.</p>
+</li>
+</ol>
+<center>
+    <img src="/images/spark/spark-dpp-7.png"/>
+</center>
+<p>이제 두 단계 사이에 명확한 자연적 경계가 있습니다. 따라서 먼저 조인의 브로드캐스트 측을 계산합니다. 이를 분배하고 나중에 실제 조인을 시작합니다. 이는 매우 흥미롭고, 우리는 이를 우리의 최적화에 활용할 수 있기를 원합니다. 왜냐하면 이것이 바로 우리가 Logical plan 수준에서 서브쿼리를 사용하여 모방한 것과 매우 유사하기 때문입니다.</p>
+<p>따라서 실제로 우리가 할 것은 다음과 같습니다. 우리는 빌드 측의 결과인 브로드캐스트 결과를 가로채어서 직접 가져와서 이를 사실 테이블 위의 스캐너 내에 동적 필터로 넣을 것입니다. 따라서 이것이 바로 동적 파티션 프루닝의 매우 효과적이고 최적화된 버전입니다.</p>
+<center>
+    <img src="/images/spark/spark-dpp-8.png"/>
+</center>
+<h1 id="결론">결론</h1>
+<p>Apache Spark 3.0에서는 동적 파티션 프루닝이라는 새로운 최적화가 구현되었습니다. 이는 다음 두 가지에서 모두 작동합니다:</p>
+<ul>
+<li>
+<p>Logical plan 수준에서는 차원 필터를 찾고 조인을 통해 스캔의 다른 쪽으로 전파됩니다.</p>
+</li>
+<li>
+<p>Physical plan 수준에서는 이 필터가 차원 측에서 한 번만 실행되도록 함으로써 이를 함께 연결합니다.</p>
+</li>
+<li>
+<p>그런 다음 필터의 결과가 테이블 스캔에서 직접 재사용됩니다. 이러한 이중 접근 방식으로 Spark에서 많은 쿼리에서 상당한 속도 향상을 달성할 수 있습니다.</p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-05-14</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/spark-dpp/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP" data-hashtags="Spark,Dynamic Partition Pruning"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/spark-dpp/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP" data-image="/images/featured-image/knowledge.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/dynamic-partition-pruning/">Dynamic Partition Pruning</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/spark-aqe/" class="prev" rel="prev" title="Spark AQE"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spark AQE</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

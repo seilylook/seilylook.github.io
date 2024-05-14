@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 13 May 2024 17:51:10 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 14 May 2024 10:52:10 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark DPP</title>
+    <link>https://seilylook.github.io/posts/spark-dpp/</link>
+    <pubDate>Tue, 14 May 2024 10:52:10 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-dpp/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>Partition Pruning in Spark 일반적인 데이터베이스에서의 프루닝은 옵티마이저가 원하는 데이터를 포함할 수 없는 파일을 읽지 않도록 하는 것을 의미합니다. 예를 들어,
+1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; 이 간단한 쿼리에서는, 우리는 과목이 영어인 학생들의 레코드를 식별하고 찾으려고 합니다. 이것은 스캔 위에 필터가 있는 간단한 형태로 전환되는데, 이는 전체 데이터가 먼저 스캔되고 조건에 맞게 필터링되는 것을 의미합니다.
+이제 대부분의 쿼리 옵티마이저는 필터를 최상위 스캔에서 가능한 한 데이터 소스에 가깝게 밀어내려 스캔하는 전체 데이터 집합을 피할 수 있도록합니다.]]></description>
+</item>
+<item>
     <title>Spark AQE</title>
     <link>https://seilylook.github.io/posts/spark-aqe/</link>
     <pubDate>Mon, 13 May 2024 17:51:10 &#43;0900</pubDate>
@@ -113,17 +125,6 @@ Containers Why do you need containers? In one of my previos projects, I had this
             </div>Architecture Spark는 여러 모듈로 구성되어 있습니다. 크게 두 부분으로 나누어 보면, 컴퓨터 Cluster의 리소스를 관리하는 Cluster Manager와 그 위에서 동작하는 사용자 프로그램인 Spark Application으로 구분됩니다.
 Spark Cluster Manager로는 Spark에 built-in된 기본 모듈 Spark Standalone과 Hadoop에서 사용되는 Yarn가 있습니다. 최근의 Spark 2.3부터는 Container Orchestration 도구로 유명한 Kubernetes도 Spark의 Cluster Manager로 사용할 수 있게 되었습니다.
 Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드에는 Spark Master 프로세스가 실행되고, 나머지 노드에는 Spark Worker 프로세스가 실행되죠.]]></description>
-</item>
-<item>
-    <title>JDK Version Change</title>
-    <link>https://seilylook.github.io/posts/jdk/</link>
-    <pubDate>Tue, 30 Apr 2024 12:28:24 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/jdk/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/java-logo.png" referrerpolicy="no-referrer">
-            </div>openJDK version 여러개 사용하기 Tip 2024년 4월 기준으로 adoptopenjdk의 JDK 8 버전은 deprecated 되었다. 이를 해결하기 위해 temurin을 사용해 JDK 8 버전을 설치해야 한다. temurin 8 설치 1 brew install --cask temurin@8 설치하고나서 확인하면 다음과 같이 2개 버전의 자바를 djk를 볼 수 있다.
-1 2 3 4 5 6 {seilylook} 💡 /usr/libexec/java_home -V Matching Java Virtual Machines (2): 11.0.22 (arm64) &#34;Homebrew&#34; - &#34;OpenJDK 11.0.22&#34; /opt/homebrew/Cellar/openjdk@11/11.0.22/libexec/openjdk.jdk/Contents/Home 1.8.0_412 (x86_64) &#34;Eclipse Temurin&#34; - &#34;Eclipse Temurin 8&#34; /Library/Java/JavaVirtualMachines/temurin-8.]]></description>
 </item>
 </channel>
 </rss>
