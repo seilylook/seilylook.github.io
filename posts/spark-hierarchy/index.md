@@ -1,6 +1,14 @@
 # Spark Hierarchy
 
 
+# Introduction
+
+Spark's execution hierarchy, from top to bottom is **Job, Stage, Task**.
+
+**Slot**s are part of executors. A task is executed in a slot. But slots are rather a tool to execute tasks, not part of the execution hierarchy itself.
+
+**Executor**s are a component of a Spark cluter, but not of the execution hierarchy.
+
 # Hardware Hierarchy
 
 <img src="/images/spark/spark-hierarchy-1.webp"/>
