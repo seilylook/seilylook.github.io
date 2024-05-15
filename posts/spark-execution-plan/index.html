@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Spark Execution Plan - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Spark Execution Plan" />
+<meta property="og:description" content="Execution plan goal An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized logical and physical operations.
+Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
+Info DAG?
+Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/spark-execution-plan/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-15T13:30:02+09:00" />
+<meta property="article:modified_time" content="2024-05-15T13:30:02+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Spark Execution Plan"/>
+<meta name="twitter:description" content="Execution plan goal An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized logical and physical operations.
+Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
+Info DAG?
+Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-execution-plan/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-hierarchy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Spark Execution Plan",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/spark-execution-plan\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Execution Plan","wordcount":  1131 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/spark-execution-plan\/","datePublished": "2024-05-15T13:30:02+09:00","dateModified": "2024-05-15T13:30:02+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/spark-execution-plan/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/spark-execution-plan/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark Execution Plan</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-15">2024-05-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1131 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/plan.webp"
+        data-srcset="/images/featured-image/plan.webp, /images/featured-image/plan.webp 1.5x, /images/featured-image/plan.webp 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/plan.webp"
+        title="/images/featured-image/plan.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#first-step-unresolved-logical-plan-generation">First step: Unresolved Logical plan generation</a></li>
+    <li><a href="#next-step-analyzed-logical-plan-generation">Next step: Analyzed logical plan generation</a></li>
+    <li><a href="#next-step-optimized-logical-plan">Next step: Optimized logical plan</a></li>
+    <li><a href="#then-many-physical-plans-are-generated-and-finally-a-unique-physical-plan-is-selected">Then, many physical plans are generated and finally a unique physical plan is selected</a></li>
+    <li><a href="#spark-execution-is-lazy-execution-plan-generation-is-not-a-lazy-thing">Spark execution is Lazy, Execution plan generation is not a lazy thing.</a></li>
+    <li><a href="#and-how-aqeadaptive-query-execution-interact-with-this-stuff">And how AQE(Adaptive Query Execution) interact with this stuff?</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="execution-plan-goal">Execution plan goal</h1>
+<p>An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized <strong>logical</strong> and <strong>physical</strong> operations.</p>
+<blockquote>
+<p>Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.</p>
+</blockquote>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>DAG?</p>
+<p>Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark. As a graph, it is composed of vertices and edges that will represent RDDs and operations (transformations and actions) performed on them.</p>
+</div>
+        </div>
+    </div>
+<p>On Spark, the optimizer is named <code>Catalyst</code> and can be represented by the schema below. It will produce different types of plans:</p>
+<img src="/images/spark/spark-execution-plan-1.webp"/>
+<p>Operation names are:</p>
+<ul>
+<li>Analysis</li>
+<li>Logical Optimization</li>
+<li>Physical Planning</li>
+<li>Cost Model Analysis</li>
+<li>Code Generation</li>
+</ul>
+<p>And those operations will produce various plans:</p>
+<ul>
+<li>Unresolved logical plan</li>
+<li>Resolved logical plan</li>
+<li>Optimized logical plan</li>
+<li>Physical plans</li>
+</ul>
+<p>The goal of all these operations and plans is to produce automatically the most effective way to process your query.</p>
+<hr>
+<h1 id="generating-plans">Generating plans</h1>
+<p>In order to generate plans, you have to deal with Dataframes regardless they come from SQL or raw dataframe. And the function you will use is (in Python) <code>explain()</code>.</p>
+<p>For example, if you have these two dataframes:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">itemsSchema</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&#34;id integer, name string, price float&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ordersSchema</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;id integer, itemid integer, count integer&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">items</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;Tomato&#34;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> \
+</span></span><span class="line"><span class="cl">                               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;Watermelon&#34;</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">],</span> \
+</span></span><span class="line"><span class="cl">                               <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;pineapple&#34;</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">]],</span> \
+</span></span><span class="line"><span class="cl">                              <span class="n">schema</span><span class="o">=</span><span class="n">itemsSchema</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orders</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> \
+</span></span><span class="line"><span class="cl">                                <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> \
+</span></span><span class="line"><span class="cl">                                <span class="p">[</span><span class="mi">101</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> \
+</span></span><span class="line"><span class="cl">                                <span class="p">[</span><span class="mi">102</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">]],</span>\
+</span></span><span class="line"><span class="cl">                               <span class="n">schema</span><span class="o">=</span><span class="n">ordersSchema</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You can control them like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span><span class="n">items</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">orders</span><span class="o">.</span><span class="n">itemid</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&#34;inner&#34;</span><span class="p">))</span>\
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>\
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">,</span><span class="s2">&#34;price&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&#34;count&#34;</span><span class="p">)</span>\
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&#34;c&#34;</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>or like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">items</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&#34;ITEMS&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orders</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&#34;ORDERS&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="o">=</span><span class="n">sql</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;select ITEMS.name,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                ITEMS.price,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                SUM(ORDERS.count) as c
+</span></span></span><span class="line"><span class="cl"><span class="s1">         from ITEMS, ORDERS
+</span></span></span><span class="line"><span class="cl"><span class="s1">         where ITEMS.id=ORDERS.itemid
+</span></span></span><span class="line"><span class="cl"><span class="s1">           and ITEMS.id=2
+</span></span></span><span class="line"><span class="cl"><span class="s1">         group by ITEMS.name, ITEMS.price&#39;&#39;&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In both cases, you will be able to call <code>explain()</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>By default, calling explain with no argument will produce a physical plan explanation:</p>
+<img src="/images/spark/spark-execution-plan-2.webp"/>
+<h1 id="getting-various-plans">Getting various plans</h1>
+<p>Starting from Apache Spark 3.0, you have a new parameter <code>mode</code> that produce expected format for the plan:</p>
+<ul>
+<li>
+<p><code>explain(mode=”simple”)</code> which will display the physical plan</p>
+</li>
+<li>
+<p><code>explain(mode=”extended”)</code> which will display physical and logical plans (like “extended” option)</p>
+</li>
+<li>
+<p><code>explain(mode=”codegen”)</code> which will display the java code planned to be executed</p>
+</li>
+<li>
+<p><code>explain(mode=”cost”)</code> which will display the optimized logical plan and related statistics (if they exist)</p>
+</li>
+<li>
+<p><code>explain(mode=”formatted”)</code> which will display a splitted output composed by a nice physical plan outline, and a section with each node details</p>
+</li>
+</ul>
+<img src="/images/spark/spark-execution-plan-3.webp"/>
+<h1 id="plans-differences">Plans differences</h1>
+<p>As stated in the beginning of this post, various kinds of plans are generated after many operations processed by the Catalyst Optimizer:</p>
+<img src="/images/spark/spark-execution-plan-1.webp"/>
+<h2 id="first-step-unresolved-logical-plan-generation">First step: Unresolved Logical plan generation</h2>
+<p>This plan is generated after a first check that verifies everything is correct on the syntactic field. Next, the semantic analysis is executed and will produced a first version of a logical plan where relation name and columns are not specifically resolved. This produced this kind of result:</p>
+<img src="/images/spark/spark-execution-plan-4.webp"/>
+<h2 id="next-step-analyzed-logical-plan-generation">Next step: Analyzed logical plan generation</h2>
+<p>When the unresolved plan has been generated, it will resolve everything that is not resolved yet by accessing an internal Spark structure mentioned as <strong>Catalog</strong> in the previous schema. In this catalog, which can be assimilated to a metastore, a semantic analysis will be produced to verify data structures, schemas, types etc. and if everything goes well, the plan is marked as “Analyzed Logical Plan” and will be formatted like this:</p>
+<img src="/images/spark/spark-execution-plan-5.webp"/>
+<p>We can see here that, just after the “Aggregate” line, all the previously marked “unresolved alias” are now resolved and correctly typed … specially the sum column.</p>
+<h2 id="next-step-optimized-logical-plan">Next step: Optimized logical plan</h2>
+<p>Once the Logical plan has been produced, it will be optimized based on various rules applied on logical operations (But you have already noticed that all these operations were logical ones: filters, aggregation etc.).</p>
+<p>These logical operations will be reordered to optimize the logical plan. When the optimization ends, it will produced this kind of output:</p>
+<img src="/images/spark/spark-execution-plan-6.webp"/>
+<p>We can see in this plan, that predicates have been pushed down on the LogicalRDD to reduce the data volume processed by the join. We can mention too that filters are pushed to both data structure (one for the “items” dataframe, and one for the “orders” dataframe).</p>
+<h2 id="then-many-physical-plans-are-generated-and-finally-a-unique-physical-plan-is-selected">Then, many physical plans are generated and finally a unique physical plan is selected</h2>
+<p>From the optimized logical plan, a plan that describes how it will be physically executed on the cluster will be generated. But before selecting a physical plan, the Catalyst Optimizer will generate many physical plans based on various strategies. Each physical plan will be estimated based on execution time and resource consumption projection and only one plan will be selected to be executed.</p>
+<p>Based on our example, the selected physical plan is this one (which is the one that is printed when you use explain() with default parameters)</p>
+<img src="/images/spark/spark-execution-plan-7.webp"/>
+<h2 id="spark-execution-is-lazy-execution-plan-generation-is-not-a-lazy-thing">Spark execution is Lazy, Execution plan generation is not a lazy thing.</h2>
+<p>Calling <code>explain()</code> function is an operation that will produce all the stuff presented above, from the unresolved logical plan to a selection of one physical plan to execute.</p>
+<p>After that, and only after that, the physical plan is executed through one to many stages and tasks in a laziness way.</p>
+<p>As a consequence, it won’t be possible to generate an unresolved logical plan by typing something like the code below (which includes a schema error: ids instead of id)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span><span class="n">items</span><span class="o">.</span><span class="n">id</span><span class="o">==</span><span class="n">orders</span><span class="o">.</span><span class="n">itemid</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&#34;inner&#34;</span><span class="p">))</span>\
+</span></span><span class="line"><span class="cl"><span class="o">...</span>          <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">ids</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>\
+</span></span><span class="line"><span class="cl"><span class="o">...</span>          <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">,</span><span class="s2">&#34;price&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&#34;count&#34;</span><span class="p">)</span>\
+</span></span><span class="line"><span class="cl"><span class="o">...</span>         <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&#34;c&#34;</span><span class="p">))</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&#34;extended&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/usr/spark-3.0.0/python/pyspark/sql/dataframe.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1401</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__getattr__</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#39;</span><span class="si">%s</span><span class="s2">&#39; object has no attribute &#39;</span><span class="si">%s</span><span class="s2">&#39;&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;DataFrame&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;ids&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="and-how-aqeadaptive-query-execution-interact-with-this-stuff">And how AQE(Adaptive Query Execution) interact with this stuff?</h2>
+<p>AQE is a new feature in Spark 3.0 which enables plan changes at runtime.</p>
+<p><strong>It collects statistics during plan execution and if Spark detects better plan during execution, it changes them at runtime.</strong></p>
+<p>If we put this on an update of the catalyst Optimizer schema, it will give something like that:</p>
+<img src="/images/spark/spark-execution-plan-8.webp"/>
+<p>However, any changes decided during DAG execution won’t be displayed after calling <code>explain()</code> function. If you want to see these changes, you will have to explore Spark UI and tracking skew partitions splits, joins changes etc.</p>
+<p>For example, if you enable AQE (which is not enabled by default), explain call will produce a hint in the physical plan display :</p>
+<img src="/images/spark/spark-execution-plan-9.webp"/>
+<p>In the explain output, you are hinted this physical plan is not the final plan, but if you have a look at the Spark UI, you will see that the SQL query plan is the final plan and optionally if the plan has been modified :</p>
+<img src="/images/spark/spark-execution-plan-10.webp"/>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-05-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/spark-execution-plan/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/spark-execution-plan/" data-title="Spark Execution Plan" data-hashtags="Spark,Execution Plan"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/spark-execution-plan/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/spark-execution-plan/" data-title="Spark Execution Plan"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/spark-execution-plan/" data-title="Spark Execution Plan"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/spark-execution-plan/" data-title="Spark Execution Plan" data-image="/images/featured-image/plan.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/execution-plan/">Execution Plan</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/spark-hierarchy/" class="prev" rel="prev" title="Spark Hierarchy"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spark Hierarchy</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

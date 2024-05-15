@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Execution Plan - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/execution-plan/</link>
+        <description>Execution Plan - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 15 May 2024 13:30:02 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/execution-plan/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark Execution Plan</title>
+    <link>https://seilylook.github.io/posts/spark-execution-plan/</link>
+    <pubDate>Wed, 15 May 2024 13:30:02 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-execution-plan/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/plan.webp" referrerpolicy="no-referrer">
+            </div>Execution plan goal An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized logical and physical operations.
+Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
+Info DAG?
+Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark.]]></description>
+</item>
+</channel>
+</rss>

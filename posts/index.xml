@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 15 May 2024 11:28:14 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 15 May 2024 13:30:02 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark Execution Plan</title>
+    <link>https://seilylook.github.io/posts/spark-execution-plan/</link>
+    <pubDate>Wed, 15 May 2024 13:30:02 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-execution-plan/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/plan.webp" referrerpolicy="no-referrer">
+            </div>Execution plan goal An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized logical and physical operations.
+Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
+Info DAG?
+Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark.]]></description>
+</item>
+<item>
     <title>Spark Hierarchy</title>
     <link>https://seilylook.github.io/posts/spark-hierarchy/</link>
     <pubDate>Wed, 15 May 2024 11:28:14 &#43;0900</pubDate>
@@ -113,16 +126,6 @@ Outer Join: 합집합
 예시 데이터
 ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하는 테이블의 ON 절의 조건일 일치하는 결과만 출력
 1 2 3 4 select u.userid, name from usertbl as u inner join buytbl as b on u.]]></description>
-</item>
-<item>
-    <title>Spark DataFrame API</title>
-    <link>https://seilylook.github.io/posts/spark-dataframe-api/</link>
-    <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-dataframe-api/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/api.jpeg" referrerpolicy="no-referrer">
-            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
 </item>
 </channel>
 </rss>
