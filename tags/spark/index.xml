@@ -12,7 +12,7 @@
     <guid>https://seilylook.github.io/posts/spark-hierarchy/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/hierarchy.jpeg" referrerpolicy="no-referrer">
-            </div>Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores. A core can be considered a slot that can be used to put workload into. Each core can take one piece of work. Memory Each server also has memory. But not all of it is given for Spark. On average 90% of this memory is given for Spark.
+            </div>Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores. A core can be considered a slot that can be used to put workload into. Each core can take one piece of work. Memory Each executor also has memory. But not all of it is given for Spark. On average 90% of this memory is given for Spark.
 At a high level, this memory is divided into Storage and Working Memory.]]></description>
 </item>
 <item>

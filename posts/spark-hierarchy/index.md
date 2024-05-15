@@ -15,7 +15,7 @@
 
 ## Memory
 
-Each server also has memory. But not all of it is given for Spark. On average 90% of this memory is given for Spark.
+Each executor also has memory. But not all of it is given for Spark. On average 90% of this memory is given for Spark.
 
 At a high level, this memory is divided into Storage and Working Memory.
 
@@ -37,7 +37,7 @@ At a high level, this memory is divided into Storage and Working Memory.
 
 ### Disks
 
-Each server also has locally attached/mounted storage.
+Each executor also has locally attached/mounted storage.
 
 - RAM/SSD/NFS Drivers
 
@@ -80,7 +80,7 @@ When we call an action, we start all the transformations that spark has staged. 
 
 - **Stages**
 
-  - It is a section of work taht is going to be done
+  - It is a section of work that is going to be done
 
   - 1 Stage can have many tasks
 
@@ -92,7 +92,7 @@ When we call an action, we start all the transformations that spark has staged. 
 
 - If a task is required to do something different, it is required to be in the inside of another stage
 
-- One Task is done by 1 core and on one partition
+- 1 Task is done by 1 core and on 1 partition
 
 | DataFrame APIs  |
 | :-------------: |
@@ -105,7 +105,7 @@ When we call an action, we start all the transformations that spark has staged. 
 
 # Shuffle
 
-Shuffle happends whenever Spark can't perform tasks on individual partitions or it needs data from other partitions for computation.
+Shuffle happens whenever Spark can't perform tasks on individual partitions or it needs data from other partitions for computation.
 
 <img src="/images/spark/spark-shuffle-1.webp"/>
 
