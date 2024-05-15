@@ -4,9 +4,20 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 14 May 2024 17:38:35 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 15 May 2024 11:28:14 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Spark Hierarchy</title>
+    <link>https://seilylook.github.io/posts/spark-hierarchy/</link>
+    <pubDate>Wed, 15 May 2024 11:28:14 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-hierarchy/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/hierarchy.jpeg" referrerpolicy="no-referrer">
+            </div>Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores. A core can be considered a slot that can be used to put workload into. Each core can take one piece of work. Memory Each server also has memory. But not all of it is given for Spark. On average 90% of this memory is given for Spark.
+At a high level, this memory is divided into Storage and Working Memory.]]></description>
+</item>
+<item>
     <title>Spark Dependency</title>
     <link>https://seilylook.github.io/posts/spark-dependency/</link>
     <pubDate>Tue, 14 May 2024 17:38:35 &#43;0900</pubDate>
@@ -114,18 +125,6 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/api.jpeg" referrerpolicy="no-referrer">
             </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
-</item>
-<item>
-    <title>Kubernetes</title>
-    <link>https://seilylook.github.io/posts/kubernetes/</link>
-    <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/kubernetes/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/kubernetes-logo.png" referrerpolicy="no-referrer">
-            </div>What is Kubernetes or K8s Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.
-To understand Kubernetes, we must first understand two things - Container and Orchestration.
-Containers Why do you need containers? In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible.]]></description>
 </item>
 </channel>
 </rss>

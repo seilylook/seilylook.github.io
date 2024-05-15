@@ -10,14 +10,14 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/spark-dependency/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-14T17:38:35+09:00" />
-<meta property="article:modified_time" content="2024-05-14T17:38:35+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-14T18:15:31+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Spark Dependency"/>
 <meta name="twitter:description" content="Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
 Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions."/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-dependency/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-dpp/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-dependency/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-dpp/" /><link rel="next" href="https://seilylook.github.io/posts/spark-hierarchy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -29,7 +29,7 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/spark-dependency\/"
         },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, Architecture","wordcount":  482 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/spark-dependency\/","datePublished": "2024-05-14T17:38:35+09:00","dateModified": "2024-05-14T17:38:35+09:00","publisher": {
+        "url": "https:\/\/seilylook.github.io\/posts\/spark-dependency\/","datePublished": "2024-05-14T17:38:35+09:00","dateModified": "2024-05-14T18:15:31+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
                 "@type": "Person",
@@ -137,7 +137,8 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-14</span>
+                <span>Updated on 2024-05-14&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/45bd09f3ee602bf7d6165deae6f800daa050ee11" target="_blank" title="commit by seilylook(seilylook@naver.com) 45bd09f3ee602bf7d6165deae6f800daa050ee11: add: Spark dependency">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>45bd09f</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
@@ -156,7 +157,8 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/spark-dpp/" class="prev" rel="prev" title="Spark DPP"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spark DPP</a></div>
+    <div class="post-nav"><a href="/posts/spark-dpp/" class="prev" rel="prev" title="Spark DPP"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spark DPP</a>
+            <a href="/posts/spark-hierarchy/" class="next" rel="next" title="Spark Hierarchy">Spark Hierarchy<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.

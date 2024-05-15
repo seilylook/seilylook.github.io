@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/tags/spark/</link>
         <description>Spark - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 14 May 2024 17:38:35 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/spark/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 15 May 2024 11:28:14 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/spark/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark Hierarchy</title>
+    <link>https://seilylook.github.io/posts/spark-hierarchy/</link>
+    <pubDate>Wed, 15 May 2024 11:28:14 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-hierarchy/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/hierarchy.jpeg" referrerpolicy="no-referrer">
+            </div>Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores. A core can be considered a slot that can be used to put workload into. Each core can take one piece of work. Memory Each server also has memory. But not all of it is given for Spark. On average 90% of this memory is given for Spark.
+At a high level, this memory is divided into Storage and Working Memory.]]></description>
+</item>
+<item>
     <title>Spark Dependency</title>
     <link>https://seilylook.github.io/posts/spark-dependency/</link>
     <pubDate>Tue, 14 May 2024 17:38:35 &#43;0900</pubDate>

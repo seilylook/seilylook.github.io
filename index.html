@@ -70,6 +70,21 @@
         alt="/images/profile.png"
         title="/images/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/spark-hierarchy/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/hierarchy.jpeg"
+        data-srcset="/images/featured-image/hierarchy.jpeg, /images/featured-image/hierarchy.jpeg 1.5x, /images/featured-image/hierarchy.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/hierarchy.jpeg"
+        title="/images/featured-image/hierarchy.jpeg" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/spark-hierarchy/">Spark Hierarchy</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-05-15">2024-05-15</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores. A core can be considered a slot that can be used to put workload into. Each core can take one piece of work. Memory Each server also has memory. But not all of it is given for Spark. On average 90% of this memory is given for Spark.
+At a high level, this memory is divided into Storage and Working Memory.</div><div class="post-footer">
+        <a href="/posts/spark-hierarchy/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/hierarchy/">Hierarchy</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/spark-dependency/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -147,23 +162,6 @@ Answer 1 2 3 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION 
 Answer 1 2 3 4 controlplane ~ ✖ kubectl get nodes -o wide NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP OS-IMAGE KERNEL-VERSION CONTAINER-RUNTIME controlplane Ready control-plane,master 30m v1.</div><div class="post-footer">
         <a href="/posts/cka-begin/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubernetes/">Kubernetes</a>,&nbsp;<a href="/tags/cka/">CKA</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/spark-partition/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/featured-image/spark-partition.webp"
-        data-srcset="/images/featured-image/spark-partition.webp, /images/featured-image/spark-partition.webp 1.5x, /images/featured-image/spark-partition.webp 2x"
-        data-sizes="auto"
-        alt="/images/featured-image/spark-partition.webp"
-        title="/images/featured-image/spark-partition.webp" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/spark-partition/">Spark Partition</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-05-09">2024-05-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">What is Partition? Partition은 RDDs나 Dataset을 구성하고 있는 최소 단위 객체이다. 각 Partition은 서로 다른 노드에서 분산 처리된다.
-Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리된다. 또한, 하나의 Task는 하나의 Core가 연산 처리한다.
-즉, 1 Core = 1 Task = 1 Partition이다.
-예를 들어, 다음과 같다면 전체 Core 수를 300개로 세팅한 상태이고, 이 300개가 현재 실행 중인 Task 수이자, 현재 처리 중인 Partition 수에 해당한다. 또한, 전체 Partition 수는 1800개로 세팅했으며, 이는 전체 Task 수이기도 하다.</div><div class="post-footer">
-        <a href="/posts/spark-partition/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/dataframe/">DataFrame</a>,&nbsp;<a href="/tags/api/">API</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -180,7 +178,7 @@ Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/8/">8</a>
+                        <a href="/page/9/">9</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
