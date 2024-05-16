@@ -65,7 +65,7 @@ These disks are extremely important because - a lot of time, Spark does **Shuffl
 
 - **Wide**(data needs to be moved around nodes, require shuffle)
 
-|   DataFrame APIs   |
+|   Transformation   |
 | :----------------: |
 |     `select()`     |
 |     `filter()`     |
@@ -102,7 +102,7 @@ When we call an action, we start all the transformations that spark has staged. 
 
 - 1 Task is done by 1 core and on 1 partition
 
-| DataFrame APIs  |
+|     Action      |
 | :-------------: |
 |    `show()`     |
 |    `count()`    |
