@@ -2,10 +2,11 @@
 
 
 <div align="center">
-    <img src="/images/profile-featured-image.png" width=200> <br/>
+    <img src="/images/featured-image/profile.png" width=200> <br/>
     <b>Se Hyeon Kim</b>
     <br/>
-    <a href="https://github.com/seilylook"><img src="/images/github-logo-featured-image.png" width=20 align="center"></a>
+    <a href="https://github.com/seilylook"><img src="/images/featured-image/github-logo.png" width=20 align="center"></a>
+    <a href="https://www.linkedin.com/in/se-hyeon-kim-07a1a02a2/"><img src="/images/featured-image/linkedin-logo.png" width=25 align="center"></a>
 </div>
 
 <br/>

@@ -1,374 +1,1047 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>Spark QA Note - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Spark QA Note" />
-<meta property="og:description" content="Test 1 Question Which of the following options describes the responsibility of the executors in Spark?
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noodp" />
+    <title>Spark QA Note - Devlog</title>
+    <meta name="Description" content="This is my cool site" />
+    <meta property="og:title" content="Spark QA Note" />
+    <meta
+      property="og:description"
+      content="Test 1 Question Which of the following options describes the responsibility of the executors in Spark?
 Answer The executors accept tasks from the driver, execute those tasks, and return results to the driver.
 6 Question Which of the following is the deepest level in Spark&rsquo;s execution hierarchy ? Success Task Description The hierarchy is, from top to bottom: Job, State, Task.
-Executors and slots facilitate the execution of tasks, but they are not directly part of the hierarchy." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://seilylook.github.io/posts/spark-qa-note/" /><meta property="og:image" content="https://seilylook.github.io/images/profile.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-05-11T11:44:43+09:00" />
-<meta property="article:modified_time" content="2024-05-11T22:31:44+09:00" /><meta property="og:site_name" content="My cool site" />
+Executors and slots facilitate the execution of tasks, but they are not directly part of the hierarchy."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://seilylook.github.io/posts/spark-qa-note/"
+    />
+    <meta
+      property="og:image"
+      content="https://seilylook.github.io/images/featured-image/profile.png"
+    />
+    <meta property="article:section" content="posts" />
+    <meta
+      property="article:published_time"
+      content="2024-05-11T11:44:43+09:00"
+    />
+    <meta
+      property="article:modified_time"
+      content="2024-05-11T22:31:44+09:00"
+    />
+    <meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://seilylook.github.io/images/profile.png" /><meta name="twitter:title" content="Spark QA Note"/>
-<meta name="twitter:description" content="Test 1 Question Which of the following options describes the responsibility of the executors in Spark?
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://seilylook.github.io/images/featured-image/profile.png"
+    />
+    <meta name="twitter:title" content="Spark QA Note" />
+    <meta
+      name="twitter:description"
+      content="Test 1 Question Which of the following options describes the responsibility of the executors in Spark?
 Answer The executors accept tasks from the driver, execute those tasks, and return results to the driver.
 6 Question Which of the following is the deepest level in Spark&rsquo;s execution hierarchy ? Success Task Description The hierarchy is, from top to bottom: Job, State, Task.
-Executors and slots facilitate the execution of tasks, but they are not directly part of the hierarchy."/>
-<meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/spark-qa-note/" /><link rel="prev" href="https://seilylook.github.io/posts/cka-begin/" /><link rel="next" href="https://seilylook.github.io/posts/spark-architecture/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
-    {
+Executors and slots facilitate the execution of tasks, but they are not directly part of the hierarchy."
+    />
+    <meta name="application-name" content="seilylook" />
+    <meta name="apple-mobile-web-app-title" content="seilylook" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <link rel="icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="canonical"
+      href="https://seilylook.github.io/posts/spark-qa-note/"
+    />
+    <link rel="prev" href="https://seilylook.github.io/posts/cka-begin/" />
+    <link
+      rel="next"
+      href="https://seilylook.github.io/posts/spark-architecture/"
+    />
+    <link rel="stylesheet" href="/css/style.min.css" />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"
+    /></noscript>
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+    /></noscript>
+    <script type="application/ld+json">
+      {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "headline": "Spark QA Note",
         "inLanguage": "en",
         "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/seilylook.github.io\/posts\/spark-qa-note\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile.png"],"genre": "posts","keywords": "Spark, DataFrame, API, Certification","wordcount":  421 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/spark-qa-note\/","datePublished": "2024-05-11T11:44:43+09:00","dateModified": "2024-05-11T22:31:44+09:00","publisher": {
-            "@type": "Organization",
-            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile.png"},"author": {
-                "@type": "Person",
-                "name": "seilylook"
-            },"description": ""
-    }
-    </script></head>
-    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+          "@type": "WebPage",
+          "@id": "https:\/\/seilylook.github.io\/posts\/spark-qa-note\/"
+        },
+        "image": ["https:\/\/seilylook.github.io\/images\/profile.png"],
+        "genre": "posts",
+        "keywords": "Spark, DataFrame, API, Certification",
+        "wordcount": 421,
+        "url": "https:\/\/seilylook.github.io\/posts\/spark-qa-note\/",
+        "datePublished": "2024-05-11T11:44:43+09:00",
+        "dateModified": "2024-05-11T22:31:44+09:00",
+        "publisher": {
+          "@type": "Organization",
+          "name": "seilylook",
+          "logo": "https:\/\/seilylook.github.io\/images\/profile.png"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "seilylook"
+        },
+        "description": ""
+      }
+    </script>
+  </head>
+  <body data-header-desktop="auto" data-header-mobile="auto">
+    <script type="text/javascript">
+      (window.localStorage && localStorage.getItem("theme")
+        ? localStorage.getItem("theme") === "dark"
+        : "light" === "auto"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : "light" === "dark") && document.body.setAttribute("theme", "dark");
+    </script>
 
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
-                    <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/spark-qa-note/" selected>English</option></select>
-                </a></div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
+    <div id="mask"></div>
+    <div class="wrapper">
+      <header class="desktop" id="header-desktop">
         <div class="header-wrapper">
+          <div class="header-title">
+            <a href="/" title="Devlog"
+              ><span id="id-1" class="typeit"></span
+            ></a>
+          </div>
+          <div class="menu">
+            <div class="menu-inner">
+              <a class="menu-item" href="/about/"> About </a
+              ><a class="menu-item" href="/posts/"> Posts </a
+              ><a class="menu-item" href="/tags/"> Tags </a
+              ><a class="menu-item" href="/categories/"> Categories </a
+              ><span class="menu-item delimiter"></span
+              ><a
+                href="javascript:void(0);"
+                class="menu-item theme-switch"
+                title="Switch Theme"
+              >
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i> </a
+              ><a
+                href="javascript:void(0);"
+                class="menu-item language"
+                title="Select Language"
+              >
+                <i class="fa fa-globe" aria-hidden="true"></i>
+                <select
+                  class="language-select"
+                  id="language-select-desktop"
+                  onchange="location = this.value;"
+                >
+                  <option value="/posts/spark-qa-note/" selected>
+                    English
+                  </option>
+                </select>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <header class="mobile" id="header-mobile">
+        <div class="header-container">
+          <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+              <a href="/" title="Devlog"
+                ><span id="id-2" class="typeit"></span
+              ></a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
             </div>
+          </div>
+          <div class="menu" id="menu-mobile">
+            <a class="menu-item" href="/about/" title="">About</a
+            ><a class="menu-item" href="/posts/" title="">Posts</a
+            ><a class="menu-item" href="/tags/" title="">Tags</a
+            ><a class="menu-item" href="/categories/" title="">Categories</a
+            ><a
+              href="javascript:void(0);"
+              class="menu-item theme-switch"
+              title="Switch Theme"
+            >
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i> </a
+            ><a
+              href="javascript:void(0);"
+              class="menu-item"
+              title="Select Language"
+            >
+              <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+              <select class="language-select" onchange="location = this.value;">
+                <option value="/posts/spark-qa-note/" selected>English</option>
+              </select>
+            </a>
+          </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
-                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/posts/spark-qa-note/" selected>English</option></select>
-                </a></div>
-    </div>
-</header><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
+      </header>
+      <main class="main">
+        <div class="container">
+          <div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark QA Note</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-11">2024-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;421 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/featured-image/exam.jpg"
-        data-srcset="/images/featured-image/exam.jpg, /images/featured-image/exam.jpg 1.5x, /images/featured-image/exam.jpg 2x"
-        data-sizes="auto"
-        alt="/images/featured-image/exam.jpg"
-        title="/images/featured-image/exam.jpg" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>Contents</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+          </div>
+          <article class="page single">
+            <h1 class="single-title animate__animated animate__flipInX">
+              Spark QA Note
+            </h1>
+            <div class="post-meta">
+              <div class="post-meta-line">
+                <span class="post-author"
+                  ><a
+                    href="https://github.com/seilylook"
+                    title="Author"
+                    target="_blank"
+                    rel="noopener noreffer author"
+                    class="author"
+                    ><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i
+                    >seilylook</a
+                  ></span
+                >&nbsp;<span class="post-category"
+                  >included in
+                  <a href="/categories/data-engineering/"
+                    ><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data
+                    Engineering</a
+                  ></span
+                >
+              </div>
+              <div class="post-meta-line">
+                <i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i
+                >&nbsp;<time datetime="2024-05-11">2024-05-11</time>&nbsp;<i
+                  class="fas fa-pencil-alt fa-fw"
+                  aria-hidden="true"
+                ></i
+                >&nbsp;421 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2
+                minutes&nbsp;
+              </div>
+            </div>
+            <div class="featured-image">
+              <img
+                class="lazyload"
+                src="/svg/loading.min.svg"
+                data-src="/images/featured-image/exam.jpg"
+                data-srcset="/images/featured-image/exam.jpg, /images/featured-image/exam.jpg 1.5x, /images/featured-image/exam.jpg 2x"
+                data-sizes="auto"
+                alt="/images/featured-image/exam.jpg"
+                title="/images/featured-image/exam.jpg"
+              />
+            </div>
+            <div class="details toc" id="toc-static" data-kept="">
+              <div class="details-summary toc-title">
+                <span>Contents</span>
+                <span
+                  ><i
+                    class="details-icon fas fa-angle-right"
+                    aria-hidden="true"
+                  ></i
+                ></span>
+              </div>
+              <div class="details-content toc-content" id="toc-content-static">
+                <nav id="TableOfContents">
+                  <ul>
+                    <li><a href="#question">Question</a></li>
+                    <li><a href="#answer">Answer</a></li>
+                    <li><a href="#6">6</a></li>
+                    <li><a href="#7">7</a></li>
+                  </ul>
+
+                  <ul>
+                    <li><a href="#15">15</a></li>
+                    <li><a href="#21">21</a></li>
+                  </ul>
+
+                  <ul>
+                    <li><a href="#49">49</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div class="content" id="content">
+              <h1 id="test-1">Test 1</h1>
+              <h2 id="question">Question</h2>
+              <p>
+                Which of the following options describes the responsibility of
+                the executors in Spark?
+              </p>
+              <h2 id="answer">Answer</h2>
+              <blockquote>
+                <p>
+                  The executors accept tasks from the driver, execute those
+                  tasks, and return results to the driver.
+                </p>
+              </blockquote>
+              <h2 id="6">6</h2>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#question">Question</a></li>
-    <li><a href="#answer">Answer</a></li>
-    <li><a href="#6">6</a></li>
-    <li><a href="#7">7</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#15">15</a></li>
-    <li><a href="#21">21</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#49">49</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><h1 id="test-1">Test 1</h1>
-<h2 id="question">Question</h2>
-<p>Which of the following options describes the responsibility of the executors in Spark?</p>
-<h2 id="answer">Answer</h2>
-<blockquote>
-<p>The executors accept tasks from the driver, execute those tasks, and return results to the driver.</p>
-</blockquote>
-<h2 id="6">6</h2>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following is the deepest level in Spark&rsquo;s execution hierarchy ?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Task</div>
-        </div>
-    </div>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p>The hierarchy is, from top to bottom: <strong>Job, State, Task</strong>.</p>
-<p>Executors and slots facilitate the execution of tasks, but they are not directly part of the hierarchy. Executors are launched by the driver on worker nodes for the purpose of running a specific Spark application. Slots help Spark parallelize work. An executor can have multiple slots which enable it to process multiple tasks in parallel.</p>
-</div>
-        </div>
-    </div>
-<h2 id="7">7</h2>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following satement about garbage collection in Spark is incorrect?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Manually persisting RDDs in Spark prevents them from being garbage collected.</div>
-        </div>
-    </div>
-<h1 id="9">9</h1>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following describes the difference between client and cluster execution modes?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">In cluster mode, the driver runs on the worker nodes, while the client mode runs the driver on the client machine</div>
-        </div>
-    </div>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><strong>In cluster mode, the driver runs on the master node, while in client mode, the driver runs on a virtual machine in the cloud</strong></p>
-<p>This is wrong, since execution modes do not specify whether workloads are run in the cloud or on-premise.</p>
-</div>
-        </div>
-    </div>
-<h2 id="15">15</h2>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following is a viable way to improve Spark&rsquo;s perfomance when dealing with large amounts of data, given that ehrer is only a single application running on the cluster?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Increase values for the properties <code>spark.default.parallelism</code> and <code>spark.sql.shuffle.partitions</code></div>
-        </div>
-    </div>
-<h2 id="21">21</h2>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following code blocks can be used to save DataFrame <code>transactionsDf</code> to memory only, recalculating partitions that do not fit in memory when they are needed?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following is the deepest level in Spark&rsquo;s
+                    execution hierarchy ?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">Task</div>
+                </div>
+              </div>
+              <div class="details admonition info open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-info-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Description<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <p>
+                      The hierarchy is, from top to bottom:
+                      <strong>Job, State, Task</strong>.
+                    </p>
+                    <p>
+                      Executors and slots facilitate the execution of tasks, but
+                      they are not directly part of the hierarchy. Executors are
+                      launched by the driver on worker nodes for the purpose of
+                      running a specific Spark application. Slots help Spark
+                      parallelize work. An executor can have multiple slots
+                      which enable it to process multiple tasks in parallel.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <h2 id="7">7</h2>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following satement about garbage collection in
+                    Spark is incorrect?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Manually persisting RDDs in Spark prevents them from being
+                    garbage collected.
+                  </div>
+                </div>
+              </div>
+              <h1 id="9">9</h1>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following describes the difference between
+                    client and cluster execution modes?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    In cluster mode, the driver runs on the worker nodes, while
+                    the client mode runs the driver on the client machine
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition info open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-info-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Description<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <p>
+                      <strong
+                        >In cluster mode, the driver runs on the master node,
+                        while in client mode, the driver runs on a virtual
+                        machine in the cloud</strong
+                      >
+                    </p>
+                    <p>
+                      This is wrong, since execution modes do not specify
+                      whether workloads are run in the cloud or on-premise.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <h2 id="15">15</h2>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following is a viable way to improve
+                    Spark&rsquo;s perfomance when dealing with large amounts of
+                    data, given that ehrer is only a single application running
+                    on the cluster?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Increase values for the properties
+                    <code>spark.default.parallelism</code> and
+                    <code>spark.sql.shuffle.partitions</code>
+                  </div>
+                </div>
+              </div>
+              <h2 id="21">21</h2>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following code blocks can be used to save
+                    DataFrame <code>transactionsDf</code> to memory only,
+                    recalculating partitions that do not fit in memory when they
+                    are needed?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <div class="highlight">
+                      <div class="chroma">
+                        <table class="lntable">
+                          <tr>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">StorageLevel</span>
+</span></code></pre>
+                            </td>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">StorageLevel</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">transactionDf</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><p><strong>transactionsDf.cache()</strong></p>
-<p>This is</p>
-</div>
-        </div>
-    </div>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following code blocks saves DataFrame <code>transactionDf</code> in location <code>/FileStore/transactions.csv</code> as a CSV file and throws an error if a file already exists in the location?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">trnsactionsDf</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;csv&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&#34;error&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&#34;/FileStore/transactions.csv&#34;</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h1 id="41">41</h1>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following blocks createds a new DataFrame with two columns <code>season</code> and <code>wind_speed_ms</code> where column <code>season</code> is of date type <code>string</code> and colum <code>wind_speed_ms</code> is of data type <code>double</code>?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="s2">&#34;summer&#34;</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="p">(</span><span class="s2">&#34;winter&#34;</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&#34;season&#34;</span><span class="p">,</span> <span class="s2">&#34;wind_speed_ms&#34;</span><span class="p">])</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<h2 id="49">49</h2>
-<div class="details admonition question open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Question<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Which of the following code blocks returns about 150 randomly selected rows from the 1000-row DataFrame <code>transactionsDf</code>, assuming that any row can appear more than once in the returned DataFrame?</div>
-        </div>
-    </div>
-<div class="details admonition success open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-check-circle fa-fw" aria-hidden="true"></i>Success<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">transactionsDf</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">8261</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></div>
-        </div>
-    </div>
-<div class="details admonition info open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Description<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><code>DataFrame.sample(withReplacement=None, fraction=None, seed=None)</code></div>
-        </div>
-    </div>
-</div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>Updated on 2024-05-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/0781a4bb45fa0177d22c921eead40aca13effa45" target="_blank" title="commit by seilylook(seilylook@naver.com) 0781a4bb45fa0177d22c921eead40aca13effa45: add: Spark architecture">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>0781a4b</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/spark-qa-note/index.md" target="_blank">Read Markdown</a>
-                        </span></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/spark-qa-note/" data-title="Spark QA Note" data-hashtags="Spark,DataFrame,API,Certification"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/spark-qa-note/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/spark-qa-note/" data-title="Spark QA Note"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/spark-qa-note/" data-title="Spark QA Note"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/spark-qa-note/" data-title="Spark QA Note" data-image="/images/featured-image/exam.jpg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+</span></span></code></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition info open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-info-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Description<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <p><strong>transactionsDf.cache()</strong></p>
+                    <p>This is</p>
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following code blocks saves DataFrame
+                    <code>transactionDf</code> in location
+                    <code>/FileStore/transactions.csv</code> as a CSV file and
+                    throws an error if a file already exists in the location?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <div class="highlight">
+                      <div class="chroma">
+                        <table class="lntable">
+                          <tr>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code><span class="lnt">1
+</span></code></pre>
+                            </td>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">trnsactionsDf</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;csv&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&#34;error&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&#34;/FileStore/transactions.csv&#34;</span><span class="p">)</span>
+</span></span></code></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h1 id="41">41</h1>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following blocks createds a new DataFrame with
+                    two columns <code>season</code> and
+                    <code>wind_speed_ms</code> where column
+                    <code>season</code> is of date type <code>string</code> and
+                    colum <code>wind_speed_ms</code> is of data type
+                    <code>double</code>?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <div class="highlight">
+                      <div class="chroma">
+                        <table class="lntable">
+                          <tr>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code><span class="lnt">1
+</span></code></pre>
+                            </td>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="s2">&#34;summer&#34;</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="p">(</span><span class="s2">&#34;winter&#34;</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&#34;season&#34;</span><span class="p">,</span> <span class="s2">&#34;wind_speed_ms&#34;</span><span class="p">])</span>
+</span></span></code></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 id="49">49</h2>
+              <div class="details admonition question open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-question-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Question<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    Which of the following code blocks returns about 150
+                    randomly selected rows from the 1000-row DataFrame
+                    <code>transactionsDf</code>, assuming that any row can
+                    appear more than once in the returned DataFrame?
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition success open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-check-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Success<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <div class="highlight">
+                      <div class="chroma">
+                        <table class="lntable">
+                          <tr>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code><span class="lnt">1
+</span></code></pre>
+                            </td>
+                            <td class="lntd">
+                              <pre
+                                tabindex="0"
+                                class="chroma"
+                              ><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">transactionsDf</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">8261</span><span class="p">)</span>
+</span></span></code></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="details admonition info open">
+                <div class="details-summary admonition-title">
+                  <i
+                    class="icon fas fa-info-circle fa-fw"
+                    aria-hidden="true"
+                  ></i
+                  >Description<i
+                    class="details-icon fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="details-content">
+                  <div class="admonition-content">
+                    <code
+                      >DataFrame.sample(withReplacement=None, fraction=None,
+                      seed=None)</code
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="post-footer" id="post-footer">
+              <div class="post-info">
+                <div class="post-info-line">
+                  <div class="post-info-mod">
+                    <span
+                      >Updated on 2024-05-11&nbsp;<a
+                        class="git-hash"
+                        href="https://github.com/seilylook/commit/0781a4bb45fa0177d22c921eead40aca13effa45"
+                        target="_blank"
+                        title="commit by seilylook(seilylook@naver.com) 0781a4bb45fa0177d22c921eead40aca13effa45: add: Spark architecture"
+                      >
+                        <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i
+                        >0781a4b</a
+                      ></span
+                    >
+                  </div>
+                </div>
+                <div class="post-info-line">
+                  <div class="post-info-md">
+                    <span>
+                      <a
+                        class="link-to-markdown"
+                        href="/posts/spark-qa-note/index.md"
+                        target="_blank"
+                        >Read Markdown</a
+                      >
+                    </span>
+                  </div>
+                  <div class="post-info-share">
+                    <span
+                      ><a
+                        href="javascript:void(0);"
+                        title="Share on Twitter"
+                        data-sharer="twitter"
+                        data-url="https://seilylook.github.io/posts/spark-qa-note/"
+                        data-title="Spark QA Note"
+                        data-hashtags="Spark,DataFrame,API,Certification"
+                        ><i
+                          class="fab fa-twitter fa-fw"
+                          aria-hidden="true"
+                        ></i></a
+                      ><a
+                        href="javascript:void(0);"
+                        title="Share on Facebook"
+                        data-sharer="facebook"
+                        data-url="https://seilylook.github.io/posts/spark-qa-note/"
+                        data-hashtag="Spark"
+                        ><i
+                          class="fab fa-facebook-square fa-fw"
+                          aria-hidden="true"
+                        ></i></a
+                      ><a
+                        href="javascript:void(0);"
+                        title="Share on Hacker News"
+                        data-sharer="hackernews"
+                        data-url="https://seilylook.github.io/posts/spark-qa-note/"
+                        data-title="Spark QA Note"
+                        ><i
+                          class="fab fa-hacker-news fa-fw"
+                          aria-hidden="true"
+                        ></i></a
+                      ><a
+                        href="javascript:void(0);"
+                        title="Share on Line"
+                        data-sharer="line"
+                        data-url="https://seilylook.github.io/posts/spark-qa-note/"
+                        data-title="Spark QA Note"
+                        ><i
+                          data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg"
+                          aria-hidden="true"
+                        ></i></a
+                      ><a
+                        href="javascript:void(0);"
+                        title="Share on 微博"
+                        data-sharer="weibo"
+                        data-url="https://seilylook.github.io/posts/spark-qa-note/"
+                        data-title="Spark QA Note"
+                        data-image="/images/featured-image/exam.jpg"
+                        ><i
+                          class="fab fa-weibo fa-fw"
+                          aria-hidden="true"
+                        ></i></a
+                    ></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="post-info-more">
+                <section class="post-tags">
+                  <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a
+                    href="/tags/spark/"
+                    >Spark</a
+                  >,&nbsp;<a href="/tags/dataframe/">DataFrame</a>,&nbsp;<a
+                    href="/tags/api/"
+                    >API</a
+                  >,&nbsp;<a href="/tags/certification/">Certification</a>
+                </section>
+                <section>
+                  <span
+                    ><a
+                      href="javascript:void(0);"
+                      onclick="window.history.back();"
+                      >Back</a
+                    ></span
+                  >&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+                </section>
+              </div>
+
+              <div class="post-nav">
+                <a
+                  href="/posts/cka-begin/"
+                  class="prev"
+                  rel="prev"
+                  title="CKA Begin"
+                  ><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CKA
+                  Begin</a
+                >
+                <a
+                  href="/posts/spark-architecture/"
+                  class="next"
+                  rel="next"
+                  title="Spark Architecture"
+                  >Spark Architecture<i
+                    class="fas fa-angle-right fa-fw"
+                    aria-hidden="true"
+                  ></i
+                ></a>
+              </div>
+            </div>
+            <div id="comments">
+              <div id="disqus_thread" class="comment"></div>
+              <noscript>
+                Please enable JavaScript to view the comments powered by
+                <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+              </noscript>
+              <div id="utterances" class="comment"></div>
+              <noscript>
+                Please enable JavaScript to view the comments powered by
+                <a href="https://utteranc.es/">utterances</a>.
+              </noscript>
+            </div>
+          </article>
         </div>
+      </main>
+      <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-line">
+            Powered by
+            <a
+              href="https://gohugo.io/"
+              target="_blank"
+              rel="noopener noreffer"
+              title="Hugo 0.121.1"
+              >Hugo</a
+            >
+            | Theme -
+            <a
+              href="https://github.com/dillonzq/LoveIt"
+              target="_blank"
+              rel="noopener noreffer"
+              title="LoveIt 0.2.11"
+              ><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i>
+              LoveIt</a
+            >
+          </div>
+          <div
+            class="footer-line"
+            itemscope
+            itemtype="http://schema.org/CreativeWork"
+          >
+            <i class="far fa-copyright fa-fw" aria-hidden="true"></i
+            ><span itemprop="copyrightYear">2022 - 2024</span
+            ><span class="author" itemprop="copyrightHolder"
+              >&nbsp;<a href="https://github.com/seilylook" target="_blank"
+                >seilylook</a
+              ></span
+            >
+          </div>
+        </div>
+      </footer>
     </div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/dataframe/">DataFrame</a>,&nbsp;<a href="/tags/api/">API</a>,&nbsp;<a href="/tags/certification/">Certification</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
-        </section>
+    <div id="fixed-buttons">
+      <a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+        <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i> </a
+      ><a
+        href="#"
+        id="view-comments"
+        class="fixed-button"
+        title="View Comments"
+      >
+        <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+      </a>
     </div>
-
-    <div class="post-nav"><a href="/posts/cka-begin/" class="prev" rel="prev" title="CKA Begin"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CKA Begin</a>
-            <a href="/posts/spark-architecture/" class="next" rel="next" title="Spark Architecture">Spark Architecture<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
-</div>
-<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
-            </noscript><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
-        </div>
-    </footer></div>
-
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://.disqus.com/embed.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"
+    ></script>
+    <script type="text/javascript">
+      window.config = {
+        code: { copyTitle: "Copy to clipboard", maxShownLines: 50 },
+        comment: {
+          utterances: {
+            darkTheme: "github-dark",
+            issueTerm: "pathname",
+            label: "💡",
+            lightTheme: "github-light",
+            repo: "seilylook/seilylook.github.io",
+          },
+        },
+        data: {
+          "id-1":
+            "\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e",
+          "id-2":
+            "\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e",
+        },
+        lightgallery: true,
+        typeit: {
+          cursorChar: "|",
+          cursorSpeed: 1000,
+          data: { "id-1": ["id-1"], "id-2": ["id-2"] },
+          duration: -1,
+          speed: 100,
+        },
+      };
+    </script>
+    <script type="text/javascript" src="/js/theme.min.js"></script>
+  </body>
 </html>
