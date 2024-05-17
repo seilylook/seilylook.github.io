@@ -59,7 +59,7 @@ Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be c
 Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
 </item>
 <item>
-    <title>Spark DPP</title>
+    <title>Spark DPP(Dynamic Partition Pruning)</title>
     <link>https://seilylook.github.io/posts/spark-dpp/</link>
     <pubDate>Tue, 14 May 2024 10:52:10 &#43;0900</pubDate>
     <author>seilylook</author>

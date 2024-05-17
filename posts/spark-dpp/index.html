@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Spark DPP - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Spark DPP" />
+        <title>Spark DPP(Dynamic Partition Pruning) - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Spark DPP(Dynamic Partition Pruning)" />
 <meta property="og:description" content="Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
 1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition." />
 <meta property="og:type" content="article" />
@@ -13,7 +13,7 @@
 <meta property="article:modified_time" content="2024-05-16T12:31:25+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Spark DPP"/>
+<meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Spark DPP(Dynamic Partition Pruning)"/>
 <meta name="twitter:description" content="Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
 1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition."/>
 <meta name="application-name" content="seilylook">
@@ -23,7 +23,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Spark DPP",
+        "headline": "Spark DPP(Dynamic Partition Pruning)",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -106,7 +106,7 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark DPP</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark DPP(Dynamic Partition Pruning)</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-14">2024-05-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1222 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
@@ -211,9 +211,9 @@
 </center>
 <h1 id="conclusion">Conclusion</h1>
 <p>To summarize, in Apache sparks 3.0, a new optimization called dynamic partition pruning is implemented that works both at:</p>
-<p>Logical planning level to find the dimensional filter and propagated across the join to the other side of the scan.
-Physical level to wire it together in a way that this filter executes only once on the dimension side.
-Then the results of the filter gets into reusing directly in the scan of the table. And with this two fold approach we can achieve significant speed ups in many queries in Spark.</p>
+<p>Logical planning level to find the dimensional filter and propagated across the join to the other side of the scan.</p>
+<p>Physical level to wire it together in a way that this filter executes only once on the dimension side.</p>
+<p>Then the results of the filter gets into reusing directly in the scan of the table. And with this two fold approach we can achieve significant speed ups in many queries in Spark.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -226,7 +226,7 @@ Then the results of the filter gets into reusing directly in the scan of the tab
                             <a class="link-to-markdown" href="/posts/spark-dpp/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP" data-hashtags="Spark,Dynamic Partition Pruning"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/spark-dpp/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP" data-image="/images/featured-image/knowledge.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP(Dynamic Partition Pruning)" data-hashtags="Spark,Dynamic Partition Pruning"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/spark-dpp/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP(Dynamic Partition Pruning)"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP(Dynamic Partition Pruning)"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/spark-dpp/" data-title="Spark DPP(Dynamic Partition Pruning)" data-image="/images/featured-image/knowledge.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

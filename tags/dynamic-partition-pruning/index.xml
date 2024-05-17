@@ -5,7 +5,7 @@
         <description>Dynamic Partition Pruning - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
             <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 14 May 2024 10:52:10 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/dynamic-partition-pruning/" rel="self" type="application/rss+xml" /><item>
-    <title>Spark DPP</title>
+    <title>Spark DPP(Dynamic Partition Pruning)</title>
     <link>https://seilylook.github.io/posts/spark-dpp/</link>
     <pubDate>Tue, 14 May 2024 10:52:10 &#43;0900</pubDate>
     <author>seilylook</author>

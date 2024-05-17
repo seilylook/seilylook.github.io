@@ -97,7 +97,7 @@ local mode는 **local client JVM에 Driver 1개와 Executor 1개를 생성하는
 ## Client mode
 
 <center>
-    <img src="/images/spark/spark-cluster-deploy-mode.png"/>
+    <img src="/images/spark/spark-client-deploy-mode.png"/>
 </center>
 
 **Client mode는 Driver가 Cluster 외부인 Client JVM에서 실행된다.** Client 프로세스에 Driver program과 그 안에 Spark application, Spark Context가 있기 때문에 Client 프로세스를 중지시키면 수행 중이던 모든 스파크 Job도 종료된다.
@@ -105,7 +105,7 @@ local mode는 **local client JVM에 Driver 1개와 Executor 1개를 생성하는
 ## Cluster mode
 
 <center>
-    <img src="/images/spark/spark-client-deploy-mode.png"/>
+    <img src="/images/spark/spark-cluster-deploy-mode.png"/>
 </center>
 
 **Cluster mode는 Driver가 Cluster 내부의 Worker node 중 하나에서 실행된다.** 애플리케이션은 Cluster 내부에서 독립적인 프로세스로 실행되고 Cluster manager에 의해 조정되기 때문에 해당 모드에서 Client는 애플리케이션 제출 후 개입하지 않는다.
