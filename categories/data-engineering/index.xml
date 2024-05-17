@@ -4,7 +4,24 @@
         <link>https://seilylook.github.io/categories/data-engineering/</link>
         <description>Data Engineering - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 15 May 2024 13:30:02 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 17 May 2024 11:49:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark UI</title>
+    <link>https://seilylook.github.io/posts/spark-ui/</link>
+    <pubDate>Fri, 17 May 2024 11:49:44 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-ui/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction Jobs: 스파크 애플리케이션의 모든 job에 대한 요약 정보
+Stages: 모든 jobs의 모든 stages의 현재 상태 요약 정보
+Storage: persisted RDD와 DataFrame 정보 제공
+Environment: 다양한 환경 변수 값
+Executors: 애플리케이션을 위해 생성된 Executer 정보 제공. 메모리와 디스크 사용량과 task, shuffle 정보 등
+SQL: 애플리케이션이 Spark SQL 쿼리 실행 시 정보 제공
+Streaming: Streaming jobs 실행 시 정보 제공
+애플리케이션 실행 1 2 3 4 5 df = spark.read.format(&#34;csv&#34;) \ .]]></description>
+</item>
+<item>
     <title>Spark Execution Plan</title>
     <link>https://seilylook.github.io/posts/spark-execution-plan/</link>
     <pubDate>Wed, 15 May 2024 13:30:02 &#43;0900</pubDate>
@@ -37,7 +54,7 @@ Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be c
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/spark-dependency/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/architecture.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
             </div>Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
 Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
 </item>
@@ -113,18 +130,6 @@ ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/api.jpeg" referrerpolicy="no-referrer">
             </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
-</item>
-<item>
-    <title>Databricks Certified Associate Developer for Apache Spark</title>
-    <link>https://seilylook.github.io/posts/databricks-certified-associate-developer-for-apache-spark/</link>
-    <pubDate>Wed, 01 May 2024 12:44:15 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/databricks-certified-associate-developer-for-apache-spark/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/certification.png" referrerpolicy="no-referrer">
-            </div>Architecture Spark는 여러 모듈로 구성되어 있습니다. 크게 두 부분으로 나누어 보면, 컴퓨터 Cluster의 리소스를 관리하는 Cluster Manager와 그 위에서 동작하는 사용자 프로그램인 Spark Application으로 구분됩니다.
-Spark Cluster Manager로는 Spark에 built-in된 기본 모듈 Spark Standalone과 Hadoop에서 사용되는 Yarn가 있습니다. 최근의 Spark 2.3부터는 Container Orchestration 도구로 유명한 Kubernetes도 Spark의 Cluster Manager로 사용할 수 있게 되었습니다.
-Standalone Cluster Manager는 Master와 Worker로 구성됩니다. Master 노드에는 Spark Master 프로세스가 실행되고, 나머지 노드에는 Spark Worker 프로세스가 실행되죠.]]></description>
 </item>
 </channel>
 </rss>

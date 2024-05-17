@@ -4,14 +4,31 @@
         <link>https://seilylook.github.io/tags/architecture/</link>
         <description>Architecture - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 14 May 2024 17:38:35 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/architecture/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 17 May 2024 11:49:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/architecture/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark UI</title>
+    <link>https://seilylook.github.io/posts/spark-ui/</link>
+    <pubDate>Fri, 17 May 2024 11:49:44 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-ui/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction Jobs: 스파크 애플리케이션의 모든 job에 대한 요약 정보
+Stages: 모든 jobs의 모든 stages의 현재 상태 요약 정보
+Storage: persisted RDD와 DataFrame 정보 제공
+Environment: 다양한 환경 변수 값
+Executors: 애플리케이션을 위해 생성된 Executer 정보 제공. 메모리와 디스크 사용량과 task, shuffle 정보 등
+SQL: 애플리케이션이 Spark SQL 쿼리 실행 시 정보 제공
+Streaming: Streaming jobs 실행 시 정보 제공
+애플리케이션 실행 1 2 3 4 5 df = spark.read.format(&#34;csv&#34;) \ .]]></description>
+</item>
+<item>
     <title>Spark Dependency</title>
     <link>https://seilylook.github.io/posts/spark-dependency/</link>
     <pubDate>Tue, 14 May 2024 17:38:35 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/spark-dependency/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/architecture.jpeg" referrerpolicy="no-referrer">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
             </div>Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
 Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
 </item>
