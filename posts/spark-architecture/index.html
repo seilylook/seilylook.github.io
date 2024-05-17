@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/spark-architecture\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Spark, Architecture","wordcount":  830 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Spark, Architecture","wordcount":  954 ,
         "url": "https:\/\/seilylook.github.io\/posts\/spark-architecture\/","datePublished": "2024-05-11T21:39:09+09:00","dateModified": "2024-05-14T12:21:01+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
@@ -74,8 +74,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spark Architecture</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-11">2024-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;830 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-11">2024-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;954 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -90,6 +90,10 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#cluster-manager">Cluster manager</a></li>
+  </ul>
+
+  <ul>
     <li><a href="#responsibilities-of-the-client-process-compoent">Responsibilities of the <code>client process</code> compoent</a></li>
     <li><a href="#responsibilities-of-the-driver-component">Responsibilities of the <code>driver</code> component</a>
       <ul>
@@ -101,8 +105,9 @@
   </ul>
 
   <ul>
-    <li><a href="#spark-standalone-cluster">Spark standalone cluster</a></li>
-    <li><a href="#yarn-cluster">YARN cluster</a></li>
+    <li><a href="#local-mode">Local mode</a></li>
+    <li><a href="#client-mode">Client mode</a></li>
+    <li><a href="#cluster-mode">Cluster mode</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="terms">Terms</h1>
@@ -156,6 +161,13 @@
 </tr>
 </tbody>
 </table>
+<h1 id="spark-architecture">Spark Architecture</h1>
+<center>
+    <img src="/images/spark/spark-context.png"/>
+</center>
+<p>Spark는 master / slave 구조로 <strong>1개의 Driver(중앙 조정자)와 N개의 Executor(분산 작업 노드)로 구성되어있다.</strong> Cluster에서 분산 모드로 실행된다면 하나의 spark application은 cluter manager(Standalone, YARN, Kubernetes)라고 불리는 외부 서비스를 사용해서 여러 개의 머신에서 실행된다.</p>
+<h2 id="cluster-manager">Cluster manager</h2>
+<p><strong>Cluster manager는 여러 서버로 구성된 클러스터 환경에서 애플리케이션들이 잘 동작할 수 있도록 자원을 관리한다.</strong> cluster manager 종류에는 크게 standalone, YARN, Kubernetes가 있다.</p>
 <h1 id="spark-runtime-components">Spark runtime components</h1>
 <table>
 <thead>
@@ -213,21 +225,25 @@ The driver and its subcomponents - the Spark context and scheduler - are respons
 <p>Once the driver is started, it configures an instance of SparkContext. When running a Spark REPL shell, the shell is the driver program. Your Spark context is already preconfigured and available as a sc variable. When running running a standalone Spark applicaion by submitting a jar file, or by using Spark API from another program, yout Spark application starts and configures the Spark context.</p>
 <p>There can be only on Spark context per JVM.</p>
 <p>A Spark context comes with many useful methods for creating RDDs, loading data, and is the main interface for accessing Spark runtime.</p>
-<img src="/images/spark/spark-context.png"/>
-<h1 id="spark-cluster-manager-types">Spark cluster manager types</h1>
-<h2 id="spark-standalone-cluster">Spark standalone cluster</h2>
-<p>A Spark standalone cluster is a Spark-specific cluster. Because a standalone cluter&rsquo;s built specifically for Spark applications, it doesn&rsquo;t support communication with an HDFS secured with Kerberos authentication protocol.</p>
-<h2 id="yarn-cluster">YARN cluster</h2>
-<p>The resource manager in Hadoop 3.</p>
-<p>Running Spark on YARN has several advantages:</p>
-<ul>
-<li>
-<p>YARN lets you run different types of Java applications, not only Spark, and you can mix legacy Hadoop and Spark applications with ease.</p>
-</li>
-<li>
-<p>YARN also provides methods for isolating and prioritizing applications among users and organizations, a functionality the standalone cluster doesn’t have.</p>
-</li>
-</ul>
+<h1 id="local-mode-vs-deploy-mode">Local mode VS Deploy mode</h1>
+<p>local mode와 deploy mode를 선택하는 기준은 <strong>cluster를 사용 여부</strong>다. 즉, cluster를 사용해서 분산 모드로 애플리케이션을 실행한다면 deploy mode, 그렇지 않다면 local mode다.</p>
+<p>cluster를 사용한다면 <strong>cluster manager 종류와 배포 방식</strong>을 선택할 수 있다. cluster manager는 standalone, YARN, Mesos 등 중에 선택할 수 있다. <strong>배포 방식에는 client, cluster가 있고 어떤 방식을 사용하느냐에 따라 driver 실행 위치가 달라진다.</strong></p>
+<p>즉, 우리는 spark 애플리케이션을 실행할때 local mode, client mode, cluster mode 총 3가지 방식으로 실행할 수 있다.</p>
+<h2 id="local-mode">Local mode</h2>
+<center>
+    <img src="/images/spark/spark-local-mode.webp"/>
+</center>
+<p>local mode는 <strong>local client JVM에 Driver 1개와 Executor 1개를 생성하는 형태</strong>로, 클러스터를 사용하지 않고 로컬 단일 머신에서 애플리케이션을 실행한다.</p>
+<h2 id="client-mode">Client mode</h2>
+<center>
+    <img src="/images/spark/spark-cluster-deploy-mode.png"/>
+</center>
+<p><strong>Client mode는 Driver가 Cluster 외부인 Client JVM에서 실행된다.</strong> Client 프로세스에 Driver program과 그 안에 Spark application, Spark Context가 있기 때문에 Client 프로세스를 중지시키면 수행 중이던 모든 스파크 Job도 종료된다.</p>
+<h2 id="cluster-mode">Cluster mode</h2>
+<center>
+    <img src="/images/spark/spark-client-deploy-mode.png"/>
+</center>
+<p><strong>Cluster mode는 Driver가 Cluster 내부의 Worker node 중 하나에서 실행된다.</strong> 애플리케이션은 Cluster 내부에서 독립적인 프로세스로 실행되고 Cluster manager에 의해 조정되기 때문에 해당 모드에서 Client는 애플리케이션 제출 후 개입하지 않는다.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
