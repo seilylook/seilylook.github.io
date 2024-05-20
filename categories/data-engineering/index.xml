@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/categories/data-engineering/</link>
         <description>Data Engineering - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 12:33:51 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 13:00:20 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark RDD(Resilient Distributed Dataset)</title>
+    <link>https://seilylook.github.io/posts/spark-rdd/</link>
+    <pubDate>Mon, 20 May 2024 13:00:20 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-rdd/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>RDD Resilient Distributed Datasets(RDDs)
+distrubuted collections of objects that can be cached in memory across cluster
+manipulated through pararrel operators
+automatically recomputed on failure
+immutable(read-only)
+RDD 연산 RDD 연산은 트랜스포메이션과 액션이 있습니다. 트랜스포메이션은 RDD를 이용해서 새로운 RDD를 생성하고, 액션은 RDD를 이용해서 작업을 처리하여 결과를 드라이버에 반환하거나, 파일시스템에 결과를 쓰는 연산입니다. 스파크는 트랜스포메이션을 호출할 때는 작업을 구성하고, 액션이 호출 될 때 실제 계산을 실행합니다.
+다음의 예제에서 csv파일의 데이터를 읽어서 lines라는 RDD 객체를 생성하고, 각 라인의 글자의 개수를 세는 map 트랜스포메이션 함수를 호출하고, 글자 수의 총합을 구하는 reduce 액션 함수를 호출합니다.]]></description>
+</item>
+<item>
     <title>Spark Cache Persist</title>
     <link>https://seilylook.github.io/posts/spark-cache-persist/</link>
     <pubDate>Mon, 20 May 2024 12:33:51 &#43;0900</pubDate>
@@ -118,22 +134,6 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
 Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리된다. 또한, 하나의 Task는 하나의 Core가 연산 처리한다.
 즉, 1 Core = 1 Task = 1 Partition이다.
 예를 들어, 다음과 같다면 전체 Core 수를 300개로 세팅한 상태이고, 이 300개가 현재 실행 중인 Task 수이자, 현재 처리 중인 Partition 수에 해당한다. 또한, 전체 Partition 수는 1800개로 세팅했으며, 이는 전체 Task 수이기도 하다.]]></description>
-</item>
-<item>
-    <title>SQL Join</title>
-    <link>https://seilylook.github.io/posts/sql-join/</link>
-    <pubDate>Wed, 08 May 2024 13:08:19 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/sql-join/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/sql.png" referrerpolicy="no-referrer">
-            </div>Join? JOIN은 데이터베이스 내의 여러 테이블에서 가져온 레코드를 조합하여 하나의 테이블이나 결과 집합으로 표현해 주는 것이다.
-Inner join: 교집합
-Left / Right join: 부분 집합
-Outer Join: 합집합
-예시 데이터
-ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하는 테이블의 ON 절의 조건일 일치하는 결과만 출력
-1 2 3 4 select u.userid, name from usertbl as u inner join buytbl as b on u.]]></description>
 </item>
 </channel>
 </rss>

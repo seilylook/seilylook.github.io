@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/tags/dynamic-partition-pruning/</link>
         <description>Dynamic Partition Pruning - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 12:33:51 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/dynamic-partition-pruning/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 13:00:20 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/dynamic-partition-pruning/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark RDD(Resilient Distributed Dataset)</title>
+    <link>https://seilylook.github.io/posts/spark-rdd/</link>
+    <pubDate>Mon, 20 May 2024 13:00:20 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-rdd/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>RDD Resilient Distributed Datasets(RDDs)
+distrubuted collections of objects that can be cached in memory across cluster
+manipulated through pararrel operators
+automatically recomputed on failure
+immutable(read-only)
+RDD 연산 RDD 연산은 트랜스포메이션과 액션이 있습니다. 트랜스포메이션은 RDD를 이용해서 새로운 RDD를 생성하고, 액션은 RDD를 이용해서 작업을 처리하여 결과를 드라이버에 반환하거나, 파일시스템에 결과를 쓰는 연산입니다. 스파크는 트랜스포메이션을 호출할 때는 작업을 구성하고, 액션이 호출 될 때 실제 계산을 실행합니다.
+다음의 예제에서 csv파일의 데이터를 읽어서 lines라는 RDD 객체를 생성하고, 각 라인의 글자의 개수를 세는 map 트랜스포메이션 함수를 호출하고, 글자 수의 총합을 구하는 reduce 액션 함수를 호출합니다.]]></description>
+</item>
+<item>
     <title>Spark Cache Persist</title>
     <link>https://seilylook.github.io/posts/spark-cache-persist/</link>
     <pubDate>Mon, 20 May 2024 12:33:51 &#43;0900</pubDate>
