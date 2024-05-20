@@ -4,7 +4,21 @@
         <link>https://seilylook.github.io/categories/data-engineering/</link>
         <description>Data Engineering - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 17 May 2024 11:49:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 12:33:51 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark Cache Persist</title>
+    <link>https://seilylook.github.io/posts/spark-cache-persist/</link>
+    <pubDate>Mon, 20 May 2024 12:33:51 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-cache-persist/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction Spark Cache and Persist are optimization techniques for iterative and interactive Spark applications to improve the performances of the jobs or applications. In
+Key Point RDD.cache() cashes the RDD with the default storage level MEMORY_ONLY
+DataFrame.cache() caches the DataFrame with the default storage level MEMORY_AND_DISK
+The persist() method is used to store it to the user-defined storage level
+On Spark UI, the Storage tab shows where partitions exist in memory or disk across the cluster.]]></description>
+</item>
+<item>
     <title>Spark UI</title>
     <link>https://seilylook.github.io/posts/spark-ui/</link>
     <pubDate>Fri, 17 May 2024 11:49:44 &#43;0900</pubDate>
@@ -120,16 +134,6 @@ Outer Join: 합집합
 예시 데이터
 ID ENAME 1 AAA 2 BBB 3 CCC ID KNAME 1 가 2 나 4 라 5 마 Inner Join 조인하는 테이블의 ON 절의 조건일 일치하는 결과만 출력
 1 2 3 4 select u.userid, name from usertbl as u inner join buytbl as b on u.]]></description>
-</item>
-<item>
-    <title>Spark DataFrame API</title>
-    <link>https://seilylook.github.io/posts/spark-dataframe-api/</link>
-    <pubDate>Tue, 07 May 2024 13:12:28 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-dataframe-api/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/api.jpeg" referrerpolicy="no-referrer">
-            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
 </item>
 </channel>
 </rss>

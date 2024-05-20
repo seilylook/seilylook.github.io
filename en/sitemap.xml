@@ -2,8 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://seilylook.github.io/tags/architecture/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/categories/"
@@ -12,8 +11,8 @@
                     hreflang="en"
                     href="https://seilylook.github.io/categories/"
                     /></url><url>
-            <loc>https://seilylook.github.io/categories/data-engineering/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/data-engineering/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/"
@@ -22,10 +21,11 @@
                     hreflang="en"
                     href="https://seilylook.github.io/"
                     /></url><url>
-            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/spark/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/spark-ui/</loc><lastmod>2024-05-17T13:04:11&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/tags/dynamic-partition-pruning/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/spark/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/spark-cache-persist/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-05-20T12:33:51&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/tags/"
@@ -34,16 +34,17 @@
                     hreflang="en"
                     href="https://seilylook.github.io/tags/"
                     /></url><url>
+            <loc>https://seilylook.github.io/tags/architecture/</loc><lastmod>2024-05-17T18:47:52&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/spark-ui/</loc><lastmod>2024-05-17T13:04:11&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/execution-plan/</loc><lastmod>2024-05-15T14:30:12&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/spark-execution-plan/</loc><lastmod>2024-05-15T14:30:12&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/hierarchy/</loc><lastmod>2024-05-16T12:31:25&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/spark-hierarchy/</loc><lastmod>2024-05-16T12:31:25&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/spark-dependency/</loc><lastmod>2024-05-17T13:04:11&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/dynamic-partition-pruning/</loc><lastmod>2024-05-16T12:31:25&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/spark-dpp/</loc><lastmod>2024-05-16T12:31:25&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/spark-dpp/</loc><lastmod>2024-05-17T18:47:52&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/adaptive-query-execution/</loc><lastmod>2024-05-16T12:59:42&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/spark-aqe/</loc><lastmod>2024-05-16T12:59:42&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/spark-architecture/</loc><lastmod>2024-05-17T14:54:31&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/spark-architecture/</loc><lastmod>2024-05-17T18:47:52&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/cka/</loc><lastmod>2024-05-10T16:34:53&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/cka-begin/</loc><lastmod>2024-05-10T16:34:53&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/categories/development/</loc><lastmod>2024-05-10T16:34:53&#43;09:00</lastmod></url><url>

@@ -4,7 +4,21 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 17 May 2024 11:49:44 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 12:33:51 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Spark Cache Persist</title>
+    <link>https://seilylook.github.io/posts/spark-cache-persist/</link>
+    <pubDate>Mon, 20 May 2024 12:33:51 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/spark-cache-persist/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction Spark Cache and Persist are optimization techniques for iterative and interactive Spark applications to improve the performances of the jobs or applications. In
+Key Point RDD.cache() cashes the RDD with the default storage level MEMORY_ONLY
+DataFrame.cache() caches the DataFrame with the default storage level MEMORY_AND_DISK
+The persist() method is used to store it to the user-defined storage level
+On Spark UI, the Storage tab shows where partitions exist in memory or disk across the cluster.]]></description>
+</item>
+<item>
     <title>Spark UI</title>
     <link>https://seilylook.github.io/posts/spark-ui/</link>
     <pubDate>Fri, 17 May 2024 11:49:44 &#43;0900</pubDate>
@@ -116,18 +130,6 @@ Answer 1 2 3 4 controlplane ~ ✖ kubectl get nodes -o wide NAME STATUS ROLES AG
 Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리된다. 또한, 하나의 Task는 하나의 Core가 연산 처리한다.
 즉, 1 Core = 1 Task = 1 Partition이다.
 예를 들어, 다음과 같다면 전체 Core 수를 300개로 세팅한 상태이고, 이 300개가 현재 실행 중인 Task 수이자, 현재 처리 중인 Partition 수에 해당한다. 또한, 전체 Partition 수는 1800개로 세팅했으며, 이는 전체 Task 수이기도 하다.]]></description>
-</item>
-<item>
-    <title>YAML</title>
-    <link>https://seilylook.github.io/posts/yaml/</link>
-    <pubDate>Wed, 08 May 2024 18:42:48 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/yaml/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/yaml.jpeg" referrerpolicy="no-referrer">
-            </div>What is YAML? YAML is a programming language that is frequently combined with a wide range of other languages and is mostly used for creating configuration files.
-When creating configuration files for application projects, languages like Python and the Google-developed Flutter framework for Dart both use YAML (.yaml). Since it can be used to format containerized files, YAML is also well-liked among cloud engineers.
-Types Key - Value Pair 1 2 3 4 Fruit: Apple Vegetable: Carrot Liquid: Water Meat: Chicken Array | Lists 1 2 3 4 5 6 7 8 9 Fruits: - Orange - Apple - Banana Vegetables: - Carrot - Cauliflower - Tomato Dictionary | Map 1 2 3 4 5 6 7 8 9 Banana: Calories: 105 Fat: 0.]]></description>
 </item>
 </channel>
 </rss>
