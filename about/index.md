@@ -2,18 +2,14 @@
 
 
 <div align="center">
-    <img src="/images/featured-image/profile.png" width=200> <br/>
+    <img src="/images/featured-image/profile.png" width=200> </br>
     <b>Se Hyeon Kim</b>
     <br/>
     <a href="https://github.com/seilylook"><img src="/images/featured-image/github-logo.png" width=20 align="center"></a>
     <a href="https://www.linkedin.com/in/se-hyeon-kim-07a1a02a2/"><img src="/images/featured-image/linkedin-logo.png" width=25 align="center"></a>
 </div>
 
-<br/>
-
 ---
-
-<br/>
 
 ## Education 🎓
 
@@ -23,17 +19,15 @@
 
 **Ajou University**
 
-- `Major`: English and literature
-- `Major`: Digital Media
-- `Coursework`: Computer Programming, Data structure, Operating System, Computer Network, Algorithm, Database, Object Programming.
+`Major`: English and literature
+
+`Major`: Digital Media
+
+`Coursework`: Computer Programming, Data structure, Operating System, Computer Network, Algorithm, Database, Object Programming.
 
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-<br/>
-
 ---
-
-<br/>
 
 ## Skills 🛠
 
@@ -41,20 +35,27 @@
         <lottie-player src="https://lottie.host/ad4c866a-535c-4dab-980a-56f43f1f1f28/ZnvWk1OlwU.json" background="transparent"  speed="1"  style="width:300px;height:300px" autoplay ></lottie-player>
 </center>
 
-- `Language`: Python, Scala, Javascript, Dart
-- `Frontend`: React.js, Svelte, Flutter
-- `Backend`: NestJS, Express
-- `Database`: MongoDB, PostgreSQL
-- `Big Data`: Spark, Kafka
-- `Infra`: Airflow, Kubernetes, Docker, GCP, AWS
+`Language`: Python, Scala
 
-<br/>
+`Database`: MongoDB, PostgreSQL
+
+`Big Data`: Spark, Kafka, Airflow, Snowflake, HDFS
+
+`Infra`: Kubernetes, Docker, GCP, AWS, S3, Azure
 
 ---
 
-<br/>
+## Certifications 🌟
 
-## Projects
+<center>
+        <lottie-player src="https://lottie.host/05122b6f-949c-4f96-8e82-b8d79814ec62/gS4g5t1Lk8.json" background="transparent"  speed="1"  style="width:300px;height:300px" autoplay ></lottie-player>
+</center>
+
+### [Databricks Certified Associate Developer for Apache Spark 3.0](https://credentials.databricks.com/356d442e-6a12-4dfd-88a4-2d561461d085)
+
+---
+
+## Projects 🚀
 
 <center>
         <lottie-player src="https://lottie.host/d2ae2b2c-70e1-4b43-8f8b-2fc0a6da9f85/k9p93ZYFuL.json" background="transparent"  speed="1"  style="width:300px;height:300px" autoplay ></lottie-player>
