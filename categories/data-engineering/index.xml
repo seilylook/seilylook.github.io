@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/categories/data-engineering/</link>
         <description>Data Engineering - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 13:00:20 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 22 May 2024 18:32:27 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/data-engineering/" rel="self" type="application/rss+xml" /><item>
+    <title>Airflow Architecture</title>
+    <link>https://seilylook.github.io/posts/airflow-architecture/</link>
+    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/airflow-architecture/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/airflow-logo.png" referrerpolicy="no-referrer">
+            </div>Airflow is a platform that lets you build and run workflows. A workflow is represented as a **DAG** (a Directed Acyclic Graph), and contains individual pieces of work called Tasks, arranged with dependencies and data flows taken into account.
+A DAG specifies the dependencies between tasks, which defines the order in which to execute the tasks. Tasks describe what to do, be it fetching data, running analysis, triggering other systems, or more.]]></description>
+</item>
+<item>
     <title>Spark RDD(Resilient Distributed Dataset)</title>
     <link>https://seilylook.github.io/posts/spark-rdd/</link>
     <pubDate>Mon, 20 May 2024 13:00:20 &#43;0900</pubDate>
@@ -121,19 +132,6 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/architecture.jpeg" referrerpolicy="no-referrer">
             </div>Terms Term Meainig Application User program built on Spark. Consists of a driver program and executors on the cluster. Application jar A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime. Driver program The process running the main() function of the application and creating the SparkContext Cluster manager An external service for acquiring resources on the cluster (e.]]></description>
-</item>
-<item>
-    <title>Spark Partition</title>
-    <link>https://seilylook.github.io/posts/spark-partition/</link>
-    <pubDate>Thu, 09 May 2024 13:27:06 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-partition/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/spark-partition.webp" referrerpolicy="no-referrer">
-            </div>What is Partition? Partition은 RDDs나 Dataset을 구성하고 있는 최소 단위 객체이다. 각 Partition은 서로 다른 노드에서 분산 처리된다.
-Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리된다. 또한, 하나의 Task는 하나의 Core가 연산 처리한다.
-즉, 1 Core = 1 Task = 1 Partition이다.
-예를 들어, 다음과 같다면 전체 Core 수를 300개로 세팅한 상태이고, 이 300개가 현재 실행 중인 Task 수이자, 현재 처리 중인 Partition 수에 해당한다. 또한, 전체 Partition 수는 1800개로 세팅했으며, 이는 전체 Task 수이기도 하다.]]></description>
 </item>
 </channel>
 </rss>

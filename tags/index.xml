@@ -4,7 +4,31 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 13:00:20 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 22 May 2024 18:32:27 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Data Engineering</title>
+    <link>https://seilylook.github.io/tags/data-engineering/</link>
+    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Data Pipeline</title>
+    <link>https://seilylook.github.io/tags/data-pipeline/</link>
+    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-pipeline/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Orchestration</title>
+    <link>https://seilylook.github.io/tags/orchestration/</link>
+    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/orchestration/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Dynamic Partition Pruning</title>
     <link>https://seilylook.github.io/tags/dynamic-partition-pruning/</link>
     <pubDate>Mon, 20 May 2024 13:00:20 &#43;0900</pubDate>
@@ -58,30 +82,6 @@
     <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/cka/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Kubernetes</title>
-    <link>https://seilylook.github.io/tags/kubernetes/</link>
-    <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/kubernetes/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>API</title>
-    <link>https://seilylook.github.io/tags/api/</link>
-    <pubDate>Thu, 09 May 2024 13:27:06 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/api/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>DataFrame</title>
-    <link>https://seilylook.github.io/tags/dataframe/</link>
-    <pubDate>Thu, 09 May 2024 13:27:06 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/dataframe/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

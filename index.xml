@@ -4,9 +4,20 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 May 2024 13:00:20 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 22 May 2024 18:32:27 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Airflow Architecture</title>
+    <link>https://seilylook.github.io/posts/airflow-architecture/</link>
+    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/airflow-architecture/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/airflow-logo.png" referrerpolicy="no-referrer">
+            </div>Airflow is a platform that lets you build and run workflows. A workflow is represented as a **DAG** (a Directed Acyclic Graph), and contains individual pieces of work called Tasks, arranged with dependencies and data flows taken into account.
+A DAG specifies the dependencies between tasks, which defines the order in which to execute the tasks. Tasks describe what to do, be it fetching data, running analysis, triggering other systems, or more.]]></description>
+</item>
+<item>
     <title>Spark RDD(Resilient Distributed Dataset)</title>
     <link>https://seilylook.github.io/posts/spark-rdd/</link>
     <pubDate>Mon, 20 May 2024 13:00:20 &#43;0900</pubDate>
@@ -123,18 +134,6 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/architecture.jpeg" referrerpolicy="no-referrer">
             </div>Terms Term Meainig Application User program built on Spark. Consists of a driver program and executors on the cluster. Application jar A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime. Driver program The process running the main() function of the application and creating the SparkContext Cluster manager An external service for acquiring resources on the cluster (e.]]></description>
-</item>
-<item>
-    <title>CKA Begin</title>
-    <link>https://seilylook.github.io/posts/cka-begin/</link>
-    <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/cka-begin/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/begin.png" referrerpolicy="no-referrer">
-            </div>Lab 1 Question How many nodes are part of the cluster?
-Answer 1 2 3 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 26m v1.29.0+k3s1 Question What is the flavor and version of Operating System on which the Kubernetes nodes are running?
-Answer 1 2 3 4 controlplane ~ ✖ kubectl get nodes -o wide NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP OS-IMAGE KERNEL-VERSION CONTAINER-RUNTIME controlplane Ready control-plane,master 30m v1.]]></description>
 </item>
 </channel>
 </rss>

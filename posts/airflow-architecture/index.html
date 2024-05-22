@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Airflow Architecture - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Airflow Architecture" />
+<meta property="og:description" content="Airflow is a platform that lets you build and run workflows. A workflow is represented as a **DAG** (a Directed Acyclic Graph), and contains individual pieces of work called Tasks, arranged with dependencies and data flows taken into account.
+A DAG specifies the dependencies between tasks, which defines the order in which to execute the tasks. Tasks describe what to do, be it fetching data, running analysis, triggering other systems, or more." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/airflow-architecture/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-22T18:32:27+09:00" />
+<meta property="article:modified_time" content="2024-05-22T18:32:27+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Airflow Architecture"/>
+<meta name="twitter:description" content="Airflow is a platform that lets you build and run workflows. A workflow is represented as a **DAG** (a Directed Acyclic Graph), and contains individual pieces of work called Tasks, arranged with dependencies and data flows taken into account.
+A DAG specifies the dependencies between tasks, which defines the order in which to execute the tasks. Tasks describe what to do, be it fetching data, running analysis, triggering other systems, or more."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/airflow-architecture/" /><link rel="prev" href="https://seilylook.github.io/posts/spark-rdd/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Airflow Architecture",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/airflow-architecture\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Orchestration, Data Pipeline, Data Engineering","wordcount":  1086 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/airflow-architecture\/","datePublished": "2024-05-22T18:32:27+09:00","dateModified": "2024-05-22T18:32:27+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/airflow-architecture/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/airflow-architecture/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Airflow Architecture</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-22">2024-05-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1086 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/airflow-logo.png"
+        data-srcset="/images/featured-image/airflow-logo.png, /images/featured-image/airflow-logo.png 1.5x, /images/featured-image/airflow-logo.png 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/airflow-logo.png"
+        title="/images/featured-image/airflow-logo.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#required-components">Required components</a>
+      <ul>
+        <li><a href="#scheduler"><strong>Scheduler</strong></a></li>
+        <li><a href="#webserver"><strong>Webserver</strong></a></li>
+        <li><a href="#folder-of-dags">Folder of <strong>DAG</strong>s</a></li>
+        <li><a href="#metadata-database">Metadata database</a></li>
+      </ul>
+    </li>
+    <li><a href="#optional-components">Optional components</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#basic-airflow-deployment">Basic Airflow deployment</a></li>
+    <li><a href="#distributed-airflow-architecture">Distributed Airflow architecture</a></li>
+    <li><a href="#seperate-dag-processing-architecture">Seperate DAG processing architecture</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Airflow is a platform that lets you build and run <strong>workflows</strong>. A workflow is represented as a <code>**DAG**</code> (a Directed Acyclic Graph), and contains individual pieces of work called <code>Tasks</code>, arranged with dependencies and data flows taken into account.</p>
+<img src="/images/airflow/airflow-architecture-1.png"/>
+<p>A <strong>DAG</strong> specifies the dependencies between tasks, which defines the order in which to execute the tasks. Tasks describe what to do, be it fetching data, running analysis, triggering other systems, or more.</p>
+<p>Airflow itself is agnostic to what you’re running - it will happily orchestrate and run anything, either with high-level support from one of our providers, or directly as a command using the shell or Python <code>Operators</code>.</p>
+<h1 id="airflow-components">Airflow components</h1>
+<h2 id="required-components">Required components</h2>
+<h3 id="scheduler"><strong>Scheduler</strong></h3>
+<p>handles both triggering scheduled workflows, and submitting Tasks to the executor to run. The executor, is a configuration property of the <strong>scheduler</strong>, not a separate component and runs within the <strong>scheduler</strong> process. There are several executors available out of the box, and you can also write your own.</p>
+<h3 id="webserver"><strong>Webserver</strong></h3>
+<p>presents a handy user interface to inspect, trigger and debug the behaviour of <strong>DAG</strong>s and tasks.</p>
+<h3 id="folder-of-dags">Folder of <strong>DAG</strong>s</h3>
+<p>read by the <strong>scheduler</strong> to figure out what tasks to run and when and to run them.</p>
+<h3 id="metadata-database">Metadata database</h3>
+<p>airflow components use to store state of workflows and tasks. Setting up a metadata database is described in Set up a Database Backend and is required for Airflow to work.</p>
+<hr>
+<h2 id="optional-components">Optional components</h2>
+<p>Optional <strong>worker</strong>, which executes the tasks given to it by the <strong>scheduler</strong>. In the basic installation worker might be part of the <strong>scheduler</strong> not a separate component. It can be run as a long running process in the CeleryExecutor, or as a POD in the KubernetesExecutor.</p>
+<p>Optional *<strong>*triggerer**</strong>, which executes deferred tasks in an asyncio event loop. In basic installation where deferred tasks are not used, a <strong>triggerer</strong> is not necessary.</p>
+<p>Optional *<strong>*DAG</strong> processor**, which parses <strong>DAG</strong> files and serializes them into the metadata database. By default, the <strong>dag</strong> processor process is part of the <strong>scheduler</strong>, but it can be run as a separate component for scalability and security reasons. If <strong>dag</strong> processor is present <strong>scheduler</strong> does not need to read the **DAG** files directly.</p>
+<p>Optional folder of <strong>plugins</strong>. Plugins are a way to extend Airflow’s functionality (similar to installed packages). Plugins are read by the <strong>scheduler</strong>, <strong>dag</strong> processor, <strong>triggerer</strong> and <strong>webserver</strong>.</p>
+<h1 id="deploying-airflow-components">Deploying Airflow components</h1>
+<p>All the components are Python applications that can be deployed using various deployment mechanisms.</p>
+<p>They can have extra installed packages installed in their Python environment. This is useful for example to install custom operators or sensors or extend Airflow functionality with custom plugins.</p>
+<p>While Airflow can be run in a single machine and with simple installation where only <strong>scheduler</strong> and <strong>webserver</strong> are deployed,</p>
+<p>Airflow is designed to be scalable and secure, and is able to run in a distributed environment - where various components can run on different machines, with different security perimeters and can be scaled by running multiple instances of the components above.</p>
+<p>The separation of components also allow for increased security, by isolating the components from each other and by allowing to perform different tasks. For example separating <strong>dag</strong> processor from <strong>scheduler</strong> allows to make sure that the <strong>scheduler</strong> does not have access to the <strong>DAG</strong> files and cannot execute code provided by <strong>DAG</strong> author.</p>
+<ul>
+<li>
+<p>brown solid lines represent DAG files submission and synchronization</p>
+</li>
+<li>
+<p>blue solid lines represent deploying and accessing installed packages and plugins</p>
+</li>
+<li>
+<p>black dashed(점선) lines represent control flow of workers by the scheduler (via executor)</p>
+</li>
+<li>
+<p>black solid lines represent accessing the UI to manage execution of the workflows</p>
+</li>
+<li>
+<p>red dashed(점선) lines represent accessing the metadata database by all components</p>
+</li>
+</ul>
+<h2 id="basic-airflow-deployment">Basic Airflow deployment</h2>
+<p>This is the simplest deployment of Airflow, usually operated and managed on a single machine. Such a deployment usually uses the LocalExecutor, where the <strong>scheduler</strong> and the <strong>workers</strong> are in the same Python process and the <strong>DAG</strong> files are read directly from the local filesystem by the <strong>scheduler</strong>. The <strong>webserver</strong> runs on the same machine as the <strong>scheduler</strong>. There is no <strong>triggerer</strong> component, which means that task deferral is not possible.</p>
+<p>Such an installation typically does not separate user roles - deployment, configuration, operation, authoring and maintenance are all done by the same person and there are no security perimeters between the components.</p>
+<img src="/images/airflow/airflow-architecture-2.png" />
+<h2 id="distributed-airflow-architecture">Distributed Airflow architecture</h2>
+<p>This is the architecture of Airflow where components of Airflow are distributed among multiple machines and where various roles of users are introduced - Deployment Manager, <code>DAG author, Operations User</code>.</p>
+<p>In the case of a distributed deployment, it is important to consider the security aspects of the components. The <strong>webserver</strong> does not have access to the DAG files directly. The code in the Code tab of the UI is read from the metadata database. The <strong>webserver</strong> cannot execute any code submitted by the <code>DAG author</code>. It can only execute code that is installed as an installed package or plugin by the <code>Deployment Manager</code>. The <code>Operations User</code> only has access to the UI and can only trigger DAGs and tasks, but cannot author DAGs.</p>
+<p>The DAG files need to be synchronized between all the components that use them - <strong>scheduler, triggerer and workers</strong>. The <strong>DAG</strong> files can be synchronized by various mechanisms - typical ways how DAGs can be synchronized are described in Manage DAGs files ot our Helm Chart documentation. Helm chart is one of the ways how to deploy Airflow in Kubernetes cluster.</p>
+<img src="/images/airflow/airflow-architecture-3.png" />
+<h2 id="seperate-dag-processing-architecture">Seperate DAG processing architecture</h2>
+<p>In a more complex installation where security and isolation are important, you’ll also see the standalone <strong>dag processor</strong> component that allows to separate scheduler from accessing <strong>DAG files</strong>. This is suitable if the deployment focus is on isolation between parsed tasks. While Airflow does not yet support full multi-tenant features, it can be used to make sure that <code>DAG author</code> provided code is never executed in the context of the scheduler.</p>
+<img src="/images/airflow/airflow-architecture-4.png" />
+<h1 id="workloads">Workloads</h1>
+<p>A DAG runs through a series of Tasks, and there are three common types of task you will see:</p>
+<p><code>Operators</code>, predefined tasks that you can string together quickly to build most parts of your DAGs.</p>
+<p><code>Sensors</code>, a special subclass of Operators which are entirely about waiting for an external event to happen.</p>
+<p>A <code>TaskFlow</code>-decorated <strong>@task</strong>, which is a custom Python function packaged up as a Task.</p>
+<p>Internally, these are all actually subclasses of Airflow’s <code>BaseOperator</code>, and the concepts of Task and Operator are somewhat interchangeable, but it’s useful to think of them as separate concepts - essentially, Operators and Sensors are templates, and when you call one in a DAG file, you’re making a Task.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-05-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/airflow-architecture/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/airflow-architecture/" data-title="Airflow Architecture" data-hashtags="Orchestration,Data Pipeline,Data Engineering"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/airflow-architecture/" data-hashtag="Orchestration"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/airflow-architecture/" data-title="Airflow Architecture"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/airflow-architecture/" data-title="Airflow Architecture"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/airflow-architecture/" data-title="Airflow Architecture" data-image="/images/featured-image/airflow-logo.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/orchestration/">Orchestration</a>,&nbsp;<a href="/tags/data-pipeline/">Data Pipeline</a>,&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/spark-rdd/" class="prev" rel="prev" title="Spark RDD(Resilient Distributed Dataset)"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Spark RDD(Resilient Distributed Dataset)</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
