@@ -2,8 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://seilylook.github.io/posts/airflow-architecture/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-05-27T15:44:33&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/categories/"
@@ -12,10 +11,9 @@
                     hreflang="en"
                     href="https://seilylook.github.io/categories/"
                     /></url><url>
-            <loc>https://seilylook.github.io/tags/data-engineering/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/data-engineering/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/data-pipeline/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/data-engineering/</loc><lastmod>2024-05-27T15:44:33&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/data-warehouse/</loc><lastmod>2024-05-27T15:44:33&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/</loc><lastmod>2024-05-27T15:44:33&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/"
@@ -24,9 +22,9 @@
                     hreflang="en"
                     href="https://seilylook.github.io/"
                     /></url><url>
-            <loc>https://seilylook.github.io/tags/orchestration/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-05-22T18:32:27&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-05-27T15:44:33&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/snowflake/</loc><lastmod>2024-05-27T15:44:33&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-05-27T15:44:33&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/tags/"
@@ -35,6 +33,10 @@
                     hreflang="en"
                     href="https://seilylook.github.io/tags/"
                     /></url><url>
+            <loc>https://seilylook.github.io/posts/airflow-architecture/</loc><lastmod>2024-05-22T19:11:53&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/data-engineering/</loc><lastmod>2024-05-22T19:11:53&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/data-pipeline/</loc><lastmod>2024-05-22T19:11:53&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/orchestration/</loc><lastmod>2024-05-22T19:11:53&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/dynamic-partition-pruning/</loc><lastmod>2024-05-20T13:06:21&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/spark/</loc><lastmod>2024-05-20T13:06:21&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/spark-rdd/</loc><lastmod>2024-05-20T13:06:21&#43;09:00</lastmod></url><url>
@@ -91,7 +93,6 @@
             <loc>https://seilylook.github.io/tags/postgresql/</loc><lastmod>2024-05-06T17:23:29&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/data-lake/</loc><lastmod>2024-05-06T17:23:29&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/datalake/</loc><lastmod>2024-05-06T17:23:29&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/data-warehouse/</loc><lastmod>2024-05-06T17:23:29&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/datawarehouse/</loc><lastmod>2024-05-06T17:23:29&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/etl/</loc><lastmod>2024-05-06T17:23:29&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/etl/</loc><lastmod>2024-05-06T17:23:29&#43;09:00</lastmod></url><url>
