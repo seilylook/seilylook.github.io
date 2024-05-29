@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 27 May 2024 15:44:33 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 29 May 2024 17:05:08 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Airflow Section 1</title>
+    <link>https://seilylook.github.io/posts/airflow-section-1/</link>
+    <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/airflow-section-1/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/airflow-logo.png" referrerpolicy="no-referrer">
+            </div>Install Virtual env 설정 1 2 3 python -m virtualenv sandbox source .sandbox/bin/activate Create and start Docker 1 2 3 cd .sandbox docker run -it --rm -p 8080:8080 python:3.8-slim /bin/bash 환경 변수 AIRFLOW_HOME 설정 1 export AIRFLOW_HOME=/usr/local/airflow 환경 변수 확인 1 env | grep airflow Airflow에 필요한 tools, dependencies 설치 1 apt-get update -y &amp;&amp; apt-get install -y wget libczmq-dev curl libssl-dev git inetutils-telnet bind9utils freetds-dev libkrb5-dev libsasl2-dev libffi-dev libpq-dev freetds-bin build-essential default-libmysqlclient-dev apt-utils rsync zip unzip gcc &amp;&amp; apt-get clean Airflow 사용자 설정 및 로그인 1 useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow 사용자 설정 확인 1 cat /etc/passwd | grep airflow pip 버전 업그레이드 1 pip install --upgrade pip Airflow 로그인 1 su - airflow Airflow dependency에 맞는 버전을 위한 txt 파일 가져오기 1 vim constraints-3.]]></description>
+</item>
+<item>
     <title>Snowflake</title>
     <link>https://seilylook.github.io/posts/snowflake/</link>
     <pubDate>Mon, 27 May 2024 15:44:33 &#43;0900</pubDate>
@@ -119,19 +129,6 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
                 <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
             </div>Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
 1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition.]]></description>
-</item>
-<item>
-    <title>Spark AQE(Adaptive Query Execution)</title>
-    <link>https://seilylook.github.io/posts/spark-aqe/</link>
-    <pubDate>Mon, 13 May 2024 17:51:10 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-aqe/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
-            </div>Info Partition은 RDDs나 Dataset를 구성하고 있는 최소 단위 객체입니다. 각 Partition은 서로 다른 노드에서 분산 처리됩니다. Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리됩니다. 또한, 하나의 Task는 하나의 Core가 연산 처리합니다.
-즉, 1 Core = 1 Task = 1 Partition입니다.
-설정된 Partition 수에 따라 각 Partition의 크기가 결정됩니다. 그리고 이 Partition의 크기가 결국 Core 당 필요한 메모리 크기를 결정하게 됩니다.
-◼️ Partition 수 → Core 수]]></description>
 </item>
 </channel>
 </rss>

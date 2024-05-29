@@ -4,18 +4,10 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 27 May 2024 15:44:33 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>Data Warehouse</title>
-    <link>https://seilylook.github.io/tags/data-warehouse/</link>
-    <pubDate>Mon, 27 May 2024 15:44:33 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/data-warehouse/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 29 May 2024 17:05:08 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
     <title>Data Engineering</title>
     <link>https://seilylook.github.io/tags/data-engineering/</link>
-    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/data-engineering/</guid>
     <description><![CDATA[]]></description>
@@ -23,7 +15,7 @@
 <item>
     <title>Data Pipeline</title>
     <link>https://seilylook.github.io/tags/data-pipeline/</link>
-    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/data-pipeline/</guid>
     <description><![CDATA[]]></description>
@@ -31,9 +23,17 @@
 <item>
     <title>Orchestration</title>
     <link>https://seilylook.github.io/tags/orchestration/</link>
-    <pubDate>Wed, 22 May 2024 18:32:27 &#43;0900</pubDate>
+    <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/orchestration/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Data Warehouse</title>
+    <link>https://seilylook.github.io/tags/data-warehouse/</link>
+    <pubDate>Mon, 27 May 2024 15:44:33 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-warehouse/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
