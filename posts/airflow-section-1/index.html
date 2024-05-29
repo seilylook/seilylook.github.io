@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/airflow-section-1/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-29T17:05:08+09:00" />
-<meta property="article:modified_time" content="2024-05-29T17:05:08+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-05-29T17:17:34+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Airflow Section 1"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/airflow-section-1\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Orchestration, Data Pipeline, Data Engineering","wordcount":  1147 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/airflow-section-1\/","datePublished": "2024-05-29T17:05:08+09:00","dateModified": "2024-05-29T17:05:08+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Orchestration, Data Pipeline, Data Engineering","wordcount":  1188 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/airflow-section-1\/","datePublished": "2024-05-29T17:05:08+09:00","dateModified": "2024-05-29T17:17:34+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Airflow Section 1</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-29">2024-05-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1147 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-29">2024-05-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1188 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -133,6 +133,8 @@
     <li><a href="#airflow-로그인">Airflow 로그인</a></li>
     <li><a href="#airflow-dependency에-맞는-버전을-위한-txt-파일-가져오기">Airflow dependency에 맞는 버전을 위한 txt 파일 가져오기</a></li>
     <li><a href="#airflow-및-하위-subpackage-설치">Airflow 및 하위 subpackage 설치</a></li>
+    <li><a href="#metadatabase-초기화">Metadatabase 초기화</a></li>
+    <li><a href="#airflow-scheduler-시작">Airflow Scheduler 시작</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="install">Install</h1>
@@ -1251,11 +1253,50 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install <span class="s2">&#34;apache-airflow[crypto,celery,postgres,cncf.kubernetes,docker]&#34;</span><span class="o">==</span>2.0.2 --constraint ./constraints-3.8.txt
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="metadatabase-초기화">Metadatabase 초기화</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># logout airflow</span>
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> + c
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">su - airflow
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">airflow db init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="airflow-scheduler-시작">Airflow Scheduler 시작</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> airflow
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">airflow@bf25e2c00ae4:~/airflow$ ls
+</span></span><span class="line"><span class="cl">airflow.cfg  airflow.db  logs  webserver_config.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">airflow@bf25e2c00ae4:~/airflow$ airflow scheduler <span class="p">&amp;</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-29</span>
+                <span>Updated on 2024-05-29&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/d451656cf4033ba23f29271e6e92ff39354d3b04" target="_blank" title="commit by seilylook(seilylook@naver.com) d451656cf4033ba23f29271e6e92ff39354d3b04: add: airflow hands on 1">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d451656</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

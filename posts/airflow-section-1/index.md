@@ -577,3 +577,25 @@ zope.interface==5.4.0
 pip install "apache-airflow[crypto,celery,postgres,cncf.kubernetes,docker]"==2.0.2 --constraint ./constraints-3.8.txt
 ```
 
+## Metadatabase 초기화
+
+```bash
+# logout airflow
+command + c
+
+su - airflow
+
+airflow db init
+```
+
+## Airflow Scheduler 시작
+
+```bash
+cd airflow
+
+airflow@bf25e2c00ae4:~/airflow$ ls
+airflow.cfg  airflow.db  logs  webserver_config.py
+
+airflow@bf25e2c00ae4:~/airflow$ airflow scheduler &
+```
+
