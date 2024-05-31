@@ -3,7 +3,98 @@
 
 # Install
 
-## Virtual env 설정
+## Docker 통한 설정
+
+### Docker 파일
+
+```yaml
+# Base Image
+FROM python:3.8-slim
+LABEL maintainer="seilylook"
+
+# Arguments that can be set with docker build
+ARG AIRFLOW_VERSION=2.0.2
+ARG AIRFLOW_HOME=/opt/airflow
+
+# Export the environment variable AIRFLOW_HOME where airflow will be installed
+ENV AIRFLOW_HOME=${AIRFLOW_HOME}
+
+# Install dependencies and tools
+RUN apt-get update -yqq && \
+    apt-get upgrade -yqq && \
+    apt-get install -yqq --no-install-recommends \
+    wget \
+    libczmq-dev \
+    curl \
+    libssl-dev \
+    git \
+    inetutils-telnet \
+    bind9utils freetds-dev \
+    libkrb5-dev \
+    libsasl2-dev \
+    libffi-dev libpq-dev \
+    freetds-bin build-essential \
+    default-libmysqlclient-dev \
+    apt-utils \
+    rsync \
+    zip \
+    unzip \
+    gcc \
+    vim \
+    locales \
+    && apt-get clean
+
+COPY ./constraints-3.8.txt /constraints-3.8.txt
+
+# Upgrade pip
+# Create airflow user
+# Install apache airflow with subpackages
+RUN pip install --upgrade pip && \
+    useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow && \
+    pip install apache-airflow[postgres]==${AIRFLOW_VERSION} --constraint /constraints-3.8.txt
+
+# Copy the entrypoint.sh from host to container (at path AIRFLOW_HOME)
+COPY ./entrypoint.sh ./entrypoint.sh
+
+# Set the entrypoint.sh file to be executable
+RUN chmod +x ./entrypoint.sh
+
+# Set the owner of the files in AIRFLOW_HOME to the user airflow
+RUN chown -R airflow: ${AIRFLOW_HOME}
+
+# Set the username to use
+USER airflow
+
+# Set workdir (it's like a cd inside the container)
+WORKDIR ${AIRFLOW_HOME}
+
+# Create the dags folder which will contain the DAGs
+RUN mkdir dags
+
+# Expose ports (just to indicate that this container needs to map port)
+EXPOSE 8080
+
+# Execute the entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
+```
+
+### Docker Image 생성
+
+```bash
+docker build -t airflow-basic .
+```
+
+### Docker 실행
+
+```bash
+docker run --rm -d -p 8080:8080 airflow-basic
+```
+
+---
+
+## Manual 설정
+
+### Virtual env 설정
 
 ```bash
 python -m virtualenv sandbox
@@ -11,7 +102,7 @@ python -m virtualenv sandbox
 source .sandbox/bin/activate
 ```
 
-## Create and start Docker
+### Create and start Docker
 
 ```bash
 cd .sandbox
@@ -19,49 +110,49 @@ cd .sandbox
 docker run -it --rm -p 8080:8080 python:3.8-slim /bin/bash
 ```
 
-## 환경 변수 AIRFLOW_HOME 설정
+### 환경 변수 AIRFLOW_HOME 설정
 
 ```bash
 export AIRFLOW_HOME=/usr/local/airflow
 ```
 
-## 환경 변수 확인
+### 환경 변수 확인
 
 ```bash
 env | grep airflow
 ```
 
-## Airflow에 필요한 tools, dependencies 설치
+### Airflow에 필요한 tools, dependencies 설치
 
 ```bash
 apt-get update -y && apt-get install -y wget libczmq-dev curl libssl-dev git inetutils-telnet bind9utils freetds-dev libkrb5-dev libsasl2-dev libffi-dev libpq-dev freetds-bin build-essential default-libmysqlclient-dev apt-utils rsync zip unzip gcc && apt-get clean
 ```
 
-## Airflow 사용자 설정 및 로그인
+### Airflow 사용자 설정 및 로그인
 
 ```bash
 useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow
 ```
 
-## 사용자 설정 확인
+### 사용자 설정 확인
 
 ```bash
 cat /etc/passwd | grep airflow
 ```
 
-## pip 버전 업그레이드
+### pip 버전 업그레이드
 
 ```bash
 pip install --upgrade pip
 ```
 
-## Airflow 로그인
+### Airflow 로그인
 
 ```bash
 su - airflow
 ```
 
-## Airflow dependency에 맞는 버전을 위한 txt 파일 가져오기
+### Airflow dependency에 맞는 버전을 위한 txt 파일 가져오기
 
 ```bash
 vim constraints-3.8.txt
@@ -571,13 +662,13 @@ zope.event==4.5.0
 zope.interface==5.4.0
 ```
 
-## Airflow 및 하위 subpackage 설치
+### Airflow 및 하위 subpackage 설치
 
 ```bash
 pip install "apache-airflow[crypto,celery,postgres,cncf.kubernetes,docker]"==2.0.2 --constraint ./constraints-3.8.txt
 ```
 
-## Metadatabase 초기화
+### Metadatabase 초기화
 
 ```bash
 # logout airflow
@@ -588,7 +679,7 @@ su - airflow
 airflow db init
 ```
 
-## Airflow Scheduler 시작
+### Airflow Scheduler 시작
 
 ```bash
 cd airflow
@@ -597,5 +688,21 @@ airflow@bf25e2c00ae4:~/airflow$ ls
 airflow.cfg  airflow.db  logs  webserver_config.py
 
 airflow@bf25e2c00ae4:~/airflow$ airflow scheduler &
+```
+
+### Airflow User 생성
+
+```bash
+airflow@6b33751afa81:~/airflow$ airflow users create -u admin -f admin -l admin -r Admin -e admin@airflow.com -p admin
+
+[2024-05-31 08:42:52,498] {manager.py:784} WARNING - No user yet created, use flask fab command to do it.
+
+Admin user admin created
+```
+
+### Airflow Webserver 실행
+
+```bash
+airflow@6b33751afa81:~/airflow$ airflow webserver &
 ```
 
