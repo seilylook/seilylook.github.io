@@ -4,10 +4,18 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 29 May 2024 17:05:08 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Airflow</title>
+    <link>https://seilylook.github.io/tags/airflow/</link>
+    <pubDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/airflow/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Data Engineering</title>
     <link>https://seilylook.github.io/tags/data-engineering/</link>
-    <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
+    <pubDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/data-engineering/</guid>
     <description><![CDATA[]]></description>
@@ -15,7 +23,7 @@
 <item>
     <title>Data Pipeline</title>
     <link>https://seilylook.github.io/tags/data-pipeline/</link>
-    <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
+    <pubDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/data-pipeline/</guid>
     <description><![CDATA[]]></description>
@@ -74,14 +82,6 @@
     <pubDate>Wed, 15 May 2024 11:28:14 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/hierarchy/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Adaptive Query Execution</title>
-    <link>https://seilylook.github.io/tags/adaptive-query-execution/</link>
-    <pubDate>Mon, 13 May 2024 17:51:10 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/adaptive-query-execution/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/tags/data-pipeline/</link>
         <description>Data Pipeline - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 29 May 2024 17:05:08 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-pipeline/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-pipeline/" rel="self" type="application/rss+xml" /><item>
+    <title>Forex Data Pipeline</title>
+    <link>https://seilylook.github.io/posts/forex-data-pipeline/</link>
+    <pubDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/forex-data-pipeline/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/stock.jpeg" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Airflow Section 1</title>
     <link>https://seilylook.github.io/posts/airflow-section-1/</link>
     <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
