@@ -11,7 +11,7 @@ Docker Configuration Shell File path: ./start.sh
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/forex-data-pipeline/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-03T20:12:49+09:00" />
-<meta property="article:modified_time" content="2024-06-03T20:14:18+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-04T15:33:29+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Forex Data Pipeline"/>
@@ -30,8 +30,8 @@ Docker Configuration Shell File path: ./start.sh
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  1130 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-03T20:14:18+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  1210 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-04T15:33:29+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -110,7 +110,7 @@ Docker Configuration Shell File path: ./start.sh
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Forex Data Pipeline</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1130 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1210 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -137,6 +137,18 @@ Docker Configuration Shell File path: ./start.sh
       <ul>
         <li><a href="#dag">DAG</a></li>
         <li><a href="#tasks-test">Tasks test</a></li>
+      </ul>
+    </li>
+    <li><a href="#section-2">Section 2</a>
+      <ul>
+        <li><a href="#dag-1">DAG</a></li>
+        <li><a href="#tasks-test-1">Tasks test</a></li>
+      </ul>
+    </li>
+    <li><a href="#section-3">Section 3</a>
+      <ul>
+        <li><a href="#dag-2">DAG</a></li>
+        <li><a href="#tasks-test-2">Tasks test</a></li>
       </ul>
     </li>
   </ul>
@@ -886,12 +898,62 @@ Docker Configuration Shell File path: ./start.sh
 </span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-04 05:59:17,868<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>is_forex_rates_available, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240604T055917, <span class="nv">end_date</span><span class="o">=</span>20240604T055917
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="section-2">Section 2</h2>
+<h3 id="dag-1">DAG</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">is_forex_currencies_file_available</span> <span class="o">=</span> <span class="n">FileSensor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task_id</span><span class="o">=</span><span class="s2">&#34;is_forex_currencies_file_available&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fs_conn_id</span><span class="o">=</span><span class="s2">&#34;forex_path&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">filepath</span><span class="o">=</span><span class="s2">&#34;forex_currencies.csv&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">poke_interval</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tasks-test-1">Tasks test</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span> venv <span class="o">{</span>seilylook<span class="o">}</span> 😎  main ±  docker <span class="nb">exec</span> -it afc31a3f3254 /bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">airflow@afc31a3f3254:/$ <span class="nb">cd</span> opt/airflow/dags/files/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">airflow@afc31a3f3254:~/dags/files$ airflow tasks <span class="nb">test</span> forex_data_pipeline is_forex_currencies_file_available 2024-01-01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-04 09:19:12,326<span class="o">]</span> <span class="o">{</span>base.py:248<span class="o">}</span> INFO - Success criteria met. Exiting.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-04 09:19:12,328<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>is_forex_currencies_file_available, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240604T091912, <span class="nv">end_date</span><span class="o">=</span>20240604T091912
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="section-3">Section 3</h2>
+<h3 id="dag-2">DAG</h3>
+<h3 id="tasks-test-2">Tasks test</h3>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-03&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/46fd34c2286fb9c2f8c177fcf0ab935af85ba3e2" target="_blank" title="commit by seilylook(seilylook@naver.com) 46fd34c2286fb9c2f8c177fcf0ab935af85ba3e2: add: init forex data pipeline">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>46fd34c</a></span>
+                <span>Updated on 2024-06-04&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/80da1c801a10bcd59992ccf5b69115c5a5ec237d" target="_blank" title="commit by seilylook(seilylook@naver.com) 80da1c801a10bcd59992ccf5b69115c5a5ec237d: add: forex project section 1">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>80da1c8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

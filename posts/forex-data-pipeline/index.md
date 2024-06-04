@@ -393,3 +393,37 @@ with DAG(
 [2024-06-04 05:59:17,868] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=is_forex_rates_available, execution_date=20240101T000000, start_date=20240604T055917, end_date=20240604T055917
 ```
 
+## Section 2
+
+### DAG
+
+```python
+    is_forex_currencies_file_available = FileSensor(
+        task_id="is_forex_currencies_file_available",
+        fs_conn_id="forex_path",
+        filepath="forex_currencies.csv",
+        poke_interval=5,
+        timeout=20,
+    )
+```
+
+### Tasks test
+
+```bash
+(venv) venv {seilylook} 😎  main ±  docker exec -it afc31a3f3254 /bin/bash
+
+airflow@afc31a3f3254:/$ cd opt/airflow/dags/files/
+
+airflow@afc31a3f3254:~/dags/files$ airflow tasks test forex_data_pipeline is_forex_currencies_file_available 2024-01-01
+
+[2024-06-04 09:19:12,326] {base.py:248} INFO - Success criteria met. Exiting.
+
+[2024-06-04 09:19:12,328] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=is_forex_currencies_file_available, execution_date=20240101T000000, start_date=20240604T091912, end_date=20240604T091912
+```
+
+## Section 3
+
+### DAG
+
+### Tasks test
+
