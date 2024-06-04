@@ -341,9 +341,7 @@ docker/
 │   └── spark-worker
 ```
 
-## Section 1
-
-Http Connection task 실행하기
+## 1. Http connection task - HttpSensor
 
 ### DAG
 
@@ -384,16 +382,25 @@ with DAG(
 ### Tasks test
 
 ```bash
-(venv) venv {seilylook} 😎 docker exec -it afc31a3f3254 /bin/bash
+(venv) {seilylook} 😎 docker exec -it afc31a3f3254 /bin/bash
 
+airflow@afc31a3f3254:/$ airflow tasks test forex_data_pipeline is_forex_rates_available 2024-01-01
+```
+
+### 결과 확인
+
+```bash
 [2024-06-04 05:59:17,459] {http.py:101} INFO - Poking: marclamberti/f45f872dea4dfd3eaa015a4a1af4b39b
+
 [2024-06-04 05:59:17,460] {base.py:79} INFO - Using connection to: id: forex_api. Host: https://gist.github.com/, Port: None, Schema: , Login: , Password: None, extra: {}
+
 [2024-06-04 05:59:17,461] {http.py:140} INFO - Sending 'GET' to url: https://gist.github.com/marclamberti/f45f872dea4dfd3eaa015a4a1af4b39b
 [2024-06-04 05:59:17,866] {base.py:248} INFO - Success criteria met. Exiting.
+
 [2024-06-04 05:59:17,868] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=is_forex_rates_available, execution_date=20240101T000000, start_date=20240604T055917, end_date=20240604T055917
 ```
 
-## Section 2
+## 2. File upload task - FileSensor
 
 ### DAG
 
@@ -410,20 +417,91 @@ with DAG(
 ### Tasks test
 
 ```bash
-(venv) venv {seilylook} 😎  main ±  docker exec -it afc31a3f3254 /bin/bash
+(venv) {seilylook} 😎  main ±  docker exec -it afc31a3f3254 /bin/bash
 
 airflow@afc31a3f3254:/$ cd opt/airflow/dags/files/
 
 airflow@afc31a3f3254:~/dags/files$ airflow tasks test forex_data_pipeline is_forex_currencies_file_available 2024-01-01
+```
 
+### 결과 확인
+
+```bash
 [2024-06-04 09:19:12,326] {base.py:248} INFO - Success criteria met. Exiting.
 
 [2024-06-04 09:19:12,328] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=is_forex_currencies_file_available, execution_date=20240101T000000, start_date=20240604T091912, end_date=20240604T091912
 ```
 
-## Section 3
+## 3. Download data task - PythonOperator
 
 ### DAG
 
+```python
+from airflow.operators.python import PythonOperator
+
+import csv
+import requests
+import json
+
+def download_rates():
+    BASE_URL = "https://gist.githubusercontent.com/marclamberti/f45f872dea4dfd3eaa015a4a1af4b39b/raw/"
+    ENDPOINTS = {
+        "USD": "api_forex_exchange_usd.json",
+        "EUR": "api_forex_exchange_eur.json",
+    }
+    with open("/opt/airflow/dags/files/forex_currencies.csv") as forex_currencies:
+        reader = csv.DictReader(forex_currencies, delimiter=";")
+
+        for idx, row in enumerate(reader):
+            base = row["base"]
+            with_pairs = row["with_pairs"].split(" ")
+            indata = requests.get(f"{BASE_URL}{ENDPOINTS[base]}").json()
+            outdata = {"base": base, "rates": {}, "last_update": indata["date"]}
+
+            for pair in with_pairs:
+                outdata["rates"][pair] = indata["rates"][pair]
+
+            with open("/opt/airflow/dags/files/forex_rates.json", "a") as outfile:
+                json.dump(outdata, outfile)
+                outfile.write("\n")
+
+with DAG(
+    "forex_data_pipeline",
+    start_date=datetime(2024, 1, 1),
+    schedule_interval="@daily",
+    default_args=default_args,
+    catchup=False,
+) as dag:
+
+    ...
+
+    # Download the forex rates from the API - PythonOperator
+    downloading_rates = PythonOperator(
+        task_id="downloading_rates",
+        python_callable=download_rates,
+    )
+
+```
+
 ### Tasks test
 
+```bash
+(venv) {seilylook} 🐯 docker exec -it afc31a3f3254 /bin/bash   
+
+airflow@afc31a3f3254:/$ airflow tasks test forex_data_pipeline downloading_rates 2024-01-01
+```
+
+### 결과 확인
+
+```bash
+[2024-06-04 10:32:56,752] {taskinstance.py:1254} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=admin@localhost.com
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=forex_data_pipeline
+AIRFLOW_CTX_TASK_ID=downloading_rates
+AIRFLOW_CTX_EXECUTION_DATE=2024-01-01T00:00:00+00:00
+
+[2024-06-04 10:32:57,549] {python.py:151} INFO - Done. Returned value was: None
+
+[2024-06-04 10:32:57,551] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=downloading_rates, execution_date=20240101T000000, start_date=20240604T103256, end_date=20240604T103257
+```
