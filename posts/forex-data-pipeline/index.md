@@ -345,41 +345,41 @@ docker/
 
 1. forex_api
 
-  Conn Id: forex_api
+    Conn Id: forex_api
 
-  Conn Type: HTTP
+    Conn Type: HTTP
 
-  Host: https://gist.github.com/
+    Host: https://gist.github.com/
 
 2. forex_path
 
-  Conn Id: forex_path
+    Conn Id: forex_path
 
-  Conn Type: File(path)
+    Conn Type: File(path)
 
-  Extra: {"path":"/opt/airflow/dags/files"}
+    Extra: {"path":"/opt/airflow/dags/files"}
 
 3. hive_conn
 
-  Conn Id: hive_conn
+    Conn Id: hive_conn
 
-  Conn Type: Hive Server 2 Thrift
+    Conn Type: Hive Server 2 Thrift
 
-  Host: hive-server
+    Host: hive-server
 
-  Login: hive
+    Login: hive
 
-  port: 10000
+    port: 10000
 
 4. spark_conn
 
-  Conn Id: spark_conn
+    Conn Id: spark_conn
 
-  Conn Type: Spark
+    Conn Type: Spark
 
-  Host: spark://spark-master
+    Host: spark://spark-master
 
-  Port: 7077
+    Port: 7077
 
 
 ## 1. Http connection task - HttpSensor

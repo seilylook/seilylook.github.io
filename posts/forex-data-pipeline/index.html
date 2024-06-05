@@ -11,7 +11,7 @@ Docker Configuration Shell File path: ./start.sh
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/forex-data-pipeline/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-03T20:12:49+09:00" />
-<meta property="article:modified_time" content="2024-06-05T15:32:10+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-05T18:27:37+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Forex Data Pipeline"/>
@@ -31,7 +31,7 @@ Docker Configuration Shell File path: ./start.sh
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/"
         },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  2203 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T15:32:10+09:00","publisher": {
+        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T18:27:37+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -850,32 +850,34 @@ Docker Configuration Shell File path: ./start.sh
 </div>
 </div><h2 id="airflow-admin-connections">Airflow admin connections</h2>
 <ol>
-<li>forex_api</li>
-</ol>
+<li>
+<p>forex_api</p>
 <p>Conn Id: forex_api</p>
 <p>Conn Type: HTTP</p>
 <p>Host: <a href="https://gist.github.com/" target="_blank" rel="noopener noreffer ">https://gist.github.com/</a></p>
-<ol start="2">
-<li>forex_path</li>
-</ol>
+</li>
+<li>
+<p>forex_path</p>
 <p>Conn Id: forex_path</p>
 <p>Conn Type: File(path)</p>
 <p>Extra: {&ldquo;path&rdquo;:&quot;/opt/airflow/dags/files&quot;}</p>
-<ol start="3">
-<li>hive_conn</li>
-</ol>
+</li>
+<li>
+<p>hive_conn</p>
 <p>Conn Id: hive_conn</p>
 <p>Conn Type: Hive Server 2 Thrift</p>
 <p>Host: hive-server</p>
 <p>Login: hive</p>
 <p>port: 10000</p>
-<ol start="4">
-<li>spark_conn</li>
-</ol>
+</li>
+<li>
+<p>spark_conn</p>
 <p>Conn Id: spark_conn</p>
 <p>Conn Type: Spark</p>
 <p>Host: spark://spark-master</p>
 <p>Port: 7077</p>
+</li>
+</ol>
 <h2 id="1-http-connection-task---httpsensor">1. Http connection task - HttpSensor</h2>
 <h3 id="dag">DAG</h3>
 <p><code>File path: /min/airflow/dags/forex_data_pipeline.py</code></p>
@@ -1463,8 +1465,8 @@ Docker Configuration Shell File path: ./start.sh
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c328e5710ed37a3c0267d6ccadc2310ce13a93f0" target="_blank" title="commit by seilylook(seilylook@naver.com) c328e5710ed37a3c0267d6ccadc2310ce13a93f0: add: process the forex rates with spark">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c328e57</a></span>
+                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/0ac24be87f0edb9469582b30eb1a6298b784501c" target="_blank" title="commit by seilylook(seilylook@naver.com) 0ac24be87f0edb9469582b30eb1a6298b784501c: add: send a email notification">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>0ac24be</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
