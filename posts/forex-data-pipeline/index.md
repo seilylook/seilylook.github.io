@@ -505,3 +505,38 @@ AIRFLOW_CTX_EXECUTION_DATE=2024-01-01T00:00:00+00:00
 
 [2024-06-04 10:32:57,551] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=downloading_rates, execution_date=20240101T000000, start_date=20240604T103256, end_date=20240604T103257
 ```
+
+## 4. Save the forex rates into HDFS - BashOperator
+
+### DAG
+
+```python
+from airflow.operators.bash import BashOperator
+
+    saving_rates = BashOperator(
+        task_id="saving_rates",
+        bash_command="""
+            hdfs dfs -mkdir -p /forex && \
+            hdfs dfs -put -f $AIRFLOW_HOME/dags/files/forex_rates.json /forex
+        """,
+    )
+```
+
+### Tasks test
+
+```bash
+(venv)  {seilylook} 🐯 docker exec -it 8477c6d75a95 /bin/bash            
+
+airflow@8477c6d75a95:/$ airflow tasks test forex_data_pipeline saving_rates 2024-01-01
+```
+
+### 결과 확인
+
+```bash
+[2024-06-05 03:49:00,586] {subprocess.py:63} INFO - Running command: ['bash', '-c', '\n            hdfs dfs -mkdir -p /forex &&             hdfs dfs -put -f $AIRFLOW_HOME/dags/files/forex_rates.json /forex\n        ']
+[2024-06-05 03:49:00,588] {subprocess.py:74} INFO - Output:
+[2024-06-05 03:49:00,759] {subprocess.py:78} INFO - 2024-06-05 03:49:00,759 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2024-06-05 03:49:01,371] {subprocess.py:78} INFO - 2024-06-05 03:49:01,371 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2024-06-05 03:49:02,281] {subprocess.py:82} INFO - Command exited with return code 0
+[2024-06-05 03:49:02,298] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=saving_rates, execution_date=20240101T000000, start_date=20240605T034900, end_date=20240605T034902
+```
