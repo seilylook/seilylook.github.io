@@ -341,6 +341,47 @@ docker/
 │   └── spark-worker
 ```
 
+## Airflow admin connections
+
+1. forex_api
+
+  Conn Id: forex_api
+
+  Conn Type: HTTP
+
+  Host: https://gist.github.com/
+
+2. forex_path
+
+  Conn Id: forex_path
+
+  Conn Type: File(path)
+
+  Extra: {"path":"/opt/airflow/dags/files"}
+
+3. hive_conn
+
+  Conn Id: hive_conn
+
+  Conn Type: Hive Server 2 Thrift
+
+  Host: hive-server
+
+  Login: hive
+
+  port: 10000
+
+4. spark_conn
+
+  Conn Id: spark_conn
+
+  Conn Type: Spark
+
+  Host: spark://spark-master
+
+  Port: 7077
+
+
 ## 1. Http connection task - HttpSensor
 
 ### DAG
@@ -615,3 +656,31 @@ airflow@8477c6d75a95:/$ airflow tasks test forex_data_pipeline creating_forex_ra
 [2024-06-05 05:09:12,423] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=creating_forex_rates_table, execution_date=20240101T000000, start_date=20240605T050904, end_date=20240605T050912
 ```
 
+## 6. Process the forex rates with Spark - SparkSubmitOperator
+
+### DAG
+
+```python
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
+
+    forex_processing = SparkSubmitOperator(
+        task_id="forex_processing",
+        application="/opt/airflow/dags/scripts/forex_processing.py",
+        conn_id="spark_conn",
+        verbose=False,
+    )
+```
+
+### Tasks test
+
+```bash
+(venv)  {seilylook} 🐯 docker exec -it 7537a6729498 /bin/bash    
+
+airflow@7537a6729498:/$ airflow tasks test forex_data_pipeline forex_processing 2024-01-01
+```
+
+### 결과 확인
+
+```bash
+[2024-06-05 06:20:18,496] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=forex_processing, execution_date=20240101T000000, start_date=20240605T055403, end_date=20240605T062018
+```

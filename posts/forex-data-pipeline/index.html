@@ -11,7 +11,7 @@ Docker Configuration Shell File path: ./start.sh
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/forex-data-pipeline/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-03T20:12:49+09:00" />
-<meta property="article:modified_time" content="2024-06-05T12:52:34+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-05T14:21:38+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Forex Data Pipeline"/>
@@ -30,8 +30,8 @@ Docker Configuration Shell File path: ./start.sh
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  1992 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T12:52:34+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  2107 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T14:21:38+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -110,7 +110,7 @@ Docker Configuration Shell File path: ./start.sh
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Forex Data Pipeline</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1992 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2107 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -133,6 +133,7 @@ Docker Configuration Shell File path: ./start.sh
         <li><a href="#docker-files">Docker files</a></li>
       </ul>
     </li>
+    <li><a href="#airflow-admin-connections">Airflow admin connections</a></li>
     <li><a href="#1-http-connection-task---httpsensor">1. Http connection task - HttpSensor</a>
       <ul>
         <li><a href="#dag">DAG</a></li>
@@ -166,6 +167,13 @@ Docker Configuration Shell File path: ./start.sh
         <li><a href="#dag-4">DAG</a></li>
         <li><a href="#tasks-test-4">Tasks test</a></li>
         <li><a href="#결과-확인-4">결과 확인</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-process-the-forex-rates-with-spark---sparksubmitoperator">6. Process the forex rates with Spark - SparkSubmitOperator</a>
+      <ul>
+        <li><a href="#dag-5">DAG</a></li>
+        <li><a href="#tasks-test-5">Tasks test</a></li>
+        <li><a href="#결과-확인-5">결과 확인</a></li>
       </ul>
     </li>
   </ul>
@@ -826,7 +834,35 @@ Docker Configuration Shell File path: ./start.sh
 </span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="nt">spark-worker</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="1-http-connection-task---httpsensor">1. Http connection task - HttpSensor</h2>
+</div><h2 id="airflow-admin-connections">Airflow admin connections</h2>
+<ol>
+<li>forex_api</li>
+</ol>
+<p>Conn Id: forex_api</p>
+<p>Conn Type: HTTP</p>
+<p>Host: <a href="https://gist.github.com/" target="_blank" rel="noopener noreffer ">https://gist.github.com/</a></p>
+<ol start="2">
+<li>forex_path</li>
+</ol>
+<p>Conn Id: forex_path</p>
+<p>Conn Type: File(path)</p>
+<p>Extra: {&ldquo;path&rdquo;:&quot;/opt/airflow/dags/files&quot;}</p>
+<ol start="3">
+<li>hive_conn</li>
+</ol>
+<p>Conn Id: hive_conn</p>
+<p>Conn Type: Hive Server 2 Thrift</p>
+<p>Host: hive-server</p>
+<p>Login: hive</p>
+<p>port: 10000</p>
+<ol start="4">
+<li>spark_conn</li>
+</ol>
+<p>Conn Id: spark_conn</p>
+<p>Conn Type: Spark</p>
+<p>Host: spark://spark-master</p>
+<p>Port: 7077</p>
+<h2 id="1-http-connection-task---httpsensor">1. Http connection task - HttpSensor</h2>
 <h3 id="dag">DAG</h3>
 <p><code>File path: /min/airflow/dags/forex_data_pipeline.py</code></p>
 <div class="highlight"><div class="chroma">
@@ -1309,12 +1345,58 @@ Docker Configuration Shell File path: ./start.sh
 </span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:12,423<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>creating_forex_rates_table, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240605T050904, <span class="nv">end_date</span><span class="o">=</span>20240605T050912
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="6-process-the-forex-rates-with-spark---sparksubmitoperator">6. Process the forex rates with Spark - SparkSubmitOperator</h2>
+<h3 id="dag-5">DAG</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">airflow.providers.apache.spark.operators.spark_submit</span> <span class="kn">import</span> <span class="n">SparkSubmitOperator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">forex_processing</span> <span class="o">=</span> <span class="n">SparkSubmitOperator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task_id</span><span class="o">=</span><span class="s2">&#34;forex_processing&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">application</span><span class="o">=</span><span class="s2">&#34;/opt/airflow/dags/scripts/forex_processing.py&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn_id</span><span class="o">=</span><span class="s2">&#34;spark_conn&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tasks-test-5">Tasks test</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🐯 docker <span class="nb">exec</span> -it 7537a6729498 /bin/bash    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">airflow@7537a6729498:/$ airflow tasks <span class="nb">test</span> forex_data_pipeline forex_processing 2024-01-01
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="결과-확인-5">결과 확인</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 06:20:18,496<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>forex_processing, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240605T055403, <span class="nv">end_date</span><span class="o">=</span>20240605T062018
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/2e0c5ccecd28ec53fd4c273886f8038c3ceb9bb5" target="_blank" title="commit by seilylook(seilylook@naver.com) 2e0c5ccecd28ec53fd4c273886f8038c3ceb9bb5: add: save the forex rates into HDFS">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>2e0c5cc</a></span>
+                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/480f11ab63242e5d2ee6a293d6d0b9517352a458" target="_blank" title="commit by seilylook(seilylook@naver.com) 480f11ab63242e5d2ee6a293d6d0b9517352a458: add: create the hive table forex rates">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>480f11a</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
