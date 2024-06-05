@@ -540,3 +540,78 @@ airflow@8477c6d75a95:/$ airflow tasks test forex_data_pipeline saving_rates 2024
 [2024-06-05 03:49:02,281] {subprocess.py:82} INFO - Command exited with return code 0
 [2024-06-05 03:49:02,298] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=saving_rates, execution_date=20240101T000000, start_date=20240605T034900, end_date=20240605T034902
 ```
+
+## 5. Create the Hive table forex rates - HiveOperator
+
+### DAG
+
+```python
+from airflow.providers.apache.hive.operators.hive import HiveOperator
+
+    # Create the Hive table forex rates - HiveOperator
+    creating_forex_rates_table = HiveOperator(
+        task_id="creating_forex_rates_table",
+        hive_cli_conn_id="hive_conn",
+        hql="""
+            CREATE EXTERNAL TABLE IF NOT EXISTS forex_rates(
+                base STRING,
+                last_update DATE,
+                eur DOUBLE,
+                usd DOUBLE,
+                nzd DOUBLE,
+                gbp DOUBLE,
+                jpy DOUBLE,
+                cad DOUBLE
+            )
+            ROW FORMAT DELIMITED
+            FIELDS TERMINATED BY ','
+            STORED AS TEXTFILE
+        """,
+    )
+```
+
+### Tasks test
+
+```bash
+(venv)  {seilylook} 🐯 docker exec -it 8477c6d75a95 /bin/bash            
+
+airflow@8477c6d75a95:/$ airflow tasks test forex_data_pipeline creating_forex_rates_table 2024-01-01
+```
+
+### 결과 확인
+
+```bash
+[2024-06-05 05:09:04,833] {hive.py:137} INFO - Executing: 
+            CREATE EXTERNAL TABLE IF NOT EXISTS forex_rates(
+                base STRING,
+                last_update DATE,
+                eur DOUBLE,
+                usd DOUBLE,
+                nzd DOUBLE,
+                gbp DOUBLE,
+                jpy DOUBLE,
+                cad DOUBLE
+            )
+            ROW FORMAT DELIMITED
+            FIELDS TERMINATED BY ','
+            STORED AS TEXTFILE
+        
+[2024-06-05 05:09:04,834] {base.py:79} INFO - Using connection to: id: ***_conn. Host: ***-server, Port: 10000, Schema: , Login: ***, Password: ***, extra: {}
+[2024-06-05 05:09:04,835] {hive.py:155} INFO - Passing HiveConf: {'airflow.ctx.dag_email': 'admin@localhost.com', 'airflow.ctx.dag_owner': 'airflow', 'airflow.ctx.dag_id': 'forex_data_pipeline', 'airflow.ctx.task_id': 'creating_forex_rates_table', 'airflow.ctx.execution_date': '2024-01-01T00:00:00+00:00'}
+[2024-06-05 05:09:04,835] {hive.py:247} INFO - *** -***conf airflow.ctx.dag_id=forex_data_pipeline -***conf airflow.ctx.task_id=creating_forex_rates_table -***conf airflow.ctx.execution_date=2024-01-01T00:00:00+00:00 -***conf airflow.ctx.dag_run_id= -***conf airflow.ctx.dag_owner=airflow -***conf airflow.ctx.dag_email=admin@localhost.com -***conf mapred.job.name=Airflow HiveOperator task for 8477c6d75a95.forex_data_pipeline.creating_forex_rates_table.2024-01-01T00:00:00+00:00 -f /tmp/airflow_***op_pnwps4j2/tmpbbxzoihf
+[2024-06-05 05:09:04,997] {hive.py:259} INFO - SLF4J: Class path contains multiple SLF4J bindings.
+[2024-06-05 05:09:04,997] {hive.py:259} INFO - SLF4J: Found binding in [jar:file:/opt/***/lib/log4j-slf4j-impl-2.10.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+[2024-06-05 05:09:04,997] {hive.py:259} INFO - SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+[2024-06-05 05:09:04,997] {hive.py:259} INFO - SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+[2024-06-05 05:09:04,998] {hive.py:259} INFO - SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+[2024-06-05 05:09:05,847] {hive.py:259} INFO - Hive Session ID = 97eddf31-2ed2-4e5c-a9ad-14f12efddbc4
+[2024-06-05 05:09:05,865] {hive.py:259} INFO - 
+[2024-06-05 05:09:05,865] {hive.py:259} INFO - Logging initialized using configuration in jar:file:/opt/***/lib/***-common-3.1.2.jar!/***-log4j2.properties Async: true
+[2024-06-05 05:09:06,665] {hive.py:259} INFO - Hive Session ID = 8f51bafb-4e60-41d5-bef3-79b13fb24aec
+[2024-06-05 05:09:07,061] {hive.py:259} INFO - OK
+[2024-06-05 05:09:07,061] {hive.py:259} INFO - Time taken: 0.374 seconds
+[2024-06-05 05:09:12,304] {hive.py:259} INFO - OK
+[2024-06-05 05:09:12,304] {hive.py:259} INFO - Time taken: 5.242 seconds
+[2024-06-05 05:09:12,423] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=creating_forex_rates_table, execution_date=20240101T000000, start_date=20240605T050904, end_date=20240605T050912
+```
+

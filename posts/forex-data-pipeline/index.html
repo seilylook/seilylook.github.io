@@ -11,7 +11,7 @@ Docker Configuration Shell File path: ./start.sh
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/forex-data-pipeline/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-03T20:12:49+09:00" />
-<meta property="article:modified_time" content="2024-06-04T19:38:02+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-05T12:52:34+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Forex Data Pipeline"/>
@@ -30,8 +30,8 @@ Docker Configuration Shell File path: ./start.sh
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  1609 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-04T19:38:02+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  1992 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T12:52:34+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -110,8 +110,8 @@ Docker Configuration Shell File path: ./start.sh
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Forex Data Pipeline</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1609 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1992 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -159,6 +159,13 @@ Docker Configuration Shell File path: ./start.sh
         <li><a href="#dag-3">DAG</a></li>
         <li><a href="#tasks-test-3">Tasks test</a></li>
         <li><a href="#결과-확인-3">결과 확인</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-create-the-hive-table-forex-rates---hiveoperator">5. Create the Hive table forex rates - HiveOperator</a>
+      <ul>
+        <li><a href="#dag-4">DAG</a></li>
+        <li><a href="#tasks-test-4">Tasks test</a></li>
+        <li><a href="#결과-확인-4">결과 확인</a></li>
       </ul>
     </li>
   </ul>
@@ -1166,12 +1173,148 @@ Docker Configuration Shell File path: ./start.sh
 </span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 03:49:02,298<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>saving_rates, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240605T034900, <span class="nv">end_date</span><span class="o">=</span>20240605T034902
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="5-create-the-hive-table-forex-rates---hiveoperator">5. Create the Hive table forex rates - HiveOperator</h2>
+<h3 id="dag-4">DAG</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">airflow.providers.apache.hive.operators.hive</span> <span class="kn">import</span> <span class="n">HiveOperator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create the Hive table forex rates - HiveOperator</span>
+</span></span><span class="line"><span class="cl">    <span class="n">creating_forex_rates_table</span> <span class="o">=</span> <span class="n">HiveOperator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task_id</span><span class="o">=</span><span class="s2">&#34;creating_forex_rates_table&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hive_cli_conn_id</span><span class="o">=</span><span class="s2">&#34;hive_conn&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hql</span><span class="o">=</span><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">            CREATE EXTERNAL TABLE IF NOT EXISTS forex_rates(
+</span></span></span><span class="line"><span class="cl"><span class="s2">                base STRING,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                last_update DATE,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                eur DOUBLE,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                usd DOUBLE,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                nzd DOUBLE,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                gbp DOUBLE,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                jpy DOUBLE,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                cad DOUBLE
+</span></span></span><span class="line"><span class="cl"><span class="s2">            )
+</span></span></span><span class="line"><span class="cl"><span class="s2">            ROW FORMAT DELIMITED
+</span></span></span><span class="line"><span class="cl"><span class="s2">            FIELDS TERMINATED BY &#39;,&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">            STORED AS TEXTFILE
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tasks-test-4">Tasks test</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🐯 docker <span class="nb">exec</span> -it 8477c6d75a95 /bin/bash            
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">airflow@8477c6d75a95:/$ airflow tasks <span class="nb">test</span> forex_data_pipeline creating_forex_rates_table 2024-01-01
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="결과-확인-4">결과 확인</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,833<span class="o">]</span> <span class="o">{</span>hive.py:137<span class="o">}</span> INFO - Executing: 
+</span></span><span class="line"><span class="cl">            CREATE EXTERNAL TABLE IF NOT EXISTS forex_rates<span class="o">(</span>
+</span></span><span class="line"><span class="cl">                base STRING,
+</span></span><span class="line"><span class="cl">                last_update DATE,
+</span></span><span class="line"><span class="cl">                eur DOUBLE,
+</span></span><span class="line"><span class="cl">                usd DOUBLE,
+</span></span><span class="line"><span class="cl">                nzd DOUBLE,
+</span></span><span class="line"><span class="cl">                gbp DOUBLE,
+</span></span><span class="line"><span class="cl">                jpy DOUBLE,
+</span></span><span class="line"><span class="cl">                cad DOUBLE
+</span></span><span class="line"><span class="cl">            <span class="o">)</span>
+</span></span><span class="line"><span class="cl">            ROW FORMAT DELIMITED
+</span></span><span class="line"><span class="cl">            FIELDS TERMINATED BY <span class="s1">&#39;,&#39;</span>
+</span></span><span class="line"><span class="cl">            STORED AS TEXTFILE
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,834<span class="o">]</span> <span class="o">{</span>base.py:79<span class="o">}</span> INFO - Using connection to: id: ***_conn. Host: ***-server, Port: 10000, Schema: , Login: ***, Password: ***, extra: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,835<span class="o">]</span> <span class="o">{</span>hive.py:155<span class="o">}</span> INFO - Passing HiveConf: <span class="o">{</span><span class="s1">&#39;airflow.ctx.dag_email&#39;</span>: <span class="s1">&#39;admin@localhost.com&#39;</span>, <span class="s1">&#39;airflow.ctx.dag_owner&#39;</span>: <span class="s1">&#39;airflow&#39;</span>, <span class="s1">&#39;airflow.ctx.dag_id&#39;</span>: <span class="s1">&#39;forex_data_pipeline&#39;</span>, <span class="s1">&#39;airflow.ctx.task_id&#39;</span>: <span class="s1">&#39;creating_forex_rates_table&#39;</span>, <span class="s1">&#39;airflow.ctx.execution_date&#39;</span>: <span class="s1">&#39;2024-01-01T00:00:00+00:00&#39;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,835<span class="o">]</span> <span class="o">{</span>hive.py:247<span class="o">}</span> INFO - *** -***conf airflow.ctx.dag_id<span class="o">=</span>forex_data_pipeline -***conf airflow.ctx.task_id<span class="o">=</span>creating_forex_rates_table -***conf airflow.ctx.execution_date<span class="o">=</span>2024-01-01T00:00:00+00:00 -***conf airflow.ctx.dag_run_id<span class="o">=</span> -***conf airflow.ctx.dag_owner<span class="o">=</span>airflow -***conf airflow.ctx.dag_email<span class="o">=</span>admin@localhost.com -***conf mapred.job.name<span class="o">=</span>Airflow HiveOperator task <span class="k">for</span> 8477c6d75a95.forex_data_pipeline.creating_forex_rates_table.2024-01-01T00:00:00+00:00 -f /tmp/airflow_***op_pnwps4j2/tmpbbxzoihf
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,997<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - SLF4J: Class path contains multiple SLF4J bindings.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,997<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - SLF4J: Found binding in <span class="o">[</span>jar:file:/opt/***/lib/log4j-slf4j-impl-2.10.0.jar!/org/slf4j/impl/StaticLoggerBinder.class<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,997<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - SLF4J: Found binding in <span class="o">[</span>jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,997<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings <span class="k">for</span> an explanation.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:04,998<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - SLF4J: Actual binding is of <span class="nb">type</span> <span class="o">[</span>org.apache.logging.slf4j.Log4jLoggerFactory<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:05,847<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - Hive Session <span class="nv">ID</span> <span class="o">=</span> 97eddf31-2ed2-4e5c-a9ad-14f12efddbc4
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:05,865<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:05,865<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - Logging initialized using configuration in jar:file:/opt/***/lib/***-common-3.1.2.jar!/***-log4j2.properties Async: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:06,665<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - Hive Session <span class="nv">ID</span> <span class="o">=</span> 8f51bafb-4e60-41d5-bef3-79b13fb24aec
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:07,061<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - OK
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:07,061<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - Time taken: 0.374 seconds
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:12,304<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - OK
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:12,304<span class="o">]</span> <span class="o">{</span>hive.py:259<span class="o">}</span> INFO - Time taken: 5.242 seconds
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 05:09:12,423<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>creating_forex_rates_table, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240605T050904, <span class="nv">end_date</span><span class="o">=</span>20240605T050912
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-04&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c809a7b1a7446faf3cd8f661347abdfce8908f7c" target="_blank" title="commit by seilylook(seilylook@naver.com) c809a7b1a7446faf3cd8f661347abdfce8908f7c: add: download the forex rates from API">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c809a7b</a></span>
+                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/2e0c5ccecd28ec53fd4c273886f8038c3ceb9bb5" target="_blank" title="commit by seilylook(seilylook@naver.com) 2e0c5ccecd28ec53fd4c273886f8038c3ceb9bb5: add: save the forex rates into HDFS">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>2e0c5cc</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
