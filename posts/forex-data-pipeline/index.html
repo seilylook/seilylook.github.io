@@ -11,7 +11,7 @@ Docker Configuration Shell File path: ./start.sh
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/forex-data-pipeline/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-03T20:12:49+09:00" />
-<meta property="article:modified_time" content="2024-06-05T18:27:37+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-05T19:00:04+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Forex Data Pipeline"/>
@@ -30,8 +30,8 @@ Docker Configuration Shell File path: ./start.sh
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  2203 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T18:27:37+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  2274 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T19:00:04+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -110,7 +110,7 @@ Docker Configuration Shell File path: ./start.sh
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Forex Data Pipeline</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2203 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2274 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -186,8 +186,11 @@ Docker Configuration Shell File path: ./start.sh
     <li><a href="#8-send-a-slack-notification">8. Send a Slack notification</a>
       <ul>
         <li><a href="#dag-7">DAG</a></li>
-        <li><a href="#tasks-test-7">Tasks test</a></li>
-        <li><a href="#결과-확인-7">결과 확인</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-add-dependencies-between-tasks">9. Add dependencies between tasks</a>
+      <ul>
+        <li><a href="#dag-8">DAG</a></li>
       </ul>
     </li>
   </ul>
@@ -1459,14 +1462,70 @@ Docker Configuration Shell File path: ./start.sh
 </div>
 </div><h2 id="8-send-a-slack-notification">8. Send a Slack notification</h2>
 <h3 id="dag-7">DAG</h3>
-<h3 id="tasks-test-7">Tasks test</h3>
-<h3 id="결과-확인-7">결과 확인</h3>
-</div><div class="post-footer" id="post-footer">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">airflow.providers.slack.operators.slack_webhook</span> <span class="kn">import</span> <span class="n">SlackWebhookOperator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_get_message</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;This is Forex Data Pipeline&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Send a Slack Notification</span>
+</span></span><span class="line"><span class="cl">    <span class="n">send_slack_notification</span> <span class="o">=</span> <span class="n">SlackWebhookOperator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task_id</span><span class="o">=</span><span class="s2">&#34;send_slack_notification&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">http_conn_id</span><span class="o">=</span><span class="s2">&#34;slack_conn&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">message</span><span class="o">=</span><span class="n">_get_message</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">channel</span><span class="o">=</span><span class="s2">&#34;#monitoring&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="9-add-dependencies-between-tasks">9. Add dependencies between tasks</h2>
+<h3 id="dag-8">DAG</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="c1"># Add dependencies between tasks</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">is_forex_rates_available</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;&gt;</span> <span class="n">is_forex_currencies_file_available</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;&gt;</span> <span class="n">downloading_rates</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;&gt;</span> <span class="n">saving_rates</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;&gt;</span> <span class="n">creating_forex_rates_table</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;&gt;</span> <span class="n">forex_processing</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&gt;&gt;</span> <span class="n">send_email_notification</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/0ac24be87f0edb9469582b30eb1a6298b784501c" target="_blank" title="commit by seilylook(seilylook@naver.com) 0ac24be87f0edb9469582b30eb1a6298b784501c: add: send a email notification">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>0ac24be</a></span>
+                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c79317d9c1a36542c03e55a029a1c4bd373323e4" target="_blank" title="commit by seilylook(seilylook@naver.com) c79317d9c1a36542c03e55a029a1c4bd373323e4: design: code indentation">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c79317d</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

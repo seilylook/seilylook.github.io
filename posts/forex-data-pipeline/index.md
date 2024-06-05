@@ -720,6 +720,36 @@ airflow@7537a6729498:/$
 
 ### DAG
 
-### Tasks test
+```python
+from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
 
-### 결과 확인
+def _get_message() -> str:
+    return "This is Forex Data Pipeline"
+
+    # Send a Slack Notification
+    send_slack_notification = SlackWebhookOperator(
+        task_id="send_slack_notification",
+        http_conn_id="slack_conn",
+        message=_get_message(),
+        channel="#monitoring",
+    )
+```
+
+## 9. Add dependencies between tasks
+
+### DAG
+
+```python
+    # Add dependencies between tasks
+    (
+        is_forex_rates_available
+        >> is_forex_currencies_file_available
+        >> downloading_rates
+        >> saving_rates
+        >> creating_forex_rates_table
+        >> forex_processing
+        >> send_email_notification
+    )
+
+```
+
