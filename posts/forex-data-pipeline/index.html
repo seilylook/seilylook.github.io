@@ -11,7 +11,7 @@ Docker Configuration Shell File path: ./start.sh
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/forex-data-pipeline/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-03T20:12:49+09:00" />
-<meta property="article:modified_time" content="2024-06-05T14:21:38+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-05T15:32:10+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Forex Data Pipeline"/>
@@ -30,8 +30,8 @@ Docker Configuration Shell File path: ./start.sh
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  2107 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T14:21:38+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  2203 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/forex-data-pipeline\/","datePublished": "2024-06-03T20:12:49+09:00","dateModified": "2024-06-05T15:32:10+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -110,8 +110,8 @@ Docker Configuration Shell File path: ./start.sh
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Forex Data Pipeline</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2107 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-03">2024-06-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2203 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -174,6 +174,20 @@ Docker Configuration Shell File path: ./start.sh
         <li><a href="#dag-5">DAG</a></li>
         <li><a href="#tasks-test-5">Tasks test</a></li>
         <li><a href="#결과-확인-5">결과 확인</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-send-an-email-notification">7. Send an Email notification</a>
+      <ul>
+        <li><a href="#dag-6">DAG</a></li>
+        <li><a href="#tasks-test-6">Tasks test</a></li>
+        <li><a href="#결과-확인-6">결과 확인</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-send-a-slack-notification">8. Send a Slack notification</a>
+      <ul>
+        <li><a href="#dag-7">DAG</a></li>
+        <li><a href="#tasks-test-7">Tasks test</a></li>
+        <li><a href="#결과-확인-7">결과 확인</a></li>
       </ul>
     </li>
   </ul>
@@ -1391,12 +1405,66 @@ Docker Configuration Shell File path: ./start.sh
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 06:20:18,496<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>forex_processing, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240605T055403, <span class="nv">end_date</span><span class="o">=</span>20240605T062018
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="7-send-an-email-notification">7. Send an Email notification</h2>
+<h3 id="dag-6">DAG</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">airflow.operators.email</span> <span class="kn">import</span> <span class="n">EmailOperator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">send_email_notification</span> <span class="o">=</span> <span class="n">EmailOperator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task_id</span><span class="o">=</span><span class="s2">&#34;send_email_notification&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">to</span><span class="o">=</span><span class="s2">&#34;airflow_course@yopmail.com&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">subject</span><span class="o">=</span><span class="s2">&#34;forex_data_pipeline&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">html_content</span><span class="o">=</span><span class="s2">&#34;&lt;h1&gt;forex_data_pipeline&lt;/h1&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tasks-test-6">Tasks test</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>venv<span class="o">)</span>  <span class="o">{</span>seilylook<span class="o">}</span> 🐯 docker <span class="nb">exec</span> -it 7537a6729498 /bin/bash            
+</span></span><span class="line"><span class="cl">airflow@7537a6729498:/$ airflow tasks <span class="nb">test</span> forex_data_pipeline send_email_notification 2024-01-01
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="결과-확인-6">결과 확인</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 09:12:39,676<span class="o">]</span> <span class="o">{</span>email.py:208<span class="o">}</span> INFO - Email alerting: attempt <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 09:12:41,029<span class="o">]</span> <span class="o">{</span>email.py:220<span class="o">}</span> INFO - Sent an alert email to <span class="o">[</span><span class="s1">&#39;airflow_course@yopmail.com&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-05 09:12:42,560<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>forex_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>send_email_notification, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240605T091239, <span class="nv">end_date</span><span class="o">=</span>20240605T091242
+</span></span><span class="line"><span class="cl">airflow@7537a6729498:/$ 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8-send-a-slack-notification">8. Send a Slack notification</h2>
+<h3 id="dag-7">DAG</h3>
+<h3 id="tasks-test-7">Tasks test</h3>
+<h3 id="결과-확인-7">결과 확인</h3>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/480f11ab63242e5d2ee6a293d6d0b9517352a458" target="_blank" title="commit by seilylook(seilylook@naver.com) 480f11ab63242e5d2ee6a293d6d0b9517352a458: add: create the hive table forex rates">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>480f11a</a></span>
+                <span>Updated on 2024-06-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c328e5710ed37a3c0267d6ccadc2310ce13a93f0" target="_blank" title="commit by seilylook(seilylook@naver.com) c328e5710ed37a3c0267d6ccadc2310ce13a93f0: add: process the forex rates with spark">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c328e57</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

@@ -684,3 +684,42 @@ airflow@7537a6729498:/$ airflow tasks test forex_data_pipeline forex_processing 
 ```bash
 [2024-06-05 06:20:18,496] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=forex_processing, execution_date=20240101T000000, start_date=20240605T055403, end_date=20240605T062018
 ```
+
+## 7. Send an Email notification
+
+### DAG
+
+```python
+from airflow.operators.email import EmailOperator
+
+    send_email_notification = EmailOperator(
+        task_id="send_email_notification",
+        to="airflow_course@yopmail.com",
+        subject="forex_data_pipeline",
+        html_content="<h1>forex_data_pipeline</h1>",
+    )
+```
+
+### Tasks test
+
+```bash
+(venv)  {seilylook} 🐯 docker exec -it 7537a6729498 /bin/bash            
+airflow@7537a6729498:/$ airflow tasks test forex_data_pipeline send_email_notification 2024-01-01
+```
+
+### 결과 확인
+
+```bash
+[2024-06-05 09:12:39,676] {email.py:208} INFO - Email alerting: attempt 1
+[2024-06-05 09:12:41,029] {email.py:220} INFO - Sent an alert email to ['airflow_course@yopmail.com']
+[2024-06-05 09:12:42,560] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=forex_data_pipeline, task_id=send_email_notification, execution_date=20240101T000000, start_date=20240605T091239, end_date=20240605T091242
+airflow@7537a6729498:/$ 
+```
+
+## 8. Send a Slack notification
+
+### DAG
+
+### Tasks test
+
+### 결과 확인
