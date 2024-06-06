@@ -4,9 +4,19 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Cryptocurrency Data Pipeline</title>
+    <link>https://seilylook.github.io/posts/cryptocurrency-data-pipeline/</link>
+    <pubDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/cryptocurrency-data-pipeline/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/cryptocurrency.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Forex Data Pipeline</title>
     <link>https://seilylook.github.io/posts/forex-data-pipeline/</link>
     <pubDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</pubDate>
@@ -121,17 +131,6 @@ Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler 
 Slots are part of executors. A task is executed in a slot. But slots are rather a tool to execute tasks, not part of the execution hierarchy itself.
 Executors are a component of a Spark cluter, but not of the execution hierarchy.
 Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores.]]></description>
-</item>
-<item>
-    <title>Spark Dependency</title>
-    <link>https://seilylook.github.io/posts/spark-dependency/</link>
-    <pubDate>Tue, 14 May 2024 17:38:35 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-dependency/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
-Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
 </item>
 </channel>
 </rss>

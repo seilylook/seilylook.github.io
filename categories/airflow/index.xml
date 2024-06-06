@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/categories/airflow/</link>
         <description>Airflow - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/airflow/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/airflow/" rel="self" type="application/rss+xml" /><item>
+    <title>Cryptocurrency Data Pipeline</title>
+    <link>https://seilylook.github.io/posts/cryptocurrency-data-pipeline/</link>
+    <pubDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/cryptocurrency-data-pipeline/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/cryptocurrency.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Forex Data Pipeline</title>
     <link>https://seilylook.github.io/posts/forex-data-pipeline/</link>
     <pubDate>Mon, 03 Jun 2024 20:12:49 &#43;0900</pubDate>
