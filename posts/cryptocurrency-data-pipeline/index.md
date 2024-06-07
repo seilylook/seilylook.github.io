@@ -376,6 +376,28 @@ airflow@cd9277581b5f:/$ airflow tasks test crypto_data_pipeline is_crypto_value_
 ```python
 from airflow.operators.python import PythonOperator
 
+def _get_crypto_data():
+    session = Session()
+    session.headers.update(headers)
+    try:
+        for crypto in CRYPTO_LIST:
+            response = session.get(URL + crypto)
+            response.raise_for_status()
+            data = response.json()
+
+            filename = f"{crypto}_data.json"
+            filepath = os.path.join(OUTPUT_DIR, filename)
+
+            with open(filepath, "w") as f:
+                json.dump(data, f, indent=2)
+
+            print(f"Data for {crypto} saved to {filepath}")
+
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        print(e)
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
 
     get_crypto_data = PythonOperator(
         task_id="get_crypto_data",
@@ -404,4 +426,69 @@ Data for TON saved to /opt/airflow/dags/files/TON_data.json
 Data for ADA saved to /opt/airflow/dags/files/ADA_data.json
 [2024-06-07 03:21:18,576] {python.py:151} INFO - Done. Returned value was: None
 [2024-06-07 03:21:18,585] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=crypto_data_pipeline, task_id=get_crypto_data, execution_date=20240101T000000, start_date=20240607T022537, end_date=20240607T032118
+```
+
+## 3. Files upload to HDFS - BashOperator, PythonOperator
+
+### DAG
+
+```python
+from airflow.operators.bash import BashOperator
+
+def _generate_hdfs_commands():
+    files = os.listdir(OUTPUT_DIR)
+    # print(files)
+
+    commands = []
+    for filename in files:
+        if filename.endswith(".json"):
+            commands.append(
+                f"hdfs dfs -put -f {os.path.join(OUTPUT_DIR, filename)} /crypto"
+            )
+
+    return commands
+
+
+def _save_files_to_hdfs():
+    commands = _generate_hdfs_commands()
+    for command in commands:
+        os.system(command)
+        print(f"Executed: {command}")
+
+    make_directory_to_hdfs = BashOperator(
+        task_id="make_directory_to_hdfs",
+        bash_command="hdfs dfs -mkdir -p /crypto",
+    )
+
+    save_files_to_hdfs = PythonOperator(
+        task_id="save_files_to_hdfs",
+        python_callable=_save_files_to_hdfs,
+    )
+
+    make_directory_to_hdfs >> save_files_to_hdfs
+```
+
+### Tasks test
+
+```bash
+airflow@cd9277581b5f:/$ airflow tasks test crypto_data_pipeline save_files_to_hdfs 2024-01-01
+```
+
+### 결과 확인
+
+```bash
+[2024-06-07 05:35:08,255] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=crypto_data_pipeline, task_id=save_files_to_hdfs, execution_date=20240101T000000, start_date=20240607T050427, end_date=20240607T053508
+airflow@cd9277581b5f:/$ hdfs dfs -ls /crypto
+2024-06-07 05:35:22,232 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 10 items
+-rw-r--r--   3 airflow supergroup       1551 2024-06-07 05:35 /crypto/ADA_data.json
+-rw-r--r--   3 airflow supergroup       1549 2024-06-07 05:35 /crypto/BNB_data.json
+-rw-r--r--   3 airflow supergroup       1553 2024-06-07 05:35 /crypto/BTC_data.json
+-rw-r--r--   3 airflow supergroup       1552 2024-06-07 05:35 /crypto/DOGE_data.json
+-rw-r--r--   3 airflow supergroup       1548 2024-06-07 05:35 /crypto/ETH_data.json
+-rw-r--r--   3 airflow supergroup       1549 2024-06-07 05:35 /crypto/SOL_data.json
+-rw-r--r--   3 airflow supergroup       1553 2024-06-07 05:35 /crypto/TON_data.json
+-rw-r--r--   3 airflow supergroup       1552 2024-06-07 05:35 /crypto/USDC_data.json
+-rw-r--r--   3 airflow supergroup       1554 2024-06-07 05:35 /crypto/USDT_data.json
+-rw-r--r--   3 airflow supergroup       1554 2024-06-07 05:35 /crypto/XRP_data.json
 ```

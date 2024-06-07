@@ -11,7 +11,7 @@ Docker Configuration Shell File path: ./start.sh
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/cryptocurrency-data-pipeline/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-06T18:12:19+09:00" />
-<meta property="article:modified_time" content="2024-06-06T18:13:39+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-07T12:38:58+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Cryptocurrency Data Pipeline"/>
@@ -30,8 +30,8 @@ Docker Configuration Shell File path: ./start.sh
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/cryptocurrency-data-pipeline\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  1153 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/cryptocurrency-data-pipeline\/","datePublished": "2024-06-06T18:12:19+09:00","dateModified": "2024-06-06T18:13:39+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Airflow, Data Pipeline, Data Engineering","wordcount":  1479 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/cryptocurrency-data-pipeline\/","datePublished": "2024-06-06T18:12:19+09:00","dateModified": "2024-06-07T12:38:58+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -110,8 +110,8 @@ Docker Configuration Shell File path: ./start.sh
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Cryptocurrency Data Pipeline</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-06">2024-06-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1153 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-06">2024-06-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1479 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -146,6 +146,13 @@ Docker Configuration Shell File path: ./start.sh
         <li><a href="#dag-1">DAG</a></li>
         <li><a href="#tasks-test-1">Tasks test</a></li>
         <li><a href="#결과-확인-1">결과 확인</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-files-upload-to-hdfs---bashoperator-pythonoperator">3. Files upload to HDFS - BashOperator, PythonOperator</a>
+      <ul>
+        <li><a href="#dag-2">DAG</a></li>
+        <li><a href="#tasks-test-2">Tasks test</a></li>
+        <li><a href="#결과-확인-2">결과 확인</a></li>
       </ul>
     </li>
   </ul>
@@ -843,16 +850,60 @@ Docker Configuration Shell File path: ./start.sh
 <h3 id="dag-1">DAG</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">airflow.operators.python</span> <span class="kn">import</span> <span class="n">PythonOperator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_get_crypto_data</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">crypto</span> <span class="ow">in</span> <span class="n">CRYPTO_LIST</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">URL</span> <span class="o">+</span> <span class="n">crypto</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">crypto</span><span class="si">}</span><span class="s2">_data.json&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Data for </span><span class="si">{</span><span class="n">crypto</span><span class="si">}</span><span class="s2"> saved to </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="p">(</span><span class="ne">ConnectionError</span><span class="p">,</span> <span class="n">Timeout</span><span class="p">,</span> <span class="n">TooManyRedirects</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Unexpected error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">get_crypto_data</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
@@ -901,12 +952,130 @@ Docker Configuration Shell File path: ./start.sh
 </span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-07 03:21:18,585<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>crypto_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>get_crypto_data, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240607T022537, <span class="nv">end_date</span><span class="o">=</span>20240607T032118
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="3-files-upload-to-hdfs---bashoperator-pythonoperator">3. Files upload to HDFS - BashOperator, PythonOperator</h2>
+<h3 id="dag-2">DAG</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">airflow.operators.bash</span> <span class="kn">import</span> <span class="n">BashOperator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_generate_hdfs_commands</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(files)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">commands</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.json&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;hdfs dfs -put -f </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2"> /crypto&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">commands</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_save_files_to_hdfs</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">commands</span> <span class="o">=</span> <span class="n">_generate_hdfs_commands</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Executed: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">make_directory_to_hdfs</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task_id</span><span class="o">=</span><span class="s2">&#34;make_directory_to_hdfs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bash_command</span><span class="o">=</span><span class="s2">&#34;hdfs dfs -mkdir -p /crypto&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">save_files_to_hdfs</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task_id</span><span class="o">=</span><span class="s2">&#34;save_files_to_hdfs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">python_callable</span><span class="o">=</span><span class="n">_save_files_to_hdfs</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">make_directory_to_hdfs</span> <span class="o">&gt;&gt;</span> <span class="n">save_files_to_hdfs</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tasks-test-2">Tasks test</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">airflow@cd9277581b5f:/$ airflow tasks <span class="nb">test</span> crypto_data_pipeline save_files_to_hdfs 2024-01-01
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="결과-확인-2">결과 확인</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>2024-06-07 05:35:08,255<span class="o">]</span> <span class="o">{</span>taskinstance.py:1219<span class="o">}</span> INFO - Marking task as SUCCESS. <span class="nv">dag_id</span><span class="o">=</span>crypto_data_pipeline, <span class="nv">task_id</span><span class="o">=</span>save_files_to_hdfs, <span class="nv">execution_date</span><span class="o">=</span>20240101T000000, <span class="nv">start_date</span><span class="o">=</span>20240607T050427, <span class="nv">end_date</span><span class="o">=</span>20240607T053508
+</span></span><span class="line"><span class="cl">airflow@cd9277581b5f:/$ hdfs dfs -ls /crypto
+</span></span><span class="line"><span class="cl">2024-06-07 05:35:22,232 WARN util.NativeCodeLoader: Unable to load native-hadoop library <span class="k">for</span> your platform... using builtin-java classes where applicable
+</span></span><span class="line"><span class="cl">Found <span class="m">10</span> items
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1551</span> 2024-06-07 05:35 /crypto/ADA_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1549</span> 2024-06-07 05:35 /crypto/BNB_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1553</span> 2024-06-07 05:35 /crypto/BTC_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1552</span> 2024-06-07 05:35 /crypto/DOGE_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1548</span> 2024-06-07 05:35 /crypto/ETH_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1549</span> 2024-06-07 05:35 /crypto/SOL_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1553</span> 2024-06-07 05:35 /crypto/TON_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1552</span> 2024-06-07 05:35 /crypto/USDC_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1554</span> 2024-06-07 05:35 /crypto/USDT_data.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">3</span> airflow supergroup       <span class="m">1554</span> 2024-06-07 05:35 /crypto/XRP_data.json
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-06&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/3d574bba1e5e5b6e323e5b5d9e8368e97a8ee16e" target="_blank" title="commit by seilylook(seilylook@naver.com) 3d574bba1e5e5b6e323e5b5d9e8368e97a8ee16e: add: Cryptocurrency data pipeline">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3d574bb</a></span>
+                <span>Updated on 2024-06-07&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/aaa8546e45027847fc09a136888621261111004d" target="_blank" title="commit by seilylook(seilylook@naver.com) aaa8546e45027847fc09a136888621261111004d: add: file save task">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>aaa8546</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
