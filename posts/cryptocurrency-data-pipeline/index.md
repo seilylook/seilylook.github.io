@@ -333,11 +333,31 @@ docker/
 
     1. crypto_api
 
-        Conn Id: is_crypto_value_available
+        Conn Id: crypto_api
 
         Conn Type: HTTP
 
         Host: https://sandbox-api.coinmarketcap.com/
+
+    2. hive_conn
+
+        Conn Id: hive_conn
+
+        Conn Type: Hive Server 2 Thrift
+
+        Login: hive
+
+        Port: 10000
+
+    3. spark_conn
+
+        Conn Id: spark_conn
+
+        Conn Type: Spark
+
+        Host: spark://spark-master
+
+        Port: 7077
 
 ## 1. Http connection task - SimpleHttpOperator
 
@@ -491,4 +511,53 @@ Found 10 items
 -rw-r--r--   3 airflow supergroup       1552 2024-06-07 05:35 /crypto/USDC_data.json
 -rw-r--r--   3 airflow supergroup       1554 2024-06-07 05:35 /crypto/USDT_data.json
 -rw-r--r--   3 airflow supergroup       1554 2024-06-07 05:35 /crypto/XRP_data.json
+```
+
+## 4. Make table in Hive - HiveOperator
+
+### DAG
+
+```python
+from airflow.providers.apache.hive.operators.hive import HiveOperator
+
+    create_crypto_data_table = HiveOperator(
+        task_id="create_crypto_data_table",
+        hive_cli_conn_id="hive_conn",
+        hql="""
+            CREATE EXTERNAL TABLE IF NOT EXISTS crypto_data(
+                symbol STRING,
+                id BIGINT,
+                price DOUBLE,
+                volume_24h DOUBLE,
+                volume_change_24h DOUBLE,
+                percent_change_1h DOUBLE,
+                percent_change_24h DOUBLE,
+                percent_change_7d DOUBLE,
+                percent_change_30d DOUBLE
+            )
+            ROW FORMAT DELIMITED
+            FIELDS TERMINATED BY ','
+            STORED AS TEXTFILE
+        """,
+    )
+```
+
+### Tasks test
+
+```bash
+airflow@cd9277581b5f:/$ airflow tasks test crypto_data_pipeline create_crypto_data_table 2024-01-01
+```
+
+### 결과 확인
+
+```bash
+[2024-06-07 06:13:56,490] {hive.py:259} INFO - Hive Session ID = d4db24e6-cde2-4c32-9a5d-cee0b94589c9
+[2024-06-07 06:13:56,507] {hive.py:259} INFO - 
+[2024-06-07 06:13:56,507] {hive.py:259} INFO - Logging initialized using configuration in jar:file:/opt/hive/lib/hive-common-3.1.2.jar!/hive-log4j2.properties Async: true
+[2024-06-07 06:13:57,392] {hive.py:259} INFO - Hive Session ID = 12d1142b-79fe-4b47-9553-184044201a7d
+[2024-06-07 06:13:57,674] {hive.py:259} INFO - OK
+[2024-06-07 06:13:57,674] {hive.py:259} INFO - Time taken: 0.261 seconds
+[2024-06-07 06:13:57,880] {hive.py:259} INFO - OK
+[2024-06-07 06:13:57,880] {hive.py:259} INFO - Time taken: 0.205 seconds
+[2024-06-07 06:13:58,003] {taskinstance.py:1219} INFO - Marking task as SUCCESS. dag_id=crypto_data_pipeline, task_id=create_crypto_data_table
 ```
