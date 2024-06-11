@@ -629,3 +629,379 @@ newpods-bj2zg   1/1     Running   1 (3m58s ago)   20m
 newpods-dn5jz   1/1     Running   1 (3m58s ago)   20m
 redis           1/1     Running   0               3m
 ```
+
+## Replica Set
+
+### Q. How many replica sets?
+
+```bash
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       5s
+```
+
+> A. 1
+
+### Q. How many PODs are DESIRED in the new-replica-set?
+
+```bash
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       5s
+```
+
+> A. 4
+
+### Q. What is the image used to create the pods in the new-replica-set?
+
+```bash
+controlplane ~ ➜  kubectl describe rs new-replica-set 
+Name:         new-replica-set
+Namespace:    default
+Selector:     name=busybox-pod
+Labels:       <none>
+Annotations:  <none>
+Replicas:     4 current / 4 desired
+Pods Status:  0 Running / 4 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  name=busybox-pod
+  Containers:
+   busybox-container:
+    Image:      busybox777
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sh
+      -c
+      echo Hello Kubernetes! && sleep 3600
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-4jm4s
+  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-8pj5l
+  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-7gbl5
+  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-2jcnr
+```
+
+> A. busybox777
+
+### Q. How many PODs are READY in the new-replica-set?
+
+```bash
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       4m30s
+```
+
+> A. 0
+
+### Q. Why do you think the PODs are not ready?
+
+```bash
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       4m30s
+```
+
+> A. The image BUSYBOX777 does not exist
+
+### Q. Delete any one of the 4 PODs
+
+```bash
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       4m30s
+
+controlplane ~ ➜  kubectl get pods
+NAME                    READY   STATUS             RESTARTS   AGE
+new-replica-set-7gbl5   0/1     ImagePullBackOff   0          6m
+new-replica-set-4jm4s   0/1     ErrImagePull       0          6m
+new-replica-set-8pj5l   0/1     ErrImagePull       0          6m
+new-replica-set-2jcnr   0/1     ErrImagePull       0          6m
+
+controlplane ~ ➜  kubectl delete pod new-replica-set-7gbl5 
+pod "new-replica-set-7gbl5" deleted
+
+controlplane ~ ➜  kubectl get pods
+NAME                    READY   STATUS             RESTARTS   AGE
+new-replica-set-4jm4s   0/1     ImagePullBackOff   0          6m39s
+new-replica-set-8pj5l   0/1     ImagePullBackOff   0          6m39s
+new-replica-set-2jcnr   0/1     ImagePullBackOff   0          6m39s
+new-replica-set-f2p2k   0/1     ImagePullBackOff   0          27s
+```
+
+### Q. Why are there still 4 PODs, even after you deleted one?
+
+> A. ReplicaSet ensures that desired number of PODs always run
+
+### Q. Create a ReplicaSet using the replicaset-definition-1.yaml file located at /root/. There is an issue with the file, so try to fix it.
+
+```bash
+controlplane ~ ➜  vim replicaset-definition-1.yaml
+
+apiVersion: v1 (x) -> apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+~
+~
+~
+~
+:wq
+
+controlplane ~ ➜  kubectl create -f replicaset-definition-1.yaml 
+replicaset.apps/replicaset-1 created
+```
+
+### Q. Fix the issue in the replicaset-definition-2.yaml file and create a ReplicaSet using it. This file is located at /root/.
+
+```bash
+controlplane ~ ➜  vim replicaset-definition-2.yaml
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: nginx
+  template:
+    metadata:
+      labels:
+        tier: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+~
+~
+~                                                           
+:wq
+
+controlplane ~ ➜  kubectl create -f replicaset-definition-2.yaml 
+replicaset.apps/replicaset-2 created
+```
+
+### Q. Delete the two newly created ReplicaSets - replicaset-1 and replicaset-2
+
+```bash
+controlplane ~ ✖ kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       22m
+replicaset-1      2         2         2       11m
+replicaset-2      2         2         2       41s
+
+controlplane ~ ➜  kubectl delete rs replicaset-1 
+replicaset.apps "replicaset-1" deleted
+
+controlplane ~ ➜  kubectl delete rs replicaset-2 
+replicaset.apps "replicaset-2" deleted
+
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       23m
+```
+
+### Q. Fix the original replica set new-replica-set to use the correct busybox image. Either delete and recreate the ReplicaSet or Update the existing ReplicaSet and then delete all PODs, so new ones with the correct image will be created.
+
+```bash
+controlplane ~ ➜  kubectl edit rs new-replica-set 
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  creationTimestamp: "2024-06-11T05:57:22Z"
+  generation: 1
+  name: new-replica-set
+  namespace: default
+  resourceVersion: "1130"
+  uid: 1e1c0ce5-d403-4bae-b53f-3b18ab954e2a
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      name: busybox-pod
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: busybox-pod
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - echo Hello Kubernetes! && sleep 3600
+        image: busybox
+        imagePullPolicy: Always
+        name: busybox-container
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  fullyLabeledReplicas: 4
+  observedGeneration: 1
+  replicas: 4
+~
+~
+~
+~
+:wq
+
+replicaset.apps/new-replica-set edited
+
+controlplane ~ ➜  kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+new-replica-set-4hj6z   1/1     Running   0          5s
+new-replica-set-2fjtt   1/1     Running   0          5s
+new-replica-set-5h2xp   1/1     Running   0          5s
+new-replica-set-rvglt   1/1     Running   0          5s
+
+controlplane ~ ➜  kubectl delete pod new-replica-set-4hj6z
+
+controlplane ~ ➜  kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+new-replica-set-7fsds   1/1     Running   0          5s
+new-replica-set-2fjtt   1/1     Running   0          5s
+new-replica-set-5h2xp   1/1     Running   0          5s
+new-replica-set-rvglt   1/1     Running   0          5s
+```
+
+### Q. Scale the ReplicaSet to 5 PODs. Use kubectl scale command or edit the replicaset using kubectl edit replicaset.
+
+```bash
+controlplane ~ ➜  kubectl edit rs new-replica-set 
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  creationTimestamp: "2024-06-11T05:57:22Z"
+  generation: 1
+  name: new-replica-set
+  namespace: default
+  resourceVersion: "1130"
+  uid: 1e1c0ce5-d403-4bae-b53f-3b18ab954e2a
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      name: busybox-pod
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: busybox-pod
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - echo Hello Kubernetes! && sleep 3600
+        image: busybox
+        imagePullPolicy: Always
+        name: busybox-container
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  fullyLabeledReplicas: 4
+  observedGeneration: 1
+  replicas: 4
+~
+~
+~
+~
+:wq
+
+replicaset.apps/new-replica-set edited
+
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   5         5         5       2m57s
+```
+
+### Q. Now scale the ReplicaSet down to 2 PODs. Use the kubectl scale command or edit the replicaset using kubectl edit replicaset.
+
+```bash
+controlplane ~ ➜  kubectl edit rs new-replica-set 
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  creationTimestamp: "2024-06-11T05:57:22Z"
+  generation: 1
+  name: new-replica-set
+  namespace: default
+  resourceVersion: "1130"
+  uid: 1e1c0ce5-d403-4bae-b53f-3b18ab954e2a
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: busybox-pod
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: busybox-pod
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - echo Hello Kubernetes! && sleep 3600
+        image: busybox
+        imagePullPolicy: Always
+        name: busybox-container
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  fullyLabeledReplicas: 4
+  observedGeneration: 1
+  replicas: 4
+~
+~
+~
+~
+:wq
+
+replicaset.apps/new-replica-set edited
+
+controlplane ~ ➜  kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   2         2         2       5m17s
+```

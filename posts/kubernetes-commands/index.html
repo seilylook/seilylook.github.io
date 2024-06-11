@@ -12,7 +12,7 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-commands/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-11T12:51:49+09:00" />
-<meta property="article:modified_time" content="2024-06-11T12:51:49+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-11T14:28:25+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Commands"/>
@@ -32,8 +32,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  2828 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T12:51:49+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  4132 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T14:28:25+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Commands</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2828 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4132 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;20 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -149,6 +149,23 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         <li><a href="#q-delete-the-webapp-pod-once-deleted-wait-for-the-pod-to-fully-terminate">Q. Delete the webapp Pod. Once deleted, wait for the pod to fully terminate.</a></li>
         <li><a href="#q-create-a-new-pod-with-the-name-redis-and-the-image-redis123-use-a-pod-definition-yaml-file-and-yes-the-image-name-is-wrong">Q. Create a new pod with the name redis and the image redis123. Use a pod-definition YAML file. And yes the image name is wrong!</a></li>
         <li><a href="#q-now-change-the-image-on-this-pod-to-redis-once-done-the-pod-should-be-in-a-running-state">Q. Now change the image on this pod to redis. Once done, the pod should be in a running state.</a></li>
+      </ul>
+    </li>
+    <li><a href="#replica-set">Replica Set</a>
+      <ul>
+        <li><a href="#q-how-many-replica-sets">Q. How many replica sets?</a></li>
+        <li><a href="#q-how-many-pods-are-desired-in-the-new-replica-set">Q. How many PODs are DESIRED in the new-replica-set?</a></li>
+        <li><a href="#q-what-is-the-image-used-to-create-the-pods-in-the-new-replica-set">Q. What is the image used to create the pods in the new-replica-set?</a></li>
+        <li><a href="#q-how-many-pods-are-ready-in-the-new-replica-set">Q. How many PODs are READY in the new-replica-set?</a></li>
+        <li><a href="#q-why-do-you-think-the-pods-are-not-ready">Q. Why do you think the PODs are not ready?</a></li>
+        <li><a href="#q-delete-any-one-of-the-4-pods">Q. Delete any one of the 4 PODs</a></li>
+        <li><a href="#q-why-are-there-still-4-pods-even-after-you-deleted-one">Q. Why are there still 4 PODs, even after you deleted one?</a></li>
+        <li><a href="#q-create-a-replicaset-using-the-replicaset-definition-1yaml-file-located-at-root-there-is-an-issue-with-the-file-so-try-to-fix-it">Q. Create a ReplicaSet using the replicaset-definition-1.yaml file located at /root/. There is an issue with the file, so try to fix it.</a></li>
+        <li><a href="#q-fix-the-issue-in-the-replicaset-definition-2yaml-file-and-create-a-replicaset-using-it-this-file-is-located-at-root">Q. Fix the issue in the replicaset-definition-2.yaml file and create a ReplicaSet using it. This file is located at /root/.</a></li>
+        <li><a href="#q-delete-the-two-newly-created-replicasets---replicaset-1-and-replicaset-2">Q. Delete the two newly created ReplicaSets - replicaset-1 and replicaset-2</a></li>
+        <li><a href="#q-fix-the-original-replica-set-new-replica-set-to-use-the-correct-busybox-image-either-delete-and-recreate-the-replicaset-or-update-the-existing-replicaset-and-then-delete-all-pods-so-new-ones-with-the-correct-image-will-be-created">Q. Fix the original replica set new-replica-set to use the correct busybox image. Either delete and recreate the ReplicaSet or Update the existing ReplicaSet and then delete all PODs, so new ones with the correct image will be created.</a></li>
+        <li><a href="#q-scale-the-replicaset-to-5-pods-use-kubectl-scale-command-or-edit-the-replicaset-using-kubectl-edit-replicaset">Q. Scale the ReplicaSet to 5 PODs. Use kubectl scale command or edit the replicaset using kubectl edit replicaset.</a></li>
+        <li><a href="#q-now-scale-the-replicaset-down-to-2-pods-use-the-kubectl-scale-command-or-edit-the-replicaset-using-kubectl-edit-replicaset">Q. Now scale the ReplicaSet down to 2 PODs. Use the kubectl scale command or edit the replicaset using kubectl edit replicaset.</a></li>
       </ul>
     </li>
   </ul>
@@ -1331,11 +1348,716 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 </span></span><span class="line"><span class="cl">redis           1/1     Running   <span class="m">0</span>               3m
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="replica-set">Replica Set</h2>
+<h3 id="q-how-many-replica-sets">Q. How many replica sets?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       5s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1</p>
+</blockquote>
+<h3 id="q-how-many-pods-are-desired-in-the-new-replica-set">Q. How many PODs are DESIRED in the new-replica-set?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       5s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 4</p>
+</blockquote>
+<h3 id="q-what-is-the-image-used-to-create-the-pods-in-the-new-replica-set">Q. What is the image used to create the pods in the new-replica-set?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe rs new-replica-set 
+</span></span><span class="line"><span class="cl">Name:         new-replica-set
+</span></span><span class="line"><span class="cl">Namespace:    default
+</span></span><span class="line"><span class="cl">Selector:     <span class="nv">name</span><span class="o">=</span>busybox-pod
+</span></span><span class="line"><span class="cl">Labels:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">Replicas:     <span class="m">4</span> current / <span class="m">4</span> desired
+</span></span><span class="line"><span class="cl">Pods Status:  <span class="m">0</span> Running / <span class="m">4</span> Waiting / <span class="m">0</span> Succeeded / <span class="m">0</span> Failed
+</span></span><span class="line"><span class="cl">Pod Template:
+</span></span><span class="line"><span class="cl">  Labels:  <span class="nv">name</span><span class="o">=</span>busybox-pod
+</span></span><span class="line"><span class="cl">  Containers:
+</span></span><span class="line"><span class="cl">   busybox-container:
+</span></span><span class="line"><span class="cl">    Image:      busybox777
+</span></span><span class="line"><span class="cl">    Port:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Command:
+</span></span><span class="line"><span class="cl">      sh
+</span></span><span class="line"><span class="cl">      -c
+</span></span><span class="line"><span class="cl">      <span class="nb">echo</span> Hello Kubernetes! <span class="o">&amp;&amp;</span> sleep <span class="m">3600</span>
+</span></span><span class="line"><span class="cl">    Environment:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Mounts:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">  Volumes:        &lt;none&gt;
+</span></span><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason            Age    From                   Message
+</span></span><span class="line"><span class="cl">  ----    ------            ----   ----                   -------
+</span></span><span class="line"><span class="cl">  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-4jm4s
+</span></span><span class="line"><span class="cl">  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-8pj5l
+</span></span><span class="line"><span class="cl">  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-7gbl5
+</span></span><span class="line"><span class="cl">  Normal  SuccessfulCreate  2m41s  replicaset-controller  Created pod: new-replica-set-2jcnr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. busybox777</p>
+</blockquote>
+<h3 id="q-how-many-pods-are-ready-in-the-new-replica-set">Q. How many PODs are READY in the new-replica-set?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       4m30s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 0</p>
+</blockquote>
+<h3 id="q-why-do-you-think-the-pods-are-not-ready">Q. Why do you think the PODs are not ready?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       4m30s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. The image BUSYBOX777 does not exist</p>
+</blockquote>
+<h3 id="q-delete-any-one-of-the-4-pods">Q. Delete any one of the 4 PODs</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       4m30s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME                    READY   STATUS             RESTARTS   AGE
+</span></span><span class="line"><span class="cl">new-replica-set-7gbl5   0/1     ImagePullBackOff   <span class="m">0</span>          6m
+</span></span><span class="line"><span class="cl">new-replica-set-4jm4s   0/1     ErrImagePull       <span class="m">0</span>          6m
+</span></span><span class="line"><span class="cl">new-replica-set-8pj5l   0/1     ErrImagePull       <span class="m">0</span>          6m
+</span></span><span class="line"><span class="cl">new-replica-set-2jcnr   0/1     ErrImagePull       <span class="m">0</span>          6m
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl delete pod new-replica-set-7gbl5 
+</span></span><span class="line"><span class="cl">pod <span class="s2">&#34;new-replica-set-7gbl5&#34;</span> deleted
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME                    READY   STATUS             RESTARTS   AGE
+</span></span><span class="line"><span class="cl">new-replica-set-4jm4s   0/1     ImagePullBackOff   <span class="m">0</span>          6m39s
+</span></span><span class="line"><span class="cl">new-replica-set-8pj5l   0/1     ImagePullBackOff   <span class="m">0</span>          6m39s
+</span></span><span class="line"><span class="cl">new-replica-set-2jcnr   0/1     ImagePullBackOff   <span class="m">0</span>          6m39s
+</span></span><span class="line"><span class="cl">new-replica-set-f2p2k   0/1     ImagePullBackOff   <span class="m">0</span>          27s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-why-are-there-still-4-pods-even-after-you-deleted-one">Q. Why are there still 4 PODs, even after you deleted one?</h3>
+<blockquote>
+<p>A. ReplicaSet ensures that desired number of PODs always run</p>
+</blockquote>
+<h3 id="q-create-a-replicaset-using-the-replicaset-definition-1yaml-file-located-at-root-there-is-an-issue-with-the-file-so-try-to-fix-it">Q. Create a ReplicaSet using the replicaset-definition-1.yaml file located at /root/. There is an issue with the file, so try to fix it.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim replicaset-definition-1.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: v1 <span class="o">(</span>x<span class="o">)</span> -&gt; apps/v1
+</span></span><span class="line"><span class="cl">kind: ReplicaSet
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: replicaset-1
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      tier: frontend
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        tier: frontend
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - name: nginx
+</span></span><span class="line"><span class="cl">        image: nginx
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f replicaset-definition-1.yaml 
+</span></span><span class="line"><span class="cl">replicaset.apps/replicaset-1 created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-fix-the-issue-in-the-replicaset-definition-2yaml-file-and-create-a-replicaset-using-it-this-file-is-located-at-root">Q. Fix the issue in the replicaset-definition-2.yaml file and create a ReplicaSet using it. This file is located at /root/.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim replicaset-definition-2.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: ReplicaSet
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: replicaset-2
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      tier: nginx
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        tier: nginx
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - name: nginx
+</span></span><span class="line"><span class="cl">        image: nginx
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~                                                           
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f replicaset-definition-2.yaml 
+</span></span><span class="line"><span class="cl">replicaset.apps/replicaset-2 created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-delete-the-two-newly-created-replicasets---replicaset-1-and-replicaset-2">Q. Delete the two newly created ReplicaSets - replicaset-1 and replicaset-2</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       22m
+</span></span><span class="line"><span class="cl">replicaset-1      <span class="m">2</span>         <span class="m">2</span>         <span class="m">2</span>       11m
+</span></span><span class="line"><span class="cl">replicaset-2      <span class="m">2</span>         <span class="m">2</span>         <span class="m">2</span>       41s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl delete rs replicaset-1 
+</span></span><span class="line"><span class="cl">replicaset.apps <span class="s2">&#34;replicaset-1&#34;</span> deleted
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl delete rs replicaset-2 
+</span></span><span class="line"><span class="cl">replicaset.apps <span class="s2">&#34;replicaset-2&#34;</span> deleted
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       23m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-fix-the-original-replica-set-new-replica-set-to-use-the-correct-busybox-image-either-delete-and-recreate-the-replicaset-or-update-the-existing-replicaset-and-then-delete-all-pods-so-new-ones-with-the-correct-image-will-be-created">Q. Fix the original replica set new-replica-set to use the correct busybox image. Either delete and recreate the ReplicaSet or Update the existing ReplicaSet and then delete all PODs, so new ones with the correct image will be created.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl edit rs new-replica-set 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: ReplicaSet
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2024-06-11T05:57:22Z&#34;</span>
+</span></span><span class="line"><span class="cl">  generation: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  name: new-replica-set
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;1130&#34;</span>
+</span></span><span class="line"><span class="cl">  uid: 1e1c0ce5-d403-4bae-b53f-3b18ab954e2a
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: busybox-pod
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      creationTimestamp: null
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: busybox-pod
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - command:
+</span></span><span class="line"><span class="cl">        - sh
+</span></span><span class="line"><span class="cl">        - -c
+</span></span><span class="line"><span class="cl">        - <span class="nb">echo</span> Hello Kubernetes! <span class="o">&amp;&amp;</span> sleep <span class="m">3600</span>
+</span></span><span class="line"><span class="cl">        image: busybox
+</span></span><span class="line"><span class="cl">        imagePullPolicy: Always
+</span></span><span class="line"><span class="cl">        name: busybox-container
+</span></span><span class="line"><span class="cl">        resources: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">        terminationMessagePath: /dev/termination-log
+</span></span><span class="line"><span class="cl">        terminationMessagePolicy: File
+</span></span><span class="line"><span class="cl">      dnsPolicy: ClusterFirst
+</span></span><span class="line"><span class="cl">      restartPolicy: Always
+</span></span><span class="line"><span class="cl">      schedulerName: default-scheduler
+</span></span><span class="line"><span class="cl">      securityContext: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">      terminationGracePeriodSeconds: <span class="m">30</span>
+</span></span><span class="line"><span class="cl">status:
+</span></span><span class="line"><span class="cl">  fullyLabeledReplicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  observedGeneration: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">replicaset.apps/new-replica-set edited
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME                    READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">new-replica-set-4hj6z   1/1     Running   <span class="m">0</span>          5s
+</span></span><span class="line"><span class="cl">new-replica-set-2fjtt   1/1     Running   <span class="m">0</span>          5s
+</span></span><span class="line"><span class="cl">new-replica-set-5h2xp   1/1     Running   <span class="m">0</span>          5s
+</span></span><span class="line"><span class="cl">new-replica-set-rvglt   1/1     Running   <span class="m">0</span>          5s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl delete pod new-replica-set-4hj6z
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME                    READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">new-replica-set-7fsds   1/1     Running   <span class="m">0</span>          5s
+</span></span><span class="line"><span class="cl">new-replica-set-2fjtt   1/1     Running   <span class="m">0</span>          5s
+</span></span><span class="line"><span class="cl">new-replica-set-5h2xp   1/1     Running   <span class="m">0</span>          5s
+</span></span><span class="line"><span class="cl">new-replica-set-rvglt   1/1     Running   <span class="m">0</span>          5s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-scale-the-replicaset-to-5-pods-use-kubectl-scale-command-or-edit-the-replicaset-using-kubectl-edit-replicaset">Q. Scale the ReplicaSet to 5 PODs. Use kubectl scale command or edit the replicaset using kubectl edit replicaset.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl edit rs new-replica-set 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: ReplicaSet
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2024-06-11T05:57:22Z&#34;</span>
+</span></span><span class="line"><span class="cl">  generation: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  name: new-replica-set
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;1130&#34;</span>
+</span></span><span class="line"><span class="cl">  uid: 1e1c0ce5-d403-4bae-b53f-3b18ab954e2a
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">5</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: busybox-pod
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      creationTimestamp: null
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: busybox-pod
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - command:
+</span></span><span class="line"><span class="cl">        - sh
+</span></span><span class="line"><span class="cl">        - -c
+</span></span><span class="line"><span class="cl">        - <span class="nb">echo</span> Hello Kubernetes! <span class="o">&amp;&amp;</span> sleep <span class="m">3600</span>
+</span></span><span class="line"><span class="cl">        image: busybox
+</span></span><span class="line"><span class="cl">        imagePullPolicy: Always
+</span></span><span class="line"><span class="cl">        name: busybox-container
+</span></span><span class="line"><span class="cl">        resources: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">        terminationMessagePath: /dev/termination-log
+</span></span><span class="line"><span class="cl">        terminationMessagePolicy: File
+</span></span><span class="line"><span class="cl">      dnsPolicy: ClusterFirst
+</span></span><span class="line"><span class="cl">      restartPolicy: Always
+</span></span><span class="line"><span class="cl">      schedulerName: default-scheduler
+</span></span><span class="line"><span class="cl">      securityContext: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">      terminationGracePeriodSeconds: <span class="m">30</span>
+</span></span><span class="line"><span class="cl">status:
+</span></span><span class="line"><span class="cl">  fullyLabeledReplicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  observedGeneration: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">replicaset.apps/new-replica-set edited
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">5</span>         <span class="m">5</span>         <span class="m">5</span>       2m57s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-now-scale-the-replicaset-down-to-2-pods-use-the-kubectl-scale-command-or-edit-the-replicaset-using-kubectl-edit-replicaset">Q. Now scale the ReplicaSet down to 2 PODs. Use the kubectl scale command or edit the replicaset using kubectl edit replicaset.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl edit rs new-replica-set 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: ReplicaSet
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2024-06-11T05:57:22Z&#34;</span>
+</span></span><span class="line"><span class="cl">  generation: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  name: new-replica-set
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;1130&#34;</span>
+</span></span><span class="line"><span class="cl">  uid: 1e1c0ce5-d403-4bae-b53f-3b18ab954e2a
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: busybox-pod
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      creationTimestamp: null
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: busybox-pod
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - command:
+</span></span><span class="line"><span class="cl">        - sh
+</span></span><span class="line"><span class="cl">        - -c
+</span></span><span class="line"><span class="cl">        - <span class="nb">echo</span> Hello Kubernetes! <span class="o">&amp;&amp;</span> sleep <span class="m">3600</span>
+</span></span><span class="line"><span class="cl">        image: busybox
+</span></span><span class="line"><span class="cl">        imagePullPolicy: Always
+</span></span><span class="line"><span class="cl">        name: busybox-container
+</span></span><span class="line"><span class="cl">        resources: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">        terminationMessagePath: /dev/termination-log
+</span></span><span class="line"><span class="cl">        terminationMessagePolicy: File
+</span></span><span class="line"><span class="cl">      dnsPolicy: ClusterFirst
+</span></span><span class="line"><span class="cl">      restartPolicy: Always
+</span></span><span class="line"><span class="cl">      schedulerName: default-scheduler
+</span></span><span class="line"><span class="cl">      securityContext: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">      terminationGracePeriodSeconds: <span class="m">30</span>
+</span></span><span class="line"><span class="cl">status:
+</span></span><span class="line"><span class="cl">  fullyLabeledReplicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  observedGeneration: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">replicaset.apps/new-replica-set edited
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME              DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">new-replica-set   <span class="m">2</span>         <span class="m">2</span>         <span class="m">2</span>       5m17s
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-11</span>
+                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f96fb99d8b276f8f901debe9ab22d7e9fc1c0962" target="_blank" title="commit by seilylook(seilylook@naver.com) f96fb99d8b276f8f901debe9ab22d7e9fc1c0962: add: kubernetes commands">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f96fb99</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
