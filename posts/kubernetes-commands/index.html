@@ -12,7 +12,7 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-commands/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-11T12:51:49+09:00" />
-<meta property="article:modified_time" content="2024-06-11T15:31:26+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-11T16:05:52+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Commands"/>
@@ -32,8 +32,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  4652 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T15:31:26+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  5535 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T16:05:52+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Commands</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4652 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;22 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5535 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -176,6 +176,16 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         <li><a href="#q-what-is-the-image-used-to-create-the-pods-in-the-new-deployment">Q. What is the image used to create the pods in the new deployment?</a></li>
         <li><a href="#q-create-a-new-deployment-using-the-deployment-definition-1yaml-file-located-at-root-there-is-an-issue-with-the-file-so-try-to-fix-it">Q. Create a new Deployment using the deployment-definition-1.yaml file located at /root/. There is an issue with the file, so try to fix it.</a></li>
         <li><a href="#q-create-a-new-deployment-with-the-below-attributes-using-your-own-deployment-definition-file">Q. Create a new Deployment with the below attributes using your own deployment definition file.</a></li>
+      </ul>
+    </li>
+    <li><a href="#rolling-updates-and-rollback">Rolling Updates and Rollback</a>
+      <ul>
+        <li><a href="#q-inspect-the-deployment-and-identify-the-current-strategy">Q. Inspect the deployment and identify the current strategy</a></li>
+        <li><a href="#q-if-you-were-to-upgrade-the-application-now-what-would-happen">Q. If you were to upgrade the application now what would happen?</a></li>
+        <li><a href="#q-let-us-try-that-upgrade-the-application-by-setting-the-image-on-the-deployment-to-kodekloudwebapp-colorv2-do-not-delete-and-re-create-the-deployment-only-set-the-new-image-name-for-the-existing-deployment">Q. Let us try that. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v2. Do not delete and re-create the deployment. Only set the new image name for the existing deployment.</a></li>
+        <li><a href="#q-up-to-how-many-pods-can-be-down-for-upgrade-at-a-time-consider-the-current-strategy-settings-and-number-of-pods---4">Q. Up to how many PODs can be down for upgrade at a time Consider the current strategy settings and number of PODs - 4</a></li>
+        <li><a href="#q-change-the-deployment-strategy-to-recreate-delete-and-re-create-the-deployment-if-necessary-only-update-the-strategy-type-for-the-existing-deployment">Q. Change the deployment strategy to Recreate. Delete and re-create the deployment if necessary. Only update the strategy type for the existing deployment.</a></li>
+        <li><a href="#q-upgrade-the-application-by-setting-the-image-on-the-deployment-to-kodekloudwebapp-colorv3">Q. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v3.</a></li>
       </ul>
     </li>
   </ul>
@@ -2346,12 +2356,492 @@ Image: httpd:2.4-alpine</p>
 </span></span><span class="line"><span class="cl">httpd-frontend        3/3     <span class="m">3</span>            <span class="m">3</span>           17s
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="rolling-updates-and-rollback">Rolling Updates and Rollback</h2>
+<h3 id="q-inspect-the-deployment-and-identify-the-current-strategy">Q. Inspect the deployment and identify the current strategy</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe deployment
+</span></span><span class="line"><span class="cl">Name:                   frontend
+</span></span><span class="line"><span class="cl">Namespace:              default
+</span></span><span class="line"><span class="cl">CreationTimestamp:      Tue, <span class="m">11</span> Jun <span class="m">2024</span> 07:17:28 +0000
+</span></span><span class="line"><span class="cl">Labels:                 &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:            deployment.kubernetes.io/revision: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Selector:               <span class="nv">name</span><span class="o">=</span>webapp
+</span></span><span class="line"><span class="cl">Replicas:               <span class="m">4</span> desired <span class="p">|</span> <span class="m">4</span> updated <span class="p">|</span> <span class="m">4</span> total <span class="p">|</span> <span class="m">4</span> available <span class="p">|</span> <span class="m">0</span> unavailable
+</span></span><span class="line"><span class="cl">StrategyType:           RollingUpdate
+</span></span><span class="line"><span class="cl">MinReadySeconds:        <span class="m">20</span>
+</span></span><span class="line"><span class="cl">RollingUpdateStrategy:  25% max unavailable, 25% max surge
+</span></span><span class="line"><span class="cl">Pod Template:
+</span></span><span class="line"><span class="cl">  Labels:  <span class="nv">name</span><span class="o">=</span>webapp
+</span></span><span class="line"><span class="cl">  Containers:
+</span></span><span class="line"><span class="cl">   simple-webapp:
+</span></span><span class="line"><span class="cl">    Image:        kodekloud/webapp-color:v1
+</span></span><span class="line"><span class="cl">    Port:         8080/TCP
+</span></span><span class="line"><span class="cl">    Host Port:    0/TCP
+</span></span><span class="line"><span class="cl">    Environment:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Mounts:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">  Volumes:        &lt;none&gt;
+</span></span><span class="line"><span class="cl">Conditions:
+</span></span><span class="line"><span class="cl">  Type           Status  Reason
+</span></span><span class="line"><span class="cl">  ----           ------  ------
+</span></span><span class="line"><span class="cl">  Available      True    MinimumReplicasAvailable
+</span></span><span class="line"><span class="cl">  Progressing    True    NewReplicaSetAvailable
+</span></span><span class="line"><span class="cl">OldReplicaSets:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">NewReplicaSet:   frontend-685dfcc44 <span class="o">(</span>4/4 replicas created<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason             Age   From                   Message
+</span></span><span class="line"><span class="cl">  ----    ------             ----  ----                   -------
+</span></span><span class="line"><span class="cl">  Normal  ScalingReplicaSet  101s  deployment-controller  Scaled up replica <span class="nb">set</span> frontend-685dfcc44 to <span class="m">4</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. RollingUpdate</p>
+</blockquote>
+<h3 id="q-if-you-were-to-upgrade-the-application-now-what-would-happen">Q. If you were to upgrade the application now what would happen?</h3>
+<blockquote>
+<p>A. PODs are upgraded few at a time</p>
+</blockquote>
+<h3 id="q-let-us-try-that-upgrade-the-application-by-setting-the-image-on-the-deployment-to-kodekloudwebapp-colorv2-do-not-delete-and-re-create-the-deployment-only-set-the-new-image-name-for-the-existing-deployment">Q. Let us try that. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v2. Do not delete and re-create the deployment. Only set the new image name for the existing deployment.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl edit deployment frontend 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Please edit the object below. Lines beginning with a &#39;#&#39; will b</span>
+</span></span><span class="line"><span class="cl">e ignored,
+</span></span><span class="line"><span class="cl"><span class="c1"># and an empty file will abort the edit. If an error occurs while</span>
+</span></span><span class="line"><span class="cl"> saving this file will be
+</span></span><span class="line"><span class="cl"><span class="c1"># reopened with the relevant failures.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  annotations:
+</span></span><span class="line"><span class="cl">    deployment.kubernetes.io/revision: <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2024-06-11T07:17:28Z&#34;</span>
+</span></span><span class="line"><span class="cl">  generation: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  name: frontend
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;819&#34;</span>
+</span></span><span class="line"><span class="cl">  uid: d8caa22d-e29d-4c2f-b896-9436b3245d0a
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  minReadySeconds: <span class="m">20</span>
+</span></span><span class="line"><span class="cl">  progressDeadlineSeconds: <span class="m">600</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  revisionHistoryLimit: <span class="m">10</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: webapp
+</span></span><span class="line"><span class="cl">  strategy:
+</span></span><span class="line"><span class="cl">    rollingUpdate:
+</span></span><span class="line"><span class="cl">      maxSurge: 25%
+</span></span><span class="line"><span class="cl">      maxUnavailable: 25%
+</span></span><span class="line"><span class="cl">    type: RollingUpdate
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      creationTimestamp: null
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: webapp
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: kodekloud/webapp-color:v2
+</span></span><span class="line"><span class="cl">        imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">        name: simple-webapp
+</span></span><span class="line"><span class="cl">        ports:
+</span></span><span class="line"><span class="cl">        - containerPort: <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">          protocol: TCP
+</span></span><span class="line"><span class="cl">        resources: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">        terminationMessagePath: /dev/termination-log
+</span></span><span class="line"><span class="cl">        terminationMessagePolicy: File
+</span></span><span class="line"><span class="cl">      dnsPolicy: ClusterFirst
+</span></span><span class="line"><span class="cl">      restartPolicy: Always
+</span></span><span class="line"><span class="cl">      schedulerName: default-scheduler
+</span></span><span class="line"><span class="cl">      securityContext: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deployment.apps/frontend edited
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-up-to-how-many-pods-can-be-down-for-upgrade-at-a-time-consider-the-current-strategy-settings-and-number-of-pods---4">Q. Up to how many PODs can be down for upgrade at a time Consider the current strategy settings and number of PODs - 4</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe deployment
+</span></span><span class="line"><span class="cl">Name:                   frontend
+</span></span><span class="line"><span class="cl">Namespace:              default
+</span></span><span class="line"><span class="cl">CreationTimestamp:      Tue, <span class="m">11</span> Jun <span class="m">2024</span> 07:17:28 +0000
+</span></span><span class="line"><span class="cl">Labels:                 &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:            deployment.kubernetes.io/revision: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Selector:               <span class="nv">name</span><span class="o">=</span>webapp
+</span></span><span class="line"><span class="cl">Replicas:               <span class="m">4</span> desired <span class="p">|</span> <span class="m">4</span> updated <span class="p">|</span> <span class="m">4</span> total <span class="p">|</span> <span class="m">4</span> available <span class="p">|</span> <span class="m">0</span> unavailable
+</span></span><span class="line"><span class="cl">StrategyType:           RollingUpdate
+</span></span><span class="line"><span class="cl">MinReadySeconds:        <span class="m">20</span>
+</span></span><span class="line"><span class="cl">RollingUpdateStrategy:  25% max unavailable, 25% max surge
+</span></span><span class="line"><span class="cl">Pod Template:
+</span></span><span class="line"><span class="cl">  Labels:  <span class="nv">name</span><span class="o">=</span>webapp
+</span></span><span class="line"><span class="cl">  Containers:
+</span></span><span class="line"><span class="cl">   simple-webapp:
+</span></span><span class="line"><span class="cl">    Image:        kodekloud/webapp-color:v1
+</span></span><span class="line"><span class="cl">    Port:         8080/TCP
+</span></span><span class="line"><span class="cl">    Host Port:    0/TCP
+</span></span><span class="line"><span class="cl">    Environment:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Mounts:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">  Volumes:        &lt;none&gt;
+</span></span><span class="line"><span class="cl">Conditions:
+</span></span><span class="line"><span class="cl">  Type           Status  Reason
+</span></span><span class="line"><span class="cl">  ----           ------  ------
+</span></span><span class="line"><span class="cl">  Available      True    MinimumReplicasAvailable
+</span></span><span class="line"><span class="cl">  Progressing    True    NewReplicaSetAvailable
+</span></span><span class="line"><span class="cl">OldReplicaSets:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">NewReplicaSet:   frontend-685dfcc44 <span class="o">(</span>4/4 replicas created<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason             Age   From                   Message
+</span></span><span class="line"><span class="cl">  ----    ------             ----  ----                   -------
+</span></span><span class="line"><span class="cl">  Normal  ScalingReplicaSet  101s  deployment-controller  Scaled up replica <span class="nb">set</span> frontend-685dfcc44 to <span class="m">4</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. Look at the Max Unavailable value under RollingUpdateStrategy in deployment details -&gt; 총 4개의 POD 중의 25%니까 1</p>
+</blockquote>
+<h3 id="q-change-the-deployment-strategy-to-recreate-delete-and-re-create-the-deployment-if-necessary-only-update-the-strategy-type-for-the-existing-deployment">Q. Change the deployment strategy to Recreate. Delete and re-create the deployment if necessary. Only update the strategy type for the existing deployment.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl edit deployment frontend
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  annotations:
+</span></span><span class="line"><span class="cl">    deployment.kubernetes.io/revision: <span class="s2">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2024-06-11T07:17:28Z&#34;</span>
+</span></span><span class="line"><span class="cl">  generation: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">  name: frontend
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;1074&#34;</span>
+</span></span><span class="line"><span class="cl">  uid: d8caa22d-e29d-4c2f-b896-9436b3245d0a
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  minReadySeconds: <span class="m">20</span>
+</span></span><span class="line"><span class="cl">  progressDeadlineSeconds: <span class="m">600</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  revisionHistoryLimit: <span class="m">10</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: webapp
+</span></span><span class="line"><span class="cl">  strategy:
+</span></span><span class="line"><span class="cl">    type: Recreate
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      creationTimestamp: null
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: webapp
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: kodekloud/webapp-color:v2
+</span></span><span class="line"><span class="cl">        imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">        name: simple-webapp
+</span></span><span class="line"><span class="cl">        ports:
+</span></span><span class="line"><span class="cl">        - containerPort: <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">          protocol: TCP
+</span></span><span class="line"><span class="cl">        resources: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">        terminationMessagePath: /dev/termination-log
+</span></span><span class="line"><span class="cl">        terminationMessagePolicy: File
+</span></span><span class="line"><span class="cl">      dnsPolicy: ClusterFirst
+</span></span><span class="line"><span class="cl">      restartPolicy: Always
+</span></span><span class="line"><span class="cl">      schedulerName: default-scheduler
+</span></span><span class="line"><span class="cl">      securityContext: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">      terminationGracePeriodSeconds: <span class="m">30</span>
+</span></span><span class="line"><span class="cl">status:
+</span></span><span class="line"><span class="cl">  availableReplicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deployment.apps/frontend edited
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-upgrade-the-application-by-setting-the-image-on-the-deployment-to-kodekloudwebapp-colorv3">Q. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v3.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  annotations:
+</span></span><span class="line"><span class="cl">    deployment.kubernetes.io/revision: <span class="s2">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2024-06-11T07:17:28Z&#34;</span>
+</span></span><span class="line"><span class="cl">  generation: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">  name: frontend
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;1150&#34;</span>
+</span></span><span class="line"><span class="cl">  uid: d8caa22d-e29d-4c2f-b896-9436b3245d0a
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  minReadySeconds: <span class="m">20</span>
+</span></span><span class="line"><span class="cl">  progressDeadlineSeconds: <span class="m">600</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">  revisionHistoryLimit: <span class="m">10</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: webapp
+</span></span><span class="line"><span class="cl">  strategy:
+</span></span><span class="line"><span class="cl">    type: Recreate
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      creationTimestamp: null
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: webapp
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: kodekloud/webapp-color:v3
+</span></span><span class="line"><span class="cl">        imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">        name: simple-webapp
+</span></span><span class="line"><span class="cl">        ports:
+</span></span><span class="line"><span class="cl">        - containerPort: <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">          protocol: TCP
+</span></span><span class="line"><span class="cl">        resources: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">        terminationMessagePath: /dev/termination-log
+</span></span><span class="line"><span class="cl">        terminationMessagePolicy: File
+</span></span><span class="line"><span class="cl">      dnsPolicy: ClusterFirst
+</span></span><span class="line"><span class="cl">      restartPolicy: Always
+</span></span><span class="line"><span class="cl">      schedulerName: default-scheduler
+</span></span><span class="line"><span class="cl">      securityContext: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">      terminationGracePeriodSeconds: <span class="m">30</span>
+</span></span><span class="line"><span class="cl">status:
+</span></span><span class="line"><span class="cl">  availableReplicas: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deployment.apps/frontend edited
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/0b8368a555f9c487a1f9744d59fdff774a570280" target="_blank" title="commit by seilylook(seilylook@naver.com) 0b8368a555f9c487a1f9744d59fdff774a570280: add: Replica set in kubernetes">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>0b8368a</a></span>
+                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c33b161ae5f140eb6fe97719065d81dc6ee8d64a" target="_blank" title="commit by seilylook(seilylook@naver.com) c33b161ae5f140eb6fe97719065d81dc6ee8d64a: add: Deployment in kubernetes">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c33b161</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

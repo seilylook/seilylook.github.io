@@ -1163,3 +1163,256 @@ frontend-deployment   0/4     4            0           9m23s
 deployment-1          0/2     2            0           3m15s
 httpd-frontend        3/3     3            3           17s
 ```
+
+## Rolling Updates and Rollback
+
+### Q. Inspect the deployment and identify the current strategy
+
+```bash
+controlplane ~ ➜  kubectl describe deployment
+Name:                   frontend
+Namespace:              default
+CreationTimestamp:      Tue, 11 Jun 2024 07:17:28 +0000
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               name=webapp
+Replicas:               4 desired | 4 updated | 4 total | 4 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        20
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  name=webapp
+  Containers:
+   simple-webapp:
+    Image:        kodekloud/webapp-color:v1
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   frontend-685dfcc44 (4/4 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  101s  deployment-controller  Scaled up replica set frontend-685dfcc44 to 4
+```
+
+> A. RollingUpdate
+
+### Q. If you were to upgrade the application now what would happen?
+
+> A. PODs are upgraded few at a time
+
+### Q. Let us try that. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v2. Do not delete and re-create the deployment. Only set the new image name for the existing deployment.
+
+```bash
+controlplane ~ ➜  kubectl edit deployment frontend 
+
+# Please edit the object below. Lines beginning with a '#' will b
+e ignored,
+# and an empty file will abort the edit. If an error occurs while
+ saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2024-06-11T07:17:28Z"
+  generation: 1
+  name: frontend
+  namespace: default
+  resourceVersion: "819"
+  uid: d8caa22d-e29d-4c2f-b896-9436b3245d0a
+spec:
+  minReadySeconds: 20
+  progressDeadlineSeconds: 600
+  replicas: 4
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: webapp
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: webapp
+    spec:
+      containers:
+      - image: kodekloud/webapp-color:v2
+        imagePullPolicy: IfNotPresent
+        name: simple-webapp
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+
+:wq
+
+deployment.apps/frontend edited
+```
+
+### Q. Up to how many PODs can be down for upgrade at a time Consider the current strategy settings and number of PODs - 4
+
+```bash
+controlplane ~ ➜  kubectl describe deployment
+Name:                   frontend
+Namespace:              default
+CreationTimestamp:      Tue, 11 Jun 2024 07:17:28 +0000
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               name=webapp
+Replicas:               4 desired | 4 updated | 4 total | 4 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        20
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  name=webapp
+  Containers:
+   simple-webapp:
+    Image:        kodekloud/webapp-color:v1
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   frontend-685dfcc44 (4/4 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  101s  deployment-controller  Scaled up replica set frontend-685dfcc44 to 4
+```
+
+> A. Look at the Max Unavailable value under RollingUpdateStrategy in deployment details -> 총 4개의 POD 중의 25%니까 1
+
+### Q. Change the deployment strategy to Recreate. Delete and re-create the deployment if necessary. Only update the strategy type for the existing deployment.
+
+```bash
+controlplane ~ ➜  kubectl edit deployment frontend
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+  creationTimestamp: "2024-06-11T07:17:28Z"
+  generation: 2
+  name: frontend
+  namespace: default
+  resourceVersion: "1074"
+  uid: d8caa22d-e29d-4c2f-b896-9436b3245d0a
+spec:
+  minReadySeconds: 20
+  progressDeadlineSeconds: 600
+  replicas: 4
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: webapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: webapp
+    spec:
+      containers:
+      - image: kodekloud/webapp-color:v2
+        imagePullPolicy: IfNotPresent
+        name: simple-webapp
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 4
+:wq
+
+deployment.apps/frontend edited
+```
+
+### Q. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v3. 
+
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+  creationTimestamp: "2024-06-11T07:17:28Z"
+  generation: 3
+  name: frontend
+  namespace: default
+  resourceVersion: "1150"
+  uid: d8caa22d-e29d-4c2f-b896-9436b3245d0a
+spec:
+  minReadySeconds: 20
+  progressDeadlineSeconds: 600
+  replicas: 4
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: webapp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: webapp
+    spec:
+      containers:
+      - image: kodekloud/webapp-color:v3
+        imagePullPolicy: IfNotPresent
+        name: simple-webapp
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 4
+:wq
+
+deployment.apps/frontend edited
+```
+
