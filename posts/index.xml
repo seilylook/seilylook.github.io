@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes Commands</title>
+    <link>https://seilylook.github.io/posts/kubernetes-commands/</link>
+    <pubDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-commands/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction 자주 사용하고 중요한 Kubectl commands들을 정리.
+Kubernetes Architecture Hierarchy Deployment &raquo; Replica Set &raquo; Pod &raquo; Container &raquo; Image
+Node Q: How many nodes are part of the cluster? 1 2 3 4 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 13m v1.29.0+k3s1 A: 1
+Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 13m v1.]]></description>
+</item>
+<item>
     <title>Cryptocurrency Data Pipeline</title>
     <link>https://seilylook.github.io/posts/cryptocurrency-data-pipeline/</link>
     <pubDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</pubDate>
@@ -118,19 +131,6 @@ Streaming: Streaming jobs 실행 시 정보 제공
 Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
 Info DAG?
 Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark.]]></description>
-</item>
-<item>
-    <title>Spark Hierarchy</title>
-    <link>https://seilylook.github.io/posts/spark-hierarchy/</link>
-    <pubDate>Wed, 15 May 2024 11:28:14 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-hierarchy/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/hierarchy.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction Spark&rsquo;s execution hierarchy, from top to bottom is Job, Stage, Task.
-Slots are part of executors. A task is executed in a slot. But slots are rather a tool to execute tasks, not part of the execution hierarchy itself.
-Executors are a component of a Spark cluter, but not of the execution hierarchy.
-Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores.]]></description>
 </item>
 </channel>
 </rss>

@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 09 May 2024 18:14:00 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes Commands</title>
+    <link>https://seilylook.github.io/posts/kubernetes-commands/</link>
+    <pubDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-commands/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
+            </div>Introduction 자주 사용하고 중요한 Kubectl commands들을 정리.
+Kubernetes Architecture Hierarchy Deployment &raquo; Replica Set &raquo; Pod &raquo; Container &raquo; Image
+Node Q: How many nodes are part of the cluster? 1 2 3 4 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 13m v1.29.0+k3s1 A: 1
+Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 13m v1.]]></description>
+</item>
+<item>
     <title>CKA Begin</title>
     <link>https://seilylook.github.io/posts/cka-begin/</link>
     <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>

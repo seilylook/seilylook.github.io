@@ -4,7 +4,15 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes</title>
+    <link>https://seilylook.github.io/tags/kubernetes/</link>
+    <pubDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/kubernetes/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Airflow</title>
     <link>https://seilylook.github.io/tags/airflow/</link>
     <pubDate>Thu, 06 Jun 2024 18:12:19 &#43;0900</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Wed, 15 May 2024 13:30:02 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/execution-plan/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Hierarchy</title>
-    <link>https://seilylook.github.io/tags/hierarchy/</link>
-    <pubDate>Wed, 15 May 2024 11:28:14 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/hierarchy/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
