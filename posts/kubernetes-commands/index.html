@@ -12,7 +12,7 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-commands/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-11T12:51:49+09:00" />
-<meta property="article:modified_time" content="2024-06-11T16:05:52+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-11T16:31:21+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Commands"/>
@@ -32,8 +32,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  5535 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T16:05:52+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  5946 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T16:31:21+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Commands</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5535 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5946 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;28 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -186,6 +186,16 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         <li><a href="#q-up-to-how-many-pods-can-be-down-for-upgrade-at-a-time-consider-the-current-strategy-settings-and-number-of-pods---4">Q. Up to how many PODs can be down for upgrade at a time Consider the current strategy settings and number of PODs - 4</a></li>
         <li><a href="#q-change-the-deployment-strategy-to-recreate-delete-and-re-create-the-deployment-if-necessary-only-update-the-strategy-type-for-the-existing-deployment">Q. Change the deployment strategy to Recreate. Delete and re-create the deployment if necessary. Only update the strategy type for the existing deployment.</a></li>
         <li><a href="#q-upgrade-the-application-by-setting-the-image-on-the-deployment-to-kodekloudwebapp-colorv3">Q. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v3.</a></li>
+      </ul>
+    </li>
+    <li><a href="#services">Services</a>
+      <ul>
+        <li><a href="#q-how-many-services-exist-on-the-system">Q. How many Services exist on the system?</a></li>
+        <li><a href="#q-what-is-the-type-of-the-default-kubernetes-service">Q. What is the type of the default kubernetes service?</a></li>
+        <li><a href="#q-what-is-the-targetport-configured-on-the-kubernetes-service">Q. What is the targetPort configured on the kubernetes service?</a></li>
+        <li><a href="#q-how-many-labels-are-configured-on-the-kubernetes-service">Q. How many labels are configured on the kubernetes service?</a></li>
+        <li><a href="#q-how-many-endpoints-are-attached-on-the-kubernetes-service">Q. How many Endpoints are attached on the kubernetes service?</a></li>
+        <li><a href="#q-create-a-new-service-to-access-the-web-application-using-the-service-definition-1yaml-file">Q. Create a new service to access the web application using the service-definition-1.yaml file.</a></li>
       </ul>
     </li>
   </ul>
@@ -2836,12 +2846,259 @@ Image: httpd:2.4-alpine</p>
 </span></span><span class="line"><span class="cl">deployment.apps/frontend edited
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="services">Services</h2>
+<h3 id="q-how-many-services-exist-on-the-system">Q. How many Services exist on the system?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get services
+</span></span><span class="line"><span class="cl">NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
+</span></span><span class="line"><span class="cl">kubernetes   ClusterIP   10.43.0.1    &lt;none&gt;        443/TCP   6m40s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1</p>
+</blockquote>
+<h3 id="q-what-is-the-type-of-the-default-kubernetes-service">Q. What is the type of the default kubernetes service?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe service kubernetes 
+</span></span><span class="line"><span class="cl">Name:              kubernetes
+</span></span><span class="line"><span class="cl">Namespace:         default
+</span></span><span class="line"><span class="cl">Labels:            <span class="nv">component</span><span class="o">=</span>apiserver
+</span></span><span class="line"><span class="cl">                   <span class="nv">provider</span><span class="o">=</span>kubernetes
+</span></span><span class="line"><span class="cl">Annotations:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">Selector:          &lt;none&gt;
+</span></span><span class="line"><span class="cl">Type:              ClusterIP
+</span></span><span class="line"><span class="cl">IP Family Policy:  SingleStack
+</span></span><span class="line"><span class="cl">IP Families:       IPv4
+</span></span><span class="line"><span class="cl">IP:                10.43.0.1
+</span></span><span class="line"><span class="cl">IPs:               10.43.0.1
+</span></span><span class="line"><span class="cl">Port:              https  443/TCP
+</span></span><span class="line"><span class="cl">TargetPort:        6443/TCP
+</span></span><span class="line"><span class="cl">Endpoints:         192.18.149.3:6443
+</span></span><span class="line"><span class="cl">Session Affinity:  None
+</span></span><span class="line"><span class="cl">Events:            &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. ClusterIP</p>
+</blockquote>
+<h3 id="q-what-is-the-targetport-configured-on-the-kubernetes-service">Q. What is the targetPort configured on the kubernetes service?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe service kubernetes 
+</span></span><span class="line"><span class="cl">Name:              kubernetes
+</span></span><span class="line"><span class="cl">Namespace:         default
+</span></span><span class="line"><span class="cl">Labels:            <span class="nv">component</span><span class="o">=</span>apiserver
+</span></span><span class="line"><span class="cl">                   <span class="nv">provider</span><span class="o">=</span>kubernetes
+</span></span><span class="line"><span class="cl">Annotations:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">Selector:          &lt;none&gt;
+</span></span><span class="line"><span class="cl">Type:              ClusterIP
+</span></span><span class="line"><span class="cl">IP Family Policy:  SingleStack
+</span></span><span class="line"><span class="cl">IP Families:       IPv4
+</span></span><span class="line"><span class="cl">IP:                10.43.0.1
+</span></span><span class="line"><span class="cl">IPs:               10.43.0.1
+</span></span><span class="line"><span class="cl">Port:              https  443/TCP
+</span></span><span class="line"><span class="cl">TargetPort:        6443/TCP
+</span></span><span class="line"><span class="cl">Endpoints:         192.18.149.3:6443
+</span></span><span class="line"><span class="cl">Session Affinity:  None
+</span></span><span class="line"><span class="cl">Events:            &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 6443/TCP</p>
+</blockquote>
+<h3 id="q-how-many-labels-are-configured-on-the-kubernetes-service">Q. How many labels are configured on the kubernetes service?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe service kubernetes 
+</span></span><span class="line"><span class="cl">Name:              kubernetes
+</span></span><span class="line"><span class="cl">Namespace:         default
+</span></span><span class="line"><span class="cl">Labels:            <span class="nv">component</span><span class="o">=</span>apiserver
+</span></span><span class="line"><span class="cl">                   <span class="nv">provider</span><span class="o">=</span>kubernetes
+</span></span><span class="line"><span class="cl">Annotations:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">Selector:          &lt;none&gt;
+</span></span><span class="line"><span class="cl">Type:              ClusterIP
+</span></span><span class="line"><span class="cl">IP Family Policy:  SingleStack
+</span></span><span class="line"><span class="cl">IP Families:       IPv4
+</span></span><span class="line"><span class="cl">IP:                10.43.0.1
+</span></span><span class="line"><span class="cl">IPs:               10.43.0.1
+</span></span><span class="line"><span class="cl">Port:              https  443/TCP
+</span></span><span class="line"><span class="cl">TargetPort:        6443/TCP
+</span></span><span class="line"><span class="cl">Endpoints:         192.18.149.3:6443
+</span></span><span class="line"><span class="cl">Session Affinity:  None
+</span></span><span class="line"><span class="cl">Events:            &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 2 -&gt; component=apiserver &amp; provider=kubernetes</p>
+</blockquote>
+<h3 id="q-how-many-endpoints-are-attached-on-the-kubernetes-service">Q. How many Endpoints are attached on the kubernetes service?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe service kubernetes 
+</span></span><span class="line"><span class="cl">Name:              kubernetes
+</span></span><span class="line"><span class="cl">Namespace:         default
+</span></span><span class="line"><span class="cl">Labels:            <span class="nv">component</span><span class="o">=</span>apiserver
+</span></span><span class="line"><span class="cl">                   <span class="nv">provider</span><span class="o">=</span>kubernetes
+</span></span><span class="line"><span class="cl">Annotations:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">Selector:          &lt;none&gt;
+</span></span><span class="line"><span class="cl">Type:              ClusterIP
+</span></span><span class="line"><span class="cl">IP Family Policy:  SingleStack
+</span></span><span class="line"><span class="cl">IP Families:       IPv4
+</span></span><span class="line"><span class="cl">IP:                10.43.0.1
+</span></span><span class="line"><span class="cl">IPs:               10.43.0.1
+</span></span><span class="line"><span class="cl">Port:              https  443/TCP
+</span></span><span class="line"><span class="cl">TargetPort:        6443/TCP
+</span></span><span class="line"><span class="cl">Endpoints:         192.18.149.3:6443
+</span></span><span class="line"><span class="cl">Session Affinity:  None
+</span></span><span class="line"><span class="cl">Events:            &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1 -&gt; 192.18.149.3:6443</p>
+</blockquote>
+<h3 id="q-create-a-new-service-to-access-the-web-application-using-the-service-definition-1yaml-file">Q. Create a new service to access the web application using the service-definition-1.yaml file.</h3>
+<p>Name: webapp-service
+Type: NodePort
+targetPort: 8080
+port: 8080
+nodePort: 30080
+selector:
+name: simple-webapp</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim service-definition-1.yaml 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Service
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: webapp-service
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  ports:
+</span></span><span class="line"><span class="cl">  - nodePort: <span class="m">30080</span>
+</span></span><span class="line"><span class="cl">    port: <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">    targetPort: <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    name: simple-webapp
+</span></span><span class="line"><span class="cl">  type: NodePort
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f service-definition-1.yaml 
+</span></span><span class="line"><span class="cl">service/webapp-service created
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c33b161ae5f140eb6fe97719065d81dc6ee8d64a" target="_blank" title="commit by seilylook(seilylook@naver.com) c33b161ae5f140eb6fe97719065d81dc6ee8d64a: add: Deployment in kubernetes">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c33b161</a></span>
+                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c58d67beca3c25c0ad57b50242b2e42d6c983708" target="_blank" title="commit by seilylook(seilylook@naver.com) c58d67beca3c25c0ad57b50242b2e42d6c983708: add: rolling updates and rollback in kubernetes">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c58d67b</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
