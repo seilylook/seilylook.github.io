@@ -12,7 +12,7 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-commands/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-11T12:51:49+09:00" />
-<meta property="article:modified_time" content="2024-06-11T14:28:25+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-11T15:31:26+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Commands"/>
@@ -32,8 +32,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  4132 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T14:28:25+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  4652 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T15:31:26+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Commands</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4132 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;20 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4652 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;22 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -166,6 +166,16 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         <li><a href="#q-fix-the-original-replica-set-new-replica-set-to-use-the-correct-busybox-image-either-delete-and-recreate-the-replicaset-or-update-the-existing-replicaset-and-then-delete-all-pods-so-new-ones-with-the-correct-image-will-be-created">Q. Fix the original replica set new-replica-set to use the correct busybox image. Either delete and recreate the ReplicaSet or Update the existing ReplicaSet and then delete all PODs, so new ones with the correct image will be created.</a></li>
         <li><a href="#q-scale-the-replicaset-to-5-pods-use-kubectl-scale-command-or-edit-the-replicaset-using-kubectl-edit-replicaset">Q. Scale the ReplicaSet to 5 PODs. Use kubectl scale command or edit the replicaset using kubectl edit replicaset.</a></li>
         <li><a href="#q-now-scale-the-replicaset-down-to-2-pods-use-the-kubectl-scale-command-or-edit-the-replicaset-using-kubectl-edit-replicaset">Q. Now scale the ReplicaSet down to 2 PODs. Use the kubectl scale command or edit the replicaset using kubectl edit replicaset.</a></li>
+      </ul>
+    </li>
+    <li><a href="#deployment">Deployment</a>
+      <ul>
+        <li><a href="#q-how-many-deployments-exist-on-the-system">Q. How many Deployments exist on the system?</a></li>
+        <li><a href="#q-how-many-replicasets-exist-on-the-system-now">Q. How many ReplicaSets exist on the system now?</a></li>
+        <li><a href="#q-how-many-pods-exist-on-the-system">Q. How many PODs exist on the system?</a></li>
+        <li><a href="#q-what-is-the-image-used-to-create-the-pods-in-the-new-deployment">Q. What is the image used to create the pods in the new deployment?</a></li>
+        <li><a href="#q-create-a-new-deployment-using-the-deployment-definition-1yaml-file-located-at-root-there-is-an-issue-with-the-file-so-try-to-fix-it">Q. Create a new Deployment using the deployment-definition-1.yaml file located at /root/. There is an issue with the file, so try to fix it.</a></li>
+        <li><a href="#q-create-a-new-deployment-with-the-below-attributes-using-your-own-deployment-definition-file">Q. Create a new Deployment with the below attributes using your own deployment definition file.</a></li>
       </ul>
     </li>
   </ul>
@@ -2052,12 +2062,296 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 </span></span><span class="line"><span class="cl">new-replica-set   <span class="m">2</span>         <span class="m">2</span>         <span class="m">2</span>       5m17s
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="deployment">Deployment</h2>
+<h3 id="q-how-many-deployments-exist-on-the-system">Q. How many Deployments exist on the system?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get deployments
+</span></span><span class="line"><span class="cl">NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span class="line"><span class="cl">frontend-deployment   0/4     <span class="m">4</span>            <span class="m">0</span>           9s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1</p>
+</blockquote>
+<h3 id="q-how-many-replicasets-exist-on-the-system-now">Q. How many ReplicaSets exist on the system now?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get rs
+</span></span><span class="line"><span class="cl">NAME                             DESIRED   CURRENT   READY   AGE
+</span></span><span class="line"><span class="cl">frontend-deployment-7b9984b987   <span class="m">4</span>         <span class="m">4</span>         <span class="m">0</span>       55s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1</p>
+</blockquote>
+<h3 id="q-how-many-pods-exist-on-the-system">Q. How many PODs exist on the system?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME                                   READY   STATUS             RESTARTS   AGE
+</span></span><span class="line"><span class="cl">frontend-deployment-7b9984b987-v58w9   0/1     ImagePullBackOff   <span class="m">0</span>          96s
+</span></span><span class="line"><span class="cl">frontend-deployment-7b9984b987-jrmbt   0/1     ImagePullBackOff   <span class="m">0</span>          96s
+</span></span><span class="line"><span class="cl">frontend-deployment-7b9984b987-hpxnn   0/1     ImagePullBackOff   <span class="m">0</span>          96s
+</span></span><span class="line"><span class="cl">frontend-deployment-7b9984b987-rth5d   0/1     ImagePullBackOff   <span class="m">0</span>          96s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 4</p>
+</blockquote>
+<h3 id="q-what-is-the-image-used-to-create-the-pods-in-the-new-deployment">Q. What is the image used to create the pods in the new deployment?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe deployment frontend-deployment 
+</span></span><span class="line"><span class="cl">Name:                   frontend-deployment
+</span></span><span class="line"><span class="cl">Namespace:              default
+</span></span><span class="line"><span class="cl">CreationTimestamp:      Tue, <span class="m">11</span> Jun <span class="m">2024</span> 06:55:55 +0000
+</span></span><span class="line"><span class="cl">Labels:                 &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:            deployment.kubernetes.io/revision: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Selector:               <span class="nv">name</span><span class="o">=</span>busybox-pod
+</span></span><span class="line"><span class="cl">Replicas:               <span class="m">4</span> desired <span class="p">|</span> <span class="m">4</span> updated <span class="p">|</span> <span class="m">4</span> total <span class="p">|</span> <span class="m">0</span> available <span class="p">|</span> <span class="m">4</span> unavailable
+</span></span><span class="line"><span class="cl">StrategyType:           RollingUpdate
+</span></span><span class="line"><span class="cl">MinReadySeconds:        <span class="m">0</span>
+</span></span><span class="line"><span class="cl">RollingUpdateStrategy:  25% max unavailable, 25% max surge
+</span></span><span class="line"><span class="cl">Pod Template:
+</span></span><span class="line"><span class="cl">  Labels:  <span class="nv">name</span><span class="o">=</span>busybox-pod
+</span></span><span class="line"><span class="cl">  Containers:
+</span></span><span class="line"><span class="cl">   busybox-container:
+</span></span><span class="line"><span class="cl">    Image:      busybox888
+</span></span><span class="line"><span class="cl">    Port:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Command:
+</span></span><span class="line"><span class="cl">      sh
+</span></span><span class="line"><span class="cl">      -c
+</span></span><span class="line"><span class="cl">      <span class="nb">echo</span> Hello Kubernetes! <span class="o">&amp;&amp;</span> sleep <span class="m">3600</span>
+</span></span><span class="line"><span class="cl">    Environment:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Mounts:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">  Volumes:        &lt;none&gt;
+</span></span><span class="line"><span class="cl">Conditions:
+</span></span><span class="line"><span class="cl">  Type           Status  Reason
+</span></span><span class="line"><span class="cl">  ----           ------  ------
+</span></span><span class="line"><span class="cl">  Available      False   MinimumReplicasUnavailable
+</span></span><span class="line"><span class="cl">  Progressing    True    ReplicaSetUpdated
+</span></span><span class="line"><span class="cl">OldReplicaSets:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">NewReplicaSet:   frontend-deployment-7b9984b987 <span class="o">(</span>4/4 replicas created<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason             Age    From                   Message
+</span></span><span class="line"><span class="cl">  ----    ------             ----   ----                   -------
+</span></span><span class="line"><span class="cl">  Normal  ScalingReplicaSet  2m56s  deployment-controller  Scaled up replica <span class="nb">set</span> frontend-deployment-7b9984b987 to <span class="m">4</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. BUSYBOX888</p>
+</blockquote>
+<h3 id="q-create-a-new-deployment-using-the-deployment-definition-1yaml-file-located-at-root-there-is-an-issue-with-the-file-so-try-to-fix-it">Q. Create a new Deployment using the deployment-definition-1.yaml file located at /root/. There is an issue with the file, so try to fix it.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim deployment-definition-1.yaml 
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: deployment-1
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: busybox-pod
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: busybox-pod
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - name: busybox-container
+</span></span><span class="line"><span class="cl">        image: busybox888
+</span></span><span class="line"><span class="cl">        command:
+</span></span><span class="line"><span class="cl">        - sh
+</span></span><span class="line"><span class="cl">        - <span class="s2">&#34;-c&#34;</span>
+</span></span><span class="line"><span class="cl">        - <span class="nb">echo</span> Hello Kubernetes! <span class="o">&amp;&amp;</span> sleep <span class="m">3600</span>
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f deployment-definition-1.yaml 
+</span></span><span class="line"><span class="cl">deployment.apps/deployment-1 created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-create-a-new-deployment-with-the-below-attributes-using-your-own-deployment-definition-file">Q. Create a new Deployment with the below attributes using your own deployment definition file.</h3>
+<p>Name: httpd-frontend;
+Replicas: 3;
+Image: httpd:2.4-alpine</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim deployment-definition-httpd.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: httpd-frontend
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      name: httpd-frontend
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        name: httpd-frontend
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - name: httpd-frontend
+</span></span><span class="line"><span class="cl">        image: httpd:2.4-alpine
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">~
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f deployment-definition-httpd.yaml 
+</span></span><span class="line"><span class="cl">deployment.apps/httpd-frontend created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get deployments
+</span></span><span class="line"><span class="cl">NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span class="line"><span class="cl">frontend-deployment   0/4     <span class="m">4</span>            <span class="m">0</span>           9m23s
+</span></span><span class="line"><span class="cl">deployment-1          0/2     <span class="m">2</span>            <span class="m">0</span>           3m15s
+</span></span><span class="line"><span class="cl">httpd-frontend        3/3     <span class="m">3</span>            <span class="m">3</span>           17s
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f96fb99d8b276f8f901debe9ab22d7e9fc1c0962" target="_blank" title="commit by seilylook(seilylook@naver.com) f96fb99d8b276f8f901debe9ab22d7e9fc1c0962: add: kubernetes commands">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f96fb99</a></span>
+                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/0b8368a555f9c487a1f9744d59fdff774a570280" target="_blank" title="commit by seilylook(seilylook@naver.com) 0b8368a555f9c487a1f9744d59fdff774a570280: add: Replica set in kubernetes">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>0b8368a</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

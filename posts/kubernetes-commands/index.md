@@ -1005,3 +1005,161 @@ controlplane ~ ➜  kubectl get rs
 NAME              DESIRED   CURRENT   READY   AGE
 new-replica-set   2         2         2       5m17s
 ```
+
+## Deployment
+
+### Q. How many Deployments exist on the system? 
+
+```bash
+controlplane ~ ➜  kubectl get deployments
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+frontend-deployment   0/4     4            0           9s
+```
+
+> A. 1
+
+### Q. How many ReplicaSets exist on the system now?
+
+```bash
+controlplane ~ ➜  kubectl get rs
+NAME                             DESIRED   CURRENT   READY   AGE
+frontend-deployment-7b9984b987   4         4         0       55s
+```
+
+> A. 1
+
+### Q. How many PODs exist on the system?
+
+```bash
+controlplane ~ ➜  kubectl get pods
+NAME                                   READY   STATUS             RESTARTS   AGE
+frontend-deployment-7b9984b987-v58w9   0/1     ImagePullBackOff   0          96s
+frontend-deployment-7b9984b987-jrmbt   0/1     ImagePullBackOff   0          96s
+frontend-deployment-7b9984b987-hpxnn   0/1     ImagePullBackOff   0          96s
+frontend-deployment-7b9984b987-rth5d   0/1     ImagePullBackOff   0          96s
+```
+
+> A. 4
+
+### Q. What is the image used to create the pods in the new deployment?
+
+```bash
+controlplane ~ ➜  kubectl describe deployment frontend-deployment 
+Name:                   frontend-deployment
+Namespace:              default
+CreationTimestamp:      Tue, 11 Jun 2024 06:55:55 +0000
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               name=busybox-pod
+Replicas:               4 desired | 4 updated | 4 total | 0 available | 4 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  name=busybox-pod
+  Containers:
+   busybox-container:
+    Image:      busybox888
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sh
+      -c
+      echo Hello Kubernetes! && sleep 3600
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      False   MinimumReplicasUnavailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  <none>
+NewReplicaSet:   frontend-deployment-7b9984b987 (4/4 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  2m56s  deployment-controller  Scaled up replica set frontend-deployment-7b9984b987 to 4
+```
+
+> A. BUSYBOX888
+
+### Q. Create a new Deployment using the deployment-definition-1.yaml file located at /root/. There is an issue with the file, so try to fix it.
+
+```bash
+controlplane ~ ➜  vim deployment-definition-1.yaml 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: busybox-pod
+  template:
+    metadata:
+      labels:
+        name: busybox-pod
+    spec:
+      containers:
+      - name: busybox-container
+        image: busybox888
+        command:
+        - sh
+        - "-c"
+        - echo Hello Kubernetes! && sleep 3600
+~
+~
+~
+~
+:wq
+
+controlplane ~ ➜  kubectl create -f deployment-definition-1.yaml 
+deployment.apps/deployment-1 created
+```
+
+### Q. Create a new Deployment with the below attributes using your own deployment definition file.
+
+
+Name: httpd-frontend;
+Replicas: 3;
+Image: httpd:2.4-alpine
+
+```bash
+controlplane ~ ➜  vim deployment-definition-httpd.yaml
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: httpd-frontend
+  template:
+    metadata:
+      labels:
+        name: httpd-frontend
+    spec:
+      containers:
+      - name: httpd-frontend
+        image: httpd:2.4-alpine
+~
+~
+~
+~
+:wq
+
+controlplane ~ ➜  kubectl create -f deployment-definition-httpd.yaml 
+deployment.apps/httpd-frontend created
+
+controlplane ~ ➜  kubectl get deployments
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+frontend-deployment   0/4     4            0           9m23s
+deployment-1          0/2     2            0           3m15s
+httpd-frontend        3/3     3            3           17s
+```
