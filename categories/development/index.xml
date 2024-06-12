@@ -4,7 +4,28 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Micro Service Architecture</title>
+    <link>https://seilylook.github.io/posts/micro-service-architecture/</link>
+    <pubDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/micro-service-architecture/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/micro-service-architecture.png" referrerpolicy="no-referrer">
+            </div>Work Flow Voting app(Python web): 80 port를 통해 사용자가 접근
+In-memory(Redis): 6379 port를 통해 Voting app POD &amp; Worker POD가 접근
+Worker(.Net): 접근할 필요 없음
+DB(PostgreSQL): 5432 port를 통해 Result app POD &amp; Worker POD가 접근
+Result(Nodejs): 80 port를 통해 사용자가 접근
+Goals Deploy Container
+Enable Connectivity
+External Access
+Steps Deploy PODs
+Create Services(Cluster IP): 내부적으로 Worker, Voting-app, Result-app이 Redis, DB에 접근할 수 있도록 해주는 용도.
+A. redis
+B. db]]></description>
+</item>
+<item>
     <title>Kubernetes Commands</title>
     <link>https://seilylook.github.io/posts/kubernetes-commands/</link>
     <pubDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</pubDate>

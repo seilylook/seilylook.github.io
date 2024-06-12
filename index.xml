@@ -4,9 +4,30 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Micro Service Architecture</title>
+    <link>https://seilylook.github.io/posts/micro-service-architecture/</link>
+    <pubDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/micro-service-architecture/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/micro-service-architecture.png" referrerpolicy="no-referrer">
+            </div>Work Flow Voting app(Python web): 80 port를 통해 사용자가 접근
+In-memory(Redis): 6379 port를 통해 Voting app POD &amp; Worker POD가 접근
+Worker(.Net): 접근할 필요 없음
+DB(PostgreSQL): 5432 port를 통해 Result app POD &amp; Worker POD가 접근
+Result(Nodejs): 80 port를 통해 사용자가 접근
+Goals Deploy Container
+Enable Connectivity
+External Access
+Steps Deploy PODs
+Create Services(Cluster IP): 내부적으로 Worker, Voting-app, Result-app이 Redis, DB에 접근할 수 있도록 해주는 용도.
+A. redis
+B. db]]></description>
+</item>
+<item>
     <title>Kubernetes Commands</title>
     <link>https://seilylook.github.io/posts/kubernetes-commands/</link>
     <pubDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</pubDate>
@@ -120,19 +141,6 @@ Executors: 애플리케이션을 위해 생성된 Executer 정보 제공. 메모
 SQL: 애플리케이션이 Spark SQL 쿼리 실행 시 정보 제공
 Streaming: Streaming jobs 실행 시 정보 제공
 애플리케이션 실행 1 2 3 4 5 df = spark.read.format(&#34;csv&#34;) \ .]]></description>
-</item>
-<item>
-    <title>Spark Execution Plan</title>
-    <link>https://seilylook.github.io/posts/spark-execution-plan/</link>
-    <pubDate>Wed, 15 May 2024 13:30:02 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-execution-plan/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/plan.webp" referrerpolicy="no-referrer">
-            </div>Execution plan goal An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized logical and physical operations.
-Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
-Info DAG?
-Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark.]]></description>
 </item>
 </channel>
 </rss>
