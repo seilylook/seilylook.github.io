@@ -342,3 +342,71 @@ kubernetes       ClusterIP   10.96.0.1        <none>        443/TCP        96m
 redis            ClusterIP   10.106.246.206   <none>        6379/TCP       2m33s
 voting-service   NodePort    10.100.147.17    <none>        80:30004/TCP   19m
 ```
+
+### Worker
+
+#### Pod 생성
+
+```bash
+ {seilylook} 🚀 cd pods 
+ {seilylook} 🚀 kubectl create -f worker-app-pod.yaml 
+pod/redis-pod created
+```
+
+#### Pod 생성 화인
+
+```bash
+ ✘ {seilylook} 🚀 kubectl get pods     
+NAME             READY   STATUS    RESTARTS   AGE
+postgres-pod     1/1     Running   0          2m47s
+redis-pod        1/1     Running   0          2m47s
+voting-app-pod   1/1     Running   0          19m
+worker-app-pod   1/1     Running   6 (21h ago)   21h
+```
+
+### Result-app
+
+#### Pod, Service 생성
+
+```bash
+ {seilylook} 🚀 cd pods 
+ {seilylook} 🚀 kubectl create -f result-app-pod.yaml 
+pod/redis-pod created
+ {seilylook} 🚀 cd ..  
+ {seilylook} 🚀 cd services 
+ {seilylook} 🚀 kubectl create -f result-app-service.yaml 
+```
+
+#### Pod, Service 생성 확인
+
+```bash
+{seilylook} 📚 kubectl get all
+NAME                 READY   STATUS    RESTARTS      AGE
+pod/postgres-pod     1/1     Running   1 (21h ago)   22h
+pod/redis-pod        1/1     Running   1 (21h ago)   22h
+pod/result-app-pod   1/1     Running   1 (21h ago)   21h
+pod/voting-app-pod   1/1     Running   1 (21h ago)   22h
+pod/worker-app-pod   1/1     Running   6 (21h ago)   21h
+
+NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+service/db               ClusterIP   10.111.84.234    <none>        5432/TCP       22h
+service/kubernetes       ClusterIP   10.96.0.1        <none>        443/TCP        23h
+service/redis            ClusterIP   10.106.246.206   <none>        6379/TCP       22h
+service/result-service   NodePort    10.110.10.185    <none>        80:30005/TCP   21h
+service/voting-service   NodePort    10.100.147.17    <none>        80:30004/TCP   22h
+```
+
+#### Url 확인
+
+```bash
+ {seilylook} 📚 kubectl get svc                      
+NAME             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+db               ClusterIP   10.111.84.234    <none>        5432/TCP       22h
+kubernetes       ClusterIP   10.96.0.1        <none>        443/TCP        23h
+redis            ClusterIP   10.106.246.206   <none>        6379/TCP       22h
+result-service   NodePort    10.110.10.185    <none>        80:30005/TCP   22h
+voting-service   NodePort    10.100.147.17    <none>        80:30004/TCP   22h
+
+ {seilylook} 📚 minikube service result-service --url
+http://127.0.0.1:51256
+```
