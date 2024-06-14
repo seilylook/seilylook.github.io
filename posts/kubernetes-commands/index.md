@@ -630,6 +630,16 @@ newpods-dn5jz   1/1     Running   1 (3m58s ago)   20m
 redis           1/1     Running   0               3m
 ```
 
+{{<admonition tip>}}
+1. kubectl `edit` 명령어를 사용해 redis POD의 image 변경하기
+
+`kubectl edit pod redis`
+
+2. `Vi` | `Nano` 명령어를 통한 편집기를 사용해 이미지를 redis123에서 redis로 변경했다면, kubectl `apploy` 명령어를 실행해 이미지를 업데이트 해준다.
+
+`kubectl apply -f redis-definition.yaml `
+{{</admonition>}}
+
 ## Replica Set
 
 ### Q. How many replica sets?

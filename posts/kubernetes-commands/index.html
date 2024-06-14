@@ -32,7 +32,7 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  5946 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  5981 ,
         "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T18:24:13+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
@@ -112,8 +112,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Commands</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5946 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;28 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5981 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;29 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -1378,7 +1378,23 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 </span></span><span class="line"><span class="cl">redis           1/1     Running   <span class="m">0</span>               3m
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="replica-set">Replica Set</h2>
+</div><div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>kubectl <code>edit</code> 명령어를 사용해 redis POD의 image 변경하기</li>
+</ol>
+<p><code>kubectl edit pod redis</code></p>
+<ol start="2">
+<li><code>Vi</code> | <code>Nano</code> 명령어를 통한 편집기를 사용해 이미지를 redis123에서 redis로 변경했다면, kubectl <code>apploy</code> 명령어를 실행해 이미지를 업데이트 해준다.</li>
+</ol>
+<p><code>kubectl apply -f redis-definition.yaml </code></p>
+</div>
+        </div>
+    </div>
+<h2 id="replica-set">Replica Set</h2>
 <h3 id="q-how-many-replica-sets">Q. How many replica sets?</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
