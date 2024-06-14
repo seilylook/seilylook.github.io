@@ -4,12 +4,20 @@
         <link>https://seilylook.github.io/categories/</link>
         <description>Categories - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 14 Jun 2024 12:28:45 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/" rel="self" type="application/rss+xml" /><item>
     <title>Development</title>
     <link>https://seilylook.github.io/categories/development/</link>
-    <pubDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</pubDate>
+    <pubDate>Fri, 14 Jun 2024 12:28:45 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/categories/development/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Infra</title>
+    <link>https://seilylook.github.io/categories/infra/</link>
+    <pubDate>Fri, 14 Jun 2024 12:28:45 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/categories/infra/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -26,14 +34,6 @@
     <pubDate>Wed, 29 May 2024 17:05:08 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/categories/data-engineering/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Infra</title>
-    <link>https://seilylook.github.io/categories/infra/</link>
-    <pubDate>Thu, 09 May 2024 18:14:00 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/categories/infra/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>

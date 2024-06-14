@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/tags/kubernetes/</link>
         <description>Kubernetes - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/kubernetes/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 14 Jun 2024 12:28:45 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/kubernetes/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes Architecture</title>
+    <link>https://seilylook.github.io/posts/kubernetes-architecture/</link>
+    <pubDate>Fri, 14 Jun 2024 12:28:45 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-architecture/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/kubernetes-logo.png" referrerpolicy="no-referrer">
+            </div> ]]></description>
+</item>
+<item>
     <title>Micro Service Architecture</title>
     <link>https://seilylook.github.io/posts/micro-service-architecture/</link>
     <pubDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</pubDate>

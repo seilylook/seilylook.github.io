@@ -4,9 +4,19 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 14 Jun 2024 12:28:45 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Kubernetes Architecture</title>
+    <link>https://seilylook.github.io/posts/kubernetes-architecture/</link>
+    <pubDate>Fri, 14 Jun 2024 12:28:45 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-architecture/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/kubernetes-logo.png" referrerpolicy="no-referrer">
+            </div> ]]></description>
+</item>
+<item>
     <title>Micro Service Architecture</title>
     <link>https://seilylook.github.io/posts/micro-service-architecture/</link>
     <pubDate>Wed, 12 Jun 2024 11:46:09 &#43;0900</pubDate>
@@ -124,23 +134,6 @@ Key Point RDD.cache() cashes the RDD with the default storage level MEMORY_ONLY
 DataFrame.cache() caches the DataFrame with the default storage level MEMORY_AND_DISK
 The persist() method is used to store it to the user-defined storage level
 On Spark UI, the Storage tab shows where partitions exist in memory or disk across the cluster.]]></description>
-</item>
-<item>
-    <title>Spark UI</title>
-    <link>https://seilylook.github.io/posts/spark-ui/</link>
-    <pubDate>Fri, 17 May 2024 11:49:44 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/spark-ui/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
-            </div>Introduction Jobs: 스파크 애플리케이션의 모든 job에 대한 요약 정보
-Stages: 모든 jobs의 모든 stages의 현재 상태 요약 정보
-Storage: persisted RDD와 DataFrame 정보 제공
-Environment: 다양한 환경 변수 값
-Executors: 애플리케이션을 위해 생성된 Executer 정보 제공. 메모리와 디스크 사용량과 task, shuffle 정보 등
-SQL: 애플리케이션이 Spark SQL 쿼리 실행 시 정보 제공
-Streaming: Streaming jobs 실행 시 정보 제공
-애플리케이션 실행 1 2 3 4 5 df = spark.read.format(&#34;csv&#34;) \ .]]></description>
 </item>
 </channel>
 </rss>
