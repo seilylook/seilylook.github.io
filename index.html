@@ -112,7 +112,7 @@
         title="/images/featured-image/scheduler.png" /></a>
         </div><h1 class="single-title" itemprop="name headline">
         <a href="/posts/kubernetes-scheduling/">Kubernetes Scheduling</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-06-17">2024-06-17</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div><div class="content"></div><div class="post-footer">
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-06-17">2024-06-17</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div><div class="content">Labels and Selectors Q. We have deployed a number of PODs. They are labelled with tier, env and bu. How many PODs exist in the dev environment (env)? 1 2 3 4 5 6 7 8 9 10 11 12 13 controlplane ~ ➜ kubectl get pods --selector env=dev NAME READY STATUS RESTARTS AGE app-1-5hskg 1/1 Running 0 71s app-1-8m5gl 1/1 Running 0 71s db-1-jfd5z 1/1 Running 0 70s app-1-jnd7g 1/1 Running 0 71s db-1-54kdk 1/1 Running 0 70s db-1-xcxv7 1/1 Running 0 70s db-1-2tffc 1/1 Running 0 70s OR kubectl get pods --selector env=dev --no-headers | wc -l A.</div><div class="post-footer">
         <a href="/posts/kubernetes-scheduling/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
@@ -155,7 +155,7 @@ B. db</div><div class="post-footer">
         <a href="/posts/micro-service-architecture/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/kubernetes-commands/"><img
+            <a href="/posts/kubernetes-core-concepts/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/featured-image/knowledge.jpeg"
@@ -164,12 +164,12 @@ B. db</div><div class="post-footer">
         alt="/images/featured-image/knowledge.jpeg"
         title="/images/featured-image/knowledge.jpeg" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/kubernetes-commands/">Kubernetes Commands</a>
+        <a href="/posts/kubernetes-core-concepts/">Kubernetes Core Concepts</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-06-11">2024-06-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div><div class="content">Introduction 자주 사용하고 중요한 Kubectl commands들을 정리.
 Kubernetes Architecture Hierarchy Deployment &raquo; Replica Set &raquo; Pod &raquo; Container &raquo; Image
 Node Q: How many nodes are part of the cluster? 1 2 3 4 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 13m v1.29.0+k3s1 A: 1
 Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 13m v1.</div><div class="post-footer">
-        <a href="/posts/kubernetes-commands/">Read More</a><div class="post-tags">
+        <a href="/posts/kubernetes-core-concepts/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/cryptocurrency-data-pipeline/"><img

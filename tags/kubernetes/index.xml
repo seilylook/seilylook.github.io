@@ -12,7 +12,7 @@
     <guid>https://seilylook.github.io/posts/kubernetes-scheduling/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/scheduler.png" referrerpolicy="no-referrer">
-            </div>]]></description>
+            </div>Labels and Selectors Q. We have deployed a number of PODs. They are labelled with tier, env and bu. How many PODs exist in the dev environment (env)? 1 2 3 4 5 6 7 8 9 10 11 12 13 controlplane ~ ➜ kubectl get pods --selector env=dev NAME READY STATUS RESTARTS AGE app-1-5hskg 1/1 Running 0 71s app-1-8m5gl 1/1 Running 0 71s db-1-jfd5z 1/1 Running 0 70s app-1-jnd7g 1/1 Running 0 71s db-1-54kdk 1/1 Running 0 70s db-1-xcxv7 1/1 Running 0 70s db-1-2tffc 1/1 Running 0 70s OR kubectl get pods --selector env=dev --no-headers | wc -l A.]]></description>
 </item>
 <item>
     <title>Kubernetes Architecture</title>
@@ -46,11 +46,11 @@ A. redis
 B. db]]></description>
 </item>
 <item>
-    <title>Kubernetes Commands</title>
-    <link>https://seilylook.github.io/posts/kubernetes-commands/</link>
+    <title>Kubernetes Core Concepts</title>
+    <link>https://seilylook.github.io/posts/kubernetes-core-concepts/</link>
     <pubDate>Tue, 11 Jun 2024 12:51:49 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/kubernetes-commands/</guid>
+    <guid>https://seilylook.github.io/posts/kubernetes-core-concepts/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image/knowledge.jpeg" referrerpolicy="no-referrer">
             </div>Introduction 자주 사용하고 중요한 Kubectl commands들을 정리.
