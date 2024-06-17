@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-scheduling/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-17T14:06:34+09:00" />
-<meta property="article:modified_time" content="2024-06-17T14:08:41+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-17T16:00:48+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Scheduling"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  435 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T14:08:41+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  888 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T16:00:48+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Scheduling</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;435 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;888 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -129,6 +129,16 @@
         <li><a href="#q-how-many-objects-are-in-the-prod-environment-including-pods-replicasets-and-any-other-objects">Q. How many objects are in the prod environment including PODs, ReplicaSets and any other objects?</a></li>
         <li><a href="#q-identify-the-pod-which-is-part-of-the-prod-environment-the-finance-bu-and-of-frontend-tier">Q. Identify the POD which is part of the prod environment, the finance BU and of frontend tier?</a></li>
         <li><a href="#q-a-replicaset-definition-file-is-given-replicaset-definition-1yaml-attempt-to-create-the-replicaset-you-will-encounter-an-issue-with-the-file-try-to-fix-it">Q. A ReplicaSet definition file is given replicaset-definition-1.yaml. Attempt to create the replicaset; you will encounter an issue with the file. Try to fix it.</a></li>
+      </ul>
+    </li>
+    <li><a href="#taints-and-tolerations">Taints and Tolerations</a>
+      <ul>
+        <li><a href="#q-do-any-taints-exist-on-node01-node">Q. Do any taints exist on node01 node?</a></li>
+        <li><a href="#q-create-a-taint-on-node01-with-key-of-spray-value-of-mortein-and-effect-of-noschedule">Q. Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule</a></li>
+        <li><a href="#q-create-another-pod-names-bee-with-the-nginx-image-which-has-a-toleration-set-to-the-taint-mortein">Q. Create another pod names bee with the nginx image, which has a toleration set to the taint mortein.</a></li>
+        <li><a href="#q-do-you-see-any-taints-on-controlplane-node">Q. Do you see any taints on controlplane node?</a></li>
+        <li><a href="#q-remove-the-taint-on-controlplane-which-currently-has-the-taint-effect-of-noschedule">Q. Remove the taint on controlplane, which currently has the taint effect of NoSchedule.</a></li>
+        <li><a href="#q-which-node-is-the-pod-mosquito-on-now">Q. Which node is the POD mosquito on now?</a></li>
       </ul>
     </li>
   </ul>
@@ -322,12 +332,270 @@
 </span></span><span class="line"><span class="cl">replicaset.apps/replicaset-1 created
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="taints-and-tolerations">Taints and Tolerations</h2>
+<h3 id="q-do-any-taints-exist-on-node01-node">Q. Do any taints exist on node01 node?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl describe node node01
+</span></span><span class="line"><span class="cl">Name:               node01
+</span></span><span class="line"><span class="cl">Roles:              &lt;none&gt;
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>node01
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">Annotations:        flannel.alpha.coreos.com/backend-data: <span class="o">{</span><span class="s2">&#34;VNI&#34;</span>:1,<span class="s2">&#34;VtepMAC&#34;</span>:<span class="s2">&#34;72:10:2d:a2:75:8d&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/backend-type: vxlan
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/kube-subnet-manager: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/public-ip: 192.14.218.6
+</span></span><span class="line"><span class="cl">                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+</span></span><span class="line"><span class="cl">                    node.alpha.kubernetes.io/ttl: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">                    volumes.kubernetes.io/controller-managed-attach-detach: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">CreationTimestamp:  Mon, <span class="m">17</span> Jun <span class="m">2024</span> 08:28:32 +0000
+</span></span><span class="line"><span class="cl">Taints:             &lt;none&gt;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. None</p>
+</blockquote>
+<h3 id="q-create-a-taint-on-node01-with-key-of-spray-value-of-mortein-and-effect-of-noschedule">Q. Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl taint nodes node01 <span class="nv">spray</span><span class="o">=</span>mortein:NoSchedule
+</span></span><span class="line"><span class="cl">node/node01 tainted
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe node node01
+</span></span><span class="line"><span class="cl">Name:               node01
+</span></span><span class="line"><span class="cl">Roles:              &lt;none&gt;
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>node01
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">Annotations:        flannel.alpha.coreos.com/backend-data: <span class="o">{</span><span class="s2">&#34;VNI&#34;</span>:1,<span class="s2">&#34;VtepMAC&#34;</span>:<span class="s2">&#34;72:10:2d:a2:75:8d&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/backend-type: vxlan
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/kube-subnet-manager: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/public-ip: 192.14.218.6
+</span></span><span class="line"><span class="cl">                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+</span></span><span class="line"><span class="cl">                    node.alpha.kubernetes.io/ttl: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">                    volumes.kubernetes.io/controller-managed-attach-detach: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">CreationTimestamp:  Mon, <span class="m">17</span> Jun <span class="m">2024</span> 08:28:32 +0000
+</span></span><span class="line"><span class="cl">Taints:             <span class="nv">spray</span><span class="o">=</span>mortein:NoSchedule
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-create-another-pod-names-bee-with-the-nginx-image-which-has-a-toleration-set-to-the-taint-mortein">Q. Create another pod names bee with the nginx image, which has a toleration set to the taint mortein.</h3>
+<p>Image name: nginx</p>
+<p>Key: spray</p>
+<p>Value: mortein</p>
+<p>Effects: NoSchedule</p>
+<p>Status: Running</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim bee-pod.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: bee
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">    - image: nginx
+</span></span><span class="line"><span class="cl">      name: bee
+</span></span><span class="line"><span class="cl">  tolerations:
+</span></span><span class="line"><span class="cl">    - key: spray
+</span></span><span class="line"><span class="cl">      value: mortein
+</span></span><span class="line"><span class="cl">      effect: NoSchedule
+</span></span><span class="line"><span class="cl">      operator: Equal
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f bee-pod.yaml 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-do-you-see-any-taints-on-controlplane-node">Q. Do you see any taints on controlplane node?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe node controlplane
+</span></span><span class="line"><span class="cl">Name:               controlplane
+</span></span><span class="line"><span class="cl">Roles:              control-plane
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>controlplane
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    node-role.kubernetes.io/control-plane<span class="o">=</span>
+</span></span><span class="line"><span class="cl">                    node.kubernetes.io/exclude-from-external-load-balancers<span class="o">=</span>
+</span></span><span class="line"><span class="cl">Annotations:        flannel.alpha.coreos.com/backend-data: <span class="o">{</span><span class="s2">&#34;VNI&#34;</span>:1,<span class="s2">&#34;VtepMAC&#34;</span>:<span class="s2">&#34;aa:0d:ad:10:90:1d&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/backend-type: vxlan
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/kube-subnet-manager: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/public-ip: 192.14.218.3
+</span></span><span class="line"><span class="cl">                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+</span></span><span class="line"><span class="cl">                    node.alpha.kubernetes.io/ttl: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">                    volumes.kubernetes.io/controller-managed-attach-detach: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">CreationTimestamp:  Mon, <span class="m">17</span> Jun <span class="m">2024</span> 08:27:49 +0000
+</span></span><span class="line"><span class="cl">Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-remove-the-taint-on-controlplane-which-currently-has-the-taint-effect-of-noschedule">Q. Remove the taint on controlplane, which currently has the taint effect of NoSchedule.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+</span></span><span class="line"><span class="cl">node/controlplane untainted
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe node controlplane
+</span></span><span class="line"><span class="cl">Name:               controlplane
+</span></span><span class="line"><span class="cl">Roles:              control-plane
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>controlplane
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    node-role.kubernetes.io/control-plane<span class="o">=</span>
+</span></span><span class="line"><span class="cl">                    node.kubernetes.io/exclude-from-external-load-balancers<span class="o">=</span>
+</span></span><span class="line"><span class="cl">Annotations:        flannel.alpha.coreos.com/backend-data: <span class="o">{</span><span class="s2">&#34;VNI&#34;</span>:1,<span class="s2">&#34;VtepMAC&#34;</span>:<span class="s2">&#34;aa:0d:ad:10:90:1d&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/backend-type: vxlan
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/kube-subnet-manager: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/public-ip: 192.14.218.3
+</span></span><span class="line"><span class="cl">                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+</span></span><span class="line"><span class="cl">                    node.alpha.kubernetes.io/ttl: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">                    volumes.kubernetes.io/controller-managed-attach-detach: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">CreationTimestamp:  Mon, <span class="m">17</span> Jun <span class="m">2024</span> 08:27:49 +0000
+</span></span><span class="line"><span class="cl">Taints:             &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-which-node-is-the-pod-mosquito-on-now">Q. Which node is the POD mosquito on now?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pod mosquito -o wide
+</span></span><span class="line"><span class="cl">NAME       READY   STATUS    RESTARTS   AGE   IP           NODE           NOMINATED NODE   READINESS GATES
+</span></span><span class="line"><span class="cl">mosquito   1/1     Running   <span class="m">0</span>          15m   10.244.0.4   controlplane   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. controlplane</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f4e737909c75fa1a4dc6b99a03a5334029da25de" target="_blank" title="commit by seilylook(seilylook@naver.com) f4e737909c75fa1a4dc6b99a03a5334029da25de: add: kubernetes commands &amp; new scheduling">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f4e7379</a></span>
+                <span>Updated on 2024-06-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/bb8ab32aec229d516e91518a7e1e148324aa03cb" target="_blank" title="commit by seilylook(seilylook@naver.com) bb8ab32aec229d516e91518a7e1e148324aa03cb: add: kubernetes scheduling">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bb8ab32</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

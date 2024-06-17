@@ -108,3 +108,151 @@ spec:
 controlplane ~ ➜  kubectl apply -f replicaset-definition-1.yaml 
 replicaset.apps/replicaset-1 created
 ```
+
+## Taints and Tolerations
+
+### Q. Do any taints exist on node01 node?
+
+```bash
+controlplane ~ ✖ kubectl describe node node01
+Name:               node01
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node01
+                    kubernetes.io/os=linux
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"72:10:2d:a2:75:8d"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 192.14.218.6
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 17 Jun 2024 08:28:32 +0000
+Taints:             <none>
+...
+```
+
+> A. None
+
+### Q. Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule
+
+```bash
+controlplane ~ ➜  kubectl taint nodes node01 spray=mortein:NoSchedule
+node/node01 tainted
+
+controlplane ~ ➜  kubectl describe node node01
+Name:               node01
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node01
+                    kubernetes.io/os=linux
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"72:10:2d:a2:75:8d"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 192.14.218.6
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 17 Jun 2024 08:28:32 +0000
+Taints:             spray=mortein:NoSchedule
+...
+```
+
+### Q. Create another pod names bee with the nginx image, which has a toleration set to the taint mortein.
+
+Image name: nginx
+
+Key: spray
+
+Value: mortein
+
+Effects: NoSchedule
+
+Status: Running
+
+```bash
+controlplane ~ ➜  vim bee-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bee
+spec:
+  containers:
+    - image: nginx
+      name: bee
+  tolerations:
+    - key: spray
+      value: mortein
+      effect: NoSchedule
+      operator: Equal
+:wq
+
+controlplane ~ ➜  kubectl create -f bee-pod.yaml 
+```
+
+### Q. Do you see any taints on controlplane node?
+
+```bash
+controlplane ~ ➜  kubectl describe node controlplane
+Name:               controlplane
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=controlplane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"aa:0d:ad:10:90:1d"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 192.14.218.3
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 17 Jun 2024 08:27:49 +0000
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+...
+```
+
+### Q. Remove the taint on controlplane, which currently has the taint effect of NoSchedule.
+
+```bash
+controlplane ~ ➜  kubectl taint nodes controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+node/controlplane untainted
+
+controlplane ~ ➜  kubectl describe node controlplane
+Name:               controlplane
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=controlplane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"aa:0d:ad:10:90:1d"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 192.14.218.3
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 17 Jun 2024 08:27:49 +0000
+Taints:             <none>
+```
+
+### Q. Which node is the POD mosquito on now?
+
+```bash
+controlplane ~ ➜  kubectl get pod mosquito -o wide
+NAME       READY   STATUS    RESTARTS   AGE   IP           NODE           NOMINATED NODE   READINESS GATES
+mosquito   1/1     Running   0          15m   10.244.0.4   controlplane   <none>           <none>
+```
+
+> A. controlplane
