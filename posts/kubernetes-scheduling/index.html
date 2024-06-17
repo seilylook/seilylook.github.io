@@ -4,30 +4,30 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Kubernetes Architecture - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Kubernetes Architecture" />
-<meta property="og:description" content=" " />
+        <title>Kubernetes Scheduling - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Kubernetes Scheduling" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-architecture/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-06-14T12:28:45+09:00" />
-<meta property="article:modified_time" content="2024-06-14T12:44:41+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-scheduling/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-17T14:06:34+09:00" />
+<meta property="article:modified_time" content="2024-06-17T14:06:34+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Architecture"/>
-<meta name="twitter:description" content=" "/>
+<meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Scheduling"/>
+<meta name="twitter:description" content=""/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/kubernetes-architecture/" /><link rel="prev" href="https://seilylook.github.io/posts/micro-service-architecture/" /><link rel="next" href="https://seilylook.github.io/posts/kubernetes-scheduling/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/kubernetes-scheduling/" /><link rel="prev" href="https://seilylook.github.io/posts/kubernetes-architecture/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Kubernetes Architecture",
+        "headline": "Kubernetes Scheduling",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-architecture\/"
+            "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/"
         },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  0 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-architecture\/","datePublished": "2024-06-14T12:28:45+09:00","dateModified": "2024-06-14T12:44:41+09:00","publisher": {
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T14:06:34+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -58,7 +58,7 @@
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
                     <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/kubernetes-architecture/" selected>English</option></select>
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/kubernetes-scheduling/" selected>English</option></select>
                 </a></div>
         </div>
     </div>
@@ -92,7 +92,7 @@
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
                     <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/posts/kubernetes-architecture/" selected>English</option></select>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/kubernetes-scheduling/" selected>English</option></select>
                 </a></div>
     </div>
 </header><div class="search-dropdown desktop">
@@ -104,37 +104,35 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Architecture</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a>&nbsp;<a href="/categories/infra/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Infra</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-14">2024-06-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Scheduling</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/featured-image/kubernetes-logo.png"
-        data-srcset="/images/featured-image/kubernetes-logo.png, /images/featured-image/kubernetes-logo.png 1.5x, /images/featured-image/kubernetes-logo.png 2x"
+        data-src="/images/featured-image/scheduler.png"
+        data-srcset="/images/featured-image/scheduler.png, /images/featured-image/scheduler.png 1.5x, /images/featured-image/scheduler.png 2x"
         data-sizes="auto"
-        alt="/images/featured-image/kubernetes-logo.png"
-        title="/images/featured-image/kubernetes-logo.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/featured-image/scheduler.png"
+        title="/images/featured-image/scheduler.png" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><img src="/images/kubernetes/kubernetes-architecture.png" />
-</div><div class="post-footer" id="post-footer">
+            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-14&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/55511c6627b6c06046e2333587bdb0d0bd2d4705" target="_blank" title="commit by seilylook(seilylook@naver.com) 55511c6627b6c06046e2333587bdb0d0bd2d4705: init commit: kubernetes architecture">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>55511c6</a></span>
+                <span>Updated on 2024-06-17</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/kubernetes-architecture/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/posts/kubernetes-scheduling/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/kubernetes-architecture/" data-title="Kubernetes Architecture" data-hashtags="Kubernetes"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/kubernetes-architecture/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/kubernetes-architecture/" data-title="Kubernetes Architecture"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/kubernetes-architecture/" data-title="Kubernetes Architecture"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/kubernetes-architecture/" data-title="Kubernetes Architecture" data-image="/images/featured-image/kubernetes-logo.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/kubernetes-scheduling/" data-title="Kubernetes Scheduling" data-hashtags="Kubernetes"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/kubernetes-scheduling/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/kubernetes-scheduling/" data-title="Kubernetes Scheduling"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/kubernetes-scheduling/" data-title="Kubernetes Scheduling"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/kubernetes-scheduling/" data-title="Kubernetes Scheduling" data-image="/images/featured-image/scheduler.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -146,8 +144,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/micro-service-architecture/" class="prev" rel="prev" title="Micro Service Architecture"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Micro Service Architecture</a>
-            <a href="/posts/kubernetes-scheduling/" class="next" rel="next" title="Kubernetes Scheduling">Kubernetes Scheduling<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/kubernetes-architecture/" class="prev" rel="prev" title="Kubernetes Architecture"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Kubernetes Architecture</a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.

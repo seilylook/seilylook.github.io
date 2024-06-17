@@ -12,7 +12,7 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-commands/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-11T12:51:49+09:00" />
-<meta property="article:modified_time" content="2024-06-11T18:24:13+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-14T14:51:44+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Commands"/>
@@ -32,8 +32,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  5981 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-11T18:24:13+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  6760 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-commands\/","datePublished": "2024-06-11T12:51:49+09:00","dateModified": "2024-06-14T14:51:44+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Commands</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5981 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;29 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-11">2024-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6760 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;32 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -198,6 +198,19 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
         <li><a href="#q-create-a-new-service-to-access-the-web-application-using-the-service-definition-1yaml-file">Q. Create a new service to access the web application using the service-definition-1.yaml file.</a></li>
       </ul>
     </li>
+    <li><a href="#imperative-commands">Imperative Commands</a>
+      <ul>
+        <li><a href="#q-deploy-a-pod-named-nginx-pod-using-the-nginxalpine-image-use-imperative-commands-only">Q. Deploy a pod named nginx-pod using the nginx:alpine image. Use imperative commands only.</a></li>
+      </ul>
+    </li>
+    <li><a href="#q-deploy-a-redis-pod-using-the-redisalpine-image-with-the-labels-set-to-tierdb-either-use-imperative-commands-to-create-the-pod-with-the-labels-or-else-use-imperative-commands-to-generate-the-pod-definition-file-then-add-the-labels-before-creating-the-pod-using-the-file">Q. Deploy a redis pod using the redis:alpine image with the labels set to tier=db. Either use imperative commands to create the pod with the labels. Or else use imperative commands to generate the pod definition file, then add the labels before creating the pod using the file.</a></li>
+    <li><a href="#q-create-a-service-redis-service-to-expose-the-redis-application-within-the-cluster-on-port-6379">Q. Create a service redis-service to expose the redis application within the cluster on port 6379.</a></li>
+    <li><a href="#q-create-a-deployment-named-webapp-using-the-image-kodekloudwebapp-color-with-3-replicas-try-to-use-imperative-commands-only-do-not-create-definition-files">Q. Create a deployment named webapp using the image kodekloud/webapp-color with 3 replicas. Try to use imperative commands only. Do not create definition files.</a></li>
+    <li><a href="#q-create-a-new-pod-called-custom-nginx-using-the-nginx-image-and-run-it-on-container-port-8080">Q. Create a new pod called custom-nginx using the nginx image and run it on container port 8080.</a></li>
+    <li><a href="#q-create-a-new-namespace-called-dev-ns-use-imperative-commands">Q. Create a new namespace called dev-ns. Use imperative commands.</a></li>
+    <li><a href="#q-create-a-new-deployment-called-redis-deploy-in-the-dev-ns-namespace-with-the-redis-image-it-should-have-2-replicas-use-imperative-commands">Q. Create a new deployment called redis-deploy in the dev-ns namespace with the redis image. It should have 2 replicas. Use imperative commands.</a></li>
+    <li><a href="#q-create-a-pod-called-httpd-using-the-image-httpdalpine-in-the-default-namespace-next-create-a-service-of-type-clusterip-by-the-same-name-httpd-the-target-port-for-the-service-should-be-80-try-to-do-this-with-as-few-steps-as-possible">Q. Create a pod called httpd using the image httpd:alpine in the default namespace. Next, create a service of type ClusterIP by the same name (httpd). The target port for the service should be 80. Try to do this with as few steps as possible.</a></li>
+    <li><a href="#q-create-a-pod-called-httpd-using-the-image-httpdalpine-in-the-default-namespace-next-create-a-service-of-type-clusterip-by-the-same-name-httpd-the-target-port-for-the-service-should-be-80-try-to-do-this-with-as-few-steps-as-possible-1">Q. Create a pod called httpd using the image httpd:alpine in the default namespace. Next, create a service of type ClusterIP by the same name (httpd). The target port for the service should be 80. Try to do this with as few steps as possible.</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
@@ -3109,12 +3122,293 @@ name: simple-webapp</p>
 </span></span><span class="line"><span class="cl">service/webapp-service created
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="imperative-commands">Imperative Commands</h2>
+<h3 id="q-deploy-a-pod-named-nginx-pod-using-the-nginxalpine-image-use-imperative-commands-only">Q. Deploy a pod named nginx-pod using the nginx:alpine image. Use imperative commands only.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl run nginx-pod --image<span class="o">=</span>nginx:alpine
+</span></span><span class="line"><span class="cl">pod/nginx-pod created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME        READY   STATUS              RESTARTS   AGE
+</span></span><span class="line"><span class="cl">nginx-pod   0/1     ContainerCreating   <span class="m">0</span>          7s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-deploy-a-redis-pod-using-the-redisalpine-image-with-the-labels-set-to-tierdb-either-use-imperative-commands-to-create-the-pod-with-the-labels-or-else-use-imperative-commands-to-generate-the-pod-definition-file-then-add-the-labels-before-creating-the-pod-using-the-file">Q. Deploy a redis pod using the redis:alpine image with the labels set to tier=db. Either use imperative commands to create the pod with the labels. Or else use imperative commands to generate the pod definition file, then add the labels before creating the pod using the file.</h2>
+<p>Solution 1.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl run redis --image<span class="o">=</span>redis:alpine --dry-run<span class="o">=</span>client -oyaml &gt; redis-pod.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  ls
+</span></span><span class="line"><span class="cl">redis-pod.yaml  sample.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  vim redis-pod.yaml 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    tier: db
+</span></span><span class="line"><span class="cl">  name: redis
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - image: redis:alpine
+</span></span><span class="line"><span class="cl">    name: redis
+</span></span><span class="line"><span class="cl">  dnsPolicy: ClusterFirst
+</span></span><span class="line"><span class="cl">  restartPolicy: Always
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f redis-pod.yaml 
+</span></span><span class="line"><span class="cl">pod/redis created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Solution 2.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run redis -l <span class="nv">tier</span><span class="o">=</span>db --image<span class="o">=</span>redis:alpine
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-create-a-service-redis-service-to-expose-the-redis-application-within-the-cluster-on-port-6379">Q. Create a service redis-service to expose the redis application within the cluster on port 6379.</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl expose pod redis --port<span class="o">=</span><span class="m">6379</span> --name redis-service
+</span></span><span class="line"><span class="cl">service/redis-service exposed
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get all
+</span></span><span class="line"><span class="cl">NAME            READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">pod/nginx-pod   1/1     Running   <span class="m">0</span>          10m
+</span></span><span class="line"><span class="cl">pod/redis       1/1     Running   <span class="m">0</span>          3m54s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>    AGE
+</span></span><span class="line"><span class="cl">service/kubernetes      ClusterIP   10.43.0.1       &lt;none&gt;        443/TCP    32m
+</span></span><span class="line"><span class="cl">service/redis-service   ClusterIP   10.43.163.218   &lt;none&gt;        6379/TCP   18s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-create-a-deployment-named-webapp-using-the-image-kodekloudwebapp-color-with-3-replicas-try-to-use-imperative-commands-only-do-not-create-definition-files">Q. Create a deployment named webapp using the image kodekloud/webapp-color with 3 replicas. Try to use imperative commands only. Do not create definition files.</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl create deployment webapp --image<span class="o">=</span>kodekloud/web
+</span></span><span class="line"><span class="cl">app-color --replicas<span class="o">=</span><span class="m">3</span>
+</span></span><span class="line"><span class="cl">deployment.apps/webapp created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get deployments
+</span></span><span class="line"><span class="cl">NAME     READY   UP-TO-DATE   AVAILABLE   AGE
+</span></span><span class="line"><span class="cl">webapp   3/3     <span class="m">3</span>            <span class="m">3</span>           46s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-create-a-new-pod-called-custom-nginx-using-the-nginx-image-and-run-it-on-container-port-8080">Q. Create a new pod called custom-nginx using the nginx image and run it on container port 8080.</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl run custom-nginx --image<span class="o">=</span>nginx --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl">pod/custom-nginx created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ✖ kubectl get pods
+</span></span><span class="line"><span class="cl">NAME                      READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">nginx-pod                 1/1     Running   <span class="m">0</span>          18m
+</span></span><span class="line"><span class="cl">redis                     1/1     Running   <span class="m">0</span>          11m
+</span></span><span class="line"><span class="cl">webapp-799f6b587f-62vgv   1/1     Running   <span class="m">0</span>          3m44s
+</span></span><span class="line"><span class="cl">webapp-799f6b587f-c2xtk   1/1     Running   <span class="m">0</span>          3m44s
+</span></span><span class="line"><span class="cl">webapp-799f6b587f-88tbr   1/1     Running   <span class="m">0</span>          3m44s
+</span></span><span class="line"><span class="cl">custom-nginx              1/1     Running   <span class="m">0</span>          32s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-create-a-new-namespace-called-dev-ns-use-imperative-commands">Q. Create a new namespace called dev-ns. Use imperative commands.</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl create namespace dev-ns
+</span></span><span class="line"><span class="cl">namespace/dev-ns created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ✖ kubectl get ns
+</span></span><span class="line"><span class="cl">NAME              STATUS   AGE
+</span></span><span class="line"><span class="cl">kube-system       Active   42m
+</span></span><span class="line"><span class="cl">kube-public       Active   42m
+</span></span><span class="line"><span class="cl">kube-node-lease   Active   42m
+</span></span><span class="line"><span class="cl">default           Active   42m
+</span></span><span class="line"><span class="cl">dev-ns            Active   13s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-create-a-new-deployment-called-redis-deploy-in-the-dev-ns-namespace-with-the-redis-image-it-should-have-2-replicas-use-imperative-commands">Q. Create a new deployment called redis-deploy in the dev-ns namespace with the redis image. It should have 2 replicas. Use imperative commands.</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl create deployment redis-deploy --image<span class="o">=</span>redis --replicas<span class="o">=</span><span class="m">2</span> -n dev-ns
+</span></span><span class="line"><span class="cl">deployment.apps/redis-deploy created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-create-a-pod-called-httpd-using-the-image-httpdalpine-in-the-default-namespace-next-create-a-service-of-type-clusterip-by-the-same-name-httpd-the-target-port-for-the-service-should-be-80-try-to-do-this-with-as-few-steps-as-possible">Q. Create a pod called httpd using the image httpd:alpine in the default namespace. Next, create a service of type ClusterIP by the same name (httpd). The target port for the service should be 80. Try to do this with as few steps as possible.</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl run httpd --image<span class="o">=</span>httpd:apline --port<span class="o">=</span><span class="m">80</span> --expose
+</span></span><span class="line"><span class="cl">service/httpd created
+</span></span><span class="line"><span class="cl">pod/httpd created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q-create-a-pod-called-httpd-using-the-image-httpdalpine-in-the-default-namespace-next-create-a-service-of-type-clusterip-by-the-same-name-httpd-the-target-port-for-the-service-should-be-80-try-to-do-this-with-as-few-steps-as-possible-1">Q. Create a pod called httpd using the image httpd:alpine in the default namespace. Next, create a service of type ClusterIP by the same name (httpd). The target port for the service should be 80. Try to do this with as few steps as possible.</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl run httpd --image<span class="o">=</span>httpd:alpine --port<span class="o">=</span><span class="m">80</span> --expose
+</span></span><span class="line"><span class="cl">service/httpd created
+</span></span><span class="line"><span class="cl">pod/httpd created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><h3 id="difference-of-kubectl-create-vs-run">Difference of kubectl <code>create</code> vs <code>run</code></h3>
+<p><code>kubectl</code>은 Kubernetes 클러스터와 상호 작용하는 데 사용되는 커맨드 라인 도구이다. <code>kubectl create</code>와 <code>kubectl run</code>은 모두 Kubernetes 리소스를 사용하는 데 사용되지만, 각각의 목적과 기능이 다르다.</p>
+<h4 id="kubectl-create">Kubectl create</h4>
+<p><code>kubectl create</code> 명령어는 명시적으로 리소스 정의 파일을 기반으로 Kubernetes 리소스를 생성한다. 주로 YAML 또는 JSON 형식의 설정 파일을 사용해 리소스를 생성할 때 사용된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create -f <span class="si">${</span><span class="nv">POD_NAME</span><span class="si">}</span>.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>YAML 또는 JSON 파일을 사용해 리소스를 생성한다.</p>
+</li>
+<li>
+<p>다양한 종류의 Kubernetes 리소스를 생성할 수 있다.(예, Pod, Service, Deployment, ConfigMap 등)</p>
+</li>
+<li>
+<p>리소스를 정의한 파일을 명확하게 요구한다.</p>
+</li>
+</ul>
+<h4 id="kubectl-run">kubectl run</h4>
+<p><code>kubectl run</code> 명령어는 주로 단순한 테스트 목적이나 임시로 Pod를 생성할 때 사용된다. 이 명령어는 Pod를 생성하고, 그 Pod를 기반으로 단순히 애플리케이션을 실행하는 데 사용된다. <code>kubectl run</code> 명령어는 기본적으로 Deployment 리소를 생성하지만, 특정 옵션을 사용해 단순한 Pod도 생성할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run nginx --image<span class="o">=</span>nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>명령어 한 줄로 쉽게 Pod 또는 Deployment를 생성할 수 있다.</p>
+</li>
+<li>
+<p>기본적으로 Deployment 리소스를 생성하며, 필요에 따라 다른 리소스 종류를 지정할 수 있다.</p>
+</li>
+<li>
+<p>설정 파일 없이 명령어 인자로 필요한 옵션을 지정한다.</p>
+</li>
+<li>
+<p>임시 Pod나 간단한 애플리케이션 배포에 유용하다.</p>
+</li>
+</ul>
+</div>
+        </div>
+    </div>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-11&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/b404addcf2d745e0e658cd1f8b9c29ac65e1dec7" target="_blank" title="commit by seilylook(seilylook@naver.com) b404addcf2d745e0e658cd1f8b9c29ac65e1dec7: add: Services in kubernetes">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>b404add</a></span>
+                <span>Updated on 2024-06-14&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/e7cd781fdad9609b546e8ea132a926ef23d6bd94" target="_blank" title="commit by seilylook(seilylook@naver.com) e7cd781fdad9609b546e8ea132a926ef23d6bd94: add: pod command - edit, vi | nano">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>e7cd781</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
