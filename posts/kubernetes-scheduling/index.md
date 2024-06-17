@@ -256,3 +256,175 @@ mosquito   1/1     Running   0          15m   10.244.0.4   controlplane   <none>
 ```
 
 > A. controlplane
+
+## Node Affinity
+
+### Q. How many Labels exist on node node01?
+
+```bash
+controlplane ~ ➜  kubectl describe node node01
+Name:               node01
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node01
+                    kubernetes.io/os=linux
+...
+```
+
+> A. 5
+
+### Q. Apply a label color=blue to node node01
+
+```bash
+controlplane ~ ➜  kubectl label node node01 color=blue
+node/node01 labeled
+
+controlplane ~ ➜  kubectl describe node node01
+Name:               node01
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    color=blue
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node01
+                    kubernetes.io/os=linux
+...
+```
+
+### Q. Which node can the pods for the blue deployment be placed on?
+
+```bash
+controlplane ~ ➜  kubectl get nodes
+NAME           STATUS   ROLES           AGE   VERSION
+controlplane   Ready    control-plane   15m   v1.29.0
+node01         Ready    <none>          15m   v1.29.0
+
+controlplane ~ ➜  kubectl describe node controlplane
+Name:               controlplane
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=controlplane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"ce:19:08:31:7b:c5"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 192.16.90.9
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 17 Jun 2024 09:28:48 +0000
+Taints:             <none>
+...
+
+controlplane ~ ➜  kubectl describe node node01
+Name:               node01
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    color=blue
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node01
+                    kubernetes.io/os=linux
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"32:2f:80:a3:e7:70"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 192.16.90.12
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 17 Jun 2024 09:29:31 +0000
+Taints:             <none>
+...
+```
+
+### Q. Set Node Affinity to the deployment to place the pods on node01 only.
+
+```bash
+controlplane ~ ✖ kubectl edit deployment blue
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: color
+                operator: In
+                values:
+                - blue
+:wq
+
+deployment.apps/blue edited
+```
+
+### Q. Create a new deployment named red with the nginx image and 2 replicas, and ensure it gets placed on the controlplane node only.
+
+
+Use the label key - node-role.kubernetes.io/control-plane - which is already set on the controlplane node.
+
+```bash
+controlplane ~ ✖ vim red-deploy.yaml
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: red
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
+:wq
+
+controlplane ~ ✖ kubectl create -f red-deploy.yaml
+deployment.apps/red created
+```
+
+## Resouce Limits
+
+## DaemonSets
+
+## Static PODs
+
+## Multiple Schedulers

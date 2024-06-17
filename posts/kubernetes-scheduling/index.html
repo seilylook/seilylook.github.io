@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-scheduling/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-17T14:06:34+09:00" />
-<meta property="article:modified_time" content="2024-06-17T16:00:48+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-17T17:58:43+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Scheduling"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  888 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T16:00:48+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  1376 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T17:58:43+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Scheduling</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;888 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1376 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -141,6 +141,19 @@
         <li><a href="#q-which-node-is-the-pod-mosquito-on-now">Q. Which node is the POD mosquito on now?</a></li>
       </ul>
     </li>
+    <li><a href="#node-affinity">Node Affinity</a>
+      <ul>
+        <li><a href="#q-how-many-labels-exist-on-node-node01">Q. How many Labels exist on node node01?</a></li>
+        <li><a href="#q-apply-a-label-colorblue-to-node-node01">Q. Apply a label color=blue to node node01</a></li>
+        <li><a href="#q-which-node-can-the-pods-for-the-blue-deployment-be-placed-on">Q. Which node can the pods for the blue deployment be placed on?</a></li>
+        <li><a href="#q-set-node-affinity-to-the-deployment-to-place-the-pods-on-node01-only">Q. Set Node Affinity to the deployment to place the pods on node01 only.</a></li>
+        <li><a href="#q-create-a-new-deployment-named-red-with-the-nginx-image-and-2-replicas-and-ensure-it-gets-placed-on-the-controlplane-node-only">Q. Create a new deployment named red with the nginx image and 2 replicas, and ensure it gets placed on the controlplane node only.</a></li>
+      </ul>
+    </li>
+    <li><a href="#resouce-limits">Resouce Limits</a></li>
+    <li><a href="#daemonsets">DaemonSets</a></li>
+    <li><a href="#static-pods">Static PODs</a></li>
+    <li><a href="#multiple-schedulers">Multiple Schedulers</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="labels-and-selectors">Labels and Selectors</h2>
@@ -590,12 +603,320 @@
 </div><blockquote>
 <p>A. controlplane</p>
 </blockquote>
+<h2 id="node-affinity">Node Affinity</h2>
+<h3 id="q-how-many-labels-exist-on-node-node01">Q. How many Labels exist on node node01?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe node node01
+</span></span><span class="line"><span class="cl">Name:               node01
+</span></span><span class="line"><span class="cl">Roles:              &lt;none&gt;
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>node01
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 5</p>
+</blockquote>
+<h3 id="q-apply-a-label-colorblue-to-node-node01">Q. Apply a label color=blue to node node01</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl label node node01 <span class="nv">color</span><span class="o">=</span>blue
+</span></span><span class="line"><span class="cl">node/node01 labeled
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe node node01
+</span></span><span class="line"><span class="cl">Name:               node01
+</span></span><span class="line"><span class="cl">Roles:              &lt;none&gt;
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    <span class="nv">color</span><span class="o">=</span>blue
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>node01
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-which-node-can-the-pods-for-the-blue-deployment-be-placed-on">Q. Which node can the pods for the blue deployment be placed on?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get nodes
+</span></span><span class="line"><span class="cl">NAME           STATUS   ROLES           AGE   VERSION
+</span></span><span class="line"><span class="cl">controlplane   Ready    control-plane   15m   v1.29.0
+</span></span><span class="line"><span class="cl">node01         Ready    &lt;none&gt;          15m   v1.29.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe node controlplane
+</span></span><span class="line"><span class="cl">Name:               controlplane
+</span></span><span class="line"><span class="cl">Roles:              control-plane
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>controlplane
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    node-role.kubernetes.io/control-plane<span class="o">=</span>
+</span></span><span class="line"><span class="cl">                    node.kubernetes.io/exclude-from-external-load-balancers<span class="o">=</span>
+</span></span><span class="line"><span class="cl">Annotations:        flannel.alpha.coreos.com/backend-data: <span class="o">{</span><span class="s2">&#34;VNI&#34;</span>:1,<span class="s2">&#34;VtepMAC&#34;</span>:<span class="s2">&#34;ce:19:08:31:7b:c5&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/backend-type: vxlan
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/kube-subnet-manager: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/public-ip: 192.16.90.9
+</span></span><span class="line"><span class="cl">                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+</span></span><span class="line"><span class="cl">                    node.alpha.kubernetes.io/ttl: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">                    volumes.kubernetes.io/controller-managed-attach-detach: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">CreationTimestamp:  Mon, <span class="m">17</span> Jun <span class="m">2024</span> 09:28:48 +0000
+</span></span><span class="line"><span class="cl">Taints:             &lt;none&gt;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe node node01
+</span></span><span class="line"><span class="cl">Name:               node01
+</span></span><span class="line"><span class="cl">Roles:              &lt;none&gt;
+</span></span><span class="line"><span class="cl">Labels:             beta.kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    beta.kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">                    <span class="nv">color</span><span class="o">=</span>blue
+</span></span><span class="line"><span class="cl">                    kubernetes.io/arch<span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl">                    kubernetes.io/hostname<span class="o">=</span>node01
+</span></span><span class="line"><span class="cl">                    kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">Annotations:        flannel.alpha.coreos.com/backend-data: <span class="o">{</span><span class="s2">&#34;VNI&#34;</span>:1,<span class="s2">&#34;VtepMAC&#34;</span>:<span class="s2">&#34;32:2f:80:a3:e7:70&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/backend-type: vxlan
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/kube-subnet-manager: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">                    flannel.alpha.coreos.com/public-ip: 192.16.90.12
+</span></span><span class="line"><span class="cl">                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+</span></span><span class="line"><span class="cl">                    node.alpha.kubernetes.io/ttl: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">                    volumes.kubernetes.io/controller-managed-attach-detach: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">CreationTimestamp:  Mon, <span class="m">17</span> Jun <span class="m">2024</span> 09:29:31 +0000
+</span></span><span class="line"><span class="cl">Taints:             &lt;none&gt;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-set-node-affinity-to-the-deployment-to-place-the-pods-on-node01-only">Q. Set Node Affinity to the deployment to place the pods on node01 only.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl edit deployment blue
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: blue
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      run: nginx
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        run: nginx
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: nginx
+</span></span><span class="line"><span class="cl">        imagePullPolicy: Always
+</span></span><span class="line"><span class="cl">        name: nginx
+</span></span><span class="line"><span class="cl">      affinity:
+</span></span><span class="line"><span class="cl">        nodeAffinity:
+</span></span><span class="line"><span class="cl">          requiredDuringSchedulingIgnoredDuringExecution:
+</span></span><span class="line"><span class="cl">            nodeSelectorTerms:
+</span></span><span class="line"><span class="cl">            - matchExpressions:
+</span></span><span class="line"><span class="cl">              - key: color
+</span></span><span class="line"><span class="cl">                operator: In
+</span></span><span class="line"><span class="cl">                values:
+</span></span><span class="line"><span class="cl">                - blue
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deployment.apps/blue edited
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-create-a-new-deployment-named-red-with-the-nginx-image-and-2-replicas-and-ensure-it-gets-placed-on-the-controlplane-node-only">Q. Create a new deployment named red with the nginx image and 2 replicas, and ensure it gets placed on the controlplane node only.</h3>
+<p>Use the label key - node-role.kubernetes.io/control-plane - which is already set on the controlplane node.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ vim red-deploy.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: Deployment
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: red
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      run: nginx
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        run: nginx
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: nginx
+</span></span><span class="line"><span class="cl">        imagePullPolicy: Always
+</span></span><span class="line"><span class="cl">        name: nginx
+</span></span><span class="line"><span class="cl">      affinity:
+</span></span><span class="line"><span class="cl">        nodeAffinity:
+</span></span><span class="line"><span class="cl">          requiredDuringSchedulingIgnoredDuringExecution:
+</span></span><span class="line"><span class="cl">            nodeSelectorTerms:
+</span></span><span class="line"><span class="cl">            - matchExpressions:
+</span></span><span class="line"><span class="cl">              - key: node-role.kubernetes.io/control-plane
+</span></span><span class="line"><span class="cl">                operator: Exists
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ✖ kubectl create -f red-deploy.yaml
+</span></span><span class="line"><span class="cl">deployment.apps/red created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="resouce-limits">Resouce Limits</h2>
+<h2 id="daemonsets">DaemonSets</h2>
+<h2 id="static-pods">Static PODs</h2>
+<h2 id="multiple-schedulers">Multiple Schedulers</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/bb8ab32aec229d516e91518a7e1e148324aa03cb" target="_blank" title="commit by seilylook(seilylook@naver.com) bb8ab32aec229d516e91518a7e1e148324aa03cb: add: kubernetes scheduling">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bb8ab32</a></span>
+                <span>Updated on 2024-06-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/a042223acd276d4b64b0c76a118e62cbde644683" target="_blank" title="commit by seilylook(seilylook@naver.com) a042223acd276d4b64b0c76a118e62cbde644683: add: kubernetes tains &amp; tolerants">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a042223</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
