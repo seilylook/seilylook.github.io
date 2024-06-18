@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-scheduling/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-17T14:06:34+09:00" />
-<meta property="article:modified_time" content="2024-06-17T17:58:43+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-17T19:23:04+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Scheduling"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  1376 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T17:58:43+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  1785 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T19:23:04+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Scheduling</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1376 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1785 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -150,7 +150,13 @@
         <li><a href="#q-create-a-new-deployment-named-red-with-the-nginx-image-and-2-replicas-and-ensure-it-gets-placed-on-the-controlplane-node-only">Q. Create a new deployment named red with the nginx image and 2 replicas, and ensure it gets placed on the controlplane node only.</a></li>
       </ul>
     </li>
-    <li><a href="#resouce-limits">Resouce Limits</a></li>
+    <li><a href="#resouce-limits">Resouce Limits</a>
+      <ul>
+        <li><a href="#q-a-pod-called-rabbit-is-deployed-identify-the-cpu-requirements-set-on-the-pod">Q. A pod called rabbit is deployed. Identify the CPU requirements set on the Pod</a></li>
+        <li><a href="#q-another-pod-called-elephant-has-been-deployed-in-the-default-namespace-it-fails-to-get-to-a-running-state-inspect-this-pod-and-identify-the-reason-why-it-is-not-running">Q. Another pod called elephant has been deployed in the default namespace. It fails to get to a running state. Inspect this pod and identify the Reason why it is not running.</a></li>
+        <li><a href="#q-the-elephant-pod-runs-a-process-that-consumes-15mi-of-memory-increase-the-limit-of-the-elephant-pod-to-20mi">Q. The elephant pod runs a process that consumes 15Mi of memory. Increase the limit of the elephant pod to 20Mi.</a></li>
+      </ul>
+    </li>
     <li><a href="#daemonsets">DaemonSets</a></li>
     <li><a href="#static-pods">Static PODs</a></li>
     <li><a href="#multiple-schedulers">Multiple Schedulers</a></li>
@@ -908,15 +914,199 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="resouce-limits">Resouce Limits</h2>
-<h2 id="daemonsets">DaemonSets</h2>
+<h3 id="q-a-pod-called-rabbit-is-deployed-identify-the-cpu-requirements-set-on-the-pod">Q. A pod called rabbit is deployed. Identify the CPU requirements set on the Pod</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe pod rabbit
+</span></span><span class="line"><span class="cl">Name:             rabbit
+</span></span><span class="line"><span class="cl">Namespace:        default
+</span></span><span class="line"><span class="cl">Priority:         <span class="m">0</span>
+</span></span><span class="line"><span class="cl">Service Account:  default
+</span></span><span class="line"><span class="cl">Node:             controlplane/192.7.141.9
+</span></span><span class="line"><span class="cl">Start Time:       Tue, <span class="m">18</span> Jun <span class="m">2024</span> 04:35:50 +0000
+</span></span><span class="line"><span class="cl">Labels:           &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:      &lt;none&gt;
+</span></span><span class="line"><span class="cl">Status:           Running
+</span></span><span class="line"><span class="cl">IP:               10.42.0.9
+</span></span><span class="line"><span class="cl">IPs:
+</span></span><span class="line"><span class="cl">  IP:  10.42.0.9
+</span></span><span class="line"><span class="cl">Containers:
+</span></span><span class="line"><span class="cl">  cpu-stress:
+</span></span><span class="line"><span class="cl">    Container ID:  containerd://e5bff6b613cb652462e33290525f74935646bc1d11aa775624513b1f5faa9ffd
+</span></span><span class="line"><span class="cl">    Image:         ubuntu
+</span></span><span class="line"><span class="cl">    Image ID:      docker.io/library/ubuntu@sha256:2e863c44b718727c860746568e1d54afd13b2fa71b160f5cd9058fc436217b30
+</span></span><span class="line"><span class="cl">    Port:          &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:     &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Args:
+</span></span><span class="line"><span class="cl">      sleep
+</span></span><span class="line"><span class="cl">      <span class="m">1000</span>
+</span></span><span class="line"><span class="cl">    State:          Waiting
+</span></span><span class="line"><span class="cl">      Reason:       CrashLoopBackOff
+</span></span><span class="line"><span class="cl">    Last State:     Terminated
+</span></span><span class="line"><span class="cl">      Reason:       StartError
+</span></span><span class="line"><span class="cl">      Message:      failed to create containerd task: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error setting cgroup config <span class="k">for</span> procHooks process: failed to write <span class="s2">&#34;200000&#34;</span>: write /sys/fs/cgroup/cpu,cpuacct/kubepods/burstable/pod0604153b-d337-443e-8f9c-1e571c491b25/e5bff6b613cb652462e33290525f74935646bc1d11aa775624513b1f5faa9ffd/cpu.cfs_quota_us: invalid argument: unknown
+</span></span><span class="line"><span class="cl">      Exit Code:    <span class="m">128</span>
+</span></span><span class="line"><span class="cl">      Started:      Thu, <span class="m">01</span> Jan <span class="m">1970</span> 00:00:00 +0000
+</span></span><span class="line"><span class="cl">      Finished:     Tue, <span class="m">18</span> Jun <span class="m">2024</span> 04:36:09 +0000
+</span></span><span class="line"><span class="cl">    Ready:          False
+</span></span><span class="line"><span class="cl">    Restart Count:  <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    Limits:
+</span></span><span class="line"><span class="cl">      cpu:  <span class="m">2</span>
+</span></span><span class="line"><span class="cl">    Requests:
+</span></span><span class="line"><span class="cl">      cpu:        <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1</p>
+</blockquote>
+<h3 id="q-another-pod-called-elephant-has-been-deployed-in-the-default-namespace-it-fails-to-get-to-a-running-state-inspect-this-pod-and-identify-the-reason-why-it-is-not-running">Q. Another pod called elephant has been deployed in the default namespace. It fails to get to a running state. Inspect this pod and identify the Reason why it is not running.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe pod elephant <span class="p">|</span> grep -A5 State:
+</span></span><span class="line"><span class="cl">    State:          Waiting
+</span></span><span class="line"><span class="cl">      Reason:       CrashLoopBackOff
+</span></span><span class="line"><span class="cl">    Last State:     Terminated
+</span></span><span class="line"><span class="cl">      Reason:       OOMKilled
+</span></span><span class="line"><span class="cl">      Exit Code:    <span class="m">1</span>
+</span></span><span class="line"><span class="cl">      Started:      Tue, <span class="m">18</span> Jun <span class="m">2024</span> 04:40:14 +0000
+</span></span><span class="line"><span class="cl">      Finished:     Tue, <span class="m">18</span> Jun <span class="m">2024</span> 04:40:14 +0000
+</span></span><span class="line"><span class="cl">    Ready:          False
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. OOMKilled (Out of Memory)</p>
+</blockquote>
+<h3 id="q-the-elephant-pod-runs-a-process-that-consumes-15mi-of-memory-increase-the-limit-of-the-elephant-pod-to-20mi">Q. The elephant pod runs a process that consumes 15Mi of memory. Increase the limit of the elephant pod to 20Mi.</h3>
+<p>Delete and recreate the pod if required. Do not modify anything other thant teh required fields.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl get pod elephant -o yaml &gt; elephant.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: elephant
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - args:
+</span></span><span class="line"><span class="cl">    - --vm
+</span></span><span class="line"><span class="cl">    - <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">    - --vm-bytes
+</span></span><span class="line"><span class="cl">    - 15M
+</span></span><span class="line"><span class="cl">    - --vm-hang
+</span></span><span class="line"><span class="cl">    - <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">    command:
+</span></span><span class="line"><span class="cl">    - stress
+</span></span><span class="line"><span class="cl">    image: polinux/stress
+</span></span><span class="line"><span class="cl">    name: mem-stress
+</span></span><span class="line"><span class="cl">    resources:
+</span></span><span class="line"><span class="cl">      limits:
+</span></span><span class="line"><span class="cl">        memory: 20Mi
+</span></span><span class="line"><span class="cl">      requests:
+</span></span><span class="line"><span class="cl">        memory: 5Mi
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl replace -f elephant.yaml --force
+</span></span><span class="line"><span class="cl">pod <span class="s2">&#34;elephant&#34;</span> deleted
+</span></span><span class="line"><span class="cl">pod/elephant replaced
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="daemonsets">DaemonSets</h2>
 <h2 id="static-pods">Static PODs</h2>
 <h2 id="multiple-schedulers">Multiple Schedulers</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/a042223acd276d4b64b0c76a118e62cbde644683" target="_blank" title="commit by seilylook(seilylook@naver.com) a042223acd276d4b64b0c76a118e62cbde644683: add: kubernetes tains &amp; tolerants">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a042223</a></span>
+                <span>Updated on 2024-06-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/57e580f767d1c52946953ff3d601053ae3d5e903" target="_blank" title="commit by seilylook(seilylook@naver.com) 57e580f767d1c52946953ff3d601053ae3d5e903: add: kubernetes node affinity">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>57e580f</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

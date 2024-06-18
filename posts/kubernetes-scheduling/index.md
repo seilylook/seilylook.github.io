@@ -423,6 +423,105 @@ deployment.apps/red created
 
 ## Resouce Limits
 
+### Q. A pod called rabbit is deployed. Identify the CPU requirements set on the Pod
+
+```bash
+controlplane ~ ➜  kubectl describe pod rabbit
+Name:             rabbit
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             controlplane/192.7.141.9
+Start Time:       Tue, 18 Jun 2024 04:35:50 +0000
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.42.0.9
+IPs:
+  IP:  10.42.0.9
+Containers:
+  cpu-stress:
+    Container ID:  containerd://e5bff6b613cb652462e33290525f74935646bc1d11aa775624513b1f5faa9ffd
+    Image:         ubuntu
+    Image ID:      docker.io/library/ubuntu@sha256:2e863c44b718727c860746568e1d54afd13b2fa71b160f5cd9058fc436217b30
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      sleep
+      1000
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       StartError
+      Message:      failed to create containerd task: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error setting cgroup config for procHooks process: failed to write "200000": write /sys/fs/cgroup/cpu,cpuacct/kubepods/burstable/pod0604153b-d337-443e-8f9c-1e571c491b25/e5bff6b613cb652462e33290525f74935646bc1d11aa775624513b1f5faa9ffd/cpu.cfs_quota_us: invalid argument: unknown
+      Exit Code:    128
+      Started:      Thu, 01 Jan 1970 00:00:00 +0000
+      Finished:     Tue, 18 Jun 2024 04:36:09 +0000
+    Ready:          False
+    Restart Count:  2
+    Limits:
+      cpu:  2
+    Requests:
+      cpu:        1
+  ...
+```
+
+> A. 1
+
+### Q. Another pod called elephant has been deployed in the default namespace. It fails to get to a running state. Inspect this pod and identify the Reason why it is not running.
+
+```bash
+controlplane ~ ➜  kubectl describe pod elephant | grep -A5 State:
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       OOMKilled
+      Exit Code:    1
+      Started:      Tue, 18 Jun 2024 04:40:14 +0000
+      Finished:     Tue, 18 Jun 2024 04:40:14 +0000
+    Ready:          False
+```
+
+> A. OOMKilled (Out of Memory)
+
+### Q. The elephant pod runs a process that consumes 15Mi of memory. Increase the limit of the elephant pod to 20Mi.
+
+Delete and recreate the pod if required. Do not modify anything other thant teh required fields.
+
+```bash
+controlplane ~ ✖ kubectl get pod elephant -o yaml > elephant.yaml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: elephant
+  namespace: default
+spec:
+  containers:
+  - args:
+    - --vm
+    - "1"
+    - --vm-bytes
+    - 15M
+    - --vm-hang
+    - "1"
+    command:
+    - stress
+    image: polinux/stress
+    name: mem-stress
+    resources:
+      limits:
+        memory: 20Mi
+      requests:
+        memory: 5Mi
+:wq
+
+controlplane ~ ➜  kubectl replace -f elephant.yaml --force
+pod "elephant" deleted
+pod/elephant replaced
+```
+
 ## DaemonSets
 
 ## Static PODs
