@@ -794,3 +794,36 @@ root@controlplane:~#
 ```
 
 ## Multiple Schedulers
+
+### Q. What is the image used to deploy the kubernetes scheduler? 
+
+Inspect the kubernetes scheduler pod and identify the image
+
+```bash
+controlplane ~ ✖ kubectl describe pod kube-scheduler-controlplane --namespace=kube-system
+Name:                 kube-scheduler-controlplane
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Node:                 controlplane/192.18.245.6
+Start Time:           Tue, 18 Jun 2024 09:36:53 +0000
+Labels:               component=kube-scheduler
+                      tier=control-plane
+Annotations:          kubernetes.io/config.hash: a0ab55e596fb42a62fb1d044490e763d
+                      kubernetes.io/config.mirror: a0ab55e596fb42a62fb1d044490e763d
+                      kubernetes.io/config.seen: 2024-06-18T09:36:52.941631140Z
+                      kubernetes.io/config.source: file
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   192.18.245.6
+IPs:
+  IP:           192.18.245.6
+Controlled By:  Node/controlplane
+Containers:
+  kube-scheduler:
+    Container ID:  containerd://3f21b8e3aefa901f67b51ae3a980575bba390a985a99d7a8290d1e8308d9ebad
+    Image:         registry.k8s.io/kube-scheduler:v1.29.0
+```
+
+> A. registry.k8s.io/kube-scheduler:v1.29.0
+

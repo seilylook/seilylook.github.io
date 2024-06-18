@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-scheduling/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-17T14:06:34+09:00" />
-<meta property="article:modified_time" content="2024-06-18T14:20:46+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-18T16:24:51+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Scheduling"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  2854 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-18T14:20:46+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  2958 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-18T16:24:51+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Scheduling</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2854 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2958 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -174,7 +174,11 @@
         <li><a href="#q-we-just-created-a-new-static-pod-named-static-greenbox-find-it-and-delete-it">Q. We just created a new static pod named static-greenbox. Find it and delete it.</a></li>
       </ul>
     </li>
-    <li><a href="#multiple-schedulers">Multiple Schedulers</a></li>
+    <li><a href="#multiple-schedulers">Multiple Schedulers</a>
+      <ul>
+        <li><a href="#q-what-is-the-image-used-to-deploy-the-kubernetes-scheduler">Q. What is the image used to deploy the kubernetes scheduler?</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="labels-and-selectors">Labels and Selectors</h2>
@@ -1589,12 +1593,69 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="multiple-schedulers">Multiple Schedulers</h2>
+<h3 id="q-what-is-the-image-used-to-deploy-the-kubernetes-scheduler">Q. What is the image used to deploy the kubernetes scheduler?</h3>
+<p>Inspect the kubernetes scheduler pod and identify the image</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl describe pod kube-scheduler-controlplane --namespace<span class="o">=</span>kube-system
+</span></span><span class="line"><span class="cl">Name:                 kube-scheduler-controlplane
+</span></span><span class="line"><span class="cl">Namespace:            kube-system
+</span></span><span class="line"><span class="cl">Priority:             <span class="m">2000001000</span>
+</span></span><span class="line"><span class="cl">Priority Class Name:  system-node-critical
+</span></span><span class="line"><span class="cl">Node:                 controlplane/192.18.245.6
+</span></span><span class="line"><span class="cl">Start Time:           Tue, <span class="m">18</span> Jun <span class="m">2024</span> 09:36:53 +0000
+</span></span><span class="line"><span class="cl">Labels:               <span class="nv">component</span><span class="o">=</span>kube-scheduler
+</span></span><span class="line"><span class="cl">                      <span class="nv">tier</span><span class="o">=</span>control-plane
+</span></span><span class="line"><span class="cl">Annotations:          kubernetes.io/config.hash: a0ab55e596fb42a62fb1d044490e763d
+</span></span><span class="line"><span class="cl">                      kubernetes.io/config.mirror: a0ab55e596fb42a62fb1d044490e763d
+</span></span><span class="line"><span class="cl">                      kubernetes.io/config.seen: 2024-06-18T09:36:52.941631140Z
+</span></span><span class="line"><span class="cl">                      kubernetes.io/config.source: file
+</span></span><span class="line"><span class="cl">Status:               Running
+</span></span><span class="line"><span class="cl">SeccompProfile:       RuntimeDefault
+</span></span><span class="line"><span class="cl">IP:                   192.18.245.6
+</span></span><span class="line"><span class="cl">IPs:
+</span></span><span class="line"><span class="cl">  IP:           192.18.245.6
+</span></span><span class="line"><span class="cl">Controlled By:  Node/controlplane
+</span></span><span class="line"><span class="cl">Containers:
+</span></span><span class="line"><span class="cl">  kube-scheduler:
+</span></span><span class="line"><span class="cl">    Container ID:  containerd://3f21b8e3aefa901f67b51ae3a980575bba390a985a99d7a8290d1e8308d9ebad
+</span></span><span class="line"><span class="cl">    Image:         registry.k8s.io/kube-scheduler:v1.29.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. registry.k8s.io/kube-scheduler:v1.29.0</p>
+</blockquote>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/992b9d8aa5f7fd7defb0eaf4cdc617d2dc1784e7" target="_blank" title="commit by seilylook(seilylook@naver.com) 992b9d8aa5f7fd7defb0eaf4cdc617d2dc1784e7: add: kubernetes daemon set">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>992b9d8</a></span>
+                <span>Updated on 2024-06-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/1e379b5fe357309b5824a595f147526757c83f4d" target="_blank" title="commit by seilylook(seilylook@naver.com) 1e379b5fe357309b5824a595f147526757c83f4d: add: kubernetes static pods">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1e379b5</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
