@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-scheduling/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-17T14:06:34+09:00" />
-<meta property="article:modified_time" content="2024-06-17T19:23:04+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-18T13:52:28+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Scheduling"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  1785 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-17T19:23:04+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  2387 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-18T13:52:28+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Scheduling</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1785 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2387 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -157,7 +157,14 @@
         <li><a href="#q-the-elephant-pod-runs-a-process-that-consumes-15mi-of-memory-increase-the-limit-of-the-elephant-pod-to-20mi">Q. The elephant pod runs a process that consumes 15Mi of memory. Increase the limit of the elephant pod to 20Mi.</a></li>
       </ul>
     </li>
-    <li><a href="#daemonsets">DaemonSets</a></li>
+    <li><a href="#daemonsets">DaemonSets</a>
+      <ul>
+        <li><a href="#q-how-many-daemonsets-are-created-in-the-cluster-in-all-namespaces">Q. How many DaemonSets are created in the cluster in all namespaces?</a></li>
+        <li><a href="#q-on-how-many-nodes-are-the-pods-scheduled-by-the-daemonset-kube-proxy">Q. On how many nodes are the pods scheduled by the DaemonSet Kube-proxy?</a></li>
+        <li><a href="#q-what-is-the-image-used-by-the-pod-deployed-by-the-kube-flannel-ds-daemonset">Q. What is the image used by the POD deployed by the kube-flannel-ds DaemonSet?</a></li>
+        <li><a href="#q-deploy-a-daemonset-for-fluentd-logging">Q. Deploy a DaemonSet for FluentD Logging.</a></li>
+      </ul>
+    </li>
     <li><a href="#static-pods">Static PODs</a></li>
     <li><a href="#multiple-schedulers">Multiple Schedulers</a></li>
   </ul>
@@ -1099,14 +1106,321 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="daemonsets">DaemonSets</h2>
-<h2 id="static-pods">Static PODs</h2>
+<h3 id="q-how-many-daemonsets-are-created-in-the-cluster-in-all-namespaces">Q. How many DaemonSets are created in the cluster in all namespaces?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl get daemonsets --all-namespaces
+</span></span><span class="line"><span class="cl">NAMESPACE      NAME              DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+</span></span><span class="line"><span class="cl">kube-flannel   kube-flannel-ds   <span class="m">1</span>         <span class="m">1</span>         <span class="m">1</span>       <span class="m">1</span>            <span class="m">1</span>           &lt;none&gt;                   3m2s
+</span></span><span class="line"><span class="cl">kube-system    kube-proxy        <span class="m">1</span>         <span class="m">1</span>         <span class="m">1</span>       <span class="m">1</span>            <span class="m">1</span>           kubernetes.io/os<span class="o">=</span>linux   3m4s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 2</p>
+</blockquote>
+<h3 id="q-on-how-many-nodes-are-the-pods-scheduled-by-the-daemonset-kube-proxy">Q. On how many nodes are the pods scheduled by the DaemonSet Kube-proxy?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl describe daemonset kube-proxy --namespace<span class="o">=</span>kube-system
+</span></span><span class="line"><span class="cl">Name:           kube-proxy
+</span></span><span class="line"><span class="cl">Selector:       k8s-app<span class="o">=</span>kube-proxy
+</span></span><span class="line"><span class="cl">Node-Selector:  kubernetes.io/os<span class="o">=</span>linux
+</span></span><span class="line"><span class="cl">Labels:         k8s-app<span class="o">=</span>kube-proxy
+</span></span><span class="line"><span class="cl">Annotations:    deprecated.daemonset.template.generation: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Desired Number of Nodes Scheduled: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Current Number of Nodes Scheduled: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Number of Nodes Scheduled with Up-to-date Pods: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Number of Nodes Scheduled with Available Pods: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Number of Nodes Misscheduled: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">Pods Status:  <span class="m">1</span> Running / <span class="m">0</span> Waiting / <span class="m">0</span> Succeeded / <span class="m">0</span> Failed
+</span></span><span class="line"><span class="cl">Pod Template:
+</span></span><span class="line"><span class="cl">  Labels:           k8s-app<span class="o">=</span>kube-proxy
+</span></span><span class="line"><span class="cl">  Service Account:  kube-proxy
+</span></span><span class="line"><span class="cl">  Containers:
+</span></span><span class="line"><span class="cl">   kube-proxy:
+</span></span><span class="line"><span class="cl">    Image:      registry.k8s.io/kube-proxy:v1.29.0
+</span></span><span class="line"><span class="cl">    Port:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Command:
+</span></span><span class="line"><span class="cl">      /usr/local/bin/kube-proxy
+</span></span><span class="line"><span class="cl">      --config<span class="o">=</span>/var/lib/kube-proxy/config.conf
+</span></span><span class="line"><span class="cl">      --hostname-override<span class="o">=</span><span class="k">$(</span>NODE_NAME<span class="k">)</span>
+</span></span><span class="line"><span class="cl">    Environment:
+</span></span><span class="line"><span class="cl">      NODE_NAME:   <span class="o">(</span>v1:spec.nodeName<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Mounts:
+</span></span><span class="line"><span class="cl">      /lib/modules from lib-modules <span class="o">(</span>ro<span class="o">)</span>
+</span></span><span class="line"><span class="cl">      /run/xtables.lock from xtables-lock <span class="o">(</span>rw<span class="o">)</span>
+</span></span><span class="line"><span class="cl">      /var/lib/kube-proxy from kube-proxy <span class="o">(</span>rw<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  Volumes:
+</span></span><span class="line"><span class="cl">   kube-proxy:
+</span></span><span class="line"><span class="cl">    Type:      ConfigMap <span class="o">(</span>a volume populated by a ConfigMap<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Name:      kube-proxy
+</span></span><span class="line"><span class="cl">    Optional:  <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">   xtables-lock:
+</span></span><span class="line"><span class="cl">    Type:          HostPath <span class="o">(</span>bare host directory volume<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Path:          /run/xtables.lock
+</span></span><span class="line"><span class="cl">    HostPathType:  FileOrCreate
+</span></span><span class="line"><span class="cl">   lib-modules:
+</span></span><span class="line"><span class="cl">    Type:               HostPath <span class="o">(</span>bare host directory volume<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Path:               /lib/modules
+</span></span><span class="line"><span class="cl">    HostPathType:       
+</span></span><span class="line"><span class="cl">  Priority Class Name:  system-node-critical
+</span></span><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason            Age    From                  Message
+</span></span><span class="line"><span class="cl">  ----    ------            ----   ----                  -------
+</span></span><span class="line"><span class="cl">  Normal  SuccessfulCreate  5m42s  daemonset-controller  Created pod: kube-proxy-w6b4f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1</p>
+</blockquote>
+<h3 id="q-what-is-the-image-used-by-the-pod-deployed-by-the-kube-flannel-ds-daemonset">Q. What is the image used by the POD deployed by the kube-flannel-ds DaemonSet?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe daemonset kube-flannel-ds --namespace<span class="o">=</span>kube-flannel
+</span></span><span class="line"><span class="cl">Name:           kube-flannel-ds
+</span></span><span class="line"><span class="cl">Selector:       <span class="nv">app</span><span class="o">=</span>flannel,k8s-app<span class="o">=</span>flannel
+</span></span><span class="line"><span class="cl">Node-Selector:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">Labels:         <span class="nv">app</span><span class="o">=</span>flannel
+</span></span><span class="line"><span class="cl">                k8s-app<span class="o">=</span>flannel
+</span></span><span class="line"><span class="cl">                <span class="nv">tier</span><span class="o">=</span>node
+</span></span><span class="line"><span class="cl">Annotations:    deprecated.daemonset.template.generation: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Desired Number of Nodes Scheduled: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Current Number of Nodes Scheduled: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Number of Nodes Scheduled with Up-to-date Pods: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Number of Nodes Scheduled with Available Pods: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Number of Nodes Misscheduled: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">Pods Status:  <span class="m">1</span> Running / <span class="m">0</span> Waiting / <span class="m">0</span> Succeeded / <span class="m">0</span> Failed
+</span></span><span class="line"><span class="cl">Pod Template:
+</span></span><span class="line"><span class="cl">  Labels:           <span class="nv">app</span><span class="o">=</span>flannel
+</span></span><span class="line"><span class="cl">                    k8s-app<span class="o">=</span>flannel
+</span></span><span class="line"><span class="cl">                    <span class="nv">tier</span><span class="o">=</span>node
+</span></span><span class="line"><span class="cl">  Service Account:  flannel
+</span></span><span class="line"><span class="cl">  Init Containers:
+</span></span><span class="line"><span class="cl">   install-cni-plugin:
+</span></span><span class="line"><span class="cl">    Image:      docker.io/flannel/flannel-cni-plugin:v1.2.0
+</span></span><span class="line"><span class="cl">    Port:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Command:
+</span></span><span class="line"><span class="cl">      cp
+</span></span><span class="line"><span class="cl">    Args:
+</span></span><span class="line"><span class="cl">      -f
+</span></span><span class="line"><span class="cl">      /flannel
+</span></span><span class="line"><span class="cl">      /opt/cni/bin/flannel
+</span></span><span class="line"><span class="cl">    Environment:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Mounts:
+</span></span><span class="line"><span class="cl">      /opt/cni/bin from cni-plugin <span class="o">(</span>rw<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   install-cni:
+</span></span><span class="line"><span class="cl">    Image:      docker.io/flannel/flannel:v0.23.0
+</span></span><span class="line"><span class="cl">    Port:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Command:
+</span></span><span class="line"><span class="cl">      cp
+</span></span><span class="line"><span class="cl">    Args:
+</span></span><span class="line"><span class="cl">      -f
+</span></span><span class="line"><span class="cl">      /etc/kube-flannel/cni-conf.json
+</span></span><span class="line"><span class="cl">      /etc/cni/net.d/10-flannel.conflist
+</span></span><span class="line"><span class="cl">    Environment:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Mounts:
+</span></span><span class="line"><span class="cl">      /etc/cni/net.d from cni <span class="o">(</span>rw<span class="o">)</span>
+</span></span><span class="line"><span class="cl">      /etc/kube-flannel/ from flannel-cfg <span class="o">(</span>rw<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  Containers:
+</span></span><span class="line"><span class="cl">   kube-flannel:
+</span></span><span class="line"><span class="cl">    Image:      docker.io/flannel/flannel:v0.23.0
+</span></span><span class="line"><span class="cl">  ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-deploy-a-daemonset-for-fluentd-logging">Q. Deploy a DaemonSet for FluentD Logging.</h3>
+<p>Name: elasticsearch</p>
+<p>Namespace: kube-system</p>
+<p>Image: registry.k8s.io/fluentd-elasticsearch:1.20</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim fluentd.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: apps/v1
+</span></span><span class="line"><span class="cl">kind: DaemonSet
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    app: elasticsearch
+</span></span><span class="line"><span class="cl">  name: elasticsearch
+</span></span><span class="line"><span class="cl">  namespace: kube-system
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    matchLabels:
+</span></span><span class="line"><span class="cl">      app: elasticsearch
+</span></span><span class="line"><span class="cl">  template:
+</span></span><span class="line"><span class="cl">    metadata:
+</span></span><span class="line"><span class="cl">      labels:
+</span></span><span class="line"><span class="cl">        app: elasticsearch
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: registry.k8s.io/fluentd-elasticsearch:1.20
+</span></span><span class="line"><span class="cl">        name: fluentd-elasticsearch
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl apply -f fluentd.yaml 
+</span></span><span class="line"><span class="cl">daemonset.apps/elasticsearch created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl get daemonsets --all-namespaces
+</span></span><span class="line"><span class="cl">NAMESPACE      NAME              DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+</span></span><span class="line"><span class="cl">kube-flannel   kube-flannel-ds   <span class="m">1</span>         <span class="m">1</span>         <span class="m">1</span>       <span class="m">1</span>            <span class="m">1</span>           &lt;none&gt;                   16m
+</span></span><span class="line"><span class="cl">kube-system    elasticsearch     <span class="m">1</span>         <span class="m">1</span>         <span class="m">1</span>       <span class="m">1</span>            <span class="m">1</span>           &lt;none&gt;                   22s
+</span></span><span class="line"><span class="cl">kube-system    kube-proxy        <span class="m">1</span>         <span class="m">1</span>         <span class="m">1</span>       <span class="m">1</span>            <span class="m">1</span>           kubernetes.io/os<span class="o">=</span>linux   16m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="static-pods">Static PODs</h2>
 <h2 id="multiple-schedulers">Multiple Schedulers</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-17&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/57e580f767d1c52946953ff3d601053ae3d5e903" target="_blank" title="commit by seilylook(seilylook@naver.com) 57e580f767d1c52946953ff3d601053ae3d5e903: add: kubernetes node affinity">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>57e580f</a></span>
+                <span>Updated on 2024-06-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/d5745f2b7c0bba4401c2c9ad755ca0e6f39d9e4d" target="_blank" title="commit by seilylook(seilylook@naver.com) d5745f2b7c0bba4401c2c9ad755ca0e6f39d9e4d: add: kubernetes resource limit">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d5745f2</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
