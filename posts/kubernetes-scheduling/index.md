@@ -689,7 +689,108 @@ kube-system    elasticsearch     1         1         1       1            1     
 kube-system    kube-proxy        1         1         1       1            1           kubernetes.io/os=linux   16m
 ```
 
-
 ## Static PODs
+
+### Q. How many static pods exist in this cluster in all namespace?
+
+```bash
+controlplane ~ ➜  kubectl get pods --all-namespaces
+NAMESPACE      NAME                                   READY   STATUS    RESTARTS       AGE
+kube-flannel   kube-flannel-ds-9q4s2                  1/1     Running   0              2m59s
+kube-flannel   kube-flannel-ds-vqs49                  1/1     Running   0              3m37s
+kube-system    coredns-69f9c977-9h5dc                 1/1     Running   0              3m37s
+kube-system    coredns-69f9c977-w2xxk                 1/1     Running   0              3m37s
+kube-system    etcd-controlplane                      1/1     Running   0              3m48s
+kube-system    kube-apiserver-controlplane            1/1     Running   0              3m48s
+kube-system    kube-controller-manager-controlplane   1/1     Running   0              3m48s
+kube-system    kube-proxy-4f4wv                       1/1     Running   0              2m59s
+kube-system    kube-proxy-9ngvf                       1/1     Running   0              3m37s
+kube-system    kube-scheduler-controlplane            1/1     Running   1 (3m1s ago)   3m52s
+```
+
+-controlplane(Node 이름)으로 끝나는 것들이 Static POD
+
+> A. 4
+
+### Q. What is the path of the directory holding the static pod definition files?
+
+```bash
+controlplane ~ ➜  ps -aux | grep /usr/bin/kubelet
+root        4369  0.0  0.0 4222964 79216 ?       Ssl  06:47   0:14 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
+root       11203  0.0  0.0   6932  2296 pts/1    S+   06:58   0:00 grep --color=auto /usr/bin/kubelet
+```
+
+결과에서 kubelet config file이 사용된 경로가 `/var/lib/kubelet/config.yaml`을 확인할 수 있다.
+
+다음으로 `staticPodPath`를 확인해본다.
+
+```bash
+controlplane ~ ➜  grep -i staticpod /var/lib/kubelet/config.yaml
+staticPodPath: /etc/kubernetes/manifests
+```
+
+### Q. What is the docker image used to deploy the kube-api server as a static pod?
+
+```bash
+controlplane ~ ➜  cat /etc/kubernetes/manifests/kube-apiserver.yaml
+
+...
+    image: registry.k8s.io/kube-apiserver:v1.29.0
+...
+```
+
+### Q. Create a ststiac pod named static-busybox that uses the busybox image and the command sleep 1000
+
+```bash
+controlplane ~ ✖ kubectl run --restart=Never --image=busybox static-busybox --dry-run=client -o yaml --command -- sleep 1000 > /etc/kubernetes/manifests/static-busybox.yaml
+```
+
+### Q. We just created a new static pod named static-greenbox. Find it and delete it.
+
+1. First, let's identify the node in which the pod called **static-greenbox** is created. 
+
+```bash
+root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
+default       static-greenbox-node01                 1/1     Running   0          19s     10.244.1.2   node01       <none>           <none>
+root@controlplane:~#
+```
+
+From the result, we can see the pod is running on node01.
+
+2. SSH to `node01` and identify the path configured for static pods in this node.
+
+`Important`: The path need not be `/etc/kubernetes/manifests`. Make sure to check the path configured in the kubelet configuration file.
+
+```bash
+root@controlplane:~# ssh node01 
+root@node01:~# ps -ef |  grep /usr/bin/kubelet 
+root        4147       1  0 14:05 ?        00:00:00 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
+root        4773    4733  0 14:05 pts/0    00:00:00 grep /usr/bin/kubelet
+
+root@node01:~# grep -i staticpod /var/lib/kubelet/config.yaml
+staticPodPath: /etc/just-to-mess-with-you
+
+root@node01:~#
+```
+
+Here the staticPodPath is `/ect/just-to-mess-with-you`.
+
+3. Navigate to this directory and delete the YAML file.
+
+```bash
+node01 ~ ➜  cd /etc/just-to-mess-with-you
+
+root@node01:/etc/just-to-mess-with-you# ls
+greenbox.yaml
+root@node01:/etc/just-to-mess-with-you# rm -rf greenbox.yaml 
+root@node01:/etc/just-to-mess-with-you#
+```
+
+4. Exit out of node01 using `CTRL + D` or type `exit`. You should return to the `controlplane` node. Check if the `static-greenbox` pad has been deleted.
+
+```bash
+root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
+root@controlplane:~#
+```
 
 ## Multiple Schedulers

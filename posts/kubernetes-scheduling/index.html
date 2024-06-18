@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-scheduling/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-17T14:06:34+09:00" />
-<meta property="article:modified_time" content="2024-06-18T13:52:28+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-18T14:20:46+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Scheduling"/>
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  2387 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-18T13:52:28+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  2854 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-scheduling\/","datePublished": "2024-06-17T14:06:34+09:00","dateModified": "2024-06-18T14:20:46+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Scheduling</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2387 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2854 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -165,7 +165,15 @@
         <li><a href="#q-deploy-a-daemonset-for-fluentd-logging">Q. Deploy a DaemonSet for FluentD Logging.</a></li>
       </ul>
     </li>
-    <li><a href="#static-pods">Static PODs</a></li>
+    <li><a href="#static-pods">Static PODs</a>
+      <ul>
+        <li><a href="#q-how-many-static-pods-exist-in-this-cluster-in-all-namespace">Q. How many static pods exist in this cluster in all namespace?</a></li>
+        <li><a href="#q-what-is-the-path-of-the-directory-holding-the-static-pod-definition-files">Q. What is the path of the directory holding the static pod definition files?</a></li>
+        <li><a href="#q-what-is-the-docker-image-used-to-deploy-the-kube-api-server-as-a-static-pod">Q. What is the docker image used to deploy the kube-api server as a static pod?</a></li>
+        <li><a href="#q-create-a-ststiac-pod-named-static-busybox-that-uses-the-busybox-image-and-the-command-sleep-1000">Q. Create a ststiac pod named static-busybox that uses the busybox image and the command sleep 1000</a></li>
+        <li><a href="#q-we-just-created-a-new-static-pod-named-static-greenbox-find-it-and-delete-it">Q. We just created a new static pod named static-greenbox. Find it and delete it.</a></li>
+      </ul>
+    </li>
     <li><a href="#multiple-schedulers">Multiple Schedulers</a></li>
   </ul>
 </nav></div>
@@ -1414,13 +1422,179 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="static-pods">Static PODs</h2>
-<h2 id="multiple-schedulers">Multiple Schedulers</h2>
+<h3 id="q-how-many-static-pods-exist-in-this-cluster-in-all-namespace">Q. How many static pods exist in this cluster in all namespace?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods --all-namespaces
+</span></span><span class="line"><span class="cl">NAMESPACE      NAME                                   READY   STATUS    RESTARTS       AGE
+</span></span><span class="line"><span class="cl">kube-flannel   kube-flannel-ds-9q4s2                  1/1     Running   <span class="m">0</span>              2m59s
+</span></span><span class="line"><span class="cl">kube-flannel   kube-flannel-ds-vqs49                  1/1     Running   <span class="m">0</span>              3m37s
+</span></span><span class="line"><span class="cl">kube-system    coredns-69f9c977-9h5dc                 1/1     Running   <span class="m">0</span>              3m37s
+</span></span><span class="line"><span class="cl">kube-system    coredns-69f9c977-w2xxk                 1/1     Running   <span class="m">0</span>              3m37s
+</span></span><span class="line"><span class="cl">kube-system    etcd-controlplane                      1/1     Running   <span class="m">0</span>              3m48s
+</span></span><span class="line"><span class="cl">kube-system    kube-apiserver-controlplane            1/1     Running   <span class="m">0</span>              3m48s
+</span></span><span class="line"><span class="cl">kube-system    kube-controller-manager-controlplane   1/1     Running   <span class="m">0</span>              3m48s
+</span></span><span class="line"><span class="cl">kube-system    kube-proxy-4f4wv                       1/1     Running   <span class="m">0</span>              2m59s
+</span></span><span class="line"><span class="cl">kube-system    kube-proxy-9ngvf                       1/1     Running   <span class="m">0</span>              3m37s
+</span></span><span class="line"><span class="cl">kube-system    kube-scheduler-controlplane            1/1     Running   <span class="m">1</span> <span class="o">(</span>3m1s ago<span class="o">)</span>   3m52s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>-controlplane(Node 이름)으로 끝나는 것들이 Static POD</p>
+<blockquote>
+<p>A. 4</p>
+</blockquote>
+<h3 id="q-what-is-the-path-of-the-directory-holding-the-static-pod-definition-files">Q. What is the path of the directory holding the static pod definition files?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  ps -aux <span class="p">|</span> grep /usr/bin/kubelet
+</span></span><span class="line"><span class="cl">root        <span class="m">4369</span>  0.0  0.0 <span class="m">4222964</span> <span class="m">79216</span> ?       Ssl  06:47   0:14 /usr/bin/kubelet --bootstrap-kubeconfig<span class="o">=</span>/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig<span class="o">=</span>/etc/kubernetes/kubelet.conf --config<span class="o">=</span>/var/lib/kubelet/config.yaml --container-runtime-endpoint<span class="o">=</span>unix:///var/run/containerd/containerd.sock --pod-infra-container-image<span class="o">=</span>registry.k8s.io/pause:3.9
+</span></span><span class="line"><span class="cl">root       <span class="m">11203</span>  0.0  0.0   <span class="m">6932</span>  <span class="m">2296</span> pts/1    S+   06:58   0:00 grep --color<span class="o">=</span>auto /usr/bin/kubelet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>결과에서 kubelet config file이 사용된 경로가 <code>/var/lib/kubelet/config.yaml</code>을 확인할 수 있다.</p>
+<p>다음으로 <code>staticPodPath</code>를 확인해본다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  grep -i staticpod /var/lib/kubelet/config.yaml
+</span></span><span class="line"><span class="cl">staticPodPath: /etc/kubernetes/manifests
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-is-the-docker-image-used-to-deploy-the-kube-api-server-as-a-static-pod">Q. What is the docker image used to deploy the kube-api server as a static pod?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  cat /etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">    image: registry.k8s.io/kube-apiserver:v1.29.0
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-create-a-ststiac-pod-named-static-busybox-that-uses-the-busybox-image-and-the-command-sleep-1000">Q. Create a ststiac pod named static-busybox that uses the busybox image and the command sleep 1000</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl run --restart<span class="o">=</span>Never --image<span class="o">=</span>busybox static-busybox --dry-run<span class="o">=</span>client -o yaml --command -- sleep <span class="m">1000</span> &gt; /etc/kubernetes/manifests/static-busybox.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-we-just-created-a-new-static-pod-named-static-greenbox-find-it-and-delete-it">Q. We just created a new static pod named static-greenbox. Find it and delete it.</h3>
+<ol>
+<li>First, let&rsquo;s identify the node in which the pod called <strong>static-greenbox</strong> is created.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl get pods --all-namespaces -o wide  <span class="p">|</span> grep static-greenbox
+</span></span><span class="line"><span class="cl">default       static-greenbox-node01                 1/1     Running   <span class="m">0</span>          19s     10.244.1.2   node01       &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">root@controlplane:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>From the result, we can see the pod is running on node01.</p>
+<ol start="2">
+<li>SSH to <code>node01</code> and identify the path configured for static pods in this node.</li>
+</ol>
+<p><code>Important</code>: The path need not be <code>/etc/kubernetes/manifests</code>. Make sure to check the path configured in the kubelet configuration file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# ssh node01 
+</span></span><span class="line"><span class="cl">root@node01:~# ps -ef <span class="p">|</span>  grep /usr/bin/kubelet 
+</span></span><span class="line"><span class="cl">root        <span class="m">4147</span>       <span class="m">1</span>  <span class="m">0</span> 14:05 ?        00:00:00 /usr/bin/kubelet --bootstrap-kubeconfig<span class="o">=</span>/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig<span class="o">=</span>/etc/kubernetes/kubelet.conf --config<span class="o">=</span>/var/lib/kubelet/config.yaml --container-runtime-endpoint<span class="o">=</span>unix:///var/run/containerd/containerd.sock --pod-infra-container-image<span class="o">=</span>registry.k8s.io/pause:3.9
+</span></span><span class="line"><span class="cl">root        <span class="m">4773</span>    <span class="m">4733</span>  <span class="m">0</span> 14:05 pts/0    00:00:00 grep /usr/bin/kubelet
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@node01:~# grep -i staticpod /var/lib/kubelet/config.yaml
+</span></span><span class="line"><span class="cl">staticPodPath: /etc/just-to-mess-with-you
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@node01:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Here the staticPodPath is <code>/ect/just-to-mess-with-you</code>.</p>
+<ol start="3">
+<li>Navigate to this directory and delete the YAML file.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">node01 ~ ➜  <span class="nb">cd</span> /etc/just-to-mess-with-you
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@node01:/etc/just-to-mess-with-you# ls
+</span></span><span class="line"><span class="cl">greenbox.yaml
+</span></span><span class="line"><span class="cl">root@node01:/etc/just-to-mess-with-you# rm -rf greenbox.yaml 
+</span></span><span class="line"><span class="cl">root@node01:/etc/just-to-mess-with-you#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Exit out of node01 using <code>CTRL + D</code> or type <code>exit</code>. You should return to the <code>controlplane</code> node. Check if the <code>static-greenbox</code> pad has been deleted.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl get pods --all-namespaces -o wide  <span class="p">|</span> grep static-greenbox
+</span></span><span class="line"><span class="cl">root@controlplane:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="multiple-schedulers">Multiple Schedulers</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/d5745f2b7c0bba4401c2c9ad755ca0e6f39d9e4d" target="_blank" title="commit by seilylook(seilylook@naver.com) d5745f2b7c0bba4401c2c9ad755ca0e6f39d9e4d: add: kubernetes resource limit">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d5745f2</a></span>
+                <span>Updated on 2024-06-18&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/992b9d8aa5f7fd7defb0eaf4cdc617d2dc1784e7" target="_blank" title="commit by seilylook(seilylook@naver.com) 992b9d8aa5f7fd7defb0eaf4cdc617d2dc1784e7: add: kubernetes daemon set">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>992b9d8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
