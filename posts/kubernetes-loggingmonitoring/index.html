@@ -10,7 +10,7 @@ Q. Identify the POD that consumes the least CPU(cores) in default namespace." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-loggingmonitoring/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-19T12:41:38+09:00" />
-<meta property="article:modified_time" content="2024-06-19T12:41:38+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-19T13:04:01+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Logging &amp; Monitoring"/>
@@ -28,8 +28,8 @@ Q. Identify the POD that consumes the least CPU(cores) in default namespace."/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-loggingmonitoring\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  123 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-loggingmonitoring\/","datePublished": "2024-06-19T12:41:38+09:00","dateModified": "2024-06-19T12:41:38+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  502 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-loggingmonitoring\/","datePublished": "2024-06-19T12:41:38+09:00","dateModified": "2024-06-19T13:04:01+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -108,8 +108,8 @@ Q. Identify the POD that consumes the least CPU(cores) in default namespace."/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Logging & Monitoring</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-19">2024-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;123 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-19">2024-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;502 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -128,6 +128,12 @@ Q. Identify the POD that consumes the least CPU(cores) in default namespace."/>
       <ul>
         <li><a href="#q-identify-the-pod-that-comsume-the-most-memorybytes-in-default-namespace">Q. Identify the POD that comsume the most Memory(bytes) in default namespace.</a></li>
         <li><a href="#q-identify-the-pod-that-consumes-the-least-cpucores-in-default-namespace">Q. Identify the POD that consumes the least CPU(cores) in default namespace.</a></li>
+      </ul>
+    </li>
+    <li><a href="#managing-application-logs">Managing Application Logs</a>
+      <ul>
+        <li><a href="#q-a-user---user5---has-expressed-concerns-accessing-the-application-identify-the-cause-of-the-issue">Q. A user - USER5 - has expressed concerns accessing the application. Identify the cause of the issue.</a></li>
+        <li><a href="#q-a-user-is-reporting-issues-while-trying-to-purchase-an-item-identify-the-user-and-the-cause-of-the-issue">Q. A user is reporting issues while trying to purchase an item. Identify the user and the cause of the issue.</a></li>
       </ul>
     </li>
   </ul>
@@ -185,11 +191,99 @@ Q. Identify the POD that consumes the least CPU(cores) in default namespace."/>
 </div><blockquote>
 <p>A. lion</p>
 </blockquote>
-</div><div class="post-footer" id="post-footer">
+<h2 id="managing-application-logs">Managing Application Logs</h2>
+<h3 id="q-a-user---user5---has-expressed-concerns-accessing-the-application-identify-the-cause-of-the-issue">Q. A user - USER5 - has expressed concerns accessing the application. Identify the cause of the issue.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME       READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">webapp-1   1/1     Running   <span class="m">0</span>          13s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ✖ kubectl logs webapp-1
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:16:41,715<span class="o">]</span> INFO in event-simulator: USER4 is viewing page2
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:16:42,716<span class="o">]</span> INFO in event-simulator: USER1 logged in
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:16:43,717<span class="o">]</span> INFO in event-simulator: USER1 is viewing page3
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:16:44,719<span class="o">]</span> INFO in event-simulator: USER3 is viewing page3
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:16:45,720<span class="o">]</span> INFO in event-simulator: USER1 is viewing page2
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:16:46,721<span class="o">]</span> WARNING in event-simulator: USER5 Failed to Login as the account is locked due to MANY FAILED ATTEMPTS.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-a-user-is-reporting-issues-while-trying-to-purchase-an-item-identify-the-user-and-the-cause-of-the-issue">Q. A user is reporting issues while trying to purchase an item. Identify the user and the cause of the issue.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get pods
+</span></span><span class="line"><span class="cl">NAME       READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">webapp-1   1/1     Running   <span class="m">0</span>          3m27s
+</span></span><span class="line"><span class="cl">webapp-2   2/2     Running   <span class="m">0</span>          11s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl logs webapp-2
+</span></span><span class="line"><span class="cl">Defaulted container <span class="s2">&#34;simple-webapp&#34;</span> out of: simple-webapp, db
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:19:55,002<span class="o">]</span> INFO in event-simulator: USER2 is viewing page3
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:19:56,003<span class="o">]</span> INFO in event-simulator: USER2 is viewing page1
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:19:57,004<span class="o">]</span> INFO in event-simulator: USER2 is viewing page3
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:19:58,005<span class="o">]</span> INFO in event-simulator: USER3 logged in
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:19:59,007<span class="o">]</span> INFO in event-simulator: USER1 logged in
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:00,008<span class="o">]</span> WARNING in event-simulator: USER5 Failed to Login as the account is locked due to MANY FAILED ATTEMPTS.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:00,008<span class="o">]</span> INFO in event-simulator: USER3 logged in
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:01,010<span class="o">]</span> INFO in event-simulator: USER3 logged in
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:02,010<span class="o">]</span> INFO in event-simulator: USER1 is viewing page1
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:03,012<span class="o">]</span> WARNING in event-simulator: USER30 Order failed as the item is OUT OF STOCK.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:03,012<span class="o">]</span> INFO in event-simulator: USER4 is viewing page3
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:04,013<span class="o">]</span> INFO in event-simulator: USER4 is viewing page2
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:05,014<span class="o">]</span> WARNING in event-simulator: USER5 Failed to Login as the account is locked due to MANY FAILED ATTEMPTS.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:05,015<span class="o">]</span> INFO in event-simulator: USER1 logged in
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:06,016<span class="o">]</span> INFO in event-simulator: USER1 is viewing page2
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:07,016<span class="o">]</span> INFO in event-simulator: USER2 logged out
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:08,017<span class="o">]</span> INFO in event-simulator: USER1 is viewing page2
+</span></span><span class="line"><span class="cl"><span class="o">[</span>2024-06-19 04:20:09,018<span class="o">]</span> INFO in event-simulator: USER1 is viewing page2
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-19</span>
+                <span>Updated on 2024-06-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/da424c4c36b46066b1c00b97c0d11edc642fa3f1" target="_blank" title="commit by seilylook(seilylook@naver.com) da424c4c36b46066b1c00b97c0d11edc642fa3f1: add: kubernetes monitoring cluster components">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>da424c4</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
