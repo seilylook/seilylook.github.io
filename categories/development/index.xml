@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 19 Jun 2024 12:41:38 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 19 Jun 2024 13:23:47 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes Application Lifecycle Management</title>
+    <link>https://seilylook.github.io/posts/kubernetes-application-lifecycle-management/</link>
+    <pubDate>Wed, 19 Jun 2024 13:23:47 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-application-lifecycle-management/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/lifecycle.jpeg" referrerpolicy="no-referrer">
+            </div>Rolloing Updates and Roll Back Q. Let us try that. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v2 Do not delete and re-create the deployment. Only set the new image name for the existing deployment.
+Deployment Name: frontend
+Deployment Image: kodekloud/webapp-color:v2
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 controlplane ~ ➜ kubectl edit deployment frontend apiVersion: apps/v1 kind: Deployment metadata: annotations: deployment.]]></description>
+</item>
+<item>
     <title>Kubernetes Logging &amp; Monitoring</title>
     <link>https://seilylook.github.io/posts/kubernetes-loggingmonitoring/</link>
     <pubDate>Wed, 19 Jun 2024 12:41:38 &#43;0900</pubDate>
