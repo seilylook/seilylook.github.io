@@ -12,7 +12,7 @@ Deployment Image: kodekloud/webapp-color:v2
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-application-lifecycle-management/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-19T13:23:47+09:00" />
-<meta property="article:modified_time" content="2024-06-19T13:23:47+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-19T14:10:51+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Application Lifecycle Management"/>
@@ -32,8 +32,8 @@ Deployment Image: kodekloud/webapp-color:v2
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-application-lifecycle-management\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  294 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-application-lifecycle-management\/","datePublished": "2024-06-19T13:23:47+09:00","dateModified": "2024-06-19T13:23:47+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  998 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-application-lifecycle-management\/","datePublished": "2024-06-19T13:23:47+09:00","dateModified": "2024-06-19T14:10:51+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@ Deployment Image: kodekloud/webapp-color:v2
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Application Lifecycle Management</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-19">2024-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;294 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-19">2024-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;998 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -132,6 +132,17 @@ Deployment Image: kodekloud/webapp-color:v2
       <ul>
         <li><a href="#q-let-us-try-that-upgrade-the-application-by-setting-the-image-on-the-deployment-to-kodekloudwebapp-colorv2">Q. Let us try that. Upgrade the application by setting the image on the deployment to kodekloud/webapp-color:v2</a></li>
         <li><a href="#q-change-the-deployment-strategy-to-recreate">Q. Change the deployment strategy to <code>Recreate</code>.</a></li>
+      </ul>
+    </li>
+    <li><a href="#commands-and-arguments">Commands and Arguments</a>
+      <ul>
+        <li><a href="#q-what-is-the-command-used-to-run-the-pod-ubuntu-sleeper">Q. What is the command used to run the pod <code>ubuntu-sleeper</code>?</a></li>
+        <li><a href="#q-create-a-pod-with-the-ubuntu-image-to-run-a-container-to-sleep-for-5000-seconds-modify-the-file-ubuntu-sleeper-2yaml">Q. Create a pod with the ubuntu image to run a container to sleep for 5000 seconds. Modify the file <code>ubuntu-sleeper-2.yaml</code>.</a></li>
+        <li><a href="#q-inspect-the-file-dockerfile-given-at-rootwebapp-color-directory-what-command-is-run-at-container-startup">Q. Inspect the file <code>Dockerfile</code> given at <code>/root/webapp-color</code> directory. What command is run at container startup?</a></li>
+        <li><a href="#q-inspect-the-file-dockerfile2-given-at-rootwebapp-color-directory-what-command-is-run-at-container-startup">Q. Inspect the file <code>Dockerfile2</code> given at <code>/root/webapp-color</code> directory. What command is run at container startup?</a></li>
+        <li><a href="#q-inspect-the-two-files-under-directory-webapp-color-2-what-command-is-run-at-container-startup">Q. Inspect the two files under directory <code>webapp-color-2</code>. What command is run at container startup?</a></li>
+        <li><a href="#q-inspect-the-two-files-under-directory-webapp-color-3-what-command-is-run-at-container-startup">Q. Inspect the two files under directory webapp-color-3. What command is run at container startup?</a></li>
+        <li><a href="#q-create-a-pod-with-the-given-specifications-by-default-it-displays-a-blue-background-set-the-given-command-line-arguments-to-change-it-to-green">Q. Create a pod with the given specifications. By default it displays a <code>blue</code> background. Set the given command line arguments to change it to <code>green</code>.</a></li>
       </ul>
     </li>
   </ul>
@@ -318,11 +329,447 @@ Deployment Image: kodekloud/webapp-color:v2
 </span></span><span class="line"><span class="cl">deployment.apps/frontend edited
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="commands-and-arguments">Commands and Arguments</h2>
+<p>EX.</p>
+<p>pod-definition.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-sleeper-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-sleeper</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-sleeper</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;sleep2.0&#34;</span><span class="p">]</span><span class="w"> </span><span class="c"># -&gt; ENTRYPOINT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10&#34;</span><span class="p">]</span><span class="w"> </span><span class="c"># -&gt; CMD</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Docker Image</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> ubuntu</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;sleep&#34;</span><span class="p">]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;5&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>ENTRYPOINT</code>와 <code>CMD</code>는 Dockerfile에서 컨테이너가 시작될 때 실행할 명령을 지정하는 데 사용되는 두 가지 중요한 지시어입니다. 이 두 가지는 종종 혼동되기 쉬우므로, 각 지시어의 역할과 차이점을 이해하는 것이 중요합니다.</p>
+<ul>
+<li>
+<p>ENTRYPOINT</p>
+<ul>
+<li>
+<p>ENTRYPOINT는 Docker 컨테이너가 시작될 때 실행되는 명령을 지정합니다.</p>
+</li>
+<li>
+<p>ENTRYPOINT로 설정된 명령은 항상 실행되며, 일반적으로 변경되지 않습니다.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>CMD</p>
+<ul>
+<li>
+<p>CMD는 Command에 전달되는 default parameter 입니다.</p>
+</li>
+<li>
+<p>CMD는 컨테이너가 시작될 때 실행할 기본 명령을 지정합니다.</p>
+</li>
+<li>
+<p>CMD는 ENTRYPOINT가 설정되지 않았을 때 실행되며, ENTRYPOINT와 함께 사용되면 ENTRYPOINT에 전달할 기본 인수를
+제공할 수도 있습니다.</p>
+</li>
+<li>
+<p>CMD는 ENTRYPOINT와 달리, 컨테이너를 실행할 때 명령을 재정의할 수 있습니다.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+    </div>
+<h3 id="q-what-is-the-command-used-to-run-the-pod-ubuntu-sleeper">Q. What is the command used to run the pod <code>ubuntu-sleeper</code>?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl describe pod ubuntu-sleeper
+</span></span><span class="line"><span class="cl">Name:             ubuntu-sleeper
+</span></span><span class="line"><span class="cl">Namespace:        default
+</span></span><span class="line"><span class="cl">Priority:         <span class="m">0</span>
+</span></span><span class="line"><span class="cl">Service Account:  default
+</span></span><span class="line"><span class="cl">Node:             controlplane/192.9.202.3
+</span></span><span class="line"><span class="cl">Start Time:       Wed, <span class="m">19</span> Jun <span class="m">2024</span> 05:59:09 +0000
+</span></span><span class="line"><span class="cl">Labels:           &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:      &lt;none&gt;
+</span></span><span class="line"><span class="cl">Status:           Running
+</span></span><span class="line"><span class="cl">IP:               10.42.0.9
+</span></span><span class="line"><span class="cl">IPs:
+</span></span><span class="line"><span class="cl">  IP:  10.42.0.9
+</span></span><span class="line"><span class="cl">Containers:
+</span></span><span class="line"><span class="cl">  ubuntu:
+</span></span><span class="line"><span class="cl">    Container ID:  containerd://31ffda30d5faa144528105f8c94028eafc7df17943b2eb901303e9593a5783a0
+</span></span><span class="line"><span class="cl">    Image:         ubuntu
+</span></span><span class="line"><span class="cl">    Image ID:      docker.io/library/ubuntu@sha256:2e863c44b718727c860746568e1d54afd13b2fa71b160f5cd9058fc436217b30
+</span></span><span class="line"><span class="cl">    Port:          &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:     &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Command:
+</span></span><span class="line"><span class="cl">      sleep
+</span></span><span class="line"><span class="cl">      <span class="m">4800</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. sleep 4800</p>
+</blockquote>
+<h3 id="q-create-a-pod-with-the-ubuntu-image-to-run-a-container-to-sleep-for-5000-seconds-modify-the-file-ubuntu-sleeper-2yaml">Q. Create a pod with the ubuntu image to run a container to sleep for 5000 seconds. Modify the file <code>ubuntu-sleeper-2.yaml</code>.</h3>
+<p>Pod Name: ubuntu-sleeper-2</p>
+<p>Command: sleep 5000</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim ubuntu-sleeper-2.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1 
+</span></span><span class="line"><span class="cl">kind: Pod 
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: ubuntu-sleeper-2 
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: ubuntu
+</span></span><span class="line"><span class="cl">    image: ubuntu
+</span></span><span class="line"><span class="cl">    command:
+</span></span><span class="line"><span class="cl">      - <span class="s2">&#34;sleep&#34;</span>
+</span></span><span class="line"><span class="cl">      - <span class="s2">&#34;5000&#34;</span>
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ✖ kubectl create -f ubuntu-sleeper-2.yaml 
+</span></span><span class="line"><span class="cl">pod/ubuntu-sleeper-2 created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-inspect-the-file-dockerfile-given-at-rootwebapp-color-directory-what-command-is-run-at-container-startup">Q. Inspect the file <code>Dockerfile</code> given at <code>/root/webapp-color</code> directory. What command is run at container startup?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~/webapp-color ➜  cat Dockerfile
+</span></span><span class="line"><span class="cl">FROM python:3.6-alpine
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN pip install flask
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY . /opt/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">EXPOSE <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /opt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;python&#34;</span>, <span class="s2">&#34;app.py&#34;</span><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. python app.py</p>
+</blockquote>
+<h3 id="q-inspect-the-file-dockerfile2-given-at-rootwebapp-color-directory-what-command-is-run-at-container-startup">Q. Inspect the file <code>Dockerfile2</code> given at <code>/root/webapp-color</code> directory. What command is run at container startup?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~/webapp-color ➜  cat Dockerfile2
+</span></span><span class="line"><span class="cl">FROM python:3.6-alpine
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN pip install flask
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY . /opt/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">EXPOSE <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /opt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;python&#34;</span>, <span class="s2">&#34;app.py&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMD <span class="o">[</span><span class="s2">&#34;--color&#34;</span>, <span class="s2">&#34;red&#34;</span><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. python app.py &ndash;color red</p>
+</blockquote>
+<h3 id="q-inspect-the-two-files-under-directory-webapp-color-2-what-command-is-run-at-container-startup">Q. Inspect the two files under directory <code>webapp-color-2</code>. What command is run at container startup?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~/webapp-color-2 ➜  cat Dockerfile
+</span></span><span class="line"><span class="cl">FROM python:3.6-alpine
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN pip install flask
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY . /opt/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">EXPOSE <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /opt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;python&#34;</span>, <span class="s2">&#34;app.py&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMD <span class="o">[</span><span class="s2">&#34;--color&#34;</span>, <span class="s2">&#34;red&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~/webapp-color-2 ➜  cat webapp-color-pod.yaml 
+</span></span><span class="line"><span class="cl">apiVersion: v1 
+</span></span><span class="line"><span class="cl">kind: Pod 
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: webapp-green
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">      name: webapp-green 
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: simple-webapp
+</span></span><span class="line"><span class="cl">    image: kodekloud/webapp-color
+</span></span><span class="line"><span class="cl">    command: <span class="o">[</span><span class="s2">&#34;--color&#34;</span>,<span class="s2">&#34;green&#34;</span><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. &ndash;color green</p>
+</blockquote>
+<h3 id="q-inspect-the-two-files-under-directory-webapp-color-3-what-command-is-run-at-container-startup">Q. Inspect the two files under directory webapp-color-3. What command is run at container startup?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~/webapp-color-3 ➜  cat Dockerfile
+</span></span><span class="line"><span class="cl">FROM python:3.6-alpine
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN pip install flask
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY . /opt/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">EXPOSE <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /opt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;python&#34;</span>, <span class="s2">&#34;app.py&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMD <span class="o">[</span><span class="s2">&#34;--color&#34;</span>, <span class="s2">&#34;red&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~/webapp-color-3 ➜  cat webapp-color-pod-2.yaml 
+</span></span><span class="line"><span class="cl">apiVersion: v1 
+</span></span><span class="line"><span class="cl">kind: Pod 
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: webapp-green
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">      name: webapp-green 
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: simple-webapp
+</span></span><span class="line"><span class="cl">    image: kodekloud/webapp-color
+</span></span><span class="line"><span class="cl">    command: <span class="o">[</span><span class="s2">&#34;python&#34;</span>, <span class="s2">&#34;app.py&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    args: <span class="o">[</span><span class="s2">&#34;--color&#34;</span>, <span class="s2">&#34;pink&#34;</span><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. python app.py &ndash;color pink</p>
+</blockquote>
+<h3 id="q-create-a-pod-with-the-given-specifications-by-default-it-displays-a-blue-background-set-the-given-command-line-arguments-to-change-it-to-green">Q. Create a pod with the given specifications. By default it displays a <code>blue</code> background. Set the given command line arguments to change it to <code>green</code>.</h3>
+<p>Pod Name: webapp-green</p>
+<p>Image: kodekloud/webapp-color</p>
+<p>Command line arguments: &ndash;color=green</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim webapp-green-pod.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1 
+</span></span><span class="line"><span class="cl">kind: Pod 
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: webapp-green
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">      name: webapp-green 
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: simple-webapp
+</span></span><span class="line"><span class="cl">    image: kodekloud/webapp-color
+</span></span><span class="line"><span class="cl">    args: <span class="o">[</span><span class="s2">&#34;--color&#34;</span>, <span class="s2">&#34;green&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">:wq
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f webapp-green-pod.yaml 
+</span></span><span class="line"><span class="cl">pod/webapp-green created
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-19</span>
+                <span>Updated on 2024-06-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/5fc1d079690a8767e2394bce531d9389a5e1574a" target="_blank" title="commit by seilylook(seilylook@naver.com) 5fc1d079690a8767e2394bce531d9389a5e1574a: add: kubernetes application lifecycle management &amp; rolling update and roll back">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5fc1d07</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
