@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 17 Jun 2024 14:06:34 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 19 Jun 2024 12:41:38 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes Logging &amp; Monitoring</title>
+    <link>https://seilylook.github.io/posts/kubernetes-loggingmonitoring/</link>
+    <pubDate>Wed, 19 Jun 2024 12:41:38 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-loggingmonitoring/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/monitoring.jpeg" referrerpolicy="no-referrer">
+            </div>Monitoring Cluster Components Q. Identify the POD that comsume the most Memory(bytes) in default namespace. 1 2 3 4 5 6 7 8 controlplane kubernetes-metrics-server on  master ➜ kubectl top pod NAME CPU(cores) MEMORY(bytes) elephant 14m 32Mi lion 1m 18Mi rabbit 97m 252Mi controlplane kubernetes-metrics-server on  master ➜ kubectl top pod --sort-by=&#39;memory&#39; --no-headers | head -1 rabbit 99m 232Mi A. rabbit
+Q. Identify the POD that consumes the least CPU(cores) in default namespace.]]></description>
+</item>
+<item>
     <title>Kubernetes Scheduling</title>
     <link>https://seilylook.github.io/posts/kubernetes-scheduling/</link>
     <pubDate>Mon, 17 Jun 2024 14:06:34 &#43;0900</pubDate>
