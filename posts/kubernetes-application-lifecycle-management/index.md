@@ -349,3 +349,271 @@ spec:
 controlplane ~ ➜  kubectl create -f webapp-green-pod.yaml 
 pod/webapp-green created
 ```
+
+## ENV Variables - ConfigMap
+
+### Q. Update the environment variable on the POD to display a `green` background.
+
+Pod Name: webapp-color
+
+Label Name: webapp-color
+
+Env: APP_COLOR=green
+
+```bash
+controlplane ~ ➜  vim webapp-color-pod.yaml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR
+      value: green
+    image: kodekloud/webapp-color
+    name: webapp-color
+
+controlplane ~ ➜  kubectl create -f webapp-color-pod.yaml 
+pod/webapp-color created
+```
+
+### Q. How many `ConfigMaps` exists in the `default` namespace?
+
+```bash
+controlplane ~ ➜  kubectl get configmaps
+NAME               DATA   AGE
+kube-root-ca.crt   1      19m
+db-config          3      14s
+```
+
+### Q. Create a new ConfigMap for the `webapp-color` POD.
+
+ConfigMap Name: webapp-config-map
+
+Data: APP_COLOR=darkblue
+
+Data: APP_OTHER=disregard
+
+```bash
+controlplane ~ ➜  kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue --from-literal=APP_OTHER=disregard
+configmap/webapp-config-map created
+```
+
+### Q. Update the cnvironment variable on the POD to use only the `APP_COLOR` key from the newly created ConfigMap.
+
+```bash
+controlplane ~ ➜  vim webapp-color-pod.yaml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: webapp-color
+  name: webapp-color
+  namespace: default
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR
+      valueFrom:
+       configMapKeyRef:
+         name: webapp-config-map
+         key: APP_COLOR
+    image: kodekloud/webapp-color
+    name: webapp-color
+
+controlplane ~ ➜  kubectl create -f webapp-color-pod.yaml 
+pod/webapp-color created
+```
+
+## Secrets
+
+### Q. The reason that the application is failed is because we have no created the secrets yet. Create a new secret named `db-secret` wit hthe data given below.
+
+Secret Name: db-secret
+
+Secret 1: DB_Host=sql01
+
+Secret 2: DB_User=root
+
+Secret 3: DB_Password=password123
+
+```bash
+controlplane ~ ➜  kubectl create secret generic db-secret --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
+secret/db-secret created
+```
+
+### Q. Configure `webapp-pod` to load environment variables from the newly created secret.
+
+Pod name: webapp-pod
+
+Image name: kodekloud/simple-webapp-mysql
+
+Env From: Secret=db-secret
+
+```bash
+controlplane ~ ➜  vim webapp-pod.yaml
+
+---
+apiVersion: v1 
+kind: Pod 
+metadata:
+  labels:
+    name: webapp-pod
+  name: webapp-pod
+  namespace: default 
+spec:
+  containers:
+  - image: kodekloud/simple-webapp-mysql
+    imagePullPolicy: Always
+    name: webapp
+    envFrom:
+    - secretRef:
+        name: db-secret
+
+controlplane ~ ➜  kubectl create -f webapp-pod.yaml 
+pod/webapp-pod created
+```
+
+## Multi Container PODs
+
+### Q. Create a multi-container pod with 2 containers.
+
+If the pod goes into the `crashloopbackoff` then add the command `sleep 1000` in the `lemon` container.
+
+Name: yellow
+
+Container 1 Name: lemon
+
+Container 1 Image: busybox
+
+Container 2 Name: gold
+
+Container 2 Image: redis
+
+```bash
+controlplane ~ ➜  vim yellow-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: yellow
+spec:
+  containers:
+  - name: lemon
+    image: busybox
+    command:
+      - sleep
+      - "1000"
+
+  - name: gold
+    image: redis
+
+controlplane ~ ➜  k create -f yellow-pod.yaml 
+pod/yellow created
+```
+
+### Q. The application outputs logs to the file `/log/app.log`. View the logs and try to identify the user having issues with Login.
+
+```bash
+controlplane ~ ➜  kubectl -n elastic-stack exec -it app -- cat /log/app.log
+```
+
+### Q. Edit the pod in the `elastic-stack` namespace to add a sidecar container to send logs to Elastic Search. Mount the log volume to the sidecar container.
+
+Only add a new container. Do not modify anything else. Use the spec provided below.
+
+Name: app
+
+Container Name: sidecar
+
+Container Image: kodekloud/filebeat-configured
+
+Volume Mount: log-volume
+
+Mount Path: /var/log/event-simulator/
+
+Existing Container Name: app
+
+Existing Container Image: kodekloud/event-simulator
+
+```bash
+controlplane ~/elastic-search ✖ k edit pod app -n elastic-stack
+error: pods "app" is invalid
+A copy of your changes has been stored to "/tmp/kubectl-edit-1753133961.yaml"
+error: Edit cancelled, no valid changes were saved.
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+  namespace: elastic-stack
+  labels:
+    name: app
+spec:
+  containers:
+  - name: app
+    image: kodekloud/event-simulator
+    volumeMounts:
+    - mountPath: /log
+      name: log-volume
+
+  - name: sidecar
+    image: kodekloud/filebeat-configured
+    volumeMounts:
+    - mountPath: /var/log/event-simulator/
+      name: log-volume
+
+  volumes:
+  - name: log-volume
+    hostPath:
+      # directory location on host
+      path: /var/log/webapp
+      # this field is optional
+      type: DirectoryOrCreate
+
+controlplane ~/elastic-search ✖ k replace --force -f /tmp/kubectl-edit-1753133961.yaml
+pod "app" deleted
+pod/app replaced
+```
+
+## Init Containers
+
+### Q. Update the pod red to use an initContainer that uses the busybox image and sleeps for 20 seconds
+
+Delete and re-create the pod if necessary. But make sure no other configurations change.
+
+Pod: red
+
+initContainer Configured Correctly
+
+```bash
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: red
+  namespace: default
+spec:
+  containers:
+  - command:
+    - sh
+    - -c
+    - echo The app is running! && sleep 3600
+    image: busybox:1.28
+    name: red-container
+  initContainers:
+  - image: busybox
+    name: red-initcontainer
+    command: 
+      - "sleep"
+      - "20"
+```

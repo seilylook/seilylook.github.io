@@ -12,7 +12,7 @@ Deployment Image: kodekloud/webapp-color:v2
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-application-lifecycle-management/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-19T13:23:47+09:00" />
-<meta property="article:modified_time" content="2024-06-19T14:10:51+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-06-19T15:32:59+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Application Lifecycle Management"/>
@@ -32,8 +32,8 @@ Deployment Image: kodekloud/webapp-color:v2
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-application-lifecycle-management\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  998 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-application-lifecycle-management\/","datePublished": "2024-06-19T13:23:47+09:00","dateModified": "2024-06-19T14:10:51+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  1808 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-application-lifecycle-management\/","datePublished": "2024-06-19T13:23:47+09:00","dateModified": "2024-06-19T15:32:59+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@ Deployment Image: kodekloud/webapp-color:v2
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Application Lifecycle Management</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-19">2024-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;998 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-19">2024-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1808 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -143,6 +143,32 @@ Deployment Image: kodekloud/webapp-color:v2
         <li><a href="#q-inspect-the-two-files-under-directory-webapp-color-2-what-command-is-run-at-container-startup">Q. Inspect the two files under directory <code>webapp-color-2</code>. What command is run at container startup?</a></li>
         <li><a href="#q-inspect-the-two-files-under-directory-webapp-color-3-what-command-is-run-at-container-startup">Q. Inspect the two files under directory webapp-color-3. What command is run at container startup?</a></li>
         <li><a href="#q-create-a-pod-with-the-given-specifications-by-default-it-displays-a-blue-background-set-the-given-command-line-arguments-to-change-it-to-green">Q. Create a pod with the given specifications. By default it displays a <code>blue</code> background. Set the given command line arguments to change it to <code>green</code>.</a></li>
+      </ul>
+    </li>
+    <li><a href="#env-variables---configmap">ENV Variables - ConfigMap</a>
+      <ul>
+        <li><a href="#q-update-the-environment-variable-on-the-pod-to-display-a-green-background">Q. Update the environment variable on the POD to display a <code>green</code> background.</a></li>
+        <li><a href="#q-how-many-configmaps-exists-in-the-default-namespace">Q. How many <code>ConfigMaps</code> exists in the <code>default</code> namespace?</a></li>
+        <li><a href="#q-create-a-new-configmap-for-the-webapp-color-pod">Q. Create a new ConfigMap for the <code>webapp-color</code> POD.</a></li>
+        <li><a href="#q-update-the-cnvironment-variable-on-the-pod-to-use-only-the-app_color-key-from-the-newly-created-configmap">Q. Update the cnvironment variable on the POD to use only the <code>APP_COLOR</code> key from the newly created ConfigMap.</a></li>
+      </ul>
+    </li>
+    <li><a href="#secrets">Secrets</a>
+      <ul>
+        <li><a href="#q-the-reason-that-the-application-is-failed-is-because-we-have-no-created-the-secrets-yet-create-a-new-secret-named-db-secret-wit-hthe-data-given-below">Q. The reason that the application is failed is because we have no created the secrets yet. Create a new secret named <code>db-secret</code> wit hthe data given below.</a></li>
+        <li><a href="#q-configure-webapp-pod-to-load-environment-variables-from-the-newly-created-secret">Q. Configure <code>webapp-pod</code> to load environment variables from the newly created secret.</a></li>
+      </ul>
+    </li>
+    <li><a href="#multi-container-pods">Multi Container PODs</a>
+      <ul>
+        <li><a href="#q-create-a-multi-container-pod-with-2-containers">Q. Create a multi-container pod with 2 containers.</a></li>
+        <li><a href="#q-the-application-outputs-logs-to-the-file-logapplog-view-the-logs-and-try-to-identify-the-user-having-issues-with-login">Q. The application outputs logs to the file <code>/log/app.log</code>. View the logs and try to identify the user having issues with Login.</a></li>
+        <li><a href="#q-edit-the-pod-in-the-elastic-stack-namespace-to-add-a-sidecar-container-to-send-logs-to-elastic-search-mount-the-log-volume-to-the-sidecar-container">Q. Edit the pod in the <code>elastic-stack</code> namespace to add a sidecar container to send logs to Elastic Search. Mount the log volume to the sidecar container.</a></li>
+      </ul>
+    </li>
+    <li><a href="#init-containers">Init Containers</a>
+      <ul>
+        <li><a href="#q-update-the-pod-red-to-use-an-initcontainer-that-uses-the-busybox-image-and-sleeps-for-20-seconds">Q. Update the pod red to use an initContainer that uses the busybox image and sleeps for 20 seconds</a></li>
       </ul>
     </li>
   </ul>
@@ -764,12 +790,416 @@ Deployment Image: kodekloud/webapp-color:v2
 </span></span><span class="line"><span class="cl">pod/webapp-green created
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="env-variables---configmap">ENV Variables - ConfigMap</h2>
+<h3 id="q-update-the-environment-variable-on-the-pod-to-display-a-green-background">Q. Update the environment variable on the POD to display a <code>green</code> background.</h3>
+<p>Pod Name: webapp-color</p>
+<p>Label Name: webapp-color</p>
+<p>Env: APP_COLOR=green</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim webapp-color-pod.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    name: webapp-color
+</span></span><span class="line"><span class="cl">  name: webapp-color
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - env:
+</span></span><span class="line"><span class="cl">    - name: APP_COLOR
+</span></span><span class="line"><span class="cl">      value: green
+</span></span><span class="line"><span class="cl">    image: kodekloud/webapp-color
+</span></span><span class="line"><span class="cl">    name: webapp-color
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f webapp-color-pod.yaml 
+</span></span><span class="line"><span class="cl">pod/webapp-color created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-how-many-configmaps-exists-in-the-default-namespace">Q. How many <code>ConfigMaps</code> exists in the <code>default</code> namespace?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl get configmaps
+</span></span><span class="line"><span class="cl">NAME               DATA   AGE
+</span></span><span class="line"><span class="cl">kube-root-ca.crt   <span class="m">1</span>      19m
+</span></span><span class="line"><span class="cl">db-config          <span class="m">3</span>      14s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-create-a-new-configmap-for-the-webapp-color-pod">Q. Create a new ConfigMap for the <code>webapp-color</code> POD.</h3>
+<p>ConfigMap Name: webapp-config-map</p>
+<p>Data: APP_COLOR=darkblue</p>
+<p>Data: APP_OTHER=disregard</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl create configmap webapp-config-map --from-literal<span class="o">=</span><span class="nv">APP_COLOR</span><span class="o">=</span>darkblue --from-literal<span class="o">=</span><span class="nv">APP_OTHER</span><span class="o">=</span>disregard
+</span></span><span class="line"><span class="cl">configmap/webapp-config-map created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-update-the-cnvironment-variable-on-the-pod-to-use-only-the-app_color-key-from-the-newly-created-configmap">Q. Update the cnvironment variable on the POD to use only the <code>APP_COLOR</code> key from the newly created ConfigMap.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim webapp-color-pod.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    name: webapp-color
+</span></span><span class="line"><span class="cl">  name: webapp-color
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - env:
+</span></span><span class="line"><span class="cl">    - name: APP_COLOR
+</span></span><span class="line"><span class="cl">      valueFrom:
+</span></span><span class="line"><span class="cl">       configMapKeyRef:
+</span></span><span class="line"><span class="cl">         name: webapp-config-map
+</span></span><span class="line"><span class="cl">         key: APP_COLOR
+</span></span><span class="line"><span class="cl">    image: kodekloud/webapp-color
+</span></span><span class="line"><span class="cl">    name: webapp-color
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f webapp-color-pod.yaml 
+</span></span><span class="line"><span class="cl">pod/webapp-color created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="secrets">Secrets</h2>
+<h3 id="q-the-reason-that-the-application-is-failed-is-because-we-have-no-created-the-secrets-yet-create-a-new-secret-named-db-secret-wit-hthe-data-given-below">Q. The reason that the application is failed is because we have no created the secrets yet. Create a new secret named <code>db-secret</code> wit hthe data given below.</h3>
+<p>Secret Name: db-secret</p>
+<p>Secret 1: DB_Host=sql01</p>
+<p>Secret 2: DB_User=root</p>
+<p>Secret 3: DB_Password=password123</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl create secret generic db-secret --from-literal<span class="o">=</span><span class="nv">DB_Host</span><span class="o">=</span>sql01 --from-literal<span class="o">=</span><span class="nv">DB_User</span><span class="o">=</span>root --from-literal<span class="o">=</span><span class="nv">DB_Password</span><span class="o">=</span>password123
+</span></span><span class="line"><span class="cl">secret/db-secret created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-configure-webapp-pod-to-load-environment-variables-from-the-newly-created-secret">Q. Configure <code>webapp-pod</code> to load environment variables from the newly created secret.</h3>
+<p>Pod name: webapp-pod</p>
+<p>Image name: kodekloud/simple-webapp-mysql</p>
+<p>Env From: Secret=db-secret</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim webapp-pod.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1 
+</span></span><span class="line"><span class="cl">kind: Pod 
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    name: webapp-pod
+</span></span><span class="line"><span class="cl">  name: webapp-pod
+</span></span><span class="line"><span class="cl">  namespace: default 
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - image: kodekloud/simple-webapp-mysql
+</span></span><span class="line"><span class="cl">    imagePullPolicy: Always
+</span></span><span class="line"><span class="cl">    name: webapp
+</span></span><span class="line"><span class="cl">    envFrom:
+</span></span><span class="line"><span class="cl">    - secretRef:
+</span></span><span class="line"><span class="cl">        name: db-secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  kubectl create -f webapp-pod.yaml 
+</span></span><span class="line"><span class="cl">pod/webapp-pod created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="multi-container-pods">Multi Container PODs</h2>
+<h3 id="q-create-a-multi-container-pod-with-2-containers">Q. Create a multi-container pod with 2 containers.</h3>
+<p>If the pod goes into the <code>crashloopbackoff</code> then add the command <code>sleep 1000</code> in the <code>lemon</code> container.</p>
+<p>Name: yellow</p>
+<p>Container 1 Name: lemon</p>
+<p>Container 1 Image: busybox</p>
+<p>Container 2 Name: gold</p>
+<p>Container 2 Image: redis</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim yellow-pod.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: yellow
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: lemon
+</span></span><span class="line"><span class="cl">    image: busybox
+</span></span><span class="line"><span class="cl">    command:
+</span></span><span class="line"><span class="cl">      - sleep
+</span></span><span class="line"><span class="cl">      - <span class="s2">&#34;1000&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - name: gold
+</span></span><span class="line"><span class="cl">    image: redis
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  k create -f yellow-pod.yaml 
+</span></span><span class="line"><span class="cl">pod/yellow created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-the-application-outputs-logs-to-the-file-logapplog-view-the-logs-and-try-to-identify-the-user-having-issues-with-login">Q. The application outputs logs to the file <code>/log/app.log</code>. View the logs and try to identify the user having issues with Login.</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubectl -n elastic-stack <span class="nb">exec</span> -it app -- cat /log/app.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-edit-the-pod-in-the-elastic-stack-namespace-to-add-a-sidecar-container-to-send-logs-to-elastic-search-mount-the-log-volume-to-the-sidecar-container">Q. Edit the pod in the <code>elastic-stack</code> namespace to add a sidecar container to send logs to Elastic Search. Mount the log volume to the sidecar container.</h3>
+<p>Only add a new container. Do not modify anything else. Use the spec provided below.</p>
+<p>Name: app</p>
+<p>Container Name: sidecar</p>
+<p>Container Image: kodekloud/filebeat-configured</p>
+<p>Volume Mount: log-volume</p>
+<p>Mount Path: /var/log/event-simulator/</p>
+<p>Existing Container Name: app</p>
+<p>Existing Container Image: kodekloud/event-simulator</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~/elastic-search ✖ k edit pod app -n elastic-stack
+</span></span><span class="line"><span class="cl">error: pods <span class="s2">&#34;app&#34;</span> is invalid
+</span></span><span class="line"><span class="cl">A copy of your changes has been stored to <span class="s2">&#34;/tmp/kubectl-edit-1753133961.yaml&#34;</span>
+</span></span><span class="line"><span class="cl">error: Edit cancelled, no valid changes were saved.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: app
+</span></span><span class="line"><span class="cl">  namespace: elastic-stack
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    name: app
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: app
+</span></span><span class="line"><span class="cl">    image: kodekloud/event-simulator
+</span></span><span class="line"><span class="cl">    volumeMounts:
+</span></span><span class="line"><span class="cl">    - mountPath: /log
+</span></span><span class="line"><span class="cl">      name: log-volume
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - name: sidecar
+</span></span><span class="line"><span class="cl">    image: kodekloud/filebeat-configured
+</span></span><span class="line"><span class="cl">    volumeMounts:
+</span></span><span class="line"><span class="cl">    - mountPath: /var/log/event-simulator/
+</span></span><span class="line"><span class="cl">      name: log-volume
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  volumes:
+</span></span><span class="line"><span class="cl">  - name: log-volume
+</span></span><span class="line"><span class="cl">    hostPath:
+</span></span><span class="line"><span class="cl">      <span class="c1"># directory location on host</span>
+</span></span><span class="line"><span class="cl">      path: /var/log/webapp
+</span></span><span class="line"><span class="cl">      <span class="c1"># this field is optional</span>
+</span></span><span class="line"><span class="cl">      type: DirectoryOrCreate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~/elastic-search ✖ k replace --force -f /tmp/kubectl-edit-1753133961.yaml
+</span></span><span class="line"><span class="cl">pod <span class="s2">&#34;app&#34;</span> deleted
+</span></span><span class="line"><span class="cl">pod/app replaced
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="init-containers">Init Containers</h2>
+<h3 id="q-update-the-pod-red-to-use-an-initcontainer-that-uses-the-busybox-image-and-sleeps-for-20-seconds">Q. Update the pod red to use an initContainer that uses the busybox image and sleeps for 20 seconds</h3>
+<p>Delete and re-create the pod if necessary. But make sure no other configurations change.</p>
+<p>Pod: red</p>
+<p>initContainer Configured Correctly</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: red
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - command:
+</span></span><span class="line"><span class="cl">    - sh
+</span></span><span class="line"><span class="cl">    - -c
+</span></span><span class="line"><span class="cl">    - <span class="nb">echo</span> The app is running! <span class="o">&amp;&amp;</span> sleep <span class="m">3600</span>
+</span></span><span class="line"><span class="cl">    image: busybox:1.28
+</span></span><span class="line"><span class="cl">    name: red-container
+</span></span><span class="line"><span class="cl">  initContainers:
+</span></span><span class="line"><span class="cl">  - image: busybox
+</span></span><span class="line"><span class="cl">    name: red-initcontainer
+</span></span><span class="line"><span class="cl">    command: 
+</span></span><span class="line"><span class="cl">      - <span class="s2">&#34;sleep&#34;</span>
+</span></span><span class="line"><span class="cl">      - <span class="s2">&#34;20&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/5fc1d079690a8767e2394bce531d9389a5e1574a" target="_blank" title="commit by seilylook(seilylook@naver.com) 5fc1d079690a8767e2394bce531d9389a5e1574a: add: kubernetes application lifecycle management &amp; rolling update and roll back">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5fc1d07</a></span>
+                <span>Updated on 2024-06-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/bebd4981c9474fcd49b9fd0db9a6ec8952ef1953" target="_blank" title="commit by seilylook(seilylook@naver.com) bebd4981c9474fcd49b9fd0db9a6ec8952ef1953: add: kubernetes commands &amp; arguments with pod &amp; docker">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bebd498</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
