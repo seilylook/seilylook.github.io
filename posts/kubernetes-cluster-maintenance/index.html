@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Kubernetes Cluster Maintenance - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Kubernetes Cluster Maintenance" />
+<meta property="og:description" content="Introduction Kubernetes의 drain, cordon, uncordon 명령어는 노트 상태를 관리하고 워크로드의 배포와 관리를 최적화하는데 사용한다.
+Drain drain 명령어는 Node에서 모든 POD를 안전하게 제거해 Node를 비운다. drain은 cordon 명령어를 내부적으로 호출해 Node를 먼저 cordon 상태로 만든 후, Node에서 실행중인 모든 POD를 삭제하거나 다른 Node로 이동시킨다.
+1 kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-local-data 주요 특징
+Node를 비워서 점검하거나, Node 종료 및 식제 시 사용한다.
+--ignore-daemonsets 옵션을 사용해 DaemonSet POD는 무시한다.
+--delete-local-data 옵션을 사용해 로컬 데이터가 있는 POD도 삭제한다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-24T12:02:34+09:00" />
+<meta property="article:modified_time" content="2024-06-24T12:02:34+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Cluster Maintenance"/>
+<meta name="twitter:description" content="Introduction Kubernetes의 drain, cordon, uncordon 명령어는 노트 상태를 관리하고 워크로드의 배포와 관리를 최적화하는데 사용한다.
+Drain drain 명령어는 Node에서 모든 POD를 안전하게 제거해 Node를 비운다. drain은 cordon 명령어를 내부적으로 호출해 Node를 먼저 cordon 상태로 만든 후, Node에서 실행중인 모든 POD를 삭제하거나 다른 Node로 이동시킨다.
+1 kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-local-data 주요 특징
+Node를 비워서 점검하거나, Node 종료 및 식제 시 사용한다.
+--ignore-daemonsets 옵션을 사용해 DaemonSet POD는 무시한다.
+--delete-local-data 옵션을 사용해 로컬 데이터가 있는 POD도 삭제한다."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" /><link rel="prev" href="https://seilylook.github.io/posts/kubernetes-application-lifecycle-management/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Kubernetes Cluster Maintenance",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-cluster-maintenance\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  3135 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-cluster-maintenance\/","datePublished": "2024-06-24T12:02:34+09:00","dateModified": "2024-06-24T12:02:34+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/kubernetes-cluster-maintenance/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/kubernetes-cluster-maintenance/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Cluster Maintenance</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-24">2024-06-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3135 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/maintenance.png"
+        data-srcset="/images/featured-image/maintenance.png, /images/featured-image/maintenance.png 1.5x, /images/featured-image/maintenance.png 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/maintenance.png"
+        title="/images/featured-image/maintenance.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#drain">Drain</a></li>
+    <li><a href="#cordon">Cordon</a></li>
+    <li><a href="#uncordon">Uncordon</a>
+      <ul>
+        <li><a href="#요약">요약</a></li>
+      </ul>
+    </li>
+    <li><a href="#os-upgrades">OS Upgrades</a>
+      <ul>
+        <li><a href="#q-we-need-to-take-node01-out-for-maintenance-empty-the-node-of-all-applications-and-mark-it-unshedulable">Q. We need to take <code>node01</code> out for maintenance. Empty the node of all applications and mark it unshedulable.</a></li>
+        <li><a href="#q-what-nodes-are-the-apps-on-now">Q. What nodes are the apps on now?</a></li>
+        <li><a href="#q-the-maintenance-tasks-have-been-completed-configure-the-node-node01-to-be-schedulable-again">Q. The maintenance tasks have been completed. Configure the node <code>node01</code> to be schedulable again.</a></li>
+        <li><a href="#q-how-many-pods-are-scheduled-on-node01-now-in-the-default-namepace">Q. How many pods are scheduled on <code>node01</code> now in the default namepace?</a></li>
+        <li><a href="#q-why-are-there-no-pods-on-node01">Q. Why are there no pods on <code>node01</code>?</a></li>
+        <li><a href="#q-why-are-the-pods-placed-on-the-controlplane-node">Q. Why are the pods placed on the <code>controlplane</code> node?</a></li>
+        <li><a href="#hr-app-is-a-critical-app-and-we-do-not-want-it-to-be-removed-and-we-do-not-want-to-schedule-any-more-pods-on-node01-mark-node01-as-unschedulable-so-that-no-new-pods-are-scheduled-on-this-node"><code>hr-app</code> is a critical app and we do not want it to be removed and we do not want to schedule any more pods on <code>node01</code>. Mark <code>node01</code> as <code>unschedulable</code> so that no new pods are scheduled on this node.</a></li>
+      </ul>
+    </li>
+    <li><a href="#cluster-upgrade">Cluster Upgrade</a>
+      <ul>
+        <li><a href="#q-what-is-the-current-version-of-the-cluster">Q. What is the current version of the cluster?</a></li>
+        <li><a href="#q-how-many-nodes-can-host-workloads-in-this-cluster">Q. How many nodes can host workloads in this cluster?</a></li>
+        <li><a href="#q-what-is-the-latest-version-available-for-an-upgrade-with-the-current-version-of-the-kubeadm-tool-installed">Q. What is the latest version available for an upgrade with the current version of the kubeadm tool installed?</a></li>
+        <li><a href="#q-we-will-be-upgrading-the-controlplane-node-first-drain-the-controlplane-node-of-workloads-and-mark-it-unschedulable">Q. We will be upgrading the controlplane node first. Drain the controlplane node of workloads and mark it <code>UnSchedulable</code>.</a></li>
+        <li><a href="#q-upgrade-the-controlplane-components-to-exact-version-v1290">Q. Upgrade the <code>controlplane</code> components to exact version <code>v1.29.0</code></a></li>
+        <li><a href="#q-upgrade-the-worker-node-to-the-exact-version-v1290">Q. Upgrade the worker node to the exact version <code>v.1.29.0</code>.</a></li>
+      </ul>
+    </li>
+    <li><a href="#backup-and-restore-methods-i">Backup and Restore Methods I</a>
+      <ul>
+        <li><a href="#q-what-is-the-version-of-etcd-running-on-the-cluster">Q. What is the version of ETCD running on the cluster?</a></li>
+        <li><a href="#q-at-what-address-can-you-reach-the-etcd-cluster-from-the-controlplane-node">Q. At what address can you reach the ETCD cluster from the controlplane node?</a></li>
+        <li><a href="#q-where-is-the-etcd-server-certificate-file-located">Q. Where is the ETCD server certificate file located?</a></li>
+        <li><a href="#q-where-is-the-etcd-ca-certificate-file-located">Q. Where is the ETCD CA Certificate file located?</a></li>
+        <li><a href="#q-take-a-snapshot-of-the-etcd-database-using-the-built-inn-snapshot-functionality">Q. Take a snapshot of the ETCD database using the built-inn snapshot functionality.</a></li>
+        <li><a href="#q-restore-the-original-state-of-the-cluster-using-the-backup-file">Q. Restore the original state of the cluster using the backup file.</a></li>
+      </ul>
+    </li>
+    <li><a href="#backup-and-restore-methods-ii">Backup and Restore Methods II</a>
+      <ul>
+        <li><a href="#q-how-many-clusters-are-defined-in-the-kubeconfig-on-the-student-node">Q. How many clusters are defined in the kubeconfig on the student-node?</a></li>
+        <li><a href="#q-how-many-nodesboth-controlplane-and-worker-are-part-of-cluster1">Q. How many nodes(both controlplane and worker) are part of cluster1?</a></li>
+        <li><a href="#q-how-is-etcd-configured-for-cluster1">Q. How is ETCD configured for cluster1?</a></li>
+        <li><a href="#q-how-is-etcd-configured-for-cluster2">Q. How is ETCD configured for cluster2?</a></li>
+        <li><a href="#q-what-is-the-default-data-directory-used-the-for-etcd-datastore-used-in-cluster1">Q. What is the default data directory used the for ETCD datastore used in cluster1?</a></li>
+        <li><a href="#q-what-is-the-default-data-directory-used-the-for-etcd-datastore-used-in-clutser2">Q. What is the default data directory used the for ETCD datastore used in clutser2?</a></li>
+        <li><a href="#q-how-many-nodes-are-part-of-the-etcd-cluster-that-etcd-server-is-a-part-of">Q. How many nodes are part of the ETCD cluster that etcd-server is a part of?</a></li>
+        <li><a href="#q-take-a-backup-of-etcd-on-cluster1-and-save-it-on-the-student-node-at-the-path-optcluster1db">Q. Take a backup of etcd on cluster1 and save it on the student-node at the path /opt/cluster1.db</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
+<p>Kubernetes의 <code>drain</code>, <code>cordon</code>, <code>uncordon</code> 명령어는 노트 상태를 관리하고 워크로드의 배포와 관리를 최적화하는데 사용한다.</p>
+<h2 id="drain">Drain</h2>
+<p><code>drain</code> 명령어는 Node에서 모든 POD를 안전하게 제거해 Node를 비운다. <code>drain</code>은 <code>cordon</code> 명령어를 내부적으로 호출해 Node를 먼저 cordon 상태로 만든 후, Node에서 실행중인 모든 POD를 삭제하거나 다른 Node로 이동시킨다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-local-data
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>주요 특징</p>
+<ul>
+<li>
+<p>Node를 비워서 점검하거나, Node 종료 및 식제 시 사용한다.</p>
+</li>
+<li>
+<p><code>--ignore-daemonsets</code> 옵션을 사용해 DaemonSet POD는 무시한다.</p>
+</li>
+<li>
+<p><code>--delete-local-data</code> 옵션을 사용해 로컬 데이터가 있는 POD도 삭제한다.</p>
+</li>
+<li>
+<p>POD가 안전하게 종료되고, 가능한 경우 다른 Node로 이동한다.</p>
+</li>
+<li>
+<p>Node가 비워지기 때문에 서비스 중단을 최소화할 수 있다.</p>
+</li>
+</ul>
+<h2 id="cordon">Cordon</h2>
+<p><code>cordon</code> 명령어는 Node를 <code>cordon</code> 상태로 만들어서, 새로운 POD가 해당 Node에 스케줄링되지 않도록 한다. 이미 실행 중인 POD는 영향을 받지 않지만, 새로 생성되거나 재스케줄링되는 POD는 다른 Node로 이동한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl cordon &lt;node-name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>주요 특징</p>
+<ul>
+<li>
+<p>Node가 <code>cordon</code> 상태가 되면 새 POD는 해당 Node에 스케줄되지 않는다.</p>
+</li>
+<li>
+<p>기존 POD는 영향을 받지 않고 계속 실행된다.</p>
+</li>
+<li>
+<p>주로 Node를 점검하거나 유지보수할 때 사용한다.</p>
+</li>
+</ul>
+<h2 id="uncordon">Uncordon</h2>
+<p><code>uncordon</code> 명령어는 cordon 상태의 Node를 다시 사용할 수 있게 풀어준다. 이 명령어를 사용하면 새로운 POD가 해당 Node에 스케줄링 될 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl uncordon &lt;node-name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>주요 특징</p>
+<ul>
+<li>
+<p>cordon 상태의 Node를 다시 정상 상태로 되돌린다.</p>
+</li>
+<li>
+<p>새 POD가 해당 Node에 스케줄링 될 수 있다.</p>
+</li>
+<li>
+<p>Node 점검이나 유지보수가 완료된 후 사용한다.</p>
+</li>
+</ul>
+<h3 id="요약">요약</h3>
+<p><code>Drain</code>: Node를 비우기 위해 모든 POD를 안전하게 제거합니다. 내부적으로 cordon 상태로 전환한 후 POD를 삭제하거나 이동시킵니다.</p>
+<p><code>Cordon</code>: Node를 cordon 상태로 만들어 새로운 POD가 스케줄링되지 않도록 합니다.</p>
+<p><code>Uncordon</code>: cordon 상태의 Node를 정상 상태로 되돌려서 새로운 POD를 스케줄링할 수 있게 합니다.</p>
+<h2 id="os-upgrades">OS Upgrades</h2>
+<h3 id="q-we-need-to-take-node01-out-for-maintenance-empty-the-node-of-all-applications-and-mark-it-unshedulable">Q. We need to take <code>node01</code> out for maintenance. Empty the node of all applications and mark it unshedulable.</h3>
+<p>Node node01 Unschedulable</p>
+<p>Pods evicted from node01</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ k drain node01 --ignore-daemonsets
+</span></span><span class="line"><span class="cl">node/node01 cordoned
+</span></span><span class="line"><span class="cl">Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-lfwv8, kube-system/kube-proxy-77vqk
+</span></span><span class="line"><span class="cl">evicting pod default/blue-fffb6db8d-cjl6s
+</span></span><span class="line"><span class="cl">evicting pod default/blue-fffb6db8d-bfkvx
+</span></span><span class="line"><span class="cl">pod/blue-fffb6db8d-cjl6s evicted
+</span></span><span class="line"><span class="cl">pod/blue-fffb6db8d-bfkvx evicted
+</span></span><span class="line"><span class="cl">node/node01 drained
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-nodes-are-the-apps-on-now">Q. What nodes are the apps on now?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  k get pods -o wide
+</span></span><span class="line"><span class="cl">NAME                   READY   STATUS    RESTARTS   AGE     IP           NODE           NOMINATED NODE   READINESS GATES
+</span></span><span class="line"><span class="cl">blue-fffb6db8d-26pnb   1/1     Running   <span class="m">0</span>          54s     10.244.0.6   controlplane   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">blue-fffb6db8d-6k7c2   1/1     Running   <span class="m">0</span>          54s     10.244.0.5   controlplane   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">blue-fffb6db8d-lkjjs   1/1     Running   <span class="m">0</span>          4m32s   10.244.0.4   controlplane   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. controlplane</p>
+</blockquote>
+<h3 id="q-the-maintenance-tasks-have-been-completed-configure-the-node-node01-to-be-schedulable-again">Q. The maintenance tasks have been completed. Configure the node <code>node01</code> to be schedulable again.</h3>
+<p>Node01 is schedulable</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  k uncordon node01
+</span></span><span class="line"><span class="cl">node/node01 uncordoned
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-how-many-pods-are-scheduled-on-node01-now-in-the-default-namepace">Q. How many pods are scheduled on <code>node01</code> now in the default namepace?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  k get pods -o wide
+</span></span><span class="line"><span class="cl">NAME                   READY   STATUS    RESTARTS   AGE     IP           NODE           NOMINATED NODE   READINESS GATES
+</span></span><span class="line"><span class="cl">blue-fffb6db8d-26pnb   1/1     Running   <span class="m">0</span>          4m35s   10.244.0.6   controlplane   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">blue-fffb6db8d-6k7c2   1/1     Running   <span class="m">0</span>          4m35s   10.244.0.5   controlplane   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">blue-fffb6db8d-lkjjs   1/1     Running   <span class="m">0</span>          8m13s   10.244.0.4   controlplane   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 0</p>
+</blockquote>
+<h3 id="q-why-are-there-no-pods-on-node01">Q. Why are there no pods on <code>node01</code>?</h3>
+<blockquote>
+<p>A. Running the <code>uncordon</code> command on a node will not automatically schedule pods on the node. When new pods are creatd, they will be placed on node01.</p>
+</blockquote>
+<h3 id="q-why-are-the-pods-placed-on-the-controlplane-node">Q. Why are the pods placed on the <code>controlplane</code> node?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl describe node controlplane <span class="p">|</span> grep -i  taint
+</span></span><span class="line"><span class="cl">Taints:             &lt;none&gt;
+</span></span><span class="line"><span class="cl">root@controlplane:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. Since there are no taints on the controlplace node, all the pods were started on it when we ran the <code>kubectl drain node01</code> command.</p>
+</blockquote>
+<h3 id="hr-app-is-a-critical-app-and-we-do-not-want-it-to-be-removed-and-we-do-not-want-to-schedule-any-more-pods-on-node01-mark-node01-as-unschedulable-so-that-no-new-pods-are-scheduled-on-this-node"><code>hr-app</code> is a critical app and we do not want it to be removed and we do not want to schedule any more pods on <code>node01</code>. Mark <code>node01</code> as <code>unschedulable</code> so that no new pods are scheduled on this node.</h3>
+<p>Make sure that hr-app is not affected.</p>
+<blockquote>
+<p>Do not drain <code>node01</code>, instead use the <code>kubectl cordon node01</code> command. This will ensure that no new pods are scheduled on this node and the existing pods will not be affected by this operation.</p>
+</blockquote>
+<h2 id="cluster-upgrade">Cluster Upgrade</h2>
+<h3 id="q-what-is-the-current-version-of-the-cluster">Q. What is the current version of the cluster?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  k get nodes -o wide
+</span></span><span class="line"><span class="cl">NAME           STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+</span></span><span class="line"><span class="cl">controlplane   Ready    control-plane   59m   v1.28.0   192.7.153.9    &lt;none&gt;        Ubuntu 20.04.6 LTS   5.4.0-1106-gcp   containerd://1.6.6
+</span></span><span class="line"><span class="cl">node01         Ready    &lt;none&gt;          58m   v1.28.0   192.7.153.11   &lt;none&gt;        Ubuntu 20.04.6 LTS   5.4.0-1106-gcp   containerd://1.6.6
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 1.28.0</p>
+</blockquote>
+<h3 id="q-how-many-nodes-can-host-workloads-in-this-cluster">Q. How many nodes can host workloads in this cluster?</h3>
+<p>Inspect the application and taints set on the nodes.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl describe nodes  controlplane <span class="p">|</span> grep -i taint
+</span></span><span class="line"><span class="cl">Taints:             &lt;none&gt;
+</span></span><span class="line"><span class="cl">root@controlplane:~# 
+</span></span><span class="line"><span class="cl">root@controlplane:~# kubectl describe nodes  node01 <span class="p">|</span> grep -i taint
+</span></span><span class="line"><span class="cl">Taints:             &lt;none&gt;
+</span></span><span class="line"><span class="cl">root@controlplane:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. Both nodes have the ability to schedule workloads on them.</p>
+</blockquote>
+<h3 id="q-what-is-the-latest-version-available-for-an-upgrade-with-the-current-version-of-the-kubeadm-tool-installed">Q. What is the latest version available for an upgrade with the current version of the kubeadm tool installed?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  kubeadm upgrade plan
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade/config<span class="o">]</span> Making sure the configuration is correct:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade/config<span class="o">]</span> Reading configuration from the cluster...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade/config<span class="o">]</span> FYI: You can look at this config file with <span class="s1">&#39;kubectl -n kube-system get cm kubeadm-config -o yaml&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>preflight<span class="o">]</span> Running pre-flight checks.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade<span class="o">]</span> Running cluster health checks
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade<span class="o">]</span> Fetching available versions to upgrade to
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade/versions<span class="o">]</span> Cluster version: v1.28.0
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade/versions<span class="o">]</span> kubeadm version: v1.28.0
+</span></span><span class="line"><span class="cl">I0624 01:43:01.970184   <span class="m">18248</span> version.go:256<span class="o">]</span> remote version is much newer: v1.30.2<span class="p">;</span> falling back to: stable-1.28
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade/versions<span class="o">]</span> Target version: v1.28.11
+</span></span><span class="line"><span class="cl"><span class="o">[</span>upgrade/versions<span class="o">]</span> Latest version in the v1.28 series: v1.28.11
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Components that must be upgraded manually after you have upgraded the control plane with <span class="s1">&#39;kubeadm upgrade apply&#39;</span>:
+</span></span><span class="line"><span class="cl">COMPONENT   CURRENT       TARGET
+</span></span><span class="line"><span class="cl">kubelet     <span class="m">2</span> x v1.28.0   v1.28.11
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Upgrade to the latest version in the v1.28 series:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COMPONENT                 CURRENT   TARGET
+</span></span><span class="line"><span class="cl">kube-apiserver            v1.28.0   v1.28.11
+</span></span><span class="line"><span class="cl">kube-controller-manager   v1.28.0   v1.28.11
+</span></span><span class="line"><span class="cl">kube-scheduler            v1.28.0   v1.28.11
+</span></span><span class="line"><span class="cl">kube-proxy                v1.28.0   v1.28.11
+</span></span><span class="line"><span class="cl">CoreDNS                   v1.10.1   v1.10.1
+</span></span><span class="line"><span class="cl">etcd                      3.5.9-0   3.5.9-0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You can now apply the upgrade by executing the following command:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        kubeadm upgrade apply v1.28.11
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-we-will-be-upgrading-the-controlplane-node-first-drain-the-controlplane-node-of-workloads-and-mark-it-unschedulable">Q. We will be upgrading the controlplane node first. Drain the controlplane node of workloads and mark it <code>UnSchedulable</code>.</h3>
+<p>Controlplane Node: SchedulingDisabled</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  k drain controlplane --ignore-daemonsets
+</span></span><span class="line"><span class="cl">node/controlplane cordoned
+</span></span><span class="line"><span class="cl">Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-x7ljk, kube-system/kube-proxy-jd6st
+</span></span><span class="line"><span class="cl">evicting pod kube-system/coredns-5dd5756b68-vchp5
+</span></span><span class="line"><span class="cl">evicting pod default/blue-667bf6b9f9-lnprm
+</span></span><span class="line"><span class="cl">evicting pod default/blue-667bf6b9f9-2ppcf
+</span></span><span class="line"><span class="cl">evicting pod kube-system/coredns-5dd5756b68-mxnht
+</span></span><span class="line"><span class="cl">pod/blue-667bf6b9f9-2ppcf evicted
+</span></span><span class="line"><span class="cl">pod/blue-667bf6b9f9-lnprm evicted
+</span></span><span class="line"><span class="cl">pod/coredns-5dd5756b68-mxnht evicted
+</span></span><span class="line"><span class="cl">pod/coredns-5dd5756b68-vchp5 evicted
+</span></span><span class="line"><span class="cl">node/controlplane drained
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-upgrade-the-controlplane-components-to-exact-version-v1290">Q. Upgrade the <code>controlplane</code> components to exact version <code>v1.29.0</code></h3>
+<p>Upgrade the kubeadm tool (if not already), then the controlplane components, and finally the kubelet. Practice referring to the Kubernetes documentation page.</p>
+<p>Controlplane Node Upgraded to v1.29.0</p>
+<p>Controlplane Kubelet Upgraded to v1.29.0</p>
+<ol>
+<li>
+<p>On the <code>controlplane</code> node:</p>
+<p>Use any text editor you prefer to open the file that defines the Kubernetes apt repository.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/apt/sources.list.d/kubernetes.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Update the version in the URL to the next available minor release, i.e v1.29.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deb <span class="o">[</span>signed-by<span class="o">=</span>/etc/apt/keyrings/kubernetes-apt-keyring.gpg<span class="o">]</span> https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>After making changes, save the file and exit from your text editor. Proceed with next instruction.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# apt update
+</span></span><span class="line"><span class="cl">root@controlplane:~# apt-cache madison kubeadm
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Based on the version information displayed by <code>apt-cache madison</code>, it indicates that for Kubernetes version <code>1.29.0</code>, the available package version is <code>1.29.0-1.1</code>. Therefore, to install kubeadm for kubernetes <code>v1.29.0</code>, use the following command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# apt-get install <span class="nv">kubeadm</span><span class="o">=</span>1.29.0-1.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Run the following command to upgrade the kubernetes cluster.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubeadm upgrade plan v1.29.0
+</span></span><span class="line"><span class="cl">root@controlplane:~# kubeadm upgrade apply v1.29.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Now, upgrade the version and restart Kubelet. Also, mark the node(in this case, the &ldquo;controlplane&rdquo; node) as schedulable.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# apt-get install <span class="nv">kubelet</span><span class="o">=</span>1.29.0-1.1
+</span></span><span class="line"><span class="cl">root@controlplane:~# systemctl daemon-reload
+</span></span><span class="line"><span class="cl">root@controlplane:~# systemctl restart kubelet
+</span></span><span class="line"><span class="cl">root@controlplane:~# kubectl uncordon controlplane
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="q-upgrade-the-worker-node-to-the-exact-version-v1290">Q. Upgrade the worker node to the exact version <code>v.1.29.0</code>.</h3>
+<p>Worker Node Upgraded to v1.29.0</p>
+<p>Worker Node Ready</p>
+<p>On the node01 node, run the following commands:</p>
+<p>If you are on the controlplane node, run ssh node01 to log in to the node01.</p>
+<p>Use any text editor you prefer to open the file that defines the Kubernetes apt repository.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/apt/sources.list.d/kubernetes.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Update the version in the URL to the next available minor release, i.e v1.29.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deb <span class="o">[</span>signed-by<span class="o">=</span>/etc/apt/keyrings/kubernetes-apt-keyring.gpg<span class="o">]</span> https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After making changes, save the file and exit from your text editor. Proceed with the next instruction.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@node01:~# apt update
+</span></span><span class="line"><span class="cl">root@node01:~# apt-cache madison kubeadm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.29.0, the available package version is 1.29.0-1.1. Therefore, to install kubeadm for Kubernetes v1.29.0, use the following command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@node01:~# apt-get install <span class="nv">kubeadm</span><span class="o">=</span>1.29.0-1.1
+</span></span><span class="line"><span class="cl"><span class="c1"># Upgrade the node </span>
+</span></span><span class="line"><span class="cl">root@node01:~# kubeadm upgrade node
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now, upgrade the version and restart Kubelet.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@node01:~# apt-get install <span class="nv">kubelet</span><span class="o">=</span>1.29.0-1.1
+</span></span><span class="line"><span class="cl">root@node01:~# systemctl daemon-reload
+</span></span><span class="line"><span class="cl">root@node01:~# systemctl restart kubelet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Type exit or logout or enter CTRL + d to go back to the controlplane node.</p>
+<h2 id="backup-and-restore-methods-i">Backup and Restore Methods I</h2>
+<h3 id="q-what-is-the-version-of-etcd-running-on-the-cluster">Q. What is the version of ETCD running on the cluster?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl -n kube-system logs etcd-controlplane <span class="p">|</span> grep -i <span class="s1">&#39;etcd-version&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;caller&#34;</span>:<span class="s2">&#34;embed/etcd.go:306&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;starting an etcd server&#34;</span>,<span class="s2">&#34;etcd-version&#34;</span>:<span class="s2">&#34;3.5.7&#34;</span>,<span class="s2">&#34;git-sha&#34;</span>:<span class="s2">&#34;215b53cf3&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@controlplane:~# 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@controlplane:~# kubectl -n kube-system describe pod etcd-controlplane <span class="p">|</span> grep Image:
+</span></span><span class="line"><span class="cl">    Image:         registry.k8s.io/etcd:3.5.12-0
+</span></span><span class="line"><span class="cl">root@controlplane:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-at-what-address-can-you-reach-the-etcd-cluster-from-the-controlplane-node">Q. At what address can you reach the ETCD cluster from the controlplane node?</h3>
+<p>Check the ETCD Service configuration in the ETCD POD</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl -n kube-system describe pod etcd-controlplane <span class="p">|</span> grep <span class="s1">&#39;\--listen-client-urls&#39;</span>
+</span></span><span class="line"><span class="cl">      --listen-client-urls<span class="o">=</span>https://127.0.0.1:2379,https://10.2.43.11:2379
+</span></span><span class="line"><span class="cl">root@controlplane:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A.</p>
+</blockquote>
+<h3 id="q-where-is-the-etcd-server-certificate-file-located">Q. Where is the ETCD server certificate file located?</h3>
+<p>Note this path down as you will need to use it later.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ kubectl -n kube-system describe pod etcd-controlplane <span class="p">|</span> grep <span class="s1">&#39;\--cer
+</span></span></span><span class="line"><span class="cl"><span class="s1">t-file&#39;</span>
+</span></span><span class="line"><span class="cl">      --cert-file<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. /etc/kubernetes/pki/etcd/server.crt</p>
+</blockquote>
+<h3 id="q-where-is-the-etcd-ca-certificate-file-located">Q. Where is the ETCD CA Certificate file located?</h3>
+<p>Note this path down as you will need to use it later</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl -n kube-system describe pod etcd-controlplane <span class="p">|</span> grep <span class="s1">&#39;\--trusted-ca-file&#39;</span>
+</span></span><span class="line"><span class="cl">      --trusted-ca-file<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt
+</span></span><span class="line"><span class="cl">root@controlplane:~#
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check the ETCD pod configuration with dommand: <code>kubectl describe pod etcd-controlplane -n kube-system</code> and look for the value &ndash;</p>
+<blockquote>
+<p>A. /etc/kubernetes/pki/etcd/server.crt</p>
+</blockquote>
+<h3 id="q-take-a-snapshot-of-the-etcd-database-using-the-built-inn-snapshot-functionality">Q. Take a snapshot of the ETCD database using the built-inn snapshot functionality.</h3>
+<p>Store the backup file at location <code>/opt/snapshot-pre-boot.db</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span> etcdctl --endpoints<span class="o">=</span>https://<span class="o">[</span>127.0.0.1<span class="o">]</span>:2379 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--cacert<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--cert<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--key<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>snapshot save /opt/snapshot-pre-boot.db
+</span></span><span class="line"><span class="cl">Snapshot saved at /opt/snapshot-pre-boot.db
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-restore-the-original-state-of-the-cluster-using-the-backup-file">Q. Restore the original state of the cluster using the backup file.</h3>
+<p>Deployments: 2</p>
+<p>Services: 3</p>
+<p>First restore the snapshot:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span> etcdctl  --data-dir /var/lib/etcd-from-backup <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>snapshot restore /opt/snapshot-pre-boot.db
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2022-03-25 09:19:27.175043 I <span class="p">|</span> mvcc: restore compact to <span class="m">2552</span>
+</span></span><span class="line"><span class="cl">2022-03-25 09:19:27.266709 I <span class="p">|</span> etcdserver/membership: added member 8e9e05c52164694d <span class="o">[</span>http://localhost:2380<span class="o">]</span> to cluster cdf818194e3a8c32
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Note: In this case, we are restoring the snapshot to a different directory but in the same server where we took the backup(the controlplane node) As a result, the only required option for the restore command is the <code>--data-dir</code>.</p>
+<p>Next, update the <code>/etc/kubernetes/manifests/etcd.yaml</code></p>
+<p>We have now restored the etcd snapshot to a new path on the controlplane - <code>/var/lib/etcd-from-backup</code>, so, the only change to be made in the YAML file, is to change the hostPath for the volume called <code>etcd-data</code> from old directory (<code>/var/lib/etcd</code>) to the new directory (<code>/var/lib/etcd-from-backup</code>)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">  volumes:
+</span></span><span class="line"><span class="cl">  - hostPath:
+</span></span><span class="line"><span class="cl">      path: /var/lib/etcd-from-backup
+</span></span><span class="line"><span class="cl">      type: DirectoryOrCreate
+</span></span><span class="line"><span class="cl">    name: etcd-data
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>With this change, <code>/var/lib/etcd</code> on the container points to <code>/var/lib/etcd-from-backup</code> on the <code>controlplane</code> (which is what we want)</p>
+<p>When this file is updated, the <code>ETCD</code> pod is automatically re-created as that is a static pod placed under the <code>/etc/kubernetes/manifests</code> directory</p>
+<p>Note 1: As the ETCD pod has changed it will automatically restart, and also <code>kube-controller-manager</code> and <code>kube-scheduler</code>. Wait 1-2 to mins for this pods to restart. You can run the command: <code>watch &quot;crictl ps | grep etcd&quot;</code> to see when the ETCD pod is restarted.</p>
+<p>Note 2: If the etcd pod is not getting <code>Ready 1/1</code>, then restart it by <code>kubectl delete pod -n kube-system etcd-controlplane</code> and wait 1 minute.</p>
+<p>Note 3: This is the simplest way to make sure that ETCD uses the restored data after the ETCD pod is recreated. You don&rsquo;t have to change anything else.</p>
+<p>If you do change <code>--data-dir</code> to <code>/var/lib/etcd-from-backup</code> in the ETCD YAML file, make sure that the <code>volumeMounts</code> for <code>etcd-data</code> is updated as well, with the mountPath pointing to <code>/var/lib/etcd-from-backup</code> (THIS COMPLETE STEP IS OPTIONAL AND NEED NOT BE DONE FOR COMPLETING THE RESTORE)</p>
+<h2 id="backup-and-restore-methods-ii">Backup and Restore Methods II</h2>
+<h3 id="q-how-many-clusters-are-defined-in-the-kubeconfig-on-the-student-node">Q. How many clusters are defined in the kubeconfig on the student-node?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ✖ k config view
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">clusters:
+</span></span><span class="line"><span class="cl">- cluster:
+</span></span><span class="line"><span class="cl">    certificate-authority-data: DATA+OMITTED
+</span></span><span class="line"><span class="cl">    server: https://cluster1-controlplane:6443
+</span></span><span class="line"><span class="cl">  name: cluster1
+</span></span><span class="line"><span class="cl">- cluster:
+</span></span><span class="line"><span class="cl">    certificate-authority-data: DATA+OMITTED
+</span></span><span class="line"><span class="cl">    server: https://192.14.89.17:6443
+</span></span><span class="line"><span class="cl">  name: cluster2
+</span></span><span class="line"><span class="cl">contexts:
+</span></span><span class="line"><span class="cl">- context:
+</span></span><span class="line"><span class="cl">    cluster: cluster1
+</span></span><span class="line"><span class="cl">    user: cluster1
+</span></span><span class="line"><span class="cl">  name: cluster1
+</span></span><span class="line"><span class="cl">- context:
+</span></span><span class="line"><span class="cl">    cluster: cluster2
+</span></span><span class="line"><span class="cl">    user: cluster2
+</span></span><span class="line"><span class="cl">  name: cluster2
+</span></span><span class="line"><span class="cl">current-context: cluster1
+</span></span><span class="line"><span class="cl">kind: Config
+</span></span><span class="line"><span class="cl">preferences: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">users:
+</span></span><span class="line"><span class="cl">- name: cluster1
+</span></span><span class="line"><span class="cl">  user:
+</span></span><span class="line"><span class="cl">    client-certificate-data: REDACTED
+</span></span><span class="line"><span class="cl">    client-key-data: REDACTED
+</span></span><span class="line"><span class="cl">- name: cluster2
+</span></span><span class="line"><span class="cl">  user:
+</span></span><span class="line"><span class="cl">    client-certificate-data: REDACTED
+</span></span><span class="line"><span class="cl">    client-key-data: REDACTED
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A. 2</p>
+</blockquote>
+<h3 id="q-how-many-nodesboth-controlplane-and-worker-are-part-of-cluster1">Q. How many nodes(both controlplane and worker) are part of cluster1?</h3>
+<p>Make sure to switch the context to <code>cluster1</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ➜  kubectl config use-context cluster1
+</span></span><span class="line"><span class="cl">Switched to context <span class="s2">&#34;cluster1&#34;</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜  k get nodes
+</span></span><span class="line"><span class="cl">NAME                    STATUS   ROLES           AGE   VERSION
+</span></span><span class="line"><span class="cl">cluster1-controlplane   Ready    control-plane   64m   v1.24.0
+</span></span><span class="line"><span class="cl">cluster1-node01         Ready    &lt;none&gt;          64m   v1.24.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-how-is-etcd-configured-for-cluster1">Q. How is ETCD configured for cluster1?</h3>
+<p>Remeber, you can access the clusters from <code>student-node</code> using the <code>kubectl</code> tool. You can also <code>ssh</code> to the cluster nodes from the <code>student-node</code>.</p>
+<p>Make sure to switch the context to <code>cluster</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ➜  kubectl config use-context cluster1
+</span></span><span class="line"><span class="cl">Switched to context <span class="s2">&#34;cluster1&#34;</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜  kubectl get pods -n kube-system <span class="p">|</span> grep etcd
+</span></span><span class="line"><span class="cl">etcd-cluster1-controlplane                      1/1     Running   <span class="m">0</span>              9m26s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This means that ETCD is set up as a <code>Stacked ETCD Topolofy</code> where the distributed data storage cluster provided by <code>etcd</code> is stacked on top of the cluster formed by the nodes managed by kubeadm that run control plane components.</p>
+<h3 id="q-how-is-etcd-configured-for-cluster2">Q. How is ETCD configured for cluster2?</h3>
+<p>Remeber, you can access the clusters from <code>student-node</code> using the <code>kubectl</code> tool. You can also <code>sssh</code> to the cluster nodes from the <code>student-node</code>.</p>
+<p>Make sure to switch the context to <code>cluster2</code>:</p>
+<p>If you check out the pods running in the <code>kube-system</code> namespace in <code>cluster2</code>, you will notice that there are NO <code>etcd</code> pods running in this cluster!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ➜  kubectl config use-context cluster2
+</span></span><span class="line"><span class="cl">Switched to context <span class="s2">&#34;cluster2&#34;</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜  kubectl get pods -n kube-system  <span class="p">|</span> grep etcd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Also, there is NO static pod configuration for <code>etcd</code> under the static pod path:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ✖ ssh cluster2-controlplane
+</span></span><span class="line"><span class="cl">Welcome to Ubuntu 18.04.6 LTS <span class="o">(</span>GNU/Linux 5.4.0-1086-gcp x86_64<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> * Documentation:  https://help.ubuntu.com
+</span></span><span class="line"><span class="cl"> * Management:     https://landscape.canonical.com
+</span></span><span class="line"><span class="cl"> * Support:        https://ubuntu.com/advantage
+</span></span><span class="line"><span class="cl">This system has been minimized by removing packages and content that are
+</span></span><span class="line"><span class="cl">not required on a system that users <span class="k">do</span> not log into.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">To restore this content, you can run the <span class="s1">&#39;unminimize&#39;</span> command.
+</span></span><span class="line"><span class="cl">Last login: Wed Aug <span class="m">31</span> 05:05:04 <span class="m">2022</span> from 10.1.127.14
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cluster2-controlplane ~ ➜  ls /etc/kubernetes/manifests/ <span class="p">|</span> grep -i etcd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>However, if you inspect the process on the controlplane for cluster2, you will see that that the process for the <code>kube-apiserver</code> is referencing an external etcd datastore:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cluster2-controlplane ~ ✖ ps -ef <span class="p">|</span> grep etcd
+</span></span><span class="line"><span class="cl">root        <span class="m">1705</span>    <span class="m">1320</span>  <span class="m">0</span> 05:03 ?        00:00:31 kube-apiserver --advertise-address<span class="o">=</span>10.1.127.3 --allow-privileged<span class="o">=</span><span class="nb">true</span> --authorization-mode<span class="o">=</span>Node,RBAC --client-ca-file<span class="o">=</span>/etc/kubernetes/pki/ca.crt --enable-admission-plugins<span class="o">=</span>NodeRestriction --enable-bootstrap-token-auth<span class="o">=</span><span class="nb">true</span> --etcd-cafile<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.pem --etcd-certfile<span class="o">=</span>/etc/kubernetes/pki/etcd/etcd.pem --etcd-keyfile<span class="o">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem --etcd-servers<span class="o">=</span>https://10.1.127.10:2379 --kubelet-client-certificate<span class="o">=</span>/etc/kubernetes/pki/apiserver-kubelet-client.crt --kubelet-client-key<span class="o">=</span>/etc/kubernetes/pki/apiserver-kubelet-client.key --kubelet-preferred-address-types<span class="o">=</span>InternalIP,ExternalIP,Hostname --proxy-client-cert-file<span class="o">=</span>/etc/kubernetes/pki/front-proxy-client.crt --proxy-client-key-file<span class="o">=</span>/etc/kubernetes/pki/front-proxy-client.key --requestheader-allowed-names<span class="o">=</span>front-proxy-client --requestheader-client-ca-file<span class="o">=</span>/etc/kubernetes/pki/front-proxy-ca.crt --requestheader-extra-headers-prefix<span class="o">=</span>X-Remote-Extra- --requestheader-group-headers<span class="o">=</span>X-Remote-Group --requestheader-username-headers<span class="o">=</span>X-Remote-User --secure-port<span class="o">=</span><span class="m">6443</span> --service-account-issuer<span class="o">=</span>https://kubernetes.default.svc.cluster.local --service-account-key-file<span class="o">=</span>/etc/kubernetes/pki/sa.pub --service-account-signing-key-file<span class="o">=</span>/etc/kubernetes/pki/sa.key --service-cluster-ip-range<span class="o">=</span>10.96.0.0/12 --tls-cert-file<span class="o">=</span>/etc/kubernetes/pki/apiserver.crt --tls-private-key-file<span class="o">=</span>/etc/kubernetes/pki/apiserver.key
+</span></span><span class="line"><span class="cl">root        <span class="m">5754</span>    <span class="m">5601</span>  <span class="m">0</span> 05:15 pts/0    00:00:00 grep etcd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You can see the same information by inspecting the kube-apiserver pod (which runs as a static pod in the kube-system namespace):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cluster2-controlplane ~ ➜  kubectl -n kube-system describe pod kube-apiserver-cluster2-controlplane 
+</span></span><span class="line"><span class="cl">Name:                 kube-apiserver-cluster2-controlplane
+</span></span><span class="line"><span class="cl">Namespace:            kube-system
+</span></span><span class="line"><span class="cl">Priority:             <span class="m">2000001000</span>
+</span></span><span class="line"><span class="cl">Priority Class Name:  system-node-critical
+</span></span><span class="line"><span class="cl">Node:                 cluster2-controlplane/10.1.127.3
+</span></span><span class="line"><span class="cl">Start Time:           Wed, <span class="m">31</span> Aug <span class="m">2022</span> 05:03:45 +0000
+</span></span><span class="line"><span class="cl">Labels:               <span class="nv">component</span><span class="o">=</span>kube-apiserver
+</span></span><span class="line"><span class="cl">                      <span class="nv">tier</span><span class="o">=</span>control-plane
+</span></span><span class="line"><span class="cl">Annotations:          kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint: 10.1.127.3:6443
+</span></span><span class="line"><span class="cl">                      kubernetes.io/config.hash: 9bd4c04b38b27661e9e7f8b0fc1237b8
+</span></span><span class="line"><span class="cl">                      kubernetes.io/config.mirror: 9bd4c04b38b27661e9e7f8b0fc1237b8
+</span></span><span class="line"><span class="cl">                      kubernetes.io/config.seen: 2022-08-31T05:03:28.843162256Z
+</span></span><span class="line"><span class="cl">                      kubernetes.io/config.source: file
+</span></span><span class="line"><span class="cl">                      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+</span></span><span class="line"><span class="cl">Status:               Running
+</span></span><span class="line"><span class="cl">IP:                   10.1.127.3
+</span></span><span class="line"><span class="cl">IPs:
+</span></span><span class="line"><span class="cl">  IP:           10.1.127.3
+</span></span><span class="line"><span class="cl">Controlled By:  Node/cluster2-controlplane
+</span></span><span class="line"><span class="cl">Containers:
+</span></span><span class="line"><span class="cl">  kube-apiserver:
+</span></span><span class="line"><span class="cl">    Container ID:  containerd://cc64f3649222f24d3fd2eb7d5f0f17db5fca76eb72dc4c17295fb4842c045f1b
+</span></span><span class="line"><span class="cl">    Image:         k8s.gcr.io/kube-apiserver:v1.24.0
+</span></span><span class="line"><span class="cl">    Image ID:      k8s.gcr.io/kube-apiserver@sha256:a04522b882e919de6141b47d72393fb01226c78e7388400f966198222558c955
+</span></span><span class="line"><span class="cl">    Port:          &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Host Port:     &lt;none&gt;
+</span></span><span class="line"><span class="cl">    Command:
+</span></span><span class="line"><span class="cl">      kube-apiserver
+</span></span><span class="line"><span class="cl">      --advertise-address<span class="o">=</span>10.1.127.3
+</span></span><span class="line"><span class="cl">      --allow-privileged<span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">      --authorization-mode<span class="o">=</span>Node,RBAC
+</span></span><span class="line"><span class="cl">      --client-ca-file<span class="o">=</span>/etc/kubernetes/pki/ca.crt
+</span></span><span class="line"><span class="cl">      --enable-admission-plugins<span class="o">=</span>NodeRestriction
+</span></span><span class="line"><span class="cl">      --enable-bootstrap-token-auth<span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">      --etcd-cafile<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.pem
+</span></span><span class="line"><span class="cl">      --etcd-certfile<span class="o">=</span>/etc/kubernetes/pki/etcd/etcd.pem
+</span></span><span class="line"><span class="cl">      --etcd-keyfile<span class="o">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem
+</span></span><span class="line"><span class="cl">      --etcd-servers<span class="o">=</span>https://10.1.127.10:2379
+</span></span><span class="line"><span class="cl">--------- End of Snippet---------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-is-the-default-data-directory-used-the-for-etcd-datastore-used-in-cluster1">Q. What is the default data directory used the for ETCD datastore used in cluster1?</h3>
+<p>Remember, this cluster uses a Stacked ETCD topology.</p>
+<p>Make sure to switch the context to cluster1:</p>
+<p>kubectl config use-context cluster1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ✖ kubectl -n kube-system describe pod etcd-cluster1-controlplane <span class="p">|</span> grep data-dir
+</span></span><span class="line"><span class="cl">      --data-dir<span class="o">=</span>/var/lib/etcd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜ --data-dir<span class="o">=</span>/var/lib/etcd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-is-the-default-data-directory-used-the-for-etcd-datastore-used-in-clutser2">Q. What is the default data directory used the for ETCD datastore used in clutser2?</h3>
+<p>Remember, this cluster uses as <code>External ETCD</code> topology.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ➜  ssh etcd-server
+</span></span><span class="line"><span class="cl">Welcome to Ubuntu 18.04.6 LTS <span class="o">(</span>GNU/Linux 5.4.0-1106-gcp x86_64<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> * Documentation:  https://help.ubuntu.com
+</span></span><span class="line"><span class="cl"> * Management:     https://landscape.canonical.com
+</span></span><span class="line"><span class="cl"> * Support:        https://ubuntu.com/advantage
+</span></span><span class="line"><span class="cl">This system has been minimized by removing packages and content that are
+</span></span><span class="line"><span class="cl">not required on a system that users <span class="k">do</span> not log into.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">To restore this content, you can run the <span class="s1">&#39;unminimize&#39;</span> command.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">etcd-server ~ ✖ ps -ef <span class="p">|</span> grep etcd
+</span></span><span class="line"><span class="cl">etcd         <span class="m">831</span>       <span class="m">1</span>  <span class="m">0</span> 07:53 ?        00:01:08 /usr/local/bin/etcd --name etcd-server --data-dir<span class="o">=</span>/var/lib/etcd-data --cert-file<span class="o">=</span>/etc/etcd/pki/etcd.pem --key-file<span class="o">=</span>/etc/etcd/pki/etcd-key.pem --peer-cert-file<span class="o">=</span>/etc/etcd/pki/etcd.pem --peer-key-file<span class="o">=</span>/etc/etcd/pki/etcd-key.pem --trusted-ca-file<span class="o">=</span>/etc/etcd/pki/ca.pem --peer-trusted-ca-file<span class="o">=</span>/etc/etcd/pki/ca.pem --peer-client-cert-auth --client-cert-auth --initial-advertise-peer-urls https://192.14.89.6:2380 --listen-peer-urls https://192.14.89.6:2380 --advertise-client-urls https://192.14.89.6:2379 --listen-client-urls https://192.14.89.6:2379,https://127.0.0.1:2379 --initial-cluster-token etcd-cluster-1 --initial-cluster etcd-server<span class="o">=</span>https://192.14.89.6:2380 --initial-cluster-state new
+</span></span><span class="line"><span class="cl">root        <span class="m">1137</span>    <span class="m">1003</span>  <span class="m">0</span> 09:18 pts/0    00:00:00 grep etcd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-how-many-nodes-are-part-of-the-etcd-cluster-that-etcd-server-is-a-part-of">Q. How many nodes are part of the ETCD cluster that etcd-server is a part of?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">etcd-server ~ ➜  <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span> etcdctl <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --endpoints<span class="o">=</span>https://127.0.0.1:2379 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --cacert<span class="o">=</span>/etc/etcd/pki/ca.pem <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --cert<span class="o">=</span>/etc/etcd/pki/etcd.pem <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> --key<span class="o">=</span>/etc/etcd/pki/etcd-key.pem <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  member list
+</span></span><span class="line"><span class="cl">f0f805fc97008de5, started, etcd-server, https://10.1.218.3:2380, https://10.1.218.3:2379, <span class="nb">false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-take-a-backup-of-etcd-on-cluster1-and-save-it-on-the-student-node-at-the-path-optcluster1db">Q. Take a backup of etcd on cluster1 and save it on the student-node at the path /opt/cluster1.db</h3>
+<p>If needed, make sure to set the context to cluster1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ➜  kubectl config use-context cluster1
+</span></span><span class="line"><span class="cl">Switched to context <span class="s2">&#34;cluster1&#34;</span>.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next, inspect the endpoints and certificates used by the <code>etcd</code> pod. We will make use of these to take the backup.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ✖ kubectl describe  pods -n kube-system etcd-cluster1-controlplane  <span class="p">|</span> grep advertise-client-urls
+</span></span><span class="line"><span class="cl">      --advertise-client-urls<span class="o">=</span>https://10.1.218.16:2379
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜  kubectl describe  pods -n kube-system etcd-cluster1-controlplane  <span class="p">|</span> grep pki
+</span></span><span class="line"><span class="cl">      --cert-file<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt
+</span></span><span class="line"><span class="cl">      --key-file<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key
+</span></span><span class="line"><span class="cl">      --peer-cert-file<span class="o">=</span>/etc/kubernetes/pki/etcd/peer.crt
+</span></span><span class="line"><span class="cl">      --peer-key-file<span class="o">=</span>/etc/kubernetes/pki/etcd/peer.key
+</span></span><span class="line"><span class="cl">      --peer-trusted-ca-file<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt
+</span></span><span class="line"><span class="cl">      --trusted-ca-file<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt
+</span></span><span class="line"><span class="cl">      /etc/kubernetes/pki/etcd from etcd-certs <span class="o">(</span>rw<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Path:          /etc/kubernetes/pki/etcd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>SSH to the <code>controlplane</code> node of <code>cluster1</code> and then take the backup using the endpoints and certificates we identified above:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cluster1-controlplane ~ ➜  <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span> etcdctl --endpoints<span class="o">=</span>https://10.1.220.8:2379 --cacert<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt --key<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key snapshot save /opt/cluster1.db
+</span></span><span class="line"><span class="cl">Snapshot saved at /opt/cluster1.db
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cluster1-controlplane ~ ➜
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally, copy the backup to the <code>student-node</code>. To do this, go back to the <code>student-node</code> and use <code>scp</code> as shown below:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">student-node ~ ➜  scp cluster1-controlplane:/opt/cluster1.db /opt
+</span></span><span class="line"><span class="cl">cluster1.db                                                                                                        100% 2088KB 112.3MB/s   00:00    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">student-node ~ ➜
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-06-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/kubernetes-cluster-maintenance/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" data-title="Kubernetes Cluster Maintenance" data-hashtags="Kubernetes"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" data-title="Kubernetes Cluster Maintenance"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" data-title="Kubernetes Cluster Maintenance"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" data-title="Kubernetes Cluster Maintenance" data-image="/images/featured-image/maintenance.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/kubernetes-application-lifecycle-management/" class="prev" rel="prev" title="Kubernetes Application Lifecycle Management"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Kubernetes Application Lifecycle Management</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
