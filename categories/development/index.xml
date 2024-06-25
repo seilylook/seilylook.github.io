@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 24 Jun 2024 12:02:34 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes Security</title>
+    <link>https://seilylook.github.io/posts/kubernetes-security/</link>
+    <pubDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-security/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/security.webp" referrerpolicy="no-referrer">
+            </div>What is SSL Word Convention Public key Private key *.crt / *.pem *.key / *-key.pem server.crt server.key server.pem server-key.pem client.crt client.key client.pem client-key.pem View Certificate Details Q. Indentify the certificate file used for the kube-api server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt Q. Identify the Certificate file used to authenticate kube-apiserver as a client to ETCD server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.]]></description>
+</item>
+<item>
     <title>Kubernetes Cluster Maintenance</title>
     <link>https://seilylook.github.io/posts/kubernetes-cluster-maintenance/</link>
     <pubDate>Mon, 24 Jun 2024 12:02:34 &#43;0900</pubDate>
@@ -120,18 +130,6 @@ Answer 1 2 3 4 controlplane ~ ✖ kubectl get nodes -o wide NAME STATUS ROLES AG
             </div>What is Kubernetes or K8s Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.
 To understand Kubernetes, we must first understand two things - Container and Orchestration.
 Containers Why do you need containers? In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible.]]></description>
-</item>
-<item>
-    <title>MLOps</title>
-    <link>https://seilylook.github.io/posts/mlops/</link>
-    <pubDate>Thu, 11 Apr 2024 13:48:36 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/mlops/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/mlops.png" referrerpolicy="no-referrer">
-            </div>Introduction 개발과 운영을 따로 나누지 않고 개발의 생산성과 운영의 안정성을 최적화하기 위한 문화이지 방법론이 DevOps이며, 이를 ML 시스템에 적용한 것이 MLOps이다.
-MLOps는 ML의 전체 Lifecycle를 관리해야 한다.
-MLOps란 단순히 ML 모델뿐만 아니라, 데이터를 수집하고 분석하는 단계(Data Collection, Ingestion, Analysis, Labeling, Validation, Preparation), 그리고 ML 모델을 학습하고 배포하는 단계(Model Training, Validation, Deployment)까지 전 과정을 AI Lifecycle로 보고, MLOps의 대상으로 보고 있다. ML에 기여하는 Engineer들(Data Scientist, Data Engineer, SW Engineer)이 이 Lifecycle을 관리하고 모니터링해야 한다.]]></description>
 </item>
 </channel>
 </rss>

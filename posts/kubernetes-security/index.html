@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Kubernetes Security - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Kubernetes Security" />
+<meta property="og:description" content="What is SSL Word Convention Public key Private key *.crt / *.pem *.key / *-key.pem server.crt server.key server.pem server-key.pem client.crt client.key client.pem client-key.pem View Certificate Details Q. Indentify the certificate file used for the kube-api server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt Q. Identify the Certificate file used to authenticate kube-apiserver as a client to ETCD server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/kubernetes-security/" /><meta property="og:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-25T13:02:19+09:00" />
+<meta property="article:modified_time" content="2024-06-25T13:02:19+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/featured-image/profile.png" /><meta name="twitter:title" content="Kubernetes Security"/>
+<meta name="twitter:description" content="What is SSL Word Convention Public key Private key *.crt / *.pem *.key / *-key.pem server.crt server.key server.pem server-key.pem client.crt client.key client.pem client-key.pem View Certificate Details Q. Indentify the certificate file used for the kube-api server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt Q. Identify the Certificate file used to authenticate kube-apiserver as a client to ETCD server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/kubernetes-security/" /><link rel="prev" href="https://seilylook.github.io/posts/kubernetes-cluster-maintenance/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Kubernetes Security",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/kubernetes-security\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"],"genre": "posts","keywords": "Kubernetes","wordcount":  926 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/kubernetes-security\/","datePublished": "2024-06-25T13:02:19+09:00","dateModified": "2024-06-25T13:02:19+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/featured-image\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/kubernetes-security/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/kubernetes-security/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kubernetes Security</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;926 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/security.webp"
+        data-srcset="/images/featured-image/security.webp, /images/featured-image/security.webp 1.5x, /images/featured-image/security.webp 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/security.webp"
+        title="/images/featured-image/security.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-sslhttpswwwnotionsof21c4e51bc63459cacf9df894b99ec89pvs401dc08d0a59642b49567b68233e6e89d"><a href="https://www.notion.so/f21c4e51bc63459cacf9df894b99ec89?pvs=4#01dc08d0a59642b49567b68233e6e89d">What is SSL</a></a></li>
+    <li><a href="#word-convention">Word Convention</a></li>
+    <li><a href="#view-certificate-details">View Certificate Details</a>
+      <ul>
+        <li><a href="#q-indentify-the-certificate-file-used-for-the-kube-api-server">Q. Indentify the certificate file used for the kube-api server</a></li>
+        <li><a href="#q-identify-the-certificate-file-used-to-authenticate-kube-apiserver-as-a-client-to-etcd-server">Q. Identify the Certificate file used to authenticate kube-apiserver as a client to ETCD server</a></li>
+        <li><a href="#q-identify-the-key-used-to-authenticate-kubeapi-server-to-the-kubelet-server">Q. Identify the key used to authenticate kubeapi-server to the kubelet server</a></li>
+        <li><a href="#q-identify-the-etcd-server-certificate-used-to-host-etcd-server">Q. Identify the ETCD Server Certificate used to host ETCD server</a></li>
+        <li><a href="#q-identify-the-etcd-server-ca-root-certificate-used-to-serve-etcd-server">Q. Identify the ETCD Server CA Root Certificate used to serve ETCD Server</a></li>
+        <li><a href="#q-what-is-the-common-namecn-configured-on-the-kube-api-server-certificate">Q. What is the Common Name(CN) configured on the Kube API Server Certificate?</a></li>
+        <li><a href="#q-what-is-the-name-of-the-ca-who-issued-the-kube-api-server-certificate">Q. What is the name of the CA who issued the Kube API Server Certificate?</a></li>
+        <li><a href="#q-which-of-the-below-alternate-names-is-not-configured-on-the-kube-api-server-certificate">Q. Which of the below alternate names is not configured on the Kube API Server Certificate?</a></li>
+        <li><a href="#q-what-is-the-common-namecn-configured-on-the-etcd-server-certificate">Q. What is the Common Name(CN) configured on the ETCD Server certificate?</a></li>
+        <li><a href="#q-how-long-from-the-issued-date-is-the-kube-api-server-certificate-valid-for">Q. How long, from the issued date, is the Kube-API Server Certificate valid for?</a></li>
+        <li><a href="#q-how-long-from-the-issued-date-is-the-root-ca-certificate-valid-for">Q. How long, from the issued date, is the Root CA Certificate valid for?</a></li>
+        <li><a href="#q-kubectl-suddenly-stops-responding-to-your-commands-check-it-out-someone-recently-modified-the-etckubernetesmanifestsetcdyaml-file">Q. Kubectl suddenly stops responding to your commands. Check it out! Someone recently modified the /etc/kubernetes/manifests/etcd.yaml file</a></li>
+        <li><a href="#q-the-kube-api-server-stopped-again-check-it-out-inspect-the-kube-api-server-logs-and-identify-the-root-cause-and-fix-the-issue">Q. The kube-api server stopped again! Check it out. Inspect the kube-api server logs and identify the root cause and fix the issue.</a></li>
+        <li><a href="#q-the-kube-api-server-stopped-again-check-it-out-inspect-the-kube-api-server-logs-and-identify-the-root-cause-and-fix-the-issue-1">Q. The kube-api server stopped again! Check it out. Inspect the kube-api server logs and identify the root cause and fix the issue.</a></li>
+      </ul>
+    </li>
+    <li><a href="#certificates-api">Certificates API</a>
+      <ul>
+        <li><a href="#q-create-a-certificatesigningrequest-object-with-the-name-akshay-with-the-contents-of-the-akshaycsr-file">Q. Create a CertificateSigningRequest object with the name akshay with the contents of the akshay.csr file</a></li>
+        <li><a href="#q-approve-the-csr-request">Q. Approve the CSR Request</a></li>
+        <li><a href="#q-what-groups-is-this-csr-requesting-access-to">Q. What groups is this CSR requesting access to?</a></li>
+        <li><a href="#reject-the-request">Reject the request</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="what-is-sslhttpswwwnotionsof21c4e51bc63459cacf9df894b99ec89pvs401dc08d0a59642b49567b68233e6e89d"><a href="https://www.notion.so/f21c4e51bc63459cacf9df894b99ec89?pvs=4#01dc08d0a59642b49567b68233e6e89d" target="_blank" rel="noopener noreffer ">What is SSL</a></h2>
+<h2 id="word-convention">Word Convention</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Public key</th>
+<th style="text-align:center">Private key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*.crt / *.pem</td>
+<td style="text-align:center">*.key / *-key.pem</td>
+</tr>
+<tr>
+<td style="text-align:center">server.crt</td>
+<td style="text-align:center">server.key</td>
+</tr>
+<tr>
+<td style="text-align:center">server.pem</td>
+<td style="text-align:center">server-key.pem</td>
+</tr>
+<tr>
+<td style="text-align:center">client.crt</td>
+<td style="text-align:center">client.key</td>
+</tr>
+<tr>
+<td style="text-align:center">client.pem</td>
+<td style="text-align:center">client-key.pem</td>
+</tr>
+</tbody>
+</table>
+<h2 id="view-certificate-details">View Certificate Details</h2>
+<h3 id="q-indentify-the-certificate-file-used-for-the-kube-api-server">Q. Indentify the certificate file used for the kube-api server</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  cat /etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - --tls-cert-file<span class="o">=</span>/etc/kubernetes/pki/apiserver.crt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-identify-the-certificate-file-used-to-authenticate-kube-apiserver-as-a-client-to-etcd-server">Q. Identify the Certificate file used to authenticate kube-apiserver as a client to ETCD server</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  cat /etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - --etcd-certfile<span class="o">=</span>/etc/kubernetes/pki/apiserver-etcd-client.crt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-identify-the-key-used-to-authenticate-kubeapi-server-to-the-kubelet-server">Q. Identify the key used to authenticate kubeapi-server to the kubelet server</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  cat /etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - --kubelet-client-key<span class="o">=</span>/etc/kubernetes/pki/apiserver-kubelet-client.key
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-identify-the-etcd-server-certificate-used-to-host-etcd-server">Q. Identify the ETCD Server Certificate used to host ETCD server</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  cat /etc/kubernetes/manifests/etcd.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - --cert-file<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-identify-the-etcd-server-ca-root-certificate-used-to-serve-etcd-server">Q. Identify the ETCD Server CA Root Certificate used to serve ETCD Server</h3>
+<p>ETCD can have its own CA. So this may be a different CA certificate than the one used by kube-api server.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  cat /etc/kubernetes/manifests/etcd.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - --trusted-ca-file<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-is-the-common-namecn-configured-on-the-kube-api-server-certificate">Q. What is the Common Name(CN) configured on the Kube API Server Certificate?</h3>
+<p>OpenSSL Syntax: <code>openssl x509 -in file-path.crt -text -noout</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Subject: <span class="nv">CN</span> <span class="o">=</span> kube-apiserver
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-is-the-name-of-the-ca-who-issued-the-kube-api-server-certificate">Q. What is the name of the CA who issued the Kube API Server Certificate?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Issuer: <span class="nv">CN</span> <span class="o">=</span> kubernetes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-which-of-the-below-alternate-names-is-not-configured-on-the-kube-api-server-certificate">Q. Which of the below alternate names is not configured on the Kube API Server Certificate?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ✖ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        X509v3 Subject Alternative Name: 
+</span></span><span class="line"><span class="cl">                        DNS:controlplane, DNS:kubernetes, DNS:kubernetes.default, DNS:kubernetes.default.svc, DNS:kubernetes.default.svc.cluster.local, IP Address:10.96.0.1, IP Address:192.12.87.9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-is-the-common-namecn-configured-on-the-etcd-server-certificate">Q. What is the Common Name(CN) configured on the ETCD Server certificate?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Subject: <span class="nv">CN</span> <span class="o">=</span> controlplane
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-how-long-from-the-issued-date-is-the-kube-api-server-certificate-valid-for">Q. How long, from the issued date, is the Kube-API Server Certificate valid for?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Validity
+</span></span><span class="line"><span class="cl">            Not Before: Jun <span class="m">25</span> 06:30:33 <span class="m">2024</span> GMT
+</span></span><span class="line"><span class="cl">            Not After : Jun <span class="m">25</span> 06:35:33 <span class="m">2025</span> GMT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-how-long-from-the-issued-date-is-the-root-ca-certificate-valid-for">Q. How long, from the issued date, is the Root CA Certificate valid for?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  openssl x509 -in /etc/kubernetes/pki/ca.crt -text
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Validity
+</span></span><span class="line"><span class="cl">            Not Before: Jun <span class="m">25</span> 06:30:33 <span class="m">2024</span> GMT
+</span></span><span class="line"><span class="cl">            Not After : Jun <span class="m">23</span> 06:35:33 <span class="m">2034</span> GMT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-kubectl-suddenly-stops-responding-to-your-commands-check-it-out-someone-recently-modified-the-etckubernetesmanifestsetcdyaml-file">Q. Kubectl suddenly stops responding to your commands. Check it out! Someone recently modified the /etc/kubernetes/manifests/etcd.yaml file</h3>
+<p>You are asked to investigate and fix the issue. Once you fix the issue wait for sometime for kubectl to respond. Check the logs of the ETCD container.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim /etc/kubernetes/manifests/etcd.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - --cert-file<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt
+</span></span><span class="line"><span class="cl">:wq!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  ls -l /etc/kubernetes/pki/etcd/server* <span class="p">|</span> grep .crt
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> root root <span class="m">1208</span> Jun <span class="m">25</span> 06:35 /etc/kubernetes/pki/etcd/server.crt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-the-kube-api-server-stopped-again-check-it-out-inspect-the-kube-api-server-logs-and-identify-the-root-cause-and-fix-the-issue">Q. The kube-api server stopped again! Check it out. Inspect the kube-api server logs and identify the root cause and fix the issue.</h3>
+<p>Run crictl ps -a command to identify the kube-api server container. Run crictl logs container-id command to view the logs.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# crictl ps -a <span class="p">|</span> grep kube-apiserver
+</span></span><span class="line"><span class="cl">1fb242055cff8       529072250ccc6       About a minute ago   Exited              kube-apiserver            <span class="m">3</span>                   ed2174865a416       kube-apiserver-controlplane
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@controlplane:~# crictl logs --tail<span class="o">=</span><span class="m">2</span> 1fb242055cff8  
+</span></span><span class="line"><span class="cl">W0916 14:19:44.771920       <span class="m">1</span> clientconn.go:1331<span class="o">]</span> <span class="o">[</span>core<span class="o">]</span> grpc: addrConn.createTransport failed to connect to <span class="o">{</span>127.0.0.1:2379 127.0.0.1 &lt;nil&gt; <span class="m">0</span> &lt;nil&gt;<span class="o">}</span>. Err: connection error: <span class="nv">desc</span> <span class="o">=</span> <span class="s2">&#34;transport: authentication handshake failed: x509: certificate signed by unknown authority&#34;</span>. Reconnecting...
+</span></span><span class="line"><span class="cl">E0916 14:19:48.689303       <span class="m">1</span> run.go:74<span class="o">]</span> <span class="s2">&#34;command failed&#34;</span> <span class="nv">err</span><span class="o">=</span><span class="s2">&#34;context deadline exceeded&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This indicates an issue with the ETCD CA certificate used by the <code>kube-apiserver</code>. Correct it to use the file <code>/etc/kubernetes/pki/etcd/ca.crt</code>.</p>
+<h3 id="q-the-kube-api-server-stopped-again-check-it-out-inspect-the-kube-api-server-logs-and-identify-the-root-cause-and-fix-the-issue-1">Q. The kube-api server stopped again! Check it out. Inspect the kube-api server logs and identify the root cause and fix the issue.</h3>
+<p>Run crictl ps -a command to identify the kube-api server container. Run crictl logs container-id command to view the logs.</p>
+<p>If we inspect the kube-apiserver container on the controlplane, we can see that it is frequently exiting.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# crictl ps -a <span class="p">|</span> grep kube-apiserver
+</span></span><span class="line"><span class="cl">1fb242055cff8       529072250ccc6       About a minute ago   Exited              kube-apiserver            <span class="m">3</span>                   ed2174865a416       kube-apiserver-controlplane
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If we now inspect the logs of this exited container, we would see the following errors:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# crictl logs --tail<span class="o">=</span><span class="m">2</span> 1fb242055cff8  
+</span></span><span class="line"><span class="cl">W0916 14:19:44.771920       <span class="m">1</span> clientconn.go:1331<span class="o">]</span> <span class="o">[</span>core<span class="o">]</span> grpc: addrConn.createTransport failed to connect to <span class="o">{</span>127.0.0.1:2379 127.0.0.1 &lt;nil&gt; <span class="m">0</span> &lt;nil&gt;<span class="o">}</span>. Err: connection error: <span class="nv">desc</span> <span class="o">=</span> <span class="s2">&#34;transport: authentication handshake failed: x509: certificate signed by unknown authority&#34;</span>. Reconnecting...
+</span></span><span class="line"><span class="cl">E0916 14:19:48.689303       <span class="m">1</span> run.go:74<span class="o">]</span> <span class="s2">&#34;command failed&#34;</span> <span class="nv">err</span><span class="o">=</span><span class="s2">&#34;context deadline exceeded&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This indicates an issue with the ETCD CA certificate used by the kube-apiserver. Correct it to use the file <code>/etc/kubernetes/pki/etcd/ca.crt</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">controlplane ~ ➜  vim /etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    - --etcd-cafile<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="certificates-api">Certificates API</h2>
+<h3 id="q-create-a-certificatesigningrequest-object-with-the-name-akshay-with-the-contents-of-the-akshaycsr-file">Q. Create a CertificateSigningRequest object with the name akshay with the contents of the akshay.csr file</h3>
+<p>As of kubernetes 1.19, the API to use for CSR is certificates.k8s.io/v1.</p>
+<p>Please note that an additional field called signerName should also be added when creating CSR. For client authentication to the API server we will use the built-in signer kubernetes.io/kube-apiserver-client.</p>
+<p>Use the command to generate the base64 encoded format on following:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat akshay.csr <span class="p">|</span> base64 -w <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim akshay-csr.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">certificates.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">CertificateSigningRequest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">akshay</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">groups</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">system:authenticated</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">request</span><span class="p">:</span><span class="w"> </span><span class="l">LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ1ZqQ0NBVDRDQVFBd0VURVBNQTBHQTFVRUF3d0dZV3R6YUdGNU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRgpBQU9DQVE4QU1JSUJDZ0tDQVFFQXhpMG1FbS80OEUwZHRmbCtSajg0R1ZGRHVhdTdOQVpHMGprcUwrU2wxd2o3ClFJQkdQV1l3OHY5YmZvRExpVTBlRnUrTC9NRTduNWlZOHVTRG9Pd3pEQldralZoK1I2SEVEblVkOHZ2eTNSZUsKbk5BV202V0tSVS9JM3A0cmU0dUViYzZ2ajgrVnFlSVhvQ1ZsczJnczBGRGEzL3MzdGxYYU5FTGZ3NjJEdVcxTgpRZ1FoNEh4L1VjWXc0YjU2dzZuREZVTm1TaFA1R0o2cWJWWjlYWndxWDRVMWVNS3N0d0pqemtDZ3libFdmeXdUCmppNmJCMjZzV2VTclV4MVRUOHFCVU1uQWFncVZHVXFyMEdZdFR5NVZrZ3JsSUlCZ2xnMHhwRyszVFZpNUVxWlkKUGl3dkh1RURsUFhhTlBGM2dMYmtHY3E4VHAzOTBnY2w3ZlhOS2tqVVZRSURBUUFCb0FBd0RRWUpLb1pJaHZjTgpBUUVMQlFBRGdnRUJBQ1cwREpSbkxYRmd5VVVjamplQk9qUjdjZjJzemMxK2JpamJmcTJ1SWlwWHJ4VDQ1RWFkCmRpbys0M2pDL0hYekxsQVlEOHNQamdsaTJqZXVjeXBDV05MRzJTRFY2S3NQZXBUbGRQbGo2YmU4R3dCeEl6cUgKVUs5ZkZvSXZPNjVVVE9LQkx0WktJZUd6bXo5SXBjZC9pb3AxT08wTUgyQlpLMGh6MG4vZmhNdWg1SmtoV1ExWgoyZFVFVmEvaGlUV2FNMTY5cVpDY3VYY0dmWnJYZEc4UDRJOVU3WlJxYng4TjlHWldyRUJCdFFOMlJpQXBuV2JLCkUzVHdmbXpEUmYzUHRQYTJXK1krVEtTUEJTTGdwMFJpSy9SUzlrdjFpUDUwNkUyN0owNkl3QlZwcUhETTlQTjYKbzEyVEVnY0c3MmhVMVpHNlk0UWs0R1JSYTJOZVJYMURNL2c9Ci0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">signerName</span><span class="p">:</span><span class="w"> </span><span class="l">kubernetes.io/kube-apiserver-client</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">usages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">client auth</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl apply -f akshay-csr.yaml 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">certificatesigningrequest.certificates.k8s.io/akshay created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-approve-the-csr-request">Q. Approve the CSR Request</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl certificate approve akshay
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q-what-groups-is-this-csr-requesting-access-to">Q. What groups is this CSR requesting access to?</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get csr agent-smith -o yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  groups:
+</span></span><span class="line"><span class="cl">  - system:masters
+</span></span><span class="line"><span class="cl">  - system:authenticated
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="reject-the-request">Reject the request</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl certificate deny agent-smith
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-06-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/kubernetes-security/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/kubernetes-security/" data-title="Kubernetes Security" data-hashtags="Kubernetes"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/kubernetes-security/" data-hashtag="Kubernetes"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/kubernetes-security/" data-title="Kubernetes Security"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/kubernetes-security/" data-title="Kubernetes Security"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/kubernetes-security/" data-title="Kubernetes Security" data-image="/images/featured-image/security.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/kubernetes-cluster-maintenance/" class="prev" rel="prev" title="Kubernetes Cluster Maintenance"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Kubernetes Cluster Maintenance</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

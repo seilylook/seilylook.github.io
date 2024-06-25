@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/tags/kubernetes/</link>
         <description>Kubernetes - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 24 Jun 2024 12:02:34 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/kubernetes/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/kubernetes/" rel="self" type="application/rss+xml" /><item>
+    <title>Kubernetes Security</title>
+    <link>https://seilylook.github.io/posts/kubernetes-security/</link>
+    <pubDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes-security/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/security.webp" referrerpolicy="no-referrer">
+            </div>What is SSL Word Convention Public key Private key *.crt / *.pem *.key / *-key.pem server.crt server.key server.pem server-key.pem client.crt client.key client.pem client-key.pem View Certificate Details Q. Indentify the certificate file used for the kube-api server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --tls-cert-file=/etc/kubernetes/pki/apiserver.crt Q. Identify the Certificate file used to authenticate kube-apiserver as a client to ETCD server 1 2 3 controlplane ~ ➜ cat /etc/kubernetes/manifests/kube-apiserver.yaml - --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.]]></description>
+</item>
+<item>
     <title>Kubernetes Cluster Maintenance</title>
     <link>https://seilylook.github.io/posts/kubernetes-cluster-maintenance/</link>
     <pubDate>Mon, 24 Jun 2024 12:02:34 &#43;0900</pubDate>

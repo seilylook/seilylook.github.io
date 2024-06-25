@@ -102,6 +102,31 @@
         alt="/images/featured-image/profile.png"
         title="/images/featured-image/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/se-hyeon-kim-07a1a02a2" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/micro-service-architecture/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/featured-image/micro-service-architecture.png"
+        data-srcset="/images/featured-image/micro-service-architecture.png, /images/featured-image/micro-service-architecture.png 1.5x, /images/featured-image/micro-service-architecture.png 2x"
+        data-sizes="auto"
+        alt="/images/featured-image/micro-service-architecture.png"
+        title="/images/featured-image/micro-service-architecture.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/micro-service-architecture/">Micro Service Architecture</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-06-12">2024-06-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/development/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Development</a></span></div><div class="content">Work Flow Voting app(Python web): 80 port를 통해 사용자가 접근
+In-memory(Redis): 6379 port를 통해 Voting app POD &amp; Worker POD가 접근
+Worker(.Net): 접근할 필요 없음
+DB(PostgreSQL): 5432 port를 통해 Result app POD &amp; Worker POD가 접근
+Result(Nodejs): 80 port를 통해 사용자가 접근
+Goals Deploy Container
+Enable Connectivity
+External Access
+Steps Deploy PODs
+Create Services(Cluster IP): 내부적으로 Worker, Voting-app, Result-app이 Redis, DB에 접근할 수 있도록 해주는 용도.
+A. redis
+B. db</div><div class="post-footer">
+        <a href="/posts/micro-service-architecture/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/kubernetes-core-concepts/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -178,21 +203,6 @@ Docker Configuration Shell File path: ./start.sh
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-05-27">2024-05-27</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Configuration SnowSQL설치 SnowSQL연결 </div><div class="post-footer">
         <a href="/posts/snowflake/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-warehouse/">Data Warehouse</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/airflow-architecture/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/featured-image/airflow-logo.png"
-        data-srcset="/images/featured-image/airflow-logo.png, /images/featured-image/airflow-logo.png 1.5x, /images/featured-image/airflow-logo.png 2x"
-        data-sizes="auto"
-        alt="/images/featured-image/airflow-logo.png"
-        title="/images/featured-image/airflow-logo.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/airflow-architecture/">Airflow Architecture</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-05-22">2024-05-22</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Airflow is a platform that lets you build and run workflows. A workflow is represented as a **DAG** (a Directed Acyclic Graph), and contains individual pieces of work called Tasks, arranged with dependencies and data flows taken into account.
-A DAG specifies the dependencies between tasks, which defines the order in which to execute the tasks. Tasks describe what to do, be it fetching data, running analysis, triggering other systems, or more.</div><div class="post-footer">
-        <a href="/posts/airflow-architecture/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/orchestration/">Orchestration</a>,&nbsp;<a href="/tags/data-pipeline/">Data Pipeline</a>,&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
