@@ -4,22 +4,7 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 26 Jun 2024 17:27:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
-    <title>Mathematics Begin</title>
-    <link>https://seilylook.github.io/posts/mathematics-begin/</link>
-    <pubDate>Wed, 26 Jun 2024 17:27:49 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/mathematics-begin/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/mathematics.webp" referrerpolicy="no-referrer">
-            </div>벡터 벡터가 뭔가요? 벡터는 숫자를 원소로 가지는 List 혹은 Array 이다.
-벡터끼리 같은 모양을 가지면 성분곱(Hadamard product)를 계산할 수 있다.
-1 2 3 x = [1, 7, 2] # 열 벡터 x = np.array([1, 7, 2]) # 행 벡터 이와 깉이 벡터의 개수에 따라 벡터의 차원이라고 한다.
-벡터는 공간에서 한 점을 나타낸다.
-벡터는 원점으로부터 상대적 위치를 표현한다.
-벡터에 숫자를 곱해주면 방향은 그대로이고 길이만 변한다. 이 연산을 스칼라 곱이라고 부른다. 곱해주는 숫자를 a라고 정했을 때, a &lt; 1이면 길이가 줄어들고 a &gt; 1이면 길이가 늘어난다.]]></description>
-</item>
-<item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
     <title>Kubernetes Security</title>
     <link>https://seilylook.github.io/posts/kubernetes-security/</link>
     <pubDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</pubDate>
@@ -133,6 +118,18 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             </div>Lab 1 Question How many nodes are part of the cluster?
 Answer 1 2 3 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 26m v1.29.0+k3s1 Question What is the flavor and version of Operating System on which the Kubernetes nodes are running?
 Answer 1 2 3 4 controlplane ~ ✖ kubectl get nodes -o wide NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP OS-IMAGE KERNEL-VERSION CONTAINER-RUNTIME controlplane Ready control-plane,master 30m v1.]]></description>
+</item>
+<item>
+    <title>Kubernetes</title>
+    <link>https://seilylook.github.io/posts/kubernetes/</link>
+    <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/kubernetes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/kubernetes-logo.png" referrerpolicy="no-referrer">
+            </div>What is Kubernetes or K8s Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.
+To understand Kubernetes, we must first understand two things - Container and Orchestration.
+Containers Why do you need containers? In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible.]]></description>
 </item>
 </channel>
 </rss>
