@@ -4,7 +4,24 @@
         <link>https://seilylook.github.io/categories/development/</link>
         <description>Development - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 27 Jun 2024 14:58:03 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/development/" rel="self" type="application/rss+xml" /><item>
+    <title>Mathematics Standard Deviation</title>
+    <link>https://seilylook.github.io/posts/mathematics-standard-deviation/</link>
+    <pubDate>Thu, 27 Jun 2024 14:58:03 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/mathematics-standard-deviation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/mathematics.webp" referrerpolicy="no-referrer">
+            </div>표준 편차(Standard Deviation)는 데이터 세트의 분포를 나타내는 통계적 척도입니다. 이는 데이터가 평균으로부터 얼마나 떨어져 있는지를 나타내며, 데이터의 변동성을 측정하는 데 사용됩니다. 표준 편차가 작을수록 데이터가 평균에 가깝게 모여 있음을 의미하고, 표준 편차가 클수록 데이터가 평균에서 멀리 떨어져 있음을 의미합니다.
+표준 편차의 계산 방법 표준 편차는 다음과 같은 단계로 계산됩니다.
+**평균(산술 평균)**을 계산합니다:
+$$
+\mu = \frac{1}{N} \sum_{i=1}^{N} x_i
+$$
+여기서 (N)은 데이터 포인트의 개수이고, (x_i)는 각 데이터 포인트입니다.
+**분산(Variance)**을 계산합니다:]]></description>
+</item>
+<item>
     <title>Kubernetes Security</title>
     <link>https://seilylook.github.io/posts/kubernetes-security/</link>
     <pubDate>Tue, 25 Jun 2024 13:02:19 &#43;0900</pubDate>
@@ -118,18 +135,6 @@ Q. What is the version of Kubernetes running on the nodes ? 1 2 3 4 controlplane
             </div>Lab 1 Question How many nodes are part of the cluster?
 Answer 1 2 3 controlplane ~ ➜ kubectl get nodes NAME STATUS ROLES AGE VERSION controlplane Ready control-plane,master 26m v1.29.0+k3s1 Question What is the flavor and version of Operating System on which the Kubernetes nodes are running?
 Answer 1 2 3 4 controlplane ~ ✖ kubectl get nodes -o wide NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP OS-IMAGE KERNEL-VERSION CONTAINER-RUNTIME controlplane Ready control-plane,master 30m v1.]]></description>
-</item>
-<item>
-    <title>Kubernetes</title>
-    <link>https://seilylook.github.io/posts/kubernetes/</link>
-    <pubDate>Mon, 06 May 2024 10:58:44 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/kubernetes/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/featured-image/kubernetes-logo.png" referrerpolicy="no-referrer">
-            </div>What is Kubernetes or K8s Kubernetes also known as K8s was built by Google based on their expreience running containers in production. It is now an open-source project and is arguably one of the best and most pupular contaniner orchestrations technologies out there.
-To understand Kubernetes, we must first understand two things - Container and Orchestration.
-Containers Why do you need containers? In one of my previos projects, I had this requirement to setup an end-to-end stack including various different technologies like a Web Server using NodeJS and database such as MongoDB/CouchDB, messaging system like Redis and an orchestration tool like Ansible.]]></description>
 </item>
 </channel>
 </rss>
