@@ -1,0 +1,23 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Standard Deviation - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/standard-deviation/</link>
+        <description>Standard Deviation - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 27 Jun 2024 14:58:03 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/standard-deviation/" rel="self" type="application/rss+xml" /><item>
+    <title>Mathematics Standard Deviation</title>
+    <link>https://seilylook.github.io/posts/mathematics-standard-deviation/</link>
+    <pubDate>Thu, 27 Jun 2024 14:58:03 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/mathematics-standard-deviation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image/mathematics.webp" referrerpolicy="no-referrer">
+            </div>표준 편차(Standard Deviation)는 데이터 세트의 분포를 나타내는 통계적 척도입니다. 이는 데이터가 평균으로부터 얼마나 떨어져 있는지를 나타내며, 데이터의 변동성을 측정하는 데 사용됩니다. 표준 편차가 작을수록 데이터가 평균에 가깝게 모여 있음을 의미하고, 표준 편차가 클수록 데이터가 평균에서 멀리 떨어져 있음을 의미합니다.
+표준 편차의 계산 방법 표준 편차는 다음과 같은 단계로 계산됩니다.
+산술 평균을 계산합니다:
+$$ \mu = \frac{1}{N} \sum_{i=1}^{N} x_i $$
+여기서 (N)은 데이터 포인트의 개수이고, (x_i)는 각 데이터 포인트입니다.
+분산을 계산합니다:]]></description>
+</item>
+</channel>
+</rss>
