@@ -4,7 +4,135 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 20 Jul 2024 17:12:21 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
-        </channel>
+        <item>
+    <title>Kubernetes Structure</title>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/structure/</link>
+    <pubDate>Sat, 20 Jul 2024 17:12:21 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/structure/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
+    <title>Ui</title>
+    <link>https://seilylook.github.io/posts/data/spark/ui/</link>
+    <pubDate>Sat, 20 Jul 2024 16:47:09 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/ui/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Introduction Jobs: 스파크 애플리케이션의 모든 job에 대한 요약 정보
+Stages: 모든 jobs의 모든 stages의 현재 상태 요약 정보
+Storage: persisted RDD와 DataFrame 정보 제공
+Environment: 다양한 환경 변수 값
+Executors: 애플리케이션을 위해 생성된 Executer 정보 제공. 메모리와 디스크 사용량과 task, shuffle 정보 등
+SQL: 애플리케이션이 Spark SQL 쿼리 실행 시 정보 제공
+Streaming: Streaming jobs 실행 시 정보 제공
+애플리케이션 실행 1 2 3 4 5 df = spark.read.format(&#34;csv&#34;) \ .]]></description>
+</item>
+<item>
+    <title>Rdd</title>
+    <link>https://seilylook.github.io/posts/data/spark/rdd/</link>
+    <pubDate>Sat, 20 Jul 2024 16:47:00 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/rdd/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>RDD Resilient Distributed Datasets(RDDs)
+distrubuted collections of objects that can be cached in memory across cluster
+manipulated through pararrel operators
+automatically recomputed on failure
+immutable(read-only)
+RDD 연산 RDD 연산은 트랜스포메이션과 액션이 있습니다. 트랜스포메이션은 RDD를 이용해서 새로운 RDD를 생성하고, 액션은 RDD를 이용해서 작업을 처리하여 결과를 드라이버에 반환하거나, 파일시스템에 결과를 쓰는 연산입니다. 스파크는 트랜스포메이션을 호출할 때는 작업을 구성하고, 액션이 호출 될 때 실제 계산을 실행합니다.
+다음의 예제에서 csv파일의 데이터를 읽어서 lines라는 RDD 객체를 생성하고, 각 라인의 글자의 개수를 세는 map 트랜스포메이션 함수를 호출하고, 글자 수의 총합을 구하는 reduce 액션 함수를 호출합니다.]]></description>
+</item>
+<item>
+    <title>Partition</title>
+    <link>https://seilylook.github.io/posts/data/spark/partition/</link>
+    <pubDate>Sat, 20 Jul 2024 16:46:51 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/partition/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>What is Partition? Partition은 RDDs나 Dataset을 구성하고 있는 최소 단위 객체이다. 각 Partition은 서로 다른 노드에서 분산 처리된다.
+Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리된다. 또한, 하나의 Task는 하나의 Core가 연산 처리한다.
+즉, 1 Core = 1 Task = 1 Partition이다.
+예를 들어, 다음과 같다면 전체 Core 수를 300개로 세팅한 상태이고, 이 300개가 현재 실행 중인 Task 수이자, 현재 처리 중인 Partition 수에 해당한다. 또한, 전체 Partition 수는 1800개로 세팅했으며, 이는 전체 Task 수이기도 하다.]]></description>
+</item>
+<item>
+    <title>Hierarchy</title>
+    <link>https://seilylook.github.io/posts/data/spark/hierarchy/</link>
+    <pubDate>Sat, 20 Jul 2024 16:46:40 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/hierarchy/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Introduction Spark&rsquo;s execution hierarchy, from top to bottom is Job, Stage, Task.
+Slots are part of executors. A task is executed in a slot. But slots are rather a tool to execute tasks, not part of the execution hierarchy itself.
+Executors are a component of a Spark cluter, but not of the execution hierarchy.
+Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores.]]></description>
+</item>
+<item>
+    <title>Execution_plan</title>
+    <link>https://seilylook.github.io/posts/data/spark/execution_plan/</link>
+    <pubDate>Sat, 20 Jul 2024 16:46:25 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/execution_plan/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Execution plan goal An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized logical and physical operations.
+Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
+Info DAG?
+Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark.]]></description>
+</item>
+<item>
+    <title>Dpp</title>
+    <link>https://seilylook.github.io/posts/data/spark/dpp/</link>
+    <pubDate>Sat, 20 Jul 2024 16:46:07 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/dpp/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
+1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition.]]></description>
+</item>
+<item>
+    <title>Dependency</title>
+    <link>https://seilylook.github.io/posts/data/spark/dependency/</link>
+    <pubDate>Sat, 20 Jul 2024 16:45:54 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/dependency/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
+Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
+</item>
+<item>
+    <title>Data_frame_api</title>
+    <link>https://seilylook.github.io/posts/data/spark/data_frame_api/</link>
+    <pubDate>Sat, 20 Jul 2024 16:45:40 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/data_frame_api/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
+</item>
+<item>
+    <title>Cache_persist</title>
+    <link>https://seilylook.github.io/posts/data/spark/cache_persist/</link>
+    <pubDate>Sat, 20 Jul 2024 16:45:26 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/spark/cache_persist/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Introduction Spark Cache and Persist are optimization techniques for iterative and interactive Spark applications to improve the performances of the jobs or applications. In
+Key Point RDD.cache() cashes the RDD with the default storage level MEMORY_ONLY
+DataFrame.cache() caches the DataFrame with the default storage level MEMORY_AND_DISK
+The persist() method is used to store it to the user-defined storage level
+On Spark UI, the Storage tab shows where partitions exist in memory or disk across the cluster.]]></description>
+</item>
+</channel>
 </rss>
