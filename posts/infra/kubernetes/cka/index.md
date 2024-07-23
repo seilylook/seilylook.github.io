@@ -5,36 +5,6 @@
 
 CKA 자격증은 쿠버네티스 클러스터를 설치, 구성, 관리하는 데 필요한 지식과 경험을 입증하는 자격증이다. 
 
-## 대표적 출제 유형
-
-- Network Policy를 생성하고 Ingress 필드에서 특정 Namespace만 접속 가능하도록 설정
-
-- PersistentVolume 생성 이후 Kubectl edit 혹은 patch를 통해 기존 선어한 내용 업데이트
-
-- Ingress 컨트롤러를 만들고 curl 등의 명령으로 웹 페이지에 접속해 200 response 확인
-
-- Drain node 이후 마스터 node의 소프트웨어 버전을 업그레이드
-
-- Role 혹은 ClusterRole을 주어진 조건대로 생성하고 이를 특정 사용자 혹은 서비스 어카운트에 바인딩
-
-- ETCD 백업과 복원에 사용하는 ETCD CLI 명령과 플래그 옵션
-
-- CPU 사용량 많은 노드 혹은 파드 찾기
-
-- Ready 혹은 NotReady 상태의 노드를 찾고 특정 텍스트 파일에 해당 내용 복제하기
-
-- Sidecar 컨테이너를 주어진 조건대로 생성하기
-
-- 멀티 컨테이너를 조건대로 실행하기
-
-- Service 형태 중 NodePort 타입의 서비스 생성
-
-- NodeSelector를 사용해 지정한 노드에 파드 생성
-
-- Kubelet에 문제가 있는 노드에 접속해 정상 작동할 수 있도록 해결
-
-- Kubeadm을 사용해 쿠버네티스 클러스터 업그레이드
-
 ## 문제
 
 ### 1. Question
@@ -528,3 +498,267 @@ NAME                          ENDPOINTS      AGE
 endpoints/check-ip-service    10.44.0.1:80   8m
 endpoints/check-ip-service2   10.44.0.1:80   6m13s
 ```
+
+### 4. Question
+
+Upgrade the current version of kubernetes from `1.29.0` to `1.30.0` exactly using the `kubeadm` utility. Make sure that the upgrade is carried out one node at a time starting with the controlplane node. 
+
+To minimiza downtime, the deployment `gold-nginx` should be rescheduled on an alternate node before upgrading each node.
+
+Upgrade `controlplane` node first and drain node `node01` before upgrading it. Pods for `gold-nginx` should run on the `controlplane` node subsequently.
+
+#### Answer
+
+**On the Controlplane node**
+
+```bash
+vim /etc/apt/sources.list.d/kubernetes.list
+```
+
+Update the version in the URL to the next available minor release, v1.30
+
+```bash
+deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+```
+
+```bash
+kubectl drain controlplane --ignore-daemonsets
+
+apt update
+
+apt-cache madison kubeadm
+```
+
+Based on the version information displayed by `apt-cache madison`, it indicates that for kubernetes version `1.30.0`, the available package version is `1.30.0-1.-1`. Therefore, to install kubeadm for kubernetes, `v1.30.0`, use the following command:
+
+```bash
+apt-get install kubeadm=1.30.0-1.1
+```
+
+Upgrade the kubernetes cluster:
+
+```bash
+kubeadm upgrade plan v1.30.0
+
+kubeadm upgrade apply v1.30.0
+```
+
+Now, upgrade the version and restart Kubelet. Also, mark the node (in this case, the "controlplane" node) as schedulable.
+
+```bash
+apt-get install kubelet=1.30.0-1.1
+
+systemctl daemon-reload
+
+systemctl restart kubelet
+
+kubectl uncordon controlplane
+```
+
+Before draining `node01`, if the controlplane gets taint during an upgrade, we have to remove it.
+
+```bash
+# Identify the taint first. 
+kubectl describe node controlplane | grep -i taint
+
+# Remove the taint with help of "kubectl taint" command.
+kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+
+# Verify it, the taint has been removed successfully.  
+kubectl describe node controlplane | grep -i taint
+```
+
+**On the node01 node**
+
+`SSH` to the `node01` and perform the below steps as follows: -
+
+Use any text editor you prefer to open the file that defines the Kubernetes apt repository.
+
+```bash
+vim /etc/apt/sources.list.d/kubernetes.list
+```
+
+Update the version in the URL to the next available minor release, i.e v1.30.
+
+```bash
+deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+```
+
+After making changes, save the file and exit from your text editor. Proceed with the next instruction.
+
+```bash
+apt update
+
+apt-cache madison kubeadm
+```
+
+Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.30.0, the available package version is 1.30.0-1.1. Therefore, to install kubeadm for Kubernetes v1.30.0, use the following command:
+
+```bash
+apt-get install kubeadm=1.30.0-1.1
+
+# Upgrade the node 
+kubeadm upgrade node
+```
+
+Now, upgrade the version and restart Kubelet.
+
+```bash
+apt-get install kubelet=1.30.0-1.1
+
+systemctl daemon-reload
+
+systemctl restart kubelet
+```
+
+To exit from the specific node, type exit or logout on the terminal.
+
+Back on the controlplane node:
+
+```bash
+kubectl uncordon node01
+
+kubectl get pods -o wide | grep gold # make sure this is scheduled on a node
+```
+
+### 5. Question
+
+Print the names of all deployments in the `admin2406` namespace in the following format:
+
+DEPLOYMENT   CONTAINER_IMAGE   READY_REPLICAS   NAMESPACE
+
+<deployment name>   <container image used>   <ready replica count>   <Namespace>
+
+The data should be sorted by the increasing order of the deployment name.
+
+Example:
+
+DEPLOYMENT   CONTAINER_IMAGE   READY_REPLICAS   NAMESPACE
+
+deploy0   nginx:alpine   1   admin2406
+
+Write the result to the file `/opt/admin2406_data`.
+
+#### Answer
+
+```bash
+kubectl get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name -n admin2406 > /opt/admin2406_data
+```
+
+### 6. Question
+
+A kubeconfig file called `admin.kubeconfig` has been created in `/root/CKA`. There is something wrong with the configuration. Troubleshoot and fix it.
+
+#### Answer
+
+Make sure the port for the `kube-apiserver` is correct. So for this change port from `4380` to `6443`. 
+
+```bash
+kubectl cluster-info --kubeconfig /root/CKA/admin.kubeconfig
+```
+
+### 7. Question
+
+Create a new deployment called `nginx-deploy`, with image `nginx:1.16` and `1` replica. Next upgrade the deployment to version `1.17` using rolling update.
+
+#### Answer
+
+Make use of the kubectl create command to create the deployment and explore the --record option while upgrading the deployment image.
+
+```bash
+kubectl create deployment  nginx-deploy --image=nginx:1.16
+```
+
+Run the below command to update the new image for nginx-deploy deployment and to record the version:
+
+```bash
+kubectl set image deployment/nginx-deploy nginx=nginx:1.17 --record
+```
+
+### 8. Question
+
+A new deployment called `alpha-mysql` has been deployed in the `alpha` namespace. However, the pods are not running. Troubleshoot and fix the issue. The deployment should make use of the persistent volume `alpha-pv` to be mounted at `/var/lib/mysql` and should use the environment variable `MYSQL_ALLOW_EMPTY_PASSWORD=1` to make use of an empty root password.
+
+Important: Do not alter the persistent volume.
+
+#### Answer
+
+Use the command kubectl describe and try to fix the issue.
+
+Solution manifest file to create a pvc called mysql-alpha-pvc as follows:
+
+```bash
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-alpha-pvc
+  namespace: alpha
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: slow
+```
+
+### 9. Question
+
+Take the backup of ETCD at the location `/opt/etcd-backup.db` on the controlplane node.
+
+#### Answer
+
+```bash
+export ETCDCTL_API=3
+
+etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --endpoints=127.0.0.1:2379 /opt/etcd-backup.db
+```
+
+### 10. Question
+
+Create a pod called `secret-1401` in the `admin1401` namespace using the `busybox` image. The container within the pod should be called `secret-admin` and should `sleep` for `4800` seconds.
+
+The container should mount a `read-only` secret volume called `secret-volume` at the path /`etc/secret-volume`. The secret being mounted has already been created for you and is called dotfile-secret.
+
+#### Answer
+
+Use the command kubectl run to create a pod definition file. Add secret volume and update container name in it.
+
+Alternatively, run the following command:
+
+```bash
+kubectl run secret-1401 --image=busybox --dry-run=client -oyaml --command -- sleep 4800 -n admin1401 > admin.yaml
+```
+
+Add the secret volume and mount path to create a pod called `secret-1401` in the `admin1401` namespace as follows:
+
+```bash
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: secret-1401
+  name: secret-1401
+  namespace: admin1401
+spec:
+  volumes:
+  - name: secret-volume
+    # secret volume
+    secret:
+      secretName: dotfile-secret
+  containers:
+  - command:
+    - sleep
+    - "4800"
+    image: busybox
+    name: secret-admin
+    # volumes' mount path
+    volumeMounts:
+    - name: secret-volume
+      readOnly: true
+      mountPath: "/etc/secret-volume"
+```
+
