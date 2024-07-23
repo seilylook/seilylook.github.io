@@ -4,12 +4,25 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 23 Jul 2024 10:18:54 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Certified Kubernetes Administrator</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/</link>
-    <pubDate>Tue, 23 Jul 2024 10:18:54 &#43;0900</pubDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 23 Jul 2024 17:48:31 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Mock Test 1</title>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/</link>
+    <pubDate>Tue, 23 Jul 2024 17:48:31 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/</guid>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>1. Question Deploy a pod named nginx-pod using the nginx-alpine image
+Answer 1 k run nginx-pod --image=nginx:alpine 2. Question Deploy a messagine pod using the redis:alpine image with the labels set to tier=msg
+Answer 1 k run messaging --image=redis:alpine -l tier=msg 3. Question Create a namespace named apx-x9984574
+Answer 1 k create namespace apx-x9984574 4. Question Get the list of nodes in JSON format and store it in a file at /opt/outputs/nodes-z3444kd9.]]></description>
+</item>
+<item>
+    <title>Killer 1</title>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</link>
+    <pubDate>Tue, 23 Jul 2024 17:48:08 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>Introduction CKA 자격증은 쿠버네티스 클러스터를 설치, 구성, 관리하는 데 필요한 지식과 경험을 입증하는 자격증이다.
@@ -124,16 +137,6 @@ Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler 
                 <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
             </div>Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
 Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
-</item>
-<item>
-    <title>Data_frame_api</title>
-    <link>https://seilylook.github.io/posts/data/spark/data_frame_api/</link>
-    <pubDate>Sat, 20 Jul 2024 16:45:40 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/spark/data_frame_api/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
-            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
 </item>
 </channel>
 </rss>
