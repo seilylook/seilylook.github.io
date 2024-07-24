@@ -4,7 +4,31 @@
         <link>https://seilylook.github.io/tags/infrastructure/</link>
         <description>Infrastructure - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 23 Jul 2024 17:48:31 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/infrastructure/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 24 Jul 2024 13:04:21 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/infrastructure/" rel="self" type="application/rss+xml" /><item>
+    <title>Mock Test 3</title>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</link>
+    <pubDate>Wed, 24 Jul 2024 13:04:21 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>1. Question Create a new service account with the name pvviewer. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
+Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
+Answer Pods authenticate to the API Server using ServiceAccounts. If the serviceAccount name is not specified, the default service account for the namespace is used during a pod creation.]]></description>
+</item>
+<item>
+    <title>Mock Test 2</title>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</link>
+    <pubDate>Wed, 24 Jul 2024 11:06:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
+Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --endpoints https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/etcd-backup.db 2. Question Create a Pod called redis-storage with image: redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod.
+Answer Use the command kubectl run and create a pod definition file for redis-storage pod and add volume.]]></description>
+</item>
+<item>
     <title>Mock Test 1</title>
     <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/</link>
     <pubDate>Tue, 23 Jul 2024 17:48:31 &#43;0900</pubDate>

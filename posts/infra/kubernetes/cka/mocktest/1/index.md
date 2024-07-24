@@ -131,7 +131,7 @@ kubectl get nodes -o jsonpath='{.items[*].status.nodeInfo.osImage}' > /opt/outpu
 
 Create a `Persistent Volume` with the given specification: -
 
-Volume name: pv-`analytics`
+Volume name: `pv-analytics`
 
 Storage: `100Mi`
 
