@@ -5,15 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Linux - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Linux" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="기본 명령어 정리 명령어 및 기능 설명 ls 현재 디렉토리의 파일 목록 표시 ls -l 상세 파일 목록 표시 ls -al 숨겨진 파일을 포함한 상세 목록 cat 파일 전체 내용 출력 more 파일 내용을 페이지 단위로 출력 less 파일 내용을 스크롤 가능하게 출력 touch 빈 파일 생성 또는 파일 시간 변경 rm 파일 삭제 cp 파일 복사 mv 파일 이동 또는 이름 변경 ln 심볼릭 링크 생성 file 파일 형식 확인 mkdir 디렉토리 생성 rmdir 빈 디렉토리 삭제 cd 디렉토리 변경 cd - 이전 디렉토리로 이동 ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/system/linux/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-25T17:17:10+09:00" />
-<meta property="article:modified_time" content="2024-07-25T17:17:10+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-07-25T18:27:17+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Linux"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="기본 명령어 정리 명령어 및 기능 설명 ls 현재 디렉토리의 파일 목록 표시 ls -l 상세 파일 목록 표시 ls -al 숨겨진 파일을 포함한 상세 목록 cat 파일 전체 내용 출력 more 파일 내용을 페이지 단위로 출력 less 파일 내용을 스크롤 가능하게 출력 touch 빈 파일 생성 또는 파일 시간 변경 rm 파일 삭제 cp 파일 복사 mv 파일 이동 또는 이름 변경 ln 심볼릭 링크 생성 file 파일 형식 확인 mkdir 디렉토리 생성 rmdir 빈 디렉토리 삭제 cd 디렉토리 변경 cd - 이전 디렉토리로 이동 ."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/system/linux/" /><link rel="prev" href="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -26,8 +26,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/system\/linux\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "System, Linux, Upstage AI Lab","wordcount":  0 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/system\/linux\/","datePublished": "2024-07-25T17:17:10+09:00","dateModified": "2024-07-25T17:17:10+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "System, Linux, Upstage AI Lab","wordcount":  217 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/system\/linux\/","datePublished": "2024-07-25T17:17:10+09:00","dateModified": "2024-07-25T18:27:17+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -74,8 +74,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-25">2024-07-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-25">2024-07-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;217 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -88,12 +88,171 @@
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#기본-명령어-정리">기본 명령어 정리</a>
+      <ul>
+        <li><a href="#catconcatenate">cat(concatenate)</a></li>
+        <li><a href="#more">more</a></li>
+        <li><a href="#less">less</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="기본-명령어-정리">기본 명령어 정리</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">명령어 및 기능</th>
+<th style="text-align:center">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>ls</code></td>
+<td style="text-align:center">현재 디렉토리의 파일 목록 표시</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ls -l</code></td>
+<td style="text-align:center">상세 파일 목록 표시</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ls -al</code></td>
+<td style="text-align:center">숨겨진 파일을 포함한 상세 목록</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cat</code></td>
+<td style="text-align:center">파일 전체 내용 출력</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>more</code></td>
+<td style="text-align:center">파일 내용을 페이지 단위로 출력</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>less</code></td>
+<td style="text-align:center">파일 내용을 스크롤 가능하게 출력</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>touch</code></td>
+<td style="text-align:center">빈 파일 생성 또는 파일 시간 변경</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>rm</code></td>
+<td style="text-align:center">파일 삭제</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cp</code></td>
+<td style="text-align:center">파일 복사</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>mv</code></td>
+<td style="text-align:center">파일 이동 또는 이름 변경</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ln</code></td>
+<td style="text-align:center">심볼릭 링크 생성</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>file</code></td>
+<td style="text-align:center">파일 형식 확인</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>mkdir</code></td>
+<td style="text-align:center">디렉토리 생성</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>rmdir</code></td>
+<td style="text-align:center">빈 디렉토리 삭제</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cd</code></td>
+<td style="text-align:center">디렉토리 변경</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cd -</code></td>
+<td style="text-align:center">이전 디렉토리로 이동</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>.</code></td>
+<td style="text-align:center">현재 디렉토리</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>..</code></td>
+<td style="text-align:center">상위 디렉토리</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>~</code></td>
+<td style="text-align:center">홈 디렉토리</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>clear</code></td>
+<td style="text-align:center">터미널 화면 지우기</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>reboot</code></td>
+<td style="text-align:center">시스템 재부팅</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>poweroff</code>, <code>shutdown</code></td>
+<td style="text-align:center">시스템 종료</td>
+</tr>
+</tbody>
+</table>
+<h3 id="catconcatenate">cat(concatenate)</h3>
+<p>cat [OPTION] &hellip; [FILE] &hellip;</p>
+<p>파일 내용 보여주기(정확히는 input과 output을 연결(concatenate) 하기)</p>
+<ul>
+<li>
+<p>cat hello.txt</p>
+</li>
+<li>
+<p>cat /etc/kubernetes/manifestss/kube-apiserver.yaml</p>
+</li>
+<li>
+<p>cat /var/log/syslog</p>
+</li>
+<li>
+<p>cat -e /etc/passwd : 줄의 맨 뒤에 $ 붙이기(히든 캐릭터 공백 등 확인)</p>
+</li>
+<li>
+<p>cat -n /etc/passwd : 줄 번호 보여주기</p>
+</li>
+</ul>
+<h3 id="more">more</h3>
+<p>more [OPTION] &hellip; [FILE] &hellip;</p>
+<p>파일 내용 보여주기 (페이지 단위로 이동 - space | 줄 단위로 이동 - enter)</p>
+<ul>
+<li>
+<p>more hello.txt</p>
+</li>
+<li>
+<p>more /etc/passwd</p>
+</li>
+<li>
+<p>more /var/log/syslog</p>
+</li>
+</ul>
+<h3 id="less">less</h3>
+<p>less [OPTION] &hellip; [FILE] &hellip;</p>
+<p>파일 내용 보여주기 (페이지 단위로 이동 - space | 줄 단위로 이동 - enter | 방향키 - 상하좌우, 페이지 up/down)</p>
+<ul>
+<li>
+<p>less hello.txt</p>
+</li>
+<li>
+<p>less /etc/passwd</p>
+</li>
+<li>
+<p>less /var/log/syslog</p>
+</li>
+</ul>
+<p>more 보다 향상된 기능, 그리고 몯느 파일을 메모리에 올리지 않아 more 대비 속도바 빠르다.</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-25</span>
+                <span>Updated on 2024-07-25&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/d87e4a8926d68a47d25eb45201778deacb9f19be" target="_blank" title="commit by seilylook(seilylook@naver.com) d87e4a8926d68a47d25eb45201778deacb9f19be: add: CKA mock test 3 &amp; linux">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d87e4a8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

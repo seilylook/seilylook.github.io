@@ -12,7 +12,7 @@
     <guid>https://seilylook.github.io/posts/system/linux/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/linux.jpg" referrerpolicy="no-referrer">
-            </div>]]></description>
+            </div>기본 명령어 정리 명령어 및 기능 설명 ls 현재 디렉토리의 파일 목록 표시 ls -l 상세 파일 목록 표시 ls -al 숨겨진 파일을 포함한 상세 목록 cat 파일 전체 내용 출력 more 파일 내용을 페이지 단위로 출력 less 파일 내용을 스크롤 가능하게 출력 touch 빈 파일 생성 또는 파일 시간 변경 rm 파일 삭제 cp 파일 복사 mv 파일 이동 또는 이름 변경 ln 심볼릭 링크 생성 file 파일 형식 확인 mkdir 디렉토리 생성 rmdir 빈 디렉토리 삭제 cd 디렉토리 변경 cd - 이전 디렉토리로 이동 .]]></description>
 </item>
 <item>
     <title>Lab Test</title>
