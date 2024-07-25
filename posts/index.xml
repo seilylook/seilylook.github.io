@@ -4,7 +4,36 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 24 Jul 2024 13:04:21 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 25 Jul 2024 17:17:10 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux</title>
+    <link>https://seilylook.github.io/posts/system/linux/</link>
+    <pubDate>Thu, 25 Jul 2024 17:17:10 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/system/linux/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/linux.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
+    <title>Lab Test</title>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/</link>
+    <pubDate>Thu, 25 Jul 2024 16:23:38 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>1. Question Use context: kubectl config use-context k8s-c2-AC
+The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
+Server private key location
+Server certificate expiration date
+Is client certificate authentication enabled
+Write these information into /opt/course/p1/etcd-info.txt
+Finally you&rsquo;re asked to save an etcd snapshot at /etc/etcd-snapshot.db on cluster2-controlplane1 and display its status
+Answer Find out etcd information
+check the nodes:
+1 2 3 4 5 6 7 k get nodes NAME STATUS ROLES AGE VERSION cluster2-controlplane1 Ready control-plane 89m v1.]]></description>
+</item>
+<item>
     <title>Mock Test 3</title>
     <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</link>
     <pubDate>Wed, 24 Jul 2024 13:04:21 &#43;0900</pubDate>
@@ -12,7 +41,8 @@
     <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. Question Create a new service account with the name pvviewer. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
+            </div>1. Question Create a new service account with the name pvviewer.
+Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
 Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
 Answer Pods authenticate to the API Server using ServiceAccounts. If the serviceAccount name is not specified, the default service account for the namespace is used during a pod creation.]]></description>
 </item>
@@ -25,8 +55,9 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
-Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --endpoints https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/etcd-backup.db 2. Question Create a Pod called redis-storage with image: redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod.
-Answer Use the command kubectl run and create a pod definition file for redis-storage pod and add volume.]]></description>
+Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/etcd-backup.db 2. Question Create a Pod called redis-storage with image: redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod.
+Answer Use the command kubectl run and create a pod definition file for redis-storage pod and add volume.
+1 kubectl run redis-storage --image=redis:alpine --dry-run=client -o yaml &gt; redis-storage.]]></description>
 </item>
 <item>
     <title>Mock Test 1</title>
@@ -42,21 +73,17 @@ Answer 1 k run messaging --image=redis:alpine -l tier=msg 3. Question Create a n
 Answer 1 k create namespace apx-x9984574 4. Question Get the list of nodes in JSON format and store it in a file at /opt/outputs/nodes-z3444kd9.]]></description>
 </item>
 <item>
-    <title>Killer 1</title>
+    <title>Killer.sh 1</title>
     <link>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</link>
     <pubDate>Tue, 23 Jul 2024 17:48:08 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>Introduction CKA 자격증은 쿠버네티스 클러스터를 설치, 구성, 관리하는 데 필요한 지식과 경험을 입증하는 자격증이다.
-문제 1. Question Use context: kubectl config use-context k8s-c2-AC
-The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
-Server private key location
-Server certificate expiration date
-Is client certificate authentication enabled
-Write these information into /opt/course/p1/etcd-info.txt
-Finally you&rsquo;re asked to save an etcd snapshot at /etc/etcd-snapshot.db on cluster2-controlplane1 and display its status]]></description>
+            </div>1. Question You have access to multiple clusters from your main terminal through kubectl contexts. Write all those context names into /opt/course/1/contexts.
+Next write a command to display the current context into /opt/course/1/context_default_kubectl.sh, the command should use kubectl
+Finally write a second command doing the same thing into /opt/course/1/context_default_no_kubectl.sh, but without the use of kubectl.
+Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo &#39;kubectl config current-context&#39; &gt; /opt/course/1/context_default_kubectl.]]></description>
 </item>
 <item>
     <title>Kubernetes Structure</title>
@@ -113,32 +140,6 @@ RDD 연산 RDD 연산은 트랜스포메이션과 액션이 있습니다. 트랜
 Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리된다. 또한, 하나의 Task는 하나의 Core가 연산 처리한다.
 즉, 1 Core = 1 Task = 1 Partition이다.
 예를 들어, 다음과 같다면 전체 Core 수를 300개로 세팅한 상태이고, 이 300개가 현재 실행 중인 Task 수이자, 현재 처리 중인 Partition 수에 해당한다. 또한, 전체 Partition 수는 1800개로 세팅했으며, 이는 전체 Task 수이기도 하다.]]></description>
-</item>
-<item>
-    <title>Hierarchy</title>
-    <link>https://seilylook.github.io/posts/data/spark/hierarchy/</link>
-    <pubDate>Sat, 20 Jul 2024 16:46:40 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/spark/hierarchy/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
-            </div>Introduction Spark&rsquo;s execution hierarchy, from top to bottom is Job, Stage, Task.
-Slots are part of executors. A task is executed in a slot. But slots are rather a tool to execute tasks, not part of the execution hierarchy itself.
-Executors are a component of a Spark cluter, but not of the execution hierarchy.
-Hardware Hierarchy Cluster Driver Executor Cores / Slots: Each executor can be considered as servers and they have cores.]]></description>
-</item>
-<item>
-    <title>Execution_plan</title>
-    <link>https://seilylook.github.io/posts/data/spark/execution_plan/</link>
-    <pubDate>Sat, 20 Jul 2024 16:46:25 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/spark/execution_plan/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
-            </div>Execution plan goal An execution plan is the set of operations executed to translate a query language statement (SQL, Spark SQL, Dataframe operations etc.) to a set of optimized logical and physical operations.
-Execution plan is a set of operations that will be executed from the SQL(or Spark SQL) statement to the DAG which will be send to Spark Executors.
-Info DAG?
-Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler in Spark.]]></description>
 </item>
 </channel>
 </rss>

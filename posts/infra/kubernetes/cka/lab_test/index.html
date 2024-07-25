@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Lab Test - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Lab Test" />
+<meta property="og:description" content="1. Question Use context: kubectl config use-context k8s-c2-AC
+The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
+Server private key location
+Server certificate expiration date
+Is client certificate authentication enabled
+Write these information into /opt/course/p1/etcd-info.txt
+Finally you&rsquo;re asked to save an etcd snapshot at /etc/etcd-snapshot.db on cluster2-controlplane1 and display its status
+Answer Find out etcd information
+check the nodes:
+1 2 3 4 5 6 7 k get nodes NAME STATUS ROLES AGE VERSION cluster2-controlplane1 Ready control-plane 89m v1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-25T16:23:38+09:00" />
+<meta property="article:modified_time" content="2024-07-25T16:23:38+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Lab Test"/>
+<meta name="twitter:description" content="1. Question Use context: kubectl config use-context k8s-c2-AC
+The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
+Server private key location
+Server certificate expiration date
+Is client certificate authentication enabled
+Write these information into /opt/course/p1/etcd-info.txt
+Finally you&rsquo;re asked to save an etcd snapshot at /etc/etcd-snapshot.db on cluster2-controlplane1 and display its status
+Answer Find out etcd information
+check the nodes:
+1 2 3 4 5 6 7 k get nodes NAME STATUS ROLES AGE VERSION cluster2-controlplane1 Ready control-plane 89m v1."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" /><link rel="prev" href="https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/" /><link rel="next" href="https://seilylook.github.io/posts/system/linux/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Lab Test",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/lab_test\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  2786 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/lab_test\/","datePublished": "2024-07-25T16:23:38+09:00","dateModified": "2024-07-25T16:23:38+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/infra/kubernetes/cka/lab_test/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/infra/kubernetes/cka/lab_test/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Lab Test</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-25">2024-07-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2786 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/kubernetes.png"
+        data-srcset="/images/feature_images/kubernetes.png, /images/feature_images/kubernetes.png 1.5x, /images/feature_images/kubernetes.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/kubernetes.png"
+        title="/images/feature_images/kubernetes.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-question">1. Question</a>
+          <ul>
+            <li><a href="#answer">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-question">2. Question</a>
+          <ul>
+            <li><a href="#answer-1">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-question">3. Question</a>
+          <ul>
+            <li><a href="#answer-2">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-question">4. Question</a>
+          <ul>
+            <li><a href="#answer-3">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-question">5. Question</a>
+          <ul>
+            <li><a href="#answer-4">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#6-question">6. Question</a>
+          <ul>
+            <li><a href="#answer-5">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#7-question">7. Question</a>
+          <ul>
+            <li><a href="#answer-6">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#8-question">8. Question</a>
+          <ul>
+            <li><a href="#answer-7">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#9-question">9. Question</a>
+          <ul>
+            <li><a href="#answer-8">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#10-question">10. Question</a>
+          <ul>
+            <li><a href="#answer-9">Answer</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="1-question">1. Question</h3>
+<p>Use context: <code>kubectl config use-context k8s-c2-AC</code></p>
+<p>The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:</p>
+<ul>
+<li>
+<p>Server private key location</p>
+</li>
+<li>
+<p>Server certificate expiration date</p>
+</li>
+<li>
+<p>Is client certificate authentication enabled</p>
+</li>
+</ul>
+<p>Write these information into <code>/opt/course/p1/etcd-info.txt</code></p>
+<p>Finally you&rsquo;re asked to save an etcd snapshot at <code>/etc/etcd-snapshot.db</code> on cluster2-controlplane1 and display its status</p>
+<h4 id="answer">Answer</h4>
+<p><strong>Find out etcd information</strong></p>
+<p>check the nodes:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get nodes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                     STATUS   ROLES           AGE    VERSION
+</span></span><span class="line"><span class="cl">cluster2-controlplane1   Ready    control-plane   89m   v1.30.1
+</span></span><span class="line"><span class="cl">cluster2-node1           Ready    &lt;none&gt;          87m   v1.30.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh cluster2-controlplane1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>First we check how etcd is setup in this cluster:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pods -n kube-system
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                                                READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">coredns-66bff467f8-k8f48                            1/1     Running   <span class="m">0</span>          26h
+</span></span><span class="line"><span class="cl">coredns-66bff467f8-rn8tr                            1/1     Running   <span class="m">0</span>          26h
+</span></span><span class="line"><span class="cl">etcd-cluster2-controlplane1                         1/1     Running   <span class="m">0</span>          26h
+</span></span><span class="line"><span class="cl">kube-apiserver-cluster2-controlplane1               1/1     Running   <span class="m">0</span>          26h
+</span></span><span class="line"><span class="cl">kube-controller-manager-cluster2-controlplane1      1/1     Running   <span class="m">0</span>          26h
+</span></span><span class="line"><span class="cl">kube-proxy-qthfg                                    1/1     Running   <span class="m">0</span>          25h
+</span></span><span class="line"><span class="cl">kube-proxy-z55lp                                    1/1     Running   <span class="m">0</span>          26h
+</span></span><span class="line"><span class="cl">kube-scheduler-cluster2-controlplane1               1/1     Running   <span class="m">1</span>          26h
+</span></span><span class="line"><span class="cl">weave-net-cqdvt                                     2/2     Running   <span class="m">0</span>          26h
+</span></span><span class="line"><span class="cl">weave-net-dxzgh                                     2/2     Running   <span class="m">1</span>          25h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We see it&rsquo;s running as a Pod, more specific a static Pod. So we check for the default kubelet directory for static manifests:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">find /etc/kubernetes/manifests/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/etc/kubernetes/manifests/
+</span></span><span class="line"><span class="cl">/etc/kubernetes/manifests/kube-controller-manager.yaml
+</span></span><span class="line"><span class="cl">/etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span><span class="line"><span class="cl">/etc/kubernetes/manifests/etcd.yaml
+</span></span><span class="line"><span class="cl">/etc/kubernetes/manifests/kube-scheduler.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat /etc/kubernetes/manifests/etcd.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>So we look at the yaml and parameter with which etcd is started:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># /etc/kubernetes/manifests/etcd.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l">etcd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l">control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">etcd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">etcd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">advertise-client-urls=https://192.168.102.11:2379</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">cert-file=/etc/kubernetes/pki/etcd/server.crt             </span><span class="w"> </span><span class="c"># server certificate</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">client-cert-auth=true                                     </span><span class="w"> </span><span class="c"># enabled</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">data-dir=/var/lib/etcd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">initial-advertise-peer-urls=https://192.168.102.11:2380</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">initial-cluster=cluster2-controlplane1=https://192.168.102.11:2380</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">key-file=/etc/kubernetes/pki/etcd/server.key              </span><span class="w"> </span><span class="c"># server private key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">listen-client-urls=https://127.0.0.1:2379,https://192.168.102.11:2379</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">listen-metrics-urls=http://127.0.0.1:2381</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">listen-peer-urls=https://192.168.102.11:2380</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">name=cluster2-controlplane1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">peer-client-cert-auth=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">peer-key-file=/etc/kubernetes/pki/etcd/peer.key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">snapshot-count=10000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>We see that client authentication is enalbed and also the requested path to the server private key, now let&rsquo;s find out the expiration of the server certificate:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl x509 -noout -text -in /etc/kubernetes/pki/etcd/server.crt 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Validity
+</span></span><span class="line"><span class="cl">            Not Before: Sep <span class="m">13</span> 13:01:31 <span class="m">2021</span> GMT
+</span></span><span class="line"><span class="cl">            Not After : Sep <span class="m">13</span> 13:01:31 <span class="m">2022</span> GMT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>There we have it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"># /opt/course/p1/etcd-info.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Server private key location: /etc/kubernetes/pki/etcd/server.key
+</span></span><span class="line"><span class="cl">Server certificate expiration date: Sep 13 13:01:31 2022 GMT
+</span></span><span class="line"><span class="cl">Is client certificate authentication enabled: yes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Create etcd snapshot</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span> etcdctl snapshot save /etc/etcd-snapshot.db
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We get the endpoint also from the yaml. But we need to specify more parameters, all of which we can find the yaml declaration abobe:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span> etcdctl snapshot save /etc/etcd-snapshot.db <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--cacert /etc/kubernetes/pki/etcd/ca.crt <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--cert /etc/kubernetes/pki/etcd/server.crt <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--key /etc/kubernetes/pki/etcd/server.key
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This wored, Now we can output the status of the backup file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span> etcdctl snapshot status /etc/etcd-snapshot.db
+</span></span><span class="line"><span class="cl">4d4e953, 7213, 1291, 2.7 MB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-question">2. Question</h3>
+<p>Use context: <code>kubectl config use-context k8s-c1-H</code></p>
+<p>You&rsquo;re asked to confirm that kube-proxy is running correctly on all nodes. For this preform the following in <em>Namespace</em> <code>project-hamster</code>:</p>
+<p>Create a new Pod names <code>p2-pod</code> with two containers, one of image <code>nginx:1.21.3-alpine</code> and one of image <code>busybox:1.31</code>. Make sure the busybox container keeps running for some time.</p>
+<p>Create a new Service named <code>p2-service</code> which exposes that pod internally in the cluster on port 3000 -&gt; 80.</p>
+<p>Find the kube-proxy container on all nodes <code>clutser1-controlplane1</code>, <code>cluster1-node1</code> and <code>clutser1-node2</code> and make sure that it&rsquo;s using iptables. Use command <code>crictl</code> for this.</p>
+<p>Write the iptables rules of all nodes belonging the created service <code>p2-service</code> into file <code>/opt/course/p2/iptables.txt</code></p>
+<p>Finally delete the Service and confirm that the iptables rules are gone from all nodes.</p>
+<h4 id="answer-1">Answer</h4>
+<p><strong>Create the Pod</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run p2-pod --image<span class="o">=</span>nginx:1.21.3-alpine -o yaml &gt; p2.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim p2.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next we add the requested second container</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># p2.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">p2-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">p2-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">project-hamster            </span><span class="w"> </span><span class="c"># add</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.21.3-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">p2-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox:1.31                 </span><span class="w"> </span><span class="c"># add</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">c2                            </span><span class="w"> </span><span class="c"># add</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;sh&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;sleep 1d&#34;</span><span class="p">]</span><span class="w">    </span><span class="c"># add</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterFirst</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">status</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>And we create the Pod:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k crete -f p2.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Create the Service</strong></p>
+<p>Next we create the Service:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k expose pod p2-pod --name p2-service --port <span class="m">3000</span> --target-port <span class="m">80</span> -n project-hamster
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This will create a yaml file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2020-04-30T20:58:14Z&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">p2-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">managedFields</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">operation</span><span class="p">:</span><span class="w"> </span><span class="l">Update</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2020-04-30T20:58:14Z&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">p2-service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">project-hamster</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">resourceVersion</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;11071&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selfLink</span><span class="p">:</span><span class="w"> </span><span class="l">/api/v1/namespaces/project-hamster/services/p2-service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uid</span><span class="p">:</span><span class="w"> </span><span class="l">2a1c0842-7fb6-4e94-8cdb-1602a3b1e7d2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">clusterIP</span><span class="p">:</span><span class="w"> </span><span class="m">10.97.45.18</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">p2-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sessionAffinity</span><span class="p">:</span><span class="w"> </span><span class="l">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterIP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">status</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">loadBalancer</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>We should confirm Pods and Services are connected, hence the Service should have endpoints.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pod,svc,ep -n project-hamster
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Confirm kube-proxy is running and is using iptables</strong></p>
+<p>First we get nodes in the cluster:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get node
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                     STATUS   ROLES           AGE   VERSION
+</span></span><span class="line"><span class="cl">cluster1-controlplane1   Ready    control-plane   98m   v1.30.1
+</span></span><span class="line"><span class="cl">cluster1-node1           Ready    &lt;none&gt;          96m   v1.30.1
+</span></span><span class="line"><span class="cl">cluster1-node2           Ready    &lt;none&gt;          95m   v1.30.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The idea here is to log into every node, find the kube-proxy container and check its logs:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh cluster1-controlplane1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">crictl ps <span class="p">|</span> grep kube-proxy
+</span></span><span class="line"><span class="cl">27b6a18c0f89c       36c4ebbc9d979       <span class="m">3</span> hours ago         Running             kube-proxy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">crictl logs 27b6a18c0f89c
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">I0913 12:53:03.096620       <span class="m">1</span> server_others.go:212<span class="o">]</span> Using iptables Proxier.
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This should be repeated on every node and result in the same output <code>Using iptables Proxier</code></p>
+<p><strong>Check kube-proxy is creating iptables rules</strong></p>
+<p>New we check the iptables rules on every node first manullay:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh cluster1-controlplane1 iptables-save <span class="p">|</span> grep p2-service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-A KUBE-SEP-6U447UXLLQIKP7BB -s 10.44.0.20/32 -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -j KUBE-MARK-MASQ
+</span></span><span class="line"><span class="cl">-A KUBE-SEP-6U447UXLLQIKP7BB -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -m tcp -j DNAT --to-destination 10.44.0.20:80
+</span></span><span class="line"><span class="cl">-A KUBE-SERVICES ! -s 10.244.0.0/16 -d 10.97.45.18/32 -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service: cluster IP&#34;</span> -m tcp --dport <span class="m">3000</span> -j KUBE-MARK-MASQ
+</span></span><span class="line"><span class="cl">-A KUBE-SERVICES -d 10.97.45.18/32 -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service: cluster IP&#34;</span> -m tcp --dport <span class="m">3000</span> -j KUBE-SVC-2A6FNMCK6FDH7PJH
+</span></span><span class="line"><span class="cl">-A KUBE-SVC-2A6FNMCK6FDH7PJH -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -j KUBE-SEP-6U447UXLLQIKP7BB
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh cluster1-node1 iptables-save <span class="p">|</span> grep p2-service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-A KUBE-SEP-6U447UXLLQIKP7BB -s 10.44.0.20/32 -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -j KUBE-MARK-MASQ
+</span></span><span class="line"><span class="cl">-A KUBE-SEP-6U447UXLLQIKP7BB -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -m tcp -j DNAT --to-destination 10.44.0.20:80
+</span></span><span class="line"><span class="cl">-A KUBE-SERVICES ! -s 10.244.0.0/16 -d 10.97.45.18/32 -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service: cluster IP&#34;</span> -m tcp --dport <span class="m">3000</span> -j KUBE-MARK-MASQ
+</span></span><span class="line"><span class="cl">-A KUBE-SERVICES -d 10.97.45.18/32 -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service: cluster IP&#34;</span> -m tcp --dport <span class="m">3000</span> -j KUBE-SVC-2A6FNMCK6FDH7PJH
+</span></span><span class="line"><span class="cl">-A KUBE-SVC-2A6FNMCK6FDH7PJH -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -j KUBE-SEP-6U447UXLLQIKP7BB
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh cluster1-node2 iptables-save <span class="p">|</span> grep p2-service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-A KUBE-SEP-6U447UXLLQIKP7BB -s 10.44.0.20/32 -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -j KUBE-MARK-MASQ
+</span></span><span class="line"><span class="cl">-A KUBE-SEP-6U447UXLLQIKP7BB -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -m tcp -j DNAT --to-destination 10.44.0.20:80
+</span></span><span class="line"><span class="cl">-A KUBE-SERVICES ! -s 10.244.0.0/16 -d 10.97.45.18/32 -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service: cluster IP&#34;</span> -m tcp --dport <span class="m">3000</span> -j KUBE-MARK-MASQ
+</span></span><span class="line"><span class="cl">-A KUBE-SERVICES -d 10.97.45.18/32 -p tcp -m comment --comment <span class="s2">&#34;project-hamster/p2-service: cluster IP&#34;</span> -m tcp --dport <span class="m">3000</span> -j KUBE-SVC-2A6FNMCK6FDH7PJH
+</span></span><span class="line"><span class="cl">-A KUBE-SVC-2A6FNMCK6FDH7PJH -m comment --comment <span class="s2">&#34;project-hamster/p2-service:&#34;</span> -j KUBE-SEP-6U447UXLLQIKP7BB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now let&rsquo;s write these logs into the requested file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh cluster1-controlplane1 iptables-save <span class="p">|</span> grep p2-service &gt;&gt; /opt/course/p2/iptables.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh cluster1-node1 iptables-save <span class="p">|</span> grep p2-service &gt;&gt; /opt/course/p2/iptables.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh cluster1-node2 iptables-save <span class="p">|</span> grep p2-service &gt;&gt; /opt/course/p2/iptables.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Delete the Service and confirm iptables rules are gone</strong></p>
+<p>Delete the Service:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k delete svc p2-service -n project-hamster
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Confirm the iptables rules are gone:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh cluster1-controlplane1 iptables-save <span class="p">|</span> grep p2-service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh cluster1-node1 iptables-save <span class="p">|</span> grep p2-service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh cluster1-node2 iptables-save <span class="p">|</span> grep p2-service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-question">3. Question</h3>
+<p>Use context: <code>kubectl config use-context k8s-c2-AC</code></p>
+<p>Create a Pod names <code>check-ip</code> in Namespace <code>default</code> using image <code>httpd:2.4.41-alpine</code>. Expose it on port 80 as a ClusterIP Service named <code>check-ip-service</code>. Remember/output the IP of that Service.</p>
+<p>Change the service CIDR to <code>11.96.0.0/12</code> for the cluster.</p>
+<p>Then create a second Service named <code>check-ip-service2</code> pointing to the same Pod to check if your settings did take effect. Finally check if the IP of the first Service has changed</p>
+<h4 id="answer-2">Answer</h4>
+<p>Create the Pod and expose it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run check-ip --image<span class="o">=</span>httpd:2.4.41-alpine
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k expose pod check-ip --name check-ip-service --port <span class="m">80</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check the Pod and Service ips:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get svc,ep -l <span class="nv">run</span><span class="o">=</span>check-ip
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                       TYPE        CLUSTER-IP    EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
+</span></span><span class="line"><span class="cl">service/check-ip-service   ClusterIP   10.104.3.45   &lt;none&gt;        80/TCP    8s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                         ENDPOINTS      AGE
+</span></span><span class="line"><span class="cl">endpoints/check-ip-service   10.44.0.3:80   7s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now we change the Service CIDR on the kube-apiserver:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh cluster2-controlplane1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim /etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># /etc/kubernetes/manifests/kube-apiserver.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l">kube-apiserver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l">control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-apiserver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-apiserver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">advertise-address=192.168.100.21</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">service-account-key-file=/etc/kubernetes/pki/sa.pub</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">service-cluster-ip-range=11.96.0.0/12            </span><span class="w"> </span><span class="c"># change</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">tls-cert-file=/etc/kubernetes/pki/apiserver.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">tls-private-key-file=/etc/kubernetes/pki/apiserver.key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Give it a bit for the kube-apiserver and controller-manager to restart</strong></p>
+<p>Wait for the api to be up again:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pod -n kube-system <span class="p">|</span> grep api
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kube-apiserver-cluster2-controlplane1            1/1     Running   <span class="m">0</span>              49s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now we do the same for the controller manager:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/kubernetes/manifests/kube-controller-manager.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># /etc/kubernetes/manifests/kube-controller-manager.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l">kube-controller-manager</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l">control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-controller-manager</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-controller-manager</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">allocate-node-cidrs=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">authentication-kubeconfig=/etc/kubernetes/controller-manager.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">authorization-kubeconfig=/etc/kubernetes/controller-manager.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">bind-address=127.0.0.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">client-ca-file=/etc/kubernetes/pki/ca.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">cluster-cidr=10.244.0.0/16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">cluster-name=kubernetes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">cluster-signing-key-file=/etc/kubernetes/pki/ca.key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">controllers=*,bootstrapsigner,tokencleaner</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">kubeconfig=/etc/kubernetes/controller-manager.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">leader-elect=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">node-cidr-mask-size=24</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">root-ca-file=/etc/kubernetes/pki/ca.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">service-account-private-key-file=/etc/kubernetes/pki/sa.key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">service-cluster-ip-range=11.96.0.0/12        </span><span class="w"> </span><span class="c"># change</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">use-service-account-credentials=true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Give it a bit for the scheduler to restart</strong></p>
+<p>We can check if it was restarted using <code>crictl</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">crictl ps <span class="p">|</span> grep scheduler
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3d258934b9fd6    aca5ededae9c8    About a minute ago   Running    kube-scheduler ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>checking our existing Pod and Service aganin:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pod,svc -l <span class="nv">run</span><span class="o">=</span>check-ip
+</span></span><span class="line"><span class="cl">NAME           READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">pod/check-ip   1/1     Running   <span class="m">0</span>          21m
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
+</span></span><span class="line"><span class="cl">service/check-ip-service   ClusterIP   10.99.32.177   &lt;none&gt;        80/TCP    21m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Nothing changed so far. Now we create another Service like before:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k expose pod check-ip --name check-ip-service2 --port <span class="m">80</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check again:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get svc, ep -l <span class="nv">run</span><span class="o">=</span>check-ip
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
+</span></span><span class="line"><span class="cl">service/check-ip-service    ClusterIP   10.109.222.111   &lt;none&gt;        80/TCP    8m
+</span></span><span class="line"><span class="cl">service/check-ip-service2   ClusterIP   11.111.108.194   &lt;none&gt;        80/TCP    6m32s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                          ENDPOINTS      AGE
+</span></span><span class="line"><span class="cl">endpoints/check-ip-service    10.44.0.1:80   8m
+</span></span><span class="line"><span class="cl">endpoints/check-ip-service2   10.44.0.1:80   6m13s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-question">4. Question</h3>
+<p>Upgrade the current version of kubernetes from <code>1.29.0</code> to <code>1.30.0</code> exactly using the <code>kubeadm</code> utility. Make sure that the upgrade is carried out one node at a time starting with the controlplane node.</p>
+<p>To minimiza downtime, the deployment <code>gold-nginx</code> should be rescheduled on an alternate node before upgrading each node.</p>
+<p>Upgrade <code>controlplane</code> node first and drain node <code>node01</code> before upgrading it. Pods for <code>gold-nginx</code> should run on the <code>controlplane</code> node subsequently.</p>
+<h4 id="answer-3">Answer</h4>
+<p><strong>On the Controlplane node</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/apt/sources.list.d/kubernetes.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Update the version in the URL to the next available minor release, v1.30</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deb <span class="o">[</span>signed-by<span class="o">=</span>/etc/apt/keyrings/kubernetes-apt-keyring.gpg<span class="o">]</span> https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl drain controlplane --ignore-daemonsets
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apt-cache madison kubeadm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Based on the version information displayed by <code>apt-cache madison</code>, it indicates that for kubernetes version <code>1.30.0</code>, the available package version is <code>1.30.0-1.-1</code>. Therefore, to install kubeadm for kubernetes, <code>v1.30.0</code>, use the following command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install <span class="nv">kubeadm</span><span class="o">=</span>1.30.0-1.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Upgrade the kubernetes cluster:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubeadm upgrade plan v1.30.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubeadm upgrade apply v1.30.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now, upgrade the version and restart Kubelet. Also, mark the node (in this case, the &ldquo;controlplane&rdquo; node) as schedulable.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install <span class="nv">kubelet</span><span class="o">=</span>1.30.0-1.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl restart kubelet
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl uncordon controlplane
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Before draining <code>node01</code>, if the controlplane gets taint during an upgrade, we have to remove it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Identify the taint first. </span>
+</span></span><span class="line"><span class="cl">kubectl describe node controlplane <span class="p">|</span> grep -i taint
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Remove the taint with help of &#34;kubectl taint&#34; command.</span>
+</span></span><span class="line"><span class="cl">kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Verify it, the taint has been removed successfully.  </span>
+</span></span><span class="line"><span class="cl">kubectl describe node controlplane <span class="p">|</span> grep -i taint
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>On the node01 node</strong></p>
+<p><code>SSH</code> to the <code>node01</code> and perform the below steps as follows: -</p>
+<p>Use any text editor you prefer to open the file that defines the Kubernetes apt repository.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/apt/sources.list.d/kubernetes.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Update the version in the URL to the next available minor release, i.e v1.30.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deb <span class="o">[</span>signed-by<span class="o">=</span>/etc/apt/keyrings/kubernetes-apt-keyring.gpg<span class="o">]</span> https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After making changes, save the file and exit from your text editor. Proceed with the next instruction.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apt-cache madison kubeadm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.30.0, the available package version is 1.30.0-1.1. Therefore, to install kubeadm for Kubernetes v1.30.0, use the following command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install <span class="nv">kubeadm</span><span class="o">=</span>1.30.0-1.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Upgrade the node </span>
+</span></span><span class="line"><span class="cl">kubeadm upgrade node
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now, upgrade the version and restart Kubelet.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install <span class="nv">kubelet</span><span class="o">=</span>1.30.0-1.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl restart kubelet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To exit from the specific node, type exit or logout on the terminal.</p>
+<p>Back on the controlplane node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl uncordon node01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get pods -o wide <span class="p">|</span> grep gold <span class="c1"># make sure this is scheduled on a node</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5-question">5. Question</h3>
+<p>Print the names of all deployments in the <code>admin2406</code> namespace in the following format:</p>
+<p>DEPLOYMENT   CONTAINER_IMAGE   READY_REPLICAS   NAMESPACE</p>
+<p><deployment name>   <container image used>   <ready replica count>   <Namespace></p>
+<p>The data should be sorted by the increasing order of the deployment name.</p>
+<p>Example:</p>
+<p>DEPLOYMENT   CONTAINER_IMAGE   READY_REPLICAS   NAMESPACE</p>
+<p>deploy0   nginx:alpine   1   admin2406</p>
+<p>Write the result to the file <code>/opt/admin2406_data</code>.</p>
+<h4 id="answer-4">Answer</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get deployment -o custom-columns<span class="o">=</span>DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers<span class="o">[]</span>.image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by<span class="o">=</span>.metadata.name -n admin2406 &gt; /opt/admin2406_data
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="6-question">6. Question</h3>
+<p>A kubeconfig file called <code>admin.kubeconfig</code> has been created in <code>/root/CKA</code>. There is something wrong with the configuration. Troubleshoot and fix it.</p>
+<h4 id="answer-5">Answer</h4>
+<p>Make sure the port for the <code>kube-apiserver</code> is correct. So for this change port from <code>4380</code> to <code>6443</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl cluster-info --kubeconfig /root/CKA/admin.kubeconfig
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="7-question">7. Question</h3>
+<p>Create a new deployment called <code>nginx-deploy</code>, with image <code>nginx:1.16</code> and <code>1</code> replica. Next upgrade the deployment to version <code>1.17</code> using rolling update.</p>
+<h4 id="answer-6">Answer</h4>
+<p>Make use of the kubectl create command to create the deployment and explore the &ndash;record option while upgrading the deployment image.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create deployment  nginx-deploy --image<span class="o">=</span>nginx:1.16
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Run the below command to update the new image for nginx-deploy deployment and to record the version:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">set</span> image deployment/nginx-deploy <span class="nv">nginx</span><span class="o">=</span>nginx:1.17 --record
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="8-question">8. Question</h3>
+<p>A new deployment called <code>alpha-mysql</code> has been deployed in the <code>alpha</code> namespace. However, the pods are not running. Troubleshoot and fix the issue. The deployment should make use of the persistent volume <code>alpha-pv</code> to be mounted at <code>/var/lib/mysql</code> and should use the environment variable <code>MYSQL_ALLOW_EMPTY_PASSWORD=1</code> to make use of an empty root password.</p>
+<p>Important: Do not alter the persistent volume.</p>
+<h4 id="answer-7">Answer</h4>
+<p>Use the command kubectl describe and try to fix the issue.</p>
+<p>Solution manifest file to create a pvc called mysql-alpha-pvc as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: PersistentVolumeClaim
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: mysql-alpha-pvc
+</span></span><span class="line"><span class="cl">  namespace: alpha
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  accessModes:
+</span></span><span class="line"><span class="cl">  - ReadWriteOnce
+</span></span><span class="line"><span class="cl">  resources:
+</span></span><span class="line"><span class="cl">    requests:
+</span></span><span class="line"><span class="cl">      storage: 1Gi
+</span></span><span class="line"><span class="cl">  storageClassName: slow
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="9-question">9. Question</h3>
+<p>Take the backup of ETCD at the location <code>/opt/etcd-backup.db</code> on the controlplane node.</p>
+<h4 id="answer-8">Answer</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">etcdctl snapshot save --cacert<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span class="o">=</span>/etc/kubernetes/pki/etcd/server.crt --key<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key --endpoints<span class="o">=</span>127.0.0.1:2379 /opt/etcd-backup.db
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="10-question">10. Question</h3>
+<p>Create a pod called <code>secret-1401</code> in the <code>admin1401</code> namespace using the <code>busybox</code> image. The container within the pod should be called <code>secret-admin</code> and should <code>sleep</code> for <code>4800</code> seconds.</p>
+<p>The container should mount a <code>read-only</code> secret volume called <code>secret-volume</code> at the path /<code>etc/secret-volume</code>. The secret being mounted has already been created for you and is called dotfile-secret.</p>
+<h4 id="answer-9">Answer</h4>
+<p>Use the command kubectl run to create a pod definition file. Add secret volume and update container name in it.</p>
+<p>Alternatively, run the following command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run secret-1401 --image<span class="o">=</span>busybox --dry-run<span class="o">=</span>client -oyaml --command -- sleep <span class="m">4800</span> -n admin1401 &gt; admin.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Add the secret volume and mount path to create a pod called <code>secret-1401</code> in the <code>admin1401</code> namespace as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  creationTimestamp: null
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    run: secret-1401
+</span></span><span class="line"><span class="cl">  name: secret-1401
+</span></span><span class="line"><span class="cl">  namespace: admin1401
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  volumes:
+</span></span><span class="line"><span class="cl">  - name: secret-volume
+</span></span><span class="line"><span class="cl">    <span class="c1"># secret volume</span>
+</span></span><span class="line"><span class="cl">    secret:
+</span></span><span class="line"><span class="cl">      secretName: dotfile-secret
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - command:
+</span></span><span class="line"><span class="cl">    - sleep
+</span></span><span class="line"><span class="cl">    - <span class="s2">&#34;4800&#34;</span>
+</span></span><span class="line"><span class="cl">    image: busybox
+</span></span><span class="line"><span class="cl">    name: secret-admin
+</span></span><span class="line"><span class="cl">    <span class="c1"># volumes&#39; mount path</span>
+</span></span><span class="line"><span class="cl">    volumeMounts:
+</span></span><span class="line"><span class="cl">    - name: secret-volume
+</span></span><span class="line"><span class="cl">      readOnly: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">      mountPath: <span class="s2">&#34;/etc/secret-volume&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-07-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/infra/kubernetes/cka/lab_test/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" data-title="Lab Test" data-hashtags="Infrastructure"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" data-hashtag="Infrastructure"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" data-title="Lab Test"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" data-title="Lab Test"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/" data-title="Lab Test" data-image="/images/feature_images/kubernetes.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/infrastructure/">Infrastructure</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/infra/kubernetes/cka/mocktest/3/" class="prev" rel="prev" title="Mock Test 3"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Mock Test 3</a>
+            <a href="/posts/system/linux/" class="next" rel="next" title="Linux">Linux<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

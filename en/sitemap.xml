@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-07-24T13:04:21&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/categories/"
@@ -11,7 +11,7 @@
                     hreflang="en"
                     href="https://seilylook.github.io/categories/"
                     /></url><url>
-            <loc>https://seilylook.github.io/</loc><lastmod>2024-07-24T13:04:21&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/"
@@ -20,11 +20,12 @@
                     hreflang="en"
                     href="https://seilylook.github.io/"
                     /></url><url>
-            <loc>https://seilylook.github.io/tags/infrastructure/</loc><lastmod>2024-07-24T13:04:21&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/kubernetes/</loc><lastmod>2024-07-24T13:04:21&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</loc><lastmod>2024-07-24T13:04:21&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-07-24T13:04:21&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-07-24T13:04:21&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/tags/linux/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/linux/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/system/linux/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/system/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/tags/"
@@ -33,8 +34,13 @@
                     hreflang="en"
                     href="https://seilylook.github.io/tags/"
                     /></url><url>
-            <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</loc><lastmod>2024-07-24T11:06:49&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/</loc><lastmod>2024-07-23T18:46:44&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/upstage-ai-lab/</loc><lastmod>2024-07-25T17:17:10&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/infrastructure/</loc><lastmod>2024-07-25T16:23:38&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/kubernetes/</loc><lastmod>2024-07-25T16:23:38&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/</loc><lastmod>2024-07-25T16:23:38&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</loc><lastmod>2024-07-24T18:30:56&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</loc><lastmod>2024-07-24T18:30:56&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/</loc><lastmod>2024-07-24T18:30:56&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</loc><lastmod>2024-07-23T18:46:44&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/infra/kubernetes/structure/</loc><lastmod>2024-07-20T17:15:00&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/architecture/</loc><lastmod>2024-07-20T17:15:00&#43;09:00</lastmod></url><url>

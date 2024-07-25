@@ -3,7 +3,9 @@
 
 ### 1. Question
 
-Create a new service account with the name `pvviewer`. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called `pvviewer-role` and ClusterRoleBinding called `pvviewer-role-binding`.
+Create a new service account with the name `pvviewer`. 
+
+Grant this Service account access to `list` all PersistentVolumes in the cluster by creating an appropriate cluster role called `pvviewer-role` and ClusterRoleBinding called `pvviewer-role-binding`.
 
 Next, create a pod called `pvviewer` with the image: `redis` and serviceAccount: `pvviewer` in the default namespace.
 
@@ -76,6 +78,7 @@ name: `beta`
 
 Solution manifest file to create a multi-container pod multi-pod as follows:
 
+```yaml
 ---
 apiVersion: v1
 kind: Pod
@@ -94,6 +97,7 @@ spec:
     env:
     - name: name
       value: beta
+```
 
 ### 4. Question
 
@@ -207,8 +211,7 @@ kubectl get pods -o wide | grep prod-redis
 
 ### 7. Question
 
-Create a pod called `hr-pod` in `hr` namespace belonging to the `production` environment and `frontend` tier .
-image: `redis:alpine`
+Create a pod called `hr-pod` in `hr` namespace belonging to the `production` environment and `frontend tier`. image: `redis:alpine`
 
 Use appropriate labels and create all the required objects if it does not exist in the system already.
 
@@ -223,7 +226,7 @@ kubectl create namespace hr
 and then create a hr-pod with given details:
 
 ```bash
-kubectl run hr-pod --image=redis:alpine --namespace=hr --la
+kubectl run hr-pod --image=redis:alpine --namespace=hr --labels=environment=production,tier=frontend
 ```
 
 ### 8. Question
@@ -263,11 +266,11 @@ kubectl get pods -n kube-system
 The command running inside the controller-manager pod is incorrect.
 After fix all the values in the file and wait for controller-manager pod to restart.
 
-Alternatively, you can run sed command to change all values at once:
-
 ```bash
-sed -i 's/kube-contro1ler-manager/kube-controller-manager/g' /etc/kubernetes/manifests/kube-controller-manager.yaml
+vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 ```
+
+`kube-contro1ler-manager` -> `kube-controller-manager`
 
 This will fix the issues in controller-manager yaml file.
 

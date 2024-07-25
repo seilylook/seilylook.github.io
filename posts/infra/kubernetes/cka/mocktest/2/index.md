@@ -10,7 +10,7 @@ Take a backup of the etcd cluster and save it to `/opt/etcd-backup.db`.
 ```bash
 export ETCDCTL_API=3
 
-etcdctl snapshot save --endpoints https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key  /opt/etcd-backup.db
+etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key  /opt/etcd-backup.db
 ```
 
 ### 2. Question
@@ -253,19 +253,19 @@ root@controlplane:~# ssh <IP of node01>
 
 On node01 node:
 
-Check if static pod directory is present which is /etc/kubernetes/manifests, if it's not present then create it.
+Check if static pod directory is present which is `/etc/kubernetes/manifests`, if it's not present then create it.
 
 ```bash
 root@node01:~# mkdir -p /etc/kubernetes/manifests
 ```
 
-Add that complete path to the staticPodPath field in the kubelet config.yaml file.
+Add that complete path to the `staticPodPath` field in the `kubelet config.yaml` file.
 
 ```bash
 root@node01:~# vi /var/lib/kubelet/config.yaml
 ```
 
-now, move/copy the static.yaml to path /etc/kubernetes/manifests/.
+now, `move/copy` the static.yaml to path `/etc/kubernetes/manifests/`.
 
 ```bash
 root@node01:~# cp /root/static.yaml /etc/kubernetes/manifests/
