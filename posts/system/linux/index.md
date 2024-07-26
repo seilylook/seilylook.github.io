@@ -70,4 +70,131 @@ less [OPTION] ... [FILE] ...
 
 more 보다 향상된 기능, 그리고 몯느 파일을 메모리에 올리지 않아 more 대비 속도바 빠르다.
 
+### rm
+
+rm [OPTION] ... [FILE] ...
+
+- rm hello.txt
+
+- rm test1 test2 test3
+
+- rm /etc/passwd(실패)
+
+### mkdir / rmdir
+
+mkdir [OPTION] ... [DIRECTORY] ...
+
+- mkdir dir1
+
+- mkdir dir2 dir3
+
+- mkdir -p dir2/sub1 (parents)
+
+rmdir [OPTION] ... [DIRECTORY] ...
+
+- rmdir dir1
+
+- rmdir dir2 dir3
+
+- rm -r dir1 (recursive)
+
+### cd(change directory)
+
+- cd dir1 
+
+- cd .. (부모 디렉토리 이동)
+
+- cd dir1/sub1
+
+- cd .
+
+- cd ../..
+
+- cd ~/ (홈 디렉토리)
+
+- cd - (이전 디렉토리)
+
+- 디렉토리 구조
+
+    - . : 나 자신
+
+    - .. : 부모 디렉토리
+
+    - ~ : 홈 디렉토리
+
+    - *-* : 이전 디렉토리
+
+### cp - copy | mv - move
+
+cp [OPTION] ... [원본][타겟]
+
+- touch hello.txt test1 test2
+
+- mkdir dir1
+
+- cp hello.txt hellow2.txt : 파일 복사
+
+- cp test1 dir1 : 파일 디렉토리 안으로 복사
+
+- cp test2 dir1 : 파일 디렉토리 안으로 복사
+
+- cp -r dir1 dir2 : 디렉토리 복사
+
+- rm -r dir1 dir2 : 삭제
+
+### ln - link
+
+ln [OPTION] ... [TARGET][LINKNAME]
+
+파일에 하드 링크/소프트링크 만들기
+
+- touch hello.txt
+
+- ln -s hello.txt hellosymlink
+
+- ln hello.txt hellolink
+
+- ls -ali
+
+<img src="/images/linux/hardlink-softlink.webp" />
+
+### file 
+
+file [OPTION] ... [FILE] ...
+
+- file hello
+
+- file /etc/passwd
+
+- file dir
+
+- file /usr/bin/file
+
+- file hellosymlink
+
+### reboot, poweroff, shutdown
+
+- reboot
+
+- poweroff 
+
+- showdown [OPTIONS][TIME]
+
+    - shutdown -P now : 바로 종료
+
+    - shutdown -r now : 바로 재시작
+
+### vi | vim | nano
+
+- vi hello.txt
+
+- vi /etc/passwd
+
+- nano hello.txt
+
+- nano /etc/passwd
+
+## Bash Shell
+
+
 

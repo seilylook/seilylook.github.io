@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/system\/linux\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "System, Linux, Upstage AI Lab","wordcount":  217 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "System, Linux, Upstage AI Lab","wordcount":  427 ,
         "url": "https:\/\/seilylook.github.io\/posts\/system\/linux\/","datePublished": "2024-07-25T17:17:10+09:00","dateModified": "2024-07-25T18:53:49+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
@@ -74,8 +74,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-25">2024-07-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;217 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-25">2024-07-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;427 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -95,8 +95,17 @@
         <li><a href="#catconcatenate">cat(concatenate)</a></li>
         <li><a href="#more">more</a></li>
         <li><a href="#less">less</a></li>
+        <li><a href="#rm">rm</a></li>
+        <li><a href="#mkdir--rmdir">mkdir / rmdir</a></li>
+        <li><a href="#cdchange-directory">cd(change directory)</a></li>
+        <li><a href="#cp---copy--mv---move">cp - copy | mv - move</a></li>
+        <li><a href="#ln---link">ln - link</a></li>
+        <li><a href="#file">file</a></li>
+        <li><a href="#reboot-poweroff-shutdown">reboot, poweroff, shutdown</a></li>
+        <li><a href="#vi--vim--nano">vi | vim | nano</a></li>
       </ul>
     </li>
+    <li><a href="#bash-shell">Bash Shell</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="기본-명령어-정리">기본 명령어 정리</h2>
@@ -247,6 +256,183 @@
 </li>
 </ul>
 <p>more 보다 향상된 기능, 그리고 몯느 파일을 메모리에 올리지 않아 more 대비 속도바 빠르다.</p>
+<h3 id="rm">rm</h3>
+<p>rm [OPTION] &hellip; [FILE] &hellip;</p>
+<ul>
+<li>
+<p>rm hello.txt</p>
+</li>
+<li>
+<p>rm test1 test2 test3</p>
+</li>
+<li>
+<p>rm /etc/passwd(실패)</p>
+</li>
+</ul>
+<h3 id="mkdir--rmdir">mkdir / rmdir</h3>
+<p>mkdir [OPTION] &hellip; [DIRECTORY] &hellip;</p>
+<ul>
+<li>
+<p>mkdir dir1</p>
+</li>
+<li>
+<p>mkdir dir2 dir3</p>
+</li>
+<li>
+<p>mkdir -p dir2/sub1 (parents)</p>
+</li>
+</ul>
+<p>rmdir [OPTION] &hellip; [DIRECTORY] &hellip;</p>
+<ul>
+<li>
+<p>rmdir dir1</p>
+</li>
+<li>
+<p>rmdir dir2 dir3</p>
+</li>
+<li>
+<p>rm -r dir1 (recursive)</p>
+</li>
+</ul>
+<h3 id="cdchange-directory">cd(change directory)</h3>
+<ul>
+<li>
+<p>cd dir1</p>
+</li>
+<li>
+<p>cd .. (부모 디렉토리 이동)</p>
+</li>
+<li>
+<p>cd dir1/sub1</p>
+</li>
+<li>
+<p>cd .</p>
+</li>
+<li>
+<p>cd ../..</p>
+</li>
+<li>
+<p>cd ~/ (홈 디렉토리)</p>
+</li>
+<li>
+<p>cd - (이전 디렉토리)</p>
+</li>
+<li>
+<p>디렉토리 구조</p>
+<ul>
+<li>
+<p>. : 나 자신</p>
+</li>
+<li>
+<p>.. : 부모 디렉토리</p>
+</li>
+<li>
+<p>~ : 홈 디렉토리</p>
+</li>
+<li>
+<p><em>-</em> : 이전 디렉토리</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="cp---copy--mv---move">cp - copy | mv - move</h3>
+<p>cp [OPTION] &hellip; [원본][타겟]</p>
+<ul>
+<li>
+<p>touch hello.txt test1 test2</p>
+</li>
+<li>
+<p>mkdir dir1</p>
+</li>
+<li>
+<p>cp hello.txt hellow2.txt : 파일 복사</p>
+</li>
+<li>
+<p>cp test1 dir1 : 파일 디렉토리 안으로 복사</p>
+</li>
+<li>
+<p>cp test2 dir1 : 파일 디렉토리 안으로 복사</p>
+</li>
+<li>
+<p>cp -r dir1 dir2 : 디렉토리 복사</p>
+</li>
+<li>
+<p>rm -r dir1 dir2 : 삭제</p>
+</li>
+</ul>
+<h3 id="ln---link">ln - link</h3>
+<p>ln [OPTION] &hellip; [TARGET][LINKNAME]</p>
+<p>파일에 하드 링크/소프트링크 만들기</p>
+<ul>
+<li>
+<p>touch hello.txt</p>
+</li>
+<li>
+<p>ln -s hello.txt hellosymlink</p>
+</li>
+<li>
+<p>ln hello.txt hellolink</p>
+</li>
+<li>
+<p>ls -ali</p>
+</li>
+</ul>
+<img src="/images/linux/hardlink-softlink.webp" />
+<h3 id="file">file</h3>
+<p>file [OPTION] &hellip; [FILE] &hellip;</p>
+<ul>
+<li>
+<p>file hello</p>
+</li>
+<li>
+<p>file /etc/passwd</p>
+</li>
+<li>
+<p>file dir</p>
+</li>
+<li>
+<p>file /usr/bin/file</p>
+</li>
+<li>
+<p>file hellosymlink</p>
+</li>
+</ul>
+<h3 id="reboot-poweroff-shutdown">reboot, poweroff, shutdown</h3>
+<ul>
+<li>
+<p>reboot</p>
+</li>
+<li>
+<p>poweroff</p>
+</li>
+<li>
+<p>showdown [OPTIONS][TIME]</p>
+<ul>
+<li>
+<p>shutdown -P now : 바로 종료</p>
+</li>
+<li>
+<p>shutdown -r now : 바로 재시작</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="vi--vim--nano">vi | vim | nano</h3>
+<ul>
+<li>
+<p>vi hello.txt</p>
+</li>
+<li>
+<p>vi /etc/passwd</p>
+</li>
+<li>
+<p>nano hello.txt</p>
+</li>
+<li>
+<p>nano /etc/passwd</p>
+</li>
+</ul>
+<h2 id="bash-shell">Bash Shell</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

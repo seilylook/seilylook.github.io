@@ -7,19 +7,19 @@
         <title>Mock Test 2 - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Mock Test 2" />
 <meta property="og:description" content="1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
 Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/etcd-backup.db 2. Question Create a Pod called redis-storage with image: redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod.
-Answer Use the command kubectl run and create a pod definition file for redis-storage pod and add volume.
-1 kubectl run redis-storage --image=redis:alpine --dry-run=client -o yaml &gt; redis-storage." />
+Answer Use the command k run and create a pod definition file for redis-storage pod and add volume.
+1 k run redis-storage --image=redis:alpine --dry-run=client -o yaml &gt; redis-storage." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-24T11:06:49+09:00" />
-<meta property="article:modified_time" content="2024-07-25T18:27:17+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-07-26T15:12:17+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Mock Test 2"/>
 <meta name="twitter:description" content="1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
 Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/etcd-backup.db 2. Question Create a Pod called redis-storage with image: redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod.
-Answer Use the command kubectl run and create a pod definition file for redis-storage pod and add volume.
-1 kubectl run redis-storage --image=redis:alpine --dry-run=client -o yaml &gt; redis-storage."/>
+Answer Use the command k run and create a pod definition file for redis-storage pod and add volume.
+1 k run redis-storage --image=redis:alpine --dry-run=client -o yaml &gt; redis-storage."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/" /><link rel="prev" href="https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/" /><link rel="next" href="https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -33,7 +33,7 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/2\/"
         },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  893 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/2\/","datePublished": "2024-07-24T11:06:49+09:00","dateModified": "2024-07-25T18:27:17+09:00","publisher": {
+        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/2\/","datePublished": "2024-07-24T11:06:49+09:00","dateModified": "2024-07-26T15:12:17+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -160,13 +160,13 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 </div><h3 id="2-question">2. Question</h3>
 <p>Create a Pod called <code>redis-storage</code> with image: <code>redis:alpine</code> with a Volume of type <code>emptyDir</code> that lasts for the life of the Pod.</p>
 <h4 id="answer-1">Answer</h4>
-<p>Use the command <code>kubectl run</code> and create a pod definition file for <code>redis-storage</code> pod and add volume.</p>
+<p>Use the command <code>k run</code> and create a pod definition file for <code>redis-storage</code> pod and add volume.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run redis-storage --image<span class="o">=</span>redis:alpine --dry-run<span class="o">=</span>client -o yaml &gt; redis-storage.yaml
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run redis-storage --image<span class="o">=</span>redis:alpine --dry-run<span class="o">=</span>client -o yaml &gt; redis-storage.yaml
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>add the volume <code>emptyDir</code> in it.</p>
@@ -398,7 +398,7 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl certificate approve john-developer
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k certificate approve john-developer
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Create a role <code>developer</code> and rolebinding <code>developer-role-binding</code></p>
@@ -409,9 +409,9 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubectl create role developer --resource<span class="o">=</span>pods --verb<span class="o">=</span>create,list,get,update,delete --namespace<span class="o">=</span>development
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ k create role developer --resource<span class="o">=</span>pods --verb<span class="o">=</span>create,list,get,update,delete --namespace<span class="o">=</span>development
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ kubectl create rolebinding developer-role-binding --role<span class="o">=</span>developer --user<span class="o">=</span>john --namespace<span class="o">=</span>development
+</span></span><span class="line"><span class="cl">$ k create rolebinding developer-role-binding --role<span class="o">=</span>developer --user<span class="o">=</span>john --namespace<span class="o">=</span>development
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Verify the permission</p>
@@ -420,14 +420,14 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubectl auth can-i update pods --as<span class="o">=</span>john --namespace<span class="o">=</span>development
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ k auth can-i update pods --as<span class="o">=</span>john --namespace<span class="o">=</span>development
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="7-question">7. Question</h3>
 <p>Create a nginx pod called <code>nginx-resolver</code> using image <code>nginx</code>, expose it internally with a service called <code>nginx-resolver-service</code>.</p>
 <p>Test that you are able to look up the service and pod names from within the cluster. Use the image: <code>busybox:1.28</code> for dns lookup. Record results in <code>/root/CKA/nginx.svc</code> and <code>/root/CKA/nginx.pod</code></p>
 <h4 id="answer-6">Answer</h4>
-<p>Use the command kubectl run and create a nginx pod and busybox pod. Resolve it, nginx service and its pod name from busybox pod.</p>
+<p>Use the command k run and create a nginx pod and busybox pod. Resolve it, nginx service and its pod name from busybox pod.</p>
 <p>To create a pod nginx-resolver and expose it internally:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -435,8 +435,8 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run nginx-resolver --image<span class="o">=</span>nginx
-</span></span><span class="line"><span class="cl">kubectl expose pod nginx-resolver --name<span class="o">=</span>nginx-resolver-service --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">80</span> --type<span class="o">=</span>ClusterIP
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run nginx-resolver --image<span class="o">=</span>nginx
+</span></span><span class="line"><span class="cl">k expose pod nginx-resolver --name<span class="o">=</span>nginx-resolver-service --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">80</span> --type<span class="o">=</span>ClusterIP
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>To create a pod test-nslookup. Test that you are able to look up the service and pod names from within the cluster:</p>
@@ -447,9 +447,9 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup nginx-resolver-service
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup nginx-resolver-service
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup nginx-resolver-service &gt; /root/CKA/nginx.svc
+</span></span><span class="line"><span class="cl">k run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup nginx-resolver-service &gt; /root/CKA/nginx.svc
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Get the IP of the nginx-resolver pod and replace the dots(.) with hyphon(-) which will be used below.</p>
@@ -460,9 +460,9 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pod nginx-resolver -o wide
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pod nginx-resolver -o wide
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it -
+</span></span><span class="line"><span class="cl">k run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it -
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="8-question">8. Question</h3>
@@ -475,7 +475,7 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run nginx-critical --image<span class="o">=</span>nginx --dry-run<span class="o">=</span>client -o yaml &gt; static.yaml
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run nginx-critical --image<span class="o">=</span>nginx --dry-run<span class="o">=</span>client -o yaml &gt; static.yaml
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Copy the contents of this file or use scp command to transfer this file from controlplane to node01 node.</p>
@@ -498,7 +498,7 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# kubectl get nodes -o wide
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@controlplane:~# k get nodes -o wide
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Perform SSH</span>
 </span></span><span class="line"><span class="cl">root@controlplane:~# ssh node01
@@ -544,15 +544,15 @@ Answer Use the command kubectl run and create a pod definition file for redis-st
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@node01:~# <span class="nb">exit</span>
 </span></span><span class="line"><span class="cl"><span class="nb">logout</span>
-</span></span><span class="line"><span class="cl">root@controlplane:~# kubectl get pods 
+</span></span><span class="line"><span class="cl">root@controlplane:~# k get pods 
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-25&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/d87e4a8926d68a47d25eb45201778deacb9f19be" target="_blank" title="commit by seilylook(seilylook@naver.com) d87e4a8926d68a47d25eb45201778deacb9f19be: add: CKA mock test 3 &amp; linux">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d87e4a8</a></span>
+                <span>Updated on 2024-07-26&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f5ebe659675063e91cd0f04489deff60bab788bc" target="_blank" title="commit by seilylook(seilylook@naver.com) f5ebe659675063e91cd0f04489deff60bab788bc: fix: cka mock test 1, 2">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f5ebe65</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

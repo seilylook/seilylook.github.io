@@ -19,10 +19,10 @@ Create a Pod called `redis-storage` with image: `redis:alpine` with a Volume of 
 
 #### Answer
 
-Use the command `kubectl run` and create a pod definition file for `redis-storage` pod and add volume.
+Use the command `k run` and create a pod definition file for `redis-storage` pod and add volume.
 
 ```bash
-kubectl run redis-storage --image=redis:alpine --dry-run=client -o yaml > redis-storage.yaml
+k run redis-storage --image=redis:alpine --dry-run=client -o yaml > redis-storage.yaml
 ```
 
 add the volume `emptyDir` in it.
@@ -168,21 +168,21 @@ spec:
 To approve this certificate,
 
 ```bash
-kubectl certificate approve john-developer
+k certificate approve john-developer
 ```
 
 Create a role `developer` and rolebinding `developer-role-binding`
 
 ```bash
-$ kubectl create role developer --resource=pods --verb=create,list,get,update,delete --namespace=development
+$ k create role developer --resource=pods --verb=create,list,get,update,delete --namespace=development
 
-$ kubectl create rolebinding developer-role-binding --role=developer --user=john --namespace=development
+$ k create rolebinding developer-role-binding --role=developer --user=john --namespace=development
 ```
 
 Verify the permission
 
 ```bash
-$ kubectl auth can-i update pods --as=john --namespace=development
+$ k auth can-i update pods --as=john --namespace=development
 ```
 
 
@@ -194,28 +194,28 @@ Test that you are able to look up the service and pod names from within the clus
 
 #### Answer
 
-Use the command kubectl run and create a nginx pod and busybox pod. Resolve it, nginx service and its pod name from busybox pod.
+Use the command k run and create a nginx pod and busybox pod. Resolve it, nginx service and its pod name from busybox pod.
 
 To create a pod nginx-resolver and expose it internally:
 
 ```bash
-kubectl run nginx-resolver --image=nginx
-kubectl expose pod nginx-resolver --name=nginx-resolver-service --port=80 --target-port=80 --type=ClusterIP
+k run nginx-resolver --image=nginx
+k expose pod nginx-resolver --name=nginx-resolver-service --port=80 --target-port=80 --type=ClusterIP
 ```
 To create a pod test-nslookup. Test that you are able to look up the service and pod names from within the cluster:
 
 ```bash
-kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service
+k run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service
 
-kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service > /root/CKA/nginx.svc
+k run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service > /root/CKA/nginx.svc
 ```
 
 Get the IP of the nginx-resolver pod and replace the dots(.) with hyphon(-) which will be used below.
 
 ```bash
-kubectl get pod nginx-resolver -o wide
+k get pod nginx-resolver -o wide
 
-kubectl run test-nslookup --image=busybox:1.28 --rm -it -
+k run test-nslookup --image=busybox:1.28 --rm -it -
 ```
 
 
@@ -230,7 +230,7 @@ Use `/etc/kubernetes/manifests` as the Static Pod path for example.
 To create a static pod called nginx-critical by using below command:
 
 ```bash
-kubectl run nginx-critical --image=nginx --dry-run=client -o yaml > static.yaml
+k run nginx-critical --image=nginx --dry-run=client -o yaml > static.yaml
 ```
 
 Copy the contents of this file or use scp command to transfer this file from controlplane to node01 node.
@@ -242,7 +242,7 @@ root@controlplane:~# scp static.yaml node01:/root/
 To know the IP Address of the node01 node:
 
 ```bash
-root@controlplane:~# kubectl get nodes -o wide
+root@controlplane:~# k get nodes -o wide
 
 # Perform SSH
 root@controlplane:~# ssh node01
@@ -275,5 +275,5 @@ Go back to the controlplane node and check the status of static pod:
 ```bash
 root@node01:~# exit
 logout
-root@controlplane:~# kubectl get pods 
+root@controlplane:~# k get pods 
 ```

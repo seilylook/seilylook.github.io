@@ -12,7 +12,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-24T13:04:21+09:00" />
-<meta property="article:modified_time" content="2024-07-25T18:27:17+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-07-26T15:12:17+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Mock Test 3"/>
@@ -32,8 +32,8 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/3\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  917 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/3\/","datePublished": "2024-07-24T13:04:21+09:00","dateModified": "2024-07-25T18:27:17+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  922 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/3\/","datePublished": "2024-07-24T13:04:21+09:00","dateModified": "2024-07-26T15:12:17+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -80,7 +80,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mock Test 3</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-24">2024-07-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;917 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-24">2024-07-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;922 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -159,7 +159,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create serviceaccount pvviewer
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create serviceaccount pvviewer
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>To create a clusterrole:</p>
@@ -168,7 +168,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create clusterrole pvviewer-role --resource<span class="o">=</span>persistentvolumes --verb<span class="o">=</span>list
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create clusterrole pvviewer-role --resource<span class="o">=</span>persistentvolumes --verb<span class="o">=</span>list
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>To create a clusterrolebinding:</p>
@@ -177,7 +177,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create clusterrolebinding pvviewer-role-binding --clusterrole<span class="o">=</span>pvviewer-role --serviceaccount<span class="o">=</span>default:pvviewer
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create clusterrolebinding pvviewer-role-binding --clusterrole<span class="o">=</span>pvviewer-role --serviceaccount<span class="o">=</span>default:pvviewer
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Solution manifest file to create a new pod called pvviewer as follows:</p>
@@ -216,7 +216,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get nodes -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[*].status.addresses[?(@.type==&#34;InternalIP&#34;)].address}&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get nodes -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[*].status.addresses[?(@.type==&#34;InternalIP&#34;)].address}&#39;</span> &gt; /root/CKA/node_ips
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="3-question">3. Question</h3>
@@ -313,13 +313,13 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -it non-root-pod -- id
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k <span class="nb">exec</span> -it non-root-pod -- id
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="5-question">5. Question</h3>
 <p>We have deployed a new pod called <code>np-test-1</code> and a service called <code>np-test-service</code>.</p>
 <p>Incoming connections to this service are not working. Troubleshoot and fix it.</p>
-<p>Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows incoming connections to the service over port <code>80</code>.</p>
+<p>Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows <code>incoming connections</code> to the service over port <code>80</code>.</p>
 <h4 id="answer-4">Answer</h4>
 <p>Solution manifest file to create a network policy ingress-to-nptest as follows:</p>
 <div class="highlight"><div class="chroma">
@@ -370,7 +370,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl taint node node01 <span class="nv">env_type</span><span class="o">=</span>production:NoSchedule
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k taint node node01 <span class="nv">env_type</span><span class="o">=</span>production:NoSchedule
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Now, deploy dev-redis pod and to ensure that workloads are not scheduled to this node01 worker node.</p>
@@ -379,7 +379,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run dev-redis --image<span class="o">=</span>redis:alpine
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run dev-redis --image<span class="o">=</span>redis:alpine
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>To view the node name of recently deployed pod:</p>
@@ -388,7 +388,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -o wide
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pods -o wide
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Solution manifest file to deploy new pod called prod-redis with toleration to be scheduled on node01 worker node.</p>
@@ -432,7 +432,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -o wide <span class="p">|</span> grep prod-redis
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pods -o wide <span class="p">|</span> grep prod-redis
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="7-question">7. Question</h3>
@@ -445,7 +445,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create namespace hr
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create namespace hr
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>and then create a hr-pod with given details:</p>
@@ -454,7 +454,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run hr-pod --image<span class="o">=</span>redis:alpine --namespace<span class="o">=</span>hr --labels<span class="o">=</span><span class="nv">environment</span><span class="o">=</span>production,tier<span class="o">=</span>frontend
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run hr-pod --image<span class="o">=</span>redis:alpine --namespace<span class="o">=</span>hr --labels<span class="o">=</span><span class="nv">environment</span><span class="o">=</span>production,tier<span class="o">=</span>frontend
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -470,6 +470,7 @@ name: <code>beta</code></p>
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
@@ -479,6 +480,7 @@ name: <code>beta</code></p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l">production</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l">frontend</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">hr</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">hr-pod</span><span class="w">
@@ -496,7 +498,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl cluster-info --kubeconfig<span class="o">=</span>/root/CKA/super.kubeconfig
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k cluster-info --kubeconfig<span class="o">=</span>/root/CKA/super.kubeconfig
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="9-question">9. Question</h3>
@@ -504,13 +506,13 @@ name: <code>beta</code></p>
 <p>scale the deployment to <code>3 replicas</code>. Has the replica&rsquo;s increased?</p>
 <p>Troubleshoot the issue and fix it.</p>
 <h4 id="answer-8">Answer</h4>
-<p>Use the command kubectl scale to increase the replica count to 3.</p>
+<p>Use the command k scale to increase the replica count to 3.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl scale deploy nginx-deploy --replicas<span class="o">=</span><span class="m">3</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k scale deploy nginx-deploy --replicas<span class="o">=</span><span class="m">3</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>The controller-manager is responsible for scaling up pods of a replicaset.</p>
@@ -520,7 +522,7 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -n kube-system
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pods -n kube-system
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>The command running inside the controller-manager pod is incorrect.</p>
@@ -533,7 +535,9 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>kube-contro1ler-manager</code> -&gt; <code>kube-controller-manager</code></p>
+</div><blockquote>
+<p>kube-contro1ler-manager -&gt; kube-controller-manager</p>
+</blockquote>
 <p>This will fix the issues in controller-manager yaml file.</p>
 <p>At last, inspect the deployment by using below command:</p>
 <div class="highlight"><div class="chroma">
@@ -541,15 +545,15 @@ name: <code>beta</code></p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get deploy
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get deploy
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-25&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/d87e4a8926d68a47d25eb45201778deacb9f19be" target="_blank" title="commit by seilylook(seilylook@naver.com) d87e4a8926d68a47d25eb45201778deacb9f19be: add: CKA mock test 3 &amp; linux">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d87e4a8</a></span>
+                <span>Updated on 2024-07-26&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/f5ebe659675063e91cd0f04489deff60bab788bc" target="_blank" title="commit by seilylook(seilylook@naver.com) f5ebe659675063e91cd0f04489deff60bab788bc: fix: cka mock test 1, 2">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f5ebe65</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

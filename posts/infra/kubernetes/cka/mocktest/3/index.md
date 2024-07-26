@@ -16,19 +16,19 @@ Pods authenticate to the API Server using ServiceAccounts. If the serviceAccount
 Now, create a service account pvviewer:
 
 ```bash
-kubectl create serviceaccount pvviewer
+k create serviceaccount pvviewer
 ```
 
 To create a clusterrole:
 
 ```bash
-kubectl create clusterrole pvviewer-role --resource=persistentvolumes --verb=list
+k create clusterrole pvviewer-role --resource=persistentvolumes --verb=list
 ```
 
 To create a clusterrolebinding:
 
 ```bash
-kubectl create clusterrolebinding pvviewer-role-binding --clusterrole=pvviewer-role --serviceaccount=default:pvviewer
+k create clusterrolebinding pvviewer-role-binding --clusterrole=pvviewer-role --serviceaccount=default:pvviewer
 ```
 
 Solution manifest file to create a new pod called pvviewer as follows:
@@ -55,7 +55,7 @@ Answer should be in the format: `InternalIP of controlplane`<space>`InternalIP o
 #### Answer
 
 ```bash
-k get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'
+k get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' > /root/CKA/node_ips
 ```
 
 ### 3. Question
@@ -127,7 +127,7 @@ spec:
 Verify the user and group IDs by using below command:
 
 ```bash
-kubectl exec -it non-root-pod -- id
+k exec -it non-root-pod -- id
 ```
 
 ### 5. Question
@@ -136,7 +136,7 @@ We have deployed a new pod called `np-test-1` and a service called `np-test-serv
 
 Incoming connections to this service are not working. Troubleshoot and fix it.
 
-Create NetworkPolicy, by the name `ingress-to-nptest` that allows incoming connections to the service over port `80`.
+Create NetworkPolicy, by the name `ingress-to-nptest` that allows `incoming connections` to the service over port `80`.
 
 #### Answer
 
@@ -175,19 +175,19 @@ key: `env_type`, value: `production`, operator: `Equal` and effect: `NoSchedule`
 To add taints on the node01 worker node:
 
 ```bash
-kubectl taint node node01 env_type=production:NoSchedule
+k taint node node01 env_type=production:NoSchedule
 ```
 
 Now, deploy dev-redis pod and to ensure that workloads are not scheduled to this node01 worker node.
 
 ```bash
-kubectl run dev-redis --image=redis:alpine
+k run dev-redis --image=redis:alpine
 ```
 
 To view the node name of recently deployed pod:
 
 ```bash
-kubectl get pods -o wide
+k get pods -o wide
 ```
 
 Solution manifest file to deploy new pod called prod-redis with toleration to be scheduled on node01 worker node.
@@ -212,7 +212,7 @@ spec:
 To view only prod-redis pod with less details:
 
 ```bash
-kubectl get pods -o wide | grep prod-redis
+k get pods -o wide | grep prod-redis
 ```
 
 ### 7. Question
@@ -226,13 +226,13 @@ Use appropriate labels and create all the required objects if it does not exist 
 Create a namespace if it doesn't exist:
 
 ```bash
-kubectl create namespace hr
+k create namespace hr
 ```
 
 and then create a hr-pod with given details:
 
 ```bash
-kubectl run hr-pod --image=redis:alpine --namespace=hr --labels=environment=production,tier=frontend
+k run hr-pod --image=redis:alpine --namespace=hr --labels=environment=production,tier=frontend
 ```
 
 ```yaml
@@ -243,6 +243,7 @@ metadata:
   labels:
     environment: production
     tier: frontend
+  namespace: hr
 spec:
   containers:
     - name: hr-pod
@@ -262,7 +263,7 @@ Open the super.kubeconfig in vi editor.
 Change the 9999 port to `6443` and run the below command to verify:
 
 ```bash
-kubectl cluster-info --kubeconfig=/root/CKA/super.kubeconfig
+k cluster-info --kubeconfig=/root/CKA/super.kubeconfig
 ```
 
 ### 9. Question
@@ -275,10 +276,10 @@ Troubleshoot the issue and fix it.
 
 #### Answer
 
-Use the command kubectl scale to increase the replica count to 3.
+Use the command k scale to increase the replica count to 3.
 
 ```bash
-kubectl scale deploy nginx-deploy --replicas=3
+k scale deploy nginx-deploy --replicas=3
 ```
 
 The controller-manager is responsible for scaling up pods of a replicaset. 
@@ -286,7 +287,7 @@ The controller-manager is responsible for scaling up pods of a replicaset.
 If you inspect the control plane components in the kube-system namespace, you will see that the controller-manager is not running.
 
 ```bash
-kubectl get pods -n kube-system
+k get pods -n kube-system
 ```
 
 The command running inside the controller-manager pod is incorrect.
@@ -297,12 +298,12 @@ After fix all the values in the file and wait for controller-manager pod to rest
 vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 ```
 
-`kube-contro1ler-manager` -> `kube-controller-manager`
+> kube-contro1ler-manager -> kube-controller-manager
 
 This will fix the issues in controller-manager yaml file.
 
 At last, inspect the deployment by using below command:
 
 ```bash
-kubectl get deploy
+k get deploy
 ```
