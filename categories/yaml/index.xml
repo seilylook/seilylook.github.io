@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>YAML - Category - Devlog</title>
+        <link>https://seilylook.github.io/categories/yaml/</link>
+        <description>YAML - Category - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/yaml/" rel="self" type="application/rss+xml" /><item>
+    <title>Yaml</title>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/yaml/</link>
+    <pubDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/yaml/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/yaml.jpg" referrerpolicy="no-referrer">
+            </div>What is YAML? 시스템 간 데이터를 교화할 때 데이터의 연동과 호환성을 위해 포맷에 대한 규칙이 필요해졌다.
+기존에 사용하던 XML은 사용하기 까다롭고 가독성이 매우 떨어지기 떄문에 JSON으로 변경되다가, JSON 역시 주석을 달 수 없는 등 제한이 있고 중괄호/대괄호로 인해 코드 길이가 증가하는 단점이 존재했다.
+이런 문제점을 해결하기 위해 YAML이 등장하게 된다.
+YAML은 XML과 JSON 포맷과 같이 타 시스템 간에 데이터를 주고 받을 때 약속된 포맷이 정의된 파일 형식이라 할 수 있다.]]></description>
+</item>
+</channel>
+</rss>
