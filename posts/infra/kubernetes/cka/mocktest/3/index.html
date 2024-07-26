@@ -32,7 +32,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/3\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  901 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  917 ,
         "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/mocktest\/3\/","datePublished": "2024-07-24T13:04:21+09:00","dateModified": "2024-07-25T18:27:17+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
@@ -80,7 +80,7 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mock Test 3</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-24">2024-07-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;901 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-24">2024-07-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;917 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -193,23 +193,17 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">pvviewer</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pvviewer</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pvviewer</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Add service account name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pvviewer</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">serviceAccountName</span><span class="p">:</span><span class="w"> </span><span class="l">pvviewer</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -226,11 +220,11 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="3-question">3. Question</h3>
-<p>Create a pod called <code>multi-pod</code> with two containers.
-Container 1: name: <code>alpha</code>, image: <code>nginx</code>
-Container 2: name: <code>beta</code>, image: <code>busybox</code>, command: <code>sleep 4800</code></p>
-<p>Environment Variables:
-container 1:
+<p>Create a pod called <code>multi-pod</code> with two containers.</p>
+<p>Container 1: name: <code>alpha</code>, image: <code>nginx</code></p>
+<p>Container 2: name: <code>beta</code>, image: <code>busybox</code>, command: <code>sleep 4800</code></p>
+<p>Environment Variables:</p>
+<p>container 1:
 name: <code>alpha</code></p>
 <p>Container 2:
 name: <code>beta</code></p>
@@ -265,17 +259,17 @@ name: <code>beta</code></p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">multi-pod</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">alpha</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">name</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">alpha</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">beta</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;sleep&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;4800&#34;</span><span class="p">]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">name</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">beta</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">alpha</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">alpha</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">beta</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">beta</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;sleep&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;4800&#34;</span><span class="p">]</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="4-question">4. Question</h3>
@@ -305,12 +299,12 @@ name: <code>beta</code></p>
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">non-root-pod</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">non-root-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runAsUser</span><span class="p">:</span><span class="w"> </span><span class="m">1000</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">fsGroup</span><span class="p">:</span><span class="w"> </span><span class="m">2000</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">non-root-pod</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Verify the user and group IDs by using below command:</p>
@@ -323,8 +317,9 @@ name: <code>beta</code></p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="5-question">5. Question</h3>
-<p>We have deployed a new pod called <code>np-test-1</code> and a service called <code>np-test-service</code>. Incoming connections to this service are not working. Troubleshoot and fix it.
-Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows incoming connections to the service over port <code>80</code>.</p>
+<p>We have deployed a new pod called <code>np-test-1</code> and a service called <code>np-test-service</code>.</p>
+<p>Incoming connections to this service are not working. Troubleshoot and fix it.</p>
+<p>Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows incoming connections to the service over port <code>80</code>.</p>
 <h4 id="answer-4">Answer</h4>
 <p>Solution manifest file to create a network policy ingress-to-nptest as follows:</p>
 <div class="highlight"><div class="chroma">
@@ -344,7 +339,6 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
@@ -352,21 +346,22 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">NetworkPolicy</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ingress-to-nptest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">np-test-1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">policyTypes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">Ingress</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">ports</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="6-question">6. Question</h3>
-<p>Taint the worker node <code>node01</code> to be Unschedulable. Once done, create a pod called <code>dev-redis</code>, image <code>redis:alpine</code>, to ensure workloads are not scheduled to this worker node. Finally, create a new pod called <code>prod-redis</code> and image: <code>redis:alpine </code>with toleration to be scheduled on <code>node01</code>.</p>
+<p>Taint the worker node <code>node01</code> to be Unschedulable.</p>
+<p>Once done, create a pod called <code>dev-redis</code>, image <code>redis:alpine</code>, to ensure workloads are not scheduled to this worker node.</p>
+<p>Finally, create a new pod called <code>prod-redis</code> and image: <code>redis:alpine </code>with toleration to be scheduled on <code>node01</code>.</p>
 <p>key: <code>env_type</code>, value: <code>production</code>, operator: <code>Equal</code> and effect: <code>NoSchedule</code></p>
 <h4 id="answer-5">Answer</h4>
 <p>To add taints on the node01 worker node:</p>
@@ -422,13 +417,13 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">prod-redis</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">prod-redis</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">prod-redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tolerations</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoSchedule</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">env_type</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Equal</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">production     </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">env_type</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">production</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Equal</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoSchedule    </span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>To view only prod-redis pod with less details:</p>
@@ -441,7 +436,7 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="7-question">7. Question</h3>
-<p>Create a pod called <code>hr-pod</code> in <code>hr</code> namespace belonging to the <code>production</code> environment and <code>frontend tier</code>. image: <code>redis:alpine</code></p>
+<p>Create a pod called <code>hr-pod</code> in <code>hr</code> namespace belonging to the <code>production environment</code> and <code>frontend tier</code>, image: <code>redis:alpine</code>.</p>
 <p>Use appropriate labels and create all the required objects if it does not exist in the system already.</p>
 <h4 id="answer-6">Answer</h4>
 <p>Create a namespace if it doesn&rsquo;t exist:</p>
@@ -462,12 +457,40 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run hr-pod --image<span class="o">=</span>redis:alpine --namespace<span class="o">=</span>hr --labels<span class="o">=</span><span class="nv">environment</span><span class="o">=</span>production,tier<span class="o">=</span>frontend
 </span></span></code></pre></td></tr></table>
 </div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">hr-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l">production</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l">frontend</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">hr-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
 </div><h3 id="8-question">8. Question</h3>
 <p>A kubeconfig file called <code>super.kubeconfig</code> has been created under <code>/root/CKA</code>. There is something wrong with the configuration. Troubleshoot and fix it.</p>
 <h4 id="answer-7">Answer</h4>
 <p>Verify host and port for kube-apiserver are correct.</p>
 <p>Open the super.kubeconfig in vi editor.</p>
-<p>Change the 9999 port to 6443 and run the below command to verify:</p>
+<p>Change the 9999 port to <code>6443</code> and run the below command to verify:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -477,7 +500,9 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="9-question">9. Question</h3>
-<p>We have created a new deployment called <code>nginx-deploy</code>. scale the deployment to 3 replicas. Has the replica&rsquo;s increased? Troubleshoot the issue and fix it.</p>
+<p>We have created a new deployment called <code>nginx-deploy</code>.</p>
+<p>scale the deployment to <code>3 replicas</code>. Has the replica&rsquo;s increased?</p>
+<p>Troubleshoot the issue and fix it.</p>
 <h4 id="answer-8">Answer</h4>
 <p>Use the command kubectl scale to increase the replica count to 3.</p>
 <div class="highlight"><div class="chroma">
@@ -488,7 +513,8 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl scale deploy nginx-deploy --replicas<span class="o">=</span><span class="m">3</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>The controller-manager is responsible for scaling up pods of a replicaset. If you inspect the control plane components in the kube-system namespace, you will see that the controller-manager is not running.</p>
+</div><p>The controller-manager is responsible for scaling up pods of a replicaset.</p>
+<p>If you inspect the control plane components in the kube-system namespace, you will see that the controller-manager is not running.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -497,8 +523,8 @@ Create NetworkPolicy, by the name <code>ingress-to-nptest</code> that allows inc
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pods -n kube-system
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>The command running inside the controller-manager pod is incorrect.
-After fix all the values in the file and wait for controller-manager pod to restart.</p>
+</div><p>The command running inside the controller-manager pod is incorrect.</p>
+<p>After fix all the values in the file and wait for controller-manager pod to restart.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1

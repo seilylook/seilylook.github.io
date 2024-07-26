@@ -38,21 +38,21 @@ metadata:
   name: redis-storage
 spec:
   containers:
-  - image: redis:alpine
-    name: redis-storage
-    volumeMounts:
-    - mountPath: /data/redis
-      name: temp-volume
+    - image: redis:alpine
+      name: redis-storage
+      volumeMounts:
+        - mountPath: /data/redis
+          name: temp-volume
   volumes:
-  - name: temp-volume
-    emptyDir: {}
+    - name: temp-volume
+      emptyDir: {}
 ```
 
 ### 3. Question
 
 Create a new pod called `super-user-pod` with image `busybox:1.28`. Allow the pod to be able to set `system_time`.
 
-The container should sleep for 4800 seconds.
+The container should `sleep for 4800` seconds.
 
 #### Answer
 
@@ -61,22 +61,17 @@ The container should sleep for 4800 seconds.
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    run: super-user-pod
   name: super-user-pod
 spec:
   containers:
-  - command:
-    - sleep
-    - "4800"
-    image: busybox:1.28
-    name: super-user-pod
-    securityContext:
-      capabilities:
-        add: ["SYS_TIME"]
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
+    - name: super-user-pod
+      image: busybox:1.28
+      command:
+        - sleep
+        - "4800"
+      securityContext:
+        capabilities:
+          add: ["SYS_TIME"]
 ```
 
 ### 4. Question
@@ -165,14 +160,16 @@ spec:
   signerName: kubernetes.io/kube-apiserver-client
   request: <PASTE_IT_HERE>
   usages:
-  - digital signature
-  - key encipherment
-  - client auth
+    - digital signature
+    - key encipherment
+    - client auth
 ```
 
 To approve this certificate,
 
-`kubectl certificate approve john-developer`
+```bash
+kubectl certificate approve john-developer
+```
 
 Create a role `developer` and rolebinding `developer-role-binding`
 
@@ -209,6 +206,7 @@ To create a pod test-nslookup. Test that you are able to look up the service and
 
 ```bash
 kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service
+
 kubectl run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service > /root/CKA/nginx.svc
 ```
 
@@ -216,6 +214,7 @@ Get the IP of the nginx-resolver pod and replace the dots(.) with hyphon(-) whic
 
 ```bash
 kubectl get pod nginx-resolver -o wide
+
 kubectl run test-nslookup --image=busybox:1.28 --rm -it -
 ```
 
