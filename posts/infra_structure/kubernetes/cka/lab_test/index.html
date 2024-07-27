@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Lab Test - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Lab Test" />
-<meta property="og:description" content="1. Question Use context: kubectl config use-context k8s-c2-AC
+<meta property="og:description" content="1. Question Use context: k config use-context k8s-c2-AC
 The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
 Server private key location
 Server certificate expiration date
@@ -17,11 +17,11 @@ Answer Find out etcd information check the nodes:
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/infra_structure/kubernetes/cka/lab_test/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-25T16:23:38+09:00" />
-<meta property="article:modified_time" content="2024-07-25T16:23:38+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-07-27T16:28:00+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Lab Test"/>
-<meta name="twitter:description" content="1. Question Use context: kubectl config use-context k8s-c2-AC
+<meta name="twitter:description" content="1. Question Use context: k config use-context k8s-c2-AC
 The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
 Server private key location
 Server certificate expiration date
@@ -43,7 +43,7 @@ Answer Find out etcd information check the nodes:
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/infra_structure\/kubernetes\/cka\/lab_test\/"
         },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  2734 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/infra_structure\/kubernetes\/cka\/lab_test\/","datePublished": "2024-07-25T16:23:38+09:00","dateModified": "2024-07-25T16:23:38+09:00","publisher": {
+        "url": "https:\/\/seilylook.github.io\/posts\/infra_structure\/kubernetes\/cka\/lab_test\/","datePublished": "2024-07-25T16:23:38+09:00","dateModified": "2024-07-27T16:28:00+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -186,7 +186,7 @@ Answer Find out etcd information check the nodes:
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h3 id="1-question">1. Question</h3>
-<p>Use context: <code>kubectl config use-context k8s-c2-AC</code></p>
+<p>Use context: <code>k config use-context k8s-c2-AC</code></p>
 <p>The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:</p>
 <ul>
 <li>
@@ -422,7 +422,7 @@ Answer Find out etcd information check the nodes:
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="2-question">2. Question</h3>
-<p>Use context: <code>kubectl config use-context k8s-c1-H</code></p>
+<p>Use context: <code>k config use-context k8s-c1-H</code></p>
 <p>You&rsquo;re asked to confirm that kube-proxy is running correctly on all nodes. For this preform the following in <em>Namespace</em> <code>project-hamster</code>:</p>
 <p>Create a new Pod names <code>p2-pod</code> with two containers, one of image <code>nginx:1.21.3-alpine</code> and one of image <code>busybox:1.31</code>. Make sure the busybox container keeps running for some time.</p>
 <p>Create a new Service named <code>p2-service</code> which exposes that pod internally in the cluster on port 3000 -&gt; 80.</p>
@@ -722,7 +722,7 @@ Answer Find out etcd information check the nodes:
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="3-question">3. Question</h3>
-<p>Use context: <code>kubectl config use-context k8s-c2-AC</code></p>
+<p>Use context: <code>k config use-context k8s-c2-AC</code></p>
 <p>Create a Pod names <code>check-ip</code> in Namespace <code>default</code> using image <code>httpd:2.4.41-alpine</code>. Expose it on port 80 as a ClusterIP Service named <code>check-ip-service</code>. Remember/output the IP of that Service.</p>
 <p>Change the service CIDR to <code>11.96.0.0/12</code> for the cluster.</p>
 <p>Then create a second Service named <code>check-ip-service2</code> pointing to the same Pod to check if your settings did take effect. Finally check if the IP of the first Service has changed</p>
@@ -833,7 +833,7 @@ Answer Find out etcd information check the nodes:
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get pod -n kube-system <span class="p">|</span> grep api
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pod -n kube-system <span class="p">|</span> grep api
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kube-apiserver-cluster2-controlplane1            1/1     Running   <span class="m">0</span>              49s
 </span></span></code></pre></td></tr></table>
@@ -1018,7 +1018,7 @@ Answer Find out etcd information check the nodes:
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl drain controlplane --ignore-daemonsets
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k drain controlplane --ignore-daemonsets
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">apt update
 </span></span><span class="line"><span class="cl">
@@ -1065,7 +1065,7 @@ Answer Find out etcd information check the nodes:
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl restart kubelet
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl uncordon controlplane
+</span></span><span class="line"><span class="cl">k uncordon controlplane
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Before draining <code>node01</code>, if the controlplane gets taint during an upgrade, we have to remove it.</p>
@@ -1082,13 +1082,13 @@ Answer Find out etcd information check the nodes:
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Identify the taint first. </span>
-</span></span><span class="line"><span class="cl">kubectl describe node controlplane <span class="p">|</span> grep -i taint
+</span></span><span class="line"><span class="cl">k describe node controlplane <span class="p">|</span> grep -i taint
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Remove the taint with help of &#34;kubectl taint&#34; command.</span>
-</span></span><span class="line"><span class="cl">kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+</span></span><span class="line"><span class="cl"><span class="c1"># Remove the taint with help of &#34;k taint&#34; command.</span>
+</span></span><span class="line"><span class="cl">k taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Verify it, the taint has been removed successfully.  </span>
-</span></span><span class="line"><span class="cl">kubectl describe node controlplane <span class="p">|</span> grep -i taint
+</span></span><span class="line"><span class="cl">k describe node controlplane <span class="p">|</span> grep -i taint
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="on-the-node01-node">On the node01 node</h5>
@@ -1165,9 +1165,9 @@ Answer Find out etcd information check the nodes:
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl uncordon node01
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k uncordon node01
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get pods -o wide <span class="p">|</span> grep gold <span class="c1"># make sure this is scheduled on a node</span>
+</span></span><span class="line"><span class="cl">k get pods -o wide <span class="p">|</span> grep gold <span class="c1"># make sure this is scheduled on a node</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="5-question">5. Question</h3>
@@ -1185,7 +1185,7 @@ Answer Find out etcd information check the nodes:
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get deployment -o custom-columns<span class="o">=</span>DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers<span class="o">[]</span>.image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by<span class="o">=</span>.metadata.name -n admin2406 &gt; /opt/admin2406_data
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get deployment -o custom-columns<span class="o">=</span>DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers<span class="o">[]</span>.image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by<span class="o">=</span>.metadata.name -n admin2406 &gt; /opt/admin2406_data
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="6-question">6. Question</h3>
@@ -1197,19 +1197,19 @@ Answer Find out etcd information check the nodes:
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl cluster-info --kubeconfig /root/CKA/admin.kubeconfig
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k cluster-info --kubeconfig /root/CKA/admin.kubeconfig
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="7-question">7. Question</h3>
 <p>Create a new deployment called <code>nginx-deploy</code>, with image <code>nginx:1.16</code> and <code>1</code> replica. Next upgrade the deployment to version <code>1.17</code> using rolling update.</p>
 <h4 id="answer-6">Answer</h4>
-<p>Make use of the kubectl create command to create the deployment and explore the &ndash;record option while upgrading the deployment image.</p>
+<p>Make use of the k create command to create the deployment and explore the &ndash;record option while upgrading the deployment image.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create deployment  nginx-deploy --image<span class="o">=</span>nginx:1.16
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create deployment  nginx-deploy --image<span class="o">=</span>nginx:1.16
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Run the below command to update the new image for nginx-deploy deployment and to record the version:</p>
@@ -1218,7 +1218,7 @@ Answer Find out etcd information check the nodes:
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl <span class="nb">set</span> image deployment/nginx-deploy <span class="nv">nginx</span><span class="o">=</span>nginx:1.17 --record
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k <span class="nb">set</span> image deployment/nginx-deploy <span class="nv">nginx</span><span class="o">=</span>nginx:1.17 --record
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="8-question">8. Question</h3>
@@ -1227,7 +1227,7 @@ Answer Find out etcd information check the nodes:
 <p>The deployment should make use of the persistent volume <code>alpha-pv</code> to be mounted at <code>/var/lib/mysql</code> and should use the environment variable <code>MYSQL_ALLOW_EMPTY_PASSWORD=1</code> to make use of an empty root password.</p>
 <p>Important: Do not alter the persistent volume.</p>
 <h4 id="answer-7">Answer</h4>
-<p>Use the command kubectl describe and try to fix the issue.</p>
+<p>Use the command k describe and try to fix the issue.</p>
 <p>Solution manifest file to create a pvc called mysql-alpha-pvc as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1282,14 +1282,14 @@ Answer Find out etcd information check the nodes:
 <p>The container should mount a <code>read-only</code> secret volume called <code>secret-volume</code> at the path <code>/etc/secret-volume</code>.</p>
 <p>The secret being mounted has already been created for you and is called <code>dotfile-secret</code>.</p>
 <h4 id="answer-9">Answer</h4>
-<p>Use the command kubectl run to create a pod definition file. Add secret volume and update container name in it.</p>
+<p>Use the command k run to create a pod definition file. Add secret volume and update container name in it.</p>
 <p>Alternatively, run the following command:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run secret-1401 --image<span class="o">=</span>busybox --dry-run<span class="o">=</span>client -oyaml --command -- sleep <span class="m">4800</span> -n admin1401 &gt; admin.yaml
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run secret-1401 --image<span class="o">=</span>busybox --dry-run<span class="o">=</span>client -oyaml --command -- sleep <span class="m">4800</span> -n admin1401 &gt; admin.yaml
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Add the secret volume and mount path to create a pod called <code>secret-1401</code> in the <code>admin1401</code> namespace as follows:</p>
@@ -1343,7 +1343,8 @@ Answer Find out etcd information check the nodes:
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-25</span>
+                <span>Updated on 2024-07-27&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/9f7e246c805cb0dbe7fea882ebc738cc3b1d703a" target="_blank" title="commit by seilylook(seilylook@naver.com) 9f7e246c805cb0dbe7fea882ebc738cc3b1d703a: change: directory names &amp; lab test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9f7e246</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

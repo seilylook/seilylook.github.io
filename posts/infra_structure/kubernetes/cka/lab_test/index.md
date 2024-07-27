@@ -3,7 +3,7 @@
 
 ### 1. Question
 
-Use context: `kubectl config use-context k8s-c2-AC`
+Use context: `k config use-context k8s-c2-AC`
 
 The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
 
@@ -144,7 +144,7 @@ ETCDCTL_API=3 etcdctl snapshot status /etc/etcd-snapshot.db
 
 ### 2. Question
 
-Use context: `kubectl config use-context k8s-c1-H`
+Use context: `k config use-context k8s-c1-H`
 
 You're asked to confirm that kube-proxy is running correctly on all nodes. For this preform the following in *Namespace* `project-hamster`:
 
@@ -333,7 +333,7 @@ ssh cluster1-node2 iptables-save | grep p2-service
 
 ### 3. Question
 
-Use context: `kubectl config use-context k8s-c2-AC`
+Use context: `k config use-context k8s-c2-AC`
 
 Create a Pod names `check-ip` in Namespace `default` using image `httpd:2.4.41-alpine`. Expose it on port 80 as a ClusterIP Service named `check-ip-service`. Remember/output the IP of that Service.
 
@@ -401,7 +401,7 @@ spec:
 Wait for the api to be up again:
 
 ```bash
-kubectl get pod -n kube-system | grep api
+k get pod -n kube-system | grep api
 
 kube-apiserver-cluster2-controlplane1            1/1     Running   0              49s
 ```
@@ -512,7 +512,7 @@ deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io
 ```
 
 ```bash
-kubectl drain controlplane --ignore-daemonsets
+k drain controlplane --ignore-daemonsets
 
 apt update
 
@@ -542,20 +542,20 @@ systemctl daemon-reload
 
 systemctl restart kubelet
 
-kubectl uncordon controlplane
+k uncordon controlplane
 ```
 
 Before draining `node01`, if the controlplane gets taint during an upgrade, we have to remove it.
 
 ```bash
 # Identify the taint first. 
-kubectl describe node controlplane | grep -i taint
+k describe node controlplane | grep -i taint
 
-# Remove the taint with help of "kubectl taint" command.
-kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+# Remove the taint with help of "k taint" command.
+k taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 
 # Verify it, the taint has been removed successfully.  
-kubectl describe node controlplane | grep -i taint
+k describe node controlplane | grep -i taint
 ```
 
 ##### On the node01 node
@@ -606,9 +606,9 @@ To exit from the specific node, type exit or logout on the terminal.
 Back on the controlplane node:
 
 ```bash
-kubectl uncordon node01
+k uncordon node01
 
-kubectl get pods -o wide | grep gold # make sure this is scheduled on a node
+k get pods -o wide | grep gold # make sure this is scheduled on a node
 ```
 
 ### 5. Question
@@ -632,7 +632,7 @@ Write the result to the file `/opt/admin2406_data`.
 #### Answer
 
 ```bash
-kubectl get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name -n admin2406 > /opt/admin2406_data
+k get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name -n admin2406 > /opt/admin2406_data
 ```
 
 ### 6. Question
@@ -644,7 +644,7 @@ A kubeconfig file called `admin.kubeconfig` has been created in `/root/CKA`. The
 Make sure the port for the `kube-apiserver` is correct. So for this change port from `4380` to `6443`. 
 
 ```bash
-kubectl cluster-info --kubeconfig /root/CKA/admin.kubeconfig
+k cluster-info --kubeconfig /root/CKA/admin.kubeconfig
 ```
 
 ### 7. Question
@@ -653,16 +653,16 @@ Create a new deployment called `nginx-deploy`, with image `nginx:1.16` and `1` r
 
 #### Answer
 
-Make use of the kubectl create command to create the deployment and explore the --record option while upgrading the deployment image.
+Make use of the k create command to create the deployment and explore the --record option while upgrading the deployment image.
 
 ```bash
-kubectl create deployment  nginx-deploy --image=nginx:1.16
+k create deployment  nginx-deploy --image=nginx:1.16
 ```
 
 Run the below command to update the new image for nginx-deploy deployment and to record the version:
 
 ```bash
-kubectl set image deployment/nginx-deploy nginx=nginx:1.17 --record
+k set image deployment/nginx-deploy nginx=nginx:1.17 --record
 ```
 
 ### 8. Question
@@ -677,7 +677,7 @@ Important: Do not alter the persistent volume.
 
 #### Answer
 
-Use the command kubectl describe and try to fix the issue.
+Use the command k describe and try to fix the issue.
 
 Solution manifest file to create a pvc called mysql-alpha-pvc as follows:
 
@@ -721,12 +721,12 @@ The secret being mounted has already been created for you and is called `dotfile
 
 #### Answer
 
-Use the command kubectl run to create a pod definition file. Add secret volume and update container name in it.
+Use the command k run to create a pod definition file. Add secret volume and update container name in it.
 
 Alternatively, run the following command:
 
 ```bash
-kubectl run secret-1401 --image=busybox --dry-run=client -oyaml --command -- sleep 4800 -n admin1401 > admin.yaml
+k run secret-1401 --image=busybox --dry-run=client -oyaml --command -- sleep 4800 -n admin1401 > admin.yaml
 ```
 
 Add the secret volume and mount path to create a pod called `secret-1401` in the `admin1401` namespace as follows:

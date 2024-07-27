@@ -12,7 +12,7 @@
     <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/lab_test/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. Question Use context: kubectl config use-context k8s-c2-AC
+            </div>1. Question Use context: k config use-context k8s-c2-AC
 The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
 Server private key location
 Server certificate expiration date
