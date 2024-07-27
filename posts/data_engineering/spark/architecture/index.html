@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Architecture - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Architecture" />
+<meta property="og:description" content="Terms Term Meainig Application User program built on Spark. Consists of a driver program and executors on the cluster. Application jar A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime. Driver program The process running the main() function of the application and creating the SparkContext Cluster manager An external service for acquiring resources on the cluster (e." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/data_engineering/spark/architecture/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-20T16:45:05+09:00" />
+<meta property="article:modified_time" content="2024-07-20T16:45:05+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Architecture"/>
+<meta name="twitter:description" content="Terms Term Meainig Application User program built on Spark. Consists of a driver program and executors on the cluster. Application jar A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime. Driver program The process running the main() function of the application and creating the SparkContext Cluster manager An external service for acquiring resources on the cluster (e."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data_engineering/spark/architecture/" /><link rel="prev" href="https://seilylook.github.io/posts/data_engineering/spark/aqe/" /><link rel="next" href="https://seilylook.github.io/posts/data_engineering/spark/cache_persist/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Architecture",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/data_engineering\/spark\/architecture\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Spark, Architecture","wordcount":  954 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/data_engineering\/spark\/architecture\/","datePublished": "2024-07-20T16:45:05+09:00","dateModified": "2024-07-20T16:45:05+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/data_engineering/spark/architecture/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/data_engineering/spark/architecture/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Architecture</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;954 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/spark.webp"
+        data-srcset="/images/feature_images/spark.webp, /images/feature_images/spark.webp 1.5x, /images/feature_images/spark.webp 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/spark.webp"
+        title="/images/feature_images/spark.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#cluster-manager">Cluster manager</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#responsibilities-of-the-client-process-compoent">Responsibilities of the <code>client process</code> compoent</a></li>
+    <li><a href="#responsibilities-of-the-driver-component">Responsibilities of the <code>driver</code> component</a>
+      <ul>
+        <li><a href="#two-basic-ways-the-driver-program-can-be-run-are">Two basic ways the driver program can be run are:</a></li>
+      </ul>
+    </li>
+    <li><a href="#responsibilities-of-the-executors">Responsibilities of the <code>executors</code></a></li>
+    <li><a href="#creation-of-the-spark-context">Creation of the <code>Spark Context</code></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#local-mode">Local mode</a></li>
+    <li><a href="#client-mode">Client mode</a></li>
+    <li><a href="#cluster-mode">Cluster mode</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="terms">Terms</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Term</th>
+<th style="text-align:center">Meainig</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Application</td>
+<td style="text-align:center">User program built on Spark. Consists of a driver program and executors on the cluster.</td>
+</tr>
+<tr>
+<td style="text-align:center">Application jar</td>
+<td style="text-align:center">A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime.</td>
+</tr>
+<tr>
+<td style="text-align:center">Driver program</td>
+<td style="text-align:center">The process running the main() function of the application and creating the SparkContext</td>
+</tr>
+<tr>
+<td style="text-align:center">Cluster manager</td>
+<td style="text-align:center">An external service for acquiring resources on the cluster (e.g. standalone manager, Mesos, YARN, Kubernetes)</td>
+</tr>
+<tr>
+<td style="text-align:center">Deploy mode</td>
+<td style="text-align:center">Distinguishes where the driver process runs. In <strong>cluster</strong> mode, the framework launches the driver inside of the cluster. In <strong>client</strong> mode, the submitter launches the driver outside of the cluster.</td>
+</tr>
+<tr>
+<td style="text-align:center">Worker node</td>
+<td style="text-align:center">Any node that can run application code in the cluster</td>
+</tr>
+<tr>
+<td style="text-align:center">Executor</td>
+<td style="text-align:center">A process launched for an application on a worker node, that runs tasks and keeps data in memory or disk storage across them. Each application has its own executors.</td>
+</tr>
+<tr>
+<td style="text-align:center">Task</td>
+<td style="text-align:center">A unit of work that will be sent to one executor</td>
+</tr>
+<tr>
+<td style="text-align:center">Job</td>
+<td style="text-align:center">A parallel computation consisting of multiple tasks that gets spawned in response to a Spark action (e.g. save, collect)</td>
+</tr>
+<tr>
+<td style="text-align:center">Stage</td>
+<td style="text-align:center">Each job gets divided into smaller sets of tasks called stages that depend on each other (similar to the map and reduce stages in MapReduce)</td>
+</tr>
+</tbody>
+</table>
+<h1 id="spark-architecture">Spark Architecture</h1>
+<p>Spark는 master / slave 구조로 <strong>1개의 Driver(중앙 조정자)와 N개의 Executor(분산 작업 노드)로 구성되어있다.</strong> Cluster에서 분산 모드로 실행된다면 하나의 spark application은 cluter manager(Standalone, YARN, Kubernetes)라고 불리는 외부 서비스를 사용해서 여러 개의 머신에서 실행된다.</p>
+<h2 id="cluster-manager">Cluster manager</h2>
+<p><strong>Cluster manager는 여러 서버로 구성된 클러스터 환경에서 애플리케이션들이 잘 동작할 수 있도록 자원을 관리한다.</strong> cluster manager 종류에는 크게 standalone, YARN, Kubernetes가 있다.</p>
+<h1 id="spark-runtime-components">Spark runtime components</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Cluter deploy mode</th>
+<th style="text-align:center">Client deploy mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><center><img src="/images/spark/spark_cluster_mode.webp"/></center></td>
+<td style="text-align:center"><center><img src="/images/spark/spark_client_mode.webp"/></center></td>
+</tr>
+<tr>
+<td style="text-align:center">Figure 1</td>
+<td style="text-align:center">Figure 2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Figure 1</strong>: Spark runtime components in <code>Cluster deploy mode</code>. Elements of a spark application are in blue boxes and an application&rsquo;s tasks running inside task slots are labeled with a &ldquo;T&rdquo;. Unoccupied task of slots are in white boxes.</p>
+<p><strong>Figure 2</strong>: Spark runtime compoents in <code>Client deploy mode</code>. The driver is running inside the client&rsquo;s JVM process.</p>
+<p>The physical placement of executor and driver processes depends on the cluster type and its configuration. For example, some of these processes could share a single physical machine, or they could run on different ones. Figure 1 shows only the logical components in cluster deploy mode.</p>
+<h2 id="responsibilities-of-the-client-process-compoent">Responsibilities of the <code>client process</code> compoent</h2>
+<p>The client process starts the driver program. For example, the client process can be a spark-submit script for running applications, a spark-shell script, or a custom application using Spark API. The client process prepares the classpath and all configuration options for the Spark application. It also passes application arguments, if any, to the application running inside the driver.</p>
+<h2 id="responsibilities-of-the-driver-component">Responsibilities of the <code>driver</code> component</h2>
+<p>The driver orchestrates and monitors execution of a Spark application. There&rsquo;s always one driver per Spark application. You can think of the driver as a wrapper around the application.
+The driver and its subcomponents - the Spark context and scheduler - are responsible for:</p>
+<ul>
+<li>
+<p>requesting memory and CPU resources from cluster managers</p>
+</li>
+<li>
+<p>breaking application logic into stages and tasks</p>
+</li>
+<li>
+<p>sending tasks to executors</p>
+</li>
+<li>
+<p>collecting the results</p>
+</li>
+</ul>
+<h3 id="two-basic-ways-the-driver-program-can-be-run-are">Two basic ways the driver program can be run are:</h3>
+<ul>
+<li>
+<p><strong>Cluster mode: the driver process runs as a seperate JVM process inside a cluster, and the cluster manages its resources(mostly JVM heap memory)</strong>.</p>
+</li>
+<li>
+<p><strong>Client mode: the driver&rsquo;s running inside the client&rsquo;s JVM process and communicates with the executors managed by the cluster</strong>.</p>
+</li>
+</ul>
+<h2 id="responsibilities-of-the-executors">Responsibilities of the <code>executors</code></h2>
+<p>The executors, which JVM processes, accept tasks from the driver, execute those tasks, and return the results to driver.</p>
+<p>Each executor has several task slots (or CPU cores) for running tasks in parallel. The executors in the figures have six tasks slots each. Those slots in white boxes are vacant. You can set the number of task slots to a value two or three times the number of CPU cores. Although these task slots are often referred to as CPU cores in Spark, they’re implemented as threads and don’t need to correspond to the number of physical CPU cores on the machine.</p>
+<h2 id="creation-of-the-spark-context">Creation of the <code>Spark Context</code></h2>
+<p>Once the driver is started, it configures an instance of SparkContext. When running a Spark REPL shell, the shell is the driver program. Your Spark context is already preconfigured and available as a sc variable. When running running a standalone Spark applicaion by submitting a jar file, or by using Spark API from another program, yout Spark application starts and configures the Spark context.</p>
+<p>There can be only on Spark context per JVM.</p>
+<p>A Spark context comes with many useful methods for creating RDDs, loading data, and is the main interface for accessing Spark runtime.</p>
+<h1 id="local-mode-vs-deploy-mode">Local mode VS Deploy mode</h1>
+<p>local mode와 deploy mode를 선택하는 기준은 <strong>cluster를 사용 여부</strong>다. 즉, cluster를 사용해서 분산 모드로 애플리케이션을 실행한다면 deploy mode, 그렇지 않다면 local mode다.</p>
+<p>cluster를 사용한다면 <strong>cluster manager 종류와 배포 방식</strong>을 선택할 수 있다. cluster manager는 standalone, YARN, Mesos 등 중에 선택할 수 있다. <strong>배포 방식에는 client, cluster가 있고 어떤 방식을 사용하느냐에 따라 driver 실행 위치가 달라진다.</strong></p>
+<p>즉, 우리는 spark 애플리케이션을 실행할때 local mode, client mode, cluster mode 총 3가지 방식으로 실행할 수 있다.</p>
+<h2 id="local-mode">Local mode</h2>
+<p>local mode는 <strong>local client JVM에 Driver 1개와 Executor 1개를 생성하는 형태</strong>로, 클러스터를 사용하지 않고 로컬 단일 머신에서 애플리케이션을 실행한다.</p>
+<h2 id="client-mode">Client mode</h2>
+<p><strong>Client mode는 Driver가 Cluster 외부인 Client JVM에서 실행된다.</strong> Client 프로세스에 Driver program과 그 안에 Spark application, Spark Context가 있기 때문에 Client 프로세스를 중지시키면 수행 중이던 모든 스파크 Job도 종료된다.</p>
+<h2 id="cluster-mode">Cluster mode</h2>
+<p><strong>Cluster mode는 Driver가 Cluster 내부의 Worker node 중 하나에서 실행된다.</strong> 애플리케이션은 Cluster 내부에서 독립적인 프로세스로 실행되고 Cluster manager에 의해 조정되기 때문에 해당 모드에서 Client는 애플리케이션 제출 후 개입하지 않는다.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-07-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/data_engineering/spark/architecture/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/data_engineering/spark/architecture/" data-title="Architecture" data-hashtags="Spark,Architecture"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/data_engineering/spark/architecture/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/data_engineering/spark/architecture/" data-title="Architecture"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/data_engineering/spark/architecture/" data-title="Architecture"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/data_engineering/spark/architecture/" data-title="Architecture" data-image="/images/feature_images/spark.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/data_engineering/spark/aqe/" class="prev" rel="prev" title="AQE"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>AQE</a>
+            <a href="/posts/data_engineering/spark/cache_persist/" class="next" rel="next" title="Cache_persist">Cache_persist<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

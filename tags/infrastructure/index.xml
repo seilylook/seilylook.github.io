@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
             <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/infrastructure/" rel="self" type="application/rss+xml" /><item>
     <title>Yaml</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/yaml/</link>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/yaml/</link>
     <pubDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/yaml/</guid>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/yaml/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/yaml.jpg" referrerpolicy="no-referrer">
             </div>What is YAML? 시스템 간 데이터를 교화할 때 데이터의 연동과 호환성을 위해 포맷에 대한 규칙이 필요해졌다.
@@ -19,10 +19,10 @@ YAML은 XML과 JSON 포맷과 같이 타 시스템 간에 데이터를 주고 �
 </item>
 <item>
     <title>Lab Test</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/</link>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/lab_test/</link>
     <pubDate>Thu, 25 Jul 2024 16:23:38 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/</guid>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/lab_test/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Use context: kubectl config use-context k8s-c2-AC
@@ -32,16 +32,15 @@ Server certificate expiration date
 Is client certificate authentication enabled
 Write these information into /opt/course/p1/etcd-info.txt
 Finally you&rsquo;re asked to save an etcd snapshot at /etc/etcd-snapshot.db on cluster2-controlplane1 and display its status
-Answer Find out etcd information
-check the nodes:
+Answer Find out etcd information check the nodes:
 1 2 3 4 5 6 7 k get nodes NAME STATUS ROLES AGE VERSION cluster2-controlplane1 Ready control-plane 89m v1.]]></description>
 </item>
 <item>
     <title>Mock Test 3</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</link>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/3/</link>
     <pubDate>Wed, 24 Jul 2024 13:04:21 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</guid>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/3/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Create a new service account with the name pvviewer.
@@ -51,10 +50,10 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 </item>
 <item>
     <title>Mock Test 2</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</link>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/2/</link>
     <pubDate>Wed, 24 Jul 2024 11:06:49 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</guid>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/2/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
@@ -64,10 +63,10 @@ Answer Use the command k run and create a pod definition file for redis-storage 
 </item>
 <item>
     <title>Mock Test 1</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/</link>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/1/</link>
     <pubDate>Tue, 23 Jul 2024 17:48:31 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/1/</guid>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/1/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Deploy a pod named nginx-pod using the nginx-alpine image
@@ -77,10 +76,10 @@ Answer 1 k create namespace apx-x9984574 4. Question Get the list of nodes in JS
 </item>
 <item>
     <title>Killer.sh 1</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</link>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/killer/1/</link>
     <pubDate>Tue, 23 Jul 2024 17:48:08 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</guid>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/killer/1/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question You have access to multiple clusters from your main terminal through kubectl contexts. Write all those context names into /opt/course/1/contexts.
@@ -90,10 +89,10 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
 </item>
 <item>
     <title>Kubernetes Structure</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/structure/</link>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/structure/</link>
     <pubDate>Sat, 20 Jul 2024 17:12:21 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/structure/</guid>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/structure/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>]]></description>
