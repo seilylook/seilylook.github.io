@@ -17,29 +17,24 @@ etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kuber
 
 Create a Pod called `redis-storage` with image: `redis:alpine` with a Volume of type `emptyDir` that lasts for the life of the Pod.
 
+Pod named 'redis-storage' created
+
+Pod 'redis-storage' uses Volume type of emptyDir
+
+Pod 'redis-storage' uses volumeMount with mountPath = /data/redis
+
 #### Answer
-
-Use the command `k run` and create a pod definition file for `redis-storage` pod and add volume.
-
-```bash
-k run redis-storage --image=redis:alpine --dry-run=client -o yaml > redis-storage.yaml
-```
-
-add the volume `emptyDir` in it.
 
 ```yaml
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    run: redis-storage
   name: redis-storage
 spec:
   containers:
-    - image: redis:alpine
-      name: redis-storage
+    - name: redis-storage
+      image: redis:alpine
       volumeMounts:
         - mountPath: /data/redis
           name: temp-volume
@@ -53,6 +48,12 @@ spec:
 Create a new pod called `super-user-pod` with image `busybox:1.28`. Allow the pod to be able to set `system_time`.
 
 The container should `sleep for 4800` seconds.
+
+Pod: super-user-pod
+
+Container Image: busybox:1.28
+
+Is SYS_TIME capability set for the container?
 
 #### Answer
 
@@ -127,6 +128,14 @@ spec:
 
 Create a new deployment called `nginx-deploy`, with image `nginx:1.16` and `1` replica. Next upgrade the deployment to version `1.17` using rolling update.
 
+Deployment : nginx-deploy. Image: nginx:1.16
+
+Image: nginx:1.16
+
+Task: Upgrade the version of the deployment to 1:17
+
+Task: Record the changes for the image upgrade
+
 #### Answer
 
 ```bash
@@ -137,9 +146,19 @@ k edit deployment nginx-deploy
 
 ### 6. Question
 
-Create a new user called `john`. Grant him access to the cluster. John should have permission to `create, list, get, update and delete pods` in the `development` namespace . The private key exists in the location: `/root/CKA/john.key` and csr at `/root/CKA/john.csr`.
+Create a new user called `john`. Grant him access to the cluster. 
+
+John should have permission to `create, list, get, update and delete pods` in the `development` namespace . 
+
+The private key exists in the location: `/root/CKA/john.key` and csr at `/root/CKA/john.csr`.
 
 Important Note: As of kubernetes 1.19, the CertificateSigningRequest object expects a `signerName`.
+
+CSR: john-developer Status:Approved
+
+Role Name: developer, namespace: development, Resource: Pods
+
+Access: User 'john' has appropriate permissions
 
 #### Answer
 
@@ -192,6 +211,12 @@ Create a nginx pod called `nginx-resolver` using image `nginx`, expose it intern
 
 Test that you are able to look up the service and pod names from within the cluster. Use the image: `busybox:1.28` for dns lookup. Record results in `/root/CKA/nginx.svc` and `/root/CKA/nginx.pod`
 
+Pod: nginx-resolver created
+
+Service DNS Resolution recorded correctly
+
+Pod DNS resolution recorded correctly
+
 #### Answer
 
 Use the command k run and create a nginx pod and busybox pod. Resolve it, nginx service and its pod name from busybox pod.
@@ -200,14 +225,15 @@ To create a pod nginx-resolver and expose it internally:
 
 ```bash
 k run nginx-resolver --image=nginx
+
 k expose pod nginx-resolver --name=nginx-resolver-service --port=80 --target-port=80 --type=ClusterIP
 ```
 To create a pod test-nslookup. Test that you are able to look up the service and pod names from within the cluster:
 
 ```bash
-k run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service
-
 k run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver-service > /root/CKA/nginx.svc
+
+k run test-nslookup --image=busybox:1.28 --rm -it --restart=Never -- nslookup nginx-resolver > /root/CKA/nginx.pod
 ```
 
 Get the IP of the nginx-resolver pod and replace the dots(.) with hyphon(-) which will be used below.
@@ -224,6 +250,10 @@ k run test-nslookup --image=busybox:1.28 --rm -it -
 Create a static pod on `node01` called `nginx-critical` with image `nginx` and make sure that it is recreated/restarted automatically in case of a failure.
 
 Use `/etc/kubernetes/manifests` as the Static Pod path for example.
+
+static pod configured under /etc/kubernetes/manifests ?
+
+Pod nginx-critical-node01 is up and running
 
 #### Answer
 
@@ -262,6 +292,23 @@ Add that complete path to the `staticPodPath` field in the `kubelet config.yaml`
 
 ```bash
 root@node01:~# vi /var/lib/kubelet/config.yaml
+```
+
+```yaml
+# /var/lib/kubelet/config.yaml
+
+apiVersion: kubelet.config.k8s.io/v1beta1
+authentication:
+  anonymous:
+    enabled: false
+  webhook:
+    cacheTTL: 0s
+    enabled: true
+  x509:
+    clientCAFile: /etc/kubernetes/pki/ca.crt
+...
+staticPodPath: /etc/kubernetes/manifests
+...
 ```
 
 now, `move/copy` the static.yaml to path `/etc/kubernetes/manifests/`.

@@ -90,8 +90,9 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
 Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/etcd-backup.db 2. Question Create a Pod called redis-storage with image: redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod.
-Answer Use the command k run and create a pod definition file for redis-storage pod and add volume.
-1 k run redis-storage --image=redis:alpine --dry-run=client -o yaml &gt; redis-storage.]]></description>
+Pod named &lsquo;redis-storage&rsquo; created
+Pod &lsquo;redis-storage&rsquo; uses Volume type of emptyDir
+Pod &lsquo;redis-storage&rsquo; uses volumeMount with mountPath = /data/redis]]></description>
 </item>
 <item>
     <title>Mock Test 1</title>
