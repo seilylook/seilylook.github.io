@@ -4,7 +4,18 @@
         <link>https://seilylook.github.io/tags/infrastructure/</link>
         <description>Infrastructure - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/infrastructure/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 29 Jul 2024 17:05:59 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/infrastructure/" rel="self" type="application/rss+xml" /><item>
+    <title>Past Exam Questions</title>
+    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/past_exam/</link>
+    <pubDate>Mon, 29 Jul 2024 17:05:59 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/past_exam/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
+            </div>기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ServiceAccount 생성, Role 생성, Role Binding 생성 후 확인 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
+ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.]]></description>
+</item>
+<item>
     <title>Yaml</title>
     <link>https://seilylook.github.io/posts/infra_structure/kubernetes/yaml/</link>
     <pubDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</pubDate>
@@ -43,8 +54,8 @@ Answer Find out etcd information check the nodes:
     <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/3/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. Question Create a new service account with the name pvviewer.
-Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
+            </div>1. Question Create a new ServiceAccount with the name pvviewer.
+Grant this ServiceAccount access to list all PersistentVolumes in the cluster by creating an appropriate ClusterRole called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
 Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
 Answer Pods authenticate to the API Server using ServiceAccounts. If the serviceAccount name is not specified, the default service account for the namespace is used during a pod creation.]]></description>
 </item>

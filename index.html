@@ -102,6 +102,21 @@
         alt="/images/profile/profile.png"
         title="/images/profile/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/se-hyeon-kim-07a1a02a2/" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/infra_structure/kubernetes/cka/past_exam/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/kubernetes.png"
+        data-srcset="/images/feature_images/kubernetes.png, /images/feature_images/kubernetes.png 1.5x, /images/feature_images/kubernetes.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/kubernetes.png"
+        title="/images/feature_images/kubernetes.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/infra_structure/kubernetes/cka/past_exam/">Past Exam Questions</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-29">2024-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div><div class="content">기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ServiceAccount 생성, Role 생성, Role Binding 생성 후 확인 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
+ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.</div><div class="post-footer">
+        <a href="/posts/infra_structure/kubernetes/cka/past_exam/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/infrastructure/">Infrastructure</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/library/python/pandas/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -181,23 +196,6 @@ Finally you&rsquo;re asked to save an etcd snapshot at /etc/etcd-snapshot.db on 
 Answer Find out etcd information check the nodes:
 1 2 3 4 5 6 7 k get nodes NAME STATUS ROLES AGE VERSION cluster2-controlplane1 Ready control-plane 89m v1.</div><div class="post-footer">
         <a href="/posts/infra_structure/kubernetes/cka/lab_test/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/infrastructure/">Infrastructure</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/infra_structure/kubernetes/cka/mocktest/3/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/feature_images/kubernetes.png"
-        data-srcset="/images/feature_images/kubernetes.png, /images/feature_images/kubernetes.png 1.5x, /images/feature_images/kubernetes.png 2x"
-        data-sizes="auto"
-        alt="/images/feature_images/kubernetes.png"
-        title="/images/feature_images/kubernetes.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/infra_structure/kubernetes/cka/mocktest/3/">Mock Test 3</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-24">2024-07-24</time></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div><div class="content">1. Question Create a new service account with the name pvviewer.
-Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
-Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
-Answer Pods authenticate to the API Server using ServiceAccounts. If the serviceAccount name is not specified, the default service account for the namespace is used during a pod creation.</div><div class="post-footer">
-        <a href="/posts/infra_structure/kubernetes/cka/mocktest/3/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/infrastructure/">Infrastructure</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

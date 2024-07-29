@@ -260,4 +260,3 @@ k create role processor --verb=create --resources=secret,configmap -n project-ha
 k create rolebinding processor --role=processor --serviceaccount=project-hamster:processor
 ```
 
-
