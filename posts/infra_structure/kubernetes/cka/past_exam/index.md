@@ -10,9 +10,6 @@
 k logs Pod이름 | grep 에러메시지 > 저장 경로
 ```
 
-- ServiceAccount 생성, Role 생성, Role Binding 생성 후 확인
-
-
 ### ETCD snapshot save & restore
 
 #### Save ETCD

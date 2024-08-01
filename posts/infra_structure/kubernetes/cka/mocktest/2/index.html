@@ -485,9 +485,9 @@ Pod &lsquo;redis-storage&rsquo; uses volumeMount with mountPath = /data/redis"/>
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup nginx-resolver-service &gt; /root/CKA/nginx.svc
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup nginx-resolver-service &gt; /root/CKA/nginx.svc
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup nginx-resolver &gt; /root/CKA/nginx.pod
+</span></span><span class="line"><span class="cl">kubectl run test-nslookup --image<span class="o">=</span>busybox:1.28 --rm -it --restart<span class="o">=</span>Never -- nslookup &lt;P-O-D-I-P.default.pod&gt; &gt; /root/CKA/nginx.pod
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Get the IP of the nginx-resolver pod and replace the dots(.) with hyphon(-) which will be used below.</p>
