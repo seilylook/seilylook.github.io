@@ -3,9 +3,9 @@
 
 ### 1. Question
 
-Create a new service account with the name `pvviewer`. 
+Create a new ServiceAccount with the name `pvviewer`. 
 
-Grant this Service account access to `list` all PersistentVolumes in the cluster by creating an appropriate cluster role called `pvviewer-role` and ClusterRoleBinding called `pvviewer-role-binding`.
+Grant this ServiceAccount access to `list` all PersistentVolumes in the cluster by creating an appropriate ClusterRole called `pvviewer-role` and ClusterRoleBinding called `pvviewer-role-binding`.
 
 Next, create a pod called `pvviewer` with the image: `redis` and serviceAccount: `pvviewer` in the default namespace.
 
@@ -50,7 +50,7 @@ spec:
 
 List the `InternalIP` of all nodes of the cluster. Save the result to a file `/root/CKA/node_ips`.
 
-Answer should be in the format: `InternalIP of controlplane`<space>`InternalIP of node01` (in a single line)
+Answer should be in the format: **InternalIP of controlplane`<space>`InternalIP of node01** (in a single line)
 
 #### Answer
 

@@ -4,12 +4,35 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 29 Jul 2024 17:05:59 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Lang_chain</title>
+    <link>https://seilylook.github.io/posts/ai/langchain/</link>
+    <pubDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/ai/langchain/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ai/lang_chain/main.webp" referrerpolicy="no-referrer">
+            </div>Introduction LangChain은 LLM을 활용한 애플리케이션 개발을 단순화하기 위해 설계돈 오픈 소스 프레임워크이다. 다양한 LLM과 상호 작용하고, 여러 모델을 연결해 복잡한 AI 애플리케이션을 구축하는 데 도움을 주는 도구이다. 주로 LLM 자체를 개발하는 것보다는 만들어진 LLM(ChatGPT)을 사용해 여러 텍스트 분석 기능, 챗봇 개발 등에 사용된다.
+source: https://js.langchain.com/v0.1/docs/get_started/introduction/
+Source : https://aws.amazon.com/ko/what-is/langchain/
+특히 LangChaindms RAG(Retrieval Augmented Generation) 같은 학습으로 모든 입력을 처리할 수 없는 케이스에 많이 사용된다. 실제로 LLM을 서비스할 때는 모든 데이터를 항상 실시간으로 학습시켜 놓을 수도 없고, 사용자가 원하는 질문을 정확하게 답변하기 위해서 여러 추가적인 지식이 필요하기 때문에 이러한 방식을 주로 사용한다.]]></description>
+</item>
+<item>
+    <title>RAG</title>
+    <link>https://seilylook.github.io/posts/ai/rag/</link>
+    <pubDate>Fri, 02 Aug 2024 11:08:57 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/ai/rag/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ai/rag/1.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Past Exam Questions</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/past_exam/</link>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/</link>
     <pubDate>Mon, 29 Jul 2024 17:05:59 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/past_exam/</guid>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
@@ -38,10 +61,10 @@ ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 �
 </item>
 <item>
     <title>Yaml</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/yaml/</link>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/yaml/</link>
     <pubDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/yaml/</guid>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/yaml/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/yaml.jpg" referrerpolicy="no-referrer">
             </div>What is YAML? 시스템 간 데이터를 교화할 때 데이터의 연동과 호환성을 위해 포맷에 대한 규칙이 필요해졌다.
@@ -61,10 +84,10 @@ YAML은 XML과 JSON 포맷과 같이 타 시스템 간에 데이터를 주고 �
 </item>
 <item>
     <title>Lab Test</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/lab_test/</link>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/</link>
     <pubDate>Thu, 25 Jul 2024 16:23:38 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/lab_test/</guid>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/lab_test/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Use context: k config use-context k8s-c2-AC
@@ -79,10 +102,10 @@ Answer Find out etcd information check the nodes:
 </item>
 <item>
     <title>Mock Test 3</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/3/</link>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</link>
     <pubDate>Wed, 24 Jul 2024 13:04:21 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/3/</guid>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/3/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Create a new ServiceAccount with the name pvviewer.
@@ -92,10 +115,10 @@ Answer Pods authenticate to the API Server using ServiceAccounts. If the service
 </item>
 <item>
     <title>Mock Test 2</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/2/</link>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</link>
     <pubDate>Wed, 24 Jul 2024 11:06:49 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/2/</guid>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
@@ -103,32 +126,6 @@ Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes
 Pod named &lsquo;redis-storage&rsquo; created
 Pod &lsquo;redis-storage&rsquo; uses Volume type of emptyDir
 Pod &lsquo;redis-storage&rsquo; uses volumeMount with mountPath = /data/redis]]></description>
-</item>
-<item>
-    <title>Mock Test 1</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/1/</link>
-    <pubDate>Tue, 23 Jul 2024 17:48:31 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/mocktest/1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. Question Deploy a pod named nginx-pod using the nginx-alpine image
-Answer 1 k run nginx-pod --image=nginx:alpine 2. Question Deploy a messagine pod using the redis:alpine image with the labels set to tier=msg
-Answer 1 k run messaging --image=redis:alpine -l tier=msg 3. Question Create a namespace named apx-x9984574
-Answer 1 k create namespace apx-x9984574 4. Question Get the list of nodes in JSON format and store it in a file at /opt/outputs/nodes-z3444kd9.]]></description>
-</item>
-<item>
-    <title>Killer.sh 1</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/killer/1/</link>
-    <pubDate>Tue, 23 Jul 2024 17:48:08 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/cka/killer/1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. Question You have access to multiple clusters from your main terminal through kubectl contexts. Write all those context names into /opt/course/1/contexts.
-Next write a command to display the current context into /opt/course/1/context_default_kubectl.sh, the command should use kubectl
-Finally write a second command doing the same thing into /opt/course/1/context_default_no_kubectl.sh, but without the use of kubectl.
-Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo &#39;kubectl config current-context&#39; &gt; /opt/course/1/context_default_kubectl.]]></description>
 </item>
 </channel>
 </rss>

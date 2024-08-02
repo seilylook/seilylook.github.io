@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>LangChain - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/langchain/</link>
+        <description>LangChain - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/langchain/" rel="self" type="application/rss+xml" /><item>
+    <title>Lang_chain</title>
+    <link>https://seilylook.github.io/posts/ai/langchain/</link>
+    <pubDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/ai/langchain/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ai/lang_chain/main.webp" referrerpolicy="no-referrer">
+            </div>Introduction LangChain은 LLM을 활용한 애플리케이션 개발을 단순화하기 위해 설계돈 오픈 소스 프레임워크이다. 다양한 LLM과 상호 작용하고, 여러 모델을 연결해 복잡한 AI 애플리케이션을 구축하는 데 도움을 주는 도구이다. 주로 LLM 자체를 개발하는 것보다는 만들어진 LLM(ChatGPT)을 사용해 여러 텍스트 분석 기능, 챗봇 개발 등에 사용된다.
+source: https://js.langchain.com/v0.1/docs/get_started/introduction/
+Source : https://aws.amazon.com/ko/what-is/langchain/
+특히 LangChaindms RAG(Retrieval Augmented Generation) 같은 학습으로 모든 입력을 처리할 수 없는 케이스에 많이 사용된다. 실제로 LLM을 서비스할 때는 모든 데이터를 항상 실시간으로 학습시켜 놓을 수도 없고, 사용자가 원하는 질문을 정확하게 답변하기 위해서 여러 추가적인 지식이 필요하기 때문에 이러한 방식을 주로 사용한다.]]></description>
+</item>
+</channel>
+</rss>

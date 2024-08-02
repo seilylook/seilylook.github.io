@@ -12,7 +12,7 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-23T17:48:08+09:00" />
-<meta property="article:modified_time" content="2024-07-25T18:27:17+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-07-27T16:28:00+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Killer.sh 1"/>
@@ -32,8 +32,8 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/killer\/1\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  172 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/killer\/1\/","datePublished": "2024-07-23T17:48:08+09:00","dateModified": "2024-07-25T18:27:17+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  859 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/killer\/1\/","datePublished": "2024-07-23T17:48:08+09:00","dateModified": "2024-07-27T16:28:00+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -49,7 +49,18 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
             <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
                     <i class="fa fa-globe" aria-hidden="true"></i>                      
@@ -67,21 +78,42 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
                     <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
                     <select class="language-select" onchange="location = this.value;"><option value="/posts/infra/kubernetes/cka/killer/1/" selected>English</option></select>
                 </a></div>
     </div>
-</header><main class="main">
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Killer.sh 1</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-23">2024-07-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;172 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-23">2024-07-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;859 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -106,6 +138,25 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
         <li><a href="#2-question">2. Question</a>
           <ul>
             <li><a href="#answer-1">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-question">3. Question</a>
+          <ul>
+            <li><a href="#answer-2">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-question">4. Question</a></li>
+        <li><a href="#5-question">5. Question</a></li>
+        <li><a href="#6-question">6. Question</a></li>
+        <li><a href="#7-question">7. Question</a></li>
+        <li><a href="#8-question">8. Question</a>
+          <ul>
+            <li><a href="#answer-3">Answer</a></li>
+          </ul>
+        </li>
+        <li><a href="#9-question">9. Question</a>
+          <ul>
+            <li><a href="#answer-4">Answer</a></li>
           </ul>
         </li>
       </ul>
@@ -134,14 +185,16 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="2-question">2. Question</h3>
-<p>Create a single Pod of image <code>httpd:2.4.41-alpine</code> in Namespace <code>default</code>. The Pod should be named <code>pod1</code> and the container should be named <code>pod1-container</code>. This Pod should only be scheduled on controlplane nodes. Do not add new labels to any nodes.</p>
+<p>Create a single Pod of image <code>httpd:2.4.41-alpine</code> in Namespace <code>default</code>.</p>
+<p>The Pod should be named <code>pod1</code> and the container should be named <code>pod1-container</code>.</p>
+<p>This Pod should only be scheduled on controlplane nodes. Do not add new labels to any nodes.</p>
 <h4 id="answer-1">Answer</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k describe node cluster1-controlplane <span class="p">|</span> grep Taint
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k describe node cluster1-controlplane1 <span class="p">|</span> grep Taint
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -168,20 +221,345 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pod1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pod1-container</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">httpd:2.4.41-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pod1-container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">httpd:2.4.41-alpine</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tolerations</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;node-role.kubernetes.io/control-plane&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Exists&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;NoSchedule&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;node-role.kubernetes.io/control-plane&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Exists&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;NoSchedule&#34;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-question">3. Question</h3>
+<p>There are tow Pods named <code>o3db</code> in Namespace <code>project-c13</code>.</p>
+<p>C13 management asked you to scale the Pods down to one replica to save resources.</p>
+<h4 id="answer-2">Answer</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k scale sts o3db --replicas<span class="o">=</span><span class="m">1</span> -n project-c13
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-question">4. Question</h3>
+<p>Do the following in Namespace default.</p>
+<p>Create a single Pod named <code>ready-if-service-ready</code> of image <code>nginx:1.16.1-alpine</code>.</p>
+<p>Configure a LivenessProve which simply executes command true.</p>
+<p>Also configure a ReadinessProbe which does check if the url <code>http://service-am-i-ready:90</code> is reachable, you can use wget -Y2 -O -https://service-am-i-ready:80 for this.</p>
+<p>Start the pod and confirm it isn&rsquo;t ready because of the ReadinessProbe.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ready-if-service-ready</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">ready-if-service-ready</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ready-if-service-ready</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx:1.16.1-apline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">livenessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">exec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="s1">&#39;true&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">readinessProbe</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">exec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">sh</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- -<span class="l">c</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="s1">&#39;wget -T2 -O- http://service-am-i-ready:80&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create a second Pod naemd <code>am-i-ready</code> of image <code>nginx:1.16.1-alpine</code> with label <code>id: cross-service-ready</code>.</p>
+<p>The already existing Service <code>service-am-i-ready</code> should now have that second Pod as endpoint.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run am-i-ready --image<span class="o">=</span>nginx:1.16.1-alpine --label<span class="o">=</span><span class="nv">id</span><span class="o">=</span>cross-service-ready
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5-question">5. Question</h3>
+<p>There are various Pods in all namespaces. Write a command into <code>/opt/course/5/find_pods.sh</code> which lists all Pods sorted by their <code>AGE(metadata.creationTimestamp)</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;kubectl get pods --all-namespaces --sort-by=.metadata.creationTimestamp&#39;</span> &gt; /opt/course/5/find_pods.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Write a second command into <code>/opt/course/5/find_pods_uid.sh</code> which lists all Pods sorted by field <code>metadata.uid</code>. Use kubeclt sorting for both commands.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;kubeclt get pods --all-namespaces --sort-by=.metadata.uid&#39;</span> &gt; /opt/course/5/find_pods_uid.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="6-question">6. Question</h3>
+<p>Create a new PersistentVolume named <code>safari-pv</code>. It should have a capacity of <code>2Gi</code>, accessMode <code>ReadWrtieOnce</code>, hostPath <code>/Volumes/Data</code> and no storageClassName defined.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">safari-pv</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ReadWriteOnce</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">2Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/Volumes/Data</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next create a new PersistentVolumeClaim in Namespace <code>project-tiger</code> named <code>safari-pvc</code>. It should request <code>2Gi</code> storage, accessMode <code>ReadWriteOnce</code> and should not define a storageClassName. The PVC should bound to the PV correctly.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolumeClaim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">safari-pvc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">project-tiger</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ReadWrtieOnce</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">2Gi</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally create a new Deployment <code>safari</code> in Namespace <code>project-tiger</code> which mounts that volume at <code>/tmp/safari-data</code>. The Pods of that Deployment should be of image <code>httpd:2.4.41-alpine</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create deployment safari --image<span class="o">=</span>httpd:2.4.41-alpine -n project-tiger --dry-run<span class="o">=</span>client -o yaml &gt; safari-deploy.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">safari</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">safari</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">project-tiger</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">safari</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">safari</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">httpd:2.4.41-alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">httpd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">safari-data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/safari-data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">safari-data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l">safari-pvc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">status</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="7-question">7. Question</h3>
+<p>The metrics-server has been installed in the cluster. Your college would like to know the kubectl commands to:</p>
+<ol>
+<li>
+<p>Show Nodes resource usage</p>
+</li>
+<li>
+<p>Show Pods and their containers resource usage</p>
+</li>
+</ol>
+<p>Please write the commands into <code>/opt/course/7/node.sh</code> and <code>/opt/sourse/7/pod.sh</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;k top node&#39;</span> &gt; /opt/course/7/node.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;k top pod --containers=true&#39;</span> &gt; /opt/course/7/pod.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="8-question">8. Question</h3>
+<p>SSH into the controlplane node with <code>ssh cluster1-controlplane1</code>.</p>
+<p>Check how the controlplane components <code>kubelet</code>, <code>kube-apiserver</code>, <code>kube-scheduler</code>, <code>kube-controller-manager</code> and <code>etcd</code> are started/installed on the controlplane node.</p>
+<p>Also find out the name of the <code>DNS application</code> and how it&rsquo;s started/installed on the controlplane node.</p>
+<p>Write the findings into file <code>/opt/course/8/controlplane-components.txt</code>. The file should be structured like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"># /opt/course/8/controlplane-components.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubelet: [TYPE]
+</span></span><span class="line"><span class="cl">kube-apiserver: [TYPE]
+</span></span><span class="line"><span class="cl">kube-scheduler: [TYPE]
+</span></span><span class="line"><span class="cl">kube-controller-manager: [TYPE]
+</span></span><span class="line"><span class="cl">etcd: [TYPE]
+</span></span><span class="line"><span class="cl">dns: [TYPE][NAME]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="answer-3">Answer</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">kubelet: process
+</span></span><span class="line"><span class="cl">kube-apiserver: static-pod
+</span></span><span class="line"><span class="cl">kube-scheduler: static-pod
+</span></span><span class="line"><span class="cl">kube-controller-manager: static-pod
+</span></span><span class="line"><span class="cl">etcd: static-pod
+</span></span><span class="line"><span class="cl">dns: pod coredns
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="9-question">9. Question</h3>
+<p>Create a new ServiceAccount <code>processor</code> in Namespace <code>project-hamster</code>.</p>
+<p>Create a Role and RoleBinding, both named processor as well.</p>
+<p>These should allow the new SA to only <code>create</code> <code>Secrets</code> and <code>ConfigMaps</code> in that Namespace.</p>
+<h4 id="answer-4">Answer</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create serviceaccount processor -n project-hamster
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k create role processor --verb<span class="o">=</span>create --resources<span class="o">=</span>secret,configmap -n project-hamster
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k create rolebinding processor --role<span class="o">=</span>processor --serviceaccount<span class="o">=</span>project-hamster:processor
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-25&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/d87e4a8926d68a47d25eb45201778deacb9f19be" target="_blank" title="commit by seilylook(seilylook@naver.com) d87e4a8926d68a47d25eb45201778deacb9f19be: add: CKA mock test 3 &amp; linux">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d87e4a8</a></span>
+                <span>Updated on 2024-07-27&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/9f7e246c805cb0dbe7fea882ebc738cc3b1d703a" target="_blank" title="commit by seilylook(seilylook@naver.com) 9f7e246c805cb0dbe7fea882ebc738cc3b1d703a: change: directory names &amp; lab test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9f7e246</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
@@ -219,5 +597,5 @@ Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo 
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

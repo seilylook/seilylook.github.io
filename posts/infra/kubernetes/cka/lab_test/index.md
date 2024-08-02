@@ -3,7 +3,7 @@
 
 ### 1. Question
 
-Use context: `kubectl config use-context k8s-c2-AC`
+Use context: `k config use-context k8s-c2-AC`
 
 The cluster admin asked you to find out the following information about etcd runngin on cluster2-controlplane1:
 
@@ -19,7 +19,7 @@ Finally you're asked to save an etcd snapshot at `/etc/etcd-snapshot.db` on clus
 
 #### Answer
 
-**Find out etcd information**
+##### Find out etcd information
 
 check the nodes:
 
@@ -123,22 +123,19 @@ Server certificate expiration date: Sep 13 13:01:31 2022 GMT
 Is client certificate authentication enabled: yes
 ```
 
-**Create etcd snapshot**
+##### Create etcd snapshot
 
 ```bash
-ETCDCTL_API=3 etcdctl snapshot save /etc/etcd-snapshot.db
-```
+export ETCDCTL_API=3 
 
-We get the endpoint also from the yaml. But we need to specify more parameters, all of which we can find the yaml declaration abobe:
-
-```bash
-ETCDCTL_API=3 etcdctl snapshot save /etc/etcd-snapshot.db \
+etcdctl snapshot save /etc/etcd-snapshot.db \
 --cacert /etc/kubernetes/pki/etcd/ca.crt \
 --cert /etc/kubernetes/pki/etcd/server.crt \
---key /etc/kubernetes/pki/etcd/server.key
+--key /etc/kubernetes/pki/etcd/server.key \
+/etc/etcd-snapshot.db
 ```
 
-This wored, Now we can output the status of the backup file:
+This worked, Now we can output the status of the backup file:
 
 ```bash
 ETCDCTL_API=3 etcdctl snapshot status /etc/etcd-snapshot.db
@@ -147,7 +144,7 @@ ETCDCTL_API=3 etcdctl snapshot status /etc/etcd-snapshot.db
 
 ### 2. Question
 
-Use context: `kubectl config use-context k8s-c1-H`
+Use context: `k config use-context k8s-c1-H`
 
 You're asked to confirm that kube-proxy is running correctly on all nodes. For this preform the following in *Namespace* `project-hamster`:
 
@@ -163,18 +160,17 @@ Finally delete the Service and confirm that the iptables rules are gone from all
 
 #### Answer
 
-**Create the Pod**
+##### Create the Pod
+
+Create a Pod with 2 containers:
 
 ```bash
-kubectl run p2-pod --image=nginx:1.21.3-alpine -o yaml > p2.yaml
-
-vim p2.yaml
+k run p2-pod --image=nginx:1.21.3-alpine --dry-run=client -o=yaml > p2-pod.yaml
 ```
-
-Next we add the requested second container
 
 ```yaml
 # p2.yaml
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -199,15 +195,15 @@ status: {}
 And we create the Pod:
 
 ```bash
-k crete -f p2.yaml
+k crete -f p2-pod.yaml
 ```
 
-**Create the Service**
+##### Create the Service
 
 Next we create the Service:
 
 ```bash
-k expose pod p2-pod --name p2-service --port 3000 --target-port 80 -n project-hamster
+k expose pod p2-pod --name=p2-servie --port=3000 --target-port=80 --type=ClusterIP -n=project-hamster
 ```
 
 This will create a yaml file:
@@ -248,7 +244,7 @@ We should confirm Pods and Services are connected, hence the Service should have
 k get pod,svc,ep -n project-hamster
 ```
 
-**Confirm kube-proxy is running and is using iptables**
+##### Confirm kube-proxy is running and is using iptables
 
 First we get nodes in the cluster:
 
@@ -277,7 +273,7 @@ I0913 12:53:03.096620       1 server_others.go:212] Using iptables Proxier.
 
 This should be repeated on every node and result in the same output `Using iptables Proxier`
 
-**Check kube-proxy is creating iptables rules**
+##### Check kube-proxy is creating iptables rules
 
 New we check the iptables rules on every node first manullay:
 
@@ -317,7 +313,7 @@ ssh cluster1-node1 iptables-save | grep p2-service >> /opt/course/p2/iptables.tx
 ssh cluster1-node2 iptables-save | grep p2-service >> /opt/course/p2/iptables.txt
 ```
 
-**Delete the Service and confirm iptables rules are gone**
+##### Delete the Service and confirm iptables rules are gone
 
 Delete the Service:
 
@@ -337,7 +333,7 @@ ssh cluster1-node2 iptables-save | grep p2-service
 
 ### 3. Question
 
-Use context: `kubectl config use-context k8s-c2-AC`
+Use context: `k config use-context k8s-c2-AC`
 
 Create a Pod names `check-ip` in Namespace `default` using image `httpd:2.4.41-alpine`. Expose it on port 80 as a ClusterIP Service named `check-ip-service`. Remember/output the IP of that Service.
 
@@ -352,7 +348,7 @@ Create the Pod and expose it:
 ```bash
 k run check-ip --image=httpd:2.4.41-alpine
 
-k expose pod check-ip --name check-ip-service --port 80
+k expose pod check-ip --name=check-ip-service --port=80 --type=ClusterIP
 ```
 
 Check the Pod and Service ips:
@@ -400,12 +396,12 @@ spec:
 ...
 ```
 
-**Give it a bit for the kube-apiserver and controller-manager to restart**
+##### Give it a bit for the kube-apiserver and controller-manager to restart
 
 Wait for the api to be up again:
 
 ```bash
-kubectl get pod -n kube-system | grep api
+k get pod -n kube-system | grep api
 
 kube-apiserver-cluster2-controlplane1            1/1     Running   0              49s
 ```
@@ -452,7 +448,7 @@ spec:
     - --use-service-account-credentials=true
 ```
 
-**Give it a bit for the scheduler to restart**
+##### Give it a bit for the scheduler to restart
 
 We can check if it was restarted using `crictl`:
 
@@ -503,7 +499,7 @@ Upgrade `controlplane` node first and drain node `node01` before upgrading it. P
 
 #### Answer
 
-**On the Controlplane node**
+##### On the Controlplane node
 
 ```bash
 vim /etc/apt/sources.list.d/kubernetes.list
@@ -516,7 +512,7 @@ deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io
 ```
 
 ```bash
-kubectl drain controlplane --ignore-daemonsets
+k drain controlplane --ignore-daemonsets
 
 apt update
 
@@ -546,23 +542,23 @@ systemctl daemon-reload
 
 systemctl restart kubelet
 
-kubectl uncordon controlplane
+k uncordon controlplane
 ```
 
 Before draining `node01`, if the controlplane gets taint during an upgrade, we have to remove it.
 
 ```bash
 # Identify the taint first. 
-kubectl describe node controlplane | grep -i taint
+k describe node controlplane | grep -i taint
 
-# Remove the taint with help of "kubectl taint" command.
-kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+# Remove the taint with help of "k taint" command.
+k taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
 
 # Verify it, the taint has been removed successfully.  
-kubectl describe node controlplane | grep -i taint
+k describe node controlplane | grep -i taint
 ```
 
-**On the node01 node**
+##### On the node01 node
 
 `SSH` to the `node01` and perform the below steps as follows: -
 
@@ -586,7 +582,7 @@ apt update
 apt-cache madison kubeadm
 ```
 
-Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.30.0, the available package version is 1.30.0-1.1. Therefore, to install kubeadm for Kubernetes v1.30.0, use the following command:
+Based on the version information displayed by `apt-cache madison`, it indicates that for kubernetes version `1.30.0`, the available package version is `1.30.0-1.-1`. Therefore, to install kubeadm for kubernetes, `v1.30.0`, use the following command:
 
 ```bash
 apt-get install kubeadm=1.30.0-1.1
@@ -610,9 +606,9 @@ To exit from the specific node, type exit or logout on the terminal.
 Back on the controlplane node:
 
 ```bash
-kubectl uncordon node01
+k uncordon node01
 
-kubectl get pods -o wide | grep gold # make sure this is scheduled on a node
+k get pods -o wide | grep gold # make sure this is scheduled on a node
 ```
 
 ### 5. Question
@@ -636,7 +632,7 @@ Write the result to the file `/opt/admin2406_data`.
 #### Answer
 
 ```bash
-kubectl get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name -n admin2406 > /opt/admin2406_data
+k get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name -n admin2406 > /opt/admin2406_data
 ```
 
 ### 6. Question
@@ -648,7 +644,7 @@ A kubeconfig file called `admin.kubeconfig` has been created in `/root/CKA`. The
 Make sure the port for the `kube-apiserver` is correct. So for this change port from `4380` to `6443`. 
 
 ```bash
-kubectl cluster-info --kubeconfig /root/CKA/admin.kubeconfig
+k cluster-info --kubeconfig /root/CKA/admin.kubeconfig
 ```
 
 ### 7. Question
@@ -657,27 +653,31 @@ Create a new deployment called `nginx-deploy`, with image `nginx:1.16` and `1` r
 
 #### Answer
 
-Make use of the kubectl create command to create the deployment and explore the --record option while upgrading the deployment image.
+Make use of the k create command to create the deployment and explore the --record option while upgrading the deployment image.
 
 ```bash
-kubectl create deployment  nginx-deploy --image=nginx:1.16
+k create deployment  nginx-deploy --image=nginx:1.16
 ```
 
 Run the below command to update the new image for nginx-deploy deployment and to record the version:
 
 ```bash
-kubectl set image deployment/nginx-deploy nginx=nginx:1.17 --record
+k set image deployment/nginx-deploy nginx=nginx:1.17 --record
 ```
 
 ### 8. Question
 
-A new deployment called `alpha-mysql` has been deployed in the `alpha` namespace. However, the pods are not running. Troubleshoot and fix the issue. The deployment should make use of the persistent volume `alpha-pv` to be mounted at `/var/lib/mysql` and should use the environment variable `MYSQL_ALLOW_EMPTY_PASSWORD=1` to make use of an empty root password.
+A new deployment called `alpha-mysql` has been deployed in the `alpha` namespace. 
+
+However, the pods are not running. Troubleshoot and fix the issue. 
+
+The deployment should make use of the persistent volume `alpha-pv` to be mounted at `/var/lib/mysql` and should use the environment variable `MYSQL_ALLOW_EMPTY_PASSWORD=1` to make use of an empty root password.
 
 Important: Do not alter the persistent volume.
 
 #### Answer
 
-Use the command kubectl describe and try to fix the issue.
+Use the command k describe and try to fix the issue.
 
 Solution manifest file to create a pvc called mysql-alpha-pvc as follows:
 
@@ -711,48 +711,46 @@ etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kuber
 
 ### 10. Question
 
-Create a pod called `secret-1401` in the `admin1401` namespace using the `busybox` image. The container within the pod should be called `secret-admin` and should `sleep` for `4800` seconds.
+Create a pod called `secret-1401` in the `admin1401` namespace using the `busybox` image. 
 
-The container should mount a `read-only` secret volume called `secret-volume` at the path /`etc/secret-volume`. The secret being mounted has already been created for you and is called dotfile-secret.
+The container within the pod should be called `secret-admin` and should `sleep` for `4800` seconds.
+
+The container should mount a `read-only` secret volume called `secret-volume` at the path `/etc/secret-volume`. 
+
+The secret being mounted has already been created for you and is called `dotfile-secret`.
 
 #### Answer
 
-Use the command kubectl run to create a pod definition file. Add secret volume and update container name in it.
+Use the command k run to create a pod definition file. Add secret volume and update container name in it.
 
 Alternatively, run the following command:
 
 ```bash
-kubectl run secret-1401 --image=busybox --dry-run=client -oyaml --command -- sleep 4800 -n admin1401 > admin.yaml
+k run secret-1401 --image=busybox --dry-run=client -oyaml --command -- sleep 4800 -n admin1401 > admin.yaml
 ```
 
 Add the secret volume and mount path to create a pod called `secret-1401` in the `admin1401` namespace as follows:
 
 ```bash
----
 apiVersion: v1
 kind: Pod
-metadata:
-  creationTimestamp: null
-  labels:
-    run: secret-1401
+metadata: 
   name: secret-1401
   namespace: admin1401
 spec:
-  volumes:
-  - name: secret-volume
-    # secret volume
-    secret:
-      secretName: dotfile-secret
   containers:
-  - command:
-    - sleep
-    - "4800"
-    image: busybox
-    name: secret-admin
-    # volumes' mount path
-    volumeMounts:
+    - name: secret-admin
+      image: busybox
+      command:
+        - sleep
+        - "4800"
+      volumeMounts:
+        - name: secret-volume
+          mountPath: /etc/secret-volume
+          readOnly: true
+  volumes:
     - name: secret-volume
-      readOnly: true
-      mountPath: "/etc/secret-volume"
+      secret:
+        secretName: dotfile-secret
 ```
 

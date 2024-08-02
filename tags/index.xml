@@ -4,7 +4,31 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 29 Jul 2024 17:05:59 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>LangChain</title>
+    <link>https://seilylook.github.io/tags/langchain/</link>
+    <pubDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/langchain/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Upstarge AI Lab</title>
+    <link>https://seilylook.github.io/tags/upstarge-ai-lab/</link>
+    <pubDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/upstarge-ai-lab/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>RAG</title>
+    <link>https://seilylook.github.io/tags/rag/</link>
+    <pubDate>Fri, 02 Aug 2024 11:08:57 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/rag/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Infrastructure</title>
     <link>https://seilylook.github.io/tags/infrastructure/</link>
     <pubDate>Mon, 29 Jul 2024 17:05:59 &#43;0900</pubDate>
@@ -58,30 +82,6 @@
     <pubDate>Sat, 20 Jul 2024 16:47:09 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/architecture/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Spark</title>
-    <link>https://seilylook.github.io/tags/spark/</link>
-    <pubDate>Sat, 20 Jul 2024 16:47:09 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/spark/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Development</title>
-    <link>https://seilylook.github.io/tags/development/</link>
-    <pubDate>Sat, 20 Jul 2024 15:48:44 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/development/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vlog</title>
-    <link>https://seilylook.github.io/tags/vlog/</link>
-    <pubDate>Sat, 20 Jul 2024 15:48:44 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/vlog/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
             <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/yaml/" rel="self" type="application/rss+xml" /><item>
     <title>Yaml</title>
-    <link>https://seilylook.github.io/posts/infra_structure/kubernetes/yaml/</link>
+    <link>https://seilylook.github.io/posts/infra/kubernetes/yaml/</link>
     <pubDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra_structure/kubernetes/yaml/</guid>
+    <guid>https://seilylook.github.io/posts/infra/kubernetes/yaml/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/yaml.jpg" referrerpolicy="no-referrer">
             </div>What is YAML? 시스템 간 데이터를 교화할 때 데이터의 연동과 호환성을 위해 포맷에 대한 규칙이 필요해졌다.

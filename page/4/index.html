@@ -102,7 +102,7 @@
         alt="/images/profile/profile.png"
         title="/images/profile/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/se-hyeon-kim-07a1a02a2/" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/data_engineering/spark/data_frame_api/"><img
+            <a href="/posts/data/spark/dpp/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/feature_images/spark.webp"
@@ -111,12 +111,13 @@
         alt="/images/feature_images/spark.webp"
         title="/images/feature_images/spark.webp" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/data_engineering/spark/data_frame_api/">Data_frame_api</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.</div><div class="post-footer">
-        <a href="/posts/data_engineering/spark/data_frame_api/">Read More</a><div class="post-tags">
+        <a href="/posts/data/spark/dpp/">Dpp</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
+1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition.</div><div class="post-footer">
+        <a href="/posts/data/spark/dpp/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/data_engineering/spark/cache_persist/"><img
+            <a href="/posts/data/spark/dependency/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/feature_images/spark.webp"
@@ -125,16 +126,45 @@
         alt="/images/feature_images/spark.webp"
         title="/images/feature_images/spark.webp" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/data_engineering/spark/cache_persist/">Cache_persist</a>
+        <a href="/posts/data/spark/dependency/">Dependency</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
+Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.</div><div class="post-footer">
+        <a href="/posts/data/spark/dependency/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/data/spark/data_frame_api/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/spark.webp"
+        data-srcset="/images/feature_images/spark.webp, /images/feature_images/spark.webp 1.5x, /images/feature_images/spark.webp 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/spark.webp"
+        title="/images/feature_images/spark.webp" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/data/spark/data_frame_api/">Data_frame_api</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.</div><div class="post-footer">
+        <a href="/posts/data/spark/data_frame_api/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/data/spark/cache_persist/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/spark.webp"
+        data-srcset="/images/feature_images/spark.webp, /images/feature_images/spark.webp 1.5x, /images/feature_images/spark.webp 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/spark.webp"
+        title="/images/feature_images/spark.webp" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/data/spark/cache_persist/">Cache_persist</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Introduction Spark Cache and Persist are optimization techniques for iterative and interactive Spark applications to improve the performances of the jobs or applications. In
 Key Point RDD.cache() cashes the RDD with the default storage level MEMORY_ONLY
 DataFrame.cache() caches the DataFrame with the default storage level MEMORY_AND_DISK
 The persist() method is used to store it to the user-defined storage level
 On Spark UI, the Storage tab shows where partitions exist in memory or disk across the cluster.</div><div class="post-footer">
-        <a href="/posts/data_engineering/spark/cache_persist/">Read More</a><div class="post-tags">
+        <a href="/posts/data/spark/cache_persist/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/data_engineering/spark/architecture/"><img
+            <a href="/posts/data/spark/architecture/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/feature_images/spark.webp"
@@ -143,12 +173,12 @@ On Spark UI, the Storage tab shows where partitions exist in memory or disk acro
         alt="/images/feature_images/spark.webp"
         title="/images/feature_images/spark.webp" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/data_engineering/spark/architecture/">Architecture</a>
+        <a href="/posts/data/spark/architecture/">Architecture</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Terms Term Meainig Application User program built on Spark. Consists of a driver program and executors on the cluster. Application jar A jar containing the user&rsquo;s Spark application. In some cases users will want to create an &ldquo;uber jar&rdquo; containing their application along with its dependencies. The user&rsquo;s jar should never include Hadoop or Spark libraries, however, these will be added at runtime. Driver program The process running the main() function of the application and creating the SparkContext Cluster manager An external service for acquiring resources on the cluster (e.</div><div class="post-footer">
-        <a href="/posts/data_engineering/spark/architecture/">Read More</a><div class="post-tags">
+        <a href="/posts/data/spark/architecture/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/data_engineering/spark/aqe/"><img
+            <a href="/posts/data/spark/aqe/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/feature_images/spark.webp"
@@ -157,29 +187,13 @@ On Spark UI, the Storage tab shows where partitions exist in memory or disk acro
         alt="/images/feature_images/spark.webp"
         title="/images/feature_images/spark.webp" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/data_engineering/spark/aqe/">AQE</a>
+        <a href="/posts/data/spark/aqe/">AQE</a>
     </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/data-engineering/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Data Engineering</a></span></div><div class="content">Info Partition은 RDDs나 Dataset를 구성하고 있는 최소 단위 객체입니다. 각 Partition은 서로 다른 노드에서 분산 처리됩니다. Spark에서는 하나의 최소 연산을 Task라고 표현하는데, 이 하나의 Task에서 하나의 Partition이 처리됩니다. 또한, 하나의 Task는 하나의 Core가 연산 처리합니다.
 즉, 1 Core = 1 Task = 1 Partition입니다.
 설정된 Partition 수에 따라 각 Partition의 크기가 결정됩니다. 그리고 이 Partition의 크기가 결국 Core 당 필요한 메모리 크기를 결정하게 됩니다.
 ◼️ Partition 수 → Core 수</div><div class="post-footer">
-        <a href="/posts/data_engineering/spark/aqe/">Read More</a><div class="post-tags">
+        <a href="/posts/data/spark/aqe/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/blog_setting/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/feature_images/hugo.png"
-        data-srcset="/images/feature_images/hugo.png, /images/feature_images/hugo.png 1.5x, /images/feature_images/hugo.png 2x"
-        data-sizes="auto"
-        alt="/images/feature_images/hugo.png"
-        title="/images/feature_images/hugo.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/blog_setting/">Blog Setting</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-20">2024-07-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div><div class="content">Hogo: The worlds&rsquo;s fastest framework for building static website.
-Hugo https://gohugo.io/
-hugo 설치 1 2 3 4 5 # Install brew ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34; # download hugo brew install hugo 프로젝트 생성 1 2 3 4 5 6 7 # 프로젝트 생성 디렉터리 접근 cd development hugo new site &lt;원하는 파일 이름&gt; # 나의 경우 hugo new site devlog 주의 hugo version upgrade인지 대부분의 사이트에서 말하는 것과 다르게 사이트를 hugo new site를 통해 프로젝트를 생성하면 config.</div><div class="post-footer">
-        <a href="/posts/blog_setting/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/vlog/">vlog</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -195,6 +209,10 @@ hugo 설치 1 2 3 4 5 # Install brew ruby -e &#34;$(curl -fsSL https://raw.githu
                 </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/4/">4</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

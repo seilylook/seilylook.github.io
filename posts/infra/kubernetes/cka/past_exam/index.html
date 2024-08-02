@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Past Exam Questions - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Past Exam Questions" />
+<meta property="og:description" content="기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
+ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.
+1 2 3 4 5 6 7 # /etc/kubernetes/manifests/etcd." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-29T17:05:59+09:00" />
+<meta property="article:modified_time" content="2024-07-29T17:05:59+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Past Exam Questions"/>
+<meta name="twitter:description" content="기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
+ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.
+1 2 3 4 5 6 7 # /etc/kubernetes/manifests/etcd."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" /><link rel="prev" href="https://seilylook.github.io/posts/library/python/pandas/" /><link rel="next" href="https://seilylook.github.io/posts/ai/rag/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Past Exam Questions",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/past_exam\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  491 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/past_exam\/","datePublished": "2024-07-29T17:05:59+09:00","dateModified": "2024-07-29T17:05:59+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/infra/kubernetes/cka/past_exam/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/infra/kubernetes/cka/past_exam/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Past Exam Questions</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-29">2024-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;491 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/kubernetes.png"
+        data-srcset="/images/feature_images/kubernetes.png, /images/feature_images/kubernetes.png 1.5x, /images/feature_images/kubernetes.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/kubernetes.png"
+        title="/images/feature_images/kubernetes.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#기출-문제-목록">기출 문제 목록</a>
+      <ul>
+        <li><a href="#pod에서-특정-log만-추출하여-파일로-저장">Pod에서 특정 log만 추출하여 파일로 저장</a></li>
+        <li><a href="#etcd-snapshot-save--restore">ETCD snapshot save &amp; restore</a>
+          <ul>
+            <li><a href="#save-etcd">Save ETCD</a></li>
+            <li><a href="#restore-etcd">Restore ETCD</a></li>
+          </ul>
+        </li>
+        <li><a href="#pod에-nodeselector-disktypessd-추가">Pod에 nodeSelector (disktype=ssd) 추가</a></li>
+        <li><a href="#pod를-생성하고-포트는-80-nodeport는-30020인-서비스를-배포">Pod를 생성하고 포트는 80, NodePort는 30020인 서비스를 배포</a></li>
+        <li><a href="#taint가-없는-node의-개수를-파일로-저장">Taint가 없는 Node의 개수를 파일로 저장</a></li>
+        <li><a href="#node의-상태가-ready-개수를-파일로-저장">Node의 상태가 ready 개수를 파일로 저장</a></li>
+        <li><a href="#사용률이-가장-높은-pod를-특정-label로만-조회해서-파일로-저장">사용률이 가장 높은 Pod를 특정 label로만 조회해서 파일로 저장</a></li>
+        <li><a href="#특정-node를-pod를-다른-node로-reschedule하고-해당-node는-schedulingdisabled">특정 Node를 Pod를 다른 Node로 Reschedule하고 해당 Node는 SchedulingDisabled</a></li>
+        <li><a href="#특정-node가-notready-상태인데-ready가-되도록-troubleshooting">특정 Node가 NotReady 상태인데 Ready가 되도록 TroubleShooting</a></li>
+        <li><a href="#특정-deployment에-대해-replicas-수정">특정 Deployment에 대해 replicas 수정</a></li>
+        <li><a href="#기존에-배포된-pod에-새로운-container-추가-sidecar-패턴">기존에 배포된 Pod에 새로운 Container 추가 (Sidecar 패턴)</a></li>
+        <li><a href="#이미지-nginx-116으로-deployment-생성-후-이미지를-nginx-117로-업그레이드-하기">이미지 nginx 1.16으로 Deployment 생성 후 이미지를 nginx 1.17로 업그레이드 하기</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="기출-문제-목록">기출 문제 목록</h2>
+<h3 id="pod에서-특정-log만-추출하여-파일로-저장">Pod에서 특정 log만 추출하여 파일로 저장</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k logs Pod이름 <span class="p">|</span> grep 에러메시지 &gt; 저장 경로
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="etcd-snapshot-save--restore">ETCD snapshot save &amp; restore</h3>
+<h4 id="save-etcd">Save ETCD</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">etcdctl snapshot save --cacert<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span class="o">=</span>/etc/kubernetes/pki/etcd.server.crt --key<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="restore-etcd">Restore ETCD</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir<span class="o">=</span>/var/lib/etcd-from-backup
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>snapshot을 다른 디렉토리에 복원만 한 상태이다.</p>
+<p>ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># /etc/kubernetes/manifests/etcd.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">etcd-data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/lib/etcd-from-backup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">DirectoryOrCreate</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pod에-nodeselector-disktypessd-추가">Pod에 nodeSelector (disktype=ssd) 추가</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">disktype</span><span class="p">:</span><span class="w"> </span><span class="l">ssd</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pod를-생성하고-포트는-80-nodeport는-30020인-서비스를-배포">Pod를 생성하고 포트는 80, NodePort는 30020인 서비스를 배포</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run nginx-resolver --image<span class="o">=</span>nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k expose pod nginx-resolver --name<span class="o">=</span>nginx-resolver-service --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">80</span> --type<span class="o">=</span>NodePort
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="taint가-없는-node의-개수를-파일로-저장">Taint가 없는 Node의 개수를 파일로 저장</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get node <span class="c1"># 노드 개수 3개 확인</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k describe node <span class="p">|</span> grep -i taint
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;2&#39;</span> &gt; 저장 경로
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="node의-상태가-ready-개수를-파일로-저장">Node의 상태가 ready 개수를 파일로 저장</h3>
+<p><a href="https://kubernetes.io/docs/reference/kubectl/quick-reference/" target="_blank" rel="noopener noreffer ">Kubectl Quick Reference</a></p>
+<p><strong>ready</strong>로 검색을 하면 다음과 같은 json path를 알 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check which nodes are ready</span>
+</span></span><span class="line"><span class="cl"><span class="nv">JSONPATH</span><span class="o">=</span><span class="s1">&#39;{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl get nodes -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$JSONPATH</span><span class="s2">&#34;</span> <span class="p">|</span> grep <span class="s2">&#34;Ready=True&#34;</span> &gt; 저장 경로
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check which nodes are ready with custom-columns</span>
+</span></span><span class="line"><span class="cl">kubectl get node -o custom-columns<span class="o">=</span><span class="s1">&#39;NODE_NAME:.metadata.name,STATUS:.status.conditions[?(@.type==&#34;Ready&#34;)].status&#39;</span> &gt; 저장 경로
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="사용률이-가장-높은-pod를-특정-label로만-조회해서-파일로-저장">사용률이 가장 높은 Pod를 특정 label로만 조회해서 파일로 저장</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 특정 namespace에 control-plane label로 필터링해서 cpu로 정렬</span>
+</span></span><span class="line"><span class="cl">k top pod -l <span class="nv">tier</span><span class="o">=</span>control-plane --sort-by<span class="o">=</span>cpu -n kube-system
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> 노드 이름 &gt; 저장 위치
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="특정-node를-pod를-다른-node로-reschedule하고-해당-node는-schedulingdisabled">특정 Node를 Pod를 다른 Node로 Reschedule하고 해당 Node는 SchedulingDisabled</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 특정 노드 이름 조회</span>
+</span></span><span class="line"><span class="cl">k get node --show-labels <span class="p">|</span> grep k8s-node-0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Drain</span>
+</span></span><span class="line"><span class="cl">k drain k8s-node-0 --ignore-daemonsets
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k get node -o wide
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k get pod -o wide
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="특정-node가-notready-상태인데-ready가-되도록-troubleshooting">특정 Node가 NotReady 상태인데 Ready가 되도록 TroubleShooting</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get node
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh node01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo -i
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl status kubelet 
+</span></span><span class="line"><span class="cl"><span class="c1"># ... inactivate 상태 확인</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl restart kubelet
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl status kubelet
+</span></span><span class="line"><span class="cl"><span class="c1"># ... active 상태 확인</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="특정-deployment에-대해-replicas-수정">특정 Deployment에 대해 replicas 수정</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k scale deployment nginx-deployment --replicas<span class="o">=</span><span class="m">10</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="기존에-배포된-pod에-새로운-container-추가-sidecar-패턴">기존에 배포된 Pod에 새로운 Container 추가 (Sidecar 패턴)</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 기존 컨테이너에서 yaml 복사, 문제 번호 + log.yaml</span>
+</span></span><span class="line"><span class="cl">k get pod eshop-cart-app -o yaml &gt; 9-log.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># yaml 검증</span>
+</span></span><span class="line"><span class="cl">k apply -f 9-log.yaml --dry-run<span class="o">=</span>server
+</span></span><span class="line"><span class="cl"><span class="c1"># ... 문법 오류가 발생하지 않으면 Pod container의 추가 수정은 불가라고 뜬다.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 적용을 위한 기존 Pod 제거</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># delete 시 시간이 소요되어 즉시 삭제 옵션 추가 --force --grace-period 0</span>
+</span></span><span class="line"><span class="cl">k delete pod eshop-cart-app --force --grace-period <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k apply -f 9-log.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 로그 확인</span>
+</span></span><span class="line"><span class="cl">k logs eshop-cart-app count-log-1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="이미지-nginx-116으로-deployment-생성-후-이미지를-nginx-117로-업그레이드-하기">이미지 nginx 1.16으로 Deployment 생성 후 이미지를 nginx 1.17로 업그레이드 하기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create deployment deploy-1 --image<span class="o">=</span>nginx:1.16
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">k <span class="nb">set</span> image deployment deploy01 <span class="nv">nginx</span><span class="o">=</span>nginx:1.17
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/infra/kubernetes/cka/past_exam/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" data-title="Past Exam Questions" data-hashtags="Infrastructure"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" data-hashtag="Infrastructure"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" data-title="Past Exam Questions"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" data-title="Past Exam Questions"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" data-title="Past Exam Questions" data-image="/images/feature_images/kubernetes.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/infrastructure/">Infrastructure</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/library/python/pandas/" class="prev" rel="prev" title="Pandas"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Pandas</a>
+            <a href="/posts/ai/rag/" class="next" rel="next" title="RAG">RAG<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
