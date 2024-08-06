@@ -5,19 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Past Exam Questions - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Past Exam Questions" />
-<meta property="og:description" content="기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
-ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.
-1 2 3 4 5 6 7 # /etc/kubernetes/manifests/etcd." />
+<meta property="og:description" content="1. RBAC(Role-Based Access Control) Service Account 생성 서비스 어카운트는 파드가 쿠버네티스 API와 통신하기 위해 파드에 할당되는 하나의 ID이다. 파드 생성 시 서비스 어카운트를 할당하고, 해당 서비스 어카운트에 적절한 권한을 부여하여 쿠버네티스 API서버와 통신할 수 있다.
+1 kubectl create serviceaccount pod-reader 쿠버네티스는 역할 기반으로 API 접근을 관리한다. 역할을 부여하기 위한 대상으로 앞서 서비스어카운트를 만들었고, 실제 역할을 만들어 서비스어카운트에 할당하는 것을 바인딩(Binding)이라고 한다. 역할은 Role, ClusterRole 두 가지로 분류된다. Role은 특정 네임스페이스에 속하게 되며, ClusterRole은 전체 클러스터에 고유한 역할이 된다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-29T17:05:59+09:00" />
-<meta property="article:modified_time" content="2024-07-29T17:05:59+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-08-02T17:41:10+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Past Exam Questions"/>
-<meta name="twitter:description" content="기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
-ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.
-1 2 3 4 5 6 7 # /etc/kubernetes/manifests/etcd."/>
+<meta name="twitter:description" content="1. RBAC(Role-Based Access Control) Service Account 생성 서비스 어카운트는 파드가 쿠버네티스 API와 통신하기 위해 파드에 할당되는 하나의 ID이다. 파드 생성 시 서비스 어카운트를 할당하고, 해당 서비스 어카운트에 적절한 권한을 부여하여 쿠버네티스 API서버와 통신할 수 있다.
+1 kubectl create serviceaccount pod-reader 쿠버네티스는 역할 기반으로 API 접근을 관리한다. 역할을 부여하기 위한 대상으로 앞서 서비스어카운트를 만들었고, 실제 역할을 만들어 서비스어카운트에 할당하는 것을 바인딩(Binding)이라고 한다. 역할은 Role, ClusterRole 두 가지로 분류된다. Role은 특정 네임스페이스에 속하게 되며, ClusterRole은 전체 클러스터에 고유한 역할이 된다."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/" /><link rel="prev" href="https://seilylook.github.io/posts/library/python/pandas/" /><link rel="next" href="https://seilylook.github.io/posts/ai/rag/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -30,8 +28,8 @@ ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 �
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/past_exam\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  491 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/past_exam\/","datePublished": "2024-07-29T17:05:59+09:00","dateModified": "2024-07-29T17:05:59+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Infrastructure","wordcount":  1298 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/infra\/kubernetes\/cka\/past_exam\/","datePublished": "2024-07-29T17:05:59+09:00","dateModified": "2024-08-02T17:41:10+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -110,8 +108,8 @@ ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 �
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Past Exam Questions</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-29">2024-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;491 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-29">2024-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1298 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -126,68 +124,82 @@ ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 �
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#기출-문제-목록">기출 문제 목록</a>
+    <li><a href="#1-rbacrole-based-access-control">1. RBAC(Role-Based Access Control)</a>
       <ul>
-        <li><a href="#pod에서-특정-log만-추출하여-파일로-저장">Pod에서 특정 log만 추출하여 파일로 저장</a></li>
-        <li><a href="#etcd-snapshot-save--restore">ETCD snapshot save &amp; restore</a>
-          <ul>
-            <li><a href="#save-etcd">Save ETCD</a></li>
-            <li><a href="#restore-etcd">Restore ETCD</a></li>
-          </ul>
-        </li>
-        <li><a href="#pod에-nodeselector-disktypessd-추가">Pod에 nodeSelector (disktype=ssd) 추가</a></li>
-        <li><a href="#pod를-생성하고-포트는-80-nodeport는-30020인-서비스를-배포">Pod를 생성하고 포트는 80, NodePort는 30020인 서비스를 배포</a></li>
-        <li><a href="#taint가-없는-node의-개수를-파일로-저장">Taint가 없는 Node의 개수를 파일로 저장</a></li>
-        <li><a href="#node의-상태가-ready-개수를-파일로-저장">Node의 상태가 ready 개수를 파일로 저장</a></li>
-        <li><a href="#사용률이-가장-높은-pod를-특정-label로만-조회해서-파일로-저장">사용률이 가장 높은 Pod를 특정 label로만 조회해서 파일로 저장</a></li>
-        <li><a href="#특정-node를-pod를-다른-node로-reschedule하고-해당-node는-schedulingdisabled">특정 Node를 Pod를 다른 Node로 Reschedule하고 해당 Node는 SchedulingDisabled</a></li>
-        <li><a href="#특정-node가-notready-상태인데-ready가-되도록-troubleshooting">특정 Node가 NotReady 상태인데 Ready가 되도록 TroubleShooting</a></li>
-        <li><a href="#특정-deployment에-대해-replicas-수정">특정 Deployment에 대해 replicas 수정</a></li>
-        <li><a href="#기존에-배포된-pod에-새로운-container-추가-sidecar-패턴">기존에 배포된 Pod에 새로운 Container 추가 (Sidecar 패턴)</a></li>
-        <li><a href="#이미지-nginx-116으로-deployment-생성-후-이미지를-nginx-117로-업그레이드-하기">이미지 nginx 1.16으로 Deployment 생성 후 이미지를 nginx 1.17로 업그레이드 하기</a></li>
+        <li><a href="#service-account-생성">Service Account 생성</a></li>
+        <li><a href="#clusterrole-생성">clusterRole 생성</a></li>
+        <li><a href="#clusterrolebind">Clusterrolebind</a></li>
       </ul>
     </li>
+    <li><a href="#2-node-troubleshooting">2. Node Troubleshooting</a>
+      <ul>
+        <li><a href="#node가-notready-상태로-나올-때">Node가 <strong>NotReady</strong> 상태로 나올 때</a></li>
+        <li><a href="#taint-가-적용된-노드-확인하기"><strong>Taint</strong> 가 적용된 노드 확인하기</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-특정-레이블을-가진-pod-중-cpu-사용량이-가장-많은-pod-조회">3. 특정 레이블을 가진 Pod 중 CPU 사용량이 가장 많은 Pod 조회</a></li>
+    <li><a href="#4-특정-node에-pod-할당">4. 특정 Node에 Pod 할당</a>
+      <ul>
+        <li><a href="#nodeselector">nodeSelector</a></li>
+        <li><a href="#nodename">nodeName</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-pod의-log를-파일로-출력">5. Pod의 Log를 파일로 출력</a></li>
+    <li><a href="#6-hostpath-pv-생성">6. hostPath PV 생성</a></li>
+    <li><a href="#7-pv-pvc-생성해-nginx-pod에-volume-mount">7. PV, PVC 생성해 nginx Pod에 volume mount</a>
+      <ul>
+        <li><a href="#pv-생성">PV 생성</a></li>
+        <li><a href="#pvc-생성">PVC 생성</a></li>
+        <li><a href="#pod-생성-및-pvc-연결">Pod 생성 및 PVC 연결</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-storageclass에-맞는-pvc-생성">8. Storageclass에 맞는 PVC 생성</a>
+      <ul>
+        <li><a href="#pv-확인">PV 확인</a></li>
+        <li><a href="#pvc-생성-1">PVC 생성</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-멀티-컨테이너-pod-배포사이트카-패턴">9. 멀티 컨테이너 Pod 배포(사이트카 패턴)</a></li>
+    <li><a href="#10-ingress-생성">10. Ingress 생성</a></li>
+    <li><a href="#11-network-policy-생성">11. Network Policy 생성</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="기출-문제-목록">기출 문제 목록</h2>
-<h3 id="pod에서-특정-log만-추출하여-파일로-저장">Pod에서 특정 log만 추출하여 파일로 저장</h3>
+            </div><div class="content" id="content"><h2 id="1-rbacrole-based-access-control">1. RBAC(Role-Based Access Control)</h2>
+<h3 id="service-account-생성">Service Account 생성</h3>
+<p>서비스 어카운트는 파드가 쿠버네티스 API와 통신하기 위해 파드에 할당되는 하나의 ID이다. 파드 생성 시 서비스 어카운트를 할당하고, 해당 서비스 어카운트에 적절한 권한을 부여하여 쿠버네티스 API서버와 통신할 수 있다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k logs Pod이름 <span class="p">|</span> grep 에러메시지 &gt; 저장 경로
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create serviceaccount pod-reader
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="etcd-snapshot-save--restore">ETCD snapshot save &amp; restore</h3>
-<h4 id="save-etcd">Save ETCD</h4>
+</div><p>쿠버네티스는 역할 기반으로 API 접근을 관리한다. 역할을 부여하기 위한 대상으로 앞서 서비스어카운트를 만들었고, 실제 역할을 만들어 서비스어카운트에 할당하는 것을 바인딩(Binding)이라고 한다.
+ 
+역할은 Role, ClusterRole 두 가지로 분류된다. Role은 특정 네임스페이스에 속하게 되며, ClusterRole은 전체 클러스터에 고유한 역할이 된다. 역할을 서비스어카운트와 바인딩하는 것도 RoleBinding, ClusterRoleBinding 두 가지 방법이 있다. RoleBinding을 통해 바인딩한 Role과 ClusterRole은 특정 네임스페이스에서만 유효하며, ClusterRoleBinding으로 바인딩 시 모든 네임스페이스에 공통적으로 적용된다.</p>
+<h3 id="clusterrole-생성">clusterRole 생성</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">etcdctl snapshot save --cacert<span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt --cert<span class="o">=</span>/etc/kubernetes/pki/etcd.server.crt --key<span class="o">=</span>/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create clusterrole pod-reader-role --verb<span class="o">=</span>get,list,watch --resource<span class="o">=</span>pods
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="restore-etcd">Restore ETCD</h4>
+</div><h3 id="clusterrolebind">Clusterrolebind</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir<span class="o">=</span>/var/lib/etcd-from-backup
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create clusterrolebinding myapp-view-binding --clusterrole<span class="o">=</span>pod-reader-role --serviceaccount<span class="o">=</span>mynamespcae:pod-reader
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>snapshot을 다른 디렉토리에 복원만 한 상태이다.</p>
-<p>ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.</p>
+</div><h2 id="2-node-troubleshooting">2. Node Troubleshooting</h2>
+<p>Node는 쿠버네티스 클러스터를 구성하는 하나의 VM 또는 하드웨어이다.</p>
+<h3 id="node가-notready-상태로-나올-때">Node가 <strong>NotReady</strong> 상태로 나올 때</h3>
+<p>쿠버네티스의 각 노드에는 kubelet이 실행된다. 이 kubelet은 노드 내에서 실제 컨테이너를 수행하는 역할을 하는데, 해당 프로세스가 제대로 실행되지 않으면 <strong>NotReady</strong> 상태로 조회된다. 아래의 명령을 통해 ssh로 노드에 직접 접속한 후 kubelet을 재실행 시킨다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -199,16 +211,137 @@ ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 �
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># /etc/kubernetes/manifests/etcd.yaml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">etcd-data</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/lib/etcd-from-backup</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">DirectoryOrCreate</span><span class="w">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get nodes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ssh node01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo systemctl status kubelet
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo systemctl restart kubelet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="taint-가-적용된-노드-확인하기"><strong>Taint</strong> 가 적용된 노드 확인하기</h3>
+<p>테인트는 톨러레이션(Tolerations)와 함께 사용된다. 테인트는 노드에 할당되고, 톨러레이션은 파드에 할당된다. 파드가 스케줄링될 때 어떤 노드에서 실행될지는 중요한 문제인데, 테인트를 통해 이를 컨트롤할 수 있다. 테인트는 일종의 검문소 역할을 하고, 톨러레이션은 해당 검문소를 통과하는 출입증과 같은 역할을 한다. 파드가 스케줄링 될 때 노드의 테인트(검문소)에 대한 톨러레이션(출입증)이 없는 경우, 그 노드에는 스케줄링되지 않는다.
+ 
+테인트가 적용된 노드는 describe 명령을 통해 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k describe nodes <span class="p">|</span> grep -i taint
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">{</span>노드 개수<span class="o">}</span> &gt; <span class="o">{</span>파일 경로<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-특정-레이블을-가진-pod-중-cpu-사용량이-가장-많은-pod-조회">3. 특정 레이블을 가진 Pod 중 CPU 사용량이 가장 많은 Pod 조회</h2>
+<p>Pod의 CPU 사용량은 kubectl top pod 명령어를 통해 알 수 있다. <code>-l</code> 옵션과 레이블 명을 추가해 특정 레이블을 가진 파드의 CPU 사용량을 조회할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k top pod -l <span class="nv">run</span><span class="o">=</span>frontend --sort-by<span class="o">=</span>cpu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">{</span>파드 이름<span class="o">}</span> &gt; <span class="o">{</span>파일 경로<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-특정-node에-pod-할당">4. 특정 Node에 Pod 할당</h2>
+<p>특정 Node에 스케쥴링 되는 파드를 생성한다. Pod가 스케쥴링 되는 노드를 지정하려면 두 가지 방법이 있다. <code>nodeSelector</code>, <code>nodeName</code></p>
+<h3 id="nodeselector">nodeSelector</h3>
+<ol>
+<li>클러스터 내의 Node의 목록과 각 Label을 알아낸다.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get nodes --show-labels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME      STATUS    ROLES    AGE     VERSION        LABELS
+</span></span><span class="line"><span class="cl">worker0   Ready     &lt;none&gt;   1d      v1.13.0        ...,kubernetes.io/hostname<span class="o">=</span>worker0
+</span></span><span class="line"><span class="cl">worker1   Ready     &lt;none&gt;   1d      v1.13.0        ...,kubernetes.io/hostname<span class="o">=</span>worker1
+</span></span><span class="line"><span class="cl">worker2   Ready     &lt;none&gt;   1d      v1.13.0        ...,kubernetes.io/hostname<span class="o">=</span>worker2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>원하는 Node에 Label을 추가해준다.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl label nodes &lt;your-node-name&gt; <span class="nv">disktype</span><span class="o">=</span>ssd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>제대로 Label이 적용되었는지 확인해준다.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get nodes --show-labels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME      STATUS    ROLES    AGE     VERSION        LABELS
+</span></span><span class="line"><span class="cl">worker0   Ready     &lt;none&gt;   1d      v1.13.0        ...,disktype<span class="o">=</span>ssd,kubernetes.io/hostname<span class="o">=</span>worker0
+</span></span><span class="line"><span class="cl">worker1   Ready     &lt;none&gt;   1d      v1.13.0        ...,kubernetes.io/hostname<span class="o">=</span>worker1
+</span></span><span class="line"><span class="cl">worker2   Ready     &lt;none&gt;   1d      v1.13.0        ...,kubernetes.io/hostname<span class="o">=</span>worker2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Pod를 생성하고 할당</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">disktype</span><span class="p">:</span><span class="w"> </span><span class="l">ssd</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="pod에-nodeselector-disktypessd-추가">Pod에 nodeSelector (disktype=ssd) 추가</h3>
+</div><h3 id="nodename">nodeName</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -228,149 +361,25 @@ ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 �
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l">foo-node</span><span class="w"> </span><span class="c"># schedule pod to specific node</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nodeSelector</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">disktype</span><span class="p">:</span><span class="w"> </span><span class="l">ssd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="pod를-생성하고-포트는-80-nodeport는-30020인-서비스를-배포">Pod를 생성하고 포트는 80, NodePort는 30020인 서비스를 배포</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k run nginx-resolver --image<span class="o">=</span>nginx
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k expose pod nginx-resolver --name<span class="o">=</span>nginx-resolver-service --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">80</span> --type<span class="o">=</span>NodePort
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="taint가-없는-node의-개수를-파일로-저장">Taint가 없는 Node의 개수를 파일로 저장</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get node <span class="c1"># 노드 개수 3개 확인</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k describe node <span class="p">|</span> grep -i taint
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;2&#39;</span> &gt; 저장 경로
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="node의-상태가-ready-개수를-파일로-저장">Node의 상태가 ready 개수를 파일로 저장</h3>
-<p><a href="https://kubernetes.io/docs/reference/kubectl/quick-reference/" target="_blank" rel="noopener noreffer ">Kubectl Quick Reference</a></p>
-<p><strong>ready</strong>로 검색을 하면 다음과 같은 json path를 알 수 있다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check which nodes are ready</span>
-</span></span><span class="line"><span class="cl"><span class="nv">JSONPATH</span><span class="o">=</span><span class="s1">&#39;{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">kubectl get nodes -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$JSONPATH</span><span class="s2">&#34;</span> <span class="p">|</span> grep <span class="s2">&#34;Ready=True&#34;</span> &gt; 저장 경로
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Check which nodes are ready with custom-columns</span>
-</span></span><span class="line"><span class="cl">kubectl get node -o custom-columns<span class="o">=</span><span class="s1">&#39;NODE_NAME:.metadata.name,STATUS:.status.conditions[?(@.type==&#34;Ready&#34;)].status&#39;</span> &gt; 저장 경로
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="사용률이-가장-높은-pod를-특정-label로만-조회해서-파일로-저장">사용률이 가장 높은 Pod를 특정 label로만 조회해서 파일로 저장</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 특정 namespace에 control-plane label로 필터링해서 cpu로 정렬</span>
-</span></span><span class="line"><span class="cl">k top pod -l <span class="nv">tier</span><span class="o">=</span>control-plane --sort-by<span class="o">=</span>cpu -n kube-system
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> 노드 이름 &gt; 저장 위치
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="특정-node를-pod를-다른-node로-reschedule하고-해당-node는-schedulingdisabled">특정 Node를 Pod를 다른 Node로 Reschedule하고 해당 Node는 SchedulingDisabled</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 특정 노드 이름 조회</span>
-</span></span><span class="line"><span class="cl">k get node --show-labels <span class="p">|</span> grep k8s-node-0
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Drain</span>
-</span></span><span class="line"><span class="cl">k drain k8s-node-0 --ignore-daemonsets
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k get node -o wide
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k get pod -o wide
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="특정-node가-notready-상태인데-ready가-되도록-troubleshooting">특정 Node가 NotReady 상태인데 Ready가 되도록 TroubleShooting</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get node
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ssh node01
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo -i
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">systemctl status kubelet 
-</span></span><span class="line"><span class="cl"><span class="c1"># ... inactivate 상태 확인</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">systemctl restart kubelet
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">systemctl status kubelet
-</span></span><span class="line"><span class="cl"><span class="c1"># ... active 상태 확인</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="특정-deployment에-대해-replicas-수정">특정 Deployment에 대해 replicas 수정</h3>
+</div><h2 id="5-pod의-log를-파일로-출력">5. Pod의 Log를 파일로 출력</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k scale deployment nginx-deployment --replicas<span class="o">=</span><span class="m">10</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl logs <span class="o">{</span>POD_NAME<span class="o">}</span> &gt; <span class="o">{</span>FILE_PATH<span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="기존에-배포된-pod에-새로운-container-추가-sidecar-패턴">기존에 배포된 Pod에 새로운 Container 추가 (Sidecar 패턴)</h3>
+</div><h2 id="6-hostpath-pv-생성">6. hostPath PV 생성</h2>
+<p>문제에서 주어진 조건대로 PV를 생성한다. Pod는 기본적으로 stateless로 Pod 삭제 시 내부에 파일 시스템에 작성되었더 내용들도 모두 삭제된다. 이를 막기 위해 영속성이 필요한 데이터들은 PV, PVC를 활용해 관리한다.</p>
+<p>PV는 어떤 스토리지를 사용할 지에 대한 부분이고, PVC는 Pod가 어떤 PV를 사용할 지에 대한 정의이다. PV는 다양한 스토리지와 연결해 사용할 수 있는데, <code>hostPath</code>의 경우 실제 컨테이너가 실행되는 host machine의 파일 시스템을 사용한다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -388,43 +397,430 @@ ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 �
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 기존 컨테이너에서 yaml 복사, 문제 번호 + log.yaml</span>
-</span></span><span class="line"><span class="cl">k get pod eshop-cart-app -o yaml &gt; 9-log.yaml
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># pv-volume.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-volume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">10Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ReadWriteOnce</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;/mnt/data&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="7-pv-pvc-생성해-nginx-pod에-volume-mount">7. PV, PVC 생성해 nginx Pod에 volume mount</h2>
+<h3 id="pv-생성">PV 생성</h3>
+<p>spec 부분에 <code>storage</code>, <code>accessModes</code>, <code>path</code> 부분을 문제에서 주어진 요구대로 생성하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># pv-volume.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-volume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">10Gi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ReadWriteOnce</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;/mnt/data&#34;</span><span class="w">                           </span><span class="l">65s</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pvc-생성">PVC 생성</h3>
+<p>생성한 혹은 문제에서 주어진 PV에 맞게 PVC를 생성한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolumeClaim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-claim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ReadWriteOnce</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">3Gi</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k get pv, pvc
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># yaml 검증</span>
-</span></span><span class="line"><span class="cl">k apply -f 9-log.yaml --dry-run<span class="o">=</span>server
-</span></span><span class="line"><span class="cl"><span class="c1"># ... 문법 오류가 발생하지 않으면 Pod container의 추가 수정은 불가라고 뜬다.</span>
+</span></span><span class="line"><span class="cl">NAME                              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   REASON   AGE
+</span></span><span class="line"><span class="cl">persistentvolume/task-pv-volume   10Gi       RWO            Retain           Bound    default/task-pv-claim                           5m28s
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 적용을 위한 기존 Pod 제거</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># delete 시 시간이 소요되어 즉시 삭제 옵션 추가 --force --grace-period 0</span>
-</span></span><span class="line"><span class="cl">k delete pod eshop-cart-app --force --grace-period <span class="m">0</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k apply -f 9-log.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 로그 확인</span>
-</span></span><span class="line"><span class="cl">k logs eshop-cart-app count-log-1
+</span></span><span class="line"><span class="cl">NAME                                  STATUS   VOLUME           CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+</span></span><span class="line"><span class="cl">persistentvolumeclaim/task-pv-claim   Bound    task-pv-volume   10Gi       RWO                           6s
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="이미지-nginx-116으로-deployment-생성-후-이미지를-nginx-117로-업그레이드-하기">이미지 nginx 1.16으로 Deployment 생성 후 이미지를 nginx 1.17로 업그레이드 하기</h3>
+</div><p>PV, PVC 조회 시 <code>Bound</code>가 되어야 한다.</p>
+<h3 id="pod-생성-및-pvc-연결">Pod 생성 및 PVC 연결</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-storage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-claim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;http-server&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;/usr/share/nginx/html&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-storage</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8-storageclass에-맞는-pvc-생성">8. Storageclass에 맞는 PVC 생성</h2>
+<p>storageClass는 PVC에 맞는 PV를 자동으로 연결해준다. 만약 문제에서 이미 생성된 PV에 맞도록 PVC를 생성하라고 요구한다면, <code>storageclass</code>를 주의깊게 살펴보고 맞추어야 한다.</p>
+<h3 id="pv-확인">PV 확인</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl describe pv task-pv-volume
+</span></span><span class="line"><span class="cl">Name:            task-pv-volume
+</span></span><span class="line"><span class="cl">Labels:          <span class="nv">type</span><span class="o">=</span><span class="nb">local</span>
+</span></span><span class="line"><span class="cl">Annotations:     &lt;none&gt;
+</span></span><span class="line"><span class="cl">Finalizers:      <span class="o">[</span>kubernetes.io/pv-protection<span class="o">]</span>
+</span></span><span class="line"><span class="cl">StorageClass:    slow
+</span></span><span class="line"><span class="cl">Status:          Terminating
+</span></span><span class="line"><span class="cl">Claim:
+</span></span><span class="line"><span class="cl">Reclaim Policy:  Delete
+</span></span><span class="line"><span class="cl">Access Modes:    RWO
+</span></span><span class="line"><span class="cl">Capacity:        1Gi
+</span></span><span class="line"><span class="cl">Message:
+</span></span><span class="line"><span class="cl">Source:
+</span></span><span class="line"><span class="cl">    Type:          HostPath <span class="o">(</span>bare host directory volume<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Path:          /tmp/data
+</span></span><span class="line"><span class="cl">    HostPathType:
+</span></span><span class="line"><span class="cl">Events:            &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pvc-생성-1">PVC 생성</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolumeClaim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">task-pv-claim</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l">slow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ReadWriteOnce</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">1Gi</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="9-멀티-컨테이너-pod-배포사이트카-패턴">9. 멀티 컨테이너 Pod 배포(사이트카 패턴)</h2>
+<p>두 개의 컨테이너가 하나의 볼륨을 공유하도록 배포해야 한다. 클러스터에는 nginx 싱글 컨테이너만 존재한다. 해당 nginx의 로그 파일이 저장되는 경로에 컨테이너 volume을 마운트하고, 해당 볼륨을 log-container라는 이름의 새로운 컨테이너에도 마운트한다. 두 컨테이너가 동일한 볼륨을 공유하게 되고, 따라서 log-container 접근 시 nginx의 log를 조회할 수 있어야 한다.</p>
+<p>기존에 존재하는 Pod에 <a href="https://kubernetes.io/docs/concepts/cluster-administration/logging/#streaming-sidecar-container" target="_blank" rel="noopener noreffer ">Loggin Architecture</a>에 있는 다음 코드를 붙여넣고 문제에서 말하는 명령어로 수정해준다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k create deployment deploy-1 --image<span class="o">=</span>nginx:1.16
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">count-log-1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox:1.28</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">/bin/sh, -c, &#39;tail -n+1 -F /var/log/1.log&#39;]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">varlog</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/var/log</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@k8s-master ~<span class="o">]</span>$ cat nginx.yaml
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k <span class="nb">set</span> image deployment deploy01 <span class="nv">nginx</span><span class="o">=</span>nginx:1.17
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: two-containers
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  volumes:
+</span></span><span class="line"><span class="cl">  - name: shared-data
+</span></span><span class="line"><span class="cl">    emptyDir: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: nginx-container
+</span></span><span class="line"><span class="cl">    image: nginx
+</span></span><span class="line"><span class="cl">    volumeMounts:
+</span></span><span class="line"><span class="cl">    - name: shared-data
+</span></span><span class="line"><span class="cl">      mountPath: var/log/nginx
+</span></span><span class="line"><span class="cl">  - name: log-container
+</span></span><span class="line"><span class="cl">    image: centos
+</span></span><span class="line"><span class="cl">    command: <span class="o">[</span><span class="s2">&#34;/bin/sh&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    args: <span class="o">[</span><span class="s2">&#34;-c&#34;</span>, <span class="s2">&#34;while true; do ls log; sleep 5;done&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    volumeMounts:
+</span></span><span class="line"><span class="cl">    - name: shared-data
+</span></span><span class="line"><span class="cl">      mountPath: log
 </span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">k logs two-containers -c log-container
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">access.log
+</span></span><span class="line"><span class="cl">error.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="10-ingress-생성">10. Ingress 생성</h2>
+<p>문제에서 요구하는 Ingress를 생성해야 한다. Ingress는 L7 스위치 역할을 논리적으로 수행해 클러스터로 접근하는 URL 별로 다른 서비스에 트래픽을 분산한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">minimal-ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/rewrite-target</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">http</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">path</span><span class="p">:</span><span class="w"> </span>{<span class="l">문제에서주어지는경로}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">backend</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span>{<span class="l">문제에서주어지는서비스명}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span>{<span class="l">문제에서주어지는포트}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="11-network-policy-생성">11. Network Policy 생성</h2>
+<p><code>Network Policy</code>를 사용하면 클러스터 내 네트워크 트래픽을 제한할 수 있다. 문제의 경우 특정 Namespace(mynx)의 특정 Port(80)에서 Pod(mypod)에 오는 Ingress 트래픽을 허용해야 한다.</p>
+<p>주의할 점은 Pod &amp; Namespace에 <code>Label</code>을 신경써야 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 특정 Pod에 label 적용</span>
+</span></span><span class="line"><span class="cl">k label pod mypod <span class="nv">role</span><span class="o">=</span>app
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 특정 Namespace에 label 적용</span>
+</span></span><span class="line"><span class="cl">k label ns mynx <span class="nv">node</span><span class="o">=</span>accept
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">NetworkPolicy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">test-network-policy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">app </span><span class="w"> </span><span class="c"># &lt;- 목표 Pod의 Label과 동일</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">policyTypes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">Ingress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">from</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">namespaceSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">node</span><span class="p">:</span><span class="w"> </span><span class="l">accept </span><span class="w"> </span><span class="c"># &lt;- 목표 Namespace의 Label과 동일 </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-29</span>
+                <span>Updated on 2024-08-02&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/ac5f7f32ff1a332f075ea3864ac71290149631f4" target="_blank" title="commit by seilylook(seilylook@naver.com) ac5f7f32ff1a332f075ea3864ac71290149631f4: add: langchain,rag &amp; edit folder name">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ac5f7f3</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

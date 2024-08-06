@@ -12,9 +12,8 @@
     <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>기출 문제 목록 Pod에서 특정 log만 추출하여 파일로 저장 1 k logs Pod이름 | grep 에러메시지 &gt; 저장 경로 ETCD snapshot save &amp; restore Save ETCD 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd.server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/snapshot-pre-boot.db Restore ETCD 1 2 3 export ETCDCTL_API=3 etcdutl snapshot restore /opt/snapshot-pre-boot.db --data-dir=/var/lib/etcd-from-backup snapshot을 다른 디렉토리에 복원만 한 상태이다.
-ETCD snapshot을 /var/lib/etcd-from-backup으로 복원했으므로 ETCD라는 볼륨에 대한 호스트 경로를 변경해야 한다.
-1 2 3 4 5 6 7 # /etc/kubernetes/manifests/etcd.]]></description>
+            </div>1. RBAC(Role-Based Access Control) Service Account 생성 서비스 어카운트는 파드가 쿠버네티스 API와 통신하기 위해 파드에 할당되는 하나의 ID이다. 파드 생성 시 서비스 어카운트를 할당하고, 해당 서비스 어카운트에 적절한 권한을 부여하여 쿠버네티스 API서버와 통신할 수 있다.
+1 kubectl create serviceaccount pod-reader 쿠버네티스는 역할 기반으로 API 접근을 관리한다. 역할을 부여하기 위한 대상으로 앞서 서비스어카운트를 만들었고, 실제 역할을 만들어 서비스어카운트에 할당하는 것을 바인딩(Binding)이라고 한다. 역할은 Role, ClusterRole 두 가지로 분류된다. Role은 특정 네임스페이스에 속하게 되며, ClusterRole은 전체 클러스터에 고유한 역할이 된다.]]></description>
 </item>
 <item>
     <title>Yaml</title>
@@ -86,19 +85,6 @@ Pod &lsquo;redis-storage&rsquo; uses volumeMount with mountPath = /data/redis]]>
 Answer 1 k run nginx-pod --image=nginx:alpine 2. Question Deploy a messagine pod using the redis:alpine image with the labels set to tier=msg
 Answer 1 k run messaging --image=redis:alpine -l tier=msg 3. Question Create a namespace named apx-x9984574
 Answer 1 k create namespace apx-x9984574 4. Question Get the list of nodes in JSON format and store it in a file at /opt/outputs/nodes-z3444kd9.]]></description>
-</item>
-<item>
-    <title>Killer.sh 1</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</link>
-    <pubDate>Tue, 23 Jul 2024 17:48:08 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/killer/1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. Question You have access to multiple clusters from your main terminal through kubectl contexts. Write all those context names into /opt/course/1/contexts.
-Next write a command to display the current context into /opt/course/1/context_default_kubectl.sh, the command should use kubectl
-Finally write a second command doing the same thing into /opt/course/1/context_default_no_kubectl.sh, but without the use of kubectl.
-Answer 1 2 3 4 5 k config get-contexts -o name &gt; /opt/course/1/contexts echo &#39;kubectl config current-context&#39; &gt; /opt/course/1/context_default_kubectl.]]></description>
 </item>
 <item>
     <title>Kubernetes Structure</title>
