@@ -116,13 +116,13 @@ rmdir [OPTION] ... [DIRECTORY] ...
 
 - 디렉토리 구조
 
-    - . : 나 자신
+  - . : 나 자신
 
-    - .. : 부모 디렉토리
+  - .. : 부모 디렉토리
 
-    - ~ : 홈 디렉토리
+  - ~ : 홈 디렉토리
 
-    - *-* : 이전 디렉토리
+  - *-* : 이전 디렉토리
 
 ### cp - copy | mv - move
 
@@ -180,9 +180,9 @@ file [OPTION] ... [FILE] ...
 
 - showdown [OPTIONS][TIME]
 
-    - shutdown -P now : 바로 종료
+  - shutdown -P now : 바로 종료
 
-    - shutdown -r now : 바로 재시작
+  - shutdown -r now : 바로 재시작
 
 ### vi | vim | nano
 

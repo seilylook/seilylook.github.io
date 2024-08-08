@@ -4,8 +4,16 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Lang_chain</title>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 08 Aug 2024 12:12:39 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>LLM</title>
+    <link>https://seilylook.github.io/posts/ai/llm/</link>
+    <pubDate>Thu, 08 Aug 2024 12:12:39 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/ai/llm/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Langchain</title>
     <link>https://seilylook.github.io/posts/ai/langchain/</link>
     <pubDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</pubDate>
     <author>seilylook</author>
@@ -25,7 +33,7 @@ Source : https://aws.amazon.com/ko/what-is/langchain/
     <guid>https://seilylook.github.io/posts/ai/rag/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/ai/rag/1.jpg" referrerpolicy="no-referrer">
-            </div>]]></description>
+            </div>Introduction RAG(Retrieval-Augmented Generation)는 대규모 언어 모델의 출력을 최적화하여 응답을 생성하기 전에 학습 데이터 소스 외부의 신뢰할 수 있는 지식 베이스를 참조하도록 하는 프로세스입니다. 대규모 언어 모델(LLM)은 방대한 양의 데이터를 기반으로 학습되며 수십억 개의 매개 변수를 사용하여 질문에 대한 답변, 언어 번역, 문장 완성과 같은 작업에 대한 독창적인 결과를 생성합니다. RAG는 이미 강력한 LLM의 기능을 특정 도메인이나 조직의 내부 지식 기반으로 확장하므로 모델을 다시 교육할 필요가 없습니다. 이는 LLM 결과를 개선하여 다양한 상황에서 관련성, 정확성 및 유용성을 유지하기 위한 비용 효율적인 접근 방식입니다.]]></description>
 </item>
 <item>
     <title>Past Exam Questions</title>
@@ -111,20 +119,6 @@ Answer Find out etcd information check the nodes:
 Grant this ServiceAccount access to list all PersistentVolumes in the cluster by creating an appropriate ClusterRole called pvviewer-role and ClusterRoleBinding called pvviewer-role-binding.
 Next, create a pod called pvviewer with the image: redis and serviceAccount: pvviewer in the default namespace.
 Answer Pods authenticate to the API Server using ServiceAccounts. If the serviceAccount name is not specified, the default service account for the namespace is used during a pod creation.]]></description>
-</item>
-<item>
-    <title>Mock Test 2</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</link>
-    <pubDate>Wed, 24 Jul 2024 11:06:49 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/mocktest/2/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. Question Take a backup of the etcd cluster and save it to /opt/etcd-backup.db.
-Answer 1 2 3 export ETCDCTL_API=3 etcdctl snapshot save --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /opt/etcd-backup.db 2. Question Create a Pod called redis-storage with image: redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod.
-Pod named &lsquo;redis-storage&rsquo; created
-Pod &lsquo;redis-storage&rsquo; uses Volume type of emptyDir
-Pod &lsquo;redis-storage&rsquo; uses volumeMount with mountPath = /data/redis]]></description>
 </item>
 </channel>
 </rss>
