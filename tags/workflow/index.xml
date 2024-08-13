@@ -1,0 +1,23 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Workflow - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/workflow/</link>
+        <description>Workflow - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/workflow/" rel="self" type="application/rss+xml" /><item>
+    <title>Airflow</title>
+    <link>https://seilylook.github.io/posts/data/airflow/1/</link>
+    <pubDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/airflow/1/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/airflow.png" referrerpolicy="no-referrer">
+            </div>Why Airflow Organization Apache Airflow helps you:
+Set the order of your tasks
+Make sure each task starts only when the provious ones are done
+Control the timing of your entire data process
+ex) You need to collect data from a database, clean it, perform some calculations, and then generate a report.
+Airflow helps you define this sequence and makes sure each step happens in the correct order, even if some tasks take loger than others]]></description>
+</item>
+</channel>
+</rss>
