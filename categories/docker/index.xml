@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Docker - Category - Devlog</title>
+        <link>https://seilylook.github.io/categories/docker/</link>
+        <description>Docker - Category - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 14 Aug 2024 12:51:24 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/docker/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker Concept</title>
+    <link>https://seilylook.github.io/posts/infra/docker/concept/</link>
+    <pubDate>Wed, 14 Aug 2024 12:51:24 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/infra/docker/concept/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/docker.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+</channel>
+</rss>

@@ -14,13 +14,13 @@ WHERE subject = 'English';
 In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition.
 
 <center>
-    <img src="/images/spark/spark-dpp-1.png"/>
+    <img src="/images/data/data/spark/spark-dpp-1.png"/>
 </center>
 
 Now, most query optimizers try to push down the filter from the top of the scan down as close as possible to the data source, in order to be able to avoid scanning the full data set.
 
 <center>
-    <img src="/images/spark/spark-dpp-2.png"/>
+    <img src="/images/data/data/spark/spark-dpp-2.png"/>
 </center>
 
 In the partition pruning technique, it follows the filter push down method and the data set is partitioned. Because in that case, if your query has a filter that’s on partition columns, you can actually be able to skip complete sets of partition files.
@@ -37,13 +37,13 @@ WHERE DailylRoutine.subject = 'English';
 ```
 
 <center>
-    <img src="/images/spark/spark-dpp-3.png"/>
+    <img src="/images/data/data/spark/spark-dpp-3.png"/>
 </center>
 
 Some may suggest that we can join the dimension tables with the fact table beforehand. In this way, we can still trigger static pruning over a single table. And then, they can execute their filters in separate queries as shown below.
 
 <center>
-    <img src="/images/spark/spark-dpp-4.png"/>
+    <img src="/images/data/data/spark/spark-dpp-4.png"/>
 </center>
 
 There are obvious downsides to this approach because first we have to execute this quite expensive join. We are duplicating the data, because we have to generate another intermediate table. This table can be quite wide because we take a bunch of smaller tables that we are joining together with a large table. And not only it’s wide but it’s actually extremely difficult to manage in the face of updating the dimensional tables. So whenever we are making a change we actually have to re trigger this whole pipeline over again.
@@ -55,7 +55,7 @@ In Spark SQL, users typically submit their queries from their favorite API in th
 During the physical planning phase spark generates an executable plan. This plan distributes the computation across clusters of many machines.
 
 <center>
-    <img src="/images/spark/spark-dpp-5.png"/>
+    <img src="/images/data/data/spark/spark-dpp-5.png"/>
 </center>
 
 # Optimization at Logical Level
@@ -69,7 +69,7 @@ Therefore, we don’t need to actually scan the full fact table as we are only i
 And in this way we can figure out that when we are planning the fact side of the join. And we are able to figure out which data this join requires. This is a simple approach.
 
 <center>
-    <img src="/images/spark/spark-dpp-6.png"/>
+    <img src="/images/data/data/spark/spark-dpp-6.png"/>
 </center>
 
 But however it can actually be expensive. We need to get rid of this sub query duplication and figure out a way to do it more efficiently. In order to do that, we’re going to take a look at how spark executes a join during the physical planning and how Spark transforms the query during this physical planning stage.
@@ -87,7 +87,7 @@ If the dimension table is small, then it’s likely that Spark will execute the 
 4. Then spark will start probing that hash table with rows that come from the fact table on each worker node.
 
 <center>
-    <img src="/images/spark/spark-dpp-7.png"/>
+    <img src="/images/data/data/spark/spark-dpp-7.png"/>
 </center>
 
 Now there is clearly a natural barrier between the two stages. So first, we are computing the broadcast side of the join. We are distributing it and only later on, do we start probing and executing the actual join. This is quite interesting, and we want to be able to leverage this into our optimization because this is quite exactly what we have mimicked with the level of logical planning with the sub query.
@@ -95,7 +95,7 @@ Now there is clearly a natural barrier between the two stages. So first, we are 
 So here’s what we are actually going to do. We are intercepting the results of the build side – the broadcast results. And we are going to take them directly and plug them in as a dynamic filter inside the scanner on top of the fact table. So this is actually a very effective and optimized version of dynamic partition pruning.
 
 <center>
-    <img src="/images/spark/spark-dpp-8.png"/>
+    <img src="/images/data/data/spark/spark-dpp-8.png"/>
 </center>
 
 # Conclusion

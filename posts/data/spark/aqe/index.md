@@ -40,7 +40,7 @@ ORDER BY avg(Y)
 
 예를 들어, 위와 같은 쿼리는 아래와 같은 쿼리 계획과 materialization point(Pipeline Breadk Point) 그리고 Query state를 가집니다:
 
-<img src="/images/spark/spark-aqe-1.png"/>
+<img src="/images/data/data/spark/spark-aqe-1.png"/>
 
 각 Query state는 중간 결과물을 materialize하고 이후의 stage는 반드시 해당 query state의 모든 병렬 처리가 materialize 된 이후에만 진행이 가능합니다. 모든 파티션에 대한 통계치가 존재하고 이후의 연산은 아직 시작되지 않은 시점이기에 이 materialization point는 자연적으로 매우 좋은 재-최적화 지점이 됩니다.
 
@@ -58,15 +58,15 @@ ORDER BY avg(Y)
 
 **Dynamically coalescing shuffle partitions** 기능은 동적으로 셔플 파티션 수를 줄일 수 있도록 하여, 기존의 정적 파티션 숫자 설정 기능에서 발생하는 것과 같이 너무 크거나 작은 파티션 사이즈의 문제를 피하며 성능을 개선합니다. 최초의 파티션 숫자는 큰 데이터 사이즈를 감당할 수 있도록 크게 설정하고, 쿼리 state에서 필요하다면 자동적으로 파티션 수를 줄이게 됩니다.
 
-<img src="/images/spark/spark-aqe-2.png"/>
+<img src="/images/data/data/spark/spark-aqe-2.png"/>
 
 기존의 정적 파티션 숫자 설정은 아래와 같이 초기에 설정된 파티션 숫자를 끝까지 사용하기에 작은 파티션 사이즈가 존재하게 됩니다:
 
-<img src="/images/spark/spark-aqe-3.png"/>
+<img src="/images/data/data/spark/spark-aqe-3.png"/>
 
 하지만, AQE가 적용된 경우에는 Coalescing이 자동적으로 수행되어 파티션 숫자가 동적으로 설정되어 낮아지며 작은 파티션 사이즈의 문제를 피할 수 있게 됩니다.
 
-<img src="/images/spark/spark-aqe-4.png"/>
+<img src="/images/data/data/spark/spark-aqe-4.png"/>
 
 ## Dynamically switching join strategies
 
@@ -80,7 +80,7 @@ ORDER BY avg(Y)
 
 AQE의 Dynamically switching join strateges 기능은 **런타임 시의 정보를 바탕으로 join 전략을 다시 계획**할 수 있도록 합니다.
 
-<img src="/images/spark/spark-aqe-5.png"/>
+<img src="/images/data/data/spark/spark-aqe-5.png"/>
 
 위와 같이 초기의 Sort Merge Join 전략이, 런타임 시 정보가 업데이트 되어 특정 데이터 대상이 충분히 작다는 사실을 인지하게 되고 Broadcast Hash Join로 변경되게 됩니다.
 
@@ -94,15 +94,15 @@ AQE의 Dynamically optimizing skew joins 기능은 런타임 통계치를 사용
 
 2. skew 파티션을 더 작은 서브 파티션들로 나눕니다.
 
-<img src="/images/spark/spark-aqe-6.png"/>
+<img src="/images/data/data/spark/spark-aqe-6.png"/>
 
 위와 같은 join 시에, 오른쪽과 같이 skew reader가 skew 파티션의 존재 여부를 파악하고 존재한다면 서브 파티션을 생성하게 됩니다.
 
 파티션의 사이즈를 중점적으로 살펴보면, 일반적인 경우 A0 파티션에 더욱 상대적으로 많은 데이터가 존재하고, A1, A2, A3 파티션의 처리가 모두 끝나도 다음 단계의 수행을 위해서 A0 처리 종료를 기다리게 됩니다.
 
-<img src="/images/spark/spark-aqe-7.png"/>
+<img src="/images/data/data/spark/spark-aqe-7.png"/>
 
 AQE가 적용되게 되면 아래와 같이 동적으로 skew 파티션을 쪼개 병렬처리하게 되면서, 더욱 빠르게 셔플 단계의 처리가 수행되게 됩니다.
 
-<img src="/images/spark/spark-aqe-8.png"/>
+<img src="/images/data/data/spark/spark-aqe-8.png"/>
 

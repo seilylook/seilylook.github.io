@@ -5,19 +5,14 @@
         <description>Airflow - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
             <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/airflow/" rel="self" type="application/rss+xml" /><item>
-    <title>Airflow</title>
-    <link>https://seilylook.github.io/posts/data/airflow/1/</link>
+    <title>Airflow Executors</title>
+    <link>https://seilylook.github.io/posts/data/airflow/concept/</link>
     <pubDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</pubDate>
     <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/airflow/1/</guid>
+    <guid>https://seilylook.github.io/posts/data/airflow/concept/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/airflow.png" referrerpolicy="no-referrer">
-            </div>Why Airflow Organization Apache Airflow helps you:
-Set the order of your tasks
-Make sure each task starts only when the provious ones are done
-Control the timing of your entire data process
-ex) You need to collect data from a database, clean it, perform some calculations, and then generate a report.
-Airflow helps you define this sequence and makes sure each step happens in the correct order, even if some tasks take loger than others]]></description>
+            </div>Apache Airflow란 무엇인가? Apache Airflow란? 공식 홈페이지에서 Airflow는 워크 플로를 코드로 작성하고 스케줄링한 뒤 모니터링하는 플랫폼이라고 설명하고 있습니다. 모든 기술이 그렇듯 Airflow에도 당연히 수많은 장점과 단점이 존재합니다. 제가 생각하는 가장 큰 장점은 데이터 조직이라면 필수로 하게 되는 과거 데이터 재처리 작업을 편리하게 수행할 수 있는 점이라고 생각합니다. 이런 이유로 많은 데이터 조직에서 이미 Airflow를 도입해 사용하고 계실 거라고 생각합니다. Airflow는 Apache 인큐베이터 프로젝트로 선정된 지 3년 만에 탑 레벨 프로젝트(Top-Level Project, TLP)로 선정될 만큼 커뮤니티가 빠른 속도로 확장되고 있습니다.]]></description>
 </item>
 </channel>
 </rss>

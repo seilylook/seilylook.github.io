@@ -12,7 +12,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/data/spark/aqe/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-20T16:44:07+09:00" />
-<meta property="article:modified_time" content="2024-08-02T17:41:10+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-08-13T14:01:56+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="AQE"/>
@@ -33,7 +33,7 @@
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/data\/spark\/aqe\/"
         },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Data Engineering","wordcount":  758 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/data\/spark\/aqe\/","datePublished": "2024-07-20T16:44:07+09:00","dateModified": "2024-08-02T17:41:10+09:00","publisher": {
+        "url": "https:\/\/seilylook.github.io\/posts\/data\/spark\/aqe\/","datePublished": "2024-07-20T16:44:07+09:00","dateModified": "2024-08-13T14:01:56+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -171,7 +171,7 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>예를 들어, 위와 같은 쿼리는 아래와 같은 쿼리 계획과 materialization point(Pipeline Breadk Point) 그리고 Query state를 가집니다:</p>
-<img src="/images/spark/spark-aqe-1.png"/>
+<img src="/images/data/data/spark/spark-aqe-1.png"/>
 <p>각 Query state는 중간 결과물을 materialize하고 이후의 stage는 반드시 해당 query state의 모든 병렬 처리가 materialize 된 이후에만 진행이 가능합니다. 모든 파티션에 대한 통계치가 존재하고 이후의 연산은 아직 시작되지 않은 시점이기에 이 materialization point는 자연적으로 매우 좋은 재-최적화 지점이 됩니다.</p>
 <p>쿼리 수행이 시작되면 AQE는 처음에는 모든 Leaf stages를 시작한다. 이러한 stages들이 materialization을 끝내면, 물리적 쿼리 계획에서 종료된 것으로 표시하고, 완료된 stages로부터 얻은 통계치를 가지고 이후의 논리적 계획을 업데이트 합니다. 또한 이러한 새로운 통계치에 기반해서 프레임워크는 옵티마이저, 물리적 플래너, 물리적 최적화 룰(일반적인 물리적 룰과 AQE의 여러 룰을 포함-아래)을 수행하게 됩니다.</p>
 <h2 id="dynamically-coalescing-shuffle-partitions">Dynamically coalescing shuffle partitions</h2>
@@ -199,11 +199,11 @@
 </tbody>
 </table>
 <p><strong>Dynamically coalescing shuffle partitions</strong> 기능은 동적으로 셔플 파티션 수를 줄일 수 있도록 하여, 기존의 정적 파티션 숫자 설정 기능에서 발생하는 것과 같이 너무 크거나 작은 파티션 사이즈의 문제를 피하며 성능을 개선합니다. 최초의 파티션 숫자는 큰 데이터 사이즈를 감당할 수 있도록 크게 설정하고, 쿼리 state에서 필요하다면 자동적으로 파티션 수를 줄이게 됩니다.</p>
-<img src="/images/spark/spark-aqe-2.png"/>
+<img src="/images/data/data/spark/spark-aqe-2.png"/>
 <p>기존의 정적 파티션 숫자 설정은 아래와 같이 초기에 설정된 파티션 숫자를 끝까지 사용하기에 작은 파티션 사이즈가 존재하게 됩니다:</p>
-<img src="/images/spark/spark-aqe-3.png"/>
+<img src="/images/data/data/spark/spark-aqe-3.png"/>
 <p>하지만, AQE가 적용된 경우에는 Coalescing이 자동적으로 수행되어 파티션 숫자가 동적으로 설정되어 낮아지며 작은 파티션 사이즈의 문제를 피할 수 있게 됩니다.</p>
-<img src="/images/spark/spark-aqe-4.png"/>
+<img src="/images/data/data/spark/spark-aqe-4.png"/>
 <h2 id="dynamically-switching-join-strategies">Dynamically switching join strategies</h2>
 <p>스파크는 join의 대상인 2개의 데이터 중 하나 이상이 메모리에 로드되기에 충분히 작다면 Broadcast Hash Join을 선택합니다. 하지만, 수행 초기 시점에 행한 데이터 크기에 대한 예측이 틀릴 수 있으며 이는 Broadcast Hash Join로 수행될 수 있는 기회를 놓치게 만듭니다. 그러한 틀린 예측은 아래와 가은 이유로 발생하게 됩니다:</p>
 <ul>
@@ -218,7 +218,7 @@
 </li>
 </ul>
 <p>AQE의 Dynamically switching join strateges 기능은 <strong>런타임 시의 정보를 바탕으로 join 전략을 다시 계획</strong>할 수 있도록 합니다.</p>
-<img src="/images/spark/spark-aqe-5.png"/>
+<img src="/images/data/data/spark/spark-aqe-5.png"/>
 <p>위와 같이 초기의 Sort Merge Join 전략이, 런타임 시 정보가 업데이트 되어 특정 데이터 대상이 충분히 작다는 사실을 인지하게 되고 Broadcast Hash Join로 변경되게 됩니다.</p>
 <h2 id="dynamically-optimizing-skew-joins">Dynamically optimizing skew joins</h2>
 <p>AQE의 3번째 기능은 동적으로 skew가 존재하는 join을 최적화하는 기능입니다. 데이터 skew는 셔플 시에 특정 키에 값이 치우쳐져서 많이 존재하고 셔플 시에는 해당 셔플의 병렬 처리가 모두 종료되고 나서 다음 단계의 처리르 수행할 수 있기에 모든 병렬 처리가 빨리 끝나도 다음 단계로 넘어가기 위해서 가장 늦은 처리를 기다릴 수 밖에 없게 만듭니다. 그리고 이 부분은 성능을 매우 저하시키게 됩니다.</p>
@@ -231,18 +231,18 @@
 <p>skew 파티션을 더 작은 서브 파티션들로 나눕니다.</p>
 </li>
 </ol>
-<img src="/images/spark/spark-aqe-6.png"/>
+<img src="/images/data/data/spark/spark-aqe-6.png"/>
 <p>위와 같은 join 시에, 오른쪽과 같이 skew reader가 skew 파티션의 존재 여부를 파악하고 존재한다면 서브 파티션을 생성하게 됩니다.</p>
 <p>파티션의 사이즈를 중점적으로 살펴보면, 일반적인 경우 A0 파티션에 더욱 상대적으로 많은 데이터가 존재하고, A1, A2, A3 파티션의 처리가 모두 끝나도 다음 단계의 수행을 위해서 A0 처리 종료를 기다리게 됩니다.</p>
-<img src="/images/spark/spark-aqe-7.png"/>
+<img src="/images/data/data/spark/spark-aqe-7.png"/>
 <p>AQE가 적용되게 되면 아래와 같이 동적으로 skew 파티션을 쪼개 병렬처리하게 되면서, 더욱 빠르게 셔플 단계의 처리가 수행되게 됩니다.</p>
-<img src="/images/spark/spark-aqe-8.png"/>
+<img src="/images/data/data/spark/spark-aqe-8.png"/>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-08-02&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/ac5f7f32ff1a332f075ea3864ac71290149631f4" target="_blank" title="commit by seilylook(seilylook@naver.com) ac5f7f32ff1a332f075ea3864ac71290149631f4: add: langchain,rag &amp; edit folder name">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ac5f7f3</a></span>
+                <span>Updated on 2024-08-13&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/ccd939b7f9f01b71814c69f7d9ad39efb4a64f44" target="_blank" title="commit by seilylook(seilylook@naver.com) ccd939b7f9f01b71814c69f7d9ad39efb4a64f44: add: airflow">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ccd939b</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

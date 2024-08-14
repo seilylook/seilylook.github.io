@@ -28,7 +28,7 @@ Spark는 master / slave 구조로 **1개의 Driver(중앙 조정자)와 N개의 
 
 |                            Cluter deploy mode                             |                            Client deploy mode                            |
 | :-----------------------------------------------------------------------: | :----------------------------------------------------------------------: |
-| <center><img src="/images/spark/spark_cluster_mode.webp"/></center> | <center><img src="/images/spark/spark_client_mode.webp"/></center> |
+| <center><img src="/images/data/data/spark/spark_cluster_mode.webp"/></center> | <center><img src="/images/data/spark/spark_client_mode.webp"/></center> |
 |                                 Figure 1                                  |                                 Figure 2                                 |
 
 **Figure 1**: Spark runtime components in `Cluster deploy mode`. Elements of a spark application are in blue boxes and an application's tasks running inside task slots are labeled with a "T". Unoccupied task of slots are in white boxes.

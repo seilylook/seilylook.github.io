@@ -13,7 +13,7 @@ Resilient Distributed Datasets(RDDs)
 
 - immutable(read-only)
 
-<img src="/images/spark/spark-rdd.png"/>
+<img src="/images/data/data/spark/spark-rdd.png"/>
 
 ## RDD 연산
 

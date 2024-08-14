@@ -15,7 +15,7 @@ Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler 
 
 On Spark, the optimizer is named `Catalyst` and can be represented by the schema below. It will produce different types of plans:
 
-<img src="/images/spark/spark-execution-plan-1.webp"/>
+<img src="/images/data/spark/spark-execution-plan-1.webp"/>
 
 Operation names are:
 
@@ -89,7 +89,7 @@ y.explain()
 
 By default, calling explain with no argument will produce a physical plan explanation:
 
-<img src="/images/spark/spark-execution-plan-2.webp"/>
+<img src="/images/data/spark/spark-execution-plan-2.webp"/>
 
 # Getting various plans
 
@@ -105,25 +105,25 @@ Starting from Apache Spark 3.0, you have a new parameter `mode` that produce exp
 
 - `explain(mode=”formatted”)` which will display a splitted output composed by a nice physical plan outline, and a section with each node details
 
-<img src="/images/spark/spark-execution-plan-3.webp"/>
+<img src="/images/data/spark/spark-execution-plan-3.webp"/>
 
 # Plans differences
 
 As stated in the beginning of this post, various kinds of plans are generated after many operations processed by the Catalyst Optimizer:
 
-<img src="/images/spark/spark-execution-plan-1.webp"/>
+<img src="/images/data/spark/spark-execution-plan-1.webp"/>
 
 ## First step: Unresolved Logical plan generation
 
 This plan is generated after a first check that verifies everything is correct on the syntactic field. Next, the semantic analysis is executed and will produced a first version of a logical plan where relation name and columns are not specifically resolved. This produced this kind of result:
 
-<img src="/images/spark/spark-execution-plan-4.webp"/>
+<img src="/images/data/spark/spark-execution-plan-4.webp"/>
 
 ## Next step: Analyzed logical plan generation
 
 When the unresolved plan has been generated, it will resolve everything that is not resolved yet by accessing an internal Spark structure mentioned as **Catalog** in the previous schema. In this catalog, which can be assimilated to a metastore, a semantic analysis will be produced to verify data structures, schemas, types etc. and if everything goes well, the plan is marked as “Analyzed Logical Plan” and will be formatted like this:
 
-<img src="/images/spark/spark-execution-plan-5.webp"/>
+<img src="/images/data/spark/spark-execution-plan-5.webp"/>
 
 We can see here that, just after the “Aggregate” line, all the previously marked “unresolved alias” are now resolved and correctly typed … specially the sum column.
 
@@ -133,7 +133,7 @@ Once the Logical plan has been produced, it will be optimized based on various r
 
 These logical operations will be reordered to optimize the logical plan. When the optimization ends, it will produced this kind of output:
 
-<img src="/images/spark/spark-execution-plan-6.webp"/>
+<img src="/images/data/spark/spark-execution-plan-6.webp"/>
 
 We can see in this plan, that predicates have been pushed down on the LogicalRDD to reduce the data volume processed by the join. We can mention too that filters are pushed to both data structure (one for the “items” dataframe, and one for the “orders” dataframe).
 
@@ -143,7 +143,7 @@ From the optimized logical plan, a plan that describes how it will be physically
 
 Based on our example, the selected physical plan is this one (which is the one that is printed when you use explain() with default parameters)
 
-<img src="/images/spark/spark-execution-plan-7.webp"/>
+<img src="/images/data/spark/spark-execution-plan-7.webp"/>
 
 ## Spark execution is Lazy, Execution plan generation is not a lazy thing.
 
@@ -173,17 +173,17 @@ AQE is a new feature in Spark 3.0 which enables plan changes at runtime.
 
 If we put this on an update of the catalyst Optimizer schema, it will give something like that:
 
-<img src="/images/spark/spark-execution-plan-8.webp"/>
+<img src="/images/data/spark/spark-execution-plan-8.webp"/>
 
 However, any changes decided during DAG execution won’t be displayed after calling `explain()` function. If you want to see these changes, you will have to explore Spark UI and tracking skew partitions splits, joins changes etc.
 
 For example, if you enable AQE (which is not enabled by default), explain call will produce a hint in the physical plan display :
 
-<img src="/images/spark/spark-execution-plan-9.webp"/>
+<img src="/images/data/spark/spark-execution-plan-9.webp"/>
 
 In the explain output, you are hinted this physical plan is not the final plan, but if you have a look at the Spark UI, you will see that the SQL query plan is the final plan and optionally if the plan has been modified :
 
-<img src="/images/spark/spark-execution-plan-10.webp"/>
+<img src="/images/data/spark/spark-execution-plan-10.webp"/>
 
 
 

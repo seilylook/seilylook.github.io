@@ -7,13 +7,13 @@ Transformations are operations on RDDs, Dataframes, or Dataset, that produce new
 
 Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either `Narrow` or `Wide` based on whether their dependency on input data partitions.
 
-<img src="/images/spark/spark-dependency.webp"/>
+<img src="/images/data/spark/spark-dependency.webp"/>
 
 ## Narrow dependency(transformation)
 
 A narrow transformation is a transformation that need to operate only on a single parition of input data to produce one partition of output data. These transformations do not require shuffling of data between partitions. They can be executed on a single partition without needing to exchange data with other partitions.
 
-<img src="/images/spark/narrow-dependency.webp"/>
+<img src="/images/data/spark/narrow-dependency.webp"/>
 
 Here, are some examples are narrow dependencies:
 
@@ -24,7 +24,7 @@ Here, are some examples are narrow dependencies:
 3. Union transformation: In this transformation, two Dataframes are combined to form a single Dataframe, with each partition of the child Dataframe depending on only one partition of each parent Dataframe. Since each partition of the child Dataframe depends on only one partition of each parent Dataframe, it is a narrow dependency.
 
 <center>
-    <img src="/images/spark/narrow-dependency-2.webp"/>
+    <img src="/images/data/spark/narrow-dependency-2.webp"/>
 </center>
 
 ## Wide dependency(transformation)
@@ -32,7 +32,7 @@ Here, are some examples are narrow dependencies:
 Wide dependency transformations are those where each partition of the output DataFrame depends on multiple partitions of the input DataFrame. This means that the transformation requires shuffling data across the network, which can be resource-intensive.
 
 <center>
-    <img src="/images/spark/wide-dependency.webp"/>
+    <img src="/images/data/spark/wide-dependency.webp"/>
 </center>
 
 Here are some examples of wide dependency transformations:

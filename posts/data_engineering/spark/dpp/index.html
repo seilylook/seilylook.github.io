@@ -8,7 +8,7 @@
 <meta property="og:description" content="Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
 1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://seilylook.github.io/posts/data_engineering/spark/dpp/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://seilylook.github.io/posts/data_engineering/data/spark/dpp/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-07-20T16:46:07+09:00" />
 <meta property="article:modified_time" content="2024-07-27T16:28:00+09:00" /><meta property="og:site_name" content="My cool site" />
 
@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
 1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition."/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data_engineering/spark/dpp/" /><link rel="prev" href="https://seilylook.github.io/posts/data_engineering/spark/dependency/" /><link rel="next" href="https://seilylook.github.io/posts/data_engineering/spark/execution_plan/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data_engineering/data/spark/dpp/" /><link rel="prev" href="https://seilylook.github.io/posts/data_engineering/data/spark/dependency/" /><link rel="next" href="https://seilylook.github.io/posts/data_engineering/data/spark/execution_plan/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -60,7 +60,7 @@
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
                     <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/data_engineering/spark/dpp/" selected>English</option></select>
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/data_engineering/data/spark/dpp/" selected>English</option></select>
                 </a></div>
         </div>
     </div>
@@ -94,7 +94,7 @@
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
                     <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/posts/data_engineering/spark/dpp/" selected>English</option></select>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/data_engineering/data/spark/dpp/" selected>English</option></select>
                 </a></div>
     </div>
 </header><div class="search-dropdown desktop">
@@ -139,11 +139,11 @@
 </div>
 </div><p>In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition.</p>
 <center>
-    <img src="/images/spark/spark-dpp-1.png"/>
+    <img src="/images/data/spark/spark-dpp-1.png"/>
 </center>
 <p>Now, most query optimizers try to push down the filter from the top of the scan down as close as possible to the data source, in order to be able to avoid scanning the full data set.</p>
 <center>
-    <img src="/images/spark/spark-dpp-2.png"/>
+    <img src="/images/data/spark/spark-dpp-2.png"/>
 </center>
 <p>In the partition pruning technique, it follows the filter push down method and the data set is partitioned. Because in that case, if your query has a filter that’s on partition columns, you can actually be able to skip complete sets of partition files.</p>
 <p><strong>Partition pruning in Spark is a performance optimization that limits the number of files and partitions that Spark reads when querying. After partitioning the data, queries that match certain partition filter criteria improve performance by allowing Spark to only read a subset of the directories and files. When partition filters are present, the catalyst optimizer pushes down the partition filters. The scan reads only the directories that match the partition filters, thus reducing disk I/O.</strong></p>
@@ -163,18 +163,18 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><center>
-    <img src="/images/spark/spark-dpp-3.png"/>
+    <img src="/images/data/spark/spark-dpp-3.png"/>
 </center>
 <p>Some may suggest that we can join the dimension tables with the fact table beforehand. In this way, we can still trigger static pruning over a single table. And then, they can execute their filters in separate queries as shown below.</p>
 <center>
-    <img src="/images/spark/spark-dpp-4.png"/>
+    <img src="/images/data/spark/spark-dpp-4.png"/>
 </center>
 <p>There are obvious downsides to this approach because first we have to execute this quite expensive join. We are duplicating the data, because we have to generate another intermediate table. This table can be quite wide because we take a bunch of smaller tables that we are joining together with a large table. And not only it’s wide but it’s actually extremely difficult to manage in the face of updating the dimensional tables. So whenever we are making a change we actually have to re trigger this whole pipeline over again.</p>
 <h1 id="dynamic-partition-pruning-in-spark">Dynamic Partition Pruning in Spark</h1>
 <p>In Spark SQL, users typically submit their queries from their favorite API in their favorite programming language, so we have data frames and data sets. Spark takes this query and translates it into a digestible form, which we call the <strong>logical plan</strong> of the query. During this phase, Spark optimizes the logical plan by applying a set of transformations which are rule-based transformations such as column pruning, constant folding, filter push down. And only later on, it will get to the actual <strong>physical planning</strong> of the query.</p>
 <p>During the physical planning phase spark generates an executable plan. This plan distributes the computation across clusters of many machines.</p>
 <center>
-    <img src="/images/spark/spark-dpp-5.png"/>
+    <img src="/images/data/spark/spark-dpp-5.png"/>
 </center>
 <h1 id="optimization-at-logical-level">Optimization at Logical Level</h1>
 <p>Let’s start with the optimization opportunities that we have at the level of logical planning. Let us consider a data set that is partitioned across multiple files. And each partition will be differ by a particular color. On the opposite side, we will have a smaller table, which is a dimension table that is not necessarily partitioned. And then we have the typical scan operators on top of these data sets.</p>
@@ -182,7 +182,7 @@
 <p>Therefore, we don’t need to actually scan the full fact table as we are only interested in two filtering partitions that result from the dimension table. To avoid this, a simple approach is to take the filter from the dimension table incorporated into a sub query. Then run that sub query below the scan on the fact table.</p>
 <p>And in this way we can figure out that when we are planning the fact side of the join. And we are able to figure out which data this join requires. This is a simple approach.</p>
 <center>
-    <img src="/images/spark/spark-dpp-6.png"/>
+    <img src="/images/data/spark/spark-dpp-6.png"/>
 </center>
 <p>But however it can actually be expensive. We need to get rid of this sub query duplication and figure out a way to do it more efficiently. In order to do that, we’re going to take a look at how spark executes a join during the physical planning and how Spark transforms the query during this physical planning stage.</p>
 <h1 id="optimization-at-physical-level">Optimization at Physical Level</h1>
@@ -202,12 +202,12 @@
 </li>
 </ol>
 <center>
-    <img src="/images/spark/spark-dpp-7.png"/>
+    <img src="/images/data/spark/spark-dpp-7.png"/>
 </center>
 <p>Now there is clearly a natural barrier between the two stages. So first, we are computing the broadcast side of the join. We are distributing it and only later on, do we start probing and executing the actual join. This is quite interesting, and we want to be able to leverage this into our optimization because this is quite exactly what we have mimicked with the level of logical planning with the sub query.</p>
 <p>So here’s what we are actually going to do. We are intercepting the results of the build side – the broadcast results. And we are going to take them directly and plug them in as a dynamic filter inside the scanner on top of the fact table. So this is actually a very effective and optimized version of dynamic partition pruning.</p>
 <center>
-    <img src="/images/spark/spark-dpp-8.png"/>
+    <img src="/images/data/spark/spark-dpp-8.png"/>
 </center>
 <h1 id="conclusion">Conclusion</h1>
 <p>To summarize, in Apache sparks 3.0, a new optimization called dynamic partition pruning is implemented that works both at:</p>
@@ -223,23 +223,23 @@
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/data_engineering/spark/dpp/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/posts/data_engineering/data/spark/dpp/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/data_engineering/spark/dpp/" data-title="Dpp" data-hashtags="Spark,Architecture"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/data_engineering/spark/dpp/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/data_engineering/spark/dpp/" data-title="Dpp"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/data_engineering/spark/dpp/" data-title="Dpp"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/data_engineering/spark/dpp/" data-title="Dpp" data-image="/images/feature_images/spark.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/data_engineering/data/spark/dpp/" data-title="Dpp" data-hashtags="Spark,Architecture"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/data_engineering/data/spark/dpp/" data-hashtag="Spark"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/data_engineering/data/spark/dpp/" data-title="Dpp"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/data_engineering/data/spark/dpp/" data-title="Dpp"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/data_engineering/data/spark/dpp/" data-title="Dpp" data-image="/images/feature_images/spark.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data/spark/">Spark</a>,&nbsp;<a href="/tags/architecture/">Architecture</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/data_engineering/spark/dependency/" class="prev" rel="prev" title="Dependency"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Dependency</a>
-            <a href="/posts/data_engineering/spark/execution_plan/" class="next" rel="next" title="Execution_plan">Execution_plan<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/data_engineering/data/spark/dependency/" class="prev" rel="prev" title="Dependency"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Dependency</a>
+            <a href="/posts/data_engineering/data/spark/execution_plan/" class="next" rel="next" title="Execution_plan">Execution_plan<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.

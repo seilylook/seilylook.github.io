@@ -11,7 +11,7 @@ Spark's execution hierarchy, from top to bottom is **Job, Stage, Task**.
 
 # Hardware Hierarchy
 
-<img src="/images/spark/spark-hierarchy-1.webp"/>
+<img src="/images/data/spark/spark-hierarchy-1.webp"/>
 
 ## Cluster
 
@@ -57,7 +57,7 @@ These disks are extremely important because - a lot of time, Spark does **Shuffl
 
 # Software Hierarchy
 
-<img src="/images/spark/spark-hierarchy-2.webp"/>
+<img src="/images/data/spark/spark-hierarchy-2.webp"/>
 
 ## Transformation(lazy)
 
@@ -115,13 +115,13 @@ When we call an action, we start all the transformations that spark has staged. 
 
 Shuffle happens whenever Spark can't perform tasks on individual partitions or it needs data from other partitions for computation.
 
-<img src="/images/spark/spark-shuffle-1.webp"/>
+<img src="/images/data/spark/spark-shuffle-1.webp"/>
 
 In the above picture, we have 3 names in 3 partitions and we are trying to get the number of names for each first character. Getting the first character in each name can be done independently.
 
 But the `groupBy` task required all A's in a single partition and hence th Shuffle. Shuffle gathers all A's into a single partition and then takes count of individual names for each first character.
 
-<img src="/images/spark/spark-shuffle-2.webp"/>
+<img src="/images/data/spark/spark-shuffle-2.webp"/>
 
 During shuffle, data from each partitions is written into disks based on the Hash keys. In this case, Stage 1 writes data to disk based on the first character. Stage 2 pulls data from disks and gets the count.
 
