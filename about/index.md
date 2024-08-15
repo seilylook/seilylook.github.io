@@ -7,7 +7,7 @@
     <b>Se Hyeon Kim | seilylook</b>
     <br/>
     <a href="https://github.com/seilylook"><img src="/images/feature_images/github.png" width="20" align="center" alt="GitHub"> GitHub |</a>
-    <a href="https://www.linkedin.com/in/se-hyeon-kim-07a1a02a2/"><img src="/images/feature_images/linkedin.webp" width="16" align="center" alt="LinkedIn"> LinkedIn |</a>
+    <a href="https://www.linkedin.com/in/se-hyeon-kim/"><img src="/images/feature_images/linkedin.webp" width="16" align="center" alt="LinkedIn"> LinkedIn |</a>
 </div>
 
 # Education 🎓
