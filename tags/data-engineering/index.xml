@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/tags/data-engineering/</link>
         <description>Data Engineering - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-engineering/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 29 Aug 2024 13:41:59 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-engineering/" rel="self" type="application/rss+xml" /><item>
+    <title>Deploy Spark on Kubernetes</title>
+    <link>https://seilylook.github.io/posts/projects/deploy_spark_on_kubernetes/</link>
+    <pubDate>Thu, 29 Aug 2024 13:41:59 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/projects/deploy_spark_on_kubernetes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Introduction Spark를 Local Kubernetes 환경에 띄우는 프로젝트
+Docker Image docker/spark/Dockerfile
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 # builder step used to download and configure spark environment FROM openjdk:11.0.11-jre-slim-buster as builder # Add Dependencies for PySpark RUN apt-get update &amp;&amp; apt-get install -y curl vim wget software-properties-common ssh net-tools ca-certificates python3 python3-pip python3-numpy python3-matplotlib python3-scipy python3-pandas python3-simpy RUN update-alternatives --install &#34;/usr/bin/python&#34; &#34;python&#34; &#34;$(which python3)&#34; 1 ENV SPARK_VERSION=3.]]></description>
+</item>
+<item>
     <title>Airflow Executors</title>
     <link>https://seilylook.github.io/posts/data/airflow/concept/</link>
     <pubDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</pubDate>
@@ -117,20 +129,6 @@ Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation 
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
             </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
-</item>
-<item>
-    <title>Cache_persist</title>
-    <link>https://seilylook.github.io/posts/data/spark/cache_persist/</link>
-    <pubDate>Sat, 20 Jul 2024 16:45:26 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/spark/cache_persist/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
-            </div>Introduction Spark Cache and Persist are optimization techniques for iterative and interactive Spark applications to improve the performances of the jobs or applications. In
-Key Point RDD.cache() cashes the RDD with the default storage level MEMORY_ONLY
-DataFrame.cache() caches the DataFrame with the default storage level MEMORY_AND_DISK
-The persist() method is used to store it to the user-defined storage level
-On Spark UI, the Storage tab shows where partitions exist in memory or disk across the cluster.]]></description>
 </item>
 </channel>
 </rss>

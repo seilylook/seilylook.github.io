@@ -4,9 +4,21 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 15 Aug 2024 14:41:59 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 29 Aug 2024 13:41:59 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Deploy Spark on Kubernetes</title>
+    <link>https://seilylook.github.io/posts/projects/deploy_spark_on_kubernetes/</link>
+    <pubDate>Thu, 29 Aug 2024 13:41:59 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/projects/deploy_spark_on_kubernetes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
+            </div>Introduction Spark를 Local Kubernetes 환경에 띄우는 프로젝트
+Docker Image docker/spark/Dockerfile
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 # builder step used to download and configure spark environment FROM openjdk:11.0.11-jre-slim-buster as builder # Add Dependencies for PySpark RUN apt-get update &amp;&amp; apt-get install -y curl vim wget software-properties-common ssh net-tools ca-certificates python3 python3-pip python3-numpy python3-matplotlib python3-scipy python3-pandas python3-simpy RUN update-alternatives --install &#34;/usr/bin/python&#34; &#34;python&#34; &#34;$(which python3)&#34; 1 ENV SPARK_VERSION=3.]]></description>
+</item>
+<item>
     <title>Scrapy</title>
     <link>https://seilylook.github.io/posts/library/python/scrapy/</link>
     <pubDate>Thu, 15 Aug 2024 14:41:59 &#43;0900</pubDate>
@@ -104,19 +116,6 @@ Source : https://aws.amazon.com/ko/what-is/langchain/
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/numpy.png" referrerpolicy="no-referrer">
             </div>]]></description>
-</item>
-<item>
-    <title>Yaml</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/yaml/</link>
-    <pubDate>Fri, 26 Jul 2024 11:40:17 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/yaml/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/yaml.jpg" referrerpolicy="no-referrer">
-            </div>What is YAML? 시스템 간 데이터를 교화할 때 데이터의 연동과 호환성을 위해 포맷에 대한 규칙이 필요해졌다.
-기존에 사용하던 XML은 사용하기 까다롭고 가독성이 매우 떨어지기 떄문에 JSON으로 변경되다가, JSON 역시 주석을 달 수 없는 등 제한이 있고 중괄호/대괄호로 인해 코드 길이가 증가하는 단점이 존재했다.
-이런 문제점을 해결하기 위해 YAML이 등장하게 된다.
-YAML은 XML과 JSON 포맷과 같이 타 시스템 간에 데이터를 주고 받을 때 약속된 포맷이 정의된 파일 형식이라 할 수 있다.]]></description>
 </item>
 </channel>
 </rss>
