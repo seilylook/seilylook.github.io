@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 07 Sep 2024 14:19:19 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Data Engineering</title>
+    <link>https://seilylook.github.io/tags/data-engineering/</link>
+    <pubDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Workflow</title>
+    <link>https://seilylook.github.io/tags/workflow/</link>
+    <pubDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/workflow/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Infrastructure</title>
     <link>https://seilylook.github.io/tags/infrastructure/</link>
     <pubDate>Sat, 07 Sep 2024 14:19:19 &#43;0900</pubDate>
@@ -13,27 +29,11 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Data Engineering</title>
-    <link>https://seilylook.github.io/tags/data-engineering/</link>
-    <pubDate>Thu, 29 Aug 2024 13:41:59 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
     <title>Library</title>
     <link>https://seilylook.github.io/tags/library/</link>
     <pubDate>Thu, 15 Aug 2024 14:41:59 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/library/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Workflow</title>
-    <link>https://seilylook.github.io/tags/workflow/</link>
-    <pubDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/workflow/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>

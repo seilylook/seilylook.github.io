@@ -1,7 +1,7 @@
 # Create_nodes
 
 
-## Install the start Minikube
+## Install and start Minikube
 
 ### Install the Minikube
 

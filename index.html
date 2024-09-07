@@ -102,6 +102,20 @@
         alt="/images/profile/profile.png"
         title="/images/profile/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/se-hyeon-kim/" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/data/airflow/projects/airflow_on_kubernetes/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/airflow.png"
+        data-srcset="/images/feature_images/airflow.png, /images/feature_images/airflow.png 1.5x, /images/feature_images/airflow.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/airflow.png"
+        title="/images/feature_images/airflow.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/data/airflow/projects/airflow_on_kubernetes/">Airflow_on_kubernetes</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-09-07">2024-09-07</time></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div><div class="content">Install Helm chart 1 brew install helm Install the Chart 1 2 3 4 5 6 7 8 9 {seilylook} 💎minikube start {seilylook} 💎helm repo add apache-airflow https://airflow.apache.org &#34;apache-airflow&#34; has been added to your repositories {seilylook} 💎 helm repo list NAME URL apache-airflow	https://airflow.apache.org Upgrade the Chart 1 2 3 4 5 6 7 8 9 10 11 {seilylook} 💎 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace {seilylook} 💎  ~/Development/Devlog   main ±  kubectl get pods -n airflow -o wide NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES airflow-postgresql-0 1/1 Running 0 9m10s 10.</div><div class="post-footer">
+        <a href="/posts/data/airflow/projects/airflow_on_kubernetes/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-engineering/">Data Engineering</a>,&nbsp;<a href="/tags/workflow/">Workflow</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/infra/kubernetes/projects/create_nodes/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -112,25 +126,9 @@
         title="/images/feature_images/kubernetes.png" /></a>
         </div><h1 class="single-title" itemprop="name headline">
         <a href="/posts/infra/kubernetes/projects/create_nodes/">Create_nodes</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-09-07">2024-09-07</time></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div><div class="content">Install the start Minikube Install the Minikube 1 2 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64 sudo install minikube-darwin-amd64 /usr/local/bin/minikube Start minikube cluster and Check the status 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 {seilylook} 🚀 minikube start 😄 Darwin 14.6.1 (arm64) 의 minikube v1.33.0 ✨ 기존 프로필에 기반하여 docker 드라이버를 사용하는 중 👍 Starting &#34;minikube&#34; primary control-plane node in &#34;minikube&#34; cluster 🚜 Pulling base image v0.</div><div class="post-footer">
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-09-07">2024-09-07</time></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div><div class="content">Install and start Minikube Install the Minikube 1 2 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64 sudo install minikube-darwin-amd64 /usr/local/bin/minikube Start minikube cluster and Check the status 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 {seilylook} 🚀 minikube start 😄 Darwin 14.6.1 (arm64) 의 minikube v1.33.0 ✨ 기존 프로필에 기반하여 docker 드라이버를 사용하는 중 👍 Starting &#34;minikube&#34; primary control-plane node in &#34;minikube&#34; cluster 🚜 Pulling base image v0.</div><div class="post-footer">
         <a href="/posts/infra/kubernetes/projects/create_nodes/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/infrastructure/">Infrastructure</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/projects/deploy_spark_on_kubernetes/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/feature_images/spark.webp"
-        data-srcset="/images/feature_images/spark.webp, /images/feature_images/spark.webp 1.5x, /images/feature_images/spark.webp 2x"
-        data-sizes="auto"
-        alt="/images/feature_images/spark.webp"
-        title="/images/feature_images/spark.webp" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/projects/deploy_spark_on_kubernetes/">Deploy Spark on Kubernetes</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-08-29">2024-08-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/projects/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Projects</a></span></div><div class="content">Introduction Spark를 Local Kubernetes 환경에 띄우는 프로젝트
-Docker Image docker/spark/Dockerfile
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 # builder step used to download and configure spark environment FROM openjdk:11.0.11-jre-slim-buster as builder # Add Dependencies for PySpark RUN apt-get update &amp;&amp; apt-get install -y curl vim wget software-properties-common ssh net-tools ca-certificates python3 python3-pip python3-numpy python3-matplotlib python3-scipy python3-pandas python3-simpy RUN update-alternatives --install &#34;/usr/bin/python&#34; &#34;python&#34; &#34;$(which python3)&#34; 1 ENV SPARK_VERSION=3.</div><div class="post-footer">
-        <a href="/posts/projects/deploy_spark_on_kubernetes/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/library/python/scrapy/"><img
         class="lazyload"

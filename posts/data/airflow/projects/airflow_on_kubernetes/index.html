@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Airflow_on_kubernetes - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Airflow_on_kubernetes" />
+<meta property="og:description" content="Install Helm chart 1 brew install helm Install the Chart 1 2 3 4 5 6 7 8 9 {seilylook} 💎minikube start {seilylook} 💎helm repo add apache-airflow https://airflow.apache.org &#34;apache-airflow&#34; has been added to your repositories {seilylook} 💎 helm repo list NAME URL apache-airflow	https://airflow.apache.org Upgrade the Chart 1 2 3 4 5 6 7 8 9 10 11 {seilylook} 💎 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace {seilylook} 💎  ~/Development/Devlog   main ±  kubectl get pods -n airflow -o wide NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES airflow-postgresql-0 1/1 Running 0 9m10s 10." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-07T16:31:41+09:00" />
+<meta property="article:modified_time" content="2024-09-07T16:31:41+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Airflow_on_kubernetes"/>
+<meta name="twitter:description" content="Install Helm chart 1 brew install helm Install the Chart 1 2 3 4 5 6 7 8 9 {seilylook} 💎minikube start {seilylook} 💎helm repo add apache-airflow https://airflow.apache.org &#34;apache-airflow&#34; has been added to your repositories {seilylook} 💎 helm repo list NAME URL apache-airflow	https://airflow.apache.org Upgrade the Chart 1 2 3 4 5 6 7 8 9 10 11 {seilylook} 💎 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace {seilylook} 💎  ~/Development/Devlog   main ±  kubectl get pods -n airflow -o wide NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES airflow-postgresql-0 1/1 Running 0 9m10s 10."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" /><link rel="prev" href="https://seilylook.github.io/posts/infra/kubernetes/projects/create_nodes/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Airflow_on_kubernetes",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/data\/airflow\/projects\/airflow_on_kubernetes\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Data Engineering, Workflow","wordcount":  678 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/data\/airflow\/projects\/airflow_on_kubernetes\/","datePublished": "2024-09-07T16:31:41+09:00","dateModified": "2024-09-07T16:31:41+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/data/airflow/projects/airflow_on_kubernetes/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/data/airflow/projects/airflow_on_kubernetes/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Airflow_on_kubernetes</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-07">2024-09-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;678 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/airflow.png"
+        data-srcset="/images/feature_images/airflow.png, /images/feature_images/airflow.png 1.5x, /images/feature_images/airflow.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/airflow.png"
+        title="/images/feature_images/airflow.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#install-helm-chart">Install Helm chart</a></li>
+    <li><a href="#install-the-chart">Install the Chart</a></li>
+    <li><a href="#upgrade-the-chart">Upgrade the Chart</a>
+      <ul>
+        <li><a href="#forward-the-service">Forward the service</a></li>
+      </ul>
+    </li>
+    <li><a href="#load-codedags-to-airflow">Load code/Dags to Airflow</a>
+      <ul>
+        <li><a href="#add-a-test-python-dag-to-github">Add a test python DAG to github</a></li>
+        <li><a href="#synchronize-to-github">Synchronize to Github</a></li>
+        <li><a href="#check-the-airflow-webserver">Check the Airflow webserver</a></li>
+        <li><a href="#add-dependencies-to-airflow-image">Add dependencies to airflow image</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="install-helm-chart">Install Helm chart</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install helm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="install-the-chart">Install the Chart</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎minikube start
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎helm repo add apache-airflow https://airflow.apache.org
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;apache-airflow&#34;</span> has been added to your repositories
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 helm repo list
+</span></span><span class="line"><span class="cl">NAME          	URL
+</span></span><span class="line"><span class="cl">apache-airflow	https://airflow.apache.org
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="upgrade-the-chart">Upgrade the Chart</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎   ~/Development/Devlog   main ±  kubectl get pods -n airflow -o wide
+</span></span><span class="line"><span class="cl">NAME                                READY   STATUS    RESTARTS      AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+</span></span><span class="line"><span class="cl">airflow-postgresql-0                1/1     Running   <span class="m">0</span>             9m10s   10.244.0.9    minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">airflow-redis-0                     1/1     Running   <span class="m">0</span>             9m10s   10.244.0.8    minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">airflow-scheduler-d4f745f94-bb8f6   2/2     Running   <span class="m">0</span>             9m10s   10.244.0.5    minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">airflow-statsd-b45f54fb4-5crk8      1/1     Running   <span class="m">0</span>             9m10s   10.244.0.4    minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">airflow-triggerer-0                 2/2     Running   <span class="m">0</span>             9m10s   10.244.0.11   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">airflow-webserver-5664c7c9-sld8x    0/1     Running   <span class="m">1</span> <span class="o">(</span>13s ago<span class="o">)</span>   9m10s   10.244.0.6    minikube   &lt;none&gt;           &lt;none&gt;
+</span></span><span class="line"><span class="cl">airflow-worker-0                    2/2     Running   <span class="m">0</span>             9m10s   10.244.0.10   minikube   &lt;none&gt;           &lt;none&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To access the Airflow UI in browser we now need to port forward the <code>airflow-webserver</code>. We will use port <code>8080</code></p>
+<h3 id="forward-the-service">Forward the service</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎   ~/Development/Devlog   main ±  kubectl get svc -n airflow         
+</span></span><span class="line"><span class="cl">NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>             AGE
+</span></span><span class="line"><span class="cl">airflow-postgresql      ClusterIP   10.107.100.22   &lt;none&gt;        5432/TCP            10m
+</span></span><span class="line"><span class="cl">airflow-postgresql-hl   ClusterIP   None            &lt;none&gt;        5432/TCP            10m
+</span></span><span class="line"><span class="cl">airflow-redis           ClusterIP   10.110.71.17    &lt;none&gt;        6379/TCP            10m
+</span></span><span class="line"><span class="cl">airflow-statsd          ClusterIP   10.99.35.197    &lt;none&gt;        9125/UDP,9102/TCP   10m
+</span></span><span class="line"><span class="cl">airflow-triggerer       ClusterIP   None            &lt;none&gt;        8794/TCP            10m
+</span></span><span class="line"><span class="cl">airflow-webserver       ClusterIP   10.97.221.13    &lt;none&gt;        8080/TCP            10m
+</span></span><span class="line"><span class="cl">airflow-worker          ClusterIP   None            &lt;none&gt;        8793/TCP            10m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">✘ <span class="o">{</span>seilylook<span class="o">}</span> 💎   ~/Development/Devlog   main ±  kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow
+</span></span><span class="line"><span class="cl">Forwarding from 127.0.0.1:8080 -&gt; <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">Forwarding from <span class="o">[</span>::1<span class="o">]</span>:8080 -&gt; <span class="m">8080</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now head into browser to <code>localhost:8080</code> and we can see the <strong>Airflow UI</strong>.</p>
+<h2 id="load-codedags-to-airflow">Load code/Dags to Airflow</h2>
+<p>Now we have Airflow running locally on Kubernetes, it is time to add your user code(a collection of python defined data pipeline). We are going to use a common methodology known as <strong>Gitsync</strong> which allows us to define a git repository that will be sync periodically with our application</p>
+<h3 id="add-a-test-python-dag-to-github">Add a test python DAG to github</h3>
+<ol>
+<li>
+<p>Add test python DAG code in git repo: <a href="https://github.com/rarup1/airflow-demo-dags.git" target="_blank" rel="noopener noreffer ">https://github.com/rarup1/airflow-demo-dags.git</a></p>
+</li>
+<li>
+<p>Load <code>values.yaml</code> and change the <code>gitSync</code></p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Enter to the test dags folder</span>
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 <span class="nb">cd</span> airflow_demo_dags
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># GET the values.yaml using Helm chart</span>
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 helm show values apache-airflow/airflow &gt; values.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># airflow-demo-dags/values.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gitSync</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># git repo clone url</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># ssh example: git@github.com:apache/airflow.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># https example: https://github.com/apache/airflow.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/seilylook/Airflow_Demo_DAGS.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l">HEAD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># The git revision (branch, tag, or hash) to check out, v4 only</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ref</span><span class="p">:</span><span class="w"> </span><span class="l">v2-2-stable</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depth</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># the number of consecutive failures allowed before aborting</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxFailures</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># subpath within the repo where dags are located</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># should be &#34;&#34; if dags are at repo root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>enabled: true</strong></p>
+<p><strong>repo: &lt;DEMO_DAG_REPOSITRY&gt;</strong></p>
+<p><strong>subPath: &ldquo;&rdquo;</strong> (if python code in in /root/)</p>
+<h3 id="synchronize-to-github">Synchronize to Github</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 helm upgrade --install airflow apache-airflow/airflow -n airflow -f values.yaml --debug
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="check-the-airflow-webserver">Check the Airflow webserver</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="add-dependencies-to-airflow-image">Add dependencies to airflow image</h3>
+<ol>
+<li>Add arequirements.txt file with the Airflow provider for dbt (as an example):</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">apache-airflow-providers-dbt-cloud==3.6.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Add a <code>Dockerfile</code> file:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">FROM apache/airflow:2.7.1-python3.11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">COPY requirements.txt .</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">RUN pip install -r requirements.txt</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Build the docker image and add to minikube:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 docker build -t my-airflow:1.0.0 .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 minikube image load my-airflow:1.0.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Update <code>values.yaml</code>:</li>
+</ol>
+<p>In order to our minikube k8s Airflow deployment to pick up the change in image(including our dbt provider) we need to amend our <code>values.yaml</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Default airflow repository -- overridden by all the specific images below</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">defaultAirflowRepository</span><span class="p">:</span><span class="w"> </span><span class="l">my-airflow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Default airflow tag to deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">defaultAirflowTag</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1.0.0&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Push to Git</strong></p>
+<ol start="5">
+<li>``helm upgrade`</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 helm upgrade --install airflow apache-airflow/airflow -n airflow -f values.yaml --debug
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-09-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/data/airflow/projects/airflow_on_kubernetes/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" data-title="Airflow_on_kubernetes" data-hashtags="Data Engineering,Workflow"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" data-hashtag="Data Engineering"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" data-title="Airflow_on_kubernetes"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" data-title="Airflow_on_kubernetes"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" data-title="Airflow_on_kubernetes" data-image="/images/feature_images/airflow.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-engineering/">Data Engineering</a>,&nbsp;<a href="/tags/workflow/">Workflow</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/infra/kubernetes/projects/create_nodes/" class="prev" rel="prev" title="Create_nodes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Create_nodes</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
