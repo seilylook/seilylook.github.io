@@ -4,9 +4,19 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Crawler</title>
+    <link>https://seilylook.github.io/posts/design/crawler/</link>
+    <pubDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/design/crawler/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/crawler.png" referrerpolicy="no-referrer">
+            </div>Chapter 9: Design a web crawler A web crawler is known as a robot or spider. It is widely used by search engines to discover new or updated content on the web. Content can be a web page, an image, a video, a PDF file, etc. A web crawler starts by collecting a few web pages and then follows links on those pages to collect new content.]]></description>
+</item>
+<item>
     <title>Airflow_on_kubernetes</title>
     <link>https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/</link>
     <pubDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</pubDate>
@@ -105,16 +115,6 @@ Source : https://aws.amazon.com/ko/what-is/langchain/
                 <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
             </div>1. RBAC(Role-Based Access Control) Service Account 생성 서비스 어카운트는 파드가 쿠버네티스 API와 통신하기 위해 파드에 할당되는 하나의 ID이다. 파드 생성 시 서비스 어카운트를 할당하고, 해당 서비스 어카운트에 적절한 권한을 부여하여 쿠버네티스 API서버와 통신할 수 있다.
 1 kubectl create serviceaccount pod-reader 쿠버네티스는 역할 기반으로 API 접근을 관리한다. 역할을 부여하기 위한 대상으로 앞서 서비스어카운트를 만들었고, 실제 역할을 만들어 서비스어카운트에 할당하는 것을 바인딩(Binding)이라고 한다. 역할은 Role, ClusterRole 두 가지로 분류된다. Role은 특정 네임스페이스에 속하게 되며, ClusterRole은 전체 클러스터에 고유한 역할이 된다.]]></description>
-</item>
-<item>
-    <title>Pandas</title>
-    <link>https://seilylook.github.io/posts/library/python/pandas/</link>
-    <pubDate>Sat, 27 Jul 2024 16:20:50 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/library/python/pandas/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/pandas.png" referrerpolicy="no-referrer">
-            </div>]]></description>
 </item>
 </channel>
 </rss>

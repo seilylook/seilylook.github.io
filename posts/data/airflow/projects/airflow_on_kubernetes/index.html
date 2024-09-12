@@ -9,13 +9,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-09-07T16:31:41+09:00" />
-<meta property="article:modified_time" content="2024-09-07T16:31:41+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-09-07T18:18:02+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Airflow_on_kubernetes"/>
 <meta name="twitter:description" content="Install Helm chart 1 brew install helm Install the Chart 1 2 3 4 5 6 7 8 9 {seilylook} 💎minikube start {seilylook} 💎helm repo add apache-airflow https://airflow.apache.org &#34;apache-airflow&#34; has been added to your repositories {seilylook} 💎 helm repo list NAME URL apache-airflow	https://airflow.apache.org Upgrade the Chart 1 2 3 4 5 6 7 8 9 10 11 {seilylook} 💎 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace {seilylook} 💎  ~/Development/Devlog   main ±  kubectl get pods -n airflow -o wide NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES airflow-postgresql-0 1/1 Running 0 9m10s 10."/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" /><link rel="prev" href="https://seilylook.github.io/posts/infra/kubernetes/projects/create_nodes/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" /><link rel="prev" href="https://seilylook.github.io/posts/infra/kubernetes/projects/create_nodes/" /><link rel="next" href="https://seilylook.github.io/posts/design/crawler/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -27,7 +27,7 @@
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/data\/airflow\/projects\/airflow_on_kubernetes\/"
         },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Data Engineering, Workflow","wordcount":  678 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/data\/airflow\/projects\/airflow_on_kubernetes\/","datePublished": "2024-09-07T16:31:41+09:00","dateModified": "2024-09-07T16:31:41+09:00","publisher": {
+        "url": "https:\/\/seilylook.github.io\/posts\/data\/airflow\/projects\/airflow_on_kubernetes\/","datePublished": "2024-09-07T16:31:41+09:00","dateModified": "2024-09-07T18:18:02+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -419,7 +419,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-09-07</span>
+                <span>Updated on 2024-09-07&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/59f33f2819cab948bf6125e5247fd2817ed29cae" target="_blank" title="commit by seilylook(seilylook@naver.com) 59f33f2819cab948bf6125e5247fd2817ed29cae: add: airflow on kubernetes">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>59f33f2</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
@@ -438,7 +439,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/infra/kubernetes/projects/create_nodes/" class="prev" rel="prev" title="Create_nodes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Create_nodes</a></div>
+    <div class="post-nav"><a href="/posts/infra/kubernetes/projects/create_nodes/" class="prev" rel="prev" title="Create_nodes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Create_nodes</a>
+            <a href="/posts/design/crawler/" class="next" rel="next" title="Crawler">Crawler<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.

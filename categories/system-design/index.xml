@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>System Design - Category - Devlog</title>
+        <link>https://seilylook.github.io/categories/system-design/</link>
+        <description>System Design - Category - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/system-design/" rel="self" type="application/rss+xml" /><item>
+    <title>Crawler</title>
+    <link>https://seilylook.github.io/posts/design/crawler/</link>
+    <pubDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/design/crawler/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/crawler.png" referrerpolicy="no-referrer">
+            </div>Chapter 9: Design a web crawler A web crawler is known as a robot or spider. It is widely used by search engines to discover new or updated content on the web. Content can be a web page, an image, a video, a PDF file, etc. A web crawler starts by collecting a few web pages and then follows links on those pages to collect new content.]]></description>
+</item>
+</channel>
+</rss>
