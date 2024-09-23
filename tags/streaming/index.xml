@@ -12,9 +12,8 @@
     <guid>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/feature_images/kafka.png" referrerpolicy="no-referrer">
-            </div>Docker Image 1 2 3 4 5 6 7 8 9 FROM apache/airflow:2.10.2 USER airflow RUN curl -O &#39;https://bootstrap.pypa.io/get-pip.py&#39; &amp;&amp; \ python3 get-pip.py --user COPY requirements.txt /requirements.txt RUN pip install --user -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo We will use this Dockerfile to build an image which is install airflow, requirements.txt.
-In docker-compose.yaml, we build the container install-requirements.
-After creating the Dockerfile, we can follow the instructions that Official Airflow Run Airflow on Docker]]></description>
+            </div>Configurations Docker Image We use official Airflow image. We have to install the necessary libraries and packages into the Airflow container. For that, we have to create a Dockerfile
+1 2 3 4 5 6 FROM apache/airflow:2.10.2 USER airflow COPY requirements.txt /requirements.txt RUN pip install -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo This Dockerfile will be used to install airflow:2.10.2. Then, it will install all necessary libraries in the requirements.]]></description>
 </item>
 </channel>
 </rss>
