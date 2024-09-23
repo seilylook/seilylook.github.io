@@ -4,20 +4,28 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Data Engineering</title>
+    <link>https://seilylook.github.io/tags/data-engineering/</link>
+    <pubDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Streaming</title>
+    <link>https://seilylook.github.io/tags/streaming/</link>
+    <pubDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/streaming/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Crawler</title>
     <link>https://seilylook.github.io/tags/crawler/</link>
     <pubDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/crawler/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Data Engineering</title>
-    <link>https://seilylook.github.io/tags/data-engineering/</link>
-    <pubDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -74,14 +82,6 @@
     <pubDate>Fri, 02 Aug 2024 11:08:57 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/rag/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Pandas</title>
-    <link>https://seilylook.github.io/tags/pandas/</link>
-    <pubDate>Sat, 27 Jul 2024 16:20:50 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/pandas/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

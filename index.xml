@@ -4,9 +4,21 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Email Validation</title>
+    <link>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</link>
+    <pubDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kafka.png" referrerpolicy="no-referrer">
+            </div>Docker Image 1 2 3 4 5 6 7 8 9 FROM apache/airflow:2.10.2 USER airflow RUN curl -O &#39;https://bootstrap.pypa.io/get-pip.py&#39; &amp;&amp; \ python3 get-pip.py --user COPY requirements.txt /requirements.txt RUN pip install --user -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo We will use this Dockerfile to build an image which is install airflow, requirements.txt.
+In docker-compose.yaml, we build the container install-requirements.
+After creating the Dockerfile, we can follow the instructions that Official Airflow Run Airflow on Docker]]></description>
+</item>
+<item>
     <title>Crawler</title>
     <link>https://seilylook.github.io/posts/design/crawler/</link>
     <pubDate>Thu, 12 Sep 2024 14:27:37 &#43;0900</pubDate>
@@ -104,17 +116,6 @@ Source : https://aws.amazon.com/ko/what-is/langchain/
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/ai/rag/1.jpg" referrerpolicy="no-referrer">
             </div>Introduction RAG(Retrieval-Augmented Generation)는 대규모 언어 모델의 출력을 최적화하여 응답을 생성하기 전에 학습 데이터 소스 외부의 신뢰할 수 있는 지식 베이스를 참조하도록 하는 프로세스입니다. 대규모 언어 모델(LLM)은 방대한 양의 데이터를 기반으로 학습되며 수십억 개의 매개 변수를 사용하여 질문에 대한 답변, 언어 번역, 문장 완성과 같은 작업에 대한 독창적인 결과를 생성합니다. RAG는 이미 강력한 LLM의 기능을 특정 도메인이나 조직의 내부 지식 기반으로 확장하므로 모델을 다시 교육할 필요가 없습니다. 이는 LLM 결과를 개선하여 다양한 상황에서 관련성, 정확성 및 유용성을 유지하기 위한 비용 효율적인 접근 방식입니다.]]></description>
-</item>
-<item>
-    <title>Past Exam Questions</title>
-    <link>https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/</link>
-    <pubDate>Mon, 29 Jul 2024 17:05:59 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/kubernetes/cka/past_exam/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/kubernetes.png" referrerpolicy="no-referrer">
-            </div>1. RBAC(Role-Based Access Control) Service Account 생성 서비스 어카운트는 파드가 쿠버네티스 API와 통신하기 위해 파드에 할당되는 하나의 ID이다. 파드 생성 시 서비스 어카운트를 할당하고, 해당 서비스 어카운트에 적절한 권한을 부여하여 쿠버네티스 API서버와 통신할 수 있다.
-1 kubectl create serviceaccount pod-reader 쿠버네티스는 역할 기반으로 API 접근을 관리한다. 역할을 부여하기 위한 대상으로 앞서 서비스어카운트를 만들었고, 실제 역할을 만들어 서비스어카운트에 할당하는 것을 바인딩(Binding)이라고 한다. 역할은 Role, ClusterRole 두 가지로 분류된다. Role은 특정 네임스페이스에 속하게 되며, ClusterRole은 전체 클러스터에 고유한 역할이 된다.]]></description>
 </item>
 </channel>
 </rss>

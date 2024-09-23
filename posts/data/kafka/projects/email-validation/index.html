@@ -4,30 +4,34 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Crawler - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Crawler" />
-<meta property="og:description" content="Chapter 9: Design a web crawler A web crawler is known as a robot or spider. It is widely used by search engines to discover new or updated content on the web. Content can be a web page, an image, a video, a PDF file, etc. A web crawler starts by collecting a few web pages and then follows links on those pages to collect new content." />
+        <title>Email Validation - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Email Validation" />
+<meta property="og:description" content="Docker Image 1 2 3 4 5 6 7 8 9 FROM apache/airflow:2.10.2 USER airflow RUN curl -O &#39;https://bootstrap.pypa.io/get-pip.py&#39; &amp;&amp; \ python3 get-pip.py --user COPY requirements.txt /requirements.txt RUN pip install --user -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo We will use this Dockerfile to build an image which is install airflow, requirements.txt.
+In docker-compose.yaml, we build the container install-requirements.
+After creating the Dockerfile, we can follow the instructions that Official Airflow Run Airflow on Docker" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://seilylook.github.io/posts/design/crawler/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-09-12T14:27:37+09:00" />
-<meta property="article:modified_time" content="2024-09-12T14:32:47+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="og:url" content="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-23T14:42:41+09:00" />
+<meta property="article:modified_time" content="2024-09-23T14:42:41+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Crawler"/>
-<meta name="twitter:description" content="Chapter 9: Design a web crawler A web crawler is known as a robot or spider. It is widely used by search engines to discover new or updated content on the web. Content can be a web page, an image, a video, a PDF file, etc. A web crawler starts by collecting a few web pages and then follows links on those pages to collect new content."/>
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Email Validation"/>
+<meta name="twitter:description" content="Docker Image 1 2 3 4 5 6 7 8 9 FROM apache/airflow:2.10.2 USER airflow RUN curl -O &#39;https://bootstrap.pypa.io/get-pip.py&#39; &amp;&amp; \ python3 get-pip.py --user COPY requirements.txt /requirements.txt RUN pip install --user -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo We will use this Dockerfile to build an image which is install airflow, requirements.txt.
+In docker-compose.yaml, we build the container install-requirements.
+After creating the Dockerfile, we can follow the instructions that Official Airflow Run Airflow on Docker"/>
 <meta name="application-name" content="seilylook">
-<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/design/crawler/" /><link rel="prev" href="https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/" /><link rel="next" href="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" /><link rel="prev" href="https://seilylook.github.io/posts/design/crawler/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Crawler",
+        "headline": "Email Validation",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/seilylook.github.io\/posts\/design\/crawler\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Crawler","wordcount":  67 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/design\/crawler\/","datePublished": "2024-09-12T14:27:37+09:00","dateModified": "2024-09-12T14:32:47+09:00","publisher": {
+            "@id": "https:\/\/seilylook.github.io\/posts\/data\/kafka\/projects\/email-validation\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Data Engineering, Streaming","wordcount":  111 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/data\/kafka\/projects\/email-validation\/","datePublished": "2024-09-23T14:42:41+09:00","dateModified": "2024-09-23T14:42:41+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -58,7 +62,7 @@
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
                     <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/design/crawler/" selected>English</option></select>
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/data/kafka/projects/email-validation/" selected>English</option></select>
                 </a></div>
         </div>
     </div>
@@ -92,7 +96,7 @@
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
                     <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/posts/design/crawler/" selected>English</option></select>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/data/kafka/projects/email-validation/" selected>English</option></select>
                 </a></div>
     </div>
 </header><div class="search-dropdown desktop">
@@ -104,51 +108,100 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Crawler</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/system-design/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>System Design</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-12">2024-09-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;67 words&nbsp;
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Email Validation</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kafka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kafka</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-23">2024-09-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;111 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/feature_images/crawler.png"
-        data-srcset="/images/feature_images/crawler.png, /images/feature_images/crawler.png 1.5x, /images/feature_images/crawler.png 2x"
+        data-src="/images/feature_images/kafka.png"
+        data-srcset="/images/feature_images/kafka.png, /images/feature_images/kafka.png 1.5x, /images/feature_images/kafka.png 2x"
         data-sizes="auto"
-        alt="/images/feature_images/crawler.png"
-        title="/images/feature_images/crawler.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/feature_images/kafka.png"
+        title="/images/feature_images/kafka.png" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><h1 id="chapter-9-design-a-web-crawler">Chapter 9: Design a web crawler</h1>
-<p>A web crawler is known as a robot or spider. It is widely used by search engines to discover new or updated content on the web. Content can be a web page, an image, a video, a PDF file, etc. A web crawler starts by collecting a few web pages and then follows links on those pages to collect new content.</p>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker-image">Docker Image</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="docker-image">Docker Image</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-docker" data-lang="docker"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> apache/airflow:2.10.2</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">USER</span><span class="s"> airflow</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> curl -O <span class="s1">&#39;https://bootstrap.pypa.io/get-pip.py&#39;</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    python3 get-pip.py --user<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> requirements.txt /requirements.txt<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> pip install --user -r /requirements.txt<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">confluent-kafka
+</span></span><span class="line"><span class="cl">cassandra-driver
+</span></span><span class="line"><span class="cl">pymongo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We will use this <strong>Dockerfile</strong> to build an image which is install airflow, requirements.txt.</p>
+<p>In <strong>docker-compose.yaml</strong>, we build the container <strong>install-requirements</strong>.</p>
+<p>After creating the Dockerfile, we can follow the instructions that <a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#fetching-docker-compose-yaml" target="_blank" rel="noopener noreffer ">Official Airflow Run Airflow on Docker</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -LfO <span class="s1">&#39;https://airflow.apache.org/docs/apache-airflow/2.10.2/docker-compose.yaml&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After obtaining the docker-compose file, we are going to modify that before starting the services. The first thing we have to do is add the following container under the <strong>services</strong> section.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-09-12&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/230ed5438c959a8f3745cdb352a7d5c00e31fa4b" target="_blank" title="commit by seilylook(seilylook@naver.com) 230ed5438c959a8f3745cdb352a7d5c00e31fa4b: chapter 9 init commit">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>230ed54</a></span>
+                <span>Updated on 2024-09-23</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/design/crawler/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/posts/data/kafka/projects/email-validation/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/design/crawler/" data-title="Crawler" data-hashtags="Crawler"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/design/crawler/" data-hashtag="Crawler"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/design/crawler/" data-title="Crawler"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/design/crawler/" data-title="Crawler"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/design/crawler/" data-title="Crawler" data-image="/images/feature_images/crawler.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" data-title="Email Validation" data-hashtags="Data Engineering,Streaming"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" data-hashtag="Data Engineering"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" data-title="Email Validation"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" data-title="Email Validation"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" data-title="Email Validation" data-image="/images/feature_images/kafka.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/crawler/">Crawler</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-engineering/">Data Engineering</a>,&nbsp;<a href="/tags/streaming/">Streaming</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/data/airflow/projects/airflow_on_kubernetes/" class="prev" rel="prev" title="Airflow_on_kubernetes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Airflow_on_kubernetes</a>
-            <a href="/posts/data/kafka/projects/email-validation/" class="next" rel="next" title="Email Validation">Email Validation<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/design/crawler/" class="prev" rel="prev" title="Crawler"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Crawler</a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.

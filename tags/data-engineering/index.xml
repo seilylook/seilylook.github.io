@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/tags/data-engineering/</link>
         <description>Data Engineering - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-engineering/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-engineering/" rel="self" type="application/rss+xml" /><item>
+    <title>Email Validation</title>
+    <link>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</link>
+    <pubDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kafka.png" referrerpolicy="no-referrer">
+            </div>Docker Image 1 2 3 4 5 6 7 8 9 FROM apache/airflow:2.10.2 USER airflow RUN curl -O &#39;https://bootstrap.pypa.io/get-pip.py&#39; &amp;&amp; \ python3 get-pip.py --user COPY requirements.txt /requirements.txt RUN pip install --user -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo We will use this Dockerfile to build an image which is install airflow, requirements.txt.
+In docker-compose.yaml, we build the container install-requirements.
+After creating the Dockerfile, we can follow the instructions that Official Airflow Run Airflow on Docker]]></description>
+</item>
+<item>
     <title>Airflow_on_kubernetes</title>
     <link>https://seilylook.github.io/posts/data/airflow/projects/airflow_on_kubernetes/</link>
     <pubDate>Sat, 07 Sep 2024 16:31:41 &#43;0900</pubDate>
@@ -117,16 +129,6 @@ Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler 
                 <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
             </div>Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
 Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
-</item>
-<item>
-    <title>Data_frame_api</title>
-    <link>https://seilylook.github.io/posts/data/spark/data_frame_api/</link>
-    <pubDate>Sat, 20 Jul 2024 16:45:40 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/spark/data_frame_api/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
-            </div>DataFrame Transformations Selecting Columns Renaming Columns Change Columns data type Adding Columns to a DataFrame Removing Columns from a DataFrame Basics Arithmetic with DataFrame Apache Spark Architecture: DataFrame Immutability How to filter a DataFrame Apache Spark Architecture: Narrow Transformations Dropping Rows How to Drop rows and columns Handling NULL Values I - Null Functions 1 2 3 4 5 6 7 Dfn = customerDf.selectExpr( &#34;salutation&#34;, &#34;firstname&#34;, &#34;lastname&#34;, &#34;email_address&#34;, &#34;year(birthdate) birthyear&#34; ) salutation firstname lastname email_address birthyear null James null james@efsefa.]]></description>
 </item>
 </channel>
 </rss>
