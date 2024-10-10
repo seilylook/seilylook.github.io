@@ -4,7 +4,22 @@
         <link>https://seilylook.github.io/tags/data-engineering/</link>
         <description>Data Engineering - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-engineering/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/data-engineering/" rel="self" type="application/rss+xml" /><item>
+    <title>Configuration</title>
+    <link>https://seilylook.github.io/posts/data/kafka/configuration/</link>
+    <pubDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/kafka/configuration/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kafka.png" referrerpolicy="no-referrer">
+            </div>Kafka with Zookeeper Install 1 brew install kafka Homebrew&rsquo;s default installation path will differ based on the chips: Macs with Apple Silicon will install kafka under /opt/homebrew/Cellar.
+Binaries and scrips will be in /opt/homebrew/bin
+Kafka configurations will be in /opt/homebrew/etc/kafka
+Zookeeper configurations will be in /opt/homebrew/etc/zookeeper
+The log.dirs config(the location of kafka data) will be set to /opt/homebrew/var/lib/kafka-logs
+Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starting Kafka, Zookeeper has to be started.]]></description>
+</item>
+<item>
     <title>Email Validation</title>
     <link>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</link>
     <pubDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</pubDate>
@@ -117,17 +132,6 @@ Directed Acyclic Graph. A DAG is an acyclic graph produced by the DAG scheduler 
                 <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
             </div>Partition Pruning in Spark In standard database pruning means that the optimizer will avoid reading files that cannot contain the data that you are looking for. For example,
 1 2 3 SELECT * FROM students WHERE subject = &#39;English&#39;; In this simple query, we are trying to match and identify records in the Students table that belong to subject English. This translates into a simple form that is a filter on top of a scan which means whole data gets scanned first and then filtered out according to the condition.]]></description>
-</item>
-<item>
-    <title>Dependency</title>
-    <link>https://seilylook.github.io/posts/data/spark/dependency/</link>
-    <pubDate>Sat, 20 Jul 2024 16:45:54 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/spark/dependency/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/spark.webp" referrerpolicy="no-referrer">
-            </div>Introduction Transformations are operations on RDDs, Dataframes, or Dataset, that produce new RDDs, Dataframes, or Datasets. Transformations are lazy evaluated, which means they are not executed until an action is called.
-Spark uses transformation to build a DAG(Directed Acyclic Graph) of computation that represents the sequence of steps required to compute the final result. Transformations can be categorized as either Narrow or Wide based on whether their dependency on input data partitions.]]></description>
 </item>
 </channel>
 </rss>

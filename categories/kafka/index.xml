@@ -4,7 +4,22 @@
         <link>https://seilylook.github.io/categories/kafka/</link>
         <description>Kafka - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/kafka/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/kafka/" rel="self" type="application/rss+xml" /><item>
+    <title>Configuration</title>
+    <link>https://seilylook.github.io/posts/data/kafka/configuration/</link>
+    <pubDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/data/kafka/configuration/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/kafka.png" referrerpolicy="no-referrer">
+            </div>Kafka with Zookeeper Install 1 brew install kafka Homebrew&rsquo;s default installation path will differ based on the chips: Macs with Apple Silicon will install kafka under /opt/homebrew/Cellar.
+Binaries and scrips will be in /opt/homebrew/bin
+Kafka configurations will be in /opt/homebrew/etc/kafka
+Zookeeper configurations will be in /opt/homebrew/etc/zookeeper
+The log.dirs config(the location of kafka data) will be set to /opt/homebrew/var/lib/kafka-logs
+Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starting Kafka, Zookeeper has to be started.]]></description>
+</item>
+<item>
     <title>Email Validation</title>
     <link>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</link>
     <pubDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</pubDate>
