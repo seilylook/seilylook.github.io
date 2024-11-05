@@ -19,7 +19,7 @@ Binaries and scrips will be in /opt/homebrew/bin
 Kafka configurations will be in /opt/homebrew/etc/kafka
 Zookeeper configurations will be in /opt/homebrew/etc/zookeeper
 The log.dirs config(the location of kafka data) will be set to /opt/homebrew/var/lib/kafka-logs
-Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starting Kafka, Zookeeper has to be started.]]></description>
+Setup the $PATH environment variable In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(~/.]]></description>
 </item>
 <item>
     <title>Email Validation</title>

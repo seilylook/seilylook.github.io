@@ -10,11 +10,11 @@ Binaries and scrips will be in /opt/homebrew/bin
 Kafka configurations will be in /opt/homebrew/etc/kafka
 Zookeeper configurations will be in /opt/homebrew/etc/zookeeper
 The log.dirs config(the location of kafka data) will be set to /opt/homebrew/var/lib/kafka-logs
-Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starting Kafka, Zookeeper has to be started." />
+Setup the $PATH environment variable In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(~/." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/data/kafka/configuration/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-10-10T12:14:40+09:00" />
-<meta property="article:modified_time" content="2024-10-10T13:31:54+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-11-05T14:00:05+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Configuration"/>
@@ -23,7 +23,7 @@ Binaries and scrips will be in /opt/homebrew/bin
 Kafka configurations will be in /opt/homebrew/etc/kafka
 Zookeeper configurations will be in /opt/homebrew/etc/zookeeper
 The log.dirs config(the location of kafka data) will be set to /opt/homebrew/var/lib/kafka-logs
-Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starting Kafka, Zookeeper has to be started."/>
+Setup the $PATH environment variable In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(~/."/>
 <meta name="application-name" content="seilylook">
 <meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/data/kafka/configuration/" /><link rel="prev" href="https://seilylook.github.io/posts/data/kafka/projects/email-validation/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -36,8 +36,8 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/data\/kafka\/configuration\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Data Engineering, Streaming","wordcount":  335 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/data\/kafka\/configuration\/","datePublished": "2024-10-10T12:14:40+09:00","dateModified": "2024-10-10T13:31:54+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Data Engineering, Streaming","wordcount":  332 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/data\/kafka\/configuration\/","datePublished": "2024-10-10T12:14:40+09:00","dateModified": "2024-11-05T14:00:05+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -116,7 +116,7 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Configuration</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kafka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kafka</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-10">2024-10-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;335 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-10">2024-10-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;332 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -133,13 +133,13 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#install">Install</a></li>
+    <li><a href="#setup-the-path-environment-variable">Setup the $PATH environment variable</a></li>
     <li><a href="#start-zookeeper">Start Zookeeper</a></li>
     <li><a href="#start-kafka">Start Kafka</a></li>
   </ul>
 
   <ul>
     <li><a href="#start-kafka-1">Start Kafka</a></li>
-    <li><a href="#setup-the-path-environment-variable">Setup the $PATH environment variable</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="kafka-with-zookeeper">Kafka with Zookeeper</h1>
@@ -167,7 +167,20 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
 <p>The <code>log.dirs</code> config(the location of kafka data) will be set to <code>/opt/homebrew/var/lib/kafka-logs</code></p>
 </li>
 </ul>
-<h2 id="start-zookeeper">Start Zookeeper</h2>
+<h2 id="setup-the-path-environment-variable">Setup the $PATH environment variable</h2>
+<p>In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(<code>~/.zshrc</code>)</p>
+<p><code>PATH=&quot;$PATH:/Users/seilylook/Development/Kafka/kafka_2.13-3.0.0/bin&quot;</code></p>
+<p>This ensures that you can now run the kafka commands without prefixing them</p>
+<p>After reloading the terminal, the following should work from any directory.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kafka-topics.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="start-zookeeper">Start Zookeeper</h2>
 <p>Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starting Kafka, Zookeeper has to be started. There is no need to explicitly install Zookeeper, as it comes included with Apache Kafka.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -213,7 +226,7 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">~/kafka_2.13-3.0.0/bin/kafka-storage.sh random-uuid
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kafka-storage.sh random-uuid
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>This returns a UUID</p>
@@ -223,7 +236,7 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">~/kafka_2.13-3.0.0/bin/kafka-storage.sh format -t &lt;uuid&gt; -c ~/kafka_2.13-3.0.0/config/kraft/server.properties
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kafka-storage.sh format -t &lt;UUID&gt; -c ./Development/Kafka/kafka_2.13-3.8.0/config/kraft/server.properties
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>This will format the directory that is in the <code>log.dirs</code> in the <code>config/kraft/server.properties</code> file (by default <code>/tmp/kraft-combined-logs</code>)</p>
@@ -233,28 +246,7 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">~/kafka_2.13-3.0.0/bin/kafka-server-start.sh ~/kafka_2.13-3.0.0/config/kraft/server.properties
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="setup-the-path-environment-variable">Setup the $PATH environment variable</h2>
-<p>In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(<code>~/.zshrc</code>)</p>
-<p><code>PATH=&quot;$PATH:/Users/seilylook/Development/Kafka/kafka_2.13-3.0.0/bin&quot;</code></p>
-<p>This ensures that you can now run the kafka commands without prefixing them</p>
-<p>After reloading the terminal, the following should work from any directory.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kafka-topics.sh
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kafka-server-start.sh ./Development/Kafka/kafka_2.13-3.0.0/config/kraft/server.properties
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kafka-server-start.sh ./Development/Kafka/kafka_2.13-3.8.0/config/kraft/server.properties
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="kafka-cli">Kafka CLI</h1>
@@ -280,8 +272,8 @@ Start Zookeeper Apache Kafka depends on Zookeeper for cluster management. Hence,
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-10-10&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/635a9724e9fedd12d4bb8831847f4abeb48408af" target="_blank" title="commit by seilylook(seilylook@naver.com) 635a9724e9fedd12d4bb8831847f4abeb48408af: config: kafka installation">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>635a972</a></span>
+                <span>Updated on 2024-11-05&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/960a8045ac94ab9ffb7f7792ec3a77ee8a88eb70" target="_blank" title="commit by seilylook(seilylook@naver.com) 960a8045ac94ab9ffb7f7792ec3a77ee8a88eb70: config: change kafka start directory">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>960a804</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

@@ -19,6 +19,20 @@ Homebrew's default installation path will differ based on the chips: Macs with A
 
 - The `log.dirs` config(the location of kafka data) will be set to `/opt/homebrew/var/lib/kafka-logs`
 
+## Setup the $PATH environment variable
+
+In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(`~/.zshrc`)
+
+`PATH="$PATH:/Users/seilylook/Development/Kafka/kafka_2.13-3.0.0/bin"`
+
+This ensures that you can now run the kafka commands without prefixing them
+
+After reloading the terminal, the following should work from any directory.
+
+```bash
+kafka-topics.sh
+```
+
 ## Start Zookeeper
 
 Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starting Kafka, Zookeeper has to be started. There is no need to explicitly install Zookeeper, as it comes included with Apache Kafka.
@@ -54,7 +68,7 @@ Ensure to keep both terminal windows opened, otherwise you will shut down Kafka 
 The first step is to generate a new ID for your cluster
 
 ```bash
-~/kafka_2.13-3.0.0/bin/kafka-storage.sh random-uuid
+kafka-storage.sh random-uuid
 ```
 
 This returns a UUID
@@ -62,7 +76,7 @@ This returns a UUID
 Next, format your storage directory (replace <uuid> by your UUID obtained above)
 
 ```bash
-~/kafka_2.13-3.0.0/bin/kafka-storage.sh format -t <uuid> -c ~/kafka_2.13-3.0.0/config/kraft/server.properties
+kafka-storage.sh format -t <UUID> -c ./Development/Kafka/kafka_2.13-3.8.0/config/kraft/server.properties
 ```
 
 This will format the directory that is in the `log.dirs` in the `config/kraft/server.properties` file (by default `/tmp/kraft-combined-logs`)
@@ -70,25 +84,7 @@ This will format the directory that is in the `log.dirs` in the `config/kraft/se
 Now you can launch the broker itself in deamon mode by running this command
 
 ```bash
-~/kafka_2.13-3.0.0/bin/kafka-server-start.sh ~/kafka_2.13-3.0.0/config/kraft/server.properties
-```
-
-## Setup the $PATH environment variable
-
-In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(`~/.zshrc`)
-
-`PATH="$PATH:/Users/seilylook/Development/Kafka/kafka_2.13-3.0.0/bin"`
-
-This ensures that you can now run the kafka commands without prefixing them
-
-After reloading the terminal, the following should work from any directory.
-
-```bash
-kafka-topics.sh
-```
-
-```bash
-kafka-server-start.sh ./Development/Kafka/kafka_2.13-3.0.0/config/kraft/server.properties
+kafka-server-start.sh ./Development/Kafka/kafka_2.13-3.8.0/config/kraft/server.properties
 ```
 
 # Kafka CLI
