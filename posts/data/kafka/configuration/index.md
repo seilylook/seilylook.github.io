@@ -32,7 +32,7 @@ Apache Kafka depends on Zookeeper for cluster management. Hence, prior to starti
 **Open another Terminal window** and run the following command from the root of Apache Kafka to start.
 
 ```bash
-/usr/local/bin/kafka-server-start /usr/local/etc/kafka/server.properties
+kafka-server-start.sh ./Development/Kafka/kafka_2.13-3.8.0/config/server.properties
 ```
 
 Ensure to keep both terminal windows opened, otherwise you will shut down Kafka or Zookeeper.
@@ -90,3 +90,17 @@ kafka-topics.sh
 ```bash
 kafka-server-start.sh ./Development/Kafka/kafka_2.13-3.0.0/config/kraft/server.properties
 ```
+
+# Kafka CLI
+
+kafka Topic Management
+
+- Create Kafka Topics
+
+- List Kafka Topics
+
+- Describe Kafka Topics
+
+- Increase Partitions in a Kafka Topic
+
+- Delete Topics
