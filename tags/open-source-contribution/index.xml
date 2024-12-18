@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Spark - Tag - Devlog</title>
-        <link>https://seilylook.github.io/tags/spark/</link>
-        <description>Spark - Tag - Devlog</description>
+        <title>Open Source Contribution - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/open-source-contribution/</link>
+        <description>Open Source Contribution - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/spark/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/open-source-contribution/" rel="self" type="application/rss+xml" /><item>
     <title>First Contribution</title>
     <link>https://seilylook.github.io/posts/contribution/spark/1/</link>
     <pubDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</pubDate>

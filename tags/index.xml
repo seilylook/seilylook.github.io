@@ -4,7 +4,23 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Open Source Contribution</title>
+    <link>https://seilylook.github.io/tags/open-source-contribution/</link>
+    <pubDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/open-source-contribution/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Spark</title>
+    <link>https://seilylook.github.io/tags/spark/</link>
+    <pubDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/spark/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Data Engineering</title>
     <link>https://seilylook.github.io/tags/data-engineering/</link>
     <pubDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Thu, 08 Aug 2024 12:12:39 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/upstarge-ai-lab/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>LangChain</title>
-    <link>https://seilylook.github.io/tags/langchain/</link>
-    <pubDate>Fri, 02 Aug 2024 11:44:04 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/langchain/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>RAG</title>
-    <link>https://seilylook.github.io/tags/rag/</link>
-    <pubDate>Fri, 02 Aug 2024 11:08:57 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/rag/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
