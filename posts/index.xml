@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Dec 2024 13:51:33 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Dec 2024 15:53:09 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Property</title>
+    <link>https://seilylook.github.io/posts/language/python/property/</link>
+    <pubDate>Thu, 19 Dec 2024 15:53:09 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/language/python/property/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction Property는 객체의 속성을 제어할 때 유용하게 사용되는 기능이며 데이터 캡슐화를 위한 방법이다.
+직접 접근 사람의 이름, 나이, 연봉 데이터를 가진 클래스를 만들어본다. 밑의 Person 클래스는 name, age, salary 3개의 필드로 이루어져 있다.
+1 2 3 4 5 class Persion(): def __init__(self, name, age, salary): self._name = name self._age = age self._salary = salary Person 클래스의 인스턴스를 생성한 후, 현재 필드 값을 읽거나 새로운 필드 값을 쓰는 것은 매우 자유롭다.(하지만 이는 지양해야 한다.]]></description>
+</item>
+<item>
     <title>Unittest</title>
     <link>https://seilylook.github.io/posts/language/python/test/unittest/</link>
     <pubDate>Thu, 19 Dec 2024 13:51:33 &#43;0900</pubDate>
@@ -107,18 +119,6 @@ Setup the $PATH environment variable In order to easily access the kafka binarie
             </div>Introduction 학부 시절 Django를 처음 배울 때를 제외하고 간만에 웹 크롤링을 경험할 기회가 생겼다. Beautifulsoup | Selenium을 사용할 수도 있지만 찾아보니 빅데이터 혹은 딥러닝에서 데이터 크롤링을 할 때 Scrapy를 많이 사용한다는 것을 발견하고 이번 기회에 사용해 보기로 마음 먹고 간단한 데이터 크롤링을 구축해봤다.
 설치 및 시작 1 pip install scrapy 1 scrapy startproject arxiv_crawling startproject 명령어를 입력하면 다음과 같이 scrapy가 자동으로 템플릿 폴더를 생성해준다.
 생성된 프로젝트 디렉토리로 이동해서 target url에 맞는 프로젝트를 생성해준다.]]></description>
-</item>
-<item>
-    <title>Docker</title>
-    <link>https://seilylook.github.io/posts/infra/docker/concept/</link>
-    <pubDate>Wed, 14 Aug 2024 12:51:24 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/infra/docker/concept/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/docker.png" referrerpolicy="no-referrer">
-            </div>Introduction 쿠버네티스를 공부했지만 정작 Docker에 대해서는 제대로 공부한 적이 없는 것이 마음에 들지 않아, 이번 기회에 Docker를 완벽히 이해하고 내 것으로 만든다.
-공식 문서를 읽으면서 이해되지 않거나 앞으로 계속 사용해야 할 핵심 코드 위주로 정리해 놓는다.
-Docker Image 생성 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 # Spark Docker # builder step used to download and configure spark environment FROM openjdk:11.]]></description>
 </item>
 </channel>
 </rss>

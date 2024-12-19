@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-12-19T13:51:33&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/categories/</loc><lastmod>2024-12-19T15:53:09&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/categories/"
@@ -11,7 +11,7 @@
                     hreflang="en"
                     href="https://seilylook.github.io/categories/"
                     /></url><url>
-            <loc>https://seilylook.github.io/</loc><lastmod>2024-12-19T13:51:33&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/</loc><lastmod>2024-12-19T15:53:09&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/"
@@ -20,10 +20,11 @@
                     hreflang="en"
                     href="https://seilylook.github.io/"
                     /></url><url>
-            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-12-19T13:51:33&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/python/</loc><lastmod>2024-12-19T13:51:33&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/categories/python/</loc><lastmod>2024-12-19T13:51:33&#43;09:00</lastmod></url><url>
-            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-12-19T13:51:33&#43;09:00</lastmod><xhtml:link
+            <loc>https://seilylook.github.io/posts/</loc><lastmod>2024-12-19T15:53:09&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/language/python/property/</loc><lastmod>2024-12-19T15:53:09&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/python/</loc><lastmod>2024-12-19T15:53:09&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/categories/python/</loc><lastmod>2024-12-19T15:53:09&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/tags/</loc><lastmod>2024-12-19T15:53:09&#43;09:00</lastmod><xhtml:link
                         rel="alternate"
                         hreflang="ko"
                         href="https://seilylook.github.io/ko/tags/"
@@ -32,7 +33,7 @@
                     hreflang="en"
                     href="https://seilylook.github.io/tags/"
                     /></url><url>
-            <loc>https://seilylook.github.io/posts/language/python/test/unittest/</loc><lastmod>2024-12-19T13:51:33&#43;09:00</lastmod></url><url>
+            <loc>https://seilylook.github.io/posts/language/python/test/unittest/</loc><lastmod>2024-12-19T14:47:54&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/language/python/assert/</loc><lastmod>2024-12-19T13:19:13&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/posts/contribution/spark/1/</loc><lastmod>2024-12-18T13:05:26&#43;09:00</lastmod></url><url>
             <loc>https://seilylook.github.io/tags/open-source-contribution/</loc><lastmod>2024-12-18T13:05:26&#43;09:00</lastmod></url><url>
