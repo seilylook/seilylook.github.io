@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/posts/</link>
         <description>All Posts | Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Dec 2024 13:10:35 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Dec 2024 13:51:33 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Unittest</title>
+    <link>https://seilylook.github.io/posts/language/python/test/unittest/</link>
+    <pubDate>Thu, 19 Dec 2024 13:51:33 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/language/python/test/unittest/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction 어떤 언어로 코딩을 하던 단위 테스트는 신뢰할 수 있는 애플리케이션을 개발하기 위해서 필수적으로 습득해야 하는 기술이다. 파이썬에서는 내장 모듈인 unittest를 통해서 다른 라이브러리 없이 비교적 간단하게 단위 테스트를 수행할 수 있다.
+unittest 모듈 unittest 모듈은 Java의 JUnit, Javascript의 Jest 또는 Mocha와 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 언어에 내장되어 있기에 파이써만 설치가 되어 있다면 바로 모듈을 불러와 사용할 수 있다.
+TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다.]]></description>
+</item>
+<item>
     <title>Assert</title>
     <link>https://seilylook.github.io/posts/language/python/assert/</link>
     <pubDate>Thu, 19 Dec 2024 13:10:35 &#43;0900</pubDate>
@@ -107,16 +119,6 @@ Setup the $PATH environment variable In order to easily access the kafka binarie
             </div>Introduction 쿠버네티스를 공부했지만 정작 Docker에 대해서는 제대로 공부한 적이 없는 것이 마음에 들지 않아, 이번 기회에 Docker를 완벽히 이해하고 내 것으로 만든다.
 공식 문서를 읽으면서 이해되지 않거나 앞으로 계속 사용해야 할 핵심 코드 위주로 정리해 놓는다.
 Docker Image 생성 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 # Spark Docker # builder step used to download and configure spark environment FROM openjdk:11.]]></description>
-</item>
-<item>
-    <title>Airflow Executors</title>
-    <link>https://seilylook.github.io/posts/data/airflow/concept/</link>
-    <pubDate>Tue, 13 Aug 2024 11:25:26 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/airflow/concept/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/airflow.png" referrerpolicy="no-referrer">
-            </div>Apache Airflow란 무엇인가? Apache Airflow란? 공식 홈페이지에서 Airflow는 워크 플로를 코드로 작성하고 스케줄링한 뒤 모니터링하는 플랫폼이라고 설명하고 있습니다. 모든 기술이 그렇듯 Airflow에도 당연히 수많은 장점과 단점이 존재합니다. 제가 생각하는 가장 큰 장점은 데이터 조직이라면 필수로 하게 되는 과거 데이터 재처리 작업을 편리하게 수행할 수 있는 점이라고 생각합니다. 이런 이유로 많은 데이터 조직에서 이미 Airflow를 도입해 사용하고 계실 거라고 생각합니다. Airflow는 Apache 인큐베이터 프로젝트로 선정된 지 3년 만에 탑 레벨 프로젝트(Top-Level Project, TLP)로 선정될 만큼 커뮤니티가 빠른 속도로 확장되고 있습니다.]]></description>
 </item>
 </channel>
 </rss>

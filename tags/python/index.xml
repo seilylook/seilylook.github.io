@@ -4,7 +4,19 @@
         <link>https://seilylook.github.io/tags/python/</link>
         <description>Python - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Dec 2024 13:10:35 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Dec 2024 13:51:33 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>Unittest</title>
+    <link>https://seilylook.github.io/posts/language/python/test/unittest/</link>
+    <pubDate>Thu, 19 Dec 2024 13:51:33 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/language/python/test/unittest/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction 어떤 언어로 코딩을 하던 단위 테스트는 신뢰할 수 있는 애플리케이션을 개발하기 위해서 필수적으로 습득해야 하는 기술이다. 파이썬에서는 내장 모듈인 unittest를 통해서 다른 라이브러리 없이 비교적 간단하게 단위 테스트를 수행할 수 있다.
+unittest 모듈 unittest 모듈은 Java의 JUnit, Javascript의 Jest 또는 Mocha와 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 언어에 내장되어 있기에 파이써만 설치가 되어 있다면 바로 모듈을 불러와 사용할 수 있다.
+TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다.]]></description>
+</item>
+<item>
     <title>Assert</title>
     <link>https://seilylook.github.io/posts/language/python/assert/</link>
     <pubDate>Thu, 19 Dec 2024 13:10:35 &#43;0900</pubDate>
