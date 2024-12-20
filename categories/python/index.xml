@@ -4,7 +4,20 @@
         <link>https://seilylook.github.io/categories/python/</link>
         <description>Python - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Thu, 19 Dec 2024 15:53:09 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/python/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 20 Dec 2024 13:20:06 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/python/" rel="self" type="application/rss+xml" /><item>
+    <title>Getattr</title>
+    <link>https://seilylook.github.io/posts/language/python/library/getattr/</link>
+    <pubDate>Fri, 20 Dec 2024 13:20:06 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/language/python/library/getattr/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction 일반적으로 클래스 혹은 패키지 안의 함수를 사용하려면 다음과 같이 사용할 수 있다.
+1 2 3 import numpy as np arr = np.array([1]) # numpy 페키지 안의 array() 함수 호출 getattr(object, &quot;NAME&quot;)이라는 함수는 object 내부의 name이라는 멤버를 반환한다. numpy 패키지에서 array라는 이름의 함수를 사용하고 싶다면 패키지 이름 뒤에 .을 사용해서 함수를 호출할 수 있다. getattr()는 이와 완전히 동일하게 동작한다.
+즉,getattr(np, &quot;array&quot;)([1]) == np.array([1]).
+getattr() 활용 두개가 동일하다면 왜 굳이 사용하는 것일까?]]></description>
+</item>
+<item>
     <title>Property</title>
     <link>https://seilylook.github.io/posts/language/python/property/</link>
     <pubDate>Thu, 19 Dec 2024 15:53:09 &#43;0900</pubDate>
