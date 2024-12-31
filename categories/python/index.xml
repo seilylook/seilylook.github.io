@@ -4,7 +4,17 @@
         <link>https://seilylook.github.io/categories/python/</link>
         <description>Python - Category - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 20 Dec 2024 13:20:06 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/python/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 20 Dec 2024 17:04:30 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/python/" rel="self" type="application/rss+xml" /><item>
+    <title>Environ</title>
+    <link>https://seilylook.github.io/posts/language/python/library/environ/</link>
+    <pubDate>Fri, 20 Dec 2024 17:04:30 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/language/python/library/environ/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Getattr</title>
     <link>https://seilylook.github.io/posts/language/python/library/getattr/</link>
     <pubDate>Fri, 20 Dec 2024 13:20:06 &#43;0900</pubDate>
