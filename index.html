@@ -102,6 +102,23 @@
         alt="/images/profile/profile.png"
         title="/images/profile/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/se-hyeon-kim/" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/library/python/poetry/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/python.png"
+        data-srcset="/images/feature_images/python.png, /images/feature_images/python.png 1.5x, /images/feature_images/python.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/python.png"
+        title="/images/feature_images/python.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/library/python/poetry/">Poetry</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-01-10">2025-01-10</time></span>&nbsp;<span class="post-category">included in <a href="/categories/library/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Library</a></span></div><div class="content">Introduction Poetry는 Python 개발 시 패키지의 의존성을 관리하는 라이브러리이며, 자바의 Maven이나 Gradle과 비슷한 Tool이라고 볼 수 있다. 또한 Virtualenv와 같이 가상 환경 설정을 지원해, 보다 포괄적인 의미의 기능도 있으며 build / publish 같은 배포까지도 가능한 범용적인 Tool로도 사용할 수 있다. pip과는 다르게 .toml, .lock 파일을 생성해 의존성을 관리한다.
+.toml: 프로젝트 의존성읠 메타 데이터 저장
+프로젝트와 의존성들 간의 충돌을 해결해준다. .lock: 설치된 패키지들의 version, hash 저장
+해당 파일을 사용해 프로젝트 의존성을 다른 환경에서도 동일하게 유지할 수 있도록 해준다.</div><div class="post-footer">
+        <a href="/posts/library/python/poetry/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/poetry/">Poetry</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/db/mongodb/spark_connection/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -177,21 +194,6 @@ getattr() 활용 두개가 동일하다면 왜 굳이 사용하는 것일까?</d
 unittest 모듈 unittest 모듈은 Java의 JUnit, Javascript의 Jest 또는 Mocha와 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 언어에 내장되어 있기에 파이써만 설치가 되어 있다면 바로 모듈을 불러와 사용할 수 있다.
 TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다.</div><div class="post-footer">
         <a href="/posts/language/python/test/unittest/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/language/python/assert/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/feature_images/python.png"
-        data-srcset="/images/feature_images/python.png, /images/feature_images/python.png 1.5x, /images/feature_images/python.png 2x"
-        data-sizes="auto"
-        alt="/images/feature_images/python.png"
-        title="/images/feature_images/python.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/language/python/assert/">Assert</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-12-19">2024-12-19</time></span>&nbsp;<span class="post-category">included in <a href="/categories/python/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Python</a></span></div><div class="content">Assert(가정 설정문) assert는 뒤의 조건이 True가 아니면 AssertError를 발생시킨다.
-1 2 3 4 5 6 7 a = 3 assert a == 2 #결과 Traceback (most recent call last): File &#34;&lt;stdin&gt;&#34;, line 1, in &lt;module&gt; AssertionError 왜 assert가 필요할까? 어떤 함수는 성능을 높이기 위해 반드시 정수만을 입력받아 처리하도록 만들 수 있다. 이런 함수를 만들기 위해서는 반드시 함수에 정수만 들어오는지 확인할 필요가 있다. 이를 위해 if문을 사용할 수도 있고 에외 처리를 사용할 수도 있지만 가정 설정문을 사용하는 방법도 있다.</div><div class="post-footer">
-        <a href="/posts/language/python/assert/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

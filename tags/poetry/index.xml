@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Library - Category - Devlog</title>
-        <link>https://seilylook.github.io/categories/library/</link>
-        <description>Library - Category - Devlog</description>
+        <title>Poetry - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/poetry/</link>
+        <description>Poetry - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 10 Jan 2025 17:10:26 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/categories/library/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 10 Jan 2025 17:10:26 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/poetry/" rel="self" type="application/rss+xml" /><item>
     <title>Poetry</title>
     <link>https://seilylook.github.io/posts/library/python/poetry/</link>
     <pubDate>Fri, 10 Jan 2025 17:10:26 &#43;0900</pubDate>
@@ -16,26 +16,6 @@
 .toml: 프로젝트 의존성읠 메타 데이터 저장
 프로젝트와 의존성들 간의 충돌을 해결해준다. .lock: 설치된 패키지들의 version, hash 저장
 해당 파일을 사용해 프로젝트 의존성을 다른 환경에서도 동일하게 유지할 수 있도록 해준다.]]></description>
-</item>
-<item>
-    <title>Pandas</title>
-    <link>https://seilylook.github.io/posts/library/python/pandas/</link>
-    <pubDate>Sat, 27 Jul 2024 16:20:50 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/library/python/pandas/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/pandas.png" referrerpolicy="no-referrer">
-            </div>]]></description>
-</item>
-<item>
-    <title>Numpy</title>
-    <link>https://seilylook.github.io/posts/library/python/numpy/</link>
-    <pubDate>Sat, 27 Jul 2024 16:20:38 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/library/python/numpy/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/numpy.png" referrerpolicy="no-referrer">
-            </div>]]></description>
 </item>
 </channel>
 </rss>
