@@ -1,7 +1,50 @@
 # Spark_connection
 
 
-# Introduction
+## Makefile
+
+```makefile
+.PHONY: build start stop test clean init_mongo
+
+# Image configuration
+IMAGE_NAME = session_2-python-app
+DEFAULT_TAG = latest
+
+# ===========================
+# Export Python dependencies
+# ===========================
+_requirements:
+	@echo "=============================================="
+	@echo "Exporting Python dependencies to requirements.txt..."
+	@echo "=============================================="
+	poetry export -f requirements.txt --output requirements.txt --without-hashes --with dev
+	@echo "\n"
+
+# ============================
+# Build Docker image
+# ============================
+build: _requirements
+	@echo "=============================================="
+	@echo "Building Docker image $(IMAGE_NAME):$(DEFAULT_TAG)..."
+	@echo "=============================================="
+	docker build --no-cache -t $(IMAGE_NAME):$(DEFAULT_TAG) .
+	@echo "\n"
+
+# ============================
+# Start application with Docker Compose
+# ============================
+start: build
+	@echo "========================="
+	@echo "Starting the application..."
+	@echo "========================="
+	docker compose up -d --build
+	@echo "Waiting for MongoDB to start..."
+	@sleep 5
+	@make init_mongo
+	@echo "\n"
+```
+
+# Docker Compose
 
 **Docker Compose** 환경에서 **Spark & MongoDB**를 연결해서 데이터를 저장해보는 실습을 수행해본다. 4일간의 삽질을 기록해본다.
 
@@ -10,59 +53,6 @@
 ```yaml
 version: '3'
 services:
-  spark-master:
-    image: bitnami/spark:latest
-    container_name: spark-master
-    ports:
-      - 4040:8080
-      - 7077:7077
-    environment:
-      - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    networks:
-      - mongodb_network
-
-  spark-worker-a:
-    image: bitnami/spark:latest
-    container_name: spark-worker-a
-    ports:
-      - 4041:8081
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=2g
-      - SPARK_WORKER_CORES=2
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    depends_on:
-      - spark-master
-    networks:
-      - mongodb_network
-
-  spark-worker-b:
-    image: bitnami/spark:latest
-    container_name: spark-worker-b
-    ports:
-      - 4042:8081
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=2g
-      - SPARK_WORKER_CORES=2
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    depends_on:
-      - spark-master
-    networks:
-      - mongodb_network
-
   mongodb:
     image: mongo
     container_name: mongodb
@@ -76,26 +66,6 @@ services:
     networks:
       - mongodb_network
 
-  jupyterlab:
-    image: jupyter/pyspark-notebook:latest
-    container_name: jupyterlab
-    ports:
-      - "8888:8888"
-    volumes:
-      - ./jupyterlab:/home/jovyan/work
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
-      - GRANT_SUDO=yes
-      - PYSPARK_DRIVER_PYTHON=jupyter
-      - PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root'
-      - SPARK_MASTER_HOST=spark-master
-    command: start-notebook.sh --NotebookApp.token="sehyeonkim"
-    depends_on:
-      - spark-master
-    user: "1000"
-    networks:
-      - mongodb_network
-
 volumes:
   data: {}
 
@@ -104,9 +74,64 @@ networks:
     name: mongodb_network
 ```
 
-- **spark-master**: 
+## Init MongoDB Database
 
-## Mongosh User Auth
+FILE PATH=**app/scrips/init_mongo.sh**
+
+```shell
+#!/bin/bash
+
+# 4. MongoDB 초기화 작업 시작
+echo "
+====================================
+Executing MongoDB Initialization
+====================================
+"
+
+# MongoDB 초기화 명령어를 실행 (실행을 위해 /bin/bash 사용)
+docker exec -i -t mongodb /bin/bash -c "mongosh -u rootuser -p rootpass <<EOF
+use test
+
+if (db.getUser(\"testuser\") == null) {
+    db.createUser({
+        \"user\": \"testuser\",
+        \"pwd\": \"testpass\",
+        \"roles\": [{\"role\": \"readWrite\", \"db\": \"test\"}]
+    });
+    print(\"User 'testuser' created successfully.\");
+} else {
+    print(\"User 'testuser' already exists.\");
+}
+
+if (db.getCollectionNames().indexOf(\"students\") === -1) {
+    db.createCollection(\"students\");
+    print(\"Collection 'students' created successfully.\");
+} else {
+    print(\"Collection 'students' already exists.\");
+}
+EOF"
+
+# 7. MongoDB 초기화 완료 확인
+if [ $? -eq 0 ]; then
+    echo "
+====================================
+MongoDB Initialization Complete
+====================================
+"
+else
+    echo "
+====================================
+MongoDB Initialization Failed
+====================================
+"
+    exit 1
+fi
+
+# 8. 이후 프로세스 실행
+exec "$@"
+```
+
+## Check the MongoDB with Mongosh
 
 ```bash
  {seilylook} 🔑 docker exec -i -t mongodb /bin/bash
@@ -152,39 +177,4 @@ admin> show users
     mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
   }
 ]
-```
-
-## Jupyter Notebook
-
-```python
-from pyspark.sql import SparkSession
-
-CONN_URI = "mongodb://testuser:testpass@mongodb:27017/test.students?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.4"
-
-spark = SparkSession.builder\
-    .appName("Spark_MongoDB_Connection")\
-    .config("spark.mongodb.read.connection.uri", CONN_URI) \
-    .config("spark.mongodb.write.connection.uri", CONN_URI) \
-    .config("spark.jars.packages", "org.mongodb.spark:mongo-spark-connector_2.12:10.4.0") \
-    .getOrCreate()
-
-df = spark.createDataFrame([
-    ("Bilbo Baggins", 50),
-    ("Gandalf", 1000),
-    ("Thorin", 195),
-    ("Balin", 178),
-    ("Kili", 77),
-    ("Dwalin", 169),
-    ("Oin", 167),
-    ("Gloin", 158),
-    ("Fili", 82),
-    ("Bombur", None)
-], ["name", "age"])
-
-df.write.format("mongodb")\
-    .mode("append")\
-    .option("database", "test")\
-    .option("collection", "students")\
-    .save()
-
 ```
