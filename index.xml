@@ -4,9 +4,33 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 10 Jan 2025 17:10:26 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 Jan 2025 16:22:41 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Dataclass</title>
+    <link>https://seilylook.github.io/posts/library/python/dataclass/</link>
+    <pubDate>Mon, 20 Jan 2025 16:22:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/dataclass/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction 파이썬에서 데이터를 저장하기 위해 여러가지 방법을 사용한다. List, Tuple, Dictionary, Namedtuple, Set, Frozen set과 같은 내장 자료구조는 사용하기 편리하다는 장점이 있다.
+반면에 클래스를 이용해서 데이터를 담아두면 캡슐화를 통해 type 안정성을 높일 수 있다.
+파이썬 3.7에서 dataclasses라는 매우 매력적인 모듈이 표준 라이브러리에 추가되었다. 이에 대한 정리글이다.
+기존 방식의 클래스를 먼저 dataclasses 모듈에 대해서 정리하기 전에 기존에 사용하던 데이터 저장용 클래스를 알아본다.
+1 2 3 4 5 6 7 8 from datetime import date class User(): def __init__(self, id:int, name: str, birth: date, role: bool = False) -&gt; None: self.]]></description>
+</item>
+<item>
+    <title>Pyenv</title>
+    <link>https://seilylook.github.io/posts/library/python/pyenv/</link>
+    <pubDate>Fri, 10 Jan 2025 18:35:54 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/pyenv/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
     <title>Poetry</title>
     <link>https://seilylook.github.io/posts/library/python/poetry/</link>
     <pubDate>Fri, 10 Jan 2025 17:10:26 &#43;0900</pubDate>
@@ -99,32 +123,6 @@ TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 
 1 2 3 4 24/12/16 20:44:42 WARN Utils: Service &#39;sparkDriver&#39; could not bind on a random free port. You may check whether configuring an appropriate binding address. 24/12/16 20:44:42 ERROR SparkContext: Error initializing SparkContext. 에러에서 설명한 대로, PORT가 이미 사용중이라는 뜻으로 생각되어 PORT를 수정하니 에러가 해결되었다.
 해결법에 대해서 docs에 수정해두었다.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 .]]></description>
-</item>
-<item>
-    <title>Configuration</title>
-    <link>https://seilylook.github.io/posts/data/kafka/configuration/</link>
-    <pubDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/kafka/configuration/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/kafka.png" referrerpolicy="no-referrer">
-            </div>Kafka with Zookeeper Install 1 brew install kafka Homebrew&rsquo;s default installation path will differ based on the chips: Macs with Apple Silicon will install kafka under /opt/homebrew/Cellar.
-Binaries and scrips will be in /opt/homebrew/bin
-Kafka configurations will be in /opt/homebrew/etc/kafka
-Zookeeper configurations will be in /opt/homebrew/etc/zookeeper
-The log.dirs config(the location of kafka data) will be set to /opt/homebrew/var/lib/kafka-logs
-Setup the $PATH environment variable In order to easily access the kafka binaries, you can edit your PATH variable by adding the following line(edit the content to your system) to your system run commands(~/.]]></description>
-</item>
-<item>
-    <title>Email Validation</title>
-    <link>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</link>
-    <pubDate>Mon, 23 Sep 2024 14:42:41 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/data/kafka/projects/email-validation/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/kafka.png" referrerpolicy="no-referrer">
-            </div>Configurations Docker Image We use official Airflow image. We have to install the necessary libraries and packages into the Airflow container. For that, we have to create a Dockerfile
-1 2 3 4 5 6 FROM apache/airflow:2.10.2 USER airflow COPY requirements.txt /requirements.txt RUN pip install -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo This Dockerfile will be used to install airflow:2.10.2. Then, it will install all necessary libraries in the requirements.]]></description>
 </item>
 </channel>
 </rss>

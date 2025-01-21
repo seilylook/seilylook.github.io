@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Dataclass - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/dataclass/</link>
+        <description>Dataclass - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 Jan 2025 16:22:41 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/dataclass/" rel="self" type="application/rss+xml" /><item>
+    <title>Dataclass</title>
+    <link>https://seilylook.github.io/posts/library/python/dataclass/</link>
+    <pubDate>Mon, 20 Jan 2025 16:22:41 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/dataclass/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction 파이썬에서 데이터를 저장하기 위해 여러가지 방법을 사용한다. List, Tuple, Dictionary, Namedtuple, Set, Frozen set과 같은 내장 자료구조는 사용하기 편리하다는 장점이 있다.
+반면에 클래스를 이용해서 데이터를 담아두면 캡슐화를 통해 type 안정성을 높일 수 있다.
+파이썬 3.7에서 dataclasses라는 매우 매력적인 모듈이 표준 라이브러리에 추가되었다. 이에 대한 정리글이다.
+기존 방식의 클래스를 먼저 dataclasses 모듈에 대해서 정리하기 전에 기존에 사용하던 데이터 저장용 클래스를 알아본다.
+1 2 3 4 5 6 7 8 from datetime import date class User(): def __init__(self, id:int, name: str, birth: date, role: bool = False) -&gt; None: self.]]></description>
+</item>
+</channel>
+</rss>

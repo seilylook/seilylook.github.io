@@ -102,6 +102,38 @@
         alt="/images/profile/profile.png"
         title="/images/profile/profile.png" /></a></div><h1 class="home-title">Se Hyeon Kim</h1><div class="home-subtitle"><div id="id-3" class="typeit"></div></div><div class="links"><a href="https://github.com/seilylook" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/se-hyeon-kim/" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.instagram.com/seilylook" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw" aria-hidden="true"></i></a><a href="mailto:seilylook@naver.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/language/python/property/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/python.png"
+        data-srcset="/images/feature_images/python.png, /images/feature_images/python.png 1.5x, /images/feature_images/python.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/python.png"
+        title="/images/feature_images/python.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/language/python/property/">Property</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-12-19">2024-12-19</time></span>&nbsp;<span class="post-category">included in <a href="/categories/python/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Python</a></span></div><div class="content">Introduction Property는 객체의 속성을 제어할 때 유용하게 사용되는 기능이며 데이터 캡슐화를 위한 방법이다.
+직접 접근 사람의 이름, 나이, 연봉 데이터를 가진 클래스를 만들어본다. 밑의 Person 클래스는 name, age, salary 3개의 필드로 이루어져 있다.
+1 2 3 4 5 class Persion(): def __init__(self, name, age, salary): self._name = name self._age = age self._salary = salary Person 클래스의 인스턴스를 생성한 후, 현재 필드 값을 읽거나 새로운 필드 값을 쓰는 것은 매우 자유롭다.(하지만 이는 지양해야 한다.</div><div class="post-footer">
+        <a href="/posts/language/python/property/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/language/python/test/unittest/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/python.png"
+        data-srcset="/images/feature_images/python.png, /images/feature_images/python.png 1.5x, /images/feature_images/python.png 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/python.png"
+        title="/images/feature_images/python.png" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/language/python/test/unittest/">Unittest</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-12-19">2024-12-19</time></span>&nbsp;<span class="post-category">included in <a href="/categories/python/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Python</a></span></div><div class="content">Introduction 어떤 언어로 코딩을 하던 단위 테스트는 신뢰할 수 있는 애플리케이션을 개발하기 위해서 필수적으로 습득해야 하는 기술이다. 파이썬에서는 내장 모듈인 unittest를 통해서 다른 라이브러리 없이 비교적 간단하게 단위 테스트를 수행할 수 있다.
+unittest 모듈 unittest 모듈은 Java의 JUnit, Javascript의 Jest 또는 Mocha와 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 언어에 내장되어 있기에 파이써만 설치가 되어 있다면 바로 모듈을 불러와 사용할 수 있다.
+TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다.</div><div class="post-footer">
+        <a href="/posts/language/python/test/unittest/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/language/python/assert/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -167,34 +199,6 @@ Setup the $PATH environment variable In order to easily access the kafka binarie
 1 2 3 4 5 6 FROM apache/airflow:2.10.2 USER airflow COPY requirements.txt /requirements.txt RUN pip install -r /requirements.txt 1 2 3 confluent-kafka cassandra-driver pymongo This Dockerfile will be used to install airflow:2.10.2. Then, it will install all necessary libraries in the requirements.</div><div class="post-footer">
         <a href="/posts/data/kafka/projects/email-validation/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-engineering/">Data Engineering</a>,&nbsp;<a href="/tags/streaming/">Streaming</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/design/crawler/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/feature_images/crawler.png"
-        data-srcset="/images/feature_images/crawler.png, /images/feature_images/crawler.png 1.5x, /images/feature_images/crawler.png 2x"
-        data-sizes="auto"
-        alt="/images/feature_images/crawler.png"
-        title="/images/feature_images/crawler.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/design/crawler/">Crawler</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-09-12">2024-09-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/system-design/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>System Design</a></span></div><div class="content">Chapter 9: Design a web crawler A web crawler is known as a robot or spider. It is widely used by search engines to discover new or updated content on the web. Content can be a web page, an image, a video, a PDF file, etc. A web crawler starts by collecting a few web pages and then follows links on those pages to collect new content.</div><div class="post-footer">
-        <a href="/posts/design/crawler/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/crawler/">Crawler</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/data/airflow/projects/airflow_on_kubernetes/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/feature_images/airflow.png"
-        data-srcset="/images/feature_images/airflow.png, /images/feature_images/airflow.png 1.5x, /images/feature_images/airflow.png 2x"
-        data-sizes="auto"
-        alt="/images/feature_images/airflow.png"
-        title="/images/feature_images/airflow.png" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/data/airflow/projects/airflow_on_kubernetes/">Airflow_on_kubernetes</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-09-07">2024-09-07</time></span>&nbsp;<span class="post-category">included in <a href="/categories/airflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Airflow</a></span></div><div class="content">Install Helm chart 1 brew install helm Install the Chart 1 2 3 4 5 6 7 8 9 {seilylook} 💎minikube start {seilylook} 💎helm repo add apache-airflow https://airflow.apache.org &#34;apache-airflow&#34; has been added to your repositories {seilylook} 💎 helm repo list NAME URL apache-airflow	https://airflow.apache.org Upgrade the Chart 1 2 3 4 5 6 7 8 9 10 11 {seilylook} 💎 helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace {seilylook} 💎  ~/Development/Devlog   main ±  kubectl get pods -n airflow -o wide NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES airflow-postgresql-0 1/1 Running 0 9m10s 10.</div><div class="post-footer">
-        <a href="/posts/data/airflow/projects/airflow_on_kubernetes/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-engineering/">Data Engineering</a>,&nbsp;<a href="/tags/workflow/">Workflow</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -215,7 +219,7 @@ Setup the $PATH environment variable In order to easily access the kafka binarie
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/7/">7</a>
+                        <a href="/page/8/">8</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
