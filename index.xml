@@ -4,9 +4,32 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 20 Jan 2025 16:22:41 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Unittest</title>
+    <link>https://seilylook.github.io/posts/library/python/test/unittest/intro/</link>
+    <pubDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/test/unittest/intro/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction unittest 모듈은 Java의 JUnit, JS의 Jest 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 내장되어 있기에 파이썬만 설치된다면 바로 모듈을 불러와서 사용할 수 있다.
+TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다. 따라서 새로운 테스트를 작성할 때는 TestCase 클래스를 상속하는 클래스를 먼저 작성해야 한다. 해당 클래스 안에 테스트를 수행하는 로직을 메서드로 추가해주면 된다.
+예를 들어 1과 2을 더해서, 3을 return 하는 테스트는 다음과 같이 작성할 수 있다.]]></description>
+</item>
+<item>
+    <title>Unittest.Mock</title>
+    <link>https://seilylook.github.io/posts/library/python/test/unittest/mock/</link>
+    <pubDate>Fri, 31 Jan 2025 16:34:22 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/test/unittest/mock/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction 단위 테스트를 작성하다보면 데이터베이스 또는 외부 API에 의존하는 코드를 테스트해야 할 일이 생긴다. 운영 환경 대비 제약이 많은 테스트 환경에서는 실제 데이터베이스와 연동하거나 실제 외부 API를 호출하기가 불가능한 경우가 많다. 가령 가능하더라도, 이렇게 외부 서비스에 의존하는 테스는 해당 서비스에 문제가 생길 경우 실패할 수 있으며 실행 속도도 당연히 느리다.
+따라서 단위 테스트를 작성할 때 외부에 의존하는 부분을 임의의 가짜로 대체하는 기법이 자주 사용되는데 이를 Mocking이라고 한다. 즉, Mocking은 외부 서비스에 의존하지 않고 독립적으로 실행이 가능한 단위 테스트를 작성하기 위해서 사용되는 테스팅 기법이다.]]></description>
+</item>
+<item>
     <title>Dataclass</title>
     <link>https://seilylook.github.io/posts/library/python/dataclass/</link>
     <pubDate>Mon, 20 Jan 2025 16:22:41 &#43;0900</pubDate>
@@ -99,30 +122,6 @@ getattr() 활용 두개가 동일하다면 왜 굳이 사용하는 것일까?]]>
             </div>Introduction 어떤 언어로 코딩을 하던 단위 테스트는 신뢰할 수 있는 애플리케이션을 개발하기 위해서 필수적으로 습득해야 하는 기술이다. 파이썬에서는 내장 모듈인 unittest를 통해서 다른 라이브러리 없이 비교적 간단하게 단위 테스트를 수행할 수 있다.
 unittest 모듈 unittest 모듈은 Java의 JUnit, Javascript의 Jest 또는 Mocha와 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 언어에 내장되어 있기에 파이써만 설치가 되어 있다면 바로 모듈을 불러와 사용할 수 있다.
 TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다.]]></description>
-</item>
-<item>
-    <title>Assert</title>
-    <link>https://seilylook.github.io/posts/language/python/assert/</link>
-    <pubDate>Thu, 19 Dec 2024 13:10:35 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/language/python/assert/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
-            </div>Assert(가정 설정문) assert는 뒤의 조건이 True가 아니면 AssertError를 발생시킨다.
-1 2 3 4 5 6 7 a = 3 assert a == 2 #결과 Traceback (most recent call last): File &#34;&lt;stdin&gt;&#34;, line 1, in &lt;module&gt; AssertionError 왜 assert가 필요할까? 어떤 함수는 성능을 높이기 위해 반드시 정수만을 입력받아 처리하도록 만들 수 있다. 이런 함수를 만들기 위해서는 반드시 함수에 정수만 들어오는지 확인할 필요가 있다. 이를 위해 if문을 사용할 수도 있고 에외 처리를 사용할 수도 있지만 가정 설정문을 사용하는 방법도 있다.]]></description>
-</item>
-<item>
-    <title>First Contribution</title>
-    <link>https://seilylook.github.io/posts/contribution/spark/1/</link>
-    <pubDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/contribution/spark/1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/contribution.jpg" referrerpolicy="no-referrer">
-            </div>Description /docs/source/development/testing.rst 파일을 읽으며 테스트를 시도하는 도중에 다음과 같은 문제가 발생했고, 이 문제를 수정하기로 생각했다.
-1 2 3 4 24/12/16 20:44:42 WARN Utils: Service &#39;sparkDriver&#39; could not bind on a random free port. You may check whether configuring an appropriate binding address. 24/12/16 20:44:42 ERROR SparkContext: Error initializing SparkContext. 에러에서 설명한 대로, PORT가 이미 사용중이라는 뜻으로 생각되어 PORT를 수정하니 에러가 해결되었다.
-해결법에 대해서 docs에 수정해두었다.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 .]]></description>
 </item>
 </channel>
 </rss>

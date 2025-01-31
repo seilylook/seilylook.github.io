@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Mock - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/mock/</link>
+        <description>Mock - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 31 Jan 2025 16:34:22 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/mock/" rel="self" type="application/rss+xml" /><item>
+    <title>Unittest.Mock</title>
+    <link>https://seilylook.github.io/posts/library/python/test/unittest/mock/</link>
+    <pubDate>Fri, 31 Jan 2025 16:34:22 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/test/unittest/mock/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction 단위 테스트를 작성하다보면 데이터베이스 또는 외부 API에 의존하는 코드를 테스트해야 할 일이 생긴다. 운영 환경 대비 제약이 많은 테스트 환경에서는 실제 데이터베이스와 연동하거나 실제 외부 API를 호출하기가 불가능한 경우가 많다. 가령 가능하더라도, 이렇게 외부 서비스에 의존하는 테스는 해당 서비스에 문제가 생길 경우 실패할 수 있으며 실행 속도도 당연히 느리다.
+따라서 단위 테스트를 작성할 때 외부에 의존하는 부분을 임의의 가짜로 대체하는 기법이 자주 사용되는데 이를 Mocking이라고 한다. 즉, Mocking은 외부 서비스에 의존하지 않고 독립적으로 실행이 가능한 단위 테스트를 작성하기 위해서 사용되는 테스팅 기법이다.]]></description>
+</item>
+</channel>
+</rss>

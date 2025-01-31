@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Unittest - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/unittest/</link>
+        <description>Unittest - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/unittest/" rel="self" type="application/rss+xml" /><item>
+    <title>Unittest</title>
+    <link>https://seilylook.github.io/posts/library/python/test/unittest/intro/</link>
+    <pubDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/test/unittest/intro/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction unittest 모듈은 Java의 JUnit, JS의 Jest 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 내장되어 있기에 파이썬만 설치된다면 바로 모듈을 불러와서 사용할 수 있다.
+TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다. 따라서 새로운 테스트를 작성할 때는 TestCase 클래스를 상속하는 클래스를 먼저 작성해야 한다. 해당 클래스 안에 테스트를 수행하는 로직을 메서드로 추가해주면 된다.
+예를 들어 1과 2을 더해서, 3을 return 하는 테스트는 다음과 같이 작성할 수 있다.]]></description>
+</item>
+</channel>
+</rss>
