@@ -4,7 +4,15 @@
         <link>https://seilylook.github.io/tags/</link>
         <description>Tags - Tag - Devlog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 03 Feb 2025 12:02:25 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Patch</title>
+    <link>https://seilylook.github.io/tags/patch/</link>
+    <pubDate>Mon, 03 Feb 2025 12:02:25 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/tags/patch/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Unittest</title>
     <link>https://seilylook.github.io/tags/unittest/</link>
     <pubDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Wed, 18 Dec 2024 12:50:49 &#43;0900</pubDate>
     <author>seilylook</author>
     <guid>https://seilylook.github.io/tags/spark/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Data Engineering</title>
-    <link>https://seilylook.github.io/tags/data-engineering/</link>
-    <pubDate>Thu, 10 Oct 2024 12:14:40 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/tags/data-engineering/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

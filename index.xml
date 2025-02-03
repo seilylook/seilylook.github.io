@@ -4,9 +4,20 @@
         <link>https://seilylook.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
-            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</lastBuildDate>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 03 Feb 2025 12:02:25 &#43;0900</lastBuildDate>
             <atom:link href="https://seilylook.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Patch</title>
+    <link>https://seilylook.github.io/posts/library/python/test/unittest/patch/</link>
+    <pubDate>Mon, 03 Feb 2025 12:02:25 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/test/unittest/patch/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction unittest.mock 모듈의 patch() 데코레이터를 이용하면 특정 모듈의 함수나 클래스를 가짜(mock)객체, 좀 더 엄밀히 말하면, MagicMock 인스턴스로 대체할 수 있다. 이 과정을 흔히 mocking 또는 patching이라고 하는데, 단위 테스트를 작성할 떄 외부 서비스에 의존하지 않고 독립적으로 실행이 가능한 단위 테스트를 작성하기 위해서 사용되는 테스팅 기법이다.
+patch 데코레이터 unittest.mock 모듈의 patch() 데코레이터는 특정 범위 내에서만 mocking이 가능하도록 해준다. 일반적으로 다음과 같이 patching이 필요한 단위 테스트 메서드에 patch() 데코레이터를 선언해줌으로서 해당 메서드 내에서만 patching이 이뤄지게 한다.]]></description>
+</item>
+<item>
     <title>Unittest</title>
     <link>https://seilylook.github.io/posts/library/python/test/unittest/intro/</link>
     <pubDate>Fri, 31 Jan 2025 16:35:55 &#43;0900</pubDate>
@@ -110,18 +121,6 @@ getattr() 활용 두개가 동일하다면 왜 굳이 사용하는 것일까?]]>
             </div>Introduction Property는 객체의 속성을 제어할 때 유용하게 사용되는 기능이며 데이터 캡슐화를 위한 방법이다.
 직접 접근 사람의 이름, 나이, 연봉 데이터를 가진 클래스를 만들어본다. 밑의 Person 클래스는 name, age, salary 3개의 필드로 이루어져 있다.
 1 2 3 4 5 class Persion(): def __init__(self, name, age, salary): self._name = name self._age = age self._salary = salary Person 클래스의 인스턴스를 생성한 후, 현재 필드 값을 읽거나 새로운 필드 값을 쓰는 것은 매우 자유롭다.(하지만 이는 지양해야 한다.]]></description>
-</item>
-<item>
-    <title>Unittest</title>
-    <link>https://seilylook.github.io/posts/language/python/test/unittest/</link>
-    <pubDate>Thu, 19 Dec 2024 13:51:33 &#43;0900</pubDate>
-    <author>seilylook</author>
-    <guid>https://seilylook.github.io/posts/language/python/test/unittest/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
-            </div>Introduction 어떤 언어로 코딩을 하던 단위 테스트는 신뢰할 수 있는 애플리케이션을 개발하기 위해서 필수적으로 습득해야 하는 기술이다. 파이썬에서는 내장 모듈인 unittest를 통해서 다른 라이브러리 없이 비교적 간단하게 단위 테스트를 수행할 수 있다.
-unittest 모듈 unittest 모듈은 Java의 JUnit, Javascript의 Jest 또는 Mocha와 같은 단위 테스트 프레임워크이다. 다만 다른 언어와 달리 기본적으로 언어에 내장되어 있기에 파이써만 설치가 되어 있다면 바로 모듈을 불러와 사용할 수 있다.
-TestCase 클래스 unittest 모듈의 TestCase 클래스는 단위 테스트에 필요한 다양한 유틸리티 메소드를 제공한다.]]></description>
 </item>
 </channel>
 </rss>

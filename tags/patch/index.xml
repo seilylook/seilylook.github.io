@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Patch - Tag - Devlog</title>
+        <link>https://seilylook.github.io/tags/patch/</link>
+        <description>Patch - Tag - Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>seilylook@naver.com (seilylook)</managingEditor>
+            <webMaster>seilylook@naver.com (seilylook)</webMaster><lastBuildDate>Mon, 03 Feb 2025 12:02:25 &#43;0900</lastBuildDate><atom:link href="https://seilylook.github.io/tags/patch/" rel="self" type="application/rss+xml" /><item>
+    <title>Patch</title>
+    <link>https://seilylook.github.io/posts/library/python/test/unittest/patch/</link>
+    <pubDate>Mon, 03 Feb 2025 12:02:25 &#43;0900</pubDate>
+    <author>seilylook</author>
+    <guid>https://seilylook.github.io/posts/library/python/test/unittest/patch/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/feature_images/python.png" referrerpolicy="no-referrer">
+            </div>Introduction unittest.mock 모듈의 patch() 데코레이터를 이용하면 특정 모듈의 함수나 클래스를 가짜(mock)객체, 좀 더 엄밀히 말하면, MagicMock 인스턴스로 대체할 수 있다. 이 과정을 흔히 mocking 또는 patching이라고 하는데, 단위 테스트를 작성할 떄 외부 서비스에 의존하지 않고 독립적으로 실행이 가능한 단위 테스트를 작성하기 위해서 사용되는 테스팅 기법이다.
+patch 데코레이터 unittest.mock 모듈의 patch() 데코레이터는 특정 범위 내에서만 mocking이 가능하도록 해준다. 일반적으로 다음과 같이 patching이 필요한 단위 테스트 메서드에 patch() 데코레이터를 선언해줌으로서 해당 메서드 내에서만 patching이 이뤄지게 한다.]]></description>
+</item>
+</channel>
+</rss>
