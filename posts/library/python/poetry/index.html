@@ -32,7 +32,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/library\/python\/poetry\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Poetry","wordcount":  311 ,
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Poetry","wordcount":  689 ,
         "url": "https:\/\/seilylook.github.io\/posts\/library\/python\/poetry\/","datePublished": "2025-01-10T17:10:26+09:00","dateModified": "2025-01-10T18:35:10+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
@@ -112,8 +112,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Poetry</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/library/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Library</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-10">2025-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;311 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-10">2025-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;689 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -133,6 +133,13 @@
     <li><a href="#new-project">New Project</a></li>
     <li><a href="#initializing-a-pre-existing-project">Initializing a pre-existing project</a></li>
     <li><a href="#add-specifying-dependencies">Add specifying dependencies</a></li>
+    <li><a href="#setup-project">Setup Project</a>
+      <ul>
+        <li><a href="#install-python-312">Install Python 3.12</a></li>
+        <li><a href="#create-poetry-project">Create poetry project</a></li>
+        <li><a href="#set-virtualenv">Set virtualenv</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="introduction">Introduction</h1>
@@ -163,7 +170,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> brew install poetry
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 brew install poetry
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry --version
 </span></span><span class="line"><span class="cl">
@@ -178,7 +185,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">poetry new poetry-demo
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry new poetry-demo
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>위의 명령어를 입력하면 아래와 같이 프로젝트가 생성된 것을 확인할 수 있다.</p>
@@ -247,8 +254,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> pre-existing-project
-</span></span><span class="line"><span class="cl">poetry init
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 <span class="nb">cd</span> pre-existing-project
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry init
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="add-specifying-dependencies">Add specifying dependencies</h2>
@@ -263,13 +270,175 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">poetry add pyspark
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry add pyspark
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">poetry add pytest
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry add pytest
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">poetry add black --dev
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry add black --dev
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">poetry add isort --dev
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry add isort --dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="setup-project">Setup Project</h2>
+<h3 id="install-python-312">Install Python 3.12</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 pyenv install 3.12
+</span></span><span class="line"><span class="cl">python-build: use openssl@3 from homebrew
+</span></span><span class="line"><span class="cl">python-build: use readline from homebrew
+</span></span><span class="line"><span class="cl">Downloading Python-3.12.4.tar.xz...
+</span></span><span class="line"><span class="cl">-&gt; https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tar.xz
+</span></span><span class="line"><span class="cl">Installing Python-3.12.4...
+</span></span><span class="line"><span class="cl">python-build: use readline from homebrew
+</span></span><span class="line"><span class="cl">python-build: use ncurses from homebrew
+</span></span><span class="line"><span class="cl">python-build: use zlib from xcode sdk
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Installed Python-3.12.4 to /Users/minwook/.pyenv/versions/3.12.4
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 pyenv <span class="nb">local</span> 3.12 <span class="c1"># notify python version to pyenv</span>
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 pyenv global 3.12 <span class="c1"># Set Python version globally</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="create-poetry-project">Create poetry project</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">This <span class="nb">command</span> will guide you through creating your pyproject.toml config.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Package name <span class="o">[</span>storyline<span class="o">]</span>:  
+</span></span><span class="line"><span class="cl">Version <span class="o">[</span>0.1.0<span class="o">]</span>:  
+</span></span><span class="line"><span class="cl">Description <span class="o">[]</span>:  
+</span></span><span class="line"><span class="cl">Author <span class="o">[</span>seilylook &lt;seilylook@naver.com&gt;, n to skip<span class="o">]</span>:  
+</span></span><span class="line"><span class="cl">License <span class="o">[]</span>:  
+</span></span><span class="line"><span class="cl">Compatible Python versions <span class="o">[</span>^3.12<span class="o">]</span>:  ^3.12
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Would you like to define your main dependencies interactively? <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>yes<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">You can specify a package in the following forms:
+</span></span><span class="line"><span class="cl">  - A single name <span class="o">(</span>requests<span class="o">)</span>: this will search <span class="k">for</span> matches on PyPI
+</span></span><span class="line"><span class="cl">  - A name and a constraint <span class="o">(</span>requests@^2.23.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - A git url <span class="o">(</span>git+https://github.com/python-poetry/poetry.git<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - A git url with a revision <span class="o">(</span>git+https://github.com/python-poetry/poetry.git#develop<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - A file path <span class="o">(</span>../my-package/my-package.whl<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - A directory <span class="o">(</span>../my-package/<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - A url <span class="o">(</span>https://example.com/packages/my-package-0.1.0.tar.gz<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Package to add or search <span class="k">for</span> <span class="o">(</span>leave blank to skip<span class="o">)</span>: 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Would you like to define your development dependencies interactively? <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>yes<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">Package to add or search <span class="k">for</span> <span class="o">(</span>leave blank to skip<span class="o">)</span>: 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Generated file
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>tool.poetry<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">name</span> <span class="o">=</span> <span class="s2">&#34;storyline&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">version</span> <span class="o">=</span> <span class="s2">&#34;0.1.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">description</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">authors</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;seilylook &lt;seilylook@naver.com&gt;&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">readme</span> <span class="o">=</span> <span class="s2">&#34;README.md&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>tool.poetry.dependencies<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">python</span> <span class="o">=</span> <span class="s2">&#34;^3.12&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>build-system<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">requires</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;poetry-core&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">build-backend <span class="o">=</span> <span class="s2">&#34;poetry.core.masonry.api&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Do you confirm generation? <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>yes<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="set-virtualenv">Set virtualenv</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry env use <span class="k">$(</span>pyenv which python<span class="k">)</span> <span class="c1"># set poetry env python version</span>
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry config virtualenvs.in-project <span class="nb">true</span> <span class="c1"># set virtualenv location in the current project</span>
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry install <span class="c1"># create virtualenv and install dependencies</span>
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry env info
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Virtualenv
+</span></span><span class="line"><span class="cl">Python:         3.12.4
+</span></span><span class="line"><span class="cl">Implementation: CPython
+</span></span><span class="line"><span class="cl">Path:           /Users/minwook/codes/work/playtag/src/storyline/.venv
+</span></span><span class="line"><span class="cl">Executable:     /Users/minwook/codes/work/playtag/src/storyline/.venv/bin/python
+</span></span><span class="line"><span class="cl">Valid:          True
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">

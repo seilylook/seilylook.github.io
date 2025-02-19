@@ -20,7 +20,7 @@ pip의 가장 큰 단점은 패키지를 설치하면 전역적으로 설치가 
 ## Install
 
 ```bash
- brew install poetry
+ {seilylook} 💎 brew install poetry
 
  {seilylook} 💎 poetry --version
 
@@ -34,7 +34,7 @@ pip의 가장 큰 단점은 패키지를 설치하면 전역적으로 설치가 
 Project Name: **poetry-deom**
 
 ```bash
-poetry new poetry-demo
+ {seilylook} 💎 poetry new poetry-demo
 ```
 
 위의 명령어를 입력하면 아래와 같이 프로젝트가 생성된 것을 확인할 수 있다.
@@ -74,18 +74,105 @@ build-backend = "poetry.core.masonry.api"
 새로운 프로젝트를 만드는 대신, Poetry는 `initialise`를 사용해 기존 프로젝트 Poetry를 적용할 수 있다. 
 
 ```bash
-cd pre-existing-project
-poetry init
+ {seilylook} 💎 cd pre-existing-project
+ {seilylook} 💎 poetry init
 ```
 
 ## Add specifying dependencies
 
 ```bash
-poetry add pyspark
+ {seilylook} 💎 poetry add pyspark
 
-poetry add pytest
+ {seilylook} 💎 poetry add pytest
 
-poetry add black --dev
+ {seilylook} 💎 poetry add black --dev
 
-poetry add isort --dev
+ {seilylook} 💎 poetry add isort --dev
+```
+
+## Setup Project
+
+### Install Python 3.12
+
+```bash
+ {seilylook} 💎 pyenv install 3.12
+python-build: use openssl@3 from homebrew
+python-build: use readline from homebrew
+Downloading Python-3.12.4.tar.xz...
+-> https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tar.xz
+Installing Python-3.12.4...
+python-build: use readline from homebrew
+python-build: use ncurses from homebrew
+python-build: use zlib from xcode sdk
+
+Installed Python-3.12.4 to /Users/minwook/.pyenv/versions/3.12.4
+
+ {seilylook} 💎 pyenv local 3.12 # notify python version to pyenv
+ {seilylook} 💎 pyenv global 3.12 # Set Python version globally
+```
+
+### Create poetry project
+
+```bash
+ {seilylook} 💎 poetry init
+
+This command will guide you through creating your pyproject.toml config.
+
+Package name [storyline]:  
+Version [0.1.0]:  
+Description []:  
+Author [seilylook <seilylook@naver.com>, n to skip]:  
+License []:  
+Compatible Python versions [^3.12]:  ^3.12
+
+Would you like to define your main dependencies interactively? (yes/no) [yes] 
+You can specify a package in the following forms:
+  - A single name (requests): this will search for matches on PyPI
+  - A name and a constraint (requests@^2.23.0)
+  - A git url (git+https://github.com/python-poetry/poetry.git)
+  - A git url with a revision (git+https://github.com/python-poetry/poetry.git#develop)
+  - A file path (../my-package/my-package.whl)
+  - A directory (../my-package/)
+  - A url (https://example.com/packages/my-package-0.1.0.tar.gz)
+
+Package to add or search for (leave blank to skip): 
+
+Would you like to define your development dependencies interactively? (yes/no) [yes] 
+Package to add or search for (leave blank to skip): 
+
+Generated file
+
+[tool.poetry]
+name = "storyline"
+version = "0.1.0"
+description = ""
+authors = ["seilylook <seilylook@naver.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+Do you confirm generation? (yes/no) [yes]
+```
+
+### Set virtualenv
+
+```bash
+ {seilylook} 💎 poetry env use $(pyenv which python) # set poetry env python version
+ {seilylook} 💎 poetry config virtualenvs.in-project true # set virtualenv location in the current project
+ {seilylook} 💎 poetry install # create virtualenv and install dependencies
+ {seilylook} 💎 poetry env info
+
+Virtualenv
+Python:         3.12.4
+Implementation: CPython
+Path:           /Users/minwook/codes/work/playtag/src/storyline/.venv
+Executable:     /Users/minwook/codes/work/playtag/src/storyline/.venv/bin/python
+Valid:          True
 ```
