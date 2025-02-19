@@ -12,7 +12,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://seilylook.github.io/posts/library/python/poetry/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2025-01-10T17:10:26+09:00" />
-<meta property="article:modified_time" content="2025-01-10T18:35:10+09:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2025-02-19T14:43:38+09:00" /><meta property="og:site_name" content="My cool site" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Poetry"/>
@@ -32,8 +32,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/seilylook.github.io\/posts\/library\/python\/poetry\/"
-        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Poetry","wordcount":  689 ,
-        "url": "https:\/\/seilylook.github.io\/posts\/library\/python\/poetry\/","datePublished": "2025-01-10T17:10:26+09:00","dateModified": "2025-01-10T18:35:10+09:00","publisher": {
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Poetry","wordcount":  2130 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/library\/python\/poetry\/","datePublished": "2025-01-10T17:10:26+09:00","dateModified": "2025-02-19T14:43:38+09:00","publisher": {
             "@type": "Organization",
             "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
                 "@type": "Person",
@@ -112,8 +112,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Poetry</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/library/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Library</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-10">2025-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;689 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-10">2025-01-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2130 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -138,6 +138,7 @@
         <li><a href="#install-python-312">Install Python 3.12</a></li>
         <li><a href="#create-poetry-project">Create poetry project</a></li>
         <li><a href="#set-virtualenv">Set virtualenv</a></li>
+        <li><a href="#custom-version">Custom version</a></li>
       </ul>
     </li>
   </ul>
@@ -394,7 +395,7 @@
 </span></span><span class="line"><span class="cl">Generated file
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="o">[</span>tool.poetry<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="nv">name</span> <span class="o">=</span> <span class="s2">&#34;storyline&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">name</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">version</span> <span class="o">=</span> <span class="s2">&#34;0.1.0&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">description</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">authors</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;seilylook &lt;seilylook@naver.com&gt;&#34;</span><span class="o">]</span>
@@ -426,6 +427,13 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry env use <span class="k">$(</span>pyenv which python<span class="k">)</span> <span class="c1"># set poetry env python version</span>
@@ -434,19 +442,615 @@
 </span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 💎 poetry env info
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">Virtualenv
-</span></span><span class="line"><span class="cl">Python:         3.12.4
+</span></span><span class="line"><span class="cl">Python:         3.12.8
 </span></span><span class="line"><span class="cl">Implementation: CPython
-</span></span><span class="line"><span class="cl">Path:           /Users/minwook/codes/work/playtag/src/storyline/.venv
-</span></span><span class="line"><span class="cl">Executable:     /Users/minwook/codes/work/playtag/src/storyline/.venv/bin/python
+</span></span><span class="line"><span class="cl">Path:           /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv
+</span></span><span class="line"><span class="cl">Executable:     /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv/bin/python
 </span></span><span class="line"><span class="cl">Valid:          True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Base
+</span></span><span class="line"><span class="cl">Platform:   darwin
+</span></span><span class="line"><span class="cl">OS:         posix
+</span></span><span class="line"><span class="cl">Python:     3.12.8
+</span></span><span class="line"><span class="cl">Path:       /Users/seilylook/.pyenv/versions/3.12.8
+</span></span><span class="line"><span class="cl">Executable: /Users/seilylook/.pyenv/versions/3.12.8/bin/python3.12
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="custom-version">Custom version</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 🚀 poetry env info                          
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Virtualenv
+</span></span><span class="line"><span class="cl">Python:         3.12.8
+</span></span><span class="line"><span class="cl">Implementation: CPython
+</span></span><span class="line"><span class="cl">Path:           /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv
+</span></span><span class="line"><span class="cl">Executable:     /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv/bin/python
+</span></span><span class="line"><span class="cl">Valid:          True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Base
+</span></span><span class="line"><span class="cl">Platform:   darwin
+</span></span><span class="line"><span class="cl">OS:         posix
+</span></span><span class="line"><span class="cl">Python:     3.12.8
+</span></span><span class="line"><span class="cl">Path:       /Users/seilylook/.pyenv/versions/3.12.8
+</span></span><span class="line"><span class="cl">Executable: /Users/seilylook/.pyenv/versions/3.12.8/bin/python3.12
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Apache Airflow의 최신 버전인 2.10.5는 파이썬 최소 | 최대 버전을 설정해 주어야 한다. 이를 위해선 <code>poetry add apache-airflow</code>가 아닌 특정 version을 포함해서 설치해 주도록 <code>pyproject.toml</code>에 <strong>version</strong>을 직접 설정해준다.</p>
+<p>이어서 <code>poetry update</code> 명령어를 통해 custom version의 package를 설치할 수 있다.</p>
+</div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">tool</span><span class="p">.</span><span class="nx">poetry</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;app&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.1.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">description</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">authors</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;seilylook &lt;seilylook@naver.com&gt;&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">readme</span> <span class="p">=</span> <span class="s2">&#34;README.md&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">tool</span><span class="p">.</span><span class="nx">poetry</span><span class="p">.</span><span class="nx">dependencies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">python</span> <span class="p">=</span> <span class="s2">&#34;^3.12&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">apache-airflow</span> <span class="p">=</span> <span class="p">{</span><span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;^2.10.5&#34;</span><span class="p">,</span> <span class="nx">python</span> <span class="p">=</span> <span class="s2">&#34;&gt;=3.8.1,&lt;3.13&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">build-system</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">requires</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;poetry-core&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">build-backend</span> <span class="p">=</span> <span class="s2">&#34;poetry.core.masonry.api&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 🚀 poetry update  
+</span></span><span class="line"><span class="cl">Updating dependencies
+</span></span><span class="line"><span class="cl">Resolving dependencies... <span class="o">(</span>18.0s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Package operations: <span class="m">136</span> installs, <span class="m">0</span> updates, <span class="m">0</span> removals
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - Installing wrapt <span class="o">(</span>1.17.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing zipp <span class="o">(</span>3.21.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing attrs <span class="o">(</span>25.1.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing deprecated <span class="o">(</span>1.2.18<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing markupsafe <span class="o">(</span>3.0.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing mdurl <span class="o">(</span>0.1.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing rpds-py <span class="o">(</span>0.22.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing importlib-metadata <span class="o">(</span>8.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing typing-extensions <span class="o">(</span>4.12.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing click <span class="o">(</span>8.1.8<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing referencing <span class="o">(</span>0.36.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing werkzeug <span class="o">(</span>2.2.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing markdown-it-py <span class="o">(</span>3.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-api <span class="o">(</span>1.30.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing packaging <span class="o">(</span>24.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing protobuf <span class="o">(</span>5.29.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pygments <span class="o">(</span>2.19.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing itsdangerous <span class="o">(</span>2.2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing jinja2 <span class="o">(</span>3.1.5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing babel <span class="o">(</span>2.17.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-proto <span class="o">(</span>1.30.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-semantic-conventions <span class="o">(</span>0.51b0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing dnspython <span class="o">(</span>2.7.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask <span class="o">(</span>2.2.5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing frozenlist <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing idna <span class="o">(</span>3.10<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing jsonschema-specifications <span class="o">(</span>2024.10.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing limits <span class="o">(</span>4.0.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing marshmallow <span class="o">(</span>3.26.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing multidict <span class="o">(</span>6.1.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing certifi <span class="o">(</span>2025.1.31<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing charset-normalizer <span class="o">(</span>3.4.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing ordered-set <span class="o">(</span>4.1.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing propcache <span class="o">(</span>0.2.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pyjwt <span class="o">(</span>2.10.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pytz <span class="o">(</span>2025.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pyyaml <span class="o">(</span>6.0.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing rich <span class="o">(</span>13.9.4<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing six <span class="o">(</span>1.17.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing sqlalchemy <span class="o">(</span>1.4.54<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing urllib3 <span class="o">(</span>2.3.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing wtforms <span class="o">(</span>3.2.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing aiohappyeyeballs <span class="o">(</span>2.4.6<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apispec <span class="o">(</span>6.8.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorama <span class="o">(</span>0.4.6<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing email-validator <span class="o">(</span>2.2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-babel <span class="o">(</span>2.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-jwt-extended <span class="o">(</span>4.7.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-limiter <span class="o">(</span>3.10.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-login <span class="o">(</span>0.6.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-sqlalchemy <span class="o">(</span>2.5.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-wtf <span class="o">(</span>1.2.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing googleapis-common-protos <span class="o">(</span>1.67.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing grpcio <span class="o">(</span>1.70.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing h11 <span class="o">(</span>0.14.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing jsonschema <span class="o">(</span>4.23.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing marshmallow-sqlalchemy <span class="o">(</span>0.28.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing aiosignal <span class="o">(</span>1.3.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing more-itertools <span class="o">(</span>10.6.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-exporter-otlp-proto-common <span class="o">(</span>1.30.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-sdk <span class="o">(</span>1.30.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing prison <span class="o">(</span>0.2.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pycparser <span class="o">(</span>2.22<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing python-dateutil <span class="o">(</span>2.9.0.post0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing requests <span class="o">(</span>2.32.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing sniffio <span class="o">(</span>1.3.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing sqlalchemy-utils <span class="o">(</span>0.41.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing sqlparse <span class="o">(</span>0.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing yarl <span class="o">(</span>1.18.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing text-unidecode <span class="o">(</span>1.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing aiohttp <span class="o">(</span>3.11.12<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing aiosqlite <span class="o">(</span>0.21.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing anyio <span class="o">(</span>4.8.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-compat <span class="o">(</span>1.3.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-sql <span class="o">(</span>1.21.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing asgiref <span class="o">(</span>3.8.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing cachelib <span class="o">(</span>0.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing cffi <span class="o">(</span>1.17.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing clickclick <span class="o">(</span>20.10.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-appbuilder <span class="o">(</span>4.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing fsspec <span class="o">(</span>2025.2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing google-re2 <span class="o">(</span>1.1.20240702<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing httpcore <span class="o">(</span>1.0.7<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing inflection <span class="o">(</span>0.5.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing jmespath <span class="o">(</span>1.0.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing lockfile <span class="o">(</span>0.12.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing mako <span class="o">(</span>1.3.9<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-exporter-otlp-proto-grpc <span class="o">(</span>1.30.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-exporter-otlp-proto-http <span class="o">(</span>1.30.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing python-slugify <span class="o">(</span>8.0.4<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing requests-toolbelt <span class="o">(</span>1.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing tzdata <span class="o">(</span>2025.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing uc-micro-py <span class="o">(</span>1.0.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing wirerope <span class="o">(</span>1.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing alembic <span class="o">(</span>1.14.1<span class="o">)</span>: Downloading... 70%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-io <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-fab <span class="o">(</span>1.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-ftp <span class="o">(</span>3.12.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-http <span class="o">(</span>5.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Downloading... 0%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Downloading... 23%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-io <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-fab <span class="o">(</span>1.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-ftp <span class="o">(</span>3.12.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-http <span class="o">(</span>5.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Downloading... 23%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing alembic <span class="o">(</span>1.14.1<span class="o">)</span>: Downloading... 100%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-io <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-fab <span class="o">(</span>1.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-ftp <span class="o">(</span>3.12.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-http <span class="o">(</span>5.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Downloading... 23%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Downloading... 100%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-io <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-fab <span class="o">(</span>1.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-ftp <span class="o">(</span>3.12.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-http <span class="o">(</span>5.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Downloading... 100%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing alembic <span class="o">(</span>1.14.1<span class="o">)</span>: Installing...
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-io <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-fab <span class="o">(</span>1.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-ftp <span class="o">(</span>3.12.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-http <span class="o">(</span>5.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Downloading... 100%
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorlog <span class="o">(</span>6.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorlog <span class="o">(</span>6.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>: Installing...
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorlog <span class="o">(</span>6.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing configupdater <span class="o">(</span>3.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing connexion <span class="o">(</span>2.14.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorlog <span class="o">(</span>6.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing configupdater <span class="o">(</span>3.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing connexion <span class="o">(</span>2.14.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorlog <span class="o">(</span>6.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing configupdater <span class="o">(</span>3.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing connexion <span class="o">(</span>2.14.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing cron-descriptor <span class="o">(</span>1.4.5<span class="o">)</span>: Downloading... 0%
+</span></span><span class="line"><span class="cl">  - Installing cron-descriptor <span class="o">(</span>1.4.5<span class="o">)</span>: Downloading... 100%
+</span></span><span class="line"><span class="cl">  - Installing cron-descriptor <span class="o">(</span>1.4.5<span class="o">)</span>: Installing...
+</span></span><span class="line"><span class="cl">  - Installing cron-descriptor <span class="o">(</span>1.4.5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-io <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-fab <span class="o">(</span>1.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-ftp <span class="o">(</span>3.12.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-http <span class="o">(</span>5.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorlog <span class="o">(</span>6.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing configupdater <span class="o">(</span>3.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing connexion <span class="o">(</span>2.14.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing cron-descriptor <span class="o">(</span>1.4.5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing alembic <span class="o">(</span>1.14.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-common-io <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-fab <span class="o">(</span>1.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-ftp <span class="o">(</span>3.12.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-http <span class="o">(</span>5.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-imap <span class="o">(</span>3.8.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-smtp <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow-providers-sqlite <span class="o">(</span>4.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing argcomplete <span class="o">(</span>3.5.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing blinker <span class="o">(</span>1.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing colorlog <span class="o">(</span>6.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing configupdater <span class="o">(</span>3.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing connexion <span class="o">(</span>2.14.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing cron-descriptor <span class="o">(</span>1.4.5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing croniter <span class="o">(</span>6.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing cryptography <span class="o">(</span>44.0.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing dill <span class="o">(</span>0.3.9<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-caching <span class="o">(</span>2.3.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing flask-session <span class="o">(</span>0.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing gunicorn <span class="o">(</span>23.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing httpx <span class="o">(</span>0.28.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing lazy-object-proxy <span class="o">(</span>1.10.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing linkify-it-py <span class="o">(</span>2.0.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing marshmallow-oneofschema <span class="o">(</span>3.1.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing mdit-py-plugins <span class="o">(</span>0.4.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing methodtools <span class="o">(</span>0.4.7<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing opentelemetry-exporter-otlp <span class="o">(</span>1.30.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pathspec <span class="o">(</span>0.12.1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pendulum <span class="o">(</span>3.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing pluggy <span class="o">(</span>1.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing psutil <span class="o">(</span>7.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing python-daemon <span class="o">(</span>3.1.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing python-nvd3 <span class="o">(</span>0.16.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing rfc3339-validator <span class="o">(</span>0.1.4<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing rich-argparse <span class="o">(</span>1.7.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing setproctitle <span class="o">(</span>1.3.4<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing sqlalchemy-jsonfield <span class="o">(</span>1.0.2<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing tabulate <span class="o">(</span>0.9.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing tenacity <span class="o">(</span>9.0.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing termcolor <span class="o">(</span>2.5.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing universal-pathlib <span class="o">(</span>0.2.6<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  - Installing apache-airflow <span class="o">(</span>2.10.5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Writing lock file
+</span></span><span class="line"><span class="cl"> <span class="o">{</span>seilylook<span class="o">}</span> 🚀 poetry add apache-airflow
+</span></span><span class="line"><span class="cl">The following packages are already present in the pyproject.toml and will be skipped:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  - apache-airflow
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If you want to update it to the latest compatible version, you can use <span class="sb">`</span>poetry update package<span class="sb">`</span>.
+</span></span><span class="line"><span class="cl">If you prefer to upgrade it to the latest available version, you can use <span class="sb">`</span>poetry add package@latest<span class="sb">`</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Nothing to add.
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-01-10&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/c947c124ec7d84507bfb8c22cc8b3ffe8195aa21" target="_blank" title="commit by seilylook(seilylook@naver.com) c947c124ec7d84507bfb8c22cc8b3ffe8195aa21: add: python dependencies controller - poetry">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c947c12</a></span>
+                <span>Updated on 2025-02-19&nbsp;<a class="git-hash" href="https://github.com/seilylook/commit/bae06ca2b2ad56ade6e0ecc8729a32fd6b85fabc" target="_blank" title="commit by seilylook(seilylook@naver.com) bae06ca2b2ad56ade6e0ecc8729a32fd6b85fabc: add: poetry &amp; pyenv">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bae06ca</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

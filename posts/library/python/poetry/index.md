@@ -143,7 +143,7 @@ Package to add or search for (leave blank to skip):
 Generated file
 
 [tool.poetry]
-name = "storyline"
+name = ""
 version = "0.1.0"
 description = ""
 authors = ["seilylook <seilylook@naver.com>"]
@@ -170,9 +170,313 @@ Do you confirm generation? (yes/no) [yes]
  {seilylook} 💎 poetry env info
 
 Virtualenv
-Python:         3.12.4
+Python:         3.12.8
 Implementation: CPython
-Path:           /Users/minwook/codes/work/playtag/src/storyline/.venv
-Executable:     /Users/minwook/codes/work/playtag/src/storyline/.venv/bin/python
+Path:           /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv
+Executable:     /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv/bin/python
 Valid:          True
+
+Base
+Platform:   darwin
+OS:         posix
+Python:     3.12.8
+Path:       /Users/seilylook/.pyenv/versions/3.12.8
+Executable: /Users/seilylook/.pyenv/versions/3.12.8/bin/python3.12
+```
+
+### Custom version 
+
+```bash
+ {seilylook} 🚀 poetry env info                          
+
+Virtualenv
+Python:         3.12.8
+Implementation: CPython
+Path:           /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv
+Executable:     /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/.venv/bin/python
+Valid:          True
+
+Base
+Platform:   darwin
+OS:         posix
+Python:     3.12.8
+Path:       /Users/seilylook/.pyenv/versions/3.12.8
+Executable: /Users/seilylook/.pyenv/versions/3.12.8/bin/python3.12
+```
+
+{{<admonition info>}}
+Apache Airflow의 최신 버전인 2.10.5는 파이썬 최소 | 최대 버전을 설정해 주어야 한다. 이를 위해선 `poetry add apache-airflow`가 아닌 특정 version을 포함해서 설치해 주도록 `pyproject.toml`에 **version**을 직접 설정해준다.
+
+이어서 `poetry update` 명령어를 통해 custom version의 package를 설치할 수 있다.
+{{</admonition>}}
+
+```toml
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["seilylook <seilylook@naver.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+apache-airflow = {version = "^2.10.5", python = ">=3.8.1,<3.13"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+```
+
+```bash
+ {seilylook} 🚀 poetry update  
+Updating dependencies
+Resolving dependencies... (18.0s)
+
+Package operations: 136 installs, 0 updates, 0 removals
+
+  - Installing wrapt (1.17.2)
+  - Installing zipp (3.21.0)
+  - Installing attrs (25.1.0)
+  - Installing deprecated (1.2.18)
+  - Installing markupsafe (3.0.2)
+  - Installing mdurl (0.1.2)
+  - Installing rpds-py (0.22.3)
+  - Installing importlib-metadata (8.5.0)
+  - Installing typing-extensions (4.12.2)
+  - Installing click (8.1.8)
+  - Installing referencing (0.36.2)
+  - Installing werkzeug (2.2.3)
+  - Installing markdown-it-py (3.0.0)
+  - Installing opentelemetry-api (1.30.0)
+  - Installing packaging (24.2)
+  - Installing protobuf (5.29.3)
+  - Installing pygments (2.19.1)
+  - Installing itsdangerous (2.2.0)
+  - Installing jinja2 (3.1.5)
+  - Installing babel (2.17.0)
+  - Installing opentelemetry-proto (1.30.0)
+  - Installing opentelemetry-semantic-conventions (0.51b0)
+  - Installing dnspython (2.7.0)
+  - Installing flask (2.2.5)
+  - Installing frozenlist (1.5.0)
+  - Installing idna (3.10)
+  - Installing jsonschema-specifications (2024.10.1)
+  - Installing limits (4.0.1)
+  - Installing marshmallow (3.26.1)
+  - Installing multidict (6.1.0)
+  - Installing certifi (2025.1.31)
+  - Installing charset-normalizer (3.4.1)
+  - Installing ordered-set (4.1.0)
+  - Installing propcache (0.2.1)
+  - Installing pyjwt (2.10.1)
+  - Installing pytz (2025.1)
+  - Installing pyyaml (6.0.2)
+  - Installing rich (13.9.4)
+  - Installing six (1.17.0)
+  - Installing sqlalchemy (1.4.54)
+  - Installing urllib3 (2.3.0)
+  - Installing wtforms (3.2.1)
+  - Installing aiohappyeyeballs (2.4.6)
+  - Installing apispec (6.8.1)
+  - Installing colorama (0.4.6)
+  - Installing email-validator (2.2.0)
+  - Installing flask-babel (2.0.0)
+  - Installing flask-jwt-extended (4.7.1)
+  - Installing flask-limiter (3.10.1)
+  - Installing flask-login (0.6.3)
+  - Installing flask-sqlalchemy (2.5.1)
+  - Installing flask-wtf (1.2.2)
+  - Installing googleapis-common-protos (1.67.0)
+  - Installing grpcio (1.70.0)
+  - Installing h11 (0.14.0)
+  - Installing jsonschema (4.23.0)
+  - Installing marshmallow-sqlalchemy (0.28.2)
+  - Installing aiosignal (1.3.2)
+  - Installing more-itertools (10.6.0)
+  - Installing opentelemetry-exporter-otlp-proto-common (1.30.0)
+  - Installing opentelemetry-sdk (1.30.0)
+  - Installing prison (0.2.1)
+  - Installing pycparser (2.22)
+  - Installing python-dateutil (2.9.0.post0)
+  - Installing requests (2.32.3)
+  - Installing sniffio (1.3.1)
+  - Installing sqlalchemy-utils (0.41.2)
+  - Installing sqlparse (0.5.3)
+  - Installing yarl (1.18.3)
+  - Installing text-unidecode (1.3)
+  - Installing aiohttp (3.11.12)
+  - Installing aiosqlite (0.21.0)
+  - Installing anyio (4.8.0)
+  - Installing apache-airflow-providers-common-compat (1.3.0)
+  - Installing apache-airflow-providers-common-sql (1.21.0)
+  - Installing asgiref (3.8.1)
+  - Installing cachelib (0.9.0)
+  - Installing cffi (1.17.1)
+  - Installing clickclick (20.10.2)
+  - Installing flask-appbuilder (4.5.3)
+  - Installing fsspec (2025.2.0)
+  - Installing google-re2 (1.1.20240702)
+  - Installing httpcore (1.0.7)
+  - Installing inflection (0.5.1)
+  - Installing jmespath (1.0.1)
+  - Installing lockfile (0.12.2)
+  - Installing mako (1.3.9)
+  - Installing opentelemetry-exporter-otlp-proto-grpc (1.30.0)
+  - Installing opentelemetry-exporter-otlp-proto-http (1.30.0)
+  - Installing python-slugify (8.0.4)
+  - Installing requests-toolbelt (1.0.0)
+  - Installing tzdata (2025.1)
+  - Installing uc-micro-py (1.0.3)
+  - Installing wirerope (1.0.0)
+  - Installing alembic (1.14.1): Downloading... 70%
+  - Installing apache-airflow-providers-common-io (1.5.0)
+  - Installing apache-airflow-providers-fab (1.5.3)
+  - Installing apache-airflow-providers-ftp (3.12.0)
+  - Installing apache-airflow-providers-http (5.0.0)
+  - Installing apache-airflow-providers-imap (3.8.0): Downloading... 0%
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-imap (3.8.0): Downloading... 23%
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-common-io (1.5.0)
+  - Installing apache-airflow-providers-fab (1.5.3)
+  - Installing apache-airflow-providers-ftp (3.12.0)
+  - Installing apache-airflow-providers-http (5.0.0)
+  - Installing apache-airflow-providers-imap (3.8.0): Downloading... 23%
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing alembic (1.14.1): Downloading... 100%
+  - Installing apache-airflow-providers-common-io (1.5.0)
+  - Installing apache-airflow-providers-fab (1.5.3)
+  - Installing apache-airflow-providers-ftp (3.12.0)
+  - Installing apache-airflow-providers-http (5.0.0)
+  - Installing apache-airflow-providers-imap (3.8.0): Downloading... 23%
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing apache-airflow-providers-imap (3.8.0): Downloading... 100%
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing apache-airflow-providers-common-io (1.5.0)
+  - Installing apache-airflow-providers-fab (1.5.3)
+  - Installing apache-airflow-providers-ftp (3.12.0)
+  - Installing apache-airflow-providers-http (5.0.0)
+  - Installing apache-airflow-providers-imap (3.8.0): Downloading... 100%
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing alembic (1.14.1): Installing...
+  - Installing apache-airflow-providers-common-io (1.5.0)
+  - Installing apache-airflow-providers-fab (1.5.3)
+  - Installing apache-airflow-providers-ftp (3.12.0)
+  - Installing apache-airflow-providers-http (5.0.0)
+  - Installing apache-airflow-providers-imap (3.8.0): Downloading... 100%
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing colorlog (6.9.0)
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing colorlog (6.9.0)
+  - Installing apache-airflow-providers-imap (3.8.0): Installing...
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing colorlog (6.9.0)
+  - Installing configupdater (3.2)
+  - Installing connexion (2.14.2)
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing colorlog (6.9.0)
+  - Installing configupdater (3.2)
+  - Installing connexion (2.14.2)
+  - Installing apache-airflow-providers-imap (3.8.0)
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing colorlog (6.9.0)
+  - Installing configupdater (3.2)
+  - Installing connexion (2.14.2)
+  - Installing cron-descriptor (1.4.5): Downloading... 0%
+  - Installing cron-descriptor (1.4.5): Downloading... 100%
+  - Installing cron-descriptor (1.4.5): Installing...
+  - Installing cron-descriptor (1.4.5)
+  - Installing apache-airflow-providers-common-io (1.5.0)
+  - Installing apache-airflow-providers-fab (1.5.3)
+  - Installing apache-airflow-providers-ftp (3.12.0)
+  - Installing apache-airflow-providers-http (5.0.0)
+  - Installing apache-airflow-providers-imap (3.8.0)
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing colorlog (6.9.0)
+  - Installing configupdater (3.2)
+  - Installing connexion (2.14.2)
+  - Installing cron-descriptor (1.4.5)
+  - Installing alembic (1.14.1)
+  - Installing apache-airflow-providers-common-io (1.5.0)
+  - Installing apache-airflow-providers-fab (1.5.3)
+  - Installing apache-airflow-providers-ftp (3.12.0)
+  - Installing apache-airflow-providers-http (5.0.0)
+  - Installing apache-airflow-providers-imap (3.8.0)
+  - Installing apache-airflow-providers-smtp (1.9.0)
+  - Installing apache-airflow-providers-sqlite (4.0.0)
+  - Installing argcomplete (3.5.3)
+  - Installing blinker (1.9.0)
+  - Installing colorlog (6.9.0)
+  - Installing configupdater (3.2)
+  - Installing connexion (2.14.2)
+  - Installing cron-descriptor (1.4.5)
+  - Installing croniter (6.0.0)
+  - Installing cryptography (44.0.1)
+  - Installing dill (0.3.9)
+  - Installing flask-caching (2.3.0)
+  - Installing flask-session (0.5.0)
+  - Installing gunicorn (23.0.0)
+  - Installing httpx (0.28.1)
+  - Installing lazy-object-proxy (1.10.0)
+  - Installing linkify-it-py (2.0.3)
+  - Installing marshmallow-oneofschema (3.1.1)
+  - Installing mdit-py-plugins (0.4.2)
+  - Installing methodtools (0.4.7)
+  - Installing opentelemetry-exporter-otlp (1.30.0)
+  - Installing pathspec (0.12.1)
+  - Installing pendulum (3.0.0)
+  - Installing pluggy (1.5.0)
+  - Installing psutil (7.0.0)
+  - Installing python-daemon (3.1.2)
+  - Installing python-nvd3 (0.16.0)
+  - Installing rfc3339-validator (0.1.4)
+  - Installing rich-argparse (1.7.0)
+  - Installing setproctitle (1.3.4)
+  - Installing sqlalchemy-jsonfield (1.0.2)
+  - Installing tabulate (0.9.0)
+  - Installing tenacity (9.0.0)
+  - Installing termcolor (2.5.0)
+  - Installing universal-pathlib (0.2.6)
+  - Installing apache-airflow (2.10.5)
+
+Writing lock file
+ {seilylook} 🚀 poetry add apache-airflow
+The following packages are already present in the pyproject.toml and will be skipped:
+
+  - apache-airflow
+
+If you want to update it to the latest compatible version, you can use `poetry update package`.
+If you prefer to upgrade it to the latest available version, you can use `poetry add package@latest`.
+
+Nothing to add.
 ```
