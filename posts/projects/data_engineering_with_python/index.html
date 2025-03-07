@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Data_engineering_with_python - Devlog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Data_engineering_with_python" />
+<meta property="og:description" content="Data Engineering with Python Chapter 2. Building Infrastructure Make build (docker build python image &amp; docker compose up) 책에서는 Airflow, NiFi, PostgreSQL, Elasticsearch, Kibana 등 모조리 다 로컬 환경에서 설치해서 실습한다. 하지만 이는 내가 아주 싫어하는 상황이므로 당연하게 Docker를 활용해서 환경을 구축했다.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 app-py3." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://seilylook.github.io/posts/projects/data_engineering_with_python/" /><meta property="og:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-03-07T17:03:46+09:00" />
+<meta property="article:modified_time" content="2025-03-07T17:03:46+09:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://seilylook.github.io/images/profile/profile.png" /><meta name="twitter:title" content="Data_engineering_with_python"/>
+<meta name="twitter:description" content="Data Engineering with Python Chapter 2. Building Infrastructure Make build (docker build python image &amp; docker compose up) 책에서는 Airflow, NiFi, PostgreSQL, Elasticsearch, Kibana 등 모조리 다 로컬 환경에서 설치해서 실습한다. 하지만 이는 내가 아주 싫어하는 상황이므로 당연하게 Docker를 활용해서 환경을 구축했다.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 app-py3."/>
+<meta name="application-name" content="seilylook">
+<meta name="apple-mobile-web-app-title" content="seilylook"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://seilylook.github.io/posts/projects/data_engineering_with_python/" /><link rel="prev" href="https://seilylook.github.io/posts/library/python/test/unittest/patch/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Data_engineering_with_python",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/seilylook.github.io\/posts\/projects\/data_engineering_with_python\/"
+        },"image": ["https:\/\/seilylook.github.io\/images\/profile\/profile.png"],"genre": "posts","keywords": "Data Engineering","wordcount":  2315 ,
+        "url": "https:\/\/seilylook.github.io\/posts\/projects\/data_engineering_with_python\/","datePublished": "2025-03-07T17:03:46+09:00","dateModified": "2025-03-07T17:03:46+09:00","publisher": {
+            "@type": "Organization",
+            "name": "seilylook","logo": "https:\/\/seilylook.github.io\/images\/profile\/profile.png"},"author": {
+                "@type": "Person",
+                "name": "seilylook"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Devlog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/projects/data_engineering_with_python/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Devlog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/projects/data_engineering_with_python/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Data_engineering_with_python</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/seilylook" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>seilylook</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Project</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-07">2025-03-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2315 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/feature_images/project.jpg"
+        data-srcset="/images/feature_images/project.jpg, /images/feature_images/project.jpg 1.5x, /images/feature_images/project.jpg 2x"
+        data-sizes="auto"
+        alt="/images/feature_images/project.jpg"
+        title="/images/feature_images/project.jpg" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#chapter-2-building-infrastructure">Chapter 2. Building Infrastructure</a>
+      <ul>
+        <li><a href="#make-build-docker-build-python-image--docker-compose-up">Make build (docker build python image &amp; docker compose up)</a>
+          <ul>
+            <li><a href="#make-test">Make test</a></li>
+            <li><a href="#make-start">Make start</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#chapter-3-reading-and-writing-files">Chapter 3. Reading and Writing Files</a>
+      <ul>
+        <li><a href="#handling-files-using-nifi-processors">Handling files using NiFi processors</a>
+          <ul>
+            <li><a href="#processors-설정">Processors 설정</a></li>
+            <li><a href="#문제-및-해결">문제 및 해결</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#chapter-4-working-with-databases">Chapter 4. Working with Databases</a>
+      <ul>
+        <li><a href="#building-data-pipelines-in-apache-airflow">Building data pipelines in Apache Airflow</a></li>
+        <li><a href="#handling-databases-with-nifi-processorss">Handling databases with NiFi processorss</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="data-engineering-with-python">Data Engineering with Python</h1>
+<h2 id="chapter-2-building-infrastructure">Chapter 2. Building Infrastructure</h2>
+<h3 id="make-build-docker-build-python-image--docker-compose-up">Make build (docker build python image &amp; docker compose up)</h3>
+<p>책에서는 Airflow, NiFi, PostgreSQL, Elasticsearch, Kibana 등 모조리 다 로컬 환경에서 설치해서 실습한다. 하지만 이는 내가 아주 싫어하는 상황이므로 당연하게 Docker를 활용해서 환경을 구축했다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">app-py3.12 ✘ <span class="o">{</span>seilylook<span class="o">}</span> 🍀 make <span class="nv">build</span>
+</span></span><span class="line"><span class="cl"><span class="o">==============================================</span>
+</span></span><span class="line"><span class="cl">Exporting Python dependencies to requirements.txt...
+</span></span><span class="line"><span class="cl"><span class="o">==============================================</span>
+</span></span><span class="line"><span class="cl">poetry <span class="nb">export</span> -f requirements.txt --output requirements.txt --without-hashes --with dev
+</span></span><span class="line"><span class="cl">Warning: poetry-plugin-export will not be installed by default in a future version of Poetry.
+</span></span><span class="line"><span class="cl">In order to avoid a breaking change and make your automation forward-compatible, please install poetry-plugin-export explicitly. See https://python-poetry.org/docs/plugins/#using-plugins <span class="k">for</span> details on how to install a plugin.
+</span></span><span class="line"><span class="cl">To disable this warning run <span class="s1">&#39;poetry config warnings.export false&#39;</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==============================================</span>
+</span></span><span class="line"><span class="cl">Building Docker image python-app:latest...
+</span></span><span class="line"><span class="cl"><span class="o">==============================================</span>
+</span></span><span class="line"><span class="cl">docker build -t python-app:latest .
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building 1.7s <span class="o">(</span>20/20<span class="o">)</span> FINISHED                                                                                               docker:desktop-linux
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile                                                                                             0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: 1.14kB                                                                                                           0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/python:3.12-slim                                                                              1.5s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>auth<span class="o">]</span> library/python:pull token <span class="k">for</span> registry-1.docker.io                                                                                    0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                                                0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 2B                                                                                                                  0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                                                0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 33.38kB                                                                                                             0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>builder 1/5<span class="o">]</span> FROM docker.io/library/python:3.12-slim@sha256:aaa3f8cb64dd64e5f8cb6e58346bdcfa410a108324b0f28f1a7cc5964355b211                0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>stage-1  2/10<span class="o">]</span> RUN apt-get update <span class="o">&amp;&amp;</span>     apt-get install -y --no-install-recommends     default-jdk     procps     wget     libpq5   0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>stage-1  3/10<span class="o">]</span> WORKDIR /app                                                                                                          0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>builder 2/5<span class="o">]</span> WORKDIR /app                                                                                                            0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>builder 3/5<span class="o">]</span> RUN apt-get update <span class="o">&amp;&amp;</span>     apt-get install -y --no-install-recommends     build-essential     libpq-dev     python3-dev  0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>builder 4/5<span class="o">]</span> COPY requirements.txt .                                                                                                 0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>builder 5/5<span class="o">]</span> RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt                                      0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>stage-1  4/10<span class="o">]</span> COPY --from<span class="o">=</span>builder /app/wheels /wheels                                                                               0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>stage-1  5/10<span class="o">]</span> COPY --from<span class="o">=</span>builder /app/requirements.txt .                                                                           0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; CACHED <span class="o">[</span>stage-1  6/10<span class="o">]</span> RUN pip install --no-cache /wheels/*                                                                                  0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>stage-1  7/10<span class="o">]</span> COPY src/ src/                                                                                                               0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>stage-1  8/10<span class="o">]</span> COPY tests/ tests/                                                                                                           0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>stage-1  9/10<span class="o">]</span> COPY data/ data/                                                                                                             0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">[</span>stage-1 10/10<span class="o">]</span> COPY conf/ conf/                                                                                                             0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; exporting to image                                                                                                                           0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                                                          0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:a7003da4b1bb9a04c9d98b7a386e9c28c84efe83df2ae20e99abc16cedf9e3fb                                                     0.0s
+</span></span><span class="line"><span class="cl"> <span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/python-app:latest                                                                                             0.0s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/4go6dhhdb6ahlu1m1xmndgsou
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">What<span class="s1">&#39;s next:
+</span></span></span><span class="line"><span class="cl"><span class="s1">    View a summary of image vulnerabilities and recommendations → docker scout quickview 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">==============================================
+</span></span></span><span class="line"><span class="cl"><span class="s1">Constructing Docker Containers...
+</span></span></span><span class="line"><span class="cl"><span class="s1">==============================================
+</span></span></span><span class="line"><span class="cl"><span class="s1">docker compose up -d
+</span></span></span><span class="line"><span class="cl"><span class="s1">WARN[0000] The &#34;AIRFLOW_UID&#34; variable is not set. Defaulting to a blank string. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">WARN[0000] The &#34;AIRFLOW_UID&#34; variable is not set. Defaulting to a blank string. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">WARN[0000] /Users/seilylook/Development/Book/Data_Engineering_with_Python/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+</span></span></span><span class="line"><span class="cl"><span class="s1">[+] Running 10/10
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container postgres           Healthy                                                                                                          4.3s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container elasticsearch      Healthy                                                                                                          3.6s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container redis              Healthy                                                                                                          4.3s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container kibana             Running                                                                                                          0.0s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container airflow-init       Exited                                                                                                           7.8s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container python-app         Started                                                                                                          3.8s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container airflow-triggerer  Running                                                                                                          0.0s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container airflow-webserver  Running                                                                                                          0.0s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container airflow-scheduler  Running                                                                                                          0.0s 
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ✔ Container airflow-worker     Running                                                                                                          0.0s 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">==============================================
+</span></span></span><span class="line"><span class="cl"><span class="s1">Waiting for PostgreSQL to start...
+</span></span></span><span class="line"><span class="cl"><span class="s1">==============================================
+</span></span></span><span class="line"><span class="cl"><span class="s1">=====================================
+</span></span></span><span class="line"><span class="cl"><span class="s1">Initializing PostgreSQL...
+</span></span></span><span class="line"><span class="cl"><span class="s1">=====================================
+</span></span></span><span class="line"><span class="cl"><span class="s1">chmod +x ./scripts/init_postgresql.sh
+</span></span></span><span class="line"><span class="cl"><span class="s1">./scripts/init_postgresql.sh
+</span></span></span><span class="line"><span class="cl"><span class="s1">dataengineering 데이터베이스 생성 중...
+</span></span></span><span class="line"><span class="cl"><span class="s1">ERROR:  database &#34;dataengineering&#34; already exists
+</span></span></span><span class="line"><span class="cl"><span class="s1">Successfully copied 2.05kB to postgres:/tmp/create_tables.sql
+</span></span></span><span class="line"><span class="cl"><span class="s1">테이블 생성 중...
+</span></span></span><span class="line"><span class="cl"><span class="s1">psql:/tmp/create_tables.sql:10: NOTICE:  relation &#34;users&#34; already exists, skipping
+</span></span></span><span class="line"><span class="cl"><span class="s1">CREATE TABLE
+</span></span></span><span class="line"><span class="cl"><span class="s1">        List of relations
+</span></span></span><span class="line"><span class="cl"><span class="s1"> Schema | Name  | Type  |  Owner  
+</span></span></span><span class="line"><span class="cl"><span class="s1">--------+-------+-------+---------
+</span></span></span><span class="line"><span class="cl"><span class="s1"> public | users | table | airflow
+</span></span></span><span class="line"><span class="cl"><span class="s1">(1 row)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">                                    Table &#34;public.users&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1"> Column |          Type          | Collation | Nullable |              Default              
+</span></span></span><span class="line"><span class="cl"><span class="s1">--------+------------------------+-----------+----------+-----------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s1"> id     | integer                |           | not null | nextval(&#39;</span>users_id_seq<span class="err">&#39;</span>::regclass<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> name   <span class="p">|</span> character varying<span class="o">(</span>100<span class="o">)</span> <span class="p">|</span>           <span class="p">|</span> not null <span class="p">|</span> 
+</span></span><span class="line"><span class="cl"> street <span class="p">|</span> character varying<span class="o">(</span>200<span class="o">)</span> <span class="p">|</span>           <span class="p">|</span>          <span class="p">|</span> 
+</span></span><span class="line"><span class="cl"> city   <span class="p">|</span> character varying<span class="o">(</span>100<span class="o">)</span> <span class="p">|</span>           <span class="p">|</span>          <span class="p">|</span> 
+</span></span><span class="line"><span class="cl"> zip    <span class="p">|</span> character varying<span class="o">(</span>10<span class="o">)</span>  <span class="p">|</span>           <span class="p">|</span>          <span class="p">|</span> 
+</span></span><span class="line"><span class="cl"> lng    <span class="p">|</span> numeric<span class="o">(</span>10,6<span class="o">)</span>          <span class="p">|</span>           <span class="p">|</span>          <span class="p">|</span> 
+</span></span><span class="line"><span class="cl"> lat    <span class="p">|</span> numeric<span class="o">(</span>10,6<span class="o">)</span>          <span class="p">|</span>           <span class="p">|</span>          <span class="p">|</span> 
+</span></span><span class="line"><span class="cl">Indexes:
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;users_pkey&#34;</span> PRIMARY KEY, btree <span class="o">(</span>id<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">권한 부여 중...
+</span></span><span class="line"><span class="cl">GRANT
+</span></span><span class="line"><span class="cl">데이터베이스와 테이블이 성공적으로 생성되었습니다.
+</span></span><span class="line"><span class="cl">데이터베이스 연결 테스트 중...
+</span></span><span class="line"><span class="cl">/var/run/postgresql:5432 - accepting connections
+</span></span><span class="line"><span class="cl">데이터베이스가 정상적으로 응답합니다.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">==============================================</span>
+</span></span><span class="line"><span class="cl">Waiting <span class="k">for</span> Elasticsearch to start...
+</span></span><span class="line"><span class="cl"><span class="o">==============================================</span>
+</span></span><span class="line"><span class="cl"><span class="o">=====================================</span>
+</span></span><span class="line"><span class="cl">Initializing Elasticsearch...
+</span></span><span class="line"><span class="cl"><span class="o">=====================================</span>
+</span></span><span class="line"><span class="cl">chmod +x ./scripts/init_elasticsearch.sh
+</span></span><span class="line"><span class="cl">./scripts/init_elasticsearch.sh
+</span></span><span class="line"><span class="cl">Elasticsearch가 준비될 때까지 대기 중...
+</span></span><span class="line"><span class="cl">Elasticsearch가 준비되었습니다.
+</span></span><span class="line"><span class="cl">users 인덱스 생성 중...
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;error&#34;</span>:<span class="o">{</span><span class="s2">&#34;root_cause&#34;</span>:<span class="o">[{</span><span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;resource_already_exists_exception&#34;</span>,<span class="s2">&#34;reason&#34;</span>:<span class="s2">&#34;index [users/AW57UPmxTYyW3G-GdL6lHw] already exists&#34;</span>,<span class="s2">&#34;index_uuid&#34;</span>:<span class="s2">&#34;AW57UPmxTYyW3G-GdL6lHw&#34;</span>,<span class="s2">&#34;index&#34;</span>:<span class="s2">&#34;users&#34;</span><span class="o">}]</span>,<span class="s2">&#34;type&#34;</span>:<span class="s2">&#34;resource_already_exists_exception&#34;</span>,<span class="s2">&#34;reason&#34;</span>:<span class="s2">&#34;index [users/AW57UPmxTYyW3G-GdL6lHw] already exists&#34;</span>,<span class="s2">&#34;index_uuid&#34;</span>:<span class="s2">&#34;AW57UPmxTYyW3G-GdL6lHw&#34;</span>,<span class="s2">&#34;index&#34;</span>:<span class="s2">&#34;users&#34;</span><span class="o">}</span>,<span class="s2">&#34;status&#34;</span>:400<span class="o">}</span>users 인덱스가 성공적으로 생성되었습니다.
+</span></span><span class="line"><span class="cl">인덱스 목록 확인:
+</span></span><span class="line"><span class="cl">health status index                                                              uuid                   pri rep docs.count docs.deleted store.size pri.store.size dataset.size
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-transform.health.alerts-default-000001            MSc-VAFyQHG9tGk2TxwbGg   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-observability.logs.alerts-default-000001          Bief08evQ_SX_3UrwZOzwQ   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-observability.uptime.alerts-default-000001        N-ptFAoNTYeF7OHGtOqZFw   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-ml.anomaly-detection.alerts-default-000001        JL9JINenTS-XMJClxKXrYA   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-observability.slo.alerts-default-000001           rFwL_h62QZmQx8kkXFZIyA   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-default.alerts-default-000001                     6xFM1NqvTc--9BJ7MlhCpA   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-observability.apm.alerts-default-000001           D1xM5G2DTPeF25kkR6_KWQ   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   users                                                              AW57UPmxTYyW3G-GdL6lHw   <span class="m">1</span>   <span class="m">0</span>       <span class="m">1000</span>            <span class="m">0</span>    229.1kb        229.1kb      229.1kb
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-observability.metrics.alerts-default-000001       IO4Li-8sS6-AH8aSsvEqLg   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-ml.anomaly-detection-health.alerts-default-000001 95sA140IQ2qCyErtmHKTEg   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-observability.threshold.alerts-default-000001     TV3IWC9fQUuYWQO-56_5sA   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-security.alerts-default-000001                    VE-qcLiURZy7h_i1hb96Lw   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span><span class="line"><span class="cl">green  open   .internal.alerts-stack.alerts-default-000001                       _PEhTLb4TJ2bYAwiv6kz8w   <span class="m">1</span>   <span class="m">0</span>          <span class="m">0</span>            <span class="m">0</span>       249b           249b         249b
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="make-test">Make test</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">app-py3.12 <span class="o">{</span>seilylook<span class="o">}</span> 🍀 make <span class="nb">test</span> 
+</span></span><span class="line"><span class="cl"><span class="o">=======================</span>
+</span></span><span class="line"><span class="cl">Running tests with pytest...
+</span></span><span class="line"><span class="cl"><span class="o">=======================</span>
+</span></span><span class="line"><span class="cl">mkdir -p target
+</span></span><span class="line"><span class="cl">docker run --rm -v /Users/seilylook/Development/Book/Data_Engineering_with_Python/app/target:/app/target python-app:latest /bin/bash -c <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                <span class="s1">&#39;for test_file in $(find tests -name &#34;*.py&#34; ! -name &#34;__init__.py&#34;); do \
+</span></span></span><span class="line"><span class="cl"><span class="s1">                        base_name=$(basename $test_file .py); \
+</span></span></span><span class="line"><span class="cl"><span class="s1">                        pytest $test_file --junitxml=target/$base_name.xml; \
+</span></span></span><span class="line"><span class="cl"><span class="s1">                done&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.12.9, pytest-8.3.4, pluggy-1.5.0
+</span></span><span class="line"><span class="cl">rootdir: /app
+</span></span><span class="line"><span class="cl">plugins: Faker-36.1.1, time-machine-2.16.0, anyio-4.8.0
+</span></span><span class="line"><span class="cl">collected <span class="m">7</span> items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tests/test_progress_bar.py .......                                       <span class="o">[</span>100%<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------------ generated xml file: /app/target/test_progress_bar.xml -------------
+</span></span><span class="line"><span class="cl"><span class="o">==============================</span> <span class="m">7</span> passed in 0.06s <span class="o">===============================</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.12.9, pytest-8.3.4, pluggy-1.5.0
+</span></span><span class="line"><span class="cl">rootdir: /app
+</span></span><span class="line"><span class="cl">plugins: Faker-36.1.1, time-machine-2.16.0, anyio-4.8.0
+</span></span><span class="line"><span class="cl">collected <span class="m">9</span> items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tests/test_data_generator.py .........                                   <span class="o">[</span>100%<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">----------- generated xml file: /app/target/test_data_generator.xml ------------
+</span></span><span class="line"><span class="cl"><span class="o">==============================</span> <span class="m">9</span> passed in 0.03s <span class="o">===============================</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.12.9, pytest-8.3.4, pluggy-1.5.0
+</span></span><span class="line"><span class="cl">rootdir: /app
+</span></span><span class="line"><span class="cl">plugins: Faker-36.1.1, time-machine-2.16.0, anyio-4.8.0
+</span></span><span class="line"><span class="cl">collected <span class="m">0</span> items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">----------------- generated xml file: /app/target/conftest.xml -----------------
+</span></span><span class="line"><span class="cl"><span class="o">============================</span> no tests ran in 0.00s <span class="o">=============================</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.12.9, pytest-8.3.4, pluggy-1.5.0
+</span></span><span class="line"><span class="cl">rootdir: /app
+</span></span><span class="line"><span class="cl">plugins: Faker-36.1.1, time-machine-2.16.0, anyio-4.8.0
+</span></span><span class="line"><span class="cl">collected <span class="m">7</span> items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tests/test_postgres_connector.py .......                                 <span class="o">[</span>100%<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------- generated xml file: /app/target/test_postgres_connector.xml ----------
+</span></span><span class="line"><span class="cl"><span class="o">==============================</span> <span class="m">7</span> passed in 0.20s <span class="o">===============================</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.12.9, pytest-8.3.4, pluggy-1.5.0
+</span></span><span class="line"><span class="cl">rootdir: /app
+</span></span><span class="line"><span class="cl">plugins: Faker-36.1.1, time-machine-2.16.0, anyio-4.8.0
+</span></span><span class="line"><span class="cl">collected <span class="m">9</span> items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tests/test_database_config.py .........                                  <span class="o">[</span>100%<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">----------- generated xml file: /app/target/test_database_config.xml -----------
+</span></span><span class="line"><span class="cl"><span class="o">==============================</span> <span class="m">9</span> passed in 0.02s <span class="o">===============================</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.12.9, pytest-8.3.4, pluggy-1.5.0
+</span></span><span class="line"><span class="cl">rootdir: /app
+</span></span><span class="line"><span class="cl">plugins: Faker-36.1.1, time-machine-2.16.0, anyio-4.8.0
+</span></span><span class="line"><span class="cl">collected <span class="m">14</span> items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tests/test_database_pytest.py ..............                             <span class="o">[</span>100%<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">----------- generated xml file: /app/target/test_database_pytest.xml -----------
+</span></span><span class="line"><span class="cl"><span class="o">==============================</span> <span class="m">14</span> passed in 0.19s <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl"><span class="o">=============================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">==============================</span>
+</span></span><span class="line"><span class="cl">platform linux -- Python 3.12.9, pytest-8.3.4, pluggy-1.5.0
+</span></span><span class="line"><span class="cl">rootdir: /app
+</span></span><span class="line"><span class="cl">plugins: Faker-36.1.1, time-machine-2.16.0, anyio-4.8.0
+</span></span><span class="line"><span class="cl">collected <span class="m">8</span> items
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tests/test_elasticsearch_connector.py ........                           <span class="o">[</span>100%<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------- generated xml file: /app/target/test_elasticsearch_connector.xml -------
+</span></span><span class="line"><span class="cl"><span class="o">==============================</span> <span class="m">8</span> passed in 0.18s <span class="o">===============================</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="make-start">Make start</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">app-py3.12 <span class="o">{</span>seilylook<span class="o">}</span> 🍀 make <span class="nv">start</span>
+</span></span><span class="line"><span class="cl"><span class="o">=========================</span>
+</span></span><span class="line"><span class="cl">Starting the application...
+</span></span><span class="line"><span class="cl"><span class="o">=========================</span>
+</span></span><span class="line"><span class="cl">python -m src.main
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,269 - root - INFO - 데이터 생성 및 저장 프로세스 시작
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,269 - root - INFO - 데이터셋이 이미 존재합니다: data/raw/test_data.csv
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,285 - src.utils.connection - INFO - PostgreSQL 연결 성공!
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,286 - src.utils.connection - INFO - Elasticsearch 클라이언트 생성 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,290 - elastic_transport.transport - INFO - GET http://localhost:9200/ <span class="o">[</span>status:200 duration:0.004s<span class="o">]</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,290 - src.utils.connection - INFO - Elasticsearch 연결 성공! 버전: 8.17.2
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,290 - root - INFO - Postgresql 상태: 연결됨
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,290 - root - INFO - Elasticsearch 상태: 연결됨
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,295 - root - INFO - PostgreSQL: 1000개 레코드를 data/raw/test_data.csv에서 읽었습니다
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,330 - src.database.repository - INFO - Bulk inserted <span class="m">1000</span> users
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,331 - root - INFO - PostgreSQL에 1000개 레코드 저장 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,331 - root - INFO - PostgreSQL에 1000개 레코드 저장됨
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,333 - root - INFO - Elasticsearch: 1000개 레코드를 data/raw/test_data.csv에서 읽었습니다
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,335 - src.utils.connection - INFO - Elasticsearch 클라이언트 생성 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,408 - elastic_transport.transport - INFO - PUT http://localhost:9200/_bulk?refresh<span class="o">=</span><span class="nb">true</span> <span class="o">[</span>status:200 duration:0.068s<span class="o">]</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,410 - src.database.repository - INFO - Elasticsearch에 1000개 문서 벌크 저장 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,410 - root - INFO - Elasticsearch에 1000개 레코드 저장 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,410 - root - INFO - Elasticsearch에 1000개 레코드 저장됨
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - root - INFO - PostgreSQL에서 5개 레코드 조회 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - root - INFO - PostgreSQL 데이터 확인 <span class="o">(</span>샘플 5개<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - root - INFO -   레코드 1: <span class="o">{</span><span class="s1">&#39;id&#39;</span>: 1, <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Whitney Olson&#39;</span>, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;1791 Pittman Overpass&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Lake Jason&#39;</span>, <span class="s1">&#39;zip&#39;</span>: <span class="s1">&#39;48870&#39;</span>, <span class="s1">&#39;lng&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;114.735089&#39;</span><span class="o">)</span>, <span class="s1">&#39;lat&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;45.235433&#39;</span><span class="o">)}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - root - INFO -   레코드 2: <span class="o">{</span><span class="s1">&#39;id&#39;</span>: 2, <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;David Smith&#39;</span>, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;0474 Julian Station&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;West Sophia&#39;</span>, <span class="s1">&#39;zip&#39;</span>: <span class="s1">&#39;72976&#39;</span>, <span class="s1">&#39;lng&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;94.204753&#39;</span><span class="o">)</span>, <span class="s1">&#39;lat&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;-88.761862&#39;</span><span class="o">)}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - root - INFO -   레코드 3: <span class="o">{</span><span class="s1">&#39;id&#39;</span>: 3, <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Mr. Jason Hughes MD&#39;</span>, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;7351 Robinson Underpass&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Stephaniebury&#39;</span>, <span class="s1">&#39;zip&#39;</span>: <span class="s1">&#39;8702&#39;</span>, <span class="s1">&#39;lng&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;-87.282108&#39;</span><span class="o">)</span>, <span class="s1">&#39;lat&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;12.763472&#39;</span><span class="o">)}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - root - INFO -   레코드 4: <span class="o">{</span><span class="s1">&#39;id&#39;</span>: 4, <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;John Johnson&#39;</span>, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;8304 Cooper Mews&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Candicefort&#39;</span>, <span class="s1">&#39;zip&#39;</span>: <span class="s1">&#39;87821&#39;</span>, <span class="s1">&#39;lng&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;-169.562279&#39;</span><span class="o">)</span>, <span class="s1">&#39;lat&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;-53.845951&#39;</span><span class="o">)}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - root - INFO -   레코드 5: <span class="o">{</span><span class="s1">&#39;id&#39;</span>: 5, <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Gregory Harrison&#39;</span>, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;0866 Lee Expressway Suite 888&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Dianaport&#39;</span>, <span class="s1">&#39;zip&#39;</span>: <span class="s1">&#39;14219&#39;</span>, <span class="s1">&#39;lng&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;-30.874919&#39;</span><span class="o">)</span>, <span class="s1">&#39;lat&#39;</span>: Decimal<span class="o">(</span><span class="s1">&#39;84.261251&#39;</span><span class="o">)}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,414 - src.utils.connection - INFO - Elasticsearch 클라이언트 생성 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,419 - elastic_transport.transport - INFO - POST http://localhost:9200/users/_search <span class="o">[</span>status:200 duration:0.005s<span class="o">]</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO - Elasticsearch에서 5개 레코드 조회 완료
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO - Elasticsearch 데이터 확인 <span class="o">(</span>샘플 5개<span class="o">)</span>:
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO -   레코드 1: <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Whitney Olson&#39;</span>, <span class="s1">&#39;age&#39;</span>: 26, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;1791 Pittman Overpass&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Lake Jason&#39;</span>, <span class="s1">&#39;state&#39;</span>: <span class="s1">&#39;Idaho&#39;</span>, <span class="s1">&#39;zip&#39;</span>: 48870, <span class="s1">&#39;lng&#39;</span>: 114.735089, <span class="s1">&#39;lat&#39;</span>: 45.2354325<span class="o">}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO -   레코드 2: <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;David Smith&#39;</span>, <span class="s1">&#39;age&#39;</span>: 28, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;0474 Julian Station&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;West Sophia&#39;</span>, <span class="s1">&#39;state&#39;</span>: <span class="s1">&#39;Arizona&#39;</span>, <span class="s1">&#39;zip&#39;</span>: 72976, <span class="s1">&#39;lng&#39;</span>: 94.204753, <span class="s1">&#39;lat&#39;</span>: -88.761862<span class="o">}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO -   레코드 3: <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Mr. Jason Hughes MD&#39;</span>, <span class="s1">&#39;age&#39;</span>: 70, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;7351 Robinson Underpass&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Stephaniebury&#39;</span>, <span class="s1">&#39;state&#39;</span>: <span class="s1">&#39;Mississippi&#39;</span>, <span class="s1">&#39;zip&#39;</span>: 8702, <span class="s1">&#39;lng&#39;</span>: -87.282108, <span class="s1">&#39;lat&#39;</span>: 12.763472<span class="o">}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO -   레코드 4: <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;John Johnson&#39;</span>, <span class="s1">&#39;age&#39;</span>: 41, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;8304 Cooper Mews&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Candicefort&#39;</span>, <span class="s1">&#39;state&#39;</span>: <span class="s1">&#39;Rhode Island&#39;</span>, <span class="s1">&#39;zip&#39;</span>: 87821, <span class="s1">&#39;lng&#39;</span>: -169.562279, <span class="s1">&#39;lat&#39;</span>: -53.845951<span class="o">}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO -   레코드 5: <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Gregory Harrison&#39;</span>, <span class="s1">&#39;age&#39;</span>: 24, <span class="s1">&#39;street&#39;</span>: <span class="s1">&#39;0866 Lee Expressway Suite 888&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;Dianaport&#39;</span>, <span class="s1">&#39;state&#39;</span>: <span class="s1">&#39;New Jersey&#39;</span>, <span class="s1">&#39;zip&#39;</span>: 14219, <span class="s1">&#39;lng&#39;</span>: -30.874919, <span class="s1">&#39;lat&#39;</span>: 84.261251<span class="o">}</span>
+</span></span><span class="line"><span class="cl">2025-02-28 17:34:59,420 - root - INFO - 데이터 생성 및 저장 프로세스 완료
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="chapter-3-reading-and-writing-files">Chapter 3. Reading and Writing Files</h2>
+<h3 id="handling-files-using-nifi-processors">Handling files using NiFi processors</h3>
+<p>앞서 <code>make start</code>를 통해 Faker를 활용해 테스트 데이터를 생성한다. 이 데이터는 다음 디렉토리에 존재한다.</p>
+<ul>
+<li>
+<p>local: /app/data/raw/test_data.csv</p>
+</li>
+<li>
+<p>NiFi container: /opt/nifi/nifi-current/data/raw/test_data.csv</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Nifi container 실행</span>
+</span></span><span class="line"><span class="cl">app-py3.12 <span class="o">{</span>seilylook<span class="o">}</span> 🚀 docker <span class="nb">exec</span> -i -t nifi /bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Container에 원본 데이터가 존재하는지 확인</span>
+</span></span><span class="line"><span class="cl">nifi@e92527995ead:/opt/nifi/nifi-current$ ls data/raw/
+</span></span><span class="line"><span class="cl">test_data.csv
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 40세 이상 사람들 Query 하고 Name 기준으로 저장</span>
+</span></span><span class="line"><span class="cl">nifi@e92527995ead:/opt/nifi/nifi-current/data/processed$ ls -al
+</span></span><span class="line"><span class="cl">total <span class="m">84</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">12</span> nifi nifi  <span class="m">384</span> Mar  <span class="m">7</span> 07:17  .
+</span></span><span class="line"><span class="cl">drwxr-xr-x  <span class="m">4</span> root root <span class="m">4096</span> Mar  <span class="m">7</span> 07:05  ..
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">5637</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Amber Taylor&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">5284</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Charles Arnold&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">5789</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Corey Hardin&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">6580</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Ebony Miller&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">6030</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Grant Garrison&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">5108</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Kristina Parker&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">5444</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Nicholas Baker MD&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">5277</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Phillip Love&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">6180</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Whitney Barnes&#39;</span>
+</span></span><span class="line"><span class="cl">-rw-r--r--  <span class="m">1</span> nifi nifi <span class="m">5438</span> Mar  <span class="m">7</span> 07:17 <span class="s1">&#39;Zachary Cohen&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="processors-설정">Processors 설정</h4>
+<p>책 63p를 참조해서 Processors와 각 Processors들의 Properties를 설정했다. 원본 데이터는 Row가 1000개이다. SplitRecord Processor의 <code>Records Per Split</code>를 100으로 설정했기 때문에 /opt/nifi/nifi-current/data/processed 에 있는 결과 파일들을 보면 10개임을 확인할 수 있다.</p>
+<h4 id="문제-및-해결">문제 및 해결</h4>
+<ol>
+<li>Nifi container 생성</li>
+</ol>
+<p>초기에 apache/nifi:latest 버전으로 image pull을 수행하니 version 2부터 자동으로 <code>https:</code>로 연결되도록 정의되어 있었다. 그래서 이전까지 Nifi를 빼고 나머지(postgresql, elasticsearch, airflow)만을 docker container로 만들었으나 문제를 해결하고 싶어 여러가지 시도를 하다가 마지막 수단으로 version을 1.28.0(버전을 낮출 떄 주의할 점은 OS/ARCH == linux/arm64 를 지원하는 docker image 인지 확인해야 한다. 내 MAC은 arm64이기 때문이다.) 으로 낮추니 정상적으로 <code>http:</code> port를 사용해서 접근할 수 있었다.</p>
+<ol start="2">
+<li>Nifi Processor</li>
+</ol>
+<p>Nifi Processor를 생성하고 Properties를 설정하는 것은 책과 동일해 큰 문제가 발생하지 않았다. 그런데 계속해서 SplitRecord 부분에서 문제가 발생했는데, 원인은 <code>RELATIONS</code> 설정. 즉, 각각의 Processor는 원하는 연결 ex, success, splits, over . 40, matched 뿐만 아니라 failure, unmatched 등 예상치 못한 상황에서 대해서 <strong>terminate</strong> | <strong>retry</strong> 를 설정해주어야 한다. 쉽게 생각하면 상단의 <code>!(Warning)</code>이 하나도 없어야 한다.</p>
+<h2 id="chapter-4-working-with-databases">Chapter 4. Working with Databases</h2>
+<h3 id="building-data-pipelines-in-apache-airflow">Building data pipelines in Apache Airflow</h3>
+<h3 id="handling-databases-with-nifi-processorss">Handling databases with NiFi processorss</h3>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-03-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/projects/data_engineering_with_python/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://seilylook.github.io/posts/projects/data_engineering_with_python/" data-title="Data_engineering_with_python" data-hashtags="Data Engineering"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://seilylook.github.io/posts/projects/data_engineering_with_python/" data-hashtag="Data Engineering"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://seilylook.github.io/posts/projects/data_engineering_with_python/" data-title="Data_engineering_with_python"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://seilylook.github.io/posts/projects/data_engineering_with_python/" data-title="Data_engineering_with_python"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://seilylook.github.io/posts/projects/data_engineering_with_python/" data-title="Data_engineering_with_python" data-image="/images/feature_images/project.jpg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/data-engineering/">Data Engineering</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/library/python/test/unittest/patch/" class="prev" rel="prev" title="Patch"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Patch</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/seilylook" target="_blank">seilylook</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"💡","lightTheme":"github-light","repo":"seilylook/seilylook.github.io"}},"data":{"id-1":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e","id-2":"\u003cspan style='color: #FF0000;'\u003eDevlog\u003c/span\u003e"},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
