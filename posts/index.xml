@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - Devlog</title>
+        <link>http://example.org/posts/</link>
+        <description>All Posts | Devlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Apr 2025 14:05:30 &#43;0900</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>HLS(HTTP Live Streaming)</title>
+    <link>http://example.org/hls/</link>
+    <pubDate>Wed, 30 Apr 2025 14:05:30 &#43;0900</pubDate><author>
+        <name>Se Hyeon Kim</name>
+    </author><guid>http://example.org/hls/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/hls.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item></channel>
+</rss>
