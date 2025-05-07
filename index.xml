@@ -3,9 +3,18 @@
         <title>Devlog</title>
         <link>http://example.org/</link>
         <description>Se Hyeon Kim&#39;s Devlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Apr 2025 14:05:30 &#43;0900</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 May 2025 15:48:18 &#43;0900</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Poetry</title>
+    <link>http://example.org/poetry/</link>
+    <pubDate>Wed, 07 May 2025 15:48:18 &#43;0900</pubDate><author>
+        <name>Se Hyeon Kim</name>
+    </author><guid>http://example.org/poetry/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/poetry.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
     <title>HLS(HTTP Live Streaming)</title>
     <link>http://example.org/hls/</link>
     <pubDate>Wed, 30 Apr 2025 14:05:30 &#43;0900</pubDate><author>
