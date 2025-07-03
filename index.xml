@@ -3,9 +3,27 @@
         <title>Devlog</title>
         <link>http://example.org/</link>
         <description>Se Hyeon Kim&#39;s Devlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 02 Jul 2025 16:01:41 &#43;0900</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 03 Jul 2025 15:42:42 &#43;0900</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>VPN</title>
+    <link>http://example.org/vpn/</link>
+    <pubDate>Thu, 03 Jul 2025 15:42:42 &#43;0900</pubDate><author>
+        <name>Se Hyeon Kim</name>
+    </author><guid>http://example.org/vpn/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/features/vpn.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
+    <title>Proxy</title>
+    <link>http://example.org/proxy/</link>
+    <pubDate>Thu, 03 Jul 2025 15:42:15 &#43;0900</pubDate><author>
+        <name>Se Hyeon Kim</name>
+    </author><guid>http://example.org/proxy/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/features/proxy.webp" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
     <title>Ethical Hacker Cookbook</title>
     <link>http://example.org/ethical-hacker-cookbook/</link>
     <pubDate>Wed, 02 Jul 2025 16:01:41 &#43;0900</pubDate><author>
