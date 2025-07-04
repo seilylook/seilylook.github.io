@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MAC on Devlog</title>
+    <link>http://example.org/tags/mac/</link>
+    <description>Recent content in MAC on Devlog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 04 Jul 2025 11:01:36 +0900</lastBuildDate>
+    <atom:link href="http://example.org/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IP &amp; MAC</title>
+      <link>http://example.org/ip-mac/</link>
+      <pubDate>Fri, 04 Jul 2025 11:01:36 +0900</pubDate>
+      <guid>http://example.org/ip-mac/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -6,13 +6,41 @@
     <description>Recent content in Tags on Devlog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Jul 2025 15:42:42 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 04 Jul 2025 11:01:36 +0900</lastBuildDate>
     <atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Cyber Security</title>
-      <link>http://example.org/tags/cyber-security/</link>
+      <title>IP</title>
+      <link>http://example.org/tags/ip/</link>
+      <pubDate>Fri, 04 Jul 2025 11:01:36 +0900</pubDate>
+      <guid>http://example.org/tags/ip/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MAC</title>
+      <link>http://example.org/tags/mac/</link>
+      <pubDate>Fri, 04 Jul 2025 11:01:36 +0900</pubDate>
+      <guid>http://example.org/tags/mac/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Port</title>
+      <link>http://example.org/tags/port/</link>
+      <pubDate>Fri, 04 Jul 2025 10:54:19 +0900</pubDate>
+      <guid>http://example.org/tags/port/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VPN</title>
+      <link>http://example.org/tags/vpn/</link>
       <pubDate>Thu, 03 Jul 2025 15:42:42 +0900</pubDate>
-      <guid>http://example.org/tags/cyber-security/</guid>
+      <guid>http://example.org/tags/vpn/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Proxy</title>
+      <link>http://example.org/tags/proxy/</link>
+      <pubDate>Thu, 03 Jul 2025 15:42:15 +0900</pubDate>
+      <guid>http://example.org/tags/proxy/</guid>
       <description></description>
     </item>
     <item>
@@ -23,10 +51,52 @@
       <description></description>
     </item>
     <item>
-      <title>Streaming</title>
-      <link>http://example.org/tags/streaming/</link>
+      <title>Kali Linux</title>
+      <link>http://example.org/tags/kali-linux/</link>
+      <pubDate>Wed, 02 Jul 2025 16:01:41 +0900</pubDate>
+      <guid>http://example.org/tags/kali-linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>UTM</title>
+      <link>http://example.org/tags/utm/</link>
+      <pubDate>Wed, 02 Jul 2025 16:01:41 +0900</pubDate>
+      <guid>http://example.org/tags/utm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Flink</title>
+      <link>http://example.org/tags/flink/</link>
       <pubDate>Sat, 10 May 2025 16:48:08 +0900</pubDate>
-      <guid>http://example.org/tags/streaming/</guid>
+      <guid>http://example.org/tags/flink/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Grafana</title>
+      <link>http://example.org/tags/grafana/</link>
+      <pubDate>Sat, 10 May 2025 16:48:08 +0900</pubDate>
+      <guid>http://example.org/tags/grafana/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>InfluxDB</title>
+      <link>http://example.org/tags/influxdb/</link>
+      <pubDate>Sat, 10 May 2025 16:48:08 +0900</pubDate>
+      <guid>http://example.org/tags/influxdb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Kafka</title>
+      <link>http://example.org/tags/kafka/</link>
+      <pubDate>Sat, 10 May 2025 16:48:08 +0900</pubDate>
+      <guid>http://example.org/tags/kafka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>YOLO</title>
+      <link>http://example.org/tags/yolo/</link>
+      <pubDate>Sat, 10 May 2025 16:48:08 +0900</pubDate>
+      <guid>http://example.org/tags/yolo/</guid>
       <description></description>
     </item>
     <item>
@@ -34,6 +104,13 @@
       <link>http://example.org/tags/environment/</link>
       <pubDate>Wed, 07 May 2025 15:48:18 +0900</pubDate>
       <guid>http://example.org/tags/environment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Streaming</title>
+      <link>http://example.org/tags/streaming/</link>
+      <pubDate>Wed, 30 Apr 2025 14:05:30 +0900</pubDate>
+      <guid>http://example.org/tags/streaming/</guid>
       <description></description>
     </item>
   </channel>

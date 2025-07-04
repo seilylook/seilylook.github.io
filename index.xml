@@ -3,16 +3,34 @@
         <title>Devlog</title>
         <link>http://example.org/</link>
         <description>Se Hyeon Kim&#39;s Devlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 03 Jul 2025 15:42:42 &#43;0900</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 04 Jul 2025 11:01:36 &#43;0900</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>IP &amp; MAC</title>
+    <link>http://example.org/ip-mac/</link>
+    <pubDate>Fri, 04 Jul 2025 11:01:36 &#43;0900</pubDate><author>
+        <name>Se Hyeon Kim</name>
+    </author><guid>http://example.org/ip-mac/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/features/security.jpeg" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
+    <title>Port</title>
+    <link>http://example.org/port/</link>
+    <pubDate>Fri, 04 Jul 2025 10:54:19 &#43;0900</pubDate><author>
+        <name>Se Hyeon Kim</name>
+    </author><guid>http://example.org/port/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/features/security.jpeg" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
     <title>VPN</title>
     <link>http://example.org/vpn/</link>
     <pubDate>Thu, 03 Jul 2025 15:42:42 &#43;0900</pubDate><author>
         <name>Se Hyeon Kim</name>
     </author><guid>http://example.org/vpn/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/features/vpn.jpg" referrerpolicy="no-referrer">
+                <img src="/images/features/security.jpeg" referrerpolicy="no-referrer">
             </div>]]></description>
 </item><item>
     <title>Proxy</title>

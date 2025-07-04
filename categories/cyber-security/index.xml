@@ -6,8 +6,22 @@
     <description>Recent content in Cyber Security on Devlog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Jul 2025 15:42:42 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 04 Jul 2025 11:01:36 +0900</lastBuildDate>
     <atom:link href="http://example.org/categories/cyber-security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IP &amp; MAC</title>
+      <link>http://example.org/ip-mac/</link>
+      <pubDate>Fri, 04 Jul 2025 11:01:36 +0900</pubDate>
+      <guid>http://example.org/ip-mac/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Port</title>
+      <link>http://example.org/port/</link>
+      <pubDate>Fri, 04 Jul 2025 10:54:19 +0900</pubDate>
+      <guid>http://example.org/port/</guid>
+      <description></description>
+    </item>
     <item>
       <title>VPN</title>
       <link>http://example.org/vpn/</link>
